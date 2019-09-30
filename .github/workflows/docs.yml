@@ -4,11 +4,19 @@ on: [push]
 
 jobs:
   deploy:
-    name: Deploy docs
+    name: Generate documentation
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: cd ./website && npm install && npm run publish-gh-pages
+      - name: Configure git credentials
+        run: |
+          git config --global user.email "tianhaoz@umich.edu"
+          git config --global user.name "Tianhao Zhou"
+      - name: Deploy docs
+        run: |
+          cd ./website
+          npm install
+          npm run publish-gh-pages
         env:
           GIT_USER: ${{ secrets.DOCS_GIT_USER }}
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
