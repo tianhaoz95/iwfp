@@ -1,0 +1,14 @@
+name: Documentation
+
+on: [push]
+
+jobs:
+  deploy:
+    name: Deploy docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: cd ./website && npm install && npm run publish-gh-pages
+        env:
+          GIT_USER: ${{ secrets.DOCS_GIT_USER }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
