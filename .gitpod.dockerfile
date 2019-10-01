@@ -31,6 +31,6 @@ RUN cd /home/gitpod && \
 
 RUN cd /home/gitpod && \
     wget android-sdk.tgz \
-    http://dl.google.com/android/android-sdk_r26.1.1-linux.tgz && \
+    https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
     tar -xvf android-sdk.tgz && \
     rm -f android-sdk.tgz;
