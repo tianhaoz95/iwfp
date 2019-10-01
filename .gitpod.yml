@@ -4,19 +4,19 @@ github:
   prebuilds:
     # enable for the master/default branch (defaults to true)
     master: true
-    # enable for all branches in this repo (defaults to false)
+# enable for all branches in this repo (defaults to false)
     branches: false
-    # enable for pull requests coming from this repo (defaults to true)
+# enable for pull requests coming from this repo (defaults to true)
     pullRequests: true
-    # enable for pull requests coming from forks (defaults to false)
+# enable for pull requests coming from forks (defaults to false)
     pullRequestsFromForks: false
-    # add a check to pull requests (defaults to true)
+# add a check to pull requests (defaults to true)
     addCheck: false
-    # add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
+# add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
     addComment: true
-    # add a "Review in Gitpod" button to the pull request's description (defaults to false)
+# add a "Review in Gitpod" button to the pull request's description (defaults to false)
     addBadge: false
-    # add a label once the prebuild is ready to pull requests (defaults to false)
+# add a label once the prebuild is ready to pull requests (defaults to false)
     addLabel: false
 tasks:
 - command: |
@@ -24,3 +24,8 @@ tasks:
     touch /home/gitpod/.android/repositories.cfg
     export PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/bin:$PATH
     /home/gitpod/android-sdk/tools/bin/sdkmanager "platform-tools" "platforms;android-28" "build-tools;28.0.3"
+
+vscode:
+  extensions:
+    - Dart-Code.flutter@3.5.0:/kOacEWdiDRLyN/idUiM4A==
+    - Dart-Code.dart-code@3.5.0:XEY0jyt9vbohU0BBguGwLg==
