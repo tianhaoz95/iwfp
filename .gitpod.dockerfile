@@ -8,7 +8,7 @@ USER root
 RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list && \
     apt-get update && \
-    apt-get -y install build-essential dart libkrb5-dev gcc make gradle android-tools-adb android-tools-fastboot && \
+    apt-get -y install build-essential dart libkrb5-dev gcc make gradle android-tools-adb android-tools-fastboot yes && \
     apt-get clean && \
     apt-get -y autoremove && \
     apt-get -y clean && \
@@ -34,4 +34,5 @@ RUN cd /home/gitpod && \
     unzip sdk-tools-linux-4333796.zip && \
     rm -f sdk-tools-linux-4333796.zip
 
-RUN yes | /home/gitpod/tools/bin/sdkmanager "build-tools;28.0.3"
+RUN touch ~/.android/repositories.cfg && \
+    yes | /home/gitpod/tools/bin/sdkmanager "build-tools;28.0.3"
