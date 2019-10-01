@@ -23,4 +23,4 @@ tasks:
     mkdir -p /home/gitpod/.android
     touch /home/gitpod/.android/repositories.cfg
     export PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/bin:$PATH
-    /home/gitpod/tools/bin/sdkmanager "build-tools;28.0.3"
+    /home/gitpod/tools/bin/sdkmanager "platform-tools" "platforms;android-28"
