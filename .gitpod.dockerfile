@@ -1,8 +1,7 @@
 FROM gitpod/workspace-full:latest
 
 ENV ANDROID_HOME=/home/gitpod/tools \
-    FLUTTER_HOME=/home/gitpod/flutter \
-    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/tools:$PATH
+    FLUTTER_HOME=/home/gitpod/flutter
 
 USER root
 
