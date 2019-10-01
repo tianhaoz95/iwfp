@@ -33,7 +33,3 @@ RUN cd /home/gitpod && \
     wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
     unzip sdk-tools-linux-4333796.zip && \
     rm -f sdk-tools-linux-4333796.zip
-
-RUN yes | /home/gitpod/tools/bin/sdkmanager "tools" "platform-tools"
-RUN yes | /home/gitpod/tools/bin/sdkmanager "platforms;android-28"
-RUN yes | /home/gitpod/tools/bin/sdkmanager "build-tools;28.0.3"
