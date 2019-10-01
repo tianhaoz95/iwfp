@@ -29,8 +29,8 @@ RUN cd /home/gitpod && \
     unzip android_studio.zip && \
     rm -f android_studio.zip
 
-RUN cd /home/gitpod && \
-    wget android-sdk.zip \
-    https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
-    unzip android-sdk.zip && \
-    rm -f android-sdk.zip
+# RUN cd /home/gitpod && \
+#     wget android-sdk.zip \
+#     https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
+#     unzip android-sdk.zip && \
+#     rm -f android-sdk.zip
