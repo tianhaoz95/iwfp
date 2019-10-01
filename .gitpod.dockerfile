@@ -31,7 +31,6 @@ RUN cd /home/gitpod && \
 
 # TODO(tianhaoz95): make the name of the SDK file into an environment variable to avoid maintainance issue
 RUN cd /home/gitpod && \
-    wget sdk-tools-linux-4333796.zip \
-    https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
+    wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
     unzip sdk-tools-linux-4333796.zip && \
     rm -f sdk-tools-linux-4333796.zip
