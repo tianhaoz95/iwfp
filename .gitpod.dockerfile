@@ -29,8 +29,9 @@ RUN cd /home/gitpod && \
     unzip android_studio.zip && \
     rm -f android_studio.zip
 
-# RUN cd /home/gitpod && \
-#     wget android-sdk.zip \
-#     https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
-#     unzip android-sdk.zip && \
-#     rm -f android-sdk.zip
+# TODO(tianhaoz95): make the name of the SDK file into an environment variable to avoid maintainance issue
+RUN cd /home/gitpod && \
+    wget sdk-tools-linux-4333796.zip \
+    https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && \
+    unzip sdk-tools-linux-4333796.zip && \
+    rm -f sdk-tools-linux-4333796.zip
