@@ -36,4 +36,6 @@ RUN cd /home/gitpod && \
 
 RUN mkdir -p ~/.android && \
     touch ~/.android/repositories.cfg && \
+    yes | /home/gitpod/tools/bin/sdkmanager "tools" "platform-tools" &&\
+    yes | /home/gitpod/tools/bin/sdkmanager "platforms;android-28" && \
     yes | /home/gitpod/tools/bin/sdkmanager "build-tools;28.0.3"
