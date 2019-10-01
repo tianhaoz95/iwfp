@@ -34,5 +34,6 @@ RUN cd /home/gitpod && \
     unzip sdk-tools-linux-4333796.zip && \
     rm -f sdk-tools-linux-4333796.zip
 
-RUN touch ~/.android/repositories.cfg && \
+RUN mkdir -p ~/.android && \
+    touch ~/.android/repositories.cfg && \
     yes | /home/gitpod/tools/bin/sdkmanager "build-tools;28.0.3"
