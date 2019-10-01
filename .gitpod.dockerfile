@@ -1,6 +1,6 @@
 FROM gitpod/workspace-full:latest
 
-ENV ANDROID_HOME=/home/gitpod/tools \
+ENV ANDROID_HOME=/home/gitpod/android-sdk \
     FLUTTER_HOME=/home/gitpod/flutter
 
 USER root
