@@ -19,4 +19,5 @@ jobs:
           flutter-version: '1.9.1+hotfix.2'
           channel: 'stable'
       - run: cd ./iwfpapp && flutter pub get
+      - run: cd ./iwfpapp && flutter analyze
       - run: cd ./iwfpapp && flutter test
