@@ -20,7 +20,7 @@ const List<Dest> allDests = <Dest>[
 ];
 
 class DestView extends StatefulWidget {
-  const DestView({ Key key }) : super(key: key);
+  const DestView({Key key}) : super(key: key);
 
   @override
   _DestView createState() {
@@ -47,23 +47,21 @@ class _DestView extends State<DestView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(destinations[_currentIndex].title),
-        backgroundColor: destinations[_currentIndex].color,
-      ),
-      backgroundColor: destinations[_currentIndex].color[100],
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
-        items: destinations.map((Dest destination) {
-          return BottomNavigationBarItem(
-            icon: Icon(destination.icon),
-            backgroundColor: destination.color,
-            title: Text(destination.title)
-          );
-        }).toList(),
-      )
-    );
+        appBar: AppBar(
+          title: Text(destinations[_currentIndex].title),
+          backgroundColor: destinations[_currentIndex].color,
+        ),
+        backgroundColor: destinations[_currentIndex].color[100],
+        body: _children[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: onTabTapped,
+          currentIndex: _currentIndex,
+          items: destinations.map((Dest destination) {
+            return BottomNavigationBarItem(
+                icon: Icon(destination.icon),
+                backgroundColor: destination.color,
+                title: Text(destination.title));
+          }).toList(),
+        ));
   }
 }
