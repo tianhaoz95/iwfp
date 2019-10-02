@@ -4,7 +4,9 @@ class Contrib extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Contrib'),
+      child: Center (
+        child: Text('Contribute'),
+      )
     );
   }
 }

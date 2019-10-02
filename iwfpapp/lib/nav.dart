@@ -48,10 +48,10 @@ class _DestView extends State<DestView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('widget.destination.title'),
+        title: Text(destinations[_currentIndex].title),
         backgroundColor: destinations[_currentIndex].color,
       ),
-      // backgroundColor: widget.destination.color[100],
+      backgroundColor: destinations[_currentIndex].color[100],
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
