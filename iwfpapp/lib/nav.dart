@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'shop.dart';
 import 'cards.dart';
+import 'contrib.dart';
+import 'user.dart';
 
 class Dest {
   final String title;
@@ -18,9 +20,7 @@ const List<Dest> allDests = <Dest>[
 ];
 
 class DestView extends StatefulWidget {
-  final Dest destination;
-
-  const DestView({ Key key, this.destination }) : super(key: key);
+  const DestView({ Key key }) : super(key: key);
 
   @override
   _DestView createState() {
@@ -33,9 +33,10 @@ class _DestView extends State<DestView> {
   final List<Widget> _children = [
     ShopNow(),
     ManageCard(),
-    ManageCard(),
-    ManageCard(),
+    UserSettings(),
+    Contrib(),
   ];
+  final List<Dest> destinations = allDests;
 
   void onTabTapped(int index) {
     setState(() {
@@ -48,14 +49,14 @@ class _DestView extends State<DestView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('widget.destination.title'),
-        // backgroundColor: widget.destination.color,
+        backgroundColor: destinations[_currentIndex].color,
       ),
       // backgroundColor: widget.destination.color[100],
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
         currentIndex: _currentIndex,
-        items: allDests.map((Dest destination) {
+        items: destinations.map((Dest destination) {
           return BottomNavigationBarItem(
             icon: Icon(destination.icon),
             backgroundColor: destination.color,
