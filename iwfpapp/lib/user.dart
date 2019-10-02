@@ -5,7 +5,7 @@ class UserSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Center(
-      child: Text('User Settings'),
+      child: Text('user'),
     ));
   }
 }

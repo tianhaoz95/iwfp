@@ -9,14 +9,20 @@ class Dest {
   final String title;
   final IconData icon;
   final MaterialColor color;
-  const Dest(this.title, this.icon, this.color);
+  final Key btnKey;
+  final Key titleKey;
+  const Dest(this.title, this.icon, this.color, this.btnKey, this.titleKey);
 }
 
 const List<Dest> allDests = <Dest>[
-  Dest('Shop Now!', Icons.shopping_cart, Colors.teal),
-  Dest('Manage Cards', Icons.credit_card, Colors.cyan),
-  Dest('My Settings', Icons.account_circle, Colors.orange),
-  Dest('Contribute', Icons.favorite, Colors.blue),
+  Dest('Shop Now!', Icons.shopping_cart, Colors.teal, Key('shop_nav_btn'),
+      Key('shop_title')),
+  Dest('Manage Cards', Icons.credit_card, Colors.cyan, Key('cards_nav_btn'),
+      Key('cards_title')),
+  Dest('My Settings', Icons.account_circle, Colors.orange, Key('user_nav_btn'),
+      Key('user_title')),
+  Dest('Contribute', Icons.favorite, Colors.blue, Key('contrib_nav_btn'),
+      Key('contrib_title')),
 ];
 
 class DestView extends StatefulWidget {
@@ -48,17 +54,19 @@ class _DestView extends State<DestView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(destinations[_currentIndex].title),
+          title: Text(destinations[_currentIndex].title,
+              key: destinations[_currentIndex].titleKey),
           backgroundColor: destinations[_currentIndex].color,
         ),
         backgroundColor: destinations[_currentIndex].color[100],
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
+          key: Key('bottom_nav_bar'),
           onTap: onTabTapped,
           currentIndex: _currentIndex,
           items: destinations.map((Dest destination) {
             return BottomNavigationBarItem(
-                icon: Icon(destination.icon),
+                icon: Icon(destination.icon, key: destination.btnKey),
                 backgroundColor: destination.color,
                 title: Text(destination.title));
           }).toList(),

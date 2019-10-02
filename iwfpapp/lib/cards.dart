@@ -5,7 +5,7 @@ class ManageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Center(
-      child: Text('Card Management'),
+      child: Text('cards'),
     ));
   }
 }

@@ -5,7 +5,7 @@ class ShopNow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Center(
-      child: Text('Shop'),
+      child: Text('shop'),
     ));
   }
 }
