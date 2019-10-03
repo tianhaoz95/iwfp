@@ -13,7 +13,7 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.9.1+hotfix.2'
+          flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
       - run: cd ./iwfpapp && flutter build apk
   deploy-ios:
@@ -26,6 +26,6 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.9.1+hotfix.2'
+          flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
       - run: cd ./iwfpapp && flutter build ios
