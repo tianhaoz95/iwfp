@@ -15,7 +15,7 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
-      - run: cd ./iwfpapp && flutter build apk
+      - run: cd ./iwfpapp && flutter build apk  --release
   deploy-ios:
     name: Deploy IOS app
     runs-on: macos-latest
@@ -28,4 +28,4 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
-      - run: cd ./iwfpapp && flutter build ios
+      - run: cd ./iwfpapp && flutter build ios  --release --no-codesign
