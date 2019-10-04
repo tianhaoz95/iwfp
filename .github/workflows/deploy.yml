@@ -32,4 +32,5 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
+      - run: flutter channel master && flutter upgrade
       - run: cd ./iwfpapp && flutter build ios  --release --no-codesign
