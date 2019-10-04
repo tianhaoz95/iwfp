@@ -18,7 +18,7 @@ jobs:
       - run: flutter channel master && flutter upgrade
       - run: flutter config --enable-web
       - run: cd ./iwfpapp && flutter create .
-      - run: flutter build web
+      - run: cd ./iwfpapp && flutter build web
   deploy-android:
     name: Deploy Android app
     runs-on: ubuntu-latest
