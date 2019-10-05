@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/widgets/buttons/login_btn.dart';
+import 'package:iwfpapp/widgets/buttons/glogin_btn.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -32,20 +34,13 @@ class LoginScreen extends StatelessWidget {
               )
             ),
             SizedBox(height: 25.0),
-            Material(
-              elevation: 5.0,
-              borderRadius: BorderRadius.circular(30.0),
-              color: Colors.blue,
-              child: MaterialButton(
-                minWidth: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                onPressed: () { Navigator.pushNamed(context, '/main'); },
-                child: Text('login',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white)
-                )
-              )
-            )
+            LoginButton(
+              onPressedCallback: () { Navigator.pushNamed(context, '/main'); },
+            ),
+            SizedBox(height: 25.0),
+            GLoginButton(
+              onPressedCallback: () { Navigator.pushNamed(context, '/main'); },
+            ),
           ],
         ),
       )

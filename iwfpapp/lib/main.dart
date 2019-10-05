@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'nav.dart';
-import 'login.dart';
+import 'screens/login/login.dart';
 
 void main() => runApp(MyApp());
 
