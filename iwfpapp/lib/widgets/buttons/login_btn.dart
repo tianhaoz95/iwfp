@@ -9,6 +9,7 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+        key: Key('email_login_btn'),
         elevation: 5.0,
         borderRadius: BorderRadius.circular(30.0),
         color: Colors.blue,
@@ -18,7 +19,7 @@ class LoginButton extends StatelessWidget {
             onPressed: () {
               onPressedCallback();
             },
-            child: Text('login',
+            child: Text('Login with Email',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white))));
   }

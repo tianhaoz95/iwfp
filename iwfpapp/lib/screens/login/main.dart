@@ -12,8 +12,14 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsets.all(36.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: 15.0),
+            Image.asset(
+              'assets/iwfp_splash.png',
+              key: Key('iwfp_splash_img'),
+            ),
+            SizedBox(height: 25.0),
             TextField(
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),

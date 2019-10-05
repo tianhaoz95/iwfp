@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:iwfpapp/nav.dart';
+import 'package:iwfpapp/screens/login/main.dart';
 
 void main() {
-  testWidgets('test app render no crash', (WidgetTester tester) async {
+  testWidgets('test contrib widget render no crash',
+      (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
       title: 'stand-alone contrib widget',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: DestView(),
+      home: LoginScreen(),
     ));
-    expect(find.byType(BottomNavigationBar), findsOneWidget);
   });
 }
