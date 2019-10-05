@@ -1,6 +1,13 @@
 name: Deploy
 
-on: [push]
+on:
+  push:
+    branches:
+      - "master"
+      - "actions/**"
+    paths:
+      - "iwfpapp/**"
+      - ".github/**"
 
 jobs:
   deploy-web:
@@ -44,7 +51,7 @@ jobs:
           path: iwfpapp/build/app/outputs
   deploy-ios:
     name: Deploy IOS app
-    runs-on: macos-latest
+    runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-java@v1
