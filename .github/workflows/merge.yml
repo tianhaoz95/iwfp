@@ -2,7 +2,8 @@ name: Merge
 
 on:
   pull_request:
-    - master
+    branches:
+      - "master"
 
 jobs:
   deploy-web:
