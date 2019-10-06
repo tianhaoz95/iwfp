@@ -5,7 +5,7 @@ typedef onPressedCallbackFunc = void Function();
 
 class LoginButton extends StatelessWidget {
   final onPressedCallbackFunc onPressedCallback;
-  const LoginButton({ this.onPressedCallback });
+  const LoginButton({this.onPressedCallback});
   @override
   Widget build(BuildContext context) {
     return Material(
