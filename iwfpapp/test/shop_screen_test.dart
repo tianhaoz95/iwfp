@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:iwfpapp/screens/shop/main.dart';
 
+import 'screen_validator.dart';
+
 void main() {
   testWidgets('test shop widget render no crash', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
@@ -12,5 +14,6 @@ void main() {
       ),
       home: ShopNow(),
     ));
+    validateShopScreenContent();
   });
 }
