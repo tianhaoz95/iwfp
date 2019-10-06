@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'shop.dart';
+import 'package:iwfpapp/screens/shop/main.dart';
 import 'cards.dart';
 import 'contrib.dart';
 import 'user.dart';
