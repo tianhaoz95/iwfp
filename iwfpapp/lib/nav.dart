@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'shop.dart';
+import 'package:iwfpapp/screens/shop/main.dart';
 import 'cards.dart';
 import 'contrib.dart';
 import 'user.dart';
@@ -59,7 +59,10 @@ class _DestView extends State<DestView> {
           backgroundColor: destinations[_currentIndex].color,
         ),
         backgroundColor: destinations[_currentIndex].color[100],
-        body: _children[_currentIndex],
+        body: SafeArea(
+          bottom: true,
+          child: _children[_currentIndex]
+        ),
         bottomNavigationBar: BottomNavigationBar(
           key: Key('bottom_nav_bar'),
           onTap: onTabTapped,
