@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:iwfpapp/contrib.dart';
+import 'package:iwfpapp/screens/contrib/main.dart';
 
 void main() {
   testWidgets('test contrib widget render no crash',
