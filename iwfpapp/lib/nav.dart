@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/screens/shop/main.dart';
 import 'cards.dart';
 import 'package:iwfpapp/screens/contrib/main.dart';
-import 'user.dart';
+import 'package:iwfpapp/screens/user/main.dart';
 
 class Dest {
   final String title;
