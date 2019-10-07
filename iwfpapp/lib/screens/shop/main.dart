@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/widgets/inputs/shop_category_filter_input.dart';
 import 'suggestions.dart';
 
 class ShopNow extends StatefulWidget {
@@ -13,26 +12,26 @@ class ShopNow extends StatefulWidget {
 
 class _ShopNow extends State<ShopNow> {
   List<ShopCategory> suggestions = [
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
-    ShopCategory('test'),
+    ShopCategory('Samsung Pay'),
+    ShopCategory('Restaurants'),
+    ShopCategory('Coffee Shop'),
+    ShopCategory('Amazon.com'),
+    ShopCategory('Walmart'),
+    ShopCategory('Macy'),
+    ShopCategory('Nike'),
+    ShopCategory('Vans'),
+    ShopCategory('Hotels'),
+    ShopCategory('Apple'),
+    ShopCategory('Microsoft'),
+    ShopCategory('Google Pay'),
+    ShopCategory('Chase Pay'),
+    ShopCategory('Gas Station'),
+    ShopCategory('Traveling'),
+    ShopCategory('Best Buy'),
+    ShopCategory('Safeway'),
+    ShopCategory('CVS'),
+    ShopCategory('Great Mall'),
+    ShopCategory('Outlets'),
   ];
 
   @override
@@ -43,7 +42,19 @@ class _ShopNow extends State<ShopNow> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            ShopCategoryFilterInput(),
+            /**
+             * @todo Add searchable shopping categories
+             * @body it will be much easier to find during
+             * a quick payment situation if the categories
+             * are searchable. It is not added for now due
+             * to some trick bug of Flutter where it refuse
+             * to pass the unit test no matter what. Once
+             * figured out the problem, use the widget
+             * defined in: 
+             * package:iwfpapp/widgets/inputs/shop_category_filter_input.dart
+             * here to get the UI. The logic is not implemented
+             * at all due to the UI failure.
+             */
             Suggestions(suggestions),
           ],
         ));
