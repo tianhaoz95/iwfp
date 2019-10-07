@@ -59,7 +59,10 @@ class _DestView extends State<DestView> {
           backgroundColor: destinations[_currentIndex].color,
         ),
         backgroundColor: destinations[_currentIndex].color[100],
-        body: _children[_currentIndex],
+        body: SafeArea(
+          bottom: true,
+          child: _children[_currentIndex]
+        ),
         bottomNavigationBar: BottomNavigationBar(
           key: Key('bottom_nav_bar'),
           onTap: onTabTapped,
