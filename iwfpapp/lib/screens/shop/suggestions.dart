@@ -32,6 +32,7 @@ class Suggestions extends StatelessWidget {
     return Expanded(
         child: ListView(
             key: Key('suggested_categories'),
-            padding: const EdgeInsets.all(8.0), children: suggestionWidgets));
+            padding: const EdgeInsets.all(8.0),
+            children: suggestionWidgets));
   }
 }
