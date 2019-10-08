@@ -7,7 +7,8 @@ import 'package:test/test.dart';
 CreditCard generateCreditCard(String name, List<int> rates) {
   CreditCard card = CreditCard(name);
   for (int rate in rates) {
-    CashbackPromo promo = CashbackPromo('coffee shop', 'sector', '09/01', '12/01', 'annually', rate);
+    CashbackPromo promo = CashbackPromo(
+        'coffee shop', 'sector', '09/01', '12/01', 'annually', rate);
     card.promos.add(promo);
   }
   return card;
