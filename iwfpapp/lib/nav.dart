@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/screens/shop/main.dart';
-import 'cards.dart';
+import 'package:iwfpapp/screens/cards/main.dart';
 import 'package:iwfpapp/screens/contrib/main.dart';
 import 'package:iwfpapp/screens/user/main.dart';
 
