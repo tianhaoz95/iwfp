@@ -14,9 +14,16 @@ class BasicCreditCard extends StatelessWidget {
         child: Row(
             children: <Widget>[
               SizedBox(height: 45.0, width: 25.0),
-              Text('card name', style: TextStyle(color: Colors.white)),
+              Text(cardMetaData.name, style: TextStyle(color: Colors.white)),
+              /// todo(tianhaoz95): enable this when there is a need
+              /// to edit the cards.
+              /*
               SizedBox(height: 45.0, width: 25.0),
-              Text('edit button', style: TextStyle(color: Colors.white))
+              FlatButton(
+                onPressed: () {},
+                child: Text('edit', style: TextStyle(color: Colors.white)),
+              ),
+              */
             ],
           )
         )
