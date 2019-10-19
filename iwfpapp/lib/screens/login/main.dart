@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/widgets/buttons/login_btn.dart';
 import 'package:iwfpapp/widgets/buttons/glogin_btn.dart';
+import 'package:iwfpapp/widgets/buttons/guest_login_btn.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -37,6 +38,12 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(32.0)))),
               SizedBox(height: 25.0),
               LoginButton(
+                onPressedCallback: () {
+                  Navigator.pushNamed(context, '/main');
+                },
+              ),
+              SizedBox(height: 25.0),
+              GuestLoginButton(
                 onPressedCallback: () {
                   Navigator.pushNamed(context, '/main');
                 },
