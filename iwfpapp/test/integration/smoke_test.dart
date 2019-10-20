@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:iwfpapp/main.dart';
+import 'screen_validator.dart';
 
 void validateIsLoginScreen() {
   expect(find.byKey(Key('iwfp_splash_img')), findsOneWidget);
@@ -37,10 +38,20 @@ void main() {
     await tester.pageBack();
     await tester.pump();
     await tester.pumpAndSettle();
+    // So far only guest login is supported.
     await tester.tap(find.byKey(Key('guest_login_btn')));
     await tester.pump();
     await tester.pumpAndSettle();
     validateIsShopScreen();
+    // Select one category and confirm it navigates
+    // to the suggestions screen.
+    await tester.tap(find.byKey(Key('samsung_pay_select_btn')));
+    await tester.pump();
+    await tester.pumpAndSettle();
+    validateSuggestionScreenContent();
+    await tester.pageBack();
+    await tester.pump();
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(Key('cards_nav_btn')));
     await tester.pump();
     await tester.pumpAndSettle();

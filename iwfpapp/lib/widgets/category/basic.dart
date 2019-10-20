@@ -19,6 +19,7 @@ class BasicCategory extends StatelessWidget {
                 SizedBox(height: 45.0, width: 25.0),
                 FlatButton(
                   child: Text('Select', style: TextStyle(color: Colors.white)),
+                  key: Key(categoryMetaData.id + '_select_btn'),
                   onPressed: () {
                     Navigator.pushNamed(context, '/suggestion');
                   },

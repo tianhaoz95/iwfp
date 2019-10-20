@@ -1,4 +1,5 @@
 class ShopCategory {
   final String name;
-  const ShopCategory(this.name);
+  final String id;
+  const ShopCategory(this.name, this.id);
 }
