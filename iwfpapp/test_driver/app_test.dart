@@ -11,7 +11,7 @@ void main() {
     final cardsNavBtn = find.byValueKey('cards_nav_btn');
     final userNavBtn = find.byValueKey('user_nav_btn');
     final contribNavBtn = find.byValueKey('contrib_nav_btn');
-    final emailLoginBtn = find.byValueKey('email_login_btn');
+    final guestLoginBtn = find.byValueKey('guest_login_btn');
 
     FlutterDriver driver;
 
@@ -28,7 +28,7 @@ void main() {
     });
 
     test('smoke test', () async {
-      await driver.tap(emailLoginBtn);
+      await driver.tap(guestLoginBtn);
       await driver.tap(cardsNavBtn);
       await driver.tap(userNavBtn);
       await driver.tap(contribNavBtn);
