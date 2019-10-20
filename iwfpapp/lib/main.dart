@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'nav.dart';
 import 'screens/login/main.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:iwfpapp/screens/placeholder/main.dart';
 
 void main() {
   // Set `enableInDevMode` to true to see reports while in debug mode
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginScreen(),
         '/main': (context) => DestView(),
+        '/placeholder': (context) => PlaceholderScreen(),
       },
     );
   }
