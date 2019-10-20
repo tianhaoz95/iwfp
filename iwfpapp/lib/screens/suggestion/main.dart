@@ -7,6 +7,7 @@ class SuggestionScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('I Should Use ...'),
         backgroundColor: Colors.purple,
+        key: Key('suggestion_title'),
       ),
       backgroundColor: Colors.purple,
     );
