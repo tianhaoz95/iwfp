@@ -15,7 +15,7 @@ class ManageCard extends StatelessWidget {
         child: Center(
             child: ListView(
       children: creditCardMetadataList.map((CreditCard card) {
-        return BasicCreditCard(card);
+        return BasicCreditCard(card, Colors.cyan);
       }).toList(),
     )));
   }
