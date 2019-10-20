@@ -47,6 +47,7 @@ flutter:
   assets:
     - assets/glogin_btn_icon.png
     - assets/iwfp_splash.png
+    - assets/coming_soon.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 25.0),
               LoginButton(
                 onPressedCallback: () {
-                  Navigator.pushNamed(context, '/main');
+                  Navigator.pushNamed(context, '/placeholder');
                 },
               ),
               SizedBox(height: 25.0),
@@ -51,7 +51,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 25.0),
               GLoginButton(
                 onPressedCallback: () {
-                  Navigator.pushNamed(context, '/main');
+                  Navigator.pushNamed(context, '/placeholder');
                 },
               ),
             ],

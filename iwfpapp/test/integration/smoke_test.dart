@@ -26,21 +26,25 @@ void validateIsContribScreen() {
 void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
-    await tester.tap(find.byKey(Key('email_login_btn')));
+    await tester.tap(find.byKey(Key('guest_login_btn')));
     await tester.pump();
     await tester.pumpAndSettle();
     validateIsShopScreen();
     await tester.tap(find.byKey(Key('cards_nav_btn')));
     await tester.pump();
+    await tester.pumpAndSettle();
     validateIsCardsScreen();
     await tester.tap(find.byKey(Key('user_nav_btn')));
     await tester.pump();
+    await tester.pumpAndSettle();
     validateIsUserScreen();
     await tester.tap(find.byKey(Key('contrib_nav_btn')));
     await tester.pump();
+    await tester.pumpAndSettle();
     validateIsContribScreen();
     await tester.tap(find.byKey(Key('shop_nav_btn')));
     await tester.pump();
+    await tester.pumpAndSettle();
     validateIsShopScreen();
     await tester.pageBack();
     await tester.pump();
