@@ -7,6 +7,7 @@ class PlaceholderScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Under Construction'),
         backgroundColor: Colors.pink,
+        key: Key('placeholder_title'),
       ),
       body: Container(
         child: Column(
