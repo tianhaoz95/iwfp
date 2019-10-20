@@ -13,7 +13,7 @@ void main() {
 
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  
+
   runApp(MyApp());
 }
 

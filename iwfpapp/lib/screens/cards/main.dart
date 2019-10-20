@@ -13,11 +13,10 @@ class ManageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Center(
-      child: ListView(
-        children: creditCardMetadataList.map((CreditCard card) {
-          return BasicCreditCard(card);
-        }).toList(),
-      )
-    ));
+            child: ListView(
+      children: creditCardMetadataList.map((CreditCard card) {
+        return BasicCreditCard(card);
+      }).toList(),
+    )));
   }
 }
