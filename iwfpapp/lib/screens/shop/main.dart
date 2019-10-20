@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/widgets/category/basic.dart';
 import 'package:iwfpapp/services/shop_category.dart';
+import 'package:iwfpapp/services/fetcher.dart';
 
 class ShopNow extends StatefulWidget {
   const ShopNow({Key key}) : super(key: key);
@@ -34,16 +35,33 @@ class _ShopNow extends State<ShopNow> {
     ShopCategory('Great Mall', 'great_mall'),
     ShopCategory('Outlets', 'outlets'),
   ];
+  Future<List<ShopCategory>> categories;
+
+  @override
+  void initState() {
+    super.initState();
+    categories = fetchAllShopCategories('tianhaoz95');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        key: Key('suggested_categories'),
-        child: Center(
-            child: ListView(
-          children: suggestions.map((ShopCategory category) {
-            return BasicCategory(category);
-          }).toList(),
-        )));
+    return FutureBuilder<List<ShopCategory>>(
+      future: categories,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Container(
+            key: Key('suggested_categories'),
+            child: Center(
+                child: ListView(
+              children: suggestions.map((ShopCategory category) {
+                return BasicCategory(category);
+              }).toList(),
+            )));
+        } else if (snapshot.hasError) {
+          return Text('error');
+        }
+        return Text('loading...');
+      },
+    );
   }
 }

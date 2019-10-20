@@ -12,6 +12,7 @@ void main() {
       ),
       home: DestView(),
     ));
+    await tester.pump(new Duration(seconds: 5));
     expect(find.byType(BottomNavigationBar), findsOneWidget);
   });
 }

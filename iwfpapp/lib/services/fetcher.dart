@@ -8,7 +8,7 @@ Future<List<CreditCard>> fetchAllCreditCards(String uid) {
     CreditCard('card 3'),
     CreditCard('card 4')
   ];
-  return Future.delayed(Duration(seconds: 4), () => creditCardMetadataList); 
+  return Future.delayed(Duration(seconds: 3), () => creditCardMetadataList); 
 }
 
 Future<List<ShopCategory>> fetchAllShopCategories(String uid) {
@@ -34,5 +34,5 @@ Future<List<ShopCategory>> fetchAllShopCategories(String uid) {
     ShopCategory('Great Mall', 'great_mall'),
     ShopCategory('Outlets', 'outlets'),
   ];
-  return Future.delayed(Duration(seconds: 4), () => suggestions); 
+  return Future.delayed(Duration(seconds: 3), () => suggestions); 
 }
