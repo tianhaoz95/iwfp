@@ -32,12 +32,10 @@ void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
     await tester.tap(find.byKey(Key('email_login_btn')));
-    await tester.pump(new Duration(seconds: 5));
     await tester.pump();
     await tester.pumpAndSettle();
     validateIsPlaceholderScreen();
     await tester.pageBack();
-    await tester.pump(new Duration(seconds: 5));
     await tester.pump();
     await tester.pumpAndSettle();
     // So far only guest login is supported.
@@ -49,7 +47,6 @@ void main() {
     // Select one category and confirm it navigates
     // to the suggestions screen.
     await tester.tap(find.byKey(Key('samsung_pay_select_btn')));
-    await tester.pump(new Duration(seconds: 5));
     await tester.pump();
     await tester.pumpAndSettle();
     validateSuggestionScreenContent();
@@ -58,17 +55,14 @@ void main() {
     await tester.pump();
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(Key('cards_nav_btn')));
-    await tester.pump(new Duration(seconds: 5));
     await tester.pump();
     await tester.pumpAndSettle();
     validateIsCardsScreen();
     await tester.tap(find.byKey(Key('user_nav_btn')));
-    await tester.pump(new Duration(seconds: 5));
     await tester.pump();
     await tester.pumpAndSettle();
     validateIsUserScreen();
     await tester.tap(find.byKey(Key('contrib_nav_btn')));
-    await tester.pump(new Duration(seconds: 5));
     await tester.pump();
     await tester.pumpAndSettle();
     validateIsContribScreen();
@@ -78,7 +72,6 @@ void main() {
     await tester.pumpAndSettle();
     validateIsShopScreen();
     await tester.pageBack();
-    await tester.pump(new Duration(seconds: 5));
     await tester.pump();
     await tester.pumpAndSettle();
     validateIsLoginScreen();
