@@ -36,13 +36,11 @@ void main() {
     await tester.pumpAndSettle();
     validateIsPlaceholderScreen();
     await tester.pageBack();
-    await tester.pump();
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(new Duration(seconds: 5));
     // So far only guest login is supported.
+    validateLoginScreenContent();
     await tester.tap(find.byKey(Key('guest_login_btn')));
-    await tester.pump(new Duration(seconds: 5));
-    await tester.pump();
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(new Duration(seconds: 5));
     validateIsShopScreen();
     // Select one category and confirm it navigates
     // to the suggestions screen.
@@ -67,9 +65,7 @@ void main() {
     await tester.pumpAndSettle();
     validateIsContribScreen();
     await tester.tap(find.byKey(Key('shop_nav_btn')));
-    await tester.pump(new Duration(seconds: 5));
-    await tester.pump();
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(new Duration(seconds: 5));
     validateIsShopScreen();
     await tester.pageBack();
     await tester.pump();

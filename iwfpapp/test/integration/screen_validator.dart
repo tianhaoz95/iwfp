@@ -8,3 +8,7 @@ void validateShopScreenContent() {
 void validateSuggestionScreenContent() {
   expect(find.byKey(Key('suggestion_title')), findsOneWidget);
 }
+
+void validateLoginScreenContent() {
+  expect(find.byKey(Key('login_screen')), findsOneWidget);
+}
