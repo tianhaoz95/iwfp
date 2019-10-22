@@ -14,7 +14,7 @@ void main() {
       ),
       home: ShopNow(),
     ));
-    await tester.pump(new Duration(seconds: 5));
+    await tester.pumpAndSettle(new Duration(seconds: 5));
     validateShopScreenContent();
   });
 }

@@ -45,8 +45,7 @@ void main() {
     // Select one category and confirm it navigates
     // to the suggestions screen.
     await tester.tap(find.byKey(Key('samsung_pay_select_btn')));
-    await tester.pump();
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(new Duration(seconds: 5));
     validateSuggestionScreenContent();
     await tester.pageBack();
     await tester.pump(new Duration(seconds: 5));

@@ -14,6 +14,7 @@ void main() {
       ),
       home: SuggestionScreen(),
     ));
+    await tester.pumpAndSettle(new Duration(seconds: 5));
     validateSuggestionScreenContent();
   });
 }
