@@ -8,6 +8,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('Welcome')),
+        key: Key('login_screen'),
         backgroundColor: Colors.blue[100],
         body: Container(
           padding: const EdgeInsets.all(36.0),

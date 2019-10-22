@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/shop_category.dart';
-import 'package:iwfpapp/widgets/credit_cards/basic.dart';
+import 'package:iwfpapp/screens/suggestion/entries.dart';
 
 class SuggestionScreen extends StatelessWidget {
   final List<CreditCard> creditCardMetadataList = [
@@ -23,13 +23,7 @@ class SuggestionScreen extends StatelessWidget {
         backgroundColor: Colors.purple,
         key: Key('suggestion_title'),
       ),
-      body: Container(
-          child: Center(
-              child: ListView(
-        children: creditCardMetadataList.map((CreditCard card) {
-          return BasicCreditCard(card, Colors.purple);
-        }).toList(),
-      ))),
+      body: SuggestionEntries(),
       backgroundColor: Colors.purple[100],
     );
   }
