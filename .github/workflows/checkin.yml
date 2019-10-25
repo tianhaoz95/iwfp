@@ -35,6 +35,15 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.2'
           channel: 'stable'
-      - run: cd ./iwfpapp && flutter pub get
-      - run: cd ./iwfpapp && flutter analyze
-      - run: cd ./iwfpapp && flutter test
+      - name: install flutter dependencies
+        run: |
+          cd ./iwfpapp
+          flutter pub get
+      - name: lint dart code
+        run: |
+          cd ./iwfpapp
+          flutter analyze
+      - name: run unit tests
+        run: |
+          cd ./iwfpapp
+          flutter test
