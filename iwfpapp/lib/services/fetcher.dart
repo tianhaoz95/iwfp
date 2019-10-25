@@ -19,8 +19,8 @@ void populateChaseCreditCard(CreditCard card) {
       CashbackPromo('chase_pay', 'payment', '10/01', '12/31', 'annual', 5));
   card.promos
       .add(CashbackPromo('paypal', 'payment', '10/01', '12/31', 'annual', 5));
-  card.promos
-      .add(CashbackPromo('all_purchase', 'universal', 'nan', 'nan', 'const', 1));
+  card.promos.add(
+      CashbackPromo('all_purchase', 'universal', 'nan', 'nan', 'const', 1));
 }
 
 void populateDiscoverCreditCard(CreditCard card) {
@@ -42,13 +42,13 @@ void populateDiscoverCreditCard(CreditCard card) {
       .add(CashbackPromo('target', 'brand', '10/01', '12/31', 'annual', 5));
   card.promos
       .add(CashbackPromo('walmart', 'brand', '10/01', '12/31', 'annual', 5));
-  card.promos
-      .add(CashbackPromo('all_purchase', 'universal', 'nan', 'nan', 'const', 1));
+  card.promos.add(
+      CashbackPromo('all_purchase', 'universal', 'nan', 'nan', 'const', 1));
 }
 
 void populateDebitCard(CreditCard card) {
-  card.promos
-      .add(CashbackPromo('all_purchase', 'universal', 'nan', 'nan', 'const', 1));
+  card.promos.add(
+      CashbackPromo('all_purchase', 'universal', 'nan', 'nan', 'const', 1));
 }
 
 Future<List<CreditCard>> fetchAllCreditCards(String uid) {
