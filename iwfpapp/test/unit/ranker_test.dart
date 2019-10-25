@@ -32,7 +32,7 @@ void main() {
     test('finds highest matching rate basic case', () {
       List<CreditCard> cards = generateCreditCardsNoGenericPromo();
       ShopCategory category = ShopCategory('coffee shop', 'coffee_shop');
-      cardRanker(cards, category);
+      rankCards(cards, category);
       expect(cards[0].name, 'Card 7');
       expect(cards[1].name, 'Card 6');
       expect(cards[2].name, 'Card 5');

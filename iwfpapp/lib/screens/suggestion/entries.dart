@@ -28,17 +28,15 @@ class _SuggestionEntries extends State<SuggestionEntries> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Container(
-            key: Key('suggested_categories'),
-            child: Center(
-                child: ListView(
-              children: snapshot.data.map((CreditCard card) {
-                return BasicCreditCard(card, Colors.purple);
-              }).toList(),
-            )));
+              key: Key('suggested_categories'),
+              child: Center(
+                  child: ListView(
+                children: snapshot.data.map((CreditCard card) {
+                  return BasicCreditCard(card, Colors.purple);
+                }).toList(),
+              )));
         } else if (snapshot.hasError) {
-          return Center(
-            child: Text('error')
-          );
+          return Center(child: Text('error'));
         }
         return Center(
           child: CircularProgressIndicator(),
