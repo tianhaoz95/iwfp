@@ -12,5 +12,6 @@ void main() {
       ),
       home: ManageCard(),
     ));
+    await tester.pumpAndSettle(new Duration(seconds: 5));
   });
 }

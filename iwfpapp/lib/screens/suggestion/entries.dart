@@ -36,9 +36,13 @@ class _SuggestionEntries extends State<SuggestionEntries> {
               }).toList(),
             )));
         } else if (snapshot.hasError) {
-          return Text('error');
+          return Center(
+            child: Text('error')
+          );
         }
-        return Text('loading...');
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

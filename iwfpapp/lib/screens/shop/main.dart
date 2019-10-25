@@ -36,9 +36,13 @@ class _ShopNow extends State<ShopNow> {
               }).toList(),
             )));
         } else if (snapshot.hasError) {
-          return Text('error');
+          return Center(
+            child: Text('error'),
+          );
         }
-        return Text('loading...');
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

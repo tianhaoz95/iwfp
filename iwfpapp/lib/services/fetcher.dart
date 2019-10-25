@@ -3,12 +3,12 @@ import 'package:iwfpapp/services/credit_card.dart';
 
 Future<List<CreditCard>> fetchAllCreditCards(String uid) {
   List<CreditCard> creditCardMetadataList = [
-    CreditCard('card 1'),
-    CreditCard('card 2'),
-    CreditCard('card 3'),
-    CreditCard('card 4')
+    CreditCard('Chase Freedom'),
+    CreditCard('Discover Credit Card'),
+    CreditCard('Discover Cashback Debit Card'),
+    CreditCard('Empower Cashback Debit Card'),
   ];
-  return Future.delayed(Duration(seconds: 3), () => creditCardMetadataList); 
+  return Future.delayed(Duration(seconds: 1), () => creditCardMetadataList); 
 }
 
 Future<List<ShopCategory>> fetchAllShopCategories(String uid) {
@@ -34,5 +34,5 @@ Future<List<ShopCategory>> fetchAllShopCategories(String uid) {
     ShopCategory('Great Mall', 'great_mall'),
     ShopCategory('Outlets', 'outlets'),
   ];
-  return Future.delayed(Duration(seconds: 3), () => suggestions); 
+  return Future.delayed(Duration(seconds: 1), () => suggestions); 
 }
