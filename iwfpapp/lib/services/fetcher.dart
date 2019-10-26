@@ -4,70 +4,78 @@ import 'package:iwfpapp/services/cashback_promo.dart';
 
 void populateChaseCreditCard(CreditCard card) {
   card.promos.add(
-      CashbackPromo('gas_stations', 'sector', '01/01', '03/31', 'annual', 5));
+      CashbackPromo('Gas Station', 'gas_stations', 'sector', '01/01', '03/31', 'annual', 5));
   card.promos.add(
-      CashbackPromo('drag_stores', 'sector', '01/01', '03/31', 'annual', 5));
+      CashbackPromo('Grag Stores', 'drag_stores', 'sector', '01/01', '03/31', 'annual', 5));
   card.promos.add(
-      CashbackPromo('grocery_stores', 'sector', '04/01', '06/30', 'annual', 5));
+      CashbackPromo('Grocery Stores', 'grocery_stores', 'sector', '04/01', '06/30', 'annual', 5));
   card.promos.add(CashbackPromo(
-      'home_improvement_stores', 'sector', '04/01', '06/30', 'annual', 5));
+      'Home Improvement Stores', 'home_improvement_stores', 'sector', '04/01', '06/30', 'annual', 5));
   card.promos.add(
-      CashbackPromo('gas_stations', 'sector', '07/01', '09/30', 'annual', 5));
+      CashbackPromo('Gas Stations', 'gas_stations', 'sector', '07/01', '09/30', 'annual', 5));
   card.promos.add(CashbackPromo(
-      'streaming_services', 'sector', '07/01', '09/30', 'annual', 5));
+      'Streaming Services', 'streaming_services', 'sector', '07/01', '09/30', 'annual', 5));
   card.promos.add(
-      CashbackPromo('chase_pay', 'payment', '10/01', '12/31', 'annual', 5));
+      CashbackPromo('Chase Pay', 'chase_pay', 'payment', '10/01', '12/31', 'annual', 5));
   card.promos
-      .add(CashbackPromo('paypal', 'payment', '10/01', '12/31', 'annual', 5));
+      .add(CashbackPromo('PayPal', 'paypal', 'payment', '10/01', '12/31', 'annual', 5));
   card.promos.add(
-      CashbackPromo('all_purchase', 'universal', 'nan', 'nan', 'const', 1));
+      CashbackPromo('All Purchases', 'all_purchase', 'universal', 'nan', 'nan', 'const', 1));
 }
 
 void populateDiscoverCreditCard(CreditCard card) {
   card.promos.add(
-      CashbackPromo('grocery_stores', 'sector', '01/01', '03/31', 'annual', 5));
+      CashbackPromo('Grocery Stores', 'grocery_stores', 'sector', '01/01', '03/31', 'annual', 5));
   card.promos.add(
-      CashbackPromo('gas_stations', 'sector', '04/01', '06/30', 'annual', 5));
+      CashbackPromo('Gas Stations', 'gas_stations', 'sector', '04/01', '06/30', 'annual', 5));
   card.promos
-      .add(CashbackPromo('uber', 'sector', '04/01', '06/30', 'annual', 5));
+      .add(CashbackPromo('Uber', 'uber', 'sector', '04/01', '06/30', 'annual', 5));
   card.promos
-      .add(CashbackPromo('lyft', 'sector', '04/01', '06/30', 'annual', 5));
+      .add(CashbackPromo('Lyft', 'lyft', 'sector', '04/01', '06/30', 'annual', 5));
   card.promos.add(
-      CashbackPromo('restaurants', 'sector', '07/01', '09/30', 'annual', 5));
+      CashbackPromo('Restaurants', 'restaurants', 'sector', '07/01', '09/30', 'annual', 5));
   card.promos
-      .add(CashbackPromo('paypal', 'payment', '07/01', '09/30', 'annual', 5));
+      .add(CashbackPromo('PayPal', 'paypal', 'payment', '07/01', '09/30', 'annual', 5));
   card.promos
-      .add(CashbackPromo('amazon', 'brand', '10/01', '12/31', 'annual', 5));
+      .add(CashbackPromo('Amazon.com', 'amazon', 'brand', '10/01', '12/31', 'annual', 5));
   card.promos
-      .add(CashbackPromo('target', 'brand', '10/01', '12/31', 'annual', 5));
+      .add(CashbackPromo('Target', 'target', 'brand', '10/01', '12/31', 'annual', 5));
   card.promos
-      .add(CashbackPromo('walmart', 'brand', '10/01', '12/31', 'annual', 5));
+      .add(CashbackPromo('Walmart', 'walmart', 'brand', '10/01', '12/31', 'annual', 5));
   card.promos.add(
-      CashbackPromo('all_purchase', 'universal', 'nan', 'nan', 'const', 1));
+      CashbackPromo('All Purchases', 'all_purchase', 'universal', 'nan', 'nan', 'const', 1));
 }
 
 void populateDebitCard(CreditCard card) {
   card.promos.add(
-      CashbackPromo('all_purchase', 'universal', 'nan', 'nan', 'const', 1));
+      CashbackPromo('All Purchases', 'all_purchase', 'universal', 'nan', 'nan', 'const', 1));
+}
+
+void populateAmazonStoreCard(CreditCard card) {
+  card.promos.add(
+      CashbackPromo('Amazon.com', 'amazon', 'brand', 'nan', 'nan', 'const', 5));
 }
 
 Future<List<CreditCard>> fetchAllCreditCards(String uid) {
   List<CreditCard> creditCardMetadataList = [
-    CreditCard('Chase Freedom'),
-    CreditCard('Discover Credit Card'),
     CreditCard('Discover Cashback Debit Card'),
     CreditCard('Empower Cashback Debit Card'),
+    CreditCard('Chase Freedom'),
+    CreditCard('Amazon Store Card'),
+    CreditCard('Discover Credit Card'),
   ];
-  populateChaseCreditCard(creditCardMetadataList[0]);
-  populateDiscoverCreditCard(creditCardMetadataList[1]);
-  populateDebitCard(creditCardMetadataList[2]);
-  populateDebitCard(creditCardMetadataList[3]);
+  populateDebitCard(creditCardMetadataList[0]);
+  populateDebitCard(creditCardMetadataList[1]);
+  populateChaseCreditCard(creditCardMetadataList[2]);
+  populateAmazonStoreCard(creditCardMetadataList[3]);
+  populateDiscoverCreditCard(creditCardMetadataList[4]);
   return Future.delayed(Duration(seconds: 1), () => creditCardMetadataList);
 }
 
 Future<List<ShopCategory>> fetchAllShopCategories(String uid) {
   List<ShopCategory> suggestions = [
     ShopCategory('Samsung Pay', 'samsung_pay'),
+    ShopCategory('Grocery Stores', 'grocery_stores'),
     ShopCategory('Restaurants', 'restaurants'),
     ShopCategory('Coffee Shop', 'coffee_shop'),
     ShopCategory('Amazon.com', 'amazon'),
