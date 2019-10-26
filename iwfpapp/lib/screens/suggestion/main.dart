@@ -23,7 +23,7 @@ class SuggestionScreen extends StatelessWidget {
         backgroundColor: Colors.purple,
         key: Key('suggestion_title'),
       ),
-      body: SuggestionEntries(),
+      body: SuggestionEntries(category),
       backgroundColor: Colors.purple[100],
     );
   }

@@ -28,17 +28,21 @@ class _ShopNow extends State<ShopNow> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Container(
-            key: Key('suggested_categories'),
-            child: Center(
-                child: ListView(
-              children: snapshot.data.map((ShopCategory category) {
-                return BasicCategory(category);
-              }).toList(),
-            )));
+              key: Key('suggested_categories'),
+              child: Center(
+                  child: ListView(
+                children: snapshot.data.map((ShopCategory category) {
+                  return BasicCategory(category);
+                }).toList(),
+              )));
         } else if (snapshot.hasError) {
-          return Text('error');
+          return Center(
+            child: Text('error'),
+          );
         }
-        return Text('loading...');
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

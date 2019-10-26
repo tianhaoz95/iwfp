@@ -53,7 +53,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(Key('cards_nav_btn')));
     await tester.pump();
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(new Duration(seconds: 5));
     validateIsCardsScreen();
     await tester.tap(find.byKey(Key('user_nav_btn')));
     await tester.pump();

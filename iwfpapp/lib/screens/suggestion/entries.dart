@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/credit_card.dart';
-import 'package:iwfpapp/services/fetcher.dart';
+import 'package:iwfpapp/services/ranker.dart';
+import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/widgets/credit_cards/basic.dart';
 
 class SuggestionEntries extends StatefulWidget {
-  const SuggestionEntries({Key key}) : super(key: key);
+  final ShopCategory category;
+  const SuggestionEntries(this.category, {Key key}) : super(key: key);
 
   @override
   _SuggestionEntries createState() {
@@ -18,7 +20,7 @@ class _SuggestionEntries extends State<SuggestionEntries> {
   @override
   void initState() {
     super.initState();
-    cards = fetchAllCreditCards('tianhaoz95');
+    cards = getRankedCards('tianhaoz95', widget.category);
   }
 
   @override
@@ -28,17 +30,19 @@ class _SuggestionEntries extends State<SuggestionEntries> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Container(
-            key: Key('suggested_categories'),
-            child: Center(
-                child: ListView(
-              children: snapshot.data.map((CreditCard card) {
-                return BasicCreditCard(card, Colors.purple);
-              }).toList(),
-            )));
+              key: Key('suggested_categories'),
+              child: Center(
+                  child: ListView(
+                children: snapshot.data.map((CreditCard card) {
+                  return BasicCreditCard(card, Colors.purple);
+                }).toList(),
+              )));
         } else if (snapshot.hasError) {
-          return Text('error');
+          return Center(child: Text('error'));
         }
-        return Text('loading...');
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

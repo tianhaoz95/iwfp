@@ -8,7 +8,7 @@ CreditCard generateCreditCard(String name, List<int> rates) {
   CreditCard card = CreditCard(name);
   for (int rate in rates) {
     CashbackPromo promo = CashbackPromo(
-        'coffee shop', 'sector', '09/01', '12/01', 'annually', rate);
+        'Coffee Shop', 'coffee_shop', 'sector', '09/01', '12/01', 'annually', rate);
     card.promos.add(promo);
   }
   return card;
@@ -31,8 +31,8 @@ void main() {
   group('ranker tests', () {
     test('finds highest matching rate basic case', () {
       List<CreditCard> cards = generateCreditCardsNoGenericPromo();
-      ShopCategory category = ShopCategory('coffee shop', 'coffee_shop');
-      cardRanker(cards, category);
+      ShopCategory category = ShopCategory('Coffee Shop', 'coffee_shop');
+      rankCards(cards, category);
       expect(cards[0].name, 'Card 7');
       expect(cards[1].name, 'Card 6');
       expect(cards[2].name, 'Card 5');
