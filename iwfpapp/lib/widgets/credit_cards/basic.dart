@@ -28,7 +28,8 @@ class BasicCreditCard extends StatelessWidget {
                   children: cardMetaData.promos.map((CashbackPromo promo) {
                     return Chip(
                         backgroundColor: color[600],
-                        label: Text(promo.name + '@' + promo.rate.toString() + '%',
+                        label: Text(
+                            promo.name + '@' + promo.rate.toString() + '%',
                             style: TextStyle(color: Colors.white)));
                   }).toList(),
                 ),

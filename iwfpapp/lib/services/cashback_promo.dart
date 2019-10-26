@@ -6,6 +6,6 @@ class CashbackPromo {
   final String end;
   final String repeat;
   final int rate;
-  const CashbackPromo(
-      this.name, this.id, this.type, this.start, this.end, this.repeat, this.rate);
+  const CashbackPromo(this.name, this.id, this.type, this.start, this.end,
+      this.repeat, this.rate);
 }
