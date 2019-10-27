@@ -54,7 +54,8 @@ jobs:
           cd ./iwfp
           ./scripts/setenv.sh
           cd ./iwfpapp
-          flutter build apk  --release
+          flutter build apk --split-per-abi
+          flutter build appbundle
   build-ios:
     name: Build IOS ipa
     runs-on: macOS-latest
