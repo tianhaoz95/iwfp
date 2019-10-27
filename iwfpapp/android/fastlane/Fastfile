@@ -24,7 +24,7 @@ platform :android do
   lane :test do
     gradle(task: "test")
   end
-
+  
   desc "Submit a new Internal Testing Build"
   lane :internal do
     gradle(task: 'assemble', build_type: 'Release')
