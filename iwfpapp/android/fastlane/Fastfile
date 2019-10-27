@@ -25,6 +25,12 @@ platform :android do
     gradle(task: "test")
   end
 
+  desc "Submit a new Internal Testing Build"
+  lane :internal do
+    gradle(task: 'assemble', build_type: 'Release')
+    upload_to_play_store(track: 'internal')
+  end
+
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
     gradle(task: "assembleRelease")
