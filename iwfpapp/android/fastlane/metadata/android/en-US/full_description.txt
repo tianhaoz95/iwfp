@@ -1,0 +1,1 @@
+The iwfpapp (I want five percent app) lets you keep track of all your cashback credit/debit cards and prompt you the highest rewarding card every time you type in a category of shopping (while you are paying in stores).
