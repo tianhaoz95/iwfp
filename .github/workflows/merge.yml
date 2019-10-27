@@ -48,7 +48,9 @@ jobs:
         run: |
           cd ..
           git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/${{ secrets.SECRET_REPO }}.git
-          cd ./iwfp/iwfpapp
+          cd ./iwfp
+          ./script/setenv.sh
+          cd ./iwfpapp
           flutter build apk  --release
   build-ios:
     name: Build IOS ipa
