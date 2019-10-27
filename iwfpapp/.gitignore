@@ -37,6 +37,7 @@
 **/android/gradlew.bat
 **/android/local.properties
 **/android/key.properties
+**/android/app/key.jks
 **/android/fastlane/Appfile
 **/android/**/GeneratedPluginRegistrant.java
 
