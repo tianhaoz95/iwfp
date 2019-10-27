@@ -52,7 +52,7 @@ jobs:
           cd ..
           git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/${{ secrets.SECRET_REPO }}.git
           cd ./iwfp
-          ./script/setenv.sh
+          ./scripts/setenv.sh
           cd ./iwfpapp
           flutter build apk  --release
   build-ios:
