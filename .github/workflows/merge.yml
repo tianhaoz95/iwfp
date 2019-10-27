@@ -53,9 +53,11 @@ jobs:
           git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/${{ secrets.SECRET_REPO }}.git
           cd ./iwfp
           ./scripts/setenv.sh
+          cat ./iwfpapp/android/key.properties
+          cat ./iwfpapp/android/fastlane/Appfile
           cd ./iwfpapp
-          flutter build apk --split-per-abi
           flutter build appbundle
+          flutter build apk --split-per-abi
   build-ios:
     name: Build IOS ipa
     runs-on: macOS-latest
