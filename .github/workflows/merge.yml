@@ -44,7 +44,12 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
-      - run: cd ./iwfpapp && flutter build apk  --release
+      - name: build apk package
+        run: |
+          cd ..
+          git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/jacksonz-secrets.git
+          cd ./iwfp/iwfpapp
+          flutter build apk  --release
   build-ios:
     name: Build IOS ipa
     runs-on: macOS-latest
