@@ -52,6 +52,7 @@ jobs:
           cd ..
           git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/${{ secrets.SECRET_REPO }}.git
           cp ./${{ secrets.SECRET_REPO }}/iwfp/key.jks ./iwfp/iwfpapp/android/app
+          ls ./iwfp/iwfpapp/android/app
           cd ./iwfp
           export PROJ=$HOME
           ./scripts/setenv.sh
