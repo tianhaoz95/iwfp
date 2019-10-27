@@ -56,6 +56,8 @@ jobs:
           export PROJ=$HOME
           ./scripts/setenv.sh
           cd ./iwfpapp
+          flutter channel master
+          flutter upgrade
           flutter build apk --split-per-abi
           flutter build appbundle
   build-ios:
