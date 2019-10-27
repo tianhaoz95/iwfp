@@ -28,8 +28,12 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
-      - run: flutter channel master && flutter upgrade
-      - run: flutter config --enable-web
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: enable flutter web
+        run: flutter config --enable-web
       - run: cd ./iwfpapp && flutter create .
       - run: cd ./iwfpapp && flutter build web
   build-android:
@@ -44,6 +48,10 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
       - name: build apk package
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
@@ -56,8 +64,6 @@ jobs:
           export PROJ=$HOME
           ./scripts/setenv.sh
           cd ./iwfpapp
-          flutter channel master
-          flutter upgrade
           flutter build apk --split-per-abi
           flutter build appbundle
   build-ios:
@@ -72,5 +78,11 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
-      - run: flutter channel master && flutter upgrade
-      - run: cd ./iwfpapp && flutter build ios  --release --no-codesign
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: build ipa
+        run: |
+          cd ./iwfpapp
+          flutter build ios  --release --no-codesign
