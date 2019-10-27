@@ -47,7 +47,7 @@ jobs:
       - name: build apk package
         run: |
           cd ..
-          git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/jacksonz-secrets.git
+          git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/${{ secrets.SECRET_REPO }}.git
           cd ./iwfp/iwfpapp
           flutter build apk  --release
   build-ios:
