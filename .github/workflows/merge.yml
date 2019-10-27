@@ -54,8 +54,6 @@ jobs:
           cd ./iwfp
           export PROJ=$HOME
           ./scripts/setenv.sh
-          cat ./iwfpapp/android/key.properties
-          cat ./iwfpapp/android/fastlane/Appfile
           cd ./iwfpapp
           flutter build appbundle
           flutter build apk --split-per-abi
