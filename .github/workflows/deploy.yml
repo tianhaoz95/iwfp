@@ -43,12 +43,34 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
-      - run: cd ./iwfpapp && flutter build apk  --release
-      - name: upload artifects
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: build apk package
+        env:
+          ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
+          SECRET_REPO: ${{ secrets.SECRET_REPO }}
+        run: |
+          cd ..
+          git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/${{ secrets.SECRET_REPO }}.git
+          cp ./${{ secrets.SECRET_REPO }}/iwfp/key.jks ./iwfp/iwfpapp/android/app
+          cd ./iwfp
+          export PROJ=$HOME
+          ./scripts/setenv.sh
+          cd ./iwfpapp
+          flutter build apk --split-per-abi
+          flutter build appbundle
+      - name: upload apk artifects
         uses: actions/upload-artifact@master
         with:
-          name: android-app
-          path: iwfpapp/build/app/outputs
+          name: android-apk
+          path: iwfpapp/build/app/outputs/apk
+      - name: upload app bundle artifects
+        uses: actions/upload-artifact@master
+        with:
+          name: android-app-bundle
+          path: iwfpapp/build/app/outputs/bundle
   deploy-ios:
     name: Deploy IOS app
     runs-on: macOS-latest
@@ -61,8 +83,14 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
-      - run: flutter channel master && flutter upgrade
-      - run: cd ./iwfpapp && flutter build ios  --release --no-codesign
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: build iOS package
+        run: |
+          cd ./iwfpapp
+          flutter build ios --release --no-codesign
       - name: upload artifects
         uses: actions/upload-artifact@master
         with:
