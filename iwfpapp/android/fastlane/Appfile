@@ -1,2 +1,0 @@
-json_key_file "/Users/tianhaozhou/Downloads/api-8667115503035826703-524540-6a10372ebf90.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
-package_name "com.jacksonz.iwfpapp" # e.g. com.krausefx.app
