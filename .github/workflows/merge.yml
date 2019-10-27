@@ -45,6 +45,9 @@ jobs:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
       - name: build apk package
+        env:
+          ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
+          SECRET_REPO: ${{ secrets.SECRET_REPO }}
         run: |
           cd ..
           git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/${{ secrets.SECRET_REPO }}.git
