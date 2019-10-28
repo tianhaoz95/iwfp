@@ -22,11 +22,17 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
-      - run: flutter channel master && flutter upgrade
-      - run: flutter config --enable-web
-      - run: cd ./iwfpapp && flutter create .
-      - run: cd ./iwfpapp && flutter build web
-      - name: upload artifects
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: enable flutter web config
+        run: flutter config --enable-web
+      - name: build for web
+        run: |
+          cd ./iwfpapp
+          flutter build web
+      - name: upload web artifects
         uses: actions/upload-artifact@master
         with:
           name: web-app
