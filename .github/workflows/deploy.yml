@@ -38,7 +38,7 @@ jobs:
       - name: install firebase cli
         run: sudo npm install -g firebase-tools
       - name: deploy to firebase
-        run: firebase deploy --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
+        run: sudo firebase deploy --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
       - name: upload web artifects
         uses: actions/upload-artifact@master
         with:
