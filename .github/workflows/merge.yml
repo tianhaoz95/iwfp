@@ -34,8 +34,10 @@ jobs:
           flutter upgrade
       - name: enable flutter web
         run: flutter config --enable-web
-      - run: cd ./iwfpapp && flutter create .
-      - run: cd ./iwfpapp && flutter build web
+      - name: build web
+        run: |
+          cd ./iwfpapp
+          flutter build web
   build-android:
     name: Build Android apk
     runs-on: ubuntu-latest
@@ -85,4 +87,4 @@ jobs:
       - name: build ipa
         run: |
           cd ./iwfpapp
-          flutter build ios  --release --no-codesign
+          flutter build ios --release --no-codesign
