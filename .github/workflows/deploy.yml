@@ -32,6 +32,8 @@ jobs:
         run: |
           cd ./iwfpapp
           flutter build web
+      - name: deploy to firebase
+        run: firebase deploy --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
       - name: upload web artifects
         uses: actions/upload-artifact@master
         with:
