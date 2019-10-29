@@ -8,7 +8,7 @@ CreditCard generateCreditCard(String name, List<int> rates) {
   CreditCard card = CreditCard(name);
   for (int rate in rates) {
     CashbackPromo promo = CashbackPromo(
-        'Coffee Shop', 'coffee_shop', 'sector', '09/01', '12/01', 'annually', rate);
+        'Coffee Shop', 'coffee_shop', 'sector', 'na', 'na', 'const', rate);
     card.promos.add(promo);
   }
   return card;

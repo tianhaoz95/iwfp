@@ -5,13 +5,44 @@ import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/fetcher.dart';
 import 'package:iwfpapp/services/shop_category.dart';
 
-bool isInValidTimeRange(CashbackPromo promo) {
-  /**
-   * @todo Add dart datetime to validate expiration
-   * @body The app should know what the current date
-   * is and use it to match the promo duration
-   */
-  return true;
+bool isInValidTimeRange(CashbackPromo promo, {DateTime useCurrentTime}) {
+  bool valid = false;
+  switch (promo.repeat) {
+    case 'const':
+      {
+        valid = true;
+      }
+      break;
+
+    case 'annual':
+      {
+        DateTime currentTime = new DateTime.now();
+        if (useCurrentTime != null) {
+          currentTime = useCurrentTime;
+        }
+        int currentYear = currentTime.year;
+        int startMonth = int.parse(promo.start.split('/')[0]);
+        int startDay = int.parse(promo.start.split('/')[1]);
+        int endMonth = int.parse(promo.end.split('/')[0]);
+        int endDay = int.parse(promo.end.split('/')[1]);
+        DateTime startTime =
+            new DateTime.utc(currentYear, startMonth, startDay);
+        DateTime endTime = new DateTime.utc(currentYear, endMonth, endDay);
+        if (currentTime.isAfter(startTime) && currentTime.isBefore(endTime)) {
+          valid = true;
+        } else {
+          valid = false;
+        }
+      }
+      break;
+
+    default:
+      {
+        valid = false;
+      }
+      break;
+  }
+  return valid;
 }
 
 int getMaxRate(CreditCard card, ShopCategory category) {
