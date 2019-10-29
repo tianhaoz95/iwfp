@@ -4,6 +4,7 @@ class CashbackPromo {
   final String type;
   final String start;
   final String end;
+
   /// repeat indicates the rule for how the promotion repeats.
   /// supported types are:
   /// * annual (repeats annually between start and end)
