@@ -7,14 +7,12 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Welcome')),
+        appBar: AppBar(title: Text('Welcome to iwfp')),
         key: Key('login_screen'),
         backgroundColor: Colors.blue[100],
         body: Container(
-          padding: const EdgeInsets.all(36.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
+          padding: const EdgeInsets.all(25.0),
+          child: ListView(
             children: <Widget>[
               SizedBox(height: 15.0),
               Image.asset(

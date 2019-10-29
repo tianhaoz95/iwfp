@@ -10,7 +10,7 @@ class GuestLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
         key: Key('guest_login_btn'),
-        elevation: 5.0,
+        elevation: 0.0,
         borderRadius: BorderRadius.circular(30.0),
         color: Colors.blue,
         child: MaterialButton(
