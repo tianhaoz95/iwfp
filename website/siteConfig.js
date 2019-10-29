@@ -21,8 +21,8 @@ const users = [
 ];
 
 const siteConfig = {
-  title: 'Test Site', // Title for your website.
-  tagline: 'A website for testing',
+  title: 'iwfp', // Title for your website.
+  tagline: 'An app to keep you at maximum credit card cashback possible',
   url: 'https://tianhaoz.com', // Your website URL
   baseUrl: '/iwfp/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:

@@ -64,9 +64,9 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
-            <Button href="#try">Try It Out</Button>
-            <Button href={docUrl('doc1.html')}>Example Link</Button>
-            <Button href={docUrl('doc2.html')}>Example Link 2</Button>
+            <Button href="https://iwfpapp.web.app">Try out the web version</Button>
+            <Button href="https://github.com/tianhaoz95/iwfp/releases/download/v0.1-alpha%2Bhotfix.1/app.apk">Download Android</Button>
+            <Button href="https://github.com/tianhaoz95/iwfp/releases/tag/v0.1-alpha%2Bhotfix.1">Download iOS</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -96,8 +96,9 @@ class Index extends React.Component {
       <div
         className="productShowcaseSection paddingBottom"
         style={{textAlign: 'center'}}>
-        <h2>Feature Callout</h2>
-        <MarkdownBlock>These are features of this project</MarkdownBlock>
+        <h2>Features:</h2>
+        <MarkdownBlock>Custom credit card sets</MarkdownBlock>
+        <MarkdownBlock>Custom shopping categories</MarkdownBlock>
       </div>
     );
 
@@ -149,16 +150,16 @@ class Index extends React.Component {
       <Block layout="fourColumn">
         {[
           {
-            content: 'This is the content of my feature',
+            content: 'Define your own set of credit cards, iwfp is not ads for credit cards',
             image: `${baseUrl}img/undraw_react.svg`,
             imageAlign: 'top',
-            title: 'Feature One',
+            title: 'Custom credit card set',
           },
           {
-            content: 'The content of my second feature',
+            content: 'You deserve the maximum credit card cashback possible at all times',
             image: `${baseUrl}img/undraw_operating_system.svg`,
             imageAlign: 'top',
-            title: 'Feature Two',
+            title: 'Credit card cashback rate ranking',
           },
         ]}
       </Block>
