@@ -12,3 +12,7 @@ void validateSuggestionScreenContent() {
 void validateLoginScreenContent() {
   expect(find.byKey(Key('login_screen')), findsOneWidget);
 }
+
+void validateSignInFailed() {
+  expect(find.byKey(Key('sign_in_failed_prompt')), findsOneWidget);
+}
