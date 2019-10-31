@@ -31,13 +31,6 @@ void validateIsPlaceholderScreen() {
 void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
-    await tester.tap(find.byKey(Key('email_login_btn')));
-    await tester.pump();
-    await tester.pumpAndSettle(new Duration(seconds: 5));
-    validateSignInFailed();
-    await tester.tap(find.text('Close'));
-    await tester.pump();
-    await tester.pumpAndSettle(new Duration(seconds: 5));
     // So far only guest login is supported.
     validateLoginScreenContent();
     await tester.tap(find.byKey(Key('guest_login_btn')));
