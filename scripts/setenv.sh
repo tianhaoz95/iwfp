@@ -1,10 +1,58 @@
-# This script should run from the root project directory
-rm -f ./iwfpapp/android/key.properties
-echo "storePassword=$ANDROID_SIGN_PWD" >> ./iwfpapp/android/key.properties
-echo "keyPassword=$ANDROID_SIGN_PWD" >> ./iwfpapp/android/key.properties
-echo "keyAlias=key" >> ./iwfpapp/android/key.properties
-echo "storeFile=key.jks" >> ./iwfpapp/android/key.properties
+#!/bin/bash
 
-rm -f ./iwfpapp/android/fastlane/Appfile
-echo "json_key_file \"$PROJ$SECRET_REPO/iwfp/play_store_service_account_api_key.json\"" >> ./iwfpapp/android/fastlane/Appfile
-echo "package_name \"com.jacksonz.iwfpapp\"" >> ./iwfpapp/android/fastlane/Appfile
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+echo "Script absolute path is $SCRIPT_DIR"
+
+PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
+
+echo "Project root path is $PROJ_ROOT"
+
+if [ -z "${ANDROID_SIGN_PWD}" ]
+then
+  echo "ANDROID_SIGN_PWD not found, abort"
+  exit 1
+else
+  echo "ANDROID_SIGN_PWD detected, proceeding..."
+fi
+
+if [ -z "${SECRET_REPO}" ]
+then
+  echo "SECRET_REPO not found, using jacksonz-secrets..."
+  export SECRET_REPO=jacksonz-secrets
+else
+  echo "SECRET_REPO detected, proceeding..."
+fi
+
+if [ -z "${PROJ}" ]
+then
+  echo "PROJ not found, using /tmp/iwfp as proj directory..."
+  export PROJ=/tmp/iwfp
+else
+  echo "PROJ detected, proceeding..."
+fi
+
+if [ -d "$PROJ/$SECRET_REPO" ]
+then
+  echo "$PROJ/$SECRET_REPO exists"
+else
+  echo "$PROJ/$SECRET_REPO not found"
+  if [ -z "${GITHUB_TOKEN}" ]
+  then
+    echo "GITHUB_TOKEN not found, abort"
+    exit 1
+  else
+    echo "GITHUB_TOKEN exist, cloning $SECRET_REPO into $PROJ/$SECRET_REPO..."
+    git clone https://${GITHUB_TOKEN}@github.com/tianhaoz95/${SECRET_REPO}.git $PROJ/$SECRET_REPO
+  fi
+fi
+
+rm -f $PROJ_ROOT/iwfpapp/android/key.properties
+echo "storePassword=$ANDROID_SIGN_PWD" >> $PROJ_ROOT/iwfpapp/android/key.properties
+echo "keyPassword=$ANDROID_SIGN_PWD" >> $PROJ_ROOT/iwfpapp/android/key.properties
+echo "keyAlias=key" >> $PROJ_ROOT/iwfpapp/android/key.properties
+echo "storeFile=key.jks" >> $PROJ_ROOT/iwfpapp/android/key.properties
+
+rm -f $PROJ_ROOT/iwfpapp/android/fastlane/Appfile
+echo "json_key_file \"$PROJ/$SECRET_REPO/iwfp/play_store_service_account_api_key.json\"" >> $PROJ_ROOT/iwfpapp/android/fastlane/Appfile
+echo "package_name \"com.jacksonz.iwfpapp\"" >> $PROJ_ROOT/iwfpapp/android/fastlane/Appfile
