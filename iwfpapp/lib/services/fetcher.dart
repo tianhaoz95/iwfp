@@ -75,26 +75,19 @@ Future<List<CreditCard>> fetchAllCreditCards(String uid) {
 Future<List<ShopCategory>> fetchAllShopCategories(String uid) {
   List<ShopCategory> suggestions = [
     ShopCategory('Samsung Pay', 'samsung_pay'),
+    ShopCategory('Drag Stores', 'drag_stores'),
+    ShopCategory('Paypal', 'paypal'),
+    ShopCategory('Uber', 'uber'),
+    ShopCategory('Lyft', 'lyft'),
     ShopCategory('Grocery Stores', 'grocery_stores'),
     ShopCategory('Restaurants', 'restaurants'),
-    ShopCategory('Coffee Shop', 'coffee_shop'),
     ShopCategory('Amazon.com', 'amazon'),
     ShopCategory('Walmart', 'walmart'),
+    ShopCategory('Target', 'target'),
     ShopCategory('Macy', 'macy'),
-    ShopCategory('Nike', 'nike'),
-    ShopCategory('Vans', 'vans'),
-    ShopCategory('Hotels', 'hotel'),
-    ShopCategory('Apple', 'apple'),
-    ShopCategory('Microsoft', 'microsoft'),
-    ShopCategory('Google Pay', 'google_pay'),
+    ShopCategory('Home Improvement Stores', 'home_improvement_stores'),
     ShopCategory('Chase Pay', 'chase_pay'),
-    ShopCategory('Gas Station', 'gas_station'),
-    ShopCategory('Traveling', 'traveling'),
-    ShopCategory('Best Buy', 'best_buy'),
-    ShopCategory('Safeway', 'safeway'),
-    ShopCategory('CVS', 'cvs'),
-    ShopCategory('Great Mall', 'great_mall'),
-    ShopCategory('Outlets', 'outlets'),
+    ShopCategory('Gas Station', 'gas_stations'),
   ];
   return Future.delayed(Duration(seconds: 1), () => suggestions);
 }
