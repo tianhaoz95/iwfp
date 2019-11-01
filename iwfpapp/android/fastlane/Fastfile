@@ -27,8 +27,13 @@ platform :android do
   
   desc "Submit a new Internal Testing Build"
   lane :internal do
-    gradle(task: 'assemble', build_type: 'Release')
-    upload_to_play_store(track: 'internal')
+    gradle(task: 'bundle', build_type: 'Release')
+    upload_to_play_store(
+      track: 'internal',
+      aab: '../build/app/outputs/bundle/release/app-release.aab',
+      skip_upload_screenshots: true,
+      skip_upload_images: true
+    )
   end
 
   desc "Submit a new Beta Build to Crashlytics Beta"
