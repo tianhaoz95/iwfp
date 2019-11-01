@@ -54,6 +54,9 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.x'
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '1.9.1+hotfix.4'
@@ -62,6 +65,8 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
+      - name: install ruby packages
+        run: bundle install
       - name: build apk package
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
