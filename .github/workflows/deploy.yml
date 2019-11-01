@@ -66,16 +66,14 @@ jobs:
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
-          cd ..
-          git clone https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/tianhaoz95/${{ secrets.SECRET_REPO }}.git
-          cp ./${{ secrets.SECRET_REPO }}/iwfp/key.jks ./iwfp/iwfpapp/android/app
-          cd ./iwfp
-          export PROJ=$HOME
           ./scripts/setenv.sh
           cd ./iwfpapp
           flutter build apk --split-per-abi
           flutter build appbundle
+          cd ./android
+          fastlane internal
       - name: upload apk artifects
         uses: actions/upload-artifact@master
         with:
