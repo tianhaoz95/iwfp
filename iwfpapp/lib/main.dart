@@ -4,6 +4,7 @@ import 'screens/login/main.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
+import 'package:iwfpapp/services/data_store.dart';
 
 void main() {
   // Set `enableInDevMode` to true to see reports while in debug mode
@@ -15,11 +16,14 @@ void main() {
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
 
-  runApp(MyApp());
+  DataStore dataStore = DataStore('firebase');
+
+  runApp(MyApp(dataStore));
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  final DataStore dataStore;
+  const MyApp(this.dataStore);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
