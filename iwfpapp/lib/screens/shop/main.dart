@@ -37,7 +37,7 @@ class _ShopNow extends State<ShopNow> {
               )));
         } else if (snapshot.hasError) {
           return Center(
-            child: Text('error'),
+            child: Text('Error: ' + snapshot.error.toString()),
           );
         }
         return Center(
