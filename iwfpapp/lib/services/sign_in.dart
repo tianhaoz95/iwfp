@@ -5,7 +5,7 @@ class IwfpappAuth {
   FirebaseAuth _auth = FirebaseAuth.instance;
   AuthResult authResult;
   FirebaseUser user;
-  bool isAuthenticated;
+  bool isAuthenticated = false;
 
   Future<bool> handleSignInWithEmail(String email, String pwd) async {
     try {

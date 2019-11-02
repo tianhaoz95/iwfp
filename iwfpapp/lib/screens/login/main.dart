@@ -3,6 +3,7 @@ import 'package:iwfpapp/widgets/buttons/login_btn.dart';
 import 'package:iwfpapp/widgets/buttons/glogin_btn.dart';
 import 'package:iwfpapp/widgets/buttons/guest_login_btn.dart';
 import 'package:iwfpapp/services/sign_in.dart';
+import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -46,13 +47,27 @@ class _LoginScreen extends State<LoginScreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('Welcome to iwfp')),
-        key: Key('login_screen'),
-        backgroundColor: Colors.blue[100],
-        body: Container(
+  Widget renderSignedIn() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+      child: ListView(
+        children: <Widget>[
+          SizedBox(height: 15.0),
+          Image.asset(
+                'assets/iwfp_splash.png',
+                key: Key('iwfp_splash_img'),
+              ),
+          SizedBox(height: 25.0),
+          LogoutButton(
+            onPressedCallback: () {},
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget renderNotSignedIn() {
+    return Container(
           padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
           child: ListView(
             children: <Widget>[
@@ -100,6 +115,19 @@ class _LoginScreen extends State<LoginScreen> {
               ),
             ],
           ),
-        ));
+        );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget bodyContent = renderNotSignedIn();
+    if (iwfpappAuth.isSignedIn()) {
+      bodyContent = renderSignedIn();
+    }
+    return Scaffold(
+        appBar: AppBar(title: Text('Welcome to iwfp')),
+        key: Key('login_screen'),
+        backgroundColor: Colors.blue[100],
+        body: bodyContent);
   }
 }
