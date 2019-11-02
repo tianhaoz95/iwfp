@@ -86,23 +86,4 @@ Future<List<ShopCategory>> fetchAllShopCategories(String uid) async {
     }
   }
   return uniqueCategories;
-  /*
-  List<ShopCategory> suggestions = [
-    ShopCategory('Samsung Pay', 'samsung_pay'),
-    ShopCategory('Drag Stores', 'drag_stores'),
-    ShopCategory('Paypal', 'paypal'),
-    ShopCategory('Uber', 'uber'),
-    ShopCategory('Lyft', 'lyft'),
-    ShopCategory('Grocery Stores', 'grocery_stores'),
-    ShopCategory('Restaurants', 'restaurants'),
-    ShopCategory('Amazon.com', 'amazon'),
-    ShopCategory('Walmart', 'walmart'),
-    ShopCategory('Target', 'target'),
-    ShopCategory('Macy', 'macy'),
-    ShopCategory('Home Improvement Stores', 'home_improvement_stores'),
-    ShopCategory('Chase Pay', 'chase_pay'),
-    ShopCategory('Gas Station', 'gas_stations'),
-  ];
-  return Future.delayed(Duration(seconds: 1), () => suggestions);
-  */
 }
