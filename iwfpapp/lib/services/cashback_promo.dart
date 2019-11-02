@@ -1,9 +1,12 @@
+import 'package:iwfpapp/services/shop_category.dart';
+
 class CashbackPromo {
   final String name;
   final String id;
   final String type;
   final String start;
   final String end;
+  final ShopCategory category;
 
   /// repeat indicates the rule for how the promotion repeats.
   /// supported types are:
@@ -12,5 +15,5 @@ class CashbackPromo {
   final String repeat;
   final int rate;
   const CashbackPromo(this.name, this.id, this.type, this.start, this.end,
-      this.repeat, this.rate);
+      this.repeat, this.rate, this.category);
 }

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:iwfpapp/main.dart';
+import 'package:mockito/mockito.dart';
 import 'screen_validator.dart';
+import 'package:iwfpapp/services/data_store.dart';
 
 void validateIsLoginScreen() {
   expect(find.byKey(Key('iwfp_splash_img')), findsOneWidget);
@@ -28,9 +30,12 @@ void validateIsPlaceholderScreen() {
   expect(find.byKey(Key('placeholder_title')), findsOneWidget);
 }
 
+class MockDataStore extends Mock implements DataStore {}
+
 void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
+    DataStore dataStore = MockDataStore();
+    await tester.pumpWidget(MyApp(dataStore));
     // So far only guest login is supported.
     validateLoginScreenContent();
     await tester.tap(find.byKey(Key('guest_login_btn')));
@@ -38,7 +43,7 @@ void main() {
     validateIsShopScreen();
     // Select one category and confirm it navigates
     // to the suggestions screen.
-    await tester.tap(find.byKey(Key('samsung_pay_select_btn')));
+    await tester.tap(find.byKey(Key('chase_pay_select_btn')));
     await tester.pumpAndSettle(new Duration(seconds: 5));
     validateSuggestionScreenContent();
     await tester.pageBack();
