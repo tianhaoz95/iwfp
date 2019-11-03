@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-typedef onPressedCallbackFunc = void Function();
+typedef onPressedCallbackFunc = Future<void> Function();
 
 class LogoutButton extends StatelessWidget {
   final onPressedCallbackFunc onPressedCallback;
@@ -16,8 +16,8 @@ class LogoutButton extends StatelessWidget {
         child: MaterialButton(
             minWidth: MediaQuery.of(context).size.width,
             padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            onPressed: () {
-              onPressedCallback();
+            onPressed: () async {
+              await onPressedCallback();
             },
             child: Text('Logout',
                 textAlign: TextAlign.center,

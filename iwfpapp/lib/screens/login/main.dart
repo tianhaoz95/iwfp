@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/widgets/buttons/login_btn.dart';
 import 'package:iwfpapp/widgets/buttons/glogin_btn.dart';
 import 'package:iwfpapp/widgets/buttons/guest_login_btn.dart';
-import 'package:iwfpapp/services/sign_in.dart';
+import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
+import 'dart:developer' as developer;
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,6 +14,27 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreen extends State<LoginScreen> {
   final emailInputController = TextEditingController();
   final pwdInputController = TextEditingController();
+  String status;
+
+  @override
+  void initState() {
+    super.initState();
+    status = 'loading';
+    getSignInStatus();
+  }
+
+  Future<void> getSignInStatus() async {
+    bool signedIn = await iwfpappAuth.isSignedIn();
+    if (signedIn) {
+      setState(() {
+        status = 'signed_in';
+      });
+    } else {
+      setState(() {
+        status = 'not_signed_in';
+      });
+    }
+  }
 
   void _showDialog(
       BuildContext context, String title, String body, String key) {
@@ -35,16 +57,28 @@ class _LoginScreen extends State<LoginScreen> {
         });
   }
 
-  void handleEmailSignIn(BuildContext context) async {
+  Future<void> handleEmailSignIn(BuildContext context) async {
+    setState(() {
+      status = 'loading';
+    });
     String email = emailInputController.text;
     String pwd = pwdInputController.text;
-    bool success = await iwfpappAuth.handleSignInWithEmail(email, pwd);
-    if (success) {
+    await iwfpappAuth.handleSignInWithEmail(email, pwd);
+    await getSignInStatus();
+    if (status == 'signed_in') {
       Navigator.pushNamed(context, '/main');
     } else {
       _showDialog(context, 'Sign in with email failed',
           'Please check your password.', 'sign_in_failed_prompt');
     }
+  }
+
+  Future<void> handleSignOut() async {
+    this.setState(() {
+      status = 'loading';
+    });
+    await iwfpappAuth.handleSignOut();
+    await getSignInStatus();
   }
 
   Widget renderSignedIn() {
@@ -54,12 +88,14 @@ class _LoginScreen extends State<LoginScreen> {
         children: <Widget>[
           SizedBox(height: 15.0),
           Image.asset(
-                'assets/iwfp_splash.png',
-                key: Key('iwfp_splash_img'),
-              ),
+            'assets/iwfp_splash.png',
+            key: Key('iwfp_splash_img'),
+          ),
           SizedBox(height: 25.0),
           LogoutButton(
-            onPressedCallback: () {},
+            onPressedCallback: () async {
+              await handleSignOut();
+            },
           )
         ],
       ),
@@ -68,61 +104,72 @@ class _LoginScreen extends State<LoginScreen> {
 
   Widget renderNotSignedIn() {
     return Container(
-          padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
-          child: ListView(
-            children: <Widget>[
-              SizedBox(height: 15.0),
-              Image.asset(
-                'assets/iwfp_splash.png',
-                key: Key('iwfp_splash_img'),
-              ),
-              SizedBox(height: 25.0),
-              TextField(
-                  controller: emailInputController,
-                  decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      hintText: 'email',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32.0)))),
-              SizedBox(height: 25.0),
-              TextField(
-                  controller: pwdInputController,
-                  decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      hintText: 'password',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32.0)))),
-              SizedBox(height: 25.0),
-              LoginButton(
-                onPressedCallback: () {
-                  // Navigator.pushNamed(context, '/placeholder');
-                  handleEmailSignIn(context);
-                },
-              ),
-              SizedBox(height: 25.0),
-              GuestLoginButton(
-                onPressedCallback: () {
-                  Navigator.pushNamed(context, '/main');
-                },
-              ),
-              SizedBox(height: 25.0),
-              GLoginButton(
-                onPressedCallback: () {
-                  Navigator.pushNamed(context, '/placeholder');
-                },
-              ),
-            ],
+      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+      child: ListView(
+        children: <Widget>[
+          SizedBox(height: 15.0),
+          Image.asset(
+            'assets/iwfp_splash.png',
+            key: Key('iwfp_splash_img'),
           ),
-        );
+          SizedBox(height: 25.0),
+          TextField(
+              controller: emailInputController,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: 'email',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32.0)))),
+          SizedBox(height: 25.0),
+          TextField(
+              controller: pwdInputController,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: 'password',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32.0)))),
+          SizedBox(height: 25.0),
+          LoginButton(
+            onPressedCallback: () async {
+              await handleEmailSignIn(context);
+            },
+          ),
+          SizedBox(height: 25.0),
+          GuestLoginButton(
+            onPressedCallback: () {
+              Navigator.pushNamed(context, '/main');
+            },
+          ),
+          SizedBox(height: 25.0),
+          GLoginButton(
+            onPressedCallback: () {
+              Navigator.pushNamed(context, '/placeholder');
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget renderLoading() {
+    return Center(
+        child: Container(
+      child: CircularProgressIndicator(),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget bodyContent = renderNotSignedIn();
-    if (iwfpappAuth.isSignedIn()) {
+    developer.log('building sign in screen...', name: 'iwfpapp.screens.login');
+    Widget bodyContent = renderLoading();
+    if (status == 'signed_in') {
       bodyContent = renderSignedIn();
+    }
+    if (status == 'not_signed_in') {
+      bodyContent = renderNotSignedIn();
+    }
+    if (status == 'loading') {
+      bodyContent = renderLoading();
     }
     return Scaffold(
         appBar: AppBar(title: Text('Welcome to iwfp')),
