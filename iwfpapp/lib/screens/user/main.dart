@@ -9,7 +9,7 @@ class UserSettings extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             Text('Coming soon... You don\'t have settings anyway lol.',
-                style: TextStyle(color: Colors.black45)),
+                style: TextStyle(color: Colors.orange)),
           ],
         ));
   }
