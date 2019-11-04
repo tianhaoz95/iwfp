@@ -130,6 +130,7 @@ class _LoginScreen extends State<LoginScreen> {
           SizedBox(height: 25.0),
           TextField(
               controller: pwdInputController,
+              obscureText: true,
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                   hintText: 'password',
