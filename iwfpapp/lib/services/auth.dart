@@ -38,5 +38,3 @@ class IwfpappAuth {
     return true;
   }
 }
-
-IwfpappAuth iwfpappAuth = IwfpappAuth();

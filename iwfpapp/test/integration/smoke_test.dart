@@ -5,42 +5,25 @@ import 'package:iwfpapp/main.dart';
 import 'package:mockito/mockito.dart';
 import 'screen_validator.dart';
 import 'package:iwfpapp/services/data_store.dart';
-
-void validateIsLoginScreen() {
-  expect(find.byKey(Key('iwfp_splash_img')), findsOneWidget);
-}
-
-void validateIsShopScreen() {
-  expect(find.byKey(Key('shop_title')), findsOneWidget);
-}
-
-void validateIsCardsScreen() {
-  expect(find.byKey(Key('cards_title')), findsOneWidget);
-}
-
-void validateIsUserScreen() {
-  expect(find.byKey(Key('user_title')), findsOneWidget);
-}
-
-void validateIsContribScreen() {
-  expect(find.byKey(Key('contrib_title')), findsOneWidget);
-}
-
-void validateIsPlaceholderScreen() {
-  expect(find.byKey(Key('placeholder_title')), findsOneWidget);
-}
+import 'package:iwfpapp/services/auth.dart';
 
 class MockDataStore extends Mock implements DataStore {}
 
+class MockIwfpappAuth extends Mock implements IwfpappAuth {}
+
 void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
-    DataStore dataStore = MockDataStore();
-    await tester.pumpWidget(MyApp(dataStore));
+    DataStore mockDataStore = MockDataStore();
+    IwfpappAuth mockAuth = MockIwfpappAuth();
+    when(mockAuth.isSignedIn()).thenAnswer((_) => Future.value(false));
+    await tester.pumpWidget(MyApp(mockDataStore, mockAuth));
+    await tester.pump();
+    await tester.pumpAndSettle(new Duration(seconds: 5));
     // So far only guest login is supported.
     validateLoginScreenContent();
     await tester.tap(find.byKey(Key('guest_login_btn')));
     await tester.pumpAndSettle(new Duration(seconds: 5));
-    validateIsShopScreen();
+    validateIsShopScreenContent();
     // Select one category and confirm it navigates
     // to the suggestions screen.
     await tester.tap(find.byKey(Key('chase_pay_select_btn')));
@@ -53,21 +36,21 @@ void main() {
     await tester.tap(find.byKey(Key('cards_nav_btn')));
     await tester.pump();
     await tester.pumpAndSettle(new Duration(seconds: 5));
-    validateIsCardsScreen();
+    validateIsCardsScreenContent();
     await tester.tap(find.byKey(Key('user_nav_btn')));
     await tester.pump();
     await tester.pumpAndSettle();
-    validateIsUserScreen();
+    validateIsUserScreenContent();
     await tester.tap(find.byKey(Key('contrib_nav_btn')));
     await tester.pump();
     await tester.pumpAndSettle();
-    validateIsContribScreen();
+    validateIsContribScreenContent();
     await tester.tap(find.byKey(Key('shop_nav_btn')));
     await tester.pumpAndSettle(new Duration(seconds: 5));
-    validateIsShopScreen();
+    validateIsShopScreenContent();
     await tester.pageBack();
     await tester.pump();
     await tester.pumpAndSettle();
-    validateIsLoginScreen();
+    validateIsLoginScreenContent();
   });
 }

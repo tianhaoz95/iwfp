@@ -7,14 +7,21 @@ import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
 import 'dart:developer' as developer;
 
 class LoginScreen extends StatefulWidget {
+  final IwfpappAuth auth;
+
+  LoginScreen(this.auth);
+
   @override
-  _LoginScreen createState() => _LoginScreen();
+  _LoginScreen createState() => _LoginScreen(auth);
 }
 
 class _LoginScreen extends State<LoginScreen> {
   final emailInputController = TextEditingController();
   final pwdInputController = TextEditingController();
+  final IwfpappAuth auth;
   String status;
+
+  _LoginScreen(this.auth);
 
   @override
   void initState() {
@@ -24,7 +31,7 @@ class _LoginScreen extends State<LoginScreen> {
   }
 
   Future<void> getSignInStatus() async {
-    bool signedIn = await iwfpappAuth.isSignedIn();
+    bool signedIn = await auth.isSignedIn();
     if (signedIn) {
       setState(() {
         status = 'signed_in';
@@ -63,7 +70,7 @@ class _LoginScreen extends State<LoginScreen> {
     });
     String email = emailInputController.text;
     String pwd = pwdInputController.text;
-    await iwfpappAuth.handleSignInWithEmail(email, pwd);
+    await auth.handleSignInWithEmail(email, pwd);
     await getSignInStatus();
     if (status == 'signed_in') {
       Navigator.pushNamed(context, '/main');
@@ -77,7 +84,7 @@ class _LoginScreen extends State<LoginScreen> {
     this.setState(() {
       status = 'loading';
     });
-    await iwfpappAuth.handleSignOut();
+    await auth.handleSignOut();
     await getSignInStatus();
   }
 
