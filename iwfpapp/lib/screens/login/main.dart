@@ -4,6 +4,7 @@ import 'package:iwfpapp/widgets/buttons/glogin_btn.dart';
 import 'package:iwfpapp/widgets/buttons/guest_login_btn.dart';
 import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
+import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
 import 'dart:developer' as developer;
 
 class LoginScreen extends StatefulWidget {
@@ -97,6 +98,12 @@ class _LoginScreen extends State<LoginScreen> {
           Image.asset(
             'assets/iwfp_splash.png',
             key: Key('iwfp_splash_img'),
+          ),
+          SizedBox(height: 25.0),
+          GoToHomeButton(
+            onPressedCallback: () async {
+              Navigator.pushNamed(context, '/main');
+            },
           ),
           SizedBox(height: 25.0),
           LogoutButton(
