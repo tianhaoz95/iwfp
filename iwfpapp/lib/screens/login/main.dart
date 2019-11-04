@@ -2,16 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/widgets/buttons/login_btn.dart';
 import 'package:iwfpapp/widgets/buttons/glogin_btn.dart';
 import 'package:iwfpapp/widgets/buttons/guest_login_btn.dart';
-import 'package:iwfpapp/services/sign_in.dart';
+import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
+import 'dart:developer' as developer;
 
 class LoginScreen extends StatefulWidget {
+  final IwfpappAuth auth;
+
+  LoginScreen(this.auth);
+
   @override
-  _LoginScreen createState() => _LoginScreen();
+  _LoginScreen createState() => _LoginScreen(auth);
 }
 
 class _LoginScreen extends State<LoginScreen> {
   final emailInputController = TextEditingController();
   final pwdInputController = TextEditingController();
+  final IwfpappAuth auth;
+  String status;
+
+  _LoginScreen(this.auth);
+
+  @override
+  void initState() {
+    super.initState();
+    status = 'loading';
+    getSignInStatus();
+  }
+
+  Future<void> getSignInStatus() async {
+    bool signedIn = await auth.isSignedIn();
+    if (signedIn) {
+      setState(() {
+        status = 'signed_in';
+      });
+    } else {
+      setState(() {
+        status = 'not_signed_in';
+      });
+    }
+  }
 
   void _showDialog(
       BuildContext context, String title, String body, String key) {
@@ -34,11 +64,15 @@ class _LoginScreen extends State<LoginScreen> {
         });
   }
 
-  void handleEmailSignIn(BuildContext context) async {
+  Future<void> handleEmailSignIn(BuildContext context) async {
+    setState(() {
+      status = 'loading';
+    });
     String email = emailInputController.text;
     String pwd = pwdInputController.text;
-    bool success = await iwfpappAuth.handleSignInWithEmail(email, pwd);
-    if (success) {
+    await auth.handleSignInWithEmail(email, pwd);
+    await getSignInStatus();
+    if (status == 'signed_in') {
       Navigator.pushNamed(context, '/main');
     } else {
       _showDialog(context, 'Sign in with email failed',
@@ -46,60 +80,108 @@ class _LoginScreen extends State<LoginScreen> {
     }
   }
 
+  Future<void> handleSignOut() async {
+    this.setState(() {
+      status = 'loading';
+    });
+    await auth.handleSignOut();
+    await getSignInStatus();
+  }
+
+  Widget renderSignedIn() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+      child: ListView(
+        children: <Widget>[
+          SizedBox(height: 15.0),
+          Image.asset(
+            'assets/iwfp_splash.png',
+            key: Key('iwfp_splash_img'),
+          ),
+          SizedBox(height: 25.0),
+          LogoutButton(
+            onPressedCallback: () async {
+              await handleSignOut();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget renderNotSignedIn() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+      child: ListView(
+        children: <Widget>[
+          SizedBox(height: 15.0),
+          Image.asset(
+            'assets/iwfp_splash.png',
+            key: Key('iwfp_splash_img'),
+          ),
+          SizedBox(height: 25.0),
+          TextField(
+              controller: emailInputController,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: 'email',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32.0)))),
+          SizedBox(height: 25.0),
+          TextField(
+              controller: pwdInputController,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: 'password',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32.0)))),
+          SizedBox(height: 25.0),
+          LoginButton(
+            onPressedCallback: () async {
+              await handleEmailSignIn(context);
+            },
+          ),
+          SizedBox(height: 25.0),
+          GuestLoginButton(
+            onPressedCallback: () {
+              Navigator.pushNamed(context, '/main');
+            },
+          ),
+          SizedBox(height: 25.0),
+          GLoginButton(
+            onPressedCallback: () {
+              Navigator.pushNamed(context, '/placeholder');
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget renderLoading() {
+    return Center(
+        child: Container(
+      child: CircularProgressIndicator(),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    developer.log('building sign in screen...', name: 'iwfpapp.screens.login');
+    Widget bodyContent = renderLoading();
+    if (status == 'signed_in') {
+      bodyContent = renderSignedIn();
+    }
+    if (status == 'not_signed_in') {
+      bodyContent = renderNotSignedIn();
+    }
+    if (status == 'loading') {
+      bodyContent = renderLoading();
+    }
     return Scaffold(
         appBar: AppBar(title: Text('Welcome to iwfp')),
         key: Key('login_screen'),
         backgroundColor: Colors.blue[100],
-        body: Container(
-          padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
-          child: ListView(
-            children: <Widget>[
-              SizedBox(height: 15.0),
-              Image.asset(
-                'assets/iwfp_splash.png',
-                key: Key('iwfp_splash_img'),
-              ),
-              SizedBox(height: 25.0),
-              TextField(
-                  controller: emailInputController,
-                  decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      hintText: 'email',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32.0)))),
-              SizedBox(height: 25.0),
-              TextField(
-                  controller: pwdInputController,
-                  decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      hintText: 'password',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32.0)))),
-              SizedBox(height: 25.0),
-              LoginButton(
-                onPressedCallback: () {
-                  // Navigator.pushNamed(context, '/placeholder');
-                  handleEmailSignIn(context);
-                },
-              ),
-              SizedBox(height: 25.0),
-              GuestLoginButton(
-                onPressedCallback: () {
-                  Navigator.pushNamed(context, '/main');
-                },
-              ),
-              SizedBox(height: 25.0),
-              GLoginButton(
-                onPressedCallback: () {
-                  Navigator.pushNamed(context, '/placeholder');
-                },
-              ),
-            ],
-          ),
-        ));
+        body: bodyContent);
   }
 }

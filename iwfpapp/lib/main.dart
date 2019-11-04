@@ -5,8 +5,11 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/auth.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   // Set `enableInDevMode` to true to see reports while in debug mode
   // This is only to be used for confirming that reports are being
   // submitted as expected. It is not intended to be used for everyday
@@ -16,14 +19,18 @@ void main() {
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
 
+  // DataStore is the top level data model
   DataStore dataStore = DataStore('firebase');
 
-  runApp(MyApp(dataStore));
+  IwfpappAuth auth = IwfpappAuth();
+
+  runApp(MyApp(dataStore, auth));
 }
 
 class MyApp extends StatelessWidget {
   final DataStore dataStore;
-  const MyApp(this.dataStore);
+  final IwfpappAuth auth;
+  const MyApp(this.dataStore, this.auth);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +40,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(),
+        '/': (context) => LoginScreen(auth),
         '/main': (context) => DestView(),
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(),
