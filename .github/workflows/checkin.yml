@@ -28,6 +28,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
