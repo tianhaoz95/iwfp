@@ -22,7 +22,7 @@ jobs:
         run: sudo npm install -g firebase-tools
       - name: install npm dependencies
         run: |
-          cd ./iwfpapi
+          cd ./iwfpapi/functions
           npm install
       - name: deploy API server to Firebase
         run: |
