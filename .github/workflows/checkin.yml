@@ -38,15 +38,25 @@ jobs:
         with:
           flutter-version: '1.9.1+hotfix.2'
           channel: 'stable'
+      - name: install firebase cli
+        run: sudo npm install -g firebase-tools
       - name: install flutter dependencies
         run: |
           cd ./iwfpapp
           flutter pub get
-      - name: lint dart code
+      - name: lint iwfpapp dart code
         run: |
           cd ./iwfpapp
           flutter analyze
-      - name: run unit tests
+      - name: run iwfpapp unit tests
         run: |
           cd ./iwfpapp
           flutter test
+      - name: lint iwfpapi typescript code
+        run: |
+          cd ./iwfpapi
+          npm run lint
+      - name: run iwfpapi unit tests
+        run: |
+          cd ./iwfpapi
+          npm test
