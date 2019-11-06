@@ -24,6 +24,10 @@ jobs:
         run: |
           cd ./iwfpapi/functions
           npm install
+      - name: compile typescript code
+        run: |
+          cd ./iwfpapi/functions
+          npm run build
       - name: deploy API server to Firebase
         run: |
           cd ./iwfpapi
