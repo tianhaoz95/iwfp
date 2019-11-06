@@ -30,7 +30,8 @@ jobs:
           npm run build
       - name: deploy API server to Firebase
         run: |
-          cd ./iwfpapi/functions
+          cd ./iwfpapi
+          ls ./functions/lib
           sudo firebase deploy --only functions --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
   deploy-web:
     name: Deploy Web app
