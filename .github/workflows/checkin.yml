@@ -54,9 +54,9 @@ jobs:
           flutter test
       - name: lint iwfpapi typescript code
         run: |
-          cd ./iwfpapi
+          cd ./iwfpapi/functions
           npm run lint
       - name: run iwfpapi unit tests
         run: |
-          cd ./iwfpapi
+          cd ./iwfpapi/functions
           npm test
