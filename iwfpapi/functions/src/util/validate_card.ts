@@ -5,6 +5,7 @@ function isValidCardData(data) {
   if (!data.name) {
     return false;
   }
+  return true;
 }
 
 export default isValidCardData;
