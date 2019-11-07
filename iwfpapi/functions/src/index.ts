@@ -1,7 +1,5 @@
-import * as functions from 'firebase-functions';
+import * as functions from "firebase-functions";
 
-export const helloWorld = functions.https.onCall((data, context) => {
-  return new Promise((resolve, reject) => {
-    resolve('Hello from iwfpapi!');
-  });
-});
+import addCreditCardHandler from "./handler/add_credit_card";
+
+export const addCreditCard = functions.https.onCall(addCreditCardHandler);
