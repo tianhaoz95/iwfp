@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/cashback_promo.dart';
 
+// TODO(tianhaoz95): this widget should know how to navigate to
+// edit and remove ui for information/confirmation.
 class BasicCreditCard extends StatelessWidget {
   final CreditCard cardMetaData;
   final MaterialColor color;
