@@ -7,6 +7,7 @@ class BasicCreditCard extends StatelessWidget {
   final CreditCard cardMetaData;
   final MaterialColor color;
   const BasicCreditCard(this.cardMetaData, this.color);
+  // TODO(tianhaoz95): add a variable indicating if can be edited
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -34,6 +35,7 @@ class BasicCreditCard extends StatelessWidget {
                   }).toList(),
                 ),
               )
+              // TODO(tianhaoz95): add edit and remove buttons
             ])));
   }
 }
