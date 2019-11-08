@@ -107,11 +107,11 @@ void populateAmazonStoreCard(CreditCard card) {
 
 Future<List<CreditCard>> fetchAllCreditCards(String uid) {
   List<CreditCard> creditCardMetadataList = [
-    CreditCard('Discover Cashback Debit Card'),
-    CreditCard('Empower Cashback Debit Card'),
-    CreditCard('Chase Freedom'),
-    CreditCard('Amazon Store Card'),
-    CreditCard('Discover Credit Card'),
+    CreditCard('Discover Cashback Debit Card', 'discover_cashback_debit_card'),
+    CreditCard('Empower Cashback Debit Card', 'empower_cashback_debit_card'),
+    CreditCard('Chase Freedom', 'chase_freedom'),
+    CreditCard('Amazon Store Card', 'amazon_store_card'),
+    CreditCard('Discover Credit Card', 'discover_credit_card'),
   ];
   populateDebitCard(creditCardMetadataList[0]);
   populateDebitCard(creditCardMetadataList[1]);

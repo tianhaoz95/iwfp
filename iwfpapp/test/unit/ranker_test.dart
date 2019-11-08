@@ -4,8 +4,8 @@ import 'package:iwfpapp/services/ranker.dart';
 import 'package:iwfpapp/services/shop_category.dart';
 import 'package:test/test.dart';
 
-CreditCard generateCreditCard(String name, List<int> rates) {
-  CreditCard card = CreditCard(name);
+CreditCard generateCreditCard(String name, String id, List<int> rates) {
+  CreditCard card = CreditCard(name, id);
   for (int rate in rates) {
     CashbackPromo promo = CashbackPromo('Coffee Shop', 'coffee_shop', 'sector',
         'na', 'na', 'const', rate, ShopCategory('Coffee Shop', 'coffee_shop'));
@@ -16,13 +16,13 @@ CreditCard generateCreditCard(String name, List<int> rates) {
 
 List<CreditCard> generateCreditCardsNoGenericPromo() {
   List<CreditCard> cards = [
-    generateCreditCard('Card 1', [1]),
-    generateCreditCard('Card 5', [5]),
-    generateCreditCard('Card 4', [4]),
-    generateCreditCard('Card 6', [6]),
-    generateCreditCard('Card 3', [3]),
-    generateCreditCard('Card 2', [2]),
-    generateCreditCard('Card 7', [7]),
+    generateCreditCard('Card 1', 'card_1', [1]),
+    generateCreditCard('Card 5', 'card_5', [5]),
+    generateCreditCard('Card 4', 'card_4', [4]),
+    generateCreditCard('Card 6', 'card_6', [6]),
+    generateCreditCard('Card 3', 'card_3', [3]),
+    generateCreditCard('Card 2', 'card_2', [2]),
+    generateCreditCard('Card 7', 'card_7', [7]),
   ];
   return cards;
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'nav.dart';
-import 'screens/login/main.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:iwfpapp/nav.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
+import 'package:iwfpapp/screens/login/main.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/screens/add_card/main.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         '/main': (context) => DestView(),
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(),
+        '/add_card': (context) => AddCardScreen(),
       },
     );
   }

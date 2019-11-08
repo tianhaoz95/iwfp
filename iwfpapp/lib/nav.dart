@@ -50,6 +50,19 @@ class _DestView extends State<DestView> {
     });
   }
 
+  Widget renderActionBtn(BuildContext context) {
+    if (_currentIndex == 1) {
+      return FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/add_card');
+        },
+        backgroundColor: Colors.cyan,
+        child: Icon(Icons.add),
+      );
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +73,7 @@ class _DestView extends State<DestView> {
         ),
         backgroundColor: destinations[_currentIndex].color[100],
         body: SafeArea(bottom: true, child: _children[_currentIndex]),
+        floatingActionButton: renderActionBtn(context),
         bottomNavigationBar: BottomNavigationBar(
           key: Key('bottom_nav_bar'),
           onTap: onTabTapped,
