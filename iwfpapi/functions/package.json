@@ -7,7 +7,7 @@
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
-    "test": "mocha -r ts-node/register --reporter spec test/**/*.ts",
+    "test": "echo NOT IMPLEMENTED",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
