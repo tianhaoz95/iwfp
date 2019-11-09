@@ -36,7 +36,7 @@ class _AddCardScreen extends State<AddCardScreen> {
             ),
           ],
         ),
-      ), 
+      ),
     );
   }
 }

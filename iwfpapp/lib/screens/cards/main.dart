@@ -32,7 +32,7 @@ class _ManageCard extends State<ManageCard> {
               child: Center(
                   child: ListView(
                 children: snapshot.data.map((CreditCard card) {
-                  return BasicCreditCard(card, Colors.cyan);
+                  return BasicCreditCard(card, Colors.cyan, true);
                 }).toList(),
               )));
         } else if (snapshot.hasError) {
