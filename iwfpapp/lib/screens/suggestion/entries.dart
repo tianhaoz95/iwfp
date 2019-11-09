@@ -34,7 +34,7 @@ class _SuggestionEntries extends State<SuggestionEntries> {
               child: Center(
                   child: ListView(
                 children: snapshot.data.map((CreditCard card) {
-                  return BasicCreditCard(card, Colors.purple);
+                  return BasicCreditCard(card, Colors.purple, false);
                 }).toList(),
               )));
         } else if (snapshot.hasError) {
