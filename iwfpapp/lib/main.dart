@@ -7,6 +7,8 @@ import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/screens/add_card/main.dart';
+import 'package:iwfpapp/screens/remove_card/main.dart';
+import 'package:iwfpapp/screens/edit_card/main.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +48,8 @@ class MyApp extends StatelessWidget {
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(),
         '/add_card': (context) => AddCardScreen(),
+        '/remove_card': (context) => RemoveCardScreen(),
+        '/edit_card': (context) => EditCardScreen(),
       },
     );
   }
