@@ -8,7 +8,7 @@ class BasicCreditCard extends StatelessWidget {
   final MaterialColor color;
   final bool edit;
   const BasicCreditCard(this.cardMetaData, this.color, this.edit);
-  List<Widget> getCardContent() {
+  List<Widget> getCardContent(BuildContext context) {
     List<Widget> content = <Widget>[
       Row(
         children: <Widget>[
@@ -29,28 +29,32 @@ class BasicCreditCard extends StatelessWidget {
         ),
       ),
     ];
-    Widget editContent = getEditContent();
+    Widget editContent = getEditContent(context);
     if (editContent != null) {
       content.add(editContent);
     }
     return content;
   }
 
-  Widget getEditContent() {
+  Widget getEditContent(BuildContext context) {
     if (edit == true) {
       return Row(
         children: <Widget>[
           Material(
             color: color,
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/edit_card');
+              },
               child: Text('Edit', style: TextStyle(color: Colors.white)),
             ),
           ),
           Material(
             color: color,
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/remove_card');
+              },
               child: Text('Remove', style: TextStyle(color: Colors.white)),
             ),
           )
@@ -65,6 +69,6 @@ class BasicCreditCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
         color: color[100],
-        child: Card(color: color, child: Column(children: getCardContent())));
+        child: Card(color: color, child: Column(children: getCardContent(context))));
   }
 }

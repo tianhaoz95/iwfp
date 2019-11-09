@@ -12,11 +12,11 @@ class SuggestionScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('For ' + category.name + ', I should use ...'),
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.teal,
         key: Key('suggestion_title'),
       ),
       body: SuggestionEntries(category),
-      backgroundColor: Colors.purple[100],
+      backgroundColor: Colors.teal[100],
     );
   }
 }
