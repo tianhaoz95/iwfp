@@ -13,7 +13,7 @@ function AddCreditCardHandler(data, context) {
             reject("Card exist");
           } else {
             cardRef
-              .set(data.cardData)
+              .set(JSON.parse(JSON.stringify(data.cardData)))
               .then(() => {
                 resolve();
               })

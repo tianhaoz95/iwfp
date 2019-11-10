@@ -22,6 +22,7 @@ class _AddCardScreen extends State<AddCardScreen> {
   final TextEditingController cardNameInputCtrl = TextEditingController();
   SubmitScreenStatus status;
   DataStore dataStore;
+  String msg = 'No message yet';
 
   @override
   void initState() {
@@ -41,6 +42,12 @@ class _AddCardScreen extends State<AddCardScreen> {
       status = SubmitScreenStatus.LOADING;
     });
     CloudFuncResponse res = await dataStore.addCard(CreditCard(cardName, cardId));
+    if (res == null) {
+      setState(() {
+        status = SubmitScreenStatus.ERROR;
+        msg = 'Response is null, internal error';
+      });
+    }
     if (res.status == ResponseStatus.SUCCEESS) {
       setState(() {
         status = SubmitScreenStatus.DONE;
@@ -48,6 +55,7 @@ class _AddCardScreen extends State<AddCardScreen> {
     } else {
       setState(() {
         status = SubmitScreenStatus.ERROR;
+        msg = res.msg;
       });
     }
   }
@@ -63,7 +71,7 @@ class _AddCardScreen extends State<AddCardScreen> {
   Widget renderError(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('Error'),
+        child: Text('Error: ' + msg),
       ),
     );
   }

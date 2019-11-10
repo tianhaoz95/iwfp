@@ -9,7 +9,8 @@ enum ResponseStatus {
 
 class CloudFuncResponse {
   ResponseStatus status;
-  String errorMsg;
+  String msg;
+  CloudFuncResponse(this.status, this.msg);
 }
 
 class DataStore {
@@ -23,18 +24,18 @@ class DataStore {
     );
   }
   Future<CloudFuncResponse> addCard(CreditCard card) async {
-    CloudFuncResponse response;
-    Map<String, dynamic> req;
-    req['cardUid'] = card.id;
-    req['cardData'] = card.name;
+    CloudFuncResponse response = CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
-      await addCardCallable.call(req);
+      HttpsCallableResult result = await addCardCallable.call(<String, dynamic>{
+        'cardUid': card.id,
+        'cardData': card.name,
+      });
       response.status = ResponseStatus.SUCCEESS;
-      response.errorMsg = 'na';
+      response.msg = result.toString();
       return response;
     } catch (err) {
       response.status = ResponseStatus.FAILURE;
-      response.errorMsg = err.toString();
+      response.msg = err.toString();
       return response;
     }
   }
