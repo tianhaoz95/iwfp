@@ -26,10 +26,7 @@ class DataStore {
     CloudFuncResponse response;
     Map<String, dynamic> req;
     req['cardUid'] = card.id;
-    req['cardData'] = <String, dynamic>{
-      'cardUid': card.id,
-      'cardName': card.name,
-    };
+    req['cardData'] = card.name;
     try {
       await addCardCallable.call(req);
       response.status = ResponseStatus.SUCCEESS;
