@@ -14,6 +14,9 @@ class AddCardScreen extends StatefulWidget {
 }
 
 class _AddCardScreen extends State<AddCardScreen> {
+  final TextEditingController cardIdInputCtrl = TextEditingController();
+  final TextEditingController cardNameInputCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +30,9 @@ class _AddCardScreen extends State<AddCardScreen> {
         child: ListView(
           children: <Widget>[
             SizedBox(height: 25.0),
-            AddCardIdInput(),
+            AddCardIdInput(cardIdInputCtrl),
             SizedBox(height: 25.0),
-            AddCardNameInput(),
+            AddCardNameInput(cardNameInputCtrl),
             SizedBox(height: 25.0),
             SubmitAddCardButton(
               onPressedCallback: () {},
