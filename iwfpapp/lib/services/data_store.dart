@@ -6,4 +6,5 @@ class DataStore {
   List<CreditCard> cards = [];
   String serviceType;
   DataStore(this.serviceType);
+  // Future<void> addCard(CreditCard card) async {}
 }
