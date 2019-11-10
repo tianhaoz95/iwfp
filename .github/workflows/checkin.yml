@@ -44,6 +44,10 @@ jobs:
       - name: install firebase cli
         if: matrix.os == 'windows-latest'
         run: npm install -g firebase-tools
+      - name: install iwfpapi dependencies
+        run: |
+          cd ./iwfpapi/functions
+          npm install
       - name: install iwfpapp flutter dependencies
         run: |
           cd ./iwfpapp
