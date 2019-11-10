@@ -7,9 +7,10 @@
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
+    "types": ["jest"],
     "target": "es2017",
     "esModuleInterop": true
   },
   "compileOnSave": true,
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "exclude": ["node_modules"]
 }
