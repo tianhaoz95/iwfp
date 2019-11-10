@@ -1,14 +1,14 @@
 import isValidCardData from "../src/util/validate_card";
 
-test("no id should fail", () => {
+test("should fail if no id", () => {
   expect(isValidCardData({ name: "test_card_name" })).toBe(false);
 });
 
-test("no name should fail", () => {
+test("should fail if no name", () => {
   expect(isValidCardData({ id: "test_card_id" })).toBe(false);
 });
 
-test("no crash", () => {
+test("should not crash", () => {
   expect(() => {
     isValidCardData({ name: "test_card_name", id: "test_card_id" });
   }).not.toThrow();
