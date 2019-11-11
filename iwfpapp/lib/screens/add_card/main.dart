@@ -41,7 +41,8 @@ class _AddCardScreen extends State<AddCardScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    CloudFuncResponse res = await dataStore.addCard(CreditCard(cardName, cardId));
+    CloudFuncResponse res =
+        await dataStore.addCard(CreditCard(cardName, cardId));
     if (res == null) {
       setState(() {
         status = SubmitScreenStatus.ERROR;
@@ -98,13 +99,31 @@ class _AddCardScreen extends State<AddCardScreen> {
 
   Widget renderDone(BuildContext context) {
     return Container(
-      child: Center(
-        child: ListView(
-          children: <Widget>[
-            Text('Add card succeeded'),
-            Text('Go home')
-          ],
-        ),
+      padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+      child: ListView(
+        children: <Widget>[
+          SizedBox(
+            height: 15.0,
+          ),
+          Center(
+            child: Text('Add card succeeded!',
+                style: TextStyle(color: Colors.cyan)),
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+          Material(
+            color: Colors.cyan[100],
+            child: RaisedButton(
+              color: Colors.cyan,
+              child: Text('Go to main menu',
+                  style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.pushNamed(context, '/main');
+              },
+            ),
+          )
+        ],
       ),
     );
   }
