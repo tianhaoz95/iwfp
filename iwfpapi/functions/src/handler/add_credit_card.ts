@@ -1,4 +1,4 @@
-import provider from '../provider';
+import provider from "../provider";
 
 function AddCreditCardHandler(data, context) {
   return new Promise((resolve, reject) => {
@@ -15,7 +15,7 @@ function AddCreditCardHandler(data, context) {
             let cardName: string = data.cardData;
             cardRef
               .set({
-                'card_name': cardName
+                card_name: cardName
               })
               .then(() => {
                 resolve();
