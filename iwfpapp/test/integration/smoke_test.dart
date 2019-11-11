@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:iwfpapp/services/mode.dart';
 import 'package:iwfpapp/main.dart';
 import 'package:mockito/mockito.dart';
 import 'screen_validator.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
+import './mock_mode.dart';
 
 class MockDataStore extends Mock implements DataStore {}
 
@@ -15,8 +16,9 @@ void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
     DataStore mockDataStore = MockDataStore();
     IwfpappAuth mockAuth = MockIwfpappAuth();
+    RunningMode mockMode = MockRunningMode();
     when(mockAuth.isSignedIn()).thenAnswer((_) => Future.value(false));
-    await tester.pumpWidget(MyApp(mockDataStore, mockAuth));
+    await tester.pumpWidget(MyApp(mockDataStore, mockAuth, mockMode));
     await tester.pump();
     await tester.pumpAndSettle(new Duration(seconds: 5));
     // So far only guest login is supported.
