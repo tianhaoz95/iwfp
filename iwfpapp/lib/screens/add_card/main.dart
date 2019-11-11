@@ -96,6 +96,19 @@ class _AddCardScreen extends State<AddCardScreen> {
     );
   }
 
+  Widget renderDone(BuildContext context) {
+    return Container(
+      child: Center(
+        child: ListView(
+          children: <Widget>[
+            Text('Add card succeeded'),
+            Text('Go home')
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget renderBodyContent(BuildContext context) {
     Widget content;
     switch (status) {
@@ -109,7 +122,7 @@ class _AddCardScreen extends State<AddCardScreen> {
         content = renderError(context);
         break;
       case SubmitScreenStatus.DONE:
-        Navigator.pushNamed(context, '/main');
+
         break;
       default:
         content = renderError(context);

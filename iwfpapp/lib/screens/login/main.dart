@@ -5,24 +5,26 @@ import 'package:iwfpapp/widgets/buttons/guest_login_btn.dart';
 import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
 import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
-import 'dart:developer' as developer;
+import 'package:iwfpapp/services/mode.dart';
 
 class LoginScreen extends StatefulWidget {
   final IwfpappAuth auth;
+  final RunningMode mode;
 
-  LoginScreen(this.auth);
+  LoginScreen(this.auth, this.mode);
 
   @override
-  _LoginScreen createState() => _LoginScreen(auth);
+  _LoginScreen createState() => _LoginScreen(auth, mode);
 }
 
 class _LoginScreen extends State<LoginScreen> {
   final emailInputController = TextEditingController();
   final pwdInputController = TextEditingController();
   final IwfpappAuth auth;
+  final RunningMode mode;
   String status;
 
-  _LoginScreen(this.auth);
+  _LoginScreen(this.auth, this.mode);
 
   @override
   void initState() {
@@ -175,7 +177,6 @@ class _LoginScreen extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    developer.log('building sign in screen...', name: 'iwfpapp.screens.login');
     Widget bodyContent = renderLoading();
     if (status == 'signed_in') {
       bodyContent = renderSignedIn();
@@ -187,7 +188,7 @@ class _LoginScreen extends State<LoginScreen> {
       bodyContent = renderLoading();
     }
     return Scaffold(
-        appBar: AppBar(title: Text('Welcome to iwfp')),
+        appBar: AppBar(title: Text(mode.devifyString('Welcome to iwfp'))),
         key: Key('login_screen'),
         backgroundColor: Colors.blue[100],
         body: bodyContent);

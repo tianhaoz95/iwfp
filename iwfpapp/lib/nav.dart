@@ -4,6 +4,7 @@ import 'package:iwfpapp/screens/shop/main.dart';
 import 'package:iwfpapp/screens/cards/main.dart';
 import 'package:iwfpapp/screens/contrib/main.dart';
 import 'package:iwfpapp/screens/user/main.dart';
+import 'package:iwfpapp/services/mode.dart';
 
 class Dest {
   final String title;
@@ -26,8 +27,8 @@ const List<Dest> allDests = <Dest>[
 ];
 
 class DestView extends StatefulWidget {
-  const DestView({Key key}) : super(key: key);
-
+  final RunningMode mode;
+  const DestView(this.mode, {Key key}) : super(key: key);
   @override
   _DestView createState() {
     return _DestView();
@@ -67,7 +68,7 @@ class _DestView extends State<DestView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(destinations[_currentIndex].title,
+          title: Text(widget.mode.devifyString(destinations[_currentIndex].title),
               key: destinations[_currentIndex].titleKey),
           backgroundColor: destinations[_currentIndex].color,
         ),
