@@ -122,7 +122,7 @@ class _AddCardScreen extends State<AddCardScreen> {
         content = renderError(context);
         break;
       case SubmitScreenStatus.DONE:
-
+        content = renderDone(context);
         break;
       default:
         content = renderError(context);
