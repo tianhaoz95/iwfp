@@ -29,7 +29,7 @@ class _UserSettings extends State<UserSettings> {
         padding: const EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 15.0,),
+            SizedBox(height: 5.0,),
             DevelopCard(widget.mode.isDevMode(), (bool nextDevVal) {
               nextIsDevFlagVal = nextDevVal;
             }),
