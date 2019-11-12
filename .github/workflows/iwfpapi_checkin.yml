@@ -40,10 +40,6 @@ jobs:
         run: |
           cd ./iwfpapi/functions
           npm install
-      - name: install iwfpapi dependencies
-        run: |
-          cd ./iwfpapi/functions
-          npm install
       - name: lint iwfpapi typescript code
         run: |
           cd ./iwfpapi/functions
