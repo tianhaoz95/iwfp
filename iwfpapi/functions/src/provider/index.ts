@@ -16,6 +16,6 @@ class Provider {
   }
 }
 
-const provider = new Provider()
+const provider = new Provider();
 
 export default provider;
