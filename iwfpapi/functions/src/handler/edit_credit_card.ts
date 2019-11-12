@@ -1,7 +1,7 @@
 import provider from "../provider";
-import { noAuthMsg } from "../config/consts";
+import { noAuthMsg, creditCardNotExistError } from "../config/consts";
 
-function AddCreditCardHandler(data, context) {
+function EditCreditCardHandler(data, context) {
   return new Promise((resolve, reject) => {
     if (context.auth) {
       const userUid = context.auth.uid;
@@ -10,13 +10,13 @@ function AddCreditCardHandler(data, context) {
       cardRef
         .get()
         .then(snap => {
-          if (snap.exists) {
-            reject("Card exist");
+          if (!snap.exists) {
+            reject(creditCardNotExistError);
           } else {
-            let cardName: string = data.cardData;
+            let creditCardName: string = data.cardData;
             cardRef
               .set({
-                card_name: cardName
+                card_name: creditCardName
               })
               .then(() => {
                 resolve();
@@ -35,4 +35,4 @@ function AddCreditCardHandler(data, context) {
   });
 }
 
-export default AddCreditCardHandler;
+export default EditCreditCardHandler;
