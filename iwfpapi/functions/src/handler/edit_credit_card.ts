@@ -13,7 +13,7 @@ function EditCreditCardHandler(data, context) {
           if (!snap.exists) {
             reject(creditCardNotExistError);
           } else {
-            let creditCardName: string = data.cardData;
+            const creditCardName: string = data.cardData;
             cardRef
               .set({
                 card_name: creditCardName
