@@ -1,13 +1,31 @@
-name: Merge
-
+name: guardians of the pull requests
 on:
   pull_request:
     branches:
       - "master"
-
 jobs:
+  build-api:
+    name: build api
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: install firebase cli
+        run: sudo npm install -g firebase-tools
+      - name: install iwfpapi dependencies
+        run: |
+          cd ./iwfpapi/functions
+          npm install
+      - name: run iwfpapi build test
+        run: |
+          cd ./iwfpapi/functions
+          npm run lint
+          npm test
+          npm run build
   build-doc:
-    name: Build docs
+    name: build docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -17,7 +35,7 @@ jobs:
           npm install
           npm run build
   build-web:
-    name: Build Web app
+    name: build web app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -37,9 +55,10 @@ jobs:
       - name: build web
         run: |
           cd ./iwfpapp
+          flutter test
           flutter build web
   build-android:
-    name: Build Android apk
+    name: build android apk and app bundle
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -62,10 +81,11 @@ jobs:
         run: |
           ./scripts/setenv.sh
           cd ./iwfpapp
+          flutter test
           flutter build apk --split-per-abi
           flutter build appbundle
   build-ios:
-    name: Build IOS ipa
+    name: build iOS
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v1
@@ -83,4 +103,5 @@ jobs:
       - name: build ipa
         run: |
           cd ./iwfpapp
+          flutter test
           flutter build ios --release --no-codesign
