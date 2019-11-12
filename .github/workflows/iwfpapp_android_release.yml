@@ -1,14 +1,13 @@
-name: deploy iwfpapp android to app store
+name: release iwfpapp android to app store
 on:
   push:
     branches:
       - "master"
-      - "actions/*"
     paths:
       - "iwfpapp/pubspec.yaml"
       - ".github/**"
 jobs:
-  deploy-android:
+  release-android:
     name: Deploy Android app
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +28,7 @@ jobs:
           flutter upgrade
       - name: install ruby packages
         run: bundle install
-      - name: build apk package
+      - name: build apk and app bundle package
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
@@ -41,7 +40,7 @@ jobs:
           flutter build appbundle
           cd ./android
           fastlane internal
-      - name: upload apk to Google Play Store
+      - name: upload app to Google Play Store
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
