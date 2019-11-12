@@ -7,11 +7,14 @@ function getCreditCardsHandler(data, context) {
       const userUid = context.auth.uid;
       const userRef = provider.getUserRef(userUid);
       const cardRef = userRef.collection("cards");
-      cardRef.get().then((snap) => {
-        resolve(snap);
-      }).catch((err) => {
-        reject(err);
-      });
+      cardRef
+        .get()
+        .then(snap => {
+          resolve(snap);
+        })
+        .catch(err => {
+          reject(err);
+        });
     } else {
       reject(noAuthMsg);
     }
