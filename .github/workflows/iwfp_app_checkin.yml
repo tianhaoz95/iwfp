@@ -1,5 +1,4 @@
 name: iwfp app checkin
-
 on:
   push:
     branches:
@@ -18,7 +17,6 @@ on:
       - "release/*"
   schedule:
     - cron: 0 2 * * *
-
 jobs:
   test:
     name: Test on ${{ matrix.os }}
