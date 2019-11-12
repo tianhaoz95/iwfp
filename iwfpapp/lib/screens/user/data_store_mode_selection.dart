@@ -34,7 +34,7 @@ class _DataStoreModeSelection extends State<DataStoreModeSelection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+      padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
       child: Row(
         children: <Widget>[
           Text(label, style: TextStyle(color: Colors.white)),

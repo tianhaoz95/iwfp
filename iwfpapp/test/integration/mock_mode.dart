@@ -6,4 +6,8 @@ class MockRunningMode extends Mock implements RunningMode {
   String devifyString(String msg) {
     return msg;
   }
+  @override
+  bool isDevMode() {
+    return false;
+  }
 }
