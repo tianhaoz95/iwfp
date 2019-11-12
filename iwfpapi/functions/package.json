@@ -2,7 +2,7 @@
   "name": "functions",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
-    "fix": "prettier --write ./src/* ./test/*",
+    "fix": "prettier --write ./src/**/*.ts ./test/**/*.ts",
     "build": "tsc",
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase functions:shell",
