@@ -1,4 +1,4 @@
-name: iwfpapp web release
+name: release iwfpapp web
 on:
   push:
     branches:
