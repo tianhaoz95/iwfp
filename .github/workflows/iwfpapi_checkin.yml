@@ -17,7 +17,6 @@ on:
       - "release/*"
   schedule:
     - cron: 0 2 * * *
-  
 jobs:
   unit-test:
     name: run iwfpapi checkin tests on ${{ matrix.os }}
