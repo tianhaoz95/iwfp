@@ -1,4 +1,4 @@
-name: iwfpapi checkin
+name: checkin iwfpapi
 on:
   push:
     branches:
@@ -8,7 +8,7 @@ on:
       - "release/*"
     paths:
       - "iwfpapi/**"
-      - ".github/**"
+      - ".github/workflows/**"
   pull_request:
     branches:
       - "master"
