@@ -24,7 +24,8 @@ class DataStore {
     );
   }
   Future<CloudFuncResponse> addCard(CreditCard card) async {
-    CloudFuncResponse response = CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+    CloudFuncResponse response =
+        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       HttpsCallableResult result = await addCardCallable.call(<String, dynamic>{
         'cardUid': card.id,

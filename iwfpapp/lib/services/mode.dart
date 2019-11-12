@@ -21,6 +21,14 @@ class RunningMode {
     }());
   }
 
+  bool isDevMode() {
+    return isDev;
+  }
+
+  void setRunningMode(bool nextVal) {
+    isDev = nextVal;
+  }
+
   String devifyString(String msg) {
     if (isDev) {
       return '(Debug Mode) ' + msg;
