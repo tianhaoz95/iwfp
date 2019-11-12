@@ -1,39 +1,14 @@
-name: Deploy
-
+name: package apps
 on:
   push:
     branches:
       - "master"
-      - "actions/*"
     paths:
       - "iwfpapp/**"
-      - ".github/**"
-
+      - ".github/workflows/**"
 jobs:
-  deploy-api:
-    name: Deploy API server
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - name: install firebase cli
-        run: sudo npm install -g firebase-tools
-      - name: install npm dependencies
-        run: |
-          cd ./iwfpapi/functions
-          npm install
-      - name: compile typescript code
-        run: |
-          cd ./iwfpapi/functions
-          npm run build
-      - name: deploy API server to Firebase
-        run: |
-          cd ./iwfpapi
-          sudo firebase deploy --only functions --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
-  deploy-web:
-    name: Deploy Web app
+  package-web:
+    name: pakcage web app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -68,8 +43,8 @@ jobs:
         with:
           name: web-app
           path: iwfpapp/build/web
-  deploy-android:
-    name: Deploy Android app
+  package-android:
+    name: package android app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -111,8 +86,8 @@ jobs:
         with:
           name: android-app-bundle
           path: iwfpapp/build/app/outputs/bundle
-  deploy-ios:
-    name: Deploy IOS app
+  package-ios:
+    name: package iOS app
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v1
