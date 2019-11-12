@@ -37,13 +37,19 @@ class DestView extends StatefulWidget {
 
 class _DestView extends State<DestView> {
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    ShopNow(),
-    ManageCard(),
-    UserSettings(),
-    Contrib(),
-  ];
+  List<Widget> _children = [];
   final List<Dest> destinations = allDests;
+
+  @override
+  void initState() {
+    super.initState();
+    _children = [
+      ShopNow(),
+      ManageCard(),
+      UserSettings(widget.mode),
+      Contrib(),
+    ];
+  }
 
   void onTabTapped(int index) {
     setState(() {
