@@ -1,0 +1,53 @@
+name: deploy iwfpapp android to app store
+on:
+  push:
+    branches:
+      - "master"
+      - "actions/*"
+    paths:
+      - "iwfpapp/pubspec.yaml"
+      - ".github/**"
+jobs:
+  deploy-android:
+    name: Deploy Android app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.9.1+hotfix.4'
+          channel: 'stable'
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: install ruby packages
+        run: bundle install
+      - name: build apk package
+        env:
+          ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
+          SECRET_REPO: ${{ secrets.SECRET_REPO }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: |
+          ./scripts/setenv.sh
+          cd ./iwfpapp
+          flutter build apk --split-per-abi
+          flutter build appbundle
+          cd ./android
+          fastlane internal
+      - name: upload apk to Google Play Store
+        env:
+          ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
+          SECRET_REPO: ${{ secrets.SECRET_REPO }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: |
+          ./scripts/setenv.sh
+          cd ./iwfpapp
+          cd ./android
+          fastlane internal
