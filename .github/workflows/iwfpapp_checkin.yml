@@ -1,4 +1,4 @@
-name: iwfp app checkin
+name: iwfpapp checkin
 on:
   push:
     branches:
@@ -19,7 +19,7 @@ on:
     - cron: 0 2 * * *
 jobs:
   test:
-    name: Test on ${{ matrix.os }}
+    name: run iwfpapp checkin tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
