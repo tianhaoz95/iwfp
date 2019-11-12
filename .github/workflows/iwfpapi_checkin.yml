@@ -1,4 +1,4 @@
-name: iwfp api checkin
+name: iwfpapi checkin
 on:
   push:
     branches:
@@ -20,7 +20,7 @@ on:
   
 jobs:
   unit-test:
-    name: Test on ${{ matrix.os }}
+    name: run iwfpapi checkin tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
