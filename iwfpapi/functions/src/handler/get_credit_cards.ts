@@ -10,7 +10,16 @@ function getCreditCardsHandler(data, context) {
       cardRef
         .get()
         .then(snap => {
-          resolve(snap);
+          /**
+           * TODO(tianhaoz95): Add a type for response, this is 
+           * better off strongly typed.
+           */
+          let response = {};
+          snap.forEach(doc => {
+            console.log('retrieve: ', doc.id, '=>', doc.data());
+            response[doc.id] = doc.data();
+          });
+          resolve(response);
         })
         .catch(err => {
           reject(err);

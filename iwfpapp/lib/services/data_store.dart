@@ -1,7 +1,7 @@
-import 'dart:convert';
 import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:iwfpapp/services/utilities/json_converter/json_to_cards.dart';
 
 enum ResponseStatus {
   SUCCEESS,
@@ -34,8 +34,7 @@ class DataStore {
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       HttpsCallableResult result = await getCardsCallable.call();
-      print('got response');
-      print(result.data);
+      List<CreditCard> cards = json2cards(result);
       return response;
     } catch (err) {
       response.status = ResponseStatus.FAILURE;
