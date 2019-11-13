@@ -1,0 +1,32 @@
+name: release iwfpapi
+on:
+  push:
+    branches:
+      - "master"
+      - "actions/*"
+    paths:
+      - "iwfpapi/**"
+      - ".github/workflows/**"
+jobs:
+  release-api:
+    name: release iwfp api services to firebase cloud functions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: install firebase cli
+        run: sudo npm install -g firebase-tools
+      - name: install npm dependencies
+        run: |
+          cd ./iwfpapi/functions
+          npm install
+      - name: compile typescript code
+        run: |
+          cd ./iwfpapi/functions
+          npm run build
+      - name: deploy API server to Firebase
+        run: |
+          cd ./iwfpapi
+          sudo firebase deploy --only functions --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}

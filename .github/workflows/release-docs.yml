@@ -1,10 +1,12 @@
-name: Documentation
-
+name: release-docs
 on:
   push:
     branches: 
       - "master"
-
+    paths:
+      - "website/**"
+      - "docs/**"
+      - ".github/workflows/**"
 jobs:
   deploy:
     name: Generate documentation
