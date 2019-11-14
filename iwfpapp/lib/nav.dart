@@ -77,7 +77,8 @@ class _DestView extends State<DestView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.mode.devifyString(destinations[_currentIndex].title),
+          title: Text(
+              widget.mode.devifyString(destinations[_currentIndex].title),
               key: destinations[_currentIndex].titleKey),
           backgroundColor: destinations[_currentIndex].color,
         ),

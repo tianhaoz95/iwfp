@@ -10,15 +10,15 @@ class UpdateSettingsButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
       child: Material(
-              color: Colors.orange[100],
-              child: RaisedButton(
-                color: Colors.orange,
-                child: Text('Update Settings', style: TextStyle(color: Colors.white)),
-                onPressed: () {
-                  handleUpdateSettings(context);
-                },
-              ),
-            ),
+        color: Colors.orange[100],
+        child: RaisedButton(
+          color: Colors.orange,
+          child: Text('Update Settings', style: TextStyle(color: Colors.white)),
+          onPressed: () {
+            handleUpdateSettings(context);
+          },
+        ),
+      ),
     );
   }
 }

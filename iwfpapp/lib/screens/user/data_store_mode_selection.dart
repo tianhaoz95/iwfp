@@ -31,6 +31,7 @@ class _DataStoreModeSelection extends State<DataStoreModeSelection> {
     }
     return label;
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,25 +41,32 @@ class _DataStoreModeSelection extends State<DataStoreModeSelection> {
           Text(label, style: TextStyle(color: Colors.white)),
           PopupMenuButton<DataStoreMode>(
             color: Colors.orange[400],
-            icon: Icon(Icons.arrow_drop_down_circle, color: Colors.orange[100],),
+            icon: Icon(
+              Icons.arrow_drop_down_circle,
+              color: Colors.orange[100],
+            ),
             initialValue: DataStoreMode.ONLINE,
             onSelected: (DataStoreMode nextMode) {
               setState(() {
                 label = getDataStoreModelSelectionText(nextMode);
               });
             },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<DataStoreMode>>[
+            itemBuilder: (BuildContext context) =>
+                <PopupMenuEntry<DataStoreMode>>[
               const PopupMenuItem<DataStoreMode>(
                 value: DataStoreMode.ONLINE,
-                child: Text('Online Mode', style: TextStyle(color: Colors.white)),
+                child:
+                    Text('Online Mode', style: TextStyle(color: Colors.white)),
               ),
               const PopupMenuItem<DataStoreMode>(
                 value: DataStoreMode.OFFLINE,
-                child: Text('Offline Mode', style: TextStyle(color: Colors.white)),
+                child:
+                    Text('Offline Mode', style: TextStyle(color: Colors.white)),
               ),
               const PopupMenuItem<DataStoreMode>(
                 value: DataStoreMode.IN_MEMORY,
-                child: Text('In-memory Mode', style: TextStyle(color: Colors.white)),
+                child: Text('In-memory Mode',
+                    style: TextStyle(color: Colors.white)),
               ),
             ],
           ),

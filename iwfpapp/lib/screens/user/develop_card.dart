@@ -16,7 +16,9 @@ class DevelopCard extends StatelessWidget {
           color: Colors.orange,
           child: Column(
             children: <Widget>[
-              SizedBox(height: 5.0,),
+              SizedBox(
+                height: 5.0,
+              ),
               Text('Developer Settings', style: TextStyle(color: Colors.white)),
               DevelopmentModeToggle(initIsDevVal, setIsDevCallbackFunc),
               DataStoreModeSelection(),

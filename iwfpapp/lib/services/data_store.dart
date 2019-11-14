@@ -38,9 +38,7 @@ class DataStore {
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
-      await removeCardCallable.call(<String, dynamic>{
-        'cardUid': card.id
-      });
+      await removeCardCallable.call(<String, dynamic>{'cardUid': card.id});
       response.status = ResponseStatus.SUCCEESS;
       response.msg = 'na';
       return response;

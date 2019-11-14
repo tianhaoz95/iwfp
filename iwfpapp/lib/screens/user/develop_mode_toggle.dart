@@ -19,6 +19,7 @@ class _DevelopmentModeToggle extends State<DevelopmentModeToggle> {
     super.initState();
     isDevVal = widget.initIsDevVal;
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
