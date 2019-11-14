@@ -47,11 +47,11 @@ class _DestView extends State<DestView> {
     super.initState();
     _children = [
       ShopNow(),
-      ManageCard(),
+      ManageCard(widget.dataStore),
       UserSettings(widget.mode),
       Contrib(),
     ];
-    widget.dataStore.getCards();
+    widget.dataStore.fetchCards();
   }
 
   void onTabTapped(int index) {

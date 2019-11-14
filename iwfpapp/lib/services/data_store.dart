@@ -1,7 +1,8 @@
+import 'package:iwfpapp/services/fetcher.dart';
 import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:iwfpapp/services/utilities/json_converter/json_to_cards.dart';
+import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 
 enum ResponseStatus {
   SUCCEESS,
@@ -28,13 +29,15 @@ class DataStore {
       functionName: 'getCreditCards',
     );
   }
-  Future<CloudFuncResponse> getCards() async {
-    print('getting cards');
+  Future<CloudFuncResponse> fetchCards() async {
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       HttpsCallableResult result = await getCardsCallable.call();
-      List<CreditCard> cards = json2cards(result);
+      List<CreditCard> fetchedCards = data2cards(result);
+      cards = fetchedCards;
+      response.status = ResponseStatus.SUCCEESS;
+      response.msg = 'na';
       return response;
     } catch (err) {
       response.status = ResponseStatus.FAILURE;
@@ -42,6 +45,14 @@ class DataStore {
       print(err.toString());
       return response;
     }
+  }
+  Future<List<CreditCard>> getCards() async {
+    CloudFuncResponse status = await fetchCards();
+    if (status.status == ResponseStatus.FAILURE) {
+      print('fetch card failed');
+      return fetchAllCreditCards('tianhaoz95');
+    }
+    return cards;
   }
   Future<CloudFuncResponse> addCard(CreditCard card) async {
     CloudFuncResponse response =
