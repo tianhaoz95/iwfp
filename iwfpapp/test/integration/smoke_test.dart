@@ -6,11 +6,9 @@ import 'package:mockito/mockito.dart';
 import 'screen_validator.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
-import './mock_mode.dart';
-
-class MockDataStore extends Mock implements DataStore {}
-
-class MockIwfpappAuth extends Mock implements IwfpappAuth {}
+import 'mock_mode.dart';
+import 'mock_data_store.dart';
+import 'mock_auth.dart';
 
 void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {

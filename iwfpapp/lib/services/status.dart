@@ -3,4 +3,5 @@ enum SubmitScreenStatus {
   LOADING,
   ERROR,
   DONE,
+  UNKNOWN,
 }

@@ -4,6 +4,7 @@ import 'package:iwfpapp/screens/shop/main.dart';
 import 'package:iwfpapp/screens/cards/main.dart';
 import 'package:iwfpapp/screens/contrib/main.dart';
 import 'package:iwfpapp/screens/user/main.dart';
+import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/mode.dart';
 
 class Dest {
@@ -28,7 +29,8 @@ const List<Dest> allDests = <Dest>[
 
 class DestView extends StatefulWidget {
   final RunningMode mode;
-  const DestView(this.mode, {Key key}) : super(key: key);
+  final DataStore dataStore;
+  const DestView(this.mode, this.dataStore, {Key key}) : super(key: key);
   @override
   _DestView createState() {
     return _DestView();
@@ -45,10 +47,11 @@ class _DestView extends State<DestView> {
     super.initState();
     _children = [
       ShopNow(),
-      ManageCard(),
+      ManageCard(widget.dataStore),
       UserSettings(widget.mode),
       Contrib(),
     ];
+    widget.dataStore.fetchCards();
   }
 
   void onTabTapped(int index) {
@@ -74,7 +77,8 @@ class _DestView extends State<DestView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.mode.devifyString(destinations[_currentIndex].title),
+          title: Text(
+              widget.mode.devifyString(destinations[_currentIndex].title),
               key: destinations[_currentIndex].titleKey),
           backgroundColor: destinations[_currentIndex].color,
         ),

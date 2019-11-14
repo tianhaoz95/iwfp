@@ -19,10 +19,12 @@ class _UserSettings extends State<UserSettings> {
     super.initState();
     nextIsDevFlagVal = widget.mode.isDevMode();
   }
+
   handleUpdateSettings(BuildContext context) {
     widget.mode.setRunningMode(nextIsDevFlagVal);
     Navigator.pushReplacementNamed(context, '/main');
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +32,9 @@ class _UserSettings extends State<UserSettings> {
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 5.0,),
+            SizedBox(
+              height: 5.0,
+            ),
             DevelopCard(widget.mode.isDevMode(), (bool nextDevVal) {
               nextIsDevFlagVal = nextDevVal;
             }),
