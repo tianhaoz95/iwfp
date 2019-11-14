@@ -21,6 +21,7 @@ class DataStore {
   String serviceType;
   HttpsCallable addCardCallable;
   HttpsCallable getCardsCallable;
+  HttpsCallable removeCardCallable;
   DataStore(this.serviceType) {
     addCardCallable = CloudFunctions.instance.getHttpsCallable(
       functionName: 'addCreditCard',
@@ -28,7 +29,29 @@ class DataStore {
     getCardsCallable = CloudFunctions.instance.getHttpsCallable(
       functionName: 'getCreditCards',
     );
+    removeCardCallable = CloudFunctions.instance.getHttpsCallable(
+      functionName: 'removeCreditCard',
+    );
   }
+
+  Future<CloudFuncResponse> removeCard(CreditCard card) async {
+    CloudFuncResponse response =
+        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+    try {
+      await removeCardCallable.call(<String, dynamic>{
+        'cardUid': card.id
+      });
+      response.status = ResponseStatus.SUCCEESS;
+      response.msg = 'na';
+      return response;
+    } catch (err) {
+      response.status = ResponseStatus.FAILURE;
+      response.msg = err.toString();
+      print(err.toString());
+      return response;
+    }
+  }
+
   Future<CloudFuncResponse> fetchCards() async {
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
