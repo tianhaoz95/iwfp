@@ -27,7 +27,72 @@ class _RemoveCardScreen extends State<RemoveCardScreen> {
       ),
       backgroundColor: Colors.cyan[100],
       body: Container(
-        child: Text('Remove ' + card.name),
+        child: ListView(
+          children: <Widget>[
+            SizedBox(
+              height: 5.0,
+            ),
+            Material(
+              color: Colors.cyan[100],
+              child: Card(
+                color: Colors.cyan,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                      child: Center(
+                        child: Text('Remove Credit Card',
+                            style: TextStyle(color: Colors.white)),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                      child: Center(
+                        child: Text('Card Name: ' + card.name,
+                            style: TextStyle(color: Colors.white)),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                      child: Center(
+                        child: Text('Card ID: ' + card.id,
+                            style: TextStyle(color: Colors.white)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Material(
+                color: Colors.cyan[100],
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+                  child: RaisedButton(
+                    color: Colors.red,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                      child:
+                          Text('Delete', style: TextStyle(color: Colors.white)),
+                    ),
+                    onPressed: () {},
+                  ),
+                )),
+            Material(
+                color: Colors.cyan[100],
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+                  child: RaisedButton(
+                    color: Colors.cyan,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                      child:
+                          Text('Cancel', style: TextStyle(color: Colors.white)),
+                    ),
+                    onPressed: () {},
+                  ),
+                )),
+          ],
+        ),
       ),
     );
   }

@@ -46,6 +46,7 @@ class DataStore {
       return response;
     }
   }
+
   Future<List<CreditCard>> getCards() async {
     CloudFuncResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
@@ -54,6 +55,7 @@ class DataStore {
     }
     return cards;
   }
+
   Future<CloudFuncResponse> addCard(CreditCard card) async {
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
