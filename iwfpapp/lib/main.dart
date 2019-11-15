@@ -10,6 +10,7 @@ import 'package:iwfpapp/screens/add_card/main.dart';
 import 'package:iwfpapp/screens/remove_card/main.dart';
 import 'package:iwfpapp/screens/edit_card/main.dart';
 import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/screens/add_promo/main.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         '/add_card': (context) => AddCardScreen(dataStore),
         '/remove_card': (context) => RemoveCardScreen(dataStore),
         '/edit_card': (context) => EditCardScreen(),
+        '/add_promo': (context) => AddPromoScreen(),
       },
     );
   }
