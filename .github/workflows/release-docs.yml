@@ -3,6 +3,7 @@ on:
   push:
     branches: 
       - "master"
+      - "actions/release-docs-*"
     paths:
       - "website/**"
       - "docs/**"
