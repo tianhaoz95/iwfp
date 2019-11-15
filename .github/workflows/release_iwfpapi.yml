@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - "master"
-      - "actions/*"
+      - "actions/release-iwfpapi-*"
     paths:
       - "iwfpapi/**"
       - ".github/workflows/**"

@@ -4,6 +4,8 @@ title: Latin-ish
 sidebar_label: Example Page
 ---
 
+Coverage is [here](http://tianhaoz.com/iwfp/reports/iwfpapp_coverage_report/index.html)
+
 Check the [documentation](https://docusaurus.io) for how to use Docusaurus.
 
 ## Lorem
