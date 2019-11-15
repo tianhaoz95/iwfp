@@ -9,16 +9,41 @@ on:
       - "docs/**"
       - ".github/workflows/**"
 jobs:
-  deploy:
-    name: Generate documentation
+  release-docs:
+    name: generate documentation
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Configure git credentials
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.9.1+hotfix.4'
+          channel: 'stable'
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: install coverage visualization
+        run: sudo apt install lcov
+      - name: test iwfpapp with coverage
+        run: |
+          cd ./iwfpapp
+          flutter test --coverage
+      - name: generate iwfpapp coverage report
+        run: |
+          cd ./iwfpapp
+          genhtml coverage/lcov.info -o coverage
+      - name: move iwfpapp coverage report to website
+        run: |
+          mkdir -p ./website/static/reports
+          cp -r ./iwfpapp/coverage ./website/static/reports/iwfpapp_coverage_report
+      - name: configure git credentials
         run: |
           git config --global user.email "tianhaoz@umich.edu"
           git config --global user.name "Tianhao Zhou"
-      - name: Deploy docs
+      - name: deploy docs to GitHub pages
         run: |
           cd ./website
           echo "machine github.com login tianhaoz95 password $GITHUB_TOKEN" > ~/.netrc
