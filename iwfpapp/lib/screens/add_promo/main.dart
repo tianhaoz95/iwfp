@@ -30,7 +30,90 @@ class _AddPromoScreen extends State<AddPromoScreen> {
 
   Widget renderPendingContent(BuildContext context) {
     return Container(
-      child: Text('pending'),
+      padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+      child: ListView(
+        children: <Widget>[
+          SizedBox(
+            height: 5.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), labelText: 'Promotion Name'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Promotion ID (unique)'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), labelText: 'Promotion Type'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), labelText: 'Start Date'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), labelText: 'End Date'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), labelText: 'Repeat Pattern'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), labelText: 'Cashback Rate'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), labelText: 'Category Name'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Category ID (unique)'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          Material(
+            color: Colors.cyan[100],
+            child: RaisedButton(
+              color: Colors.cyan,
+              onPressed: () {},
+              child: Text(
+                'Add Promotion',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
