@@ -13,6 +13,15 @@ class AddPromoScreen extends StatefulWidget {
 class _AddPromoScreen extends State<AddPromoScreen> {
   CreditCard card;
   SubmitScreenStatus status = SubmitScreenStatus.PENDING;
+  TextEditingController promoNameCtrl = TextEditingController();
+  TextEditingController promoIdCtrl = TextEditingController();
+  TextEditingController promoTypeCtrl = TextEditingController();
+  TextEditingController promoStartCtrl = TextEditingController();
+  TextEditingController promoEndCtrl = TextEditingController();
+  TextEditingController promoRepeatCtrl = TextEditingController();
+  TextEditingController promoRateCtrl = TextEditingController();
+  TextEditingController promoCategoryNameCtrl = TextEditingController();
+  TextEditingController promoCategoryIdCtrl = TextEditingController();
 
   @override
   void didChangeDependencies() {
@@ -20,6 +29,18 @@ class _AddPromoScreen extends State<AddPromoScreen> {
     if (ModalRoute.of(context).settings.arguments != null) {
       card = ModalRoute.of(context).settings.arguments;
     }
+  }
+
+  Future<void> handleAddPromo() async {
+    String promoName = promoNameCtrl.text;
+    String promoId = promoIdCtrl.text;
+    String promoType = promoTypeCtrl.text;
+    String promoStart = promoStartCtrl.text;
+    String promoEnd = promoEndCtrl.text;
+    String promoRepeat = promoRepeatCtrl.text;
+    String promoRate = promoRateCtrl.text;
+    String promoCategoryName = promoCategoryNameCtrl.text;
+    String promoCategoryId = promoCategoryIdCtrl.text;
   }
 
   Widget render(BuildContext context) {
@@ -37,6 +58,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
+            controller: promoNameCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Promotion Name'),
           ),
@@ -44,6 +66,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
+            controller: promoIdCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Promotion ID (unique)'),
@@ -52,6 +75,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
+            controller: promoTypeCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Promotion Type'),
           ),
@@ -59,20 +83,23 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
+            controller: promoStartCtrl,
             decoration: InputDecoration(
-                border: OutlineInputBorder(), labelText: 'Start Date'),
+                border: OutlineInputBorder(), labelText: 'Start Date (MM/DD)'),
           ),
           SizedBox(
             height: 5.0,
           ),
           TextField(
+            controller: promoEndCtrl,
             decoration: InputDecoration(
-                border: OutlineInputBorder(), labelText: 'End Date'),
+                border: OutlineInputBorder(), labelText: 'End Date (MM/DD)'),
           ),
           SizedBox(
             height: 5.0,
           ),
           TextField(
+            controller: promoRepeatCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Repeat Pattern'),
           ),
@@ -80,6 +107,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
+            controller: promoRateCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Cashback Rate'),
           ),
@@ -87,6 +115,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
+            controller: promoCategoryNameCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Category Name'),
           ),
@@ -94,6 +123,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
+            controller: promoCategoryIdCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Category ID (unique)'),
@@ -105,9 +135,24 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             color: Colors.cyan[100],
             child: RaisedButton(
               color: Colors.cyan,
-              onPressed: () {},
+              onPressed: () {
+                handleAddPromo();
+              },
               child: Text(
                 'Add Promotion',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+          Material(
+            color: Colors.cyan[100],
+            child: RaisedButton(
+              color: Colors.cyan,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Cancel',
                 style: TextStyle(color: Colors.white),
               ),
             ),
