@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/cashback_promo.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/status.dart';
 
@@ -30,20 +31,62 @@ class _EditCardScreen extends State<EditCardScreen> {
     return Container(child: Text('unknown'));
   }
 
+  Widget renderPromotions(BuildContext context) {
+    return Material(
+      child: Card(
+        child: Column(
+          children: card.promos.map((CashbackPromo promo) {
+            return Text(promo.name);
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
   Widget renderPendingContent(BuildContext context) {
+    Widget promos = renderPromotions(context);
     return Container(
       child: ListView(
         children: <Widget>[
-          Text('Editing: ' + card.name),
-          Text('edit id'),
-          Text('edit name'),
-          RaisedButton(
-            child: Text('add'),
-            onPressed: () {
-              Navigator.pushNamed(context, '/add_promo', arguments: card);
-            },
+          Material(
+            color: Colors.cyan[100],
+            child: Card(
+              color: Colors.cyan,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Center(
+                    child: Text('Card Name: ' + card.name,
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Center(
+                    child: Text('Card ID: ' + card.id,
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                ],
+              ),
+            ),
           ),
-          Text('update'),
+          promos,
+          Container(
+            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+            child: RaisedButton(
+              color: Colors.cyan,
+              child:
+                  Text('Add Promotion', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.pushNamed(context, '/add_promo', arguments: card);
+              },
+            ),
+          ),
         ],
       ),
     );
