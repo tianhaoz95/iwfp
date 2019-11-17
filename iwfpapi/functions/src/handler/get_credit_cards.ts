@@ -19,17 +19,20 @@ function getCreditCardsHandler(data, context) {
             console.log("retrieve card: ", card.id, "=>", card.data());
             response[card.id] = card.data();
             const promoRef = cardRef.doc(card.id).collection("promos");
-            promoRef.get().then((promoSnap) => {
-              let promos = {};
-              promoSnap.forEach(promo => {
-                console.log("retrieve promo: ", promo.id, "=>", promo.data());
-                promos[promo.id] = promo.data();
+            promoRef
+              .get()
+              .then(promoSnap => {
+                const promos = {};
+                promoSnap.forEach(promo => {
+                  console.log("retrieve promo: ", promo.id, "=>", promo.data());
+                  promos[promo.id] = promo.data();
+                });
+                response[card.id]["promos"] = promos;
+                resolve(response);
+              })
+              .catch(err => {
+                reject(err);
               });
-              response[card.id]["promos"] = promos;
-              resolve(response);
-            }).catch((err) => {
-              reject(err);
-            });
           });
         })
         .catch(err => {
