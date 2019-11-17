@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/cashback_promo.dart';
 import 'package:iwfpapp/services/credit_card.dart';
+import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/services/status.dart';
 
 class AddPromoScreen extends StatefulWidget {
+  final DataStore dataStore;
+  const AddPromoScreen(this.dataStore, {Key key}) : super(key: key);
   @override
   _AddPromoScreen createState() {
     return _AddPromoScreen();
@@ -32,15 +37,41 @@ class _AddPromoScreen extends State<AddPromoScreen> {
   }
 
   Future<void> handleAddPromo() async {
+    setState(() {
+      status = SubmitScreenStatus.LOADING;
+    });
     String promoName = promoNameCtrl.text;
     String promoId = promoIdCtrl.text;
     String promoType = promoTypeCtrl.text;
     String promoStart = promoStartCtrl.text;
     String promoEnd = promoEndCtrl.text;
     String promoRepeat = promoRepeatCtrl.text;
-    String promoRate = promoRateCtrl.text;
+    int promoRate = int.parse(promoRateCtrl.text);
     String promoCategoryName = promoCategoryNameCtrl.text;
     String promoCategoryId = promoCategoryIdCtrl.text;
+    CashbackPromo promo = CashbackPromo(
+        promoName,
+        promoId,
+        promoType,
+        promoStart,
+        promoEnd,
+        promoRepeat,
+        promoRate,
+        ShopCategory(promoCategoryName, promoCategoryId));
+    CloudFuncResponse response = await widget.dataStore.addPromo(card, promo);
+    if (response.status == ResponseStatus.SUCCEESS) {
+      setState(() {
+        status = SubmitScreenStatus.DONE;
+      });
+    } else if (response.status == ResponseStatus.FAILURE) {
+      setState(() {
+        status = SubmitScreenStatus.ERROR;
+      });
+    } else {
+      setState(() {
+        status = SubmitScreenStatus.UNKNOWN;
+      });
+    }
   }
 
   Widget render(BuildContext context) {
