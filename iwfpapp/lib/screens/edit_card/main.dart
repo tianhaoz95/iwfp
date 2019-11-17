@@ -33,10 +33,12 @@ class _EditCardScreen extends State<EditCardScreen> {
 
   Widget renderPromotions(BuildContext context) {
     return Material(
+      color: Colors.cyan[100],
       child: Card(
+        color: Colors.cyan,
         child: Column(
           children: card.promos.map((CashbackPromo promo) {
-            return Text(promo.name);
+            return Text(promo.name, style: TextStyle(color: Colors.white));
           }).toList(),
         ),
       ),
