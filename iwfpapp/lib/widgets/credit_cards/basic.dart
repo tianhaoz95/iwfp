@@ -9,11 +9,15 @@ class BasicCreditCard extends StatelessWidget {
   final bool edit;
   const BasicCreditCard(this.cardMetaData, this.color, this.edit);
   List<Widget> getCardContent(BuildContext context) {
+    String cardName = 'Unknown';
+    if (cardMetaData.name != null) {
+      cardName = cardMetaData.name;
+    }
     List<Widget> content = <Widget>[
       Row(
         children: <Widget>[
           SizedBox(height: 45.0, width: 25.0),
-          Text(cardMetaData.name, style: TextStyle(color: Colors.white)),
+          Text(cardName, style: TextStyle(color: Colors.white)),
         ],
       ),
       Container(
@@ -21,9 +25,17 @@ class BasicCreditCard extends StatelessWidget {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: cardMetaData.promos.map((CashbackPromo promo) {
+            String promoName = 'Unknown';
+            if (promo.name != null) {
+              promoName = promo.name;
+            }
+            int promoRate = -1;
+            if (promo.rate != null) {
+              promoRate = promo.rate;
+            }
             return Chip(
                 backgroundColor: color[600],
-                label: Text(promo.name + '@' + promo.rate.toString() + '%',
+                label: Text(promoName + '@' + promoRate.toString() + '%',
                     style: TextStyle(color: Colors.white)));
           }).toList(),
         ),

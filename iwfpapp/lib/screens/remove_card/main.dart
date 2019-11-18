@@ -150,7 +150,7 @@ class _RemoveCardScreen extends State<RemoveCardScreen> {
               child: Container(
                 padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
                 child: RaisedButton(
-                  color: Colors.red,
+                  color: Colors.redAccent,
                   child: Container(
                     padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
                     child:

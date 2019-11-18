@@ -9,17 +9,31 @@ function getCreditCardsHandler(data, context) {
       const cardRef = userRef.collection("cards");
       cardRef
         .get()
-        .then(snap => {
+        .then(cardSnap => {
           /**
-           * TODO(tianhaoz95): Add a type for response, this is 
+           * TODO(tianhaoz95): Add a type for response, this is
            * better off strongly typed.
            */
-          let response = {};
-          snap.forEach(doc => {
-            console.log('retrieve: ', doc.id, '=>', doc.data());
-            response[doc.id] = doc.data();
+          const response = {};
+          cardSnap.forEach(card => {
+            console.log("retrieve card: ", card.id, "=>", card.data());
+            response[card.id] = card.data();
+            const promoRef = cardRef.doc(card.id).collection("promos");
+            promoRef
+              .get()
+              .then(promoSnap => {
+                const promos = {};
+                promoSnap.forEach(promo => {
+                  console.log("retrieve promo: ", promo.id, "=>", promo.data());
+                  promos[promo.id] = promo.data();
+                });
+                response[card.id]["promos"] = promos;
+                resolve(response);
+              })
+              .catch(err => {
+                reject(err);
+              });
           });
-          resolve(response);
         })
         .catch(err => {
           reject(err);

@@ -1,3 +1,4 @@
+import 'package:iwfpapp/services/cashback_promo.dart';
 import 'package:iwfpapp/services/fetcher.dart';
 import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/services/credit_card.dart';
@@ -20,6 +21,7 @@ class DataStore {
   List<CreditCard> cards = [];
   String serviceType;
   HttpsCallable addCardCallable;
+  HttpsCallable addPromoCallable;
   HttpsCallable getCardsCallable;
   HttpsCallable removeCardCallable;
   DataStore(this.serviceType) {
@@ -31,6 +33,9 @@ class DataStore {
     );
     removeCardCallable = CloudFunctions.instance.getHttpsCallable(
       functionName: 'removeCreditCard',
+    );
+    addPromoCallable = CloudFunctions.instance.getHttpsCallable(
+      functionName: 'addPromo',
     );
   }
 
@@ -84,6 +89,35 @@ class DataStore {
       HttpsCallableResult result = await addCardCallable.call(<String, dynamic>{
         'cardUid': card.id,
         'cardData': card.name,
+      });
+      response.status = ResponseStatus.SUCCEESS;
+      response.msg = result.toString();
+      return response;
+    } catch (err) {
+      response.status = ResponseStatus.FAILURE;
+      response.msg = err.toString();
+      return response;
+    }
+  }
+
+  Future<CloudFuncResponse> addPromo(
+      CreditCard card, CashbackPromo promo) async {
+    CloudFuncResponse response =
+        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+    try {
+      HttpsCallableResult result =
+          await addPromoCallable.call(<String, dynamic>{
+        'cardUid': card.id,
+        'cardData': card.name,
+        'promoName': promo.name,
+        'promoId': promo.id,
+        'promoType': promo.type,
+        'promoStart': promo.start,
+        'promoEnd': promo.end,
+        'promoRepeat': promo.repeat,
+        'promoRate': promo.rate,
+        'promoCategoryName': promo.category.name,
+        'promoCategoryId': promo.category.id,
       });
       response.status = ResponseStatus.SUCCEESS;
       response.msg = result.toString();
