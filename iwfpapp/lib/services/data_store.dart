@@ -100,11 +100,13 @@ class DataStore {
     }
   }
 
-  Future<CloudFuncResponse> addPromo(CreditCard card, CashbackPromo promo) async {
+  Future<CloudFuncResponse> addPromo(
+      CreditCard card, CashbackPromo promo) async {
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
-      HttpsCallableResult result = await addPromoCallable.call(<String, dynamic>{
+      HttpsCallableResult result =
+          await addPromoCallable.call(<String, dynamic>{
         'cardUid': card.id,
         'cardData': card.name,
         'promoName': promo.name,
