@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/widgets/buttons/login_btn.dart';
 import 'package:iwfpapp/widgets/buttons/glogin_btn.dart';
 import 'package:iwfpapp/widgets/buttons/guest_login_btn.dart';
@@ -10,9 +11,8 @@ import 'package:iwfpapp/services/mode.dart';
 class LoginScreen extends StatefulWidget {
   final IwfpappAuth auth;
   final RunningMode mode;
-
-  LoginScreen(this.auth, this.mode);
-
+  final DataStore dataStore;
+  LoginScreen(this.auth, this.mode, this.dataStore);
   @override
   _LoginScreen createState() => _LoginScreen(auth, mode);
 }
@@ -36,6 +36,7 @@ class _LoginScreen extends State<LoginScreen> {
   Future<void> getSignInStatus() async {
     bool signedIn = await auth.isSignedIn();
     if (signedIn) {
+      await widget.dataStore.fetchCards();
       setState(() {
         status = 'signed_in';
       });

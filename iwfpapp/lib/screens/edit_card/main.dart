@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/cashback_promo.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/status.dart';
+import 'package:iwfpapp/widgets/promos/entry_view.dart';
 
 class EditCardScreen extends StatefulWidget {
   @override
@@ -31,65 +32,61 @@ class _EditCardScreen extends State<EditCardScreen> {
     return Container(child: Text('unknown'));
   }
 
-  Widget renderPromotions(BuildContext context) {
-    return Material(
-      color: Colors.cyan[100],
-      child: Card(
-        color: Colors.cyan,
-        child: Column(
-          children: card.promos.map((CashbackPromo promo) {
-            return Text(promo.name, style: TextStyle(color: Colors.white));
-          }).toList(),
-        ),
-      ),
-    );
+  List<Widget> renderPromotions(BuildContext context) {
+    if (card.promos.isEmpty) {
+      return [Text('empty')];
+    } else {
+      return card.promos.map((promo) => PromoEntry(promo)).toList();
+    }
   }
 
   Widget renderPendingContent(BuildContext context) {
-    Widget promos = renderPromotions(context);
+    List<Widget> promos = renderPromotions(context);
+    List<Widget> contentList = [
+      Material(
+        color: Colors.cyan[100],
+        child: Card(
+          color: Colors.cyan,
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 15.0,
+              ),
+              Center(
+                child: Text('Card Name: ' + card.name,
+                    style: TextStyle(color: Colors.white)),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              Center(
+                child: Text('Card ID: ' + card.id,
+                    style: TextStyle(color: Colors.white)),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ];
+    promos.forEach((Widget promo) {
+      contentList.add(promo);
+    });
+    contentList.add(Container(
+      padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+      child: RaisedButton(
+        color: Colors.cyan,
+        child: Text('Add Promotion', style: TextStyle(color: Colors.white)),
+        onPressed: () {
+          Navigator.pushNamed(context, '/add_promo', arguments: card);
+        },
+      ),
+    ));
     return Container(
       child: ListView(
-        children: <Widget>[
-          Material(
-            color: Colors.cyan[100],
-            child: Card(
-              color: Colors.cyan,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Center(
-                    child: Text('Card Name: ' + card.name,
-                        style: TextStyle(color: Colors.white)),
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Center(
-                    child: Text('Card ID: ' + card.id,
-                        style: TextStyle(color: Colors.white)),
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          promos,
-          Container(
-            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-            child: RaisedButton(
-              color: Colors.cyan,
-              child:
-                  Text('Add Promotion', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                Navigator.pushNamed(context, '/add_promo', arguments: card);
-              },
-            ),
-          ),
-        ],
+        children: contentList,
       ),
     );
   }

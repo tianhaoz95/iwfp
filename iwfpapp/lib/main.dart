@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(auth, mode),
+        '/': (context) => LoginScreen(auth, mode, dataStore),
         '/main': (context) => DestView(mode, dataStore),
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(),

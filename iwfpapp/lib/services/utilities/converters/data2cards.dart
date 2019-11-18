@@ -24,7 +24,7 @@ List<CreditCard> data2cards(HttpsCallableResult rawResponse) {
               promoData['promo_type'],
               promoData['promo_start'],
               promoData['promo_end'],
-              promoData['promo_repeat'],
+              promoData['promo_repeat_pattern'],
               promoData['promo_rate'],
               ShopCategory(promoData['promo_category_name'],
                   promoData['promo_category_id']),
