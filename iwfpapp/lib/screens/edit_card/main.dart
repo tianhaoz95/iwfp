@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/cashback_promo.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/status.dart';
 import 'package:iwfpapp/widgets/promos/entry_view.dart';
