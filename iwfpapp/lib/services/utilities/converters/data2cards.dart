@@ -4,6 +4,7 @@ import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/shop_category.dart';
 
 List<CreditCard> data2cards(HttpsCallableResult rawResponse) {
+  print(rawResponse.data.toString());
   List<CreditCard> cards = [];
   Map<String, dynamic> docs = Map<String, dynamic>.from(rawResponse.data);
   if (docs != null) {
