@@ -195,7 +195,31 @@ class _AddPromoScreen extends State<AddPromoScreen> {
 
   Widget renderDoneContent(BuildContext context) {
     return Container(
-      child: Text('done'),
+      child: ListView(
+        children: <Widget>[
+          Material(
+            color: Colors.cyan[100],
+            child: Card(
+              color: Colors.cyan,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 15.0,),
+                  Text('Promotion Added', style: TextStyle(color: Colors.white)),
+                  SizedBox(height: 15.0,),
+                  RaisedButton(
+                    color: Colors.amber[900],
+                    onPressed: () {
+                      Navigator.maybePop(context);
+                      Navigator.pushReplacementNamed(context, '/edit_card', arguments: card);
+                    },
+                    child: Text('Back to Card Editing', style: TextStyle(color: Colors.white),),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -207,7 +231,9 @@ class _AddPromoScreen extends State<AddPromoScreen> {
 
   Widget renderLoadingContent(BuildContext context) {
     return Container(
-      child: Text('loading'),
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 
