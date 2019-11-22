@@ -10,6 +10,6 @@
 
 ## Contribute
 
-Contribution of any kind (code, docs, suggestions, etc) is appreciated! Please see [./CONTRIBUTING](./CONTRIBUTING.md) for details.
+Contribution of any kind (code, docs, suggestions, etc) is appreciated! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/tianhaoz95/iwfp)
