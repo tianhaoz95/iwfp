@@ -121,6 +121,7 @@ class DataStore {
       });
       response.status = ResponseStatus.SUCCEESS;
       response.msg = result.toString();
+      await fetchCards();
       return response;
     } catch (err) {
       response.status = ResponseStatus.FAILURE;
