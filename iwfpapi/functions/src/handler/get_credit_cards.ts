@@ -1,47 +1,39 @@
 import provider from "../provider";
-import { noAuthMsg } from "../config/consts";
+import { noAuthMsg, noCardFoundError } from "../config/consts";
 
-function getCreditCardsHandler(data, context) {
-  return new Promise((resolve, reject) => {
-    if (context.auth) {
-      const userUid = context.auth.uid;
-      const userRef = provider.getUserRef(userUid);
-      const cardRef = userRef.collection("cards");
-      cardRef
-        .get()
-        .then(cardSnap => {
-          /**
-           * TODO(tianhaoz95): Add a type for response, this is
-           * better off strongly typed.
-           */
-          const response = {};
-          cardSnap.forEach(card => {
-            console.log("retrieve card: ", card.id, "=>", card.data());
-            response[card.id] = card.data();
-            const promoRef = cardRef.doc(card.id).collection("promos");
-            promoRef
-              .get()
-              .then(promoSnap => {
-                const promos = {};
-                promoSnap.forEach(promo => {
-                  console.log("retrieve promo: ", promo.id, "=>", promo.data());
-                  promos[promo.id] = promo.data();
-                });
-                response[card.id]["promos"] = promos;
-                resolve(response);
-              })
-              .catch(err => {
-                reject(err);
-              });
-          });
-        })
-        .catch(err => {
-          reject(err);
-        });
+async function getCreditCardsHandler(data, context) {
+  if (context.auth) {
+    const userUid = context.auth.uid;
+    const userRef = provider.getUserRef(userUid);
+    const cardRef = userRef.collection("cards");
+    const cardSnap: FirebaseFirestore.QuerySnapshot = await cardRef.get();
+    const response = {};
+    if (cardSnap.empty) {
+      throw noCardFoundError;
     } else {
-      reject(noAuthMsg);
+      for (const card of cardSnap.docs) {
+        console.log("retrieve card: ", card.id, "=>", card.data());
+        response[card.id] = card.data();
+        const promoRef = cardRef.doc(card.id).collection("promos");
+        const promoSnap: FirebaseFirestore.QuerySnapshot = await promoRef.get();
+        const promos = {};
+        if (promoSnap.empty) {
+          console.log("no promo found");
+        } else {
+          console.log("promos found, retrieve promos");
+          for (const promo of promoSnap.docs) {
+            console.log("retrieved promo: ", promo.id, "=>", promo.data());
+            promos[promo.id] = promo.data();
+          }
+          response[card.id]["promos"] = promos;
+          console.log("card data and all promos retrieved");
+        }
+      }
     }
-  });
+    return response;
+  } else {
+    throw noAuthMsg;
+  }
 }
 
 export default getCreditCardsHandler;
