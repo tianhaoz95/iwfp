@@ -15,6 +15,9 @@ on:
       - "dev/*"
       - "feature/*"
       - "release/*"
+    paths:
+      - "iwfpapp/**"
+      - ".github/workflows/**"
   schedule:
     - cron: 0 2 * * *
 jobs:
