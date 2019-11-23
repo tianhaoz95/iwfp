@@ -34,7 +34,9 @@ class PromoEntry extends StatelessWidget {
                     style: TextStyle(color: Colors.white)),
                 RaisedButton(
                   color: Colors.redAccent,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/remove_promo');
+                  },
                   child: Text('Remove', style: TextStyle(color: Colors.white)),
                 )
               ],

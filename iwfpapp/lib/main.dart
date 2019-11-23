@@ -3,6 +3,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:iwfpapp/nav.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/login/main.dart';
+import 'package:iwfpapp/screens/remove_promo/main.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         '/remove_card': (context) => RemoveCardScreen(dataStore),
         '/edit_card': (context) => EditCardScreen(),
         '/add_promo': (context) => AddPromoScreen(dataStore),
+        '/remove_promo': (context) => RemovePromoScreen(),
       },
     );
   }
