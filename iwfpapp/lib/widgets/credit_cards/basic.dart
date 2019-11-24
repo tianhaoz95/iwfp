@@ -56,7 +56,7 @@ class BasicCreditCard extends StatelessWidget {
             color: color,
             child: FlatButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/edit_card',
+                Navigator.pushReplacementNamed(context, '/edit_card',
                     arguments: cardMetaData);
               },
               child: Text('Edit', style: TextStyle(color: Colors.white)),
@@ -66,7 +66,7 @@ class BasicCreditCard extends StatelessWidget {
             color: color,
             child: FlatButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/remove_card',
+                Navigator.pushReplacementNamed(context, '/remove_card',
                     arguments: cardMetaData);
               },
               child: Text('Remove', style: TextStyle(color: Colors.white)),

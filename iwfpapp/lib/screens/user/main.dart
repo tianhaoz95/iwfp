@@ -39,6 +39,16 @@ class _UserSettings extends State<UserSettings> {
               nextIsDevFlagVal = nextDevVal;
             }),
             UpdateSettingsButton(handleUpdateSettings),
+            Container(
+              child: RaisedButton(
+                key: Key('go_to_auth_btn'),
+                color: Colors.orange,
+                child: Text('Go to Authentication', style: TextStyle(color: Colors.white),),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/sign_in');
+                },
+              ),
+            ),
           ],
         ));
   }

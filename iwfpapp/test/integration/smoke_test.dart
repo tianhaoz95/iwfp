@@ -37,10 +37,6 @@ void main() {
     await tester.pump();
     await tester.pumpAndSettle(new Duration(seconds: 5));
     validateIsCardsScreenContent();
-    await tester.tap(find.byKey(Key('user_nav_btn')));
-    await tester.pump();
-    await tester.pumpAndSettle();
-    validateIsUserScreenContent();
     await tester.tap(find.byKey(Key('contrib_nav_btn')));
     await tester.pump();
     await tester.pumpAndSettle();
@@ -48,7 +44,11 @@ void main() {
     await tester.tap(find.byKey(Key('shop_nav_btn')));
     await tester.pumpAndSettle(new Duration(seconds: 5));
     validateIsShopScreenContent();
-    await tester.pageBack();
+    await tester.tap(find.byKey(Key('user_nav_btn')));
+    await tester.pump();
+    await tester.pumpAndSettle();
+    validateIsUserScreenContent();
+    await tester.tap(find.byKey(Key('go_to_auth_btn')));
     await tester.pump();
     await tester.pumpAndSettle();
     validateIsLoginScreenContent();

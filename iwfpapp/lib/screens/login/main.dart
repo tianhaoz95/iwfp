@@ -77,7 +77,7 @@ class _LoginScreen extends State<LoginScreen> {
     await auth.handleSignInWithEmail(email, pwd);
     await getSignInStatus();
     if (status == 'signed_in') {
-      Navigator.pushNamed(context, '/main');
+      Navigator.pushReplacementNamed(context, '/main');
     } else {
       _showDialog(context, 'Sign in with email failed',
           'Please check your password.', 'sign_in_failed_prompt');
@@ -105,7 +105,7 @@ class _LoginScreen extends State<LoginScreen> {
           SizedBox(height: 25.0),
           GoToHomeButton(
             onPressedCallback: () async {
-              Navigator.pushNamed(context, '/main');
+              Navigator.pushReplacementNamed(context, '/main');
             },
           ),
           SizedBox(height: 25.0),
@@ -155,13 +155,13 @@ class _LoginScreen extends State<LoginScreen> {
           SizedBox(height: 25.0),
           GuestLoginButton(
             onPressedCallback: () {
-              Navigator.pushNamed(context, '/main');
+              Navigator.pushReplacementNamed(context, '/main');
             },
           ),
           SizedBox(height: 25.0),
           GLoginButton(
             onPressedCallback: () {
-              Navigator.pushNamed(context, '/placeholder');
+              Navigator.pushReplacementNamed(context, '/placeholder');
             },
           ),
         ],
