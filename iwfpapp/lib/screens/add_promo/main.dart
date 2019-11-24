@@ -216,7 +216,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
                     color: Colors.amber[900],
                     onPressed: () {
                       Navigator.pushReplacementNamed(context, '/edit_card',
-                          arguments: card);
+                          arguments: widget.dataStore.renewCard(card));
                     },
                     child: Text(
                       'Back to Card Editing',

@@ -92,6 +92,20 @@ class _AddCardScreen extends State<AddCardScreen> {
               await handleAddCard();
             },
           ),
+          RaisedButton(
+            color: Colors.redAccent,
+            child: Text('Add Card', style: TextStyle(color: Colors.white),),
+            onPressed: () async {
+              await handleAddCard();
+            },
+          ),
+          RaisedButton(
+            color: Colors.amber[900],
+            child: Text('Cancel', style: TextStyle(color: Colors.white),),
+            onPressed: () async {
+              await handleAddCard();
+            },
+          ),
         ],
       ),
     );
