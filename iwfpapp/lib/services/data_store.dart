@@ -122,9 +122,9 @@ class DataStore {
     try {
       HttpsCallableResult result =
           await removePromoCallable.call(<String, dynamic>{
-            'cardUid': card.id,
-            'promoId': promo.id,
-          });
+        'cardUid': card.id,
+        'promoId': promo.id,
+      });
       response.status = ResponseStatus.SUCCEESS;
       response.msg = result.toString();
       await fetchCards();

@@ -203,16 +203,25 @@ class _AddPromoScreen extends State<AddPromoScreen> {
               color: Colors.cyan,
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 15.0,),
-                  Text('Promotion Added', style: TextStyle(color: Colors.white)),
-                  SizedBox(height: 15.0,),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Text('Promotion Added',
+                      style: TextStyle(color: Colors.white)),
+                  SizedBox(
+                    height: 15.0,
+                  ),
                   RaisedButton(
                     color: Colors.amber[900],
                     onPressed: () {
                       Navigator.maybePop(context);
-                      Navigator.pushReplacementNamed(context, '/edit_card', arguments: card);
+                      Navigator.pushReplacementNamed(context, '/edit_card',
+                          arguments: card);
                     },
-                    child: Text('Back to Card Editing', style: TextStyle(color: Colors.white),),
+                    child: Text(
+                      'Back to Card Editing',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),
