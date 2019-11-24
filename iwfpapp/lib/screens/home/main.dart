@@ -4,43 +4,35 @@ import 'package:iwfpapp/screens/shop/main.dart';
 import 'package:iwfpapp/screens/cards/main.dart';
 import 'package:iwfpapp/screens/contrib/main.dart';
 import 'package:iwfpapp/screens/user/main.dart';
+import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/mode.dart';
 
-class Dest {
-  final String title;
-  final IconData icon;
-  final MaterialColor color;
-  final Key btnKey;
-  final Key titleKey;
-  const Dest(this.title, this.icon, this.color, this.btnKey, this.titleKey);
-}
-
-const List<Dest> allDests = <Dest>[
-  Dest('Shop Now!', Icons.shopping_cart, Colors.teal, Key('shop_nav_btn'),
+const List<HomeTab> allDests = <HomeTab>[
+  HomeTab('Shop Now!', Icons.shopping_cart, Colors.teal, Key('shop_nav_btn'),
       Key('shop_title')),
-  Dest('Manage Cards', Icons.credit_card, Colors.cyan, Key('cards_nav_btn'),
+  HomeTab('Manage Cards', Icons.credit_card, Colors.cyan, Key('cards_nav_btn'),
       Key('cards_title')),
-  Dest('My Settings', Icons.account_circle, Colors.orange, Key('user_nav_btn'),
-      Key('user_title')),
-  Dest('Contribute', Icons.favorite, Colors.blue, Key('contrib_nav_btn'),
+  HomeTab('My Settings', Icons.account_circle, Colors.orange,
+      Key('user_nav_btn'), Key('user_title')),
+  HomeTab('Contribute', Icons.favorite, Colors.blue, Key('contrib_nav_btn'),
       Key('contrib_title')),
 ];
 
-class DestView extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   final RunningMode mode;
   final DataStore dataStore;
-  const DestView(this.mode, this.dataStore, {Key key}) : super(key: key);
+  const HomeScreen(this.mode, this.dataStore, {Key key}) : super(key: key);
   @override
-  _DestView createState() {
-    return _DestView();
+  _HomeScreen createState() {
+    return _HomeScreen();
   }
 }
 
-class _DestView extends State<DestView> {
+class _HomeScreen extends State<HomeScreen> {
   int _currentIndex = 0;
   List<Widget> _children = [];
-  final List<Dest> destinations = allDests;
+  final List<HomeTab> destinations = allDests;
 
   @override
   void initState() {
@@ -89,7 +81,7 @@ class _DestView extends State<DestView> {
           key: Key('bottom_nav_bar'),
           onTap: onTabTapped,
           currentIndex: _currentIndex,
-          items: destinations.map((Dest destination) {
+          items: destinations.map((HomeTab destination) {
             return BottomNavigationBarItem(
                 icon: Icon(destination.icon, key: destination.btnKey),
                 backgroundColor: destination.color,

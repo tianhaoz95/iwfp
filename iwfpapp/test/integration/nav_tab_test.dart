@@ -15,7 +15,7 @@ void main() {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: DestView(mockMode, mockDataStore),
+      home: HomeScreen(mockMode, mockDataStore),
     ));
     await tester.pump(new Duration(seconds: 5));
     expect(find.byType(BottomNavigationBar), findsOneWidget);
