@@ -79,7 +79,7 @@ class _EditCardScreen extends State<EditCardScreen> {
         color: Colors.green,
         child: Text('Add Promotion', style: TextStyle(color: Colors.white)),
         onPressed: () {
-          Navigator.pushNamed(context, '/add_promo', arguments: card);
+          Navigator.pushReplacementNamed(context, '/add_promo', arguments: card);
         },
       ),
     ));

@@ -180,7 +180,8 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             child: RaisedButton(
               color: Colors.cyan,
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/edit_card',
+                          arguments: card);
               },
               child: Text(
                 'Cancel',
@@ -214,7 +215,6 @@ class _AddPromoScreen extends State<AddPromoScreen> {
                   RaisedButton(
                     color: Colors.amber[900],
                     onPressed: () {
-                      Navigator.maybePop(context);
                       Navigator.pushReplacementNamed(context, '/edit_card',
                           arguments: card);
                     },
