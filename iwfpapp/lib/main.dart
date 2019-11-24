@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:iwfpapp/nav.dart';
+import 'package:iwfpapp/screens/home/main.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/login/main.dart';
 import 'package:iwfpapp/screens/remove_promo/main.dart';
