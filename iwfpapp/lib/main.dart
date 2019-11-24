@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         '/remove_card': (context) => RemoveCardScreen(dataStore),
         '/edit_card': (context) => EditCardScreen(),
         '/add_promo': (context) => AddPromoScreen(dataStore),
-        '/remove_promo': (context) => RemovePromoScreen(),
+        '/remove_promo': (context) => RemovePromoScreen(dataStore),
       },
     );
   }

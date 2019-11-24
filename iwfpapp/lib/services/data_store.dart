@@ -1,4 +1,5 @@
 import 'package:iwfpapp/services/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/services/fetcher.dart';
 import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/services/credit_card.dart';
@@ -24,6 +25,7 @@ class DataStore {
   HttpsCallable addPromoCallable;
   HttpsCallable getCardsCallable;
   HttpsCallable removeCardCallable;
+  HttpsCallable removePromoCallable;
   DataStore(this.serviceType) {
     addCardCallable = CloudFunctions.instance.getHttpsCallable(
       functionName: 'addCreditCard',
@@ -36,6 +38,9 @@ class DataStore {
     );
     addPromoCallable = CloudFunctions.instance.getHttpsCallable(
       functionName: 'addPromo',
+    );
+    removePromoCallable = CloudFunctions.instance.getHttpsCallable(
+      functionName: 'removePromo',
     );
   }
 
@@ -92,6 +97,37 @@ class DataStore {
       });
       response.status = ResponseStatus.SUCCEESS;
       response.msg = result.toString();
+      return response;
+    } catch (err) {
+      response.status = ResponseStatus.FAILURE;
+      response.msg = err.toString();
+      return response;
+    }
+  }
+
+  CreditCard renewCard(CreditCard card) {
+    for (CreditCard searchCard in cards) {
+      if (searchCard.id == card.id) {
+        return searchCard;
+      }
+    }
+    return card;
+  }
+
+  Future<CloudFuncResponse> removePromo(RemovePromoMeta meta) async {
+    CreditCard card = meta.card;
+    CashbackPromo promo = meta.promo;
+    CloudFuncResponse response =
+        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+    try {
+      HttpsCallableResult result =
+          await removePromoCallable.call(<String, dynamic>{
+            'cardUid': card.id,
+            'promoId': promo.id,
+          });
+      response.status = ResponseStatus.SUCCEESS;
+      response.msg = result.toString();
+      await fetchCards();
       return response;
     } catch (err) {
       response.status = ResponseStatus.FAILURE;

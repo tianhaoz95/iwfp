@@ -166,13 +166,15 @@ class _RemoveCardScreen extends State<RemoveCardScreen> {
               child: Container(
                 padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
                 child: RaisedButton(
-                  color: Colors.cyan,
+                  color: Colors.green,
                   child: Container(
                     padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
                     child:
                         Text('Cancel', style: TextStyle(color: Colors.white)),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               )),
         ],
