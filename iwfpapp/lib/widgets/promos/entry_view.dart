@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
+import 'package:iwfpapp/services/credit_card.dart';
 
 class PromoEntry extends StatelessWidget {
   final CashbackPromo promo;
-  const PromoEntry(this.promo);
+  final CreditCard card;
+  const PromoEntry(this.promo, this.card);
   @override
   Widget build(BuildContext context) {
     double maxContainerWidth = MediaQuery.of(context).size.width;
@@ -34,7 +37,10 @@ class PromoEntry extends StatelessWidget {
                     style: TextStyle(color: Colors.white)),
                 RaisedButton(
                   color: Colors.redAccent,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/remove_promo',
+                        arguments: RemovePromoMeta(card, promo));
+                  },
                   child: Text('Remove', style: TextStyle(color: Colors.white)),
                 )
               ],

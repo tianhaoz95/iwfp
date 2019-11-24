@@ -35,7 +35,7 @@ class _EditCardScreen extends State<EditCardScreen> {
     if (card.promos.isEmpty) {
       return [Text('empty')];
     } else {
-      return card.promos.map((promo) => PromoEntry(promo)).toList();
+      return card.promos.map((promo) => PromoEntry(promo, card)).toList();
     }
   }
 
