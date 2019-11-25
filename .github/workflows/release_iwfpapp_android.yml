@@ -6,7 +6,7 @@ on:
       - "release_iwfpapp_android/*"
     paths:
       - "iwfpapp/pubspec.yaml"
-      - ".github/**"
+      - ".github/workflows/release_iwfpapp_android.yml"
 jobs:
   release-android:
     name: Deploy Android app
