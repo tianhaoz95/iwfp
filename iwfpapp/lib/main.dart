@@ -49,10 +49,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/sign_in',
+      initialRoute: '/',
       routes: {
+        '/': (context) => HomeScreen(mode, dataStore, auth),
         '/sign_in': (context) => LoginScreen(auth, mode, dataStore),
-        '/': (context) => HomeScreen(mode, dataStore),
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(),
         '/add_card': (context) => AddCardScreen(dataStore),

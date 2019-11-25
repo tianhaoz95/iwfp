@@ -15,17 +15,10 @@ void main() {
     DataStore mockDataStore = MockDataStore();
     IwfpappAuth mockAuth = MockIwfpappAuth();
     RunningMode mockMode = MockRunningMode();
-    when(mockAuth.isSignedIn()).thenAnswer((_) => Future.value(false));
+    when(mockAuth.isSignedIn()).thenAnswer((_) => Future.value(true));
     await tester.pumpWidget(MyApp(mockDataStore, mockAuth, mockMode));
     await tester.pump();
     await tester.pumpAndSettle(new Duration(seconds: 5));
-    // So far only guest login is supported.
-    validateLoginScreenContent();
-    await tester.tap(find.byKey(Key('guest_login_btn')));
-    await tester.pumpAndSettle(new Duration(seconds: 5));
-    validateIsShopScreenContent();
-    // Select one category and confirm it navigates
-    // to the suggestions screen.
     await tester.tap(find.byKey(Key('chase_pay_select_btn')));
     await tester.pumpAndSettle(new Duration(seconds: 5));
     validateSuggestionScreenContent();
