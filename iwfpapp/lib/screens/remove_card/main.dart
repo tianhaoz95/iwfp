@@ -77,7 +77,7 @@ class _RemoveCardScreen extends State<RemoveCardScreen> {
           child:
               Text('Done! Back to main', style: TextStyle(color: Colors.white)),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/main');
+            Navigator.pushReplacementNamed(context, '/');
           },
         ),
       )),

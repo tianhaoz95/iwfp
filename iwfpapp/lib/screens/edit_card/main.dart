@@ -76,10 +76,20 @@ class _EditCardScreen extends State<EditCardScreen> {
     contentList.add(Container(
       padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
       child: RaisedButton(
-        color: Colors.cyan,
+        color: Colors.green,
         child: Text('Add Promotion', style: TextStyle(color: Colors.white)),
         onPressed: () {
-          Navigator.pushNamed(context, '/add_promo', arguments: card);
+          Navigator.pushReplacementNamed(context, '/add_promo', arguments: card);
+        },
+      ),
+    ));
+    contentList.add(Container(
+      padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+      child: RaisedButton(
+        color: Colors.amber[900],
+        child: Text('Cancel', style: TextStyle(color: Colors.white)),
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, '/', arguments: card);
         },
       ),
     ));
