@@ -3,9 +3,12 @@ on:
   push:
     branches:
       - "master"
+      - "release_iwfpapp_android/*"
     paths:
       - "iwfpapp/pubspec.yaml"
-      - ".github/**"
+      - ".github/workflows/release_iwfpapp_android.yml"
+      - "Gemfile"
+      - "Gemfile.lock"
 jobs:
   release-android:
     name: Deploy Android app
