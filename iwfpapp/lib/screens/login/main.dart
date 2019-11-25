@@ -133,36 +133,57 @@ class _LoginScreen extends State<LoginScreen> {
           TextField(
               controller: emailInputController,
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   hintText: 'email',
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32.0)))),
+                      borderRadius: BorderRadius.circular(5.0)))),
           SizedBox(height: 25.0),
           TextField(
               controller: pwdInputController,
               obscureText: true,
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   hintText: 'password',
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32.0)))),
+                      borderRadius: BorderRadius.circular(5.0)))),
           SizedBox(height: 25.0),
-          LoginButton(
-            onPressedCallback: () async {
-              await handleEmailSignIn(context);
-            },
+          Material(
+            color: Colors.blue[100],
+            child: RaisedButton(
+              color: Colors.green,
+              child: Text('Sign In with Email', style: TextStyle(color: Colors.white),),
+              onPressed: () async {
+                await handleEmailSignIn(context);
+              },
+            ),
           ),
-          SizedBox(height: 25.0),
-          GuestLoginButton(
-            onPressedCallback: () {
-              Navigator.pushReplacementNamed(context, '/');
-            },
+          Material(
+            color: Colors.blue[100],
+            child: RaisedButton(
+              color: Colors.redAccent,
+              child: Text('Forgot Password', style: TextStyle(color: Colors.white),),
+              onPressed: () {},
+            ),
           ),
-          SizedBox(height: 25.0),
-          GLoginButton(
-            onPressedCallback: () {
-              Navigator.pushReplacementNamed(context, '/placeholder');
-            },
+          Material(
+            color: Colors.blue[100],
+            child: RaisedButton(
+              color: Colors.amber[900],
+              child: Text('Continue as Guest', style: TextStyle(color: Colors.white),),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/');
+              },
+            ),
+          ),
+          Material(
+            color: Colors.blue[100],
+            child: RaisedButton(
+              color: Colors.blue,
+              child: Text('Register', style: TextStyle(color: Colors.white),),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/sign_up');
+              },
+            ),
           ),
         ],
       ),

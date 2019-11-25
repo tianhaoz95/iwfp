@@ -4,6 +4,7 @@ import 'package:iwfpapp/screens/home/main.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/login/main.dart';
 import 'package:iwfpapp/screens/remove_promo/main.dart';
+import 'package:iwfpapp/screens/sign_up/main.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomeScreen(mode, dataStore, auth),
         '/sign_in': (context) => LoginScreen(auth, mode, dataStore),
+        '/sign_up': (context) => SignUpScreen(),
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(),
         '/add_card': (context) => AddCardScreen(dataStore),
