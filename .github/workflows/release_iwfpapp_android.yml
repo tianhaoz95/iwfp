@@ -7,6 +7,8 @@ on:
     paths:
       - "iwfpapp/pubspec.yaml"
       - ".github/workflows/release_iwfpapp_android.yml"
+      - "Gemfile"
+      - "Gemfile.lock"
 jobs:
   release-android:
     name: Deploy Android app
