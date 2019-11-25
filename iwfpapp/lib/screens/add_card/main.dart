@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
-import 'package:iwfpapp/widgets/buttons/submit_add_card_btn.dart';
 import 'package:iwfpapp/services/status.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 
@@ -87,11 +87,6 @@ class _AddCardScreen extends State<AddCardScreen> {
           SizedBox(height: 25.0),
           AddCardNameInput(cardNameInputCtrl),
           SizedBox(height: 25.0),
-          SubmitAddCardButton(
-            onPressedCallback: () async {
-              await handleAddCard();
-            },
-          ),
           RaisedButton(
             color: Colors.redAccent,
             child: Text('Add Card', style: TextStyle(color: Colors.white),),
@@ -102,8 +97,8 @@ class _AddCardScreen extends State<AddCardScreen> {
           RaisedButton(
             color: Colors.amber[900],
             child: Text('Cancel', style: TextStyle(color: Colors.white),),
-            onPressed: () async {
-              await handleAddCard();
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/main', arguments: HomeTabId.CARD_MANAGEMENT);
             },
           ),
         ],
@@ -133,7 +128,7 @@ class _AddCardScreen extends State<AddCardScreen> {
               child: Text('Go to main menu',
                   style: TextStyle(color: Colors.white)),
               onPressed: () {
-                Navigator.pushNamed(context, '/main');
+                Navigator.pushReplacementNamed(context, '/main', arguments: HomeTabId.CARD_MANAGEMENT);
               },
             ),
           )
