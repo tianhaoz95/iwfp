@@ -98,7 +98,7 @@ class _AddCardScreen extends State<AddCardScreen> {
             color: Colors.amber[900],
             child: Text('Cancel', style: TextStyle(color: Colors.white),),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/main', arguments: HomeTabId.CARD_MANAGEMENT);
+              Navigator.pushReplacementNamed(context, '/', arguments: HomeTabId.CARD_MANAGEMENT);
             },
           ),
         ],
@@ -128,7 +128,7 @@ class _AddCardScreen extends State<AddCardScreen> {
               child: Text('Go to main menu',
                   style: TextStyle(color: Colors.white)),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/main', arguments: HomeTabId.CARD_MANAGEMENT);
+                Navigator.pushReplacementNamed(context, '/', arguments: HomeTabId.CARD_MANAGEMENT);
               },
             ),
           )

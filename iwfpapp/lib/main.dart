@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/sign_in',
       routes: {
         '/sign_in': (context) => LoginScreen(auth, mode, dataStore),
-        '/main': (context) => HomeScreen(mode, dataStore),
+        '/': (context) => HomeScreen(mode, dataStore),
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(),
         '/add_card': (context) => AddCardScreen(dataStore),

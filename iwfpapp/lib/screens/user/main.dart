@@ -22,7 +22,7 @@ class _UserSettings extends State<UserSettings> {
 
   handleUpdateSettings(BuildContext context) {
     widget.mode.setRunningMode(nextIsDevFlagVal);
-    Navigator.pushReplacementNamed(context, '/main');
+    Navigator.pushReplacementNamed(context, '/');
   }
 
   @override
