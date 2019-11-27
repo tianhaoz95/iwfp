@@ -27,7 +27,8 @@ class HomeScreen extends StatefulWidget {
   final RunningMode mode;
   final DataStore dataStore;
   final IwfpappAuth auth;
-  const HomeScreen(this.mode, this.dataStore, this.auth, {Key key}) : super(key: key);
+  const HomeScreen(this.mode, this.dataStore, this.auth, {Key key})
+      : super(key: key);
   @override
   _HomeScreen createState() {
     return _HomeScreen();
@@ -95,7 +96,9 @@ class _HomeScreen extends State<HomeScreen> {
 
   Widget renderLoading(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Signing in...'),),
+      appBar: AppBar(
+        title: Text('Signing in...'),
+      ),
       body: Container(
         child: Center(
           child: CircularProgressIndicator(),

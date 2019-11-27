@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/config/typedefs/auth_status.dart';
 import 'package:iwfpapp/services/status.dart';
 
 class SignUpScreen extends StatefulWidget {
+  final IwfpappAuth auth;
+  const SignUpScreen(this.auth, {Key key}) : super(key: key);
   @override
   _SignUpScreen createState() {
     return _SignUpScreen();
@@ -10,6 +14,51 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreen extends State<SignUpScreen> {
   SubmitScreenStatus status = SubmitScreenStatus.PENDING;
+  TextEditingController emailCtrl = TextEditingController();
+  TextEditingController pwdCtrl = TextEditingController();
+  TextEditingController pwdConfirmCtrl = TextEditingController();
+  String msg = 'na';
+
+  Future<void> handleSignUp() async {
+    setState(() {
+      status = SubmitScreenStatus.LOADING;
+    });
+    String email = emailCtrl.text;
+    String pwd = pwdCtrl.text;
+    String pwdConfirm = pwdConfirmCtrl.text;
+    if (pwd == pwdConfirm) {
+      SignUpResponse response =
+          await widget.auth.handleSignUpWithEmail(email, pwd);
+      switch (response.status) {
+        case SignUpStatus.SUCCESS:
+          setState(() {
+            status = SubmitScreenStatus.DONE;
+          });
+          break;
+        case SignUpStatus.FAIL:
+          setState(() {
+            status = SubmitScreenStatus.ERROR;
+            msg = response.msg;
+          });
+          break;
+        case SignUpStatus.UNKNOWN:
+          setState(() {
+            status = SubmitScreenStatus.ERROR;
+            msg = response.msg;
+          });
+          break;
+        default:
+          setState(() {
+            status = SubmitScreenStatus.UNKNOWN;
+          });
+      }
+    } else {
+      setState(() {
+        status = SubmitScreenStatus.ERROR;
+        msg = 'Password not matching';
+      });
+    }
+  }
 
   Widget renderPendingContent(BuildContext context) {
     return Container(
@@ -21,6 +70,7 @@ class _SignUpScreen extends State<SignUpScreen> {
           Container(
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: TextField(
+                  controller: emailCtrl,
                   decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -33,6 +83,7 @@ class _SignUpScreen extends State<SignUpScreen> {
           Container(
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: TextField(
+                  controller: pwdCtrl,
                   decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -45,6 +96,7 @@ class _SignUpScreen extends State<SignUpScreen> {
           Container(
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: TextField(
+                  controller: pwdConfirmCtrl,
                   decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -57,8 +109,13 @@ class _SignUpScreen extends State<SignUpScreen> {
                 padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
                 child: RaisedButton(
                   color: Colors.green,
-                  onPressed: () {},
-                  child: Text('Register', style: TextStyle(color: Colors.white),),
+                  onPressed: () {
+                    handleSignUp();
+                  },
+                  child: Text(
+                    'Register',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               )),
           Material(
@@ -70,7 +127,10 @@ class _SignUpScreen extends State<SignUpScreen> {
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, '/sign_in');
                   },
-                  child: Text('Cancel', style: TextStyle(color: Colors.white),),
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               )),
         ],
@@ -102,11 +162,70 @@ class _SignUpScreen extends State<SignUpScreen> {
     );
   }
 
+  Widget renderLoadingContent(BuildContext context) {
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  Widget renderDoneContent(BuildContext context) {
+    return Container(
+      child: ListView(
+        children: <Widget>[
+          Material(
+              color: Colors.blue[100],
+              child: Container(
+                padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+                child: RaisedButton(
+                  color: Colors.blue,
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/sign_in');
+                  },
+                  child: Text(
+                    'Done! Sign in.',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+
+  Widget renderErrorContent(BuildContext context) {
+    return Container(
+      child: ListView(
+        children: <Widget>[
+          Text(msg),
+          Material(
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/sign_in');
+              },
+              child: Text('Error, back to login'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget renderContent(BuildContext context) {
     Widget content = renderUnknownContent(context);
     switch (status) {
       case SubmitScreenStatus.PENDING:
         content = renderPendingContent(context);
+        break;
+      case SubmitScreenStatus.LOADING:
+        content = renderLoadingContent(context);
+        break;
+      case SubmitScreenStatus.ERROR:
+        content = renderErrorContent(context);
+        break;
+      case SubmitScreenStatus.DONE:
+        content = renderDoneContent(context);
         break;
       default:
         content = renderUnknownContent(context);

@@ -148,7 +148,10 @@ class _LoginScreen extends State<LoginScreen> {
             color: Colors.blue[100],
             child: RaisedButton(
               color: Colors.green,
-              child: Text('Sign In with Email', style: TextStyle(color: Colors.white),),
+              child: Text(
+                'Sign In with Email',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: () async {
                 await handleEmailSignIn(context);
               },
@@ -158,7 +161,10 @@ class _LoginScreen extends State<LoginScreen> {
             color: Colors.blue[100],
             child: RaisedButton(
               color: Colors.redAccent,
-              child: Text('Forgot Password', style: TextStyle(color: Colors.white),),
+              child: Text(
+                'Forgot Password',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: () {},
             ),
           ),
@@ -166,7 +172,10 @@ class _LoginScreen extends State<LoginScreen> {
             color: Colors.blue[100],
             child: RaisedButton(
               color: Colors.amber[900],
-              child: Text('Continue as Guest', style: TextStyle(color: Colors.white),),
+              child: Text(
+                'Continue as Guest',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/');
               },
@@ -176,7 +185,10 @@ class _LoginScreen extends State<LoginScreen> {
             color: Colors.blue[100],
             child: RaisedButton(
               color: Colors.blue,
-              child: Text('Register', style: TextStyle(color: Colors.white),),
+              child: Text(
+                'Register',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/sign_up');
               },

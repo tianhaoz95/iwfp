@@ -89,16 +89,23 @@ class _AddCardScreen extends State<AddCardScreen> {
           SizedBox(height: 25.0),
           RaisedButton(
             color: Colors.redAccent,
-            child: Text('Add Card', style: TextStyle(color: Colors.white),),
+            child: Text(
+              'Add Card',
+              style: TextStyle(color: Colors.white),
+            ),
             onPressed: () async {
               await handleAddCard();
             },
           ),
           RaisedButton(
             color: Colors.amber[900],
-            child: Text('Cancel', style: TextStyle(color: Colors.white),),
+            child: Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white),
+            ),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/', arguments: HomeTabId.CARD_MANAGEMENT);
+              Navigator.pushReplacementNamed(context, '/',
+                  arguments: HomeTabId.CARD_MANAGEMENT);
             },
           ),
         ],
@@ -128,7 +135,8 @@ class _AddCardScreen extends State<AddCardScreen> {
               child: Text('Go to main menu',
                   style: TextStyle(color: Colors.white)),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/', arguments: HomeTabId.CARD_MANAGEMENT);
+                Navigator.pushReplacementNamed(context, '/',
+                    arguments: HomeTabId.CARD_MANAGEMENT);
               },
             ),
           )
