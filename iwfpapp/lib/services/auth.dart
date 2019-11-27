@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' as developer;
 
+import 'package:iwfpapp/services/config/typedefs/auth_status.dart';
+
 class IwfpappAuth {
   FirebaseAuth _auth = FirebaseAuth.instance;
   AuthResult authResult;
@@ -12,6 +14,24 @@ class IwfpappAuth {
     } catch (err) {
       developer.log(err.toString(), name: 'iwfpapp.services.auth.sign_in');
     }
+  }
+
+  Future<SignUpResponse> handleSignUpWithEmail(String email, String pwd) async {
+    SignUpResponse authResponse = SignUpResponse(SignUpStatus.UNKNOWN, 'na');
+    try {
+      AuthResult res = await _auth.createUserWithEmailAndPassword(
+          email: email, password: pwd);
+      if (res.user != null) {
+        authResponse.status = SignUpStatus.SUCCESS;
+      } else {
+        authResponse.status = SignUpStatus.FAIL;
+        authResponse.msg = 'Returned user is null';
+      }
+    } catch (err) {
+      authResponse.status = SignUpStatus.UNKNOWN;
+      authResponse.msg = err.toString();
+    }
+    return authResponse;
   }
 
   Future<void> handleSignOut() async {

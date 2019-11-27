@@ -181,7 +181,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
               color: Colors.cyan,
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/edit_card',
-                          arguments: card);
+                    arguments: card);
               },
               child: Text(
                 'Cancel',
