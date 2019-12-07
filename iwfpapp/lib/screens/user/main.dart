@@ -40,6 +40,7 @@ class _UserSettings extends State<UserSettings> {
             }),
             UpdateSettingsButton(handleUpdateSettings),
             Container(
+              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: RaisedButton(
                 key: Key('go_to_auth_btn'),
                 color: Colors.orange,
