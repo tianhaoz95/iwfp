@@ -55,6 +55,7 @@ jobs:
         run: flutter config --enable-web
       - name: build web
         run: |
+          git clean -xffd
           cd ./iwfpapp
           flutter test
           flutter build web
@@ -81,6 +82,7 @@ jobs:
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
+          git clean -xffd
           ./scripts/setenv.sh
           cd ./iwfpapp
           flutter test
@@ -105,6 +107,7 @@ jobs:
           flutter --version
       - name: build ipa
         run: |
+          git clean -xffd
           cd ./iwfpapp
           flutter test
           flutter build ios --release --no-codesign
