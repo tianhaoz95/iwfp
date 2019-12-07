@@ -29,6 +29,8 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
+      - name: clean up workspace
+        run: git clean -xffd
       - name: install ruby packages
         run: bundle install
       - name: build apk and app bundle package
@@ -39,6 +41,8 @@ jobs:
         run: |
           ./scripts/setenv.sh
           cd ./iwfpapp
+          flutter pub get
+          flutter test
           flutter build apk --split-per-abi
           flutter build appbundle
           cd ./android
