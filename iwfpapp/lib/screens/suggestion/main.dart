@@ -19,6 +19,7 @@ class SuggestionScreen extends StatelessWidget {
         backgroundColor: Colors.teal,
         key: Key('suggestion_title'),
         leading: FlatButton(
+          key: Key('suggestion_back_btn'),
           child: Icon(Icons.arrow_back_ios, color: Colors.white,),
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/', arguments: HomeTabId.SHOPPING);
