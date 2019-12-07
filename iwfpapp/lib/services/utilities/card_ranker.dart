@@ -8,7 +8,7 @@ int getMaxRate(CreditCard card, ShopCategory category) {
   int maxRate = 0;
   for (CashbackPromo promo in card.promos) {
     if (isInValidTimeRange(promo)) {
-      if (promo.id == category.id) {
+      if (promo.category.id == category.id) {
         maxRate = max(maxRate, promo.rate);
       } else {
         if (promo.type == 'universal') {
