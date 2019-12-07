@@ -5,6 +5,7 @@ import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:iwfpapp/services/utilities/card_ranker.dart';
+import 'package:iwfpapp/services/utilities/category_counter.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 
 enum ResponseStatus {
@@ -51,17 +52,7 @@ class DataStore {
       print('fetch card failed');
       return [];
     }
-    Map<String, bool> promoIdDict = {};
-    List<ShopCategory> uniqueCategories = [];
-    for (CreditCard card in cards) {
-      for (CashbackPromo promo in card.promos) {
-        if (!promoIdDict.containsKey(promo.id)) {
-          promoIdDict[promo.id] = true;
-          uniqueCategories.add(promo.category);
-        }
-      }
-    }
-    return uniqueCategories;
+    return getUniqueShoppingCategories(cards);
   }
 
   Future<CloudFuncResponse> removeCard(CreditCard card) async {
