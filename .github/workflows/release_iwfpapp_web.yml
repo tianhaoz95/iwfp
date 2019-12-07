@@ -26,11 +26,15 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
+      - name: clean up workspace
+        run: git clean -xffd
       - name: enable flutter web config
         run: flutter config --enable-web
       - name: build for web
         run: |
           cd ./iwfpapp
+          flutter pub get
+          flutter test
           flutter build web
       - name: install firebase cli
         run: sudo npm install -g firebase-tools

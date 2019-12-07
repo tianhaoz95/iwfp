@@ -26,11 +26,15 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
+      - name: clean up workspace
+        run: git clean -xffd
       - name: enable flutter web config
         run: flutter config --enable-web
       - name: build for web
         run: |
           cd ./iwfpapp
+          flutter pub get
+          flutter test
           flutter build web
       - name: upload web artifects
         uses: actions/upload-artifact@master
@@ -56,6 +60,8 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
+      - name: clean up workspace
+        run: git clean -xffd
       - name: install ruby packages
         run: bundle install
       - name: build apk package
@@ -66,6 +72,8 @@ jobs:
         run: |
           ./scripts/setenv.sh
           cd ./iwfpapp
+          flutter pub get
+          flutter test
           flutter build apk --split-per-abi
           flutter build appbundle
       - name: upload apk artifects
@@ -94,9 +102,13 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
+      - name: clean up workspace
+        run: git clean -xffd
       - name: build iOS package
         run: |
           cd ./iwfpapp
+          flutter pub get
+          flutter test
           flutter build ios --release --no-codesign
       - name: upload artifects
         uses: actions/upload-artifact@master
