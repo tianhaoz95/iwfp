@@ -21,7 +21,7 @@ class BasicCategory extends StatelessWidget {
                   child: Text('Select', style: TextStyle(color: Colors.white)),
                   key: Key(categoryMetaData.id + '_select_btn'),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/suggestion',
+                    Navigator.pushReplacementNamed(context, '/suggestion',
                         arguments: categoryMetaData);
                   },
                 ),

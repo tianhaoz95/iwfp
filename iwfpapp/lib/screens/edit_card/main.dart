@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/status.dart';
 import 'package:iwfpapp/widgets/promos/entry_view.dart';
@@ -90,7 +91,7 @@ class _EditCardScreen extends State<EditCardScreen> {
         color: Colors.amber[900],
         child: Text('Cancel', style: TextStyle(color: Colors.white)),
         onPressed: () {
-          Navigator.pushReplacementNamed(context, '/', arguments: card);
+          Navigator.pushReplacementNamed(context, '/', arguments: HomeTabId.CARD_MANAGEMENT);
         },
       ),
     ));

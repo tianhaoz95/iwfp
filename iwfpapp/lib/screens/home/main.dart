@@ -44,7 +44,7 @@ class _HomeScreen extends State<HomeScreen> {
   void initState() {
     super.initState();
     _children = [
-      ShopNow(),
+      ShopNow(widget.dataStore),
       ManageCard(widget.dataStore),
       UserSettings(widget.mode),
       Contrib(),

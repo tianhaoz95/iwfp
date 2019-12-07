@@ -22,7 +22,7 @@ void main() {
     await tester.tap(find.byKey(Key('chase_pay_select_btn')));
     await tester.pumpAndSettle(new Duration(seconds: 5));
     validateSuggestionScreenContent();
-    await tester.pageBack();
+    await tester.tap(find.byKey(Key('suggestion_back_btn')));
     await tester.pump(new Duration(seconds: 5));
     await tester.pump();
     await tester.pumpAndSettle();

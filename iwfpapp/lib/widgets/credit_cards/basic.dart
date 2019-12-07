@@ -27,7 +27,7 @@ class BasicCreditCard extends StatelessWidget {
           children: cardMetaData.promos.map((CashbackPromo promo) {
             String promoName = 'Unknown';
             if (promo.name != null) {
-              promoName = promo.name;
+              promoName = promo.category.name;
             }
             int promoRate = -1;
             if (promo.rate != null) {

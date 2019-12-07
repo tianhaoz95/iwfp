@@ -4,6 +4,8 @@ import 'package:iwfpapp/services/fetcher.dart';
 import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:iwfpapp/services/utilities/card_ranker.dart';
+import 'package:iwfpapp/services/utilities/category_counter.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 
 enum ResponseStatus {
@@ -42,6 +44,15 @@ class DataStore {
     removePromoCallable = CloudFunctions.instance.getHttpsCallable(
       functionName: 'removePromo',
     );
+  }
+
+  Future<List<ShopCategory>> getShopCategories() async {
+    CloudFuncResponse status = await fetchCards();
+    if (status.status == ResponseStatus.FAILURE) {
+      print('fetch card failed');
+      return [];
+    }
+    return getUniqueShoppingCategories(cards);
   }
 
   Future<CloudFuncResponse> removeCard(CreditCard card) async {
@@ -112,6 +123,16 @@ class DataStore {
       }
     }
     return card;
+  }
+
+  Future<List<CreditCard>> getRankedCards(ShopCategory category) async {
+    CloudFuncResponse status = await fetchCards();
+    if (status.status == ResponseStatus.FAILURE) {
+      print('fetch card failed');
+      return [];
+    }
+    rankCards(cards, category);
+    return cards;
   }
 
   Future<CloudFuncResponse> removePromo(RemovePromoMeta meta) async {

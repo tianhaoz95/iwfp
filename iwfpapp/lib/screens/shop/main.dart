@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/widgets/category/basic.dart';
 import 'package:iwfpapp/services/shop_category.dart';
-import 'package:iwfpapp/services/fetcher.dart';
 
 class ShopNow extends StatefulWidget {
-  const ShopNow({Key key}) : super(key: key);
-
+  final DataStore dataStore;
+  const ShopNow(this.dataStore, {Key key}) : super(key: key);
   @override
   _ShopNow createState() {
     return _ShopNow();
@@ -18,7 +18,7 @@ class _ShopNow extends State<ShopNow> {
   @override
   void initState() {
     super.initState();
-    categories = fetchAllShopCategories('tianhaoz95');
+    categories = widget.dataStore.getShopCategories();
   }
 
   @override

@@ -50,11 +50,14 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
+          flutter --version
       - name: enable flutter web
         run: flutter config --enable-web
       - name: build web
         run: |
+          git clean -xffd
           cd ./iwfpapp
+          flutter pub get
           flutter test
           flutter build web
   build-android:
@@ -73,14 +76,17 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
+          flutter --version
       - name: build apk package
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
+          git clean -xffd
           ./scripts/setenv.sh
           cd ./iwfpapp
+          flutter pub get
           flutter test
           flutter build apk --split-per-abi
           flutter build appbundle
@@ -100,8 +106,11 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
+          flutter --version
       - name: build ipa
         run: |
+          git clean -xffd
           cd ./iwfpapp
+          flutter pub get
           flutter test
           flutter build ios --release --no-codesign

@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         '/sign_in': (context) => LoginScreen(auth, mode, dataStore),
         '/sign_up': (context) => SignUpScreen(auth),
         '/placeholder': (context) => PlaceholderScreen(),
-        '/suggestion': (context) => SuggestionScreen(),
+        '/suggestion': (context) => SuggestionScreen(dataStore),
         '/add_card': (context) => AddCardScreen(dataStore),
         '/remove_card': (context) => RemoveCardScreen(dataStore),
         '/edit_card': (context) => EditCardScreen(),
