@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/screens/shop/main.dart';
 import 'package:iwfpapp/services/data_store.dart';
-import 'mock_data_store.dart';
-import 'screen_validator.dart';
+import 'mock_services/mock_data_store.dart';
+import 'validators/screen_validator.dart';
 
 void main() {
   testWidgets('test shop widget render no crash', (WidgetTester tester) async {

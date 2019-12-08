@@ -3,12 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/services/mode.dart';
 import 'package:iwfpapp/main.dart';
 import 'package:mockito/mockito.dart';
-import 'screen_validator.dart';
+import 'validators/screen_validator.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
-import 'mock_mode.dart';
-import 'mock_data_store.dart';
-import 'mock_auth.dart';
+import 'mock_services/mock_mode.dart';
+import 'mock_services/mock_data_store.dart';
+import 'mock_services/mock_auth.dart';
 
 void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {

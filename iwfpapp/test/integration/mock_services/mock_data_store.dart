@@ -4,7 +4,7 @@ import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
 import 'package:mockito/mockito.dart';
 
-import 'fixtures/mock_cards.dart';
+import '../fixtures/mock_cards.dart';
 
 class MockDataStore extends Mock implements DataStore {
   List<CreditCard> cards = [];
