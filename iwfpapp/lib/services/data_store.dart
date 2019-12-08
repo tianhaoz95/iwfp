@@ -72,6 +72,9 @@ class DataStore {
   }
 
   Future<CloudFuncResponse> fetchCards() async {
+    /// TODO(tianhaoz95): fetch cards should not refresh every
+    /// time. Instead, it should keep track of a dirty bit and
+    /// only refresh when needed.
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
@@ -117,6 +120,9 @@ class DataStore {
   }
 
   Future<CloudFuncResponse> addCardTemplate(CreditCard card) async {
+    /// TODO(tianhaoz95): this idealy should be a atmoic
+    /// operation to avoid incomplete failure. Server side
+    /// work is needed to make the change.
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
