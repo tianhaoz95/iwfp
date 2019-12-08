@@ -91,7 +91,8 @@ class _EditCardScreen extends State<EditCardScreen> {
         color: Colors.amber[900],
         child: Text('Cancel', style: TextStyle(color: Colors.white)),
         onPressed: () {
-          Navigator.pushReplacementNamed(context, '/', arguments: HomeTabId.CARD_MANAGEMENT);
+          Navigator.pushReplacementNamed(context, '/',
+              arguments: HomeTabId.CARD_MANAGEMENT);
         },
       ),
     ));

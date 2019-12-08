@@ -119,7 +119,22 @@ class DataStore {
   Future<CloudFuncResponse> addCardTemplate(CreditCard card) async {
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
-    return Future.delayed(Duration(seconds: 2), () => response);
+    try {
+      await addCard(card);
+    } catch (err) {
+      response.status = ResponseStatus.FAILURE;
+      return response;
+    }
+    try {
+      for (CashbackPromo promo in card.promos) {
+        await addPromo(card, promo);
+      }
+    } catch (err) {
+      response.status = ResponseStatus.FAILURE;
+      return response;
+    }
+    response.status = ResponseStatus.SUCCEESS;
+    return response;
   }
 
   CreditCard renewCard(CreditCard card) {

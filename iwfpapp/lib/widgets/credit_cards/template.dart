@@ -23,8 +23,14 @@ class TemplateCreditCard extends StatelessWidget {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
-    return BasicCreditCard(card, color, false, actions: renderTemplateActions(context),);
+    return BasicCreditCard(
+      card,
+      color,
+      false,
+      actions: renderTemplateActions(context),
+    );
   }
 }

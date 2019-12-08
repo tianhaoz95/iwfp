@@ -101,7 +101,8 @@ class _AddCardScreen extends State<AddCardScreen> {
             color: Colors.amber[900],
             child: Text('From Template', style: TextStyle(color: Colors.white)),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/add_card_from_template');
+              Navigator.pushReplacementNamed(
+                  context, '/add_card_from_template');
             },
           ),
           RaisedButton(

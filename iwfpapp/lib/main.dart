@@ -59,7 +59,8 @@ class MyApp extends StatelessWidget {
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(dataStore),
         '/add_card': (context) => AddCardScreen(dataStore),
-        '/add_card_from_template': (context) => AddCardFromTemplateScreen(dataStore),
+        '/add_card_from_template': (context) =>
+            AddCardFromTemplateScreen(dataStore),
         '/remove_card': (context) => RemoveCardScreen(dataStore),
         '/edit_card': (context) => EditCardScreen(),
         '/add_promo': (context) => AddPromoScreen(dataStore),
