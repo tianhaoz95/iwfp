@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:iwfpapp/screens/add_card_from_template/main.dart';
 import 'package:iwfpapp/screens/home/main.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/login/main.dart';
@@ -58,6 +59,8 @@ class MyApp extends StatelessWidget {
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(dataStore),
         '/add_card': (context) => AddCardScreen(dataStore),
+        '/add_card_from_template': (context) =>
+            AddCardFromTemplateScreen(dataStore),
         '/remove_card': (context) => RemoveCardScreen(dataStore),
         '/edit_card': (context) => EditCardScreen(),
         '/add_promo': (context) => AddPromoScreen(dataStore),

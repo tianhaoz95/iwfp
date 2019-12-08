@@ -58,6 +58,8 @@ class _HomeScreen extends State<HomeScreen> {
     super.didChangeDependencies();
     if (ModalRoute.of(context).settings.arguments != null) {
       currentTabId = ModalRoute.of(context).settings.arguments;
+    } else {
+      currentTabId = HomeTabId.SHOPPING;
     }
   }
 

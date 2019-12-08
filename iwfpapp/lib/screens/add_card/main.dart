@@ -88,7 +88,7 @@ class _AddCardScreen extends State<AddCardScreen> {
           AddCardNameInput(cardNameInputCtrl),
           SizedBox(height: 25.0),
           RaisedButton(
-            color: Colors.redAccent,
+            color: Colors.green,
             child: Text(
               'Add Card',
               style: TextStyle(color: Colors.white),
@@ -99,6 +99,14 @@ class _AddCardScreen extends State<AddCardScreen> {
           ),
           RaisedButton(
             color: Colors.amber[900],
+            child: Text('From Template', style: TextStyle(color: Colors.white)),
+            onPressed: () {
+              Navigator.pushReplacementNamed(
+                  context, '/add_card_from_template');
+            },
+          ),
+          RaisedButton(
+            color: Colors.redAccent,
             child: Text(
               'Cancel',
               style: TextStyle(color: Colors.white),
@@ -171,7 +179,7 @@ class _AddCardScreen extends State<AddCardScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
-        title: Text('Add card'),
+        title: Text('Add Card'),
       ),
       backgroundColor: Colors.cyan[100],
       body: renderBodyContent(context),
