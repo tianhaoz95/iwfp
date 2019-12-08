@@ -116,6 +116,12 @@ class DataStore {
     }
   }
 
+  Future<CloudFuncResponse> addCardTemplate(CreditCard card) async {
+    CloudFuncResponse response =
+        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+    return Future.delayed(Duration(seconds: 2), () => response);
+  }
+
   CreditCard renewCard(CreditCard card) {
     for (CreditCard searchCard in cards) {
       if (searchCard.id == card.id) {

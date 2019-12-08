@@ -7,7 +7,8 @@ class BasicCreditCard extends StatelessWidget {
   final CreditCard cardMetaData;
   final MaterialColor color;
   final bool edit;
-  const BasicCreditCard(this.cardMetaData, this.color, this.edit);
+  final Widget actions;
+  const BasicCreditCard(this.cardMetaData, this.color, this.edit, {this.actions});
   List<Widget> getCardContent(BuildContext context) {
     String cardName = 'Unknown';
     if (cardMetaData.name != null) {
@@ -44,6 +45,9 @@ class BasicCreditCard extends StatelessWidget {
     Widget editContent = getEditContent(context);
     if (editContent != null) {
       content.add(editContent);
+    }
+    if (actions != null) {
+      content.add(actions);
     }
     return content;
   }
