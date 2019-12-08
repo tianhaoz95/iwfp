@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/credit_card.dart';
+import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/status.dart';
 import 'package:iwfpapp/services/utilities/card_template.dart';
 import 'package:iwfpapp/widgets/credit_cards/template.dart';
 
 class AddCardFromTemplateScreen extends StatefulWidget {
-  const AddCardFromTemplateScreen({Key key}) : super(key: key);
+  final DataStore dataStore;
+  const AddCardFromTemplateScreen(this.dataStore, {Key key}) : super(key: key);
   @override
   _AddCardFromTemplateScreen createState() {
     return _AddCardFromTemplateScreen();
