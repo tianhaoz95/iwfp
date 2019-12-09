@@ -129,6 +129,7 @@ class _LoginScreen extends State<LoginScreen> {
           SizedBox(height: 25.0),
           TextField(
               controller: emailInputController,
+              key: Key('sign_in_email_input'),
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   hintText: 'email',
@@ -138,6 +139,7 @@ class _LoginScreen extends State<LoginScreen> {
           TextField(
               controller: pwdInputController,
               obscureText: true,
+              key: Key('sign_in_password_input'),
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   hintText: 'password',
@@ -148,6 +150,7 @@ class _LoginScreen extends State<LoginScreen> {
             color: Colors.blue[100],
             child: RaisedButton(
               color: Colors.green,
+              key: Key('email_sign_in_btn'),
               child: Text(
                 'Sign In with Email',
                 style: TextStyle(color: Colors.white),
