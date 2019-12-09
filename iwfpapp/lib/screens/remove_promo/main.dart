@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/data_store.dart';
@@ -6,8 +7,11 @@ import 'package:iwfpapp/services/status.dart';
 
 class RemovePromoScreen extends StatefulWidget {
   final DataStore dataStore;
+  final RemovePromoMeta defaultRemovePromoMeta;
   @override
-  const RemovePromoScreen(this.dataStore, {Key key}) : super(key: key);
+  const RemovePromoScreen(this.dataStore,
+      {Key key, this.defaultRemovePromoMeta})
+      : super(key: key);
   @override
   _RemovePromoScreen createState() {
     return _RemovePromoScreen();
@@ -23,6 +27,10 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
     super.didChangeDependencies();
     if (ModalRoute.of(context).settings.arguments != null) {
       removePromoMeta = ModalRoute.of(context).settings.arguments;
+    } else {
+      if (widget.defaultRemovePromoMeta != null) {
+        removePromoMeta = widget.defaultRemovePromoMeta;
+      }
     }
   }
 
