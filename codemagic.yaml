@@ -13,3 +13,4 @@ workflows:
         cd ./iwfpapp
         flutter packages pub get
         flutter test
+        flutter drive ./test_driver/app.dart
