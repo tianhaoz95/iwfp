@@ -5,12 +5,12 @@ import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/mode.dart';
 import 'package:iwfpapp/screens/home/main.dart';
 import 'package:mockito/mockito.dart';
-import 'mock_auth.dart';
-import 'mock_mode.dart';
-import 'mock_data_store.dart';
+import 'mock_services/mock_auth.dart';
+import 'mock_services/mock_mode.dart';
+import 'mock_services/mock_data_store.dart';
 
 void main() {
-  testWidgets('test app render no crash', (WidgetTester tester) async {
+  testWidgets('test home screen render no crash', (WidgetTester tester) async {
     RunningMode mockMode = MockRunningMode();
     IwfpappAuth mockAuth = MockIwfpappAuth();
     DataStore mockDataStore = MockDataStore();

@@ -8,7 +8,9 @@ import 'package:iwfpapp/services/status.dart';
 
 class AddPromoScreen extends StatefulWidget {
   final DataStore dataStore;
-  const AddPromoScreen(this.dataStore, {Key key}) : super(key: key);
+  final CreditCard defaultCard;
+  const AddPromoScreen(this.dataStore, {Key key, this.defaultCard})
+      : super(key: key);
   @override
   _AddPromoScreen createState() {
     return _AddPromoScreen();
@@ -33,6 +35,10 @@ class _AddPromoScreen extends State<AddPromoScreen> {
     super.didChangeDependencies();
     if (ModalRoute.of(context).settings.arguments != null) {
       card = ModalRoute.of(context).settings.arguments;
+    } else {
+      if (widget.defaultCard != null) {
+        card = widget.defaultCard;
+      }
     }
   }
 
