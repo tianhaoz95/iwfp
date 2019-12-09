@@ -8,8 +8,8 @@ workflows:
         - pattern: master
           include: true
           source: true
-      scripts:
-        - |
-          cd ./iwfpapp
-          flutter packages pub get
-          flutter test
+    scripts:
+      - |
+        cd ./iwfpapp
+        flutter packages pub get
+        flutter test
