@@ -7,11 +7,13 @@ void main() {
     // First, define the Finders and use them to locate widgets from the
     // test suite. Note: the Strings provided to the `byValueKey` method must
     // be the same as the Strings we used for the Keys in step 1.
+    final signInEmailInput = find.byValueKey('sign_in_email_input');
+    final signInPasswordInput = find.byValueKey('sign_in_password_input');
     final shopNavBtn = find.byValueKey('shop_nav_btn');
     final cardsNavBtn = find.byValueKey('cards_nav_btn');
     final userNavBtn = find.byValueKey('user_nav_btn');
     final contribNavBtn = find.byValueKey('contrib_nav_btn');
-    final guestLoginBtn = find.byValueKey('guest_login_btn');
+    final emailSignInBtn = find.byValueKey('email_sign_in_btn');
 
     FlutterDriver driver;
 
@@ -27,8 +29,32 @@ void main() {
       }
     });
 
+    Future<bool> isSignedIn() async {
+      try {
+        await driver.waitFor(find.text('Shop Now!'),timeout: Duration(seconds: 3));
+        return true;
+      } catch (err) {
+        return false;
+      }
+    }
+
     test('smoke test', () async {
-      await driver.tap(guestLoginBtn);
+      bool signedIn = await isSignedIn();
+      if (signedIn) {
+        print('Signed in');
+        await driver.tap(find.byValueKey('user_nav_btn'));
+        await driver.waitFor(find.text('Go to Authentication'));
+        await driver.tap(find.text('Go to Authentication'));
+        await driver.waitFor(find.text('Logout'));
+        await driver.tap(find.text('Logout'));
+        await driver.waitFor(find.text('Sign In with Email'));
+      }
+      await driver.tap(signInEmailInput);
+      await driver.enterText('tianhaoz@umich.edu');
+      await driver.tap(signInPasswordInput);
+      await driver.enterText('Iwfpapp#950903');
+      await driver.tap(emailSignInBtn);
+      await driver.waitFor(find.text('Shop Now!'));
       await driver.tap(cardsNavBtn);
       await driver.tap(userNavBtn);
       await driver.tap(contribNavBtn);
