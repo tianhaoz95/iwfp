@@ -1,0 +1,15 @@
+workflows:
+  automated-tests:
+    name: Automated Flutter Tests
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: master
+          include: true
+          source: true
+      scripts:
+        - |
+          cd ./iwfpapp
+          flutter packages pub get
+          flutter test
