@@ -5,6 +5,7 @@
 [![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release%20iwfpapi/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 [![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release%20iwfpapp%20android/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 [![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release%20iwfpapp%20web/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
+[![Codemagic build status](https://api.codemagic.io/apps/5decb1aedf9d1020e4329787/5decb1aedf9d1020e4329786/status_badge.svg)](https://codemagic.io/apps/5decb1aedf9d1020e4329787/5decb1aedf9d1020e4329786/latest_build)
 
 > May the ~~force~~ **five percent** be with you.
 
