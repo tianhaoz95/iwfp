@@ -2,6 +2,8 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
+import 'utilities/screenshot.dart';
+
 void main() {
   group('iwfpapp', () {
     // First, define the Finders and use them to locate widgets from the
@@ -39,9 +41,9 @@ void main() {
     }
 
     test('smoke test', () async {
+      await prepareScreenshotArea();
       bool signedIn = await isSignedIn();
       if (signedIn) {
-        print('Signed in');
         await driver.tap(find.byValueKey('user_nav_btn'));
         await driver.waitFor(find.text('Go to Authentication'));
         await driver.tap(find.text('Go to Authentication'));
@@ -49,12 +51,15 @@ void main() {
         await driver.tap(find.text('Logout'));
         await driver.waitFor(find.text('Sign In with Email'));
       }
+      await takeNamedScreenshot(driver, 'sign_in_screen_pending');
       await driver.tap(signInEmailInput);
       await driver.enterText('tianhaoz@umich.edu');
       await driver.tap(signInPasswordInput);
       await driver.enterText('Iwfpapp#950903');
+      await takeNamedScreenshot(driver, 'sign_in_screen_presubmit');
       await driver.tap(emailSignInBtn);
       await driver.waitFor(find.text('Shop Now!'));
+      await takeNamedScreenshot(driver, 'home_screen');
       await driver.tap(cardsNavBtn);
       await driver.tap(userNavBtn);
       await driver.tap(contribNavBtn);

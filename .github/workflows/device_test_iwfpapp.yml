@@ -64,3 +64,8 @@ jobs:
           flutter pub get
           flutter test
           flutter drive --target=test_driver/app.dart
+      - name: upload screenshot
+        uses: actions/upload-artifact@master
+        with:
+          name: screenshot_${{ matrix.device }}
+          path: /tmp/iwfpapp_screenshot
