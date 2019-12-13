@@ -52,7 +52,7 @@ class _AddCardScreen extends State<AddCardScreen> {
     String cardId = cardIdInputCtrl.text;
     String cardName = cardNameInputCtrl.text;
     ValidationResponse validationResponse = isValidCardInfo(cardName, cardId);
-    if (validationResponse.valid) {
+    if (!validationResponse.valid) {
       await promptWarning(context);
       return;
     }
