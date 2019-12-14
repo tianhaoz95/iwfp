@@ -39,13 +39,12 @@ class _AddCardScreen extends State<AddCardScreen> {
 
   Future<void> promptWarning(BuildContext context) async {
     await showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          title: Text('error'),
-        );
-      }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: Text('error'),
+          );
+        });
   }
 
   Future<void> handleAddCard() async {
