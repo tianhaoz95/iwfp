@@ -72,9 +72,6 @@ class _AddPromoScreen extends State<AddPromoScreen> {
   }
 
   Future<void> handleAddPromo() async {
-    setState(() {
-      status = SubmitScreenStatus.LOADING;
-    });
     String promoName = promoNameCtrl.text;
     String promoId = promoIdCtrl.text;
     String promoType = promoTypeCtrl.text;
@@ -98,6 +95,9 @@ class _AddPromoScreen extends State<AddPromoScreen> {
       await promptWarning(context, validationResponse.messages);
       return;
     }
+    setState(() {
+      status = SubmitScreenStatus.LOADING;
+    });
     int promoRate = int.parse(promoRateStr);
     CashbackPromo promo = CashbackPromo(
         promoName,
@@ -122,12 +122,6 @@ class _AddPromoScreen extends State<AddPromoScreen> {
         status = SubmitScreenStatus.UNKNOWN;
       });
     }
-  }
-
-  Widget render(BuildContext context) {
-    return Container(
-      child: Text('data'),
-    );
   }
 
   Widget renderPendingContent(BuildContext context) {
