@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/credit_card.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/services/status.dart';
+import 'package:iwfpapp/services/utilities/validators/promo_info_validator.dart';
 
 class AddPromoScreen extends StatefulWidget {
   final DataStore dataStore;
@@ -42,19 +44,61 @@ class _AddPromoScreen extends State<AddPromoScreen> {
     }
   }
 
+  Future<void> promptWarning(
+      BuildContext context, List<String> messages) async {
+    List<Widget> content = messages.map((String message) {
+      return Text(message);
+    }).toList();
+    await showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('error'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: content,
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Back'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   Future<void> handleAddPromo() async {
-    setState(() {
-      status = SubmitScreenStatus.LOADING;
-    });
     String promoName = promoNameCtrl.text;
     String promoId = promoIdCtrl.text;
     String promoType = promoTypeCtrl.text;
     String promoStart = promoStartCtrl.text;
     String promoEnd = promoEndCtrl.text;
     String promoRepeat = promoRepeatCtrl.text;
-    int promoRate = int.parse(promoRateCtrl.text);
+    String promoRateStr = promoRateCtrl.text;
     String promoCategoryName = promoCategoryNameCtrl.text;
     String promoCategoryId = promoCategoryIdCtrl.text;
+    ValidationResponse validationResponse = isValidPromoInfo(
+        promoName,
+        promoId,
+        promoType,
+        promoStart,
+        promoEnd,
+        promoRepeat,
+        promoRateStr,
+        promoCategoryName,
+        promoCategoryId);
+    if (!validationResponse.valid) {
+      await promptWarning(context, validationResponse.messages);
+      return;
+    }
+    setState(() {
+      status = SubmitScreenStatus.LOADING;
+    });
+    int promoRate = int.parse(promoRateStr);
     CashbackPromo promo = CashbackPromo(
         promoName,
         promoId,
@@ -78,12 +122,6 @@ class _AddPromoScreen extends State<AddPromoScreen> {
         status = SubmitScreenStatus.UNKNOWN;
       });
     }
-  }
-
-  Widget render(BuildContext context) {
-    return Container(
-      child: Text('data'),
-    );
   }
 
   Widget renderPendingContent(BuildContext context) {

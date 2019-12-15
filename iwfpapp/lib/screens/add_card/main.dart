@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
+import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/utilities/validators/card_info_validator.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
 import 'package:iwfpapp/services/status.dart';
@@ -35,9 +37,41 @@ class _AddCardScreen extends State<AddCardScreen> {
     }
   }
 
+  Future<void> promptWarning(
+      BuildContext context, List<String> messages) async {
+    List<Widget> content = messages.map((String message) {
+      return Text(message);
+    }).toList();
+    await showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('error'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: content,
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Back'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   Future<void> handleAddCard() async {
     String cardId = cardIdInputCtrl.text;
     String cardName = cardNameInputCtrl.text;
+    ValidationResponse validationResponse = isValidCardInfo(cardName, cardId);
+    if (!validationResponse.valid) {
+      await promptWarning(context, validationResponse.messages);
+      return;
+    }
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
