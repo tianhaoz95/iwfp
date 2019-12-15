@@ -1,5 +1,7 @@
 import 'package:iwfpapp/services/config/consts/error_messages.dart';
+import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
+import 'package:iwfpapp/services/utilities/converters/str2promo_type.dart';
 import 'package:iwfpapp/services/utilities/validators/category_info_validator.dart';
 import 'package:iwfpapp/services/utilities/validators/response_merger.dart';
 
@@ -25,11 +27,16 @@ ValidationResponse isValidPromoName(String promoName) {
   return response;
 }
 
-ValidationResponse isValidPromoType(String promoType) {
+ValidationResponse isValidPromoType(String promoTypeStr) {
   ValidationResponse response = ValidationResponse(valid: true);
-  if (promoType.isEmpty) {
+  if (promoTypeStr.isEmpty) {
     response.valid = false;
     response.messages.add(promoTypeEmptyErrorMessage);
+  }
+  CashbackPromoType promoType = str2promoType(promoTypeStr);
+  if (promoType == CashbackPromoType.UNKNOWN) {
+    response.valid = false;
+    response.messages.add(promoTypeUnknownErrorMessage);
   }
   return response;
 }
