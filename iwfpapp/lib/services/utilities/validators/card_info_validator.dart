@@ -4,6 +4,10 @@ import 'package:iwfpapp/services/utilities/validators/response_merger.dart';
 
 ValidationResponse isValidCardId(String cardId) {
   ValidationResponse response = ValidationResponse(valid: true);
+  if (cardId.isEmpty) {
+    response.valid = false;
+    response.messages.add(cardIdEmptyErrorMessage);
+  }
   if (cardId.contains(' ')) {
     response.valid = false;
     response.messages.add(cardIdHasSpaceErrorMessage);
@@ -13,6 +17,10 @@ ValidationResponse isValidCardId(String cardId) {
 
 ValidationResponse isValidCardName(String cardName) {
   ValidationResponse response = ValidationResponse(valid: true);
+  if (cardName.isEmpty) {
+    response.valid = false;
+    response.messages.add(cardNameEmptyErrorMessage);
+  }
   return response;
 }
 

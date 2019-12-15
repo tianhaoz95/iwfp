@@ -15,3 +15,5 @@ final String categoryIdEmptyErrorMessage = 'Category ID cannot be empty';
 
 /// Error message about credit card information validation
 final String cardIdHasSpaceErrorMessage = 'Credit card ID cannot contain space.';
+final String cardIdEmptyErrorMessage = 'Credit card ID cannot be empty';
+final String cardNameEmptyErrorMessage = 'Credit card Name cannot be empty';
