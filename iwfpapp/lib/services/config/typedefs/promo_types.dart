@@ -16,5 +16,8 @@ enum CashbackPromoType {
   /// For example, Walmart, Target,
   /// BestBuy, etc
   BRAND,
+  /// UNKNOWN is reserved for undefined
+  /// types, mostly error
+  UNKNOWN,
 }
 
