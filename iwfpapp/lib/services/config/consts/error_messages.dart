@@ -3,6 +3,7 @@ final String promoIdHasSpaceErrorMessage = 'Promotion ID cannot contain space.';
 final String promoIdEmptyErrorMessage = 'Promotion ID cannot be empty.';
 final String promoNameEmptyErrorMessage = 'Promotion name cannot be empty.';
 final String promoTypeEmptyErrorMessage = 'Promotion type cannot be empty.';
+final String promoTypeUnknownErrorMessage = 'Promotion type is unknwon.';
 final String promoStartEmptyErrorMessage =
     'Promotion start date cannot be empty.';
 final String promoEndEmptyErrorMessage = 'Promotion end date cannot be empty.';
