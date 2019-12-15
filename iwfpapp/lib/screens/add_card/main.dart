@@ -37,12 +37,29 @@ class _AddCardScreen extends State<AddCardScreen> {
     }
   }
 
-  Future<void> promptWarning(BuildContext context) async {
+  Future<void> promptWarning(
+      BuildContext context, List<String> messages) async {
+    List<Widget> content = messages.map((String message) {
+      return Text(message);
+    }).toList();
     await showDialog<void>(
         context: context,
         builder: (BuildContext context) {
-          return SimpleDialog(
+          return AlertDialog(
             title: Text('error'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: content,
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Back'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
           );
         });
   }
@@ -52,7 +69,7 @@ class _AddCardScreen extends State<AddCardScreen> {
     String cardName = cardNameInputCtrl.text;
     ValidationResponse validationResponse = isValidCardInfo(cardName, cardId);
     if (!validationResponse.valid) {
-      await promptWarning(context);
+      await promptWarning(context, validationResponse.messages);
       return;
     }
     setState(() {

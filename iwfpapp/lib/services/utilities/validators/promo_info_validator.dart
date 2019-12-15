@@ -1,4 +1,14 @@
+import 'package:iwfpapp/services/config/consts/error_messages.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
+
+ValidationResponse isValidPromoId(String promoId) {
+  ValidationResponse response = ValidationResponse(valid: true);
+  if (promoId.contains(' ')) {
+    response.valid = false;
+    response.messages.add(promoIdHasSpaceErrorMessage);
+  }
+  return response;
+}
 
 ValidationResponse isValidPromoInfo(
     String name,
