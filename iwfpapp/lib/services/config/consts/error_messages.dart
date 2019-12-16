@@ -9,6 +9,7 @@ final String promoStartEmptyErrorMessage =
 final String promoEndEmptyErrorMessage = 'Promotion end date cannot be empty.';
 final String promoRepeatEmptyErrorMessage =
     'Promotion repeat pattern cannot be empty.';
+final String promoRepeatUnknownErrorMessage = 'Promotion repeat pattern is unknown';
 final String promoRateNotIntErrorMessage =
     'Promotion rate should be an integer.';
 final String promoRateEmptyErrorMessage = 'Promotion rate cannot be empty.';

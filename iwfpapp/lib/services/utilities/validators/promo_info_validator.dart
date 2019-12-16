@@ -1,6 +1,8 @@
 import 'package:iwfpapp/services/config/consts/error_messages.dart';
 import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
+import 'package:iwfpapp/services/config/typedefs/repeat_pattern.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
+import 'package:iwfpapp/services/utilities/converters/str2promo_repeat.dart';
 import 'package:iwfpapp/services/utilities/converters/str2promo_type.dart';
 import 'package:iwfpapp/services/utilities/validators/category_info_validator.dart';
 import 'package:iwfpapp/services/utilities/validators/response_merger.dart';
@@ -64,6 +66,11 @@ ValidationResponse isValidPromoRepeat(String promoRepeat) {
   if (promoRepeat.isEmpty) {
     response.valid = false;
     response.messages.add(promoRepeatEmptyErrorMessage);
+  }
+  CashbackPromoRepeatPattern repeat = str2promoRepeat(promoRepeat);
+  if (repeat == CashbackPromoRepeatPattern.UNKNOWN) {
+    response.valid = false;
+    response.messages.add(promoRepeatUnknownErrorMessage);
   }
   return response;
 }
