@@ -2,6 +2,7 @@ import 'package:iwfpapp/services/config/consts/error_messages.dart';
 import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
 import 'package:iwfpapp/services/config/typedefs/repeat_pattern.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
+import 'package:iwfpapp/services/utilities/converters/str2date_of_current_year.dart';
 import 'package:iwfpapp/services/utilities/converters/str2promo_repeat.dart';
 import 'package:iwfpapp/services/utilities/converters/str2promo_type.dart';
 import 'package:iwfpapp/services/utilities/validators/category_info_validator.dart';
@@ -61,16 +62,62 @@ ValidationResponse isValidPromoEnd(String promoEnd) {
   return response;
 }
 
-ValidationResponse isValidPromoRepeat(String promoRepeat) {
+ValidationResponse isValidConstRepeatStartEnd(String start, String end) {
   ValidationResponse response = ValidationResponse(valid: true);
+  if (start != 'na') {
+    response.valid = false;
+    response.messages.add(promoConstStartNotNaErrorMessage);
+  }
+  if (end != 'na') {
+    response.valid = false;
+    response.messages.add(promoConstEndNotNaErrorMessage);
+  }
+  return response;
+}
+
+bool isValidMonthDateFormat(String dateStr) {
+  RegExp dateMatcher = RegExp(r"^[0-9]{2}/[0-9]{2}$");
+  return dateStr.contains(dateMatcher);
+}
+
+ValidationResponse isValidAnnualRepeatStartEnd(String start, String end) {
+  ValidationResponse response = ValidationResponse(valid: true);
+  if (isValidMonthDateFormat(start) && isValidMonthDateFormat(end)) {
+    DateTime startDate = str2dateOfCurrentYear(start);
+    DateTime endDate = str2dateOfCurrentYear(end);
+    if (endDate.isBefore(startDate)) {
+      response.valid = false;
+      response.messages.add(promoAnnualEndBeforeStartErrorMessage);
+    }
+  } else {
+    response.valid = false;
+    response.messages.add(promoAnnualStartEndIncorrectFormatErrorMessage);
+  }
+  return response;
+}
+
+ValidationResponse isValidPromoRepeat(
+    String promoRepeat, String promoStart, String promoEnd) {
+  ValidationResponse response = ValidationResponse(valid: true);
+  response = mergeValidationResponses(
+      [response, isValidPromoStart(promoStart), isValidPromoEnd(promoEnd)]);
   if (promoRepeat.isEmpty) {
     response.valid = false;
     response.messages.add(promoRepeatEmptyErrorMessage);
   }
   CashbackPromoRepeatPattern repeat = str2promoRepeat(promoRepeat);
-  if (repeat == CashbackPromoRepeatPattern.UNKNOWN) {
-    response.valid = false;
-    response.messages.add(promoRepeatUnknownErrorMessage);
+  switch (repeat) {
+    case CashbackPromoRepeatPattern.CONST:
+      response = mergeValidationResponses(
+          [response, isValidConstRepeatStartEnd(promoStart, promoEnd)]);
+      break;
+    case CashbackPromoRepeatPattern.ANNUAL:
+      response = mergeValidationResponses(
+          [response, isValidAnnualRepeatStartEnd(promoStart, promoEnd)]);
+      break;
+    default:
+      response.valid = false;
+      response.messages.add(promoRepeatUnknownErrorMessage);
   }
   return response;
 }
@@ -104,9 +151,7 @@ ValidationResponse isValidPromoInfo(
     isValidPromoId(id),
     isValidPromoName(name),
     isValidPromoType(type),
-    isValidPromoStart(start),
-    isValidPromoEnd(end),
-    isValidPromoRepeat(repeat),
+    isValidPromoRepeat(repeat, start, end),
     isValidPromoRate(rate),
     isValidCategoryInfo(categoryName, categoryId),
   ]);

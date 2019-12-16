@@ -6,7 +6,15 @@ final String promoTypeEmptyErrorMessage = 'Promotion type cannot be empty.';
 final String promoTypeUnknownErrorMessage = 'Promotion type is unknwon.';
 final String promoStartEmptyErrorMessage =
     'Promotion start date cannot be empty.';
+final String promoConstStartNotNaErrorMessage =
+    'Promotion end date should be na if repeat type is const';
 final String promoEndEmptyErrorMessage = 'Promotion end date cannot be empty.';
+final String promoConstEndNotNaErrorMessage =
+    'Promotion end date should be na if repeat type is const';
+final String promoAnnualStartEndIncorrectFormatErrorMessage =
+    'Promotion start/end date not correctly formated. Should be MM/DD';
+final String promoAnnualEndBeforeStartErrorMessage =
+    'Promotion should not back date (end date is before start date) for annual repeat pattern.';
 final String promoRepeatEmptyErrorMessage =
     'Promotion repeat pattern cannot be empty.';
 final String promoRepeatUnknownErrorMessage =
