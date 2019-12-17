@@ -1,4 +1,4 @@
-import 'package:iwfpapp/services/shop_category.dart';
+import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 
 class CashbackPromo {
   final String name;

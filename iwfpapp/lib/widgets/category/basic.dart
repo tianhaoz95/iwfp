@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:iwfpapp/services/shop_category.dart';
+import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 
 class BasicCategory extends StatelessWidget {
   final ShopCategory categoryMetaData;

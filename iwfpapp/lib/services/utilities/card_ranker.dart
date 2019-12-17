@@ -1,7 +1,7 @@
 import 'dart:math';
-import 'package:iwfpapp/services/cashback_promo.dart';
-import 'package:iwfpapp/services/credit_card.dart';
-import 'package:iwfpapp/services/shop_category.dart';
+import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/utilities/validators/card_expiration_validator.dart';
 
 int getMaxRate(CreditCard card, ShopCategory category) {

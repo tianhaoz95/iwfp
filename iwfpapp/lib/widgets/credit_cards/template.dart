@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/widgets/credit_cards/basic.dart';
 
 typedef void OnPressedAddTemplate();

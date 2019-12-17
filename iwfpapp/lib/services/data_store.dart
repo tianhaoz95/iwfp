@@ -1,8 +1,8 @@
-import 'package:iwfpapp/services/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/fetcher.dart';
-import 'package:iwfpapp/services/shop_category.dart';
-import 'package:iwfpapp/services/credit_card.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:iwfpapp/services/utilities/card_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';

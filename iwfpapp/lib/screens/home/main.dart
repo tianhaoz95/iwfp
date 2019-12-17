@@ -8,9 +8,9 @@ import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
+import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/mode.dart';
-import 'package:iwfpapp/services/status.dart';
 
 const List<HomeTab> allDests = <HomeTab>[
   HomeTab('Shop Now!', Icons.shopping_cart, Colors.teal, Key('shop_nav_btn'),

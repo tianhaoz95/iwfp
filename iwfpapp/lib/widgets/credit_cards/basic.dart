@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:iwfpapp/services/credit_card.dart';
-import 'package:iwfpapp/services/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 
 class BasicCreditCard extends StatelessWidget {
   final CreditCard cardMetaData;

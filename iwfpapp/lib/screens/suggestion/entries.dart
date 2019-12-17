@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/data_store.dart';
-// import 'package:iwfpapp/services/ranker.dart';
-import 'package:iwfpapp/services/shop_category.dart';
 import 'package:iwfpapp/widgets/credit_cards/basic.dart';
 
 class SuggestionEntries extends StatefulWidget {
