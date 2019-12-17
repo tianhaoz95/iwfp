@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/screens/remove_promo/main.dart';
-import 'package:iwfpapp/services/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
-import 'package:iwfpapp/services/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/data_store.dart';
-import 'package:iwfpapp/services/shop_category.dart';
 
 import 'mock_services/mock_data_store.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/widgets/category/basic.dart';
-import 'package:iwfpapp/services/shop_category.dart';
 
 class ShopNow extends StatefulWidget {
   final DataStore dataStore;

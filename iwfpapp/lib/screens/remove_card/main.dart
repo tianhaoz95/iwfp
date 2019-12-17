@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/data_store.dart';
-import 'package:iwfpapp/services/status.dart';
 
 class RemoveCardScreen extends StatefulWidget {
   final DataStore dataStore;
