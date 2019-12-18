@@ -8,16 +8,13 @@ on:
       - "release/*"
     paths:
       - "iwfpapp/**"
-      - ".github/workflows/**"
+      - ".github/workflows/checkin_iwfpapp.yml"
   pull_request:
     branches:
       - "master"
       - "dev/*"
       - "feature/*"
       - "release/*"
-    paths:
-      - "iwfpapp/**"
-      - ".github/workflows/**"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -34,8 +31,14 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.9.1+hotfix.2'
+          flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: clean up workspace
+        run: git clean -xffd
       - name: install iwfpapp flutter dependencies
         run: |
           cd ./iwfpapp
