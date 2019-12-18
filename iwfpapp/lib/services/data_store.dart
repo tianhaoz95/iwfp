@@ -96,7 +96,7 @@ class DataStore {
     CloudFuncResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
       print('fetch card failed');
-      return fetchAllCreditCards('tianhaoz95');
+      return [];
     }
     return cards;
   }
