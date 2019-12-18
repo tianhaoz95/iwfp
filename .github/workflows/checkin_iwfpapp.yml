@@ -34,8 +34,12 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.9.1+hotfix.2'
+          flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
+      - name: upgrade flutter
+        run: |
+          flutter upgrade
+          flutter --version
       - name: install iwfpapp flutter dependencies
         run: |
           cd ./iwfpapp
