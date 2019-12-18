@@ -77,6 +77,8 @@ jobs:
           flutter channel master
           flutter upgrade
           flutter --version
+      - name: enable flutter web
+        run: flutter config --enable-web
       - name: build apk package
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
@@ -107,6 +109,8 @@ jobs:
           flutter channel master
           flutter upgrade
           flutter --version
+      - name: enable flutter web
+        run: flutter config --enable-web
       - name: build ipa
         run: |
           git clean -xffd
