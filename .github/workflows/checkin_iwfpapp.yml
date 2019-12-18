@@ -6,18 +6,14 @@ on:
       - "dev/*"
       - "feature/*"
       - "release/*"
+      - "fix/*"
+      - "refactor/*"
     paths:
       - "iwfpapp/**"
-      - ".github/workflows/**"
+      - ".github/workflows/checkin_iwfpapp.yml"
   pull_request:
     branches:
       - "master"
-      - "dev/*"
-      - "feature/*"
-      - "release/*"
-    paths:
-      - "iwfpapp/**"
-      - ".github/workflows/**"
   schedule:
     - cron: 0 2 * * *
 jobs:
