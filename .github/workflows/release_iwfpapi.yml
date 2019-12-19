@@ -3,10 +3,10 @@ on:
   push:
     branches:
       - "master"
-      - "actions/release-iwfpapi-*"
+      - "actions/release-iwfpapi__*"
     paths:
       - "iwfpapi/**"
-      - ".github/workflows/**"
+      - ".github/workflows/release_iwfpapi.yml"
 jobs:
   release-api:
     name: release iwfp api services to firebase cloud functions
