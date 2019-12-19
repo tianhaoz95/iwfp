@@ -112,6 +112,5 @@ jobs:
           git clean -xffd
           cd ./iwfpapp
           flutter pub get
-          flutter pub cache repair
           flutter test
           flutter build ios --release --no-codesign
