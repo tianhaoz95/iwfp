@@ -8,6 +8,8 @@
 
 > May the ~~force~~ **five percent** be with you.
 
+iwfp (I want five percent) is a utility to help everyone who uses credit cards maximize cash back rewards.
+
 ## Contribute
 
 Contribution of any kind (code, docs, suggestions, etc) is appreciated! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
