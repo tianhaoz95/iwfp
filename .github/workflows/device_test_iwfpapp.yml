@@ -6,15 +6,14 @@ on:
       - "dev/*"
       - "feature/*"
       - "release/*"
+      - "fix/*"
+      - "refactor/*"
     paths:
       - "iwfpapp/**"
       - ".github/workflows/device_test_iwfpapp.yml"
   pull_request:
     branches:
       - "master"
-      - "dev/*"
-      - "feature/*"
-      - "release/*"
   schedule:
     - cron: 0 2 * * *
 jobs:

@@ -4,8 +4,8 @@ on:
     branches:
       - "master"
     paths:
-      - "iwfpapp/**"
-      - ".github/workflows/**"
+      - "iwfpapp/pubspec.yaml"
+      - ".github/workflows/package.yml"
 jobs:
   package-web:
     name: pakcage web app

@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - "master"
-      - "release_iwfpapp_android/*"
+      - "actions/release_iwfpapp_android__*"
     paths:
       - "iwfpapp/pubspec.yaml"
       - ".github/workflows/release_iwfpapp_android.yml"

@@ -3,12 +3,12 @@ on:
   push:
     branches: 
       - "master"
-      - "actions/release-docs-*"
+      - "actions/release-docs__*"
     paths:
       - "website/**"
       - "docs/**"
       - "iwfpapp/**"
-      - ".github/workflows/**"
+      - ".github/workflows/release_docs.yml"
 jobs:
   release-docs:
     name: generate documentation
