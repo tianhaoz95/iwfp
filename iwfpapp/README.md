@@ -1,16 +1,32 @@
 # iwfpapp
 
-A new Flutter project.
+The client app(s) for iwfp project. The app is developed in [Flutter](https://flutter.dev/), so it should support all the platforms Flutter supports.
 
-## Getting Started
+For documentation, please head over to the [doc](http://tianhaoz.com/iwfp).
 
-This project is a starting point for a Flutter application.
+## Quick Commands Lookup
 
-A few resources to get you started if this is your first Flutter project:
+To format code:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```bash
+flutter format .
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To lint code:
+
+```bash
+flutter analyze
+```
+
+To run unit tests:
+
+```bash
+flutter test
+```
+
+To run integration tests:
+
+```bash
+# make sure there is a device/emulator connected
+flutter drive --target=test_driver/app.dart
+```
