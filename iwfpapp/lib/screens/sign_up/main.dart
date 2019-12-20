@@ -80,6 +80,7 @@ class _SignUpScreen extends State<SignUpScreen> {
           SizedBox(
             height: 5.0,
           ),
+          /// TODO(tianhaoz95): pwd should be masked
           Container(
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: TextField(
@@ -93,6 +94,7 @@ class _SignUpScreen extends State<SignUpScreen> {
           SizedBox(
             height: 5.0,
           ),
+          /// TODO(tianhaoz95): pwd confirmation should be masked
           Container(
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: TextField(
