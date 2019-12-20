@@ -9,20 +9,11 @@
 // site configuration options.
 
 // List of projects/orgs using your project for the users page.
-const users = [
-  {
-    caption: 'User1',
-    // You will need to prepend the image path with your baseUrl
-    // if it is not '/', like: '/test-site/img/image.jpg'.
-    image: '/img/undraw_open_source.svg',
-    infoLink: 'https://www.facebook.com',
-    pinned: true,
-  },
-];
+const users = []
 
 const siteConfig = {
   title: 'iwfp', // Title for your website.
-  tagline: 'An app to keep you at maximum credit card cashback possible',
+  tagline: 'An utility app to keep you at maximum credit card cashback reward.',
   url: 'https://tianhaoz.com', // Your website URL
   baseUrl: '/iwfp/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
@@ -38,24 +29,23 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'doc1', label: 'Docs'},
-    {doc: 'doc4', label: 'API'},
-    {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    { doc: 'project-structure-doc', label: 'Docs' },
+    { page: 'help', label: 'Help' },
+    { blog: true, label: 'Blog' }
   ],
 
   // If you have users set above, you add it here:
   users,
 
   /* path to images for header/footer */
-  headerIcon: 'img/favicon.ico',
-  footerIcon: 'img/favicon.ico',
-  favicon: 'img/favicon.ico',
+  headerIcon: 'img/web_logo.png',
+  footerIcon: 'img/web_logo.png',
+  favicon: 'img/web_logo.png',
 
   /* Colors for website */
   colors: {
     primaryColor: '#2b4a72',
-    secondaryColor: '#1e334f',
+    secondaryColor: '#1e334f'
   },
 
   /* Custom fonts for website */
@@ -73,11 +63,11 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} Your Name or Your Company Name`,
+  copyright: `Copyright © ${new Date().getFullYear()} Tianhao Zhou`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
-    theme: 'default',
+    theme: 'default'
   },
 
   // Add custom scripts here that would be placed in <script> tags.
@@ -107,8 +97,8 @@ const siteConfig = {
   //   repoUrl: 'https://github.com/facebook/test-site',
 
   separateCss: [
-    'static/reports',
+    'static/reports'
   ]
-};
+}
 
-module.exports = siteConfig;
+module.exports = siteConfig
