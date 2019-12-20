@@ -1,17 +1,24 @@
-# TODO(tianhaoz95): add config
-
 version: 1
 update_configs:
-  # Update your Gemfile (& lockfiles) as soon as
-  # new versions are published to the RubyGems registry
   - package_manager: "ruby:bundler"
     directory: "/"
     update_schedule: "live"
-
-    # Apply default reviewer and label to created
-    # pull requests
     default_reviewers:
-      - "github-username"
+      - "tianhaoz95"
     default_labels:
-      - "label-name"
+      - "gem dependency update"
+  - package_manager: "javascript"
+    directory: "/website"
+    update_schedule: "live"
+    default_reviewers:
+      - "tianhaoz95"
+    default_labels:
+      - "docs dependency update"
+  - package_manager: "javascript"
+    directory: "/iwfpapi/functions"
+    update_schedule: "live"
+    default_reviewers:
+      - "tianhaoz95"
+    default_labels:
+      - "api dependency update"
       
