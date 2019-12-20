@@ -123,7 +123,7 @@ class _LoginScreen extends State<LoginScreen> {
         children: <Widget>[
           SizedBox(height: 15.0),
           Image.asset(
-            'assets/iwfp_splash.png',
+            'assets/blue_splash.png',
             key: Key('iwfp_splash_img'),
           ),
           SizedBox(height: 25.0),
@@ -168,7 +168,9 @@ class _LoginScreen extends State<LoginScreen> {
                 'Forgot Password',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/placeholder');
+              },
             ),
           ),
           Material(
@@ -180,7 +182,7 @@ class _LoginScreen extends State<LoginScreen> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/');
+                Navigator.pushNamed(context, '/placeholder');
               },
             ),
           ),
