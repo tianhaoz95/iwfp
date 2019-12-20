@@ -1,11 +1,10 @@
 {
   "docs": {
-    "Docusaurus": ["doc1"],
-    "First Category": ["doc2"],
-    "Second Category": ["doc3"],
-    "Design Doc": ["data-flow-design-doc"]
-  },
-  "docs-other": {
-    "First Category": ["doc4", "doc5"]
+    "Design Docs": ["project-structure-doc"],
+    "For Developers": [
+      "client-app-doc",
+      "server-api-doc",
+      "useful-links"
+    ]
   }
 }
