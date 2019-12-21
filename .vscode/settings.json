@@ -1,0 +1,5 @@
+{
+  "dart.analysisExcludedFolders": [
+    "./iwfpapp/lib/generated_plugin_registrant.dart"
+  ]
+}
