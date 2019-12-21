@@ -2,24 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/utilities/card_ranker.dart';
 
 class BasicCreditCard extends StatelessWidget {
   final CreditCard cardMetaData;
+  final ShopCategory targetCategory;
   final MaterialColor color;
   final bool edit;
   final Widget actions;
   const BasicCreditCard(this.cardMetaData, this.color, this.edit,
-      {this.actions});
-  List<Widget> getCardContent(BuildContext context) {
-    String cardName = 'Unknown';
+      {this.actions, this.targetCategory});
+
+  String renderCardName() {
+    String showCardName = 'Unknown';
     if (cardMetaData.name != null) {
-      cardName = cardMetaData.name;
+      showCardName = cardMetaData.name;
+      if (targetCategory != null) {
+        int maxRate = getMaxRate(cardMetaData, targetCategory);
+        showCardName = showCardName + ' w/ rate @ ' + maxRate.toString() + '%';
+      }
     }
+    return showCardName;
+  }
+
+  List<Widget> getCardContent(BuildContext context) {
     List<Widget> content = <Widget>[
       Row(
         children: <Widget>[
           SizedBox(height: 45.0, width: 25.0),
-          Text(cardName, style: TextStyle(color: Colors.white)),
+          Text(renderCardName(), style: TextStyle(color: Colors.white)),
         ],
       ),
       Container(

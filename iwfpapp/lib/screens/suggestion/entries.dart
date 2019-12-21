@@ -38,7 +38,8 @@ class _SuggestionEntries extends State<SuggestionEntries> {
                 children: snapshot.data.map((CreditCard card) {
                   /// TOOD(tianhaoz95): here the highest corresponding
                   /// reward rate should show with the card.
-                  return BasicCreditCard(card, Colors.teal, false);
+                  return BasicCreditCard(card, Colors.teal, false,
+                      targetCategory: widget.category);
                 }).toList(),
               )));
         } else if (snapshot.hasError) {
