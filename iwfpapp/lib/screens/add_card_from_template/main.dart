@@ -183,6 +183,16 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
       backgroundColor: Colors.cyan[100],
       appBar: AppBar(
         title: Text('Add Card from Templates'),
+        leading: FlatButton(
+          key: Key('template_back_btn'),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/add_card');
+          },
+        ),
         backgroundColor: Colors.cyan,
       ),
       body: renderContent(context),
