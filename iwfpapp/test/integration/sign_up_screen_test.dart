@@ -7,12 +7,12 @@ import 'mock_services/mock_auth.dart';
 import 'validators/obscure_input_validator.dart';
 
 void main() {
-  testWidgets('test sign in screen render no crash',
+  testWidgets('test sign up screen details',
       (WidgetTester tester) async {
     IwfpappAuth mockAuth = MockIwfpappAuth();
     when(mockAuth.isSignedIn()).thenAnswer((_) => Future.value(false));
     await tester.pumpWidget(MaterialApp(
-      title: 'stand-alone sign in screen',
+      title: 'stand-alone sign up screen',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
