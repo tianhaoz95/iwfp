@@ -84,6 +84,8 @@ class _SignUpScreen extends State<SignUpScreen> {
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: TextField(
                   controller: pwdCtrl,
+                  obscureText: true,
+                  key: Key('sign_up_pwd_input'),
                   decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -97,6 +99,8 @@ class _SignUpScreen extends State<SignUpScreen> {
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: TextField(
                   controller: pwdConfirmCtrl,
+                  obscureText: true,
+                  key: Key('sign_up_pwd_confirmation_input'),
                   decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
