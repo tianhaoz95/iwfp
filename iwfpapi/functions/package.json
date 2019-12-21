@@ -21,7 +21,7 @@
     "firebase-functions": "^3.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.22",
+    "@types/jest": "^24.0.24",
     "@types/node": "^12.12.7",
     "firebase-functions-test": "^0.1.7",
     "jest": "^24.9.0",
