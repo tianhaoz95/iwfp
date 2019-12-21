@@ -40,3 +40,13 @@ void validateIsContribScreenContent() {
 void validateIsPlaceholderScreenContent() {
   expect(find.byKey(Key('placeholder_title')), findsOneWidget);
 }
+
+void validateIsSignInScreenContent() {
+  expect(find.text('email'), findsOneWidget);
+  expect(find.text('password'), findsOneWidget);
+  expect(find.text('Sign In with Email'), findsOneWidget);
+  expect(find.text('Forgot Password'), findsOneWidget);
+  expect(find.text('Continue as Guest'), findsOneWidget);
+  expect(find.text('Register'), findsOneWidget);
+  expect(find.text('Welcome to iwfp'), findsOneWidget);
+}
