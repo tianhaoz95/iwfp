@@ -1,0 +1,24 @@
+version: 1
+update_configs:
+  - package_manager: "ruby:bundler"
+    directory: "/"
+    update_schedule: "live"
+    default_reviewers:
+      - "tianhaoz95"
+    default_labels:
+      - "gem dependency update"
+  - package_manager: "javascript"
+    directory: "/website"
+    update_schedule: "live"
+    default_reviewers:
+      - "tianhaoz95"
+    default_labels:
+      - "docs dependency update"
+  - package_manager: "javascript"
+    directory: "/iwfpapi/functions"
+    update_schedule: "live"
+    default_reviewers:
+      - "tianhaoz95"
+    default_labels:
+      - "api dependency update"
+      
