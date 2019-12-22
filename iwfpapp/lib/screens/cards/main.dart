@@ -27,14 +27,47 @@ class _ManageCard extends State<ManageCard> {
       future: cards,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Container(
-              key: Key('suggested_categories'),
-              child: Center(
-                  child: ListView(
-                children: snapshot.data.map((CreditCard card) {
-                  return BasicCreditCard(card, Colors.cyan, true);
-                }).toList(),
-              )));
+          if (snapshot.data.isEmpty) {
+            return Container(
+              child: ListView(
+                children: <Widget>[
+                  Material(
+                    color: Colors.cyan[100],
+                    child: Card(
+                        color: Colors.cyan,
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(height: 5.0,),
+                            Center(
+                              child: Text(
+                                'No Card Found',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            SizedBox(height: 5.0,),
+                            Center(
+                              child: Text(
+                                'Use the button below to add cards.',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            SizedBox(height: 5.0,),
+                          ],
+                        )),
+                  )
+                ],
+              ),
+            );
+          } else {
+            return Container(
+                key: Key('suggested_categories'),
+                child: Center(
+                    child: ListView(
+                  children: snapshot.data.map((CreditCard card) {
+                    return BasicCreditCard(card, Colors.cyan, true);
+                  }).toList(),
+                )));
+          }
         } else if (snapshot.hasError) {
           return Center(child: Text('error'));
         }
