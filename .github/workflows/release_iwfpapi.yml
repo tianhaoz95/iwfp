@@ -25,6 +25,7 @@ jobs:
       - name: compile typescript code
         run: |
           cd ./iwfpapi/functions
+          chmod ugo+rw /home/runner/.config/configstore/firebase-tools.json
           npm run lint
           npm run build
           npm run e2e
