@@ -38,6 +38,7 @@ jobs:
         run: |
           cd ./iwfpapi/functions
           npm install
+          npm rebuild
       - name: lint iwfpapi typescript code
         run: |
           cd ./iwfpapi/functions

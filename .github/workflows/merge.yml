@@ -18,6 +18,7 @@ jobs:
         run: |
           cd ./iwfpapi/functions
           npm install
+          npm rebuild
       - name: run iwfpapi build test
         run: |
           cd ./iwfpapi/functions
