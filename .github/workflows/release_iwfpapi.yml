@@ -31,4 +31,4 @@ jobs:
       - name: deploy API server to Firebase
         run: |
           cd ./iwfpapi
-          sudo firebase deploy --only functions --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
+          firebase deploy --only functions --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
