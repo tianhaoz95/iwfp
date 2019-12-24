@@ -33,7 +33,7 @@ jobs:
         run: sudo curl -sL firebase.tools | bash
       - name: install firebase cli for windows
         if: matrix.os == 'windows-latest'
-        run: curl -sL firebase.tools | bash
+        run: npm install -g firebase-tools
       - name: install iwfpapi dependencies
         run: |
           cd ./iwfpapi/functions
