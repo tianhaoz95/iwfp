@@ -2,12 +2,14 @@
   "name": "functions",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
-    "fix": "tslint --fix --project tsconfig.json && prettier --write ./src/**/*.ts ./test/**/*.ts",
+    "fix": "tslint --fix --project tsconfig.json && prettier --write ./src/**/*.ts ./test/**/*.ts ./src/*.ts ./test/*.ts",
     "build": "tsc",
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "test": "jest",
+    "e2e": "npm run build && firebase emulators:exec --only functions,firestore \"npm test\"",
+    "emulator": "npm run build && firebase emulators:start --only firestore,functions",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
@@ -22,6 +24,8 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.24",
+    "axios": "^0.19.0",
+    "firebase": "^7.6.1",
     "@types/node": "^13.1.0",
     "firebase-functions-test": "^0.1.7",
     "jest": "^24.9.0",
