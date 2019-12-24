@@ -28,10 +28,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '10.16.0'
-      - name: install firebase cli for non-windows
+      - name: install firebase cli for ubuntu
         if: matrix.os != 'windows-latest'
-        run: sudo curl -sL firebase.tools | bash
+        run: npm install -g firebase-tools
       - name: install firebase cli for windows
+        if: matrix.os == 'windows-latest'
+        run: npm install -g firebase-tools
+      - name: install firebase cli for macOS
         if: matrix.os == 'windows-latest'
         run: npm install -g firebase-tools
       - name: install iwfpapi dependencies

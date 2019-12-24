@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: '10.16.0'
       - name: install firebase cli
-        run: curl -sL firebase.tools | bash
+        run: npm install -g firebase-tools
       - name: install iwfpapi dependencies
         run: |
           cd ./iwfpapi/functions
