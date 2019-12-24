@@ -1,24 +1,16 @@
-import provider from "../provider";
 import { noAuthMsg } from "../config/consts";
+import getUserUid from "../util/uid_getter";
+import isValidAuth from "../util/validate_auth";
 
-function RemoveCreditCardHandler(data, context) {
-  return new Promise((resolve, reject) => {
-    if (context.auth) {
-      const userUid = context.auth.uid;
-      const userRef = provider.getUserRef(userUid);
-      const cardRef = userRef.collection("cards").doc(data.cardUid);
-      cardRef
-        .delete()
-        .then(() => {
-          resolve();
-        })
-        .catch(err => {
-          reject(err);
-        });
-    } else {
-      reject(noAuthMsg);
-    }
-  });
+async function removeCreditCardHandler(data, context, provider) {
+  if (isValidAuth(context.auth, process.env.FUNCTIONS_EMULATOR)) {
+    const userUid: string = getUserUid(context, process.env.FUNCTIONS_EMULATOR);
+    const userRef = provider.getUserRef(userUid);
+    const cardRef = userRef.collection("cards").doc(data.cardUid);
+    await cardRef.delete();
+  } else {
+    throw noAuthMsg;
+  }
 }
 
-export default RemoveCreditCardHandler;
+export default removeCreditCardHandler;

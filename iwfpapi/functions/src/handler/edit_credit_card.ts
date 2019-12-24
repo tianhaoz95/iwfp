@@ -1,38 +1,24 @@
-import provider from "../provider";
 import { noAuthMsg, creditCardNotExistError } from "../config/consts";
+import getUserUid from "../util/uid_getter";
+import isValidAuth from "../util/validate_auth";
 
-function EditCreditCardHandler(data, context) {
-  return new Promise((resolve, reject) => {
-    if (context.auth) {
-      const userUid = context.auth.uid;
-      const userRef = provider.getUserRef(userUid);
-      const cardRef = userRef.collection("cards").doc(data.cardUid);
-      cardRef
-        .get()
-        .then(snap => {
-          if (!snap.exists) {
-            reject(creditCardNotExistError);
-          } else {
-            const creditCardName: string = data.cardData;
-            cardRef
-              .set({
-                card_name: creditCardName
-              })
-              .then(() => {
-                resolve();
-              })
-              .catch(err => {
-                reject(err);
-              });
-          }
-        })
-        .catch(err => {
-          reject(err);
-        });
+async function editCreditCardHandler(data, context, provider) {
+  if (isValidAuth(context.auth, process.env.FUNCTIONS_EMULATOR)) {
+    const userUid: string = getUserUid(context, process.env.FUNCTIONS_EMULATOR);
+    const userRef = provider.getUserRef(userUid);
+    const cardRef = userRef.collection("cards").doc(data.cardUid);
+    const cardSnap = await cardRef.get();
+    if (!cardSnap.exists) {
+      throw creditCardNotExistError;
     } else {
-      reject(noAuthMsg);
+      const creditCardName: string = data.cardData;
+      await cardRef.set({
+        card_name: creditCardName
+      });
     }
-  });
+  } else {
+    throw noAuthMsg;
+  }
 }
 
-export default EditCreditCardHandler;
+export default editCreditCardHandler;

@@ -1,15 +1,17 @@
-import provider from "../provider";
-import { noAuthMsg, noCardFoundError } from "../config/consts";
+import { noAuthMsg } from "../config/consts";
+import { EmptyWalletError } from "../config/errors";
+import isValidAuth from "../util/validate_auth";
+import getUserUid from "../util/uid_getter";
 
-async function getCreditCardsHandler(data, context) {
-  if (context.auth) {
-    const userUid = context.auth.uid;
+async function getCreditCardsHandler(data, context, provider) {
+  if (isValidAuth(context.auth, process.env.FUNCTIONS_EMULATOR)) {
+    const userUid: string = getUserUid(context, process.env.FUNCTIONS_EMULATOR);
     const userRef = provider.getUserRef(userUid);
     const cardRef = userRef.collection("cards");
     const cardSnap: FirebaseFirestore.QuerySnapshot = await cardRef.get();
     const response = {};
     if (cardSnap.empty) {
-      throw noCardFoundError;
+      throw EmptyWalletError;
     } else {
       for (const card of cardSnap.docs) {
         console.log("retrieve card: ", card.id, "=>", card.data());
@@ -30,6 +32,7 @@ async function getCreditCardsHandler(data, context) {
         }
       }
     }
+    console.log("return response: ", response);
     return response;
   } else {
     throw noAuthMsg;
