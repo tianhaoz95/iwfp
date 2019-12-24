@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: '10.16.0'
       - name: install firebase cli
-        run: sudo npm install -g firebase-tools
+        run: curl -sL firebase.tools | bash
       - name: install iwfpapi dependencies
         run: |
           cd ./iwfpapi/functions
@@ -23,7 +23,7 @@ jobs:
           cd ./iwfpapi/functions
           npm run lint
           npm run build
-          sudo npm e2e
+          npm e2e
   build-doc:
     name: build docs
     runs-on: ubuntu-latest

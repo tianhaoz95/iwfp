@@ -30,10 +30,10 @@ jobs:
           node-version: '10.16.0'
       - name: install firebase cli for non-windows
         if: matrix.os != 'windows-latest'
-        run: sudo npm install -g firebase-tools
+        run: sudo curl -sL firebase.tools | bash
       - name: install firebase cli for windows
         if: matrix.os == 'windows-latest'
-        run: npm install -g firebase-tools
+        run: curl -sL firebase.tools | bash
       - name: install iwfpapi dependencies
         run: |
           cd ./iwfpapi/functions
@@ -45,4 +45,4 @@ jobs:
       - name: run iwfpapi unit tests
         run: |
           cd ./iwfpapi/functions
-          sudo npm run e2e
+          npm run e2e
