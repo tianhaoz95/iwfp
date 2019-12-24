@@ -45,4 +45,4 @@ jobs:
       - name: run iwfpapi unit tests
         run: |
           cd ./iwfpapi/functions
-          npm run e2e
+          sudo npm run e2e

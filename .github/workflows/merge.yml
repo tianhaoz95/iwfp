@@ -23,7 +23,7 @@ jobs:
           cd ./iwfpapi/functions
           npm run lint
           npm run build
-          npm e2e
+          sudo npm e2e
   build-doc:
     name: build docs
     runs-on: ubuntu-latest
