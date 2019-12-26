@@ -7,6 +7,6 @@ export const BasicPromo = {
   promoEnd: "06/01",
   promoRepeat: "annual",
   promoRate: "5",
-  promoCategoryId: "best_buy", 
+  promoCategoryId: "best_buy",
   promoCategoryName: "Best Buy"
 };

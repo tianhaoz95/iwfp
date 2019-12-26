@@ -102,11 +102,6 @@ describe("end 2 end tests", () => {
     }
   });
 
-  test("remove user should not crash", async () => {
-    const response = await removeUserCallable();
-    expect(response).toBeNull;
-  });
-
   test("add card should not crash", async () => {
     const response = await addCreditCardCallable({
       cardData: "test_card_name",
@@ -145,15 +140,15 @@ describe("end 2 end tests", () => {
       .get();
     expect(promoSnap.exists).toBeTruthy;
     expect(promoSnap.data()).toMatchObject({
-      "promo_category_id": "best_buy",
-      "promo_category_name": "Best Buy",
-      "promo_end": "06/01",
-      "promo_id": "test_promo",
-      "promo_name": "Test Promo",
-      "promo_rate": "5",
-      "promo_repeat_pattern": "annual",
-      "promo_start": "03/01",
-      "promo_type": "brand",
+      promo_category_id: "best_buy",
+      promo_category_name: "Best Buy",
+      promo_end: "06/01",
+      promo_id: "test_promo",
+      promo_name: "Test Promo",
+      promo_rate: "5",
+      promo_repeat_pattern: "annual",
+      promo_start: "03/01",
+      promo_type: "brand"
     });
   });
 
@@ -267,5 +262,45 @@ describe("end 2 end tests", () => {
     expect(cardsAfterAdding.data["test_card_uid"]["card_name"]).toBe(
       "test_card_name"
     );
+  });
+
+  test("remove user should not crash", async () => {
+    const response = await removeUserCallable();
+    expect(response).toBeNull;
+  });
+
+  test("remove user should remove user data", async () => {
+    const addCardResponse = await addCreditCardCallable({
+      cardData: "test_card_name",
+      cardUid: "test_card_uid"
+    });
+    expect(addCardResponse).toBeNull;
+    const cardSnapAfterAdd = await db
+      .collection("channel")
+      .doc("production-v1")
+      .collection("users")
+      .doc("test_user")
+      .collection("cards")
+      .doc("test_card_uid")
+      .get();
+    expect(cardSnapAfterAdd.exists).toBeTruthy;
+    const removeUserresponse = await removeUserCallable();
+    expect(removeUserresponse).toBeNull;
+    const userSnapAfterRemove = await db
+      .collection("channel")
+      .doc("production-v1")
+      .collection("users")
+      .doc("test_user")
+      .get();
+    expect(userSnapAfterRemove.exists).toBeFalsy;
+    const cardSnapAfterRemove = await db
+      .collection("channel")
+      .doc("production-v1")
+      .collection("users")
+      .doc("test_user")
+      .collection("cards")
+      .doc("test_card_uid")
+      .get();
+    expect(cardSnapAfterRemove.exists).toBeFalsy;
   });
 });

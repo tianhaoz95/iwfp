@@ -3,6 +3,7 @@ import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:iwfpapp/services/mode.dart';
 import 'package:iwfpapp/services/utilities/card_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
@@ -22,26 +23,33 @@ class DataStore {
   List<ShopCategory> categories = [];
   List<CreditCard> cards = [];
   String serviceType;
+  RunningMode mode;
   HttpsCallable addCardCallable;
   HttpsCallable addPromoCallable;
   HttpsCallable getCardsCallable;
   HttpsCallable removeCardCallable;
   HttpsCallable removePromoCallable;
-  DataStore(this.serviceType) {
-    addCardCallable = CloudFunctions.instance.getHttpsCallable(
+  HttpsCallable deleteAccountCallable;
+  CloudFunctions cloudFunc;
+  DataStore(this.serviceType, this.mode) {
+    cloudFunc = CloudFunctions.instance;
+    addCardCallable = cloudFunc.getHttpsCallable(
       functionName: 'addCreditCard',
     );
-    getCardsCallable = CloudFunctions.instance.getHttpsCallable(
+    getCardsCallable = cloudFunc.getHttpsCallable(
       functionName: 'getCreditCards',
     );
-    removeCardCallable = CloudFunctions.instance.getHttpsCallable(
+    removeCardCallable = cloudFunc.getHttpsCallable(
       functionName: 'removeCreditCard',
     );
-    addPromoCallable = CloudFunctions.instance.getHttpsCallable(
+    addPromoCallable = cloudFunc.getHttpsCallable(
       functionName: 'addPromo',
     );
-    removePromoCallable = CloudFunctions.instance.getHttpsCallable(
+    removePromoCallable = cloudFunc.getHttpsCallable(
       functionName: 'removePromo',
+    );
+    deleteAccountCallable = cloudFunc.getHttpsCallable(
+      functionName: 'removeUser',
     );
   }
 
@@ -82,6 +90,12 @@ class DataStore {
       cards = fetchedCards;
       response.status = ResponseStatus.SUCCEESS;
       response.msg = 'na';
+      return response;
+    } on CloudFunctionsException catch (cloudFuncError) {
+      response.status = ResponseStatus.FAILURE;
+      print('fetch card failed with cloud function error');
+      print(cloudFuncError.code);
+      print(cloudFuncError.message);
       return response;
     } catch (err) {
       response.status = ResponseStatus.FAILURE;
@@ -209,6 +223,27 @@ class DataStore {
     } catch (err) {
       response.status = ResponseStatus.FAILURE;
       response.msg = err.toString();
+      return response;
+    }
+  }
+
+  Future<CloudFuncResponse> deleteAccount() async {
+    CloudFuncResponse response =
+        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+    try {
+      await deleteAccountCallable.call();
+      response.status = ResponseStatus.SUCCEESS;
+      return response;
+    } on CloudFunctionsException catch (cloudFuncError) {
+      response.status = ResponseStatus.FAILURE;
+      print('fetch card failed with cloud function error');
+      print(cloudFuncError.code);
+      print(cloudFuncError.message);
+      return response;
+    } catch (err) {
+      response.status = ResponseStatus.FAILURE;
+      response.msg = err.toString();
+      print(err.toString());
       return response;
     }
   }
