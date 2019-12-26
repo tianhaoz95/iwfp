@@ -5,3 +5,5 @@ export const creditCardNotExistError: string = "Credit card not exist";
 export const notImplementedError: string = "Not implemented";
 export const promoAlreadyExistError: string = "Promotion already existed";
 export const noCardFoundError: string = "No card found";
+// Followings are newly added
+export const TestUserUid: string = "test_user";

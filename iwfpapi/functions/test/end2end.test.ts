@@ -18,6 +18,7 @@ describe("end 2 end tests", () => {
   let removeCreditCardCallable: firebase.functions.HttpsCallable;
   let addPromoCallable: firebase.functions.HttpsCallable;
   let removePromoCallable: firebase.functions.HttpsCallable;
+  let removeUserCallable: firebase.functions.HttpsCallable;
 
   beforeAll(() => {
     app = firebase.initializeApp(EmulatedAppConfig);
@@ -30,6 +31,7 @@ describe("end 2 end tests", () => {
     removeCreditCardCallable = cloudFunctions.httpsCallable("removeCreditCard");
     addPromoCallable = cloudFunctions.httpsCallable("addPromo");
     removePromoCallable = cloudFunctions.httpsCallable("removePromo");
+    removeUserCallable = cloudFunctions.httpsCallable("removeUser");
   });
 
   afterAll(async () => {
@@ -98,6 +100,11 @@ describe("end 2 end tests", () => {
     } catch (err) {
       expect(err.code).toBe("not-found");
     }
+  });
+
+  test("remove user should not crash", async () => {
+    const response = await removeUserCallable();
+    expect(response).toBeNull;
   });
 
   test("add card should not crash", async () => {
