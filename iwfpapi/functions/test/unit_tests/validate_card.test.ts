@@ -1,6 +1,6 @@
-import isValidCardData from "../src/util/validate_card";
+import isValidCardData from "../../src/util/validate_card";
 
-describe("utility tests", () => {
+describe("card validator tests", () => {
   test("card data validator should not crash", () => {
     expect(() => {
       isValidCardData({ name: "test_card_name", id: "test_card_id" });
