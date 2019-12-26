@@ -43,7 +43,7 @@ void main() {
       await driver.tap(find.byValueKey('sign_in_email_input'));
       await driver.enterText('tianhaoz@umich.edu');
       await driver.tap(find.byValueKey('sign_in_password_input'));
-      await driver.enterText('Iwfpapp#950903');
+      await driver.enterText('250250abc');
       await takeNamedScreenshot(driver, 'sign_in_screen_presubmit');
       await driver.tap(find.text('Sign In with Email'));
       await driver.waitFor(find.byValueKey('shop_title'));

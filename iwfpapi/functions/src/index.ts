@@ -5,6 +5,7 @@ import editCreditCardHandler from "./handler/edit_credit_card";
 import addPromoHandler from "./handler/add_promo";
 import removePromoHandler from "./handler/remove_promo";
 import getCreditCardHandler from "./handler/get_credit_cards";
+import removeUserHandler from "./handler/remove_user";
 import Provider from "./provider";
 
 const provider = new Provider();
@@ -34,4 +35,8 @@ export const removePromo = functions.https.onCall(async (data, context) => {
 export const getCreditCards = functions.https.onCall(async (data, context) => {
   const response = await getCreditCardHandler(data, context, provider);
   return response;
+});
+
+export const removeUser = functions.https.onCall(async (data, context) => {
+  await removeUserHandler(data, context, provider);
 });
