@@ -53,6 +53,31 @@ class _UserSettings extends State<UserSettings> {
                 },
               ),
             ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Container(
+              child: Center(
+                child: Text('Dangerous Zone',
+                    style: TextStyle(color: Colors.redAccent)),
+              ),
+            ),
+            Divider(
+              color: Colors.redAccent,
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/delete_account');
+                },
+                color: Colors.redAccent,
+                child: Text(
+                  'Delete Account',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
           ],
         ));
   }

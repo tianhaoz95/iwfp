@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:iwfpapp/screens/add_card_from_template/main.dart';
+import 'package:iwfpapp/screens/delete_account/main.dart';
 import 'package:iwfpapp/screens/home/main.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/login/main.dart';
@@ -27,14 +28,14 @@ void main() {
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
 
+  // Running mode interface
+  RunningMode mode = RunningMode();
+
   // DataStore is the top level data model
-  DataStore dataStore = DataStore('firebase');
+  DataStore dataStore = DataStore('firebase', mode);
 
   // Authentication interface
   IwfpappAuth auth = IwfpappAuth();
-
-  // Running mode interface
-  RunningMode mode = RunningMode();
 
   runApp(MyApp(dataStore, auth, mode));
 }
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
         '/edit_card': (context) => EditCardScreen(),
         '/add_promo': (context) => AddPromoScreen(dataStore),
         '/remove_promo': (context) => RemovePromoScreen(dataStore),
+        '/delete_account': (context) => DeleteAccountScreen(dataStore, auth),
       },
     );
   }

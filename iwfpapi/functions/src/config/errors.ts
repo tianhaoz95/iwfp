@@ -19,3 +19,13 @@ export const UnknownUserError = new functions.https.HttpsError(
   "unknown",
   "Unknown user, uid not exist"
 );
+
+export const UnauthenticatedUserError = new functions.https.HttpsError(
+  "unknown",
+  "Unknown user, not authenticated"
+);
+
+export const AttemptDeleteNonTestUserError = new functions.https.HttpsError(
+  "permission-denied",
+  "Deleting normal users in testing mode is not allowed"
+);
