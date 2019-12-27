@@ -81,9 +81,6 @@ class DataStore {
   }
 
   Future<CloudFuncResponse> fetchCards() async {
-    /// TODO(tianhaoz95): fetch cards should not refresh every
-    /// time. Instead, it should keep track of a dirty bit and
-    /// only refresh when needed.
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     if (!needRefresh) {
