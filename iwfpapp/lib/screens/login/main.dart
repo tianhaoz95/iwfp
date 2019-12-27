@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/utilities/validators/sign_in_validator.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
 import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
 import 'package:iwfpapp/services/mode.dart';
@@ -65,12 +67,44 @@ class _LoginScreen extends State<LoginScreen> {
         });
   }
 
+  Future<void> promptWarning(
+      BuildContext context, List<String> messages) async {
+    List<Widget> content = messages.map((String message) {
+      return Text(message);
+    }).toList();
+    await showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('error'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: content,
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Back'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   Future<void> handleEmailSignIn(BuildContext context) async {
+    String email = emailInputController.text;
+    String pwd = pwdInputController.text;
+    ValidationResponse signInValidationResponse = isValidSignInInfo(email, pwd);
+    if (!signInValidationResponse.valid) {
+      await promptWarning(context, signInValidationResponse.messages);
+      return;
+    }
     setState(() {
       status = 'loading';
     });
-    String email = emailInputController.text;
-    String pwd = pwdInputController.text;
     await auth.handleSignInWithEmail(email, pwd);
     await getSignInStatus();
     if (status == 'signed_in') {

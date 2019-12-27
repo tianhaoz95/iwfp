@@ -32,3 +32,12 @@ final String cardIdHasSpaceErrorMessage =
     'Credit card ID cannot contain space.';
 final String cardIdEmptyErrorMessage = 'Credit card ID cannot be empty';
 final String cardNameEmptyErrorMessage = 'Credit card Name cannot be empty';
+
+/// Error message about user account
+final String emailEmptyErrorMessage = 'Email cannot be empty';
+final String emailContainSpaceErrorMessage = 'Email should not contain empty space';
+final String emailInvalidFormatErrorMessage = 'Email is of wrong format';
+final String passwordEmptyErrorMessage = 'Password cannot be empty';
+final String passwordContainSpaceErrorMessage = 'Password cannot contain space';
+final String passwordTooShortErrorMessage = 'Password should at least be 6 characters long';
+final String passwordConfirmationNotMatchErrorMessage = 'Password and confirmation do not match';
