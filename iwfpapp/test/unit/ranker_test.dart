@@ -1,7 +1,7 @@
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
-import 'package:iwfpapp/services/ranker.dart';
+import 'package:iwfpapp/services/utilities/card_ranker.dart';
 import 'package:test/test.dart';
 
 CreditCard generateCreditCard(String name, String id, List<int> rates) {
