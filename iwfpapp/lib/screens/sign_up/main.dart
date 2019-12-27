@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/services/config/typedefs/auth_status.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
+import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
+import 'package:iwfpapp/services/utilities/validators/register_validator.dart';
 
 class SignUpScreen extends StatefulWidget {
   final IwfpappAuth auth;
@@ -19,13 +21,45 @@ class _SignUpScreen extends State<SignUpScreen> {
   TextEditingController pwdConfirmCtrl = TextEditingController();
   String msg = 'na';
 
+  Future<void> promptWarning(
+      BuildContext context, List<String> messages) async {
+    List<Widget> content = messages.map((String message) {
+      return Text(message);
+    }).toList();
+    await showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('error'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: content,
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Back'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   Future<void> handleSignUp() async {
-    setState(() {
-      status = SubmitScreenStatus.LOADING;
-    });
     String email = emailCtrl.text;
     String pwd = pwdCtrl.text;
     String pwdConfirm = pwdConfirmCtrl.text;
+    ValidationResponse registerValidationResponse = isValidRegisterInfo(email, pwd, pwdConfirm);
+    if (!registerValidationResponse.valid) {
+      await promptWarning(context, registerValidationResponse.messages);
+      return;
+    }
+    setState(() {
+      status = SubmitScreenStatus.LOADING;
+    });
     if (pwd == pwdConfirm) {
       SignUpResponse response =
           await widget.auth.handleSignUpWithEmail(email, pwd);
