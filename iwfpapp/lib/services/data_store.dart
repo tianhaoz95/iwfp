@@ -24,6 +24,7 @@ class DataStore {
   List<CreditCard> cards = [];
   String serviceType;
   RunningMode mode;
+  bool needRefresh;
   HttpsCallable addCardCallable;
   HttpsCallable addPromoCallable;
   HttpsCallable getCardsCallable;
@@ -32,6 +33,7 @@ class DataStore {
   HttpsCallable deleteAccountCallable;
   CloudFunctions cloudFunc;
   DataStore(this.serviceType, this.mode) {
+    needRefresh = true;
     cloudFunc = CloudFunctions.instance;
     addCardCallable = cloudFunc.getHttpsCallable(
       functionName: 'addCreditCard',
@@ -84,12 +86,16 @@ class DataStore {
     /// only refresh when needed.
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+    if (!needRefresh) {
+      return response;
+    }
     try {
       HttpsCallableResult result = await getCardsCallable.call();
       List<CreditCard> fetchedCards = data2cards(result);
       cards = fetchedCards;
       response.status = ResponseStatus.SUCCEESS;
       response.msg = 'na';
+      needRefresh = false;
       return response;
     } on CloudFunctionsException catch (cloudFuncError) {
       response.status = ResponseStatus.FAILURE;
@@ -124,6 +130,7 @@ class DataStore {
       });
       response.status = ResponseStatus.SUCCEESS;
       response.msg = result.toString();
+      needRefresh = true;
       return response;
     } catch (err) {
       response.status = ResponseStatus.FAILURE;
@@ -153,6 +160,7 @@ class DataStore {
       return response;
     }
     response.status = ResponseStatus.SUCCEESS;
+    needRefresh = true;
     return response;
   }
 
@@ -168,7 +176,6 @@ class DataStore {
   Future<List<CreditCard>> getRankedCards(ShopCategory category) async {
     CloudFuncResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
-      print('fetch card failed');
       return [];
     }
     rankCards(cards, category);
@@ -188,6 +195,7 @@ class DataStore {
       });
       response.status = ResponseStatus.SUCCEESS;
       response.msg = result.toString();
+      needRefresh = true;
       await fetchCards();
       return response;
     } catch (err) {
@@ -218,6 +226,7 @@ class DataStore {
       });
       response.status = ResponseStatus.SUCCEESS;
       response.msg = result.toString();
+      needRefresh = true;
       await fetchCards();
       return response;
     } catch (err) {
@@ -233,6 +242,7 @@ class DataStore {
     try {
       await deleteAccountCallable.call();
       response.status = ResponseStatus.SUCCEESS;
+      needRefresh = true;
       return response;
     } on CloudFunctionsException catch (cloudFuncError) {
       response.status = ResponseStatus.FAILURE;
