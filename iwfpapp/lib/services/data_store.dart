@@ -84,6 +84,8 @@ class DataStore {
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     if (!needRefresh) {
+      response.status = ResponseStatus.SUCCEESS;
+      response.msg = 'No need to fetch';
       return response;
     }
     try {
@@ -108,10 +110,17 @@ class DataStore {
     }
   }
 
+  Future<void> forceRefresh() async {
+    needRefresh = true;
+    CloudFuncResponse status = await fetchCards();
+    if (status.status == ResponseStatus.FAILURE) {
+      print('Refreshing data failed');
+    }
+  }
+
   Future<List<CreditCard>> getCards() async {
     CloudFuncResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
-      print('fetch card failed');
       return [];
     }
     return cards;

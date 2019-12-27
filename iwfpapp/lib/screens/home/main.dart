@@ -83,6 +83,16 @@ class _HomeScreen extends State<HomeScreen> {
     });
   }
 
+  Future<void> handleRefresh() async {
+    setState(() {
+      status = SubmitScreenStatus.LOADING;
+    });
+    await widget.dataStore.forceRefresh();
+    setState(() {
+      status = SubmitScreenStatus.DONE;
+    });
+  }
+
   Widget renderActionBtn(BuildContext context) {
     if (currentTabId == HomeTabId.CARD_MANAGEMENT) {
       return FloatingActionButton(
@@ -99,8 +109,10 @@ class _HomeScreen extends State<HomeScreen> {
   Widget renderLoading(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Signing in...'),
+        title: Text('Preparing ...'),
+        backgroundColor: Colors.blue,
       ),
+      backgroundColor: Colors.blue[100],
       body: Container(
         child: Center(
           child: CircularProgressIndicator(),
@@ -115,6 +127,14 @@ class _HomeScreen extends State<HomeScreen> {
           title: Text(widget.mode.devifyString(homeTabs[currentTabId].title),
               key: homeTabs[currentTabId].titleKey),
           backgroundColor: homeTabs[currentTabId].color,
+          actions: <Widget>[
+            FlatButton(
+              child: Icon(Icons.refresh, color: Colors.white,),
+              onPressed: () async {
+                await handleRefresh();
+              },
+            ),
+          ],
         ),
         backgroundColor: homeTabs[currentTabId].color[100],
         body: SafeArea(
