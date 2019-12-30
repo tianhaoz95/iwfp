@@ -27,7 +27,7 @@
     "@types/node": "^13.1.0",
     "axios": "^0.19.0",
     "firebase": "^7.6.1",
-    "@types/node": "^13.1.1",
+    "@types/node": "^13.1.2",
     "firebase-functions-test": "^0.1.7",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
