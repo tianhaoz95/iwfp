@@ -1,0 +1,14 @@
+# Global owners
+*             @tianhaoz95
+
+# Apps owners
+iwfpapp/*     @tianhaoz95
+
+# API owners
+iwfpapi.*     @tianhaoz95
+
+# Docs owners
+docs/*        @tianhaoz95
+
+# Docs infra owners
+website/*     @tianhaoz95
