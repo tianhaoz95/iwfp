@@ -89,8 +89,8 @@ void populateDiscoverCreditCardTemplate(CreditCard card) {
       '12/31', 'annual', 5, ShopCategory('Amazon.com', 'amazon')));
   card.promos.add(CashbackPromo('Target', 'target', 'brand', '10/01', '12/31',
       'annual', 5, ShopCategory('Target', 'target')));
-  card.promos.add(CashbackPromo('Walmart', 'walmart', 'brand', '10/01', '12/31',
-      'annual', 5, ShopCategory('Walmart', 'walmart')));
+  card.promos.add(CashbackPromo('Walmart.com', 'walmart_online_store', 'brand', '10/01', '12/31',
+      'annual', 5, ShopCategory('Walmart.com', 'walmart_online_store')));
   card.promos.add(CashbackPromo('All Purchases', 'all_purchase', 'universal',
       'nan', 'nan', 'const', 1, ShopCategory('All Purchases', 'all_purchase')));
 }
