@@ -1,4 +1,4 @@
-# iwfp
+# I want 5% (iwfp)
 
 [![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/package%20apps/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 [![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release-docs/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
@@ -9,6 +9,10 @@
 > May the ~~force~~ **five percent** be with you.
 
 iwfp (I want five percent) is a utility to help everyone who uses credit cards maximize cash back rewards.
+
+**A quick look** (where you select a shopping category and it tells you which card is the best):
+
+<img height="500px" alt="demo app usage" src="./website/static/img/app_demo_animation.gif" />
 
 ## Getting Started
 
