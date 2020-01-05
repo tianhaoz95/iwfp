@@ -16,7 +16,6 @@ class SuggestionScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('For ' + category.name + ', I should use ...'),
-        backgroundColor: Colors.teal,
         key: Key('suggestion_title'),
         leading: FlatButton(
           key: Key('suggestion_back_btn'),
@@ -31,7 +30,6 @@ class SuggestionScreen extends StatelessWidget {
         ),
       ),
       body: SuggestionEntries(category, dataStore),
-      backgroundColor: Colors.teal[100],
     );
   }
 }

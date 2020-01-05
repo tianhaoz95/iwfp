@@ -43,10 +43,9 @@ class _UserSettings extends State<UserSettings> {
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: RaisedButton(
                 key: Key('go_to_auth_btn'),
-                color: Colors.orange,
+                color: Theme.of(context).primaryColor,
                 child: Text(
-                  'Go to Authentication',
-                  style: TextStyle(color: Colors.white),
+                  'Go to Authentication', style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, '/sign_in');
@@ -58,8 +57,7 @@ class _UserSettings extends State<UserSettings> {
             ),
             Container(
               child: Center(
-                child: Text('Dangerous Zone',
-                    style: TextStyle(color: Colors.redAccent)),
+                child: Text('Dangerous Zone'),
               ),
             ),
             Divider(

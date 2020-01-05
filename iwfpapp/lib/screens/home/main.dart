@@ -99,7 +99,6 @@ class _HomeScreen extends State<HomeScreen> {
         onPressed: () {
           Navigator.pushReplacementNamed(context, '/add_card');
         },
-        backgroundColor: Colors.cyan,
         child: Icon(Icons.add),
       );
     }
@@ -110,9 +109,7 @@ class _HomeScreen extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Preparing ...'),
-        backgroundColor: Colors.blue,
       ),
-      backgroundColor: Colors.blue[100],
       body: Container(
         child: Center(
           child: CircularProgressIndicator(),
@@ -126,7 +123,6 @@ class _HomeScreen extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(widget.mode.devifyString(homeTabs[currentTabId].title),
               key: homeTabs[currentTabId].titleKey),
-          backgroundColor: homeTabs[currentTabId].color,
           actions: <Widget>[
             FlatButton(
               child: Icon(Icons.refresh, color: Colors.white,),
@@ -136,7 +132,6 @@ class _HomeScreen extends State<HomeScreen> {
             ),
           ],
         ),
-        backgroundColor: homeTabs[currentTabId].color[100],
         body: SafeArea(
             bottom: true, child: _children[homeTabId2Index(currentTabId)]),
         floatingActionButton: renderActionBtn(context),
@@ -148,25 +143,25 @@ class _HomeScreen extends State<HomeScreen> {
             BottomNavigationBarItem(
               icon: Icon(homeTabs[HomeTabId.SHOPPING].icon,
                   key: homeTabs[HomeTabId.SHOPPING].btnKey),
-              backgroundColor: homeTabs[HomeTabId.SHOPPING].color,
+              backgroundColor: Theme.of(context).primaryColor,
               title: Text(homeTabs[HomeTabId.SHOPPING].title),
             ),
             BottomNavigationBarItem(
               icon: Icon(homeTabs[HomeTabId.CARD_MANAGEMENT].icon,
                   key: homeTabs[HomeTabId.CARD_MANAGEMENT].btnKey),
-              backgroundColor: homeTabs[HomeTabId.CARD_MANAGEMENT].color,
+              backgroundColor: Theme.of(context).primaryColor,
               title: Text(homeTabs[HomeTabId.CARD_MANAGEMENT].title),
             ),
             BottomNavigationBarItem(
               icon: Icon(homeTabs[HomeTabId.USER_SETTINGS].icon,
                   key: homeTabs[HomeTabId.USER_SETTINGS].btnKey),
-              backgroundColor: homeTabs[HomeTabId.USER_SETTINGS].color,
+              backgroundColor: Theme.of(context).primaryColor,
               title: Text(homeTabs[HomeTabId.USER_SETTINGS].title),
             ),
             BottomNavigationBarItem(
               icon: Icon(homeTabs[HomeTabId.CONTRIB].icon,
                   key: homeTabs[HomeTabId.CONTRIB].btnKey),
-              backgroundColor: homeTabs[HomeTabId.CONTRIB].color,
+              backgroundColor: Theme.of(context).primaryColor,
               title: Text(homeTabs[HomeTabId.CONTRIB].title),
             ),
           ],

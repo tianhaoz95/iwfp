@@ -14,27 +14,15 @@ class PromoEntry extends StatelessWidget {
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
       width: maxContainerWidth,
       child: Material(
-        color: Colors.cyan[100],
         child: Card(
-            color: Colors.cyan,
-            child: Column(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+              child: Center(
+                child: Column(
               children: <Widget>[
-                Text('Promotion Name: ' + promo.name,
-                    style: TextStyle(color: Colors.white)),
-                Text('Promotion ID: ' + promo.id,
-                    style: TextStyle(color: Colors.white)),
-                Text('Promotion Type' + promo.type,
-                    style: TextStyle(color: Colors.white)),
-                Text('Promotion Duration: ' + promo.start + '~' + promo.end,
-                    style: TextStyle(color: Colors.white)),
-                Text('Promotion Repeat Pattern: ' + promo.repeat,
-                    style: TextStyle(color: Colors.white)),
-                Text('Promotion Cashback Rate: ' + promo.rate.toString() + '%',
-                    style: TextStyle(color: Colors.white)),
-                Text('Promotion Target Name: ' + promo.category.name,
-                    style: TextStyle(color: Colors.white)),
-                Text('Promotion Target ID: ' + promo.category.id,
-                    style: TextStyle(color: Colors.white)),
+                Text('${promo.name} (${promo.id})'),
+                Text('${promo.type} ${promo.repeat} ${promo.start}~${promo.end}'),
+                Text('@ ${promo.rate.toString()}% for ${promo.category.name} (${promo.category.id})'),
                 RaisedButton(
                   color: Colors.redAccent,
                   onPressed: () {
@@ -44,7 +32,7 @@ class PromoEntry extends StatelessWidget {
                   child: Text('Remove', style: TextStyle(color: Colors.white)),
                 )
               ],
-            )),
+            )))),
       ),
     );
   }

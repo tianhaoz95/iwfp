@@ -32,24 +32,18 @@ class _ManageCard extends State<ManageCard> {
               child: ListView(
                 children: <Widget>[
                   Material(
-                    color: Colors.cyan[100],
                     child: Card(
-                        color: Colors.cyan,
                         child: Column(
                           children: <Widget>[
                             SizedBox(height: 5.0,),
                             Center(
                               child: Text(
-                                'No Card Found',
-                                style: TextStyle(color: Colors.white),
-                              ),
+                                'No Card Found'),
                             ),
                             SizedBox(height: 5.0,),
                             Center(
                               child: Text(
-                                'Use the button below to add cards.',
-                                style: TextStyle(color: Colors.white),
-                              ),
+                                'Use the button below to add cards.',),
                             ),
                             SizedBox(height: 5.0,),
                           ],

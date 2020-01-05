@@ -132,6 +132,10 @@ class _AddPromoScreen extends State<AddPromoScreen> {
           SizedBox(
             height: 5.0,
           ),
+          Text('Adding Promotion for ${card.name}...'),
+          SizedBox(
+            height: 5.0,
+          ),
           TextField(
             controller: promoNameCtrl,
             decoration: InputDecoration(
@@ -207,9 +211,8 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           Material(
-            color: Colors.cyan[100],
             child: RaisedButton(
-              color: Colors.cyan,
+              color: Colors.green,
               onPressed: () {
                 handleAddPromo();
               },
@@ -220,9 +223,8 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             ),
           ),
           Material(
-            color: Colors.cyan[100],
             child: RaisedButton(
-              color: Colors.cyan,
+              color: Colors.redAccent,
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/edit_card',
                     arguments: card);
@@ -243,9 +245,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
       child: ListView(
         children: <Widget>[
           Material(
-            color: Colors.cyan[100],
             child: Card(
-              color: Colors.cyan,
               child: Column(
                 children: <Widget>[
                   SizedBox(
@@ -320,10 +320,8 @@ class _AddPromoScreen extends State<AddPromoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[100],
       appBar: AppBar(
-        backgroundColor: Colors.cyan,
-        title: Text('Add Promotion for ' + card.name),
+        title: Text('Add Promotion'),
       ),
       body: renderContent(context),
     );

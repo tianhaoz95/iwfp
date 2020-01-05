@@ -26,10 +26,9 @@ class _DevelopmentModeToggle extends State<DevelopmentModeToggle> {
       padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
       child: Row(
         children: <Widget>[
-          Text('Development Mode', style: TextStyle(color: Colors.white)),
+          Text('Development Mode'),
           Switch(
             value: isDevVal,
-            activeColor: Colors.orange[100],
             onChanged: (bool nextIsDevVal) {
               isDevVal = nextIsDevVal;
               widget.setIsDevCallbackFunc(nextIsDevVal);
