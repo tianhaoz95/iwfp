@@ -164,16 +164,14 @@ class _AddCardScreen extends State<AddCardScreen> {
             height: 15.0,
           ),
           Center(
-            child: Text('Add card succeeded!',
-                style: TextStyle(color: Colors.cyan)),
+            child: Text('Add card succeeded!'),
           ),
           SizedBox(
             height: 15.0,
           ),
           Material(
-            color: Colors.cyan[100],
             child: RaisedButton(
-              color: Colors.cyan,
+              color: Colors.green,
               child: Text('Go to main menu',
                   style: TextStyle(color: Colors.white)),
               onPressed: () {
@@ -212,10 +210,8 @@ class _AddCardScreen extends State<AddCardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan,
         title: Text('Add Card'),
       ),
-      backgroundColor: Colors.cyan[100],
       body: renderBodyContent(context),
     );
   }

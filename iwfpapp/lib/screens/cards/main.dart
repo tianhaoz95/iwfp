@@ -34,20 +34,26 @@ class _ManageCard extends State<ManageCard> {
                   Material(
                     child: Card(
                         child: Column(
-                          children: <Widget>[
-                            SizedBox(height: 5.0,),
-                            Center(
-                              child: Text(
-                                'No Card Found'),
-                            ),
-                            SizedBox(height: 5.0,),
-                            Center(
-                              child: Text(
-                                'Use the button below to add cards.',),
-                            ),
-                            SizedBox(height: 5.0,),
-                          ],
-                        )),
+                      children: <Widget>[
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Center(
+                          child: Text('No Card Found'),
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Center(
+                          child: Text(
+                            'Use the button below to add cards.',
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                      ],
+                    )),
                   )
                 ],
               ),

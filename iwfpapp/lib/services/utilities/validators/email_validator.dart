@@ -11,7 +11,8 @@ ValidationResponse isValidEmail(String email) {
     response.valid = false;
     response.messages.add(emailContainSpaceErrorMessage);
   }
-  RegExp emailMatcher = RegExp(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$");
+  RegExp emailMatcher =
+      RegExp(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$");
   if (!email.contains(emailMatcher)) {
     response.valid = false;
     response.messages.add(emailInvalidFormatErrorMessage);

@@ -16,23 +16,26 @@ class PromoEntry extends StatelessWidget {
       child: Material(
         child: Card(
             child: Container(
-              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-              child: Center(
-                child: Column(
-              children: <Widget>[
-                Text('${promo.name} (${promo.id})'),
-                Text('${promo.type} ${promo.repeat} ${promo.start}~${promo.end}'),
-                Text('@ ${promo.rate.toString()}% for ${promo.category.name} (${promo.category.id})'),
-                RaisedButton(
-                  color: Colors.redAccent,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/remove_promo',
-                        arguments: RemovePromoMeta(card, promo));
-                  },
-                  child: Text('Remove', style: TextStyle(color: Colors.white)),
-                )
-              ],
-            )))),
+                padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+                child: Center(
+                    child: Column(
+                  children: <Widget>[
+                    Text('${promo.name} (${promo.id})'),
+                    Text(
+                        '${promo.type} ${promo.repeat} ${promo.start}~${promo.end}'),
+                    Text(
+                        '@ ${promo.rate.toString()}% for ${promo.category.name} (${promo.category.id})'),
+                    RaisedButton(
+                      color: Colors.redAccent,
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, '/remove_promo',
+                            arguments: RemovePromoMeta(card, promo));
+                      },
+                      child:
+                          Text('Remove', style: TextStyle(color: Colors.white)),
+                    )
+                  ],
+                )))),
       ),
     );
   }

@@ -53,13 +53,11 @@ class _DataStoreModeSelection extends State<DataStoreModeSelection> {
                 <PopupMenuEntry<DataStoreMode>>[
               const PopupMenuItem<DataStoreMode>(
                 value: DataStoreMode.ONLINE,
-                child:
-                    Text('Online Mode'),
+                child: Text('Online Mode'),
               ),
               const PopupMenuItem<DataStoreMode>(
                 value: DataStoreMode.OFFLINE,
-                child:
-                    Text('Offline Mode'),
+                child: Text('Offline Mode'),
               ),
               const PopupMenuItem<DataStoreMode>(
                 value: DataStoreMode.IN_MEMORY,

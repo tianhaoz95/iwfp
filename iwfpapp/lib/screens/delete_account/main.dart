@@ -21,7 +21,8 @@ class _DeleteAccountScreen extends State<DeleteAccountScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    CloudFuncResponse deleteAccountResponse = await widget.dataStore.deleteAccount();
+    CloudFuncResponse deleteAccountResponse =
+        await widget.dataStore.deleteAccount();
     if (deleteAccountResponse.status == ResponseStatus.SUCCEESS) {
       setState(() {
         status = SubmitScreenStatus.DONE;
@@ -43,35 +44,27 @@ class _DeleteAccountScreen extends State<DeleteAccountScreen> {
             height: 5.0,
           ),
           Material(
-            color: Colors.orange[100],
             child: Card(
-              color: Colors.orange,
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 5.0,
+                    height: 15.0,
                   ),
                   Container(
                     child: Center(
-                      child: Text(
-                        'Are you sure?',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      child: Text('Are you sure?'),
                     ),
                   ),
                   SizedBox(
-                    height: 5.0,
+                    height: 15.0,
                   ),
                   Container(
                     child: Center(
-                      child: Text(
-                        'Once delete, it cannot be recovered',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      child: Text('Once delete, it cannot be recovered'),
                     ),
                   ),
                   SizedBox(
-                    height: 5.0,
+                    height: 15.0,
                   ),
                 ],
               ),
@@ -161,7 +154,6 @@ class _DeleteAccountScreen extends State<DeleteAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
         title: Text('Delete Account?'),
         leading: FlatButton(
           key: Key('delete_account_back_btn'),
@@ -175,7 +167,6 @@ class _DeleteAccountScreen extends State<DeleteAccountScreen> {
           },
         ),
       ),
-      backgroundColor: Colors.orange[100],
       body: renderContent(context),
     );
   }

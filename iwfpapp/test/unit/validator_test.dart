@@ -87,7 +87,8 @@ void main() {
     });
 
     test('password confirmation not match should fail', () {
-      ValidationResponse response = isValidRegisterInfo('tianhaoz@umich.edu', '250250abc', '250250xyz');
+      ValidationResponse response =
+          isValidRegisterInfo('tianhaoz@umich.edu', '250250abc', '250250xyz');
       expect(response.valid, false);
     });
   });

@@ -17,9 +17,11 @@ void main() {
     await tester.pumpWidget(MyApp(mockDataStore, mockAuth, mockMode));
     await tester.pump();
     await tester.pumpAndSettle(new Duration(seconds: 5));
-    await tester.enterText(find.byKey(Key('sign_in_email_input')), 'test_acct_0@iwfp.com');
+    await tester.enterText(
+        find.byKey(Key('sign_in_email_input')), 'test_acct_0@iwfp.com');
     await tester.pumpAndSettle();
-    await tester.enterText(find.byKey(Key('sign_in_password_input')), 'Test0%12345');
+    await tester.enterText(
+        find.byKey(Key('sign_in_password_input')), 'Test0%12345');
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(Key('email_sign_in_btn')));
     await tester.pumpAndSettle(new Duration(seconds: 5));

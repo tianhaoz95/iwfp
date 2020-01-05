@@ -128,11 +128,6 @@ class _LoginScreen extends State<LoginScreen> {
       padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 15.0),
-          Image.asset(
-            'assets/iwfp_splash.png',
-            key: Key('iwfp_splash_img'),
-          ),
           SizedBox(height: 25.0),
           GoToHomeButton(
             onPressedCallback: () async {
@@ -155,10 +150,23 @@ class _LoginScreen extends State<LoginScreen> {
       padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 15.0),
-          Image.asset(
-            'assets/blue_splash.png',
-            key: Key('iwfp_splash_img'),
+          SizedBox(height: 25.0),
+          Container(
+            child: Center(
+              child: Text(
+                'Welcome to I want 5%',
+                style: TextStyle(fontSize: 25.0),
+                key: Key('iwfp_welcome_title'),
+              ),
+            ),
+          ),
+          SizedBox(height: 25.0),
+          Container(
+            child: Center(
+              child: Text('May the 5% be with you',
+                  style: TextStyle(fontSize: 15.0),
+                  key: Key('iwfp_welcome_subtitle')),
+            ),
           ),
           SizedBox(height: 25.0),
           TextField(
@@ -181,7 +189,6 @@ class _LoginScreen extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(5.0)))),
           SizedBox(height: 25.0),
           Material(
-            color: Colors.blue[100],
             child: RaisedButton(
               color: Colors.green,
               key: Key('email_sign_in_btn'),
@@ -195,7 +202,6 @@ class _LoginScreen extends State<LoginScreen> {
             ),
           ),
           Material(
-            color: Colors.blue[100],
             child: RaisedButton(
               color: Colors.redAccent,
               child: Text(
@@ -208,7 +214,6 @@ class _LoginScreen extends State<LoginScreen> {
             ),
           ),
           Material(
-            color: Colors.blue[100],
             child: RaisedButton(
               color: Colors.amber[900],
               child: Text(
@@ -221,7 +226,6 @@ class _LoginScreen extends State<LoginScreen> {
             ),
           ),
           Material(
-            color: Colors.blue[100],
             child: RaisedButton(
               color: Colors.blue,
               child: Text(
@@ -260,7 +264,6 @@ class _LoginScreen extends State<LoginScreen> {
     return Scaffold(
         appBar: AppBar(title: Text(mode.devifyString('Welcome to iwfp'))),
         key: Key('login_screen'),
-        backgroundColor: Colors.blue[100],
         body: bodyContent);
   }
 }

@@ -79,8 +79,7 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
                       width: MediaQuery.of(context).size.width,
                       child: Center(
                         child: Text(
-                          '${removePromoMeta.promo.name} (${removePromoMeta.promo.id})'
-                        ),
+                            '${removePromoMeta.promo.name} (${removePromoMeta.promo.id})'),
                       )),
                   SizedBox(
                     height: 5.0,
@@ -93,8 +92,7 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
                       width: MediaQuery.of(context).size.width,
                       child: Center(
                         child: Text(
-                          '${removePromoMeta.card.name} (${removePromoMeta.card.id})'
-                        ),
+                            '${removePromoMeta.card.name} (${removePromoMeta.card.id})'),
                       )),
                   SizedBox(
                     height: 5.0,
@@ -203,11 +201,10 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
                 'Back to editing card',
                 style: TextStyle(color: Colors.white),
               ),
-              color: Colors.amber[900],
+              color: Colors.green,
               onPressed: () {
                 CreditCard modifiedCard = removePromoMeta.card;
                 modifiedCard.removePromo(removePromoMeta.promo);
-                Navigator.maybePop(context);
                 Navigator.pushReplacementNamed(context, '/edit_card',
                     arguments: modifiedCard);
               },

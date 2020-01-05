@@ -125,7 +125,10 @@ class _HomeScreen extends State<HomeScreen> {
               key: homeTabs[currentTabId].titleKey),
           actions: <Widget>[
             FlatButton(
-              child: Icon(Icons.refresh, color: Colors.white,),
+              child: Icon(
+                Icons.refresh,
+                color: Colors.white,
+              ),
               onPressed: () async {
                 await handleRefresh();
               },

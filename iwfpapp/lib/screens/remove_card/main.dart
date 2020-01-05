@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/data_store.dart';
 
@@ -71,13 +72,13 @@ class _RemoveCardScreen extends State<RemoveCardScreen> {
     return Container(
       child: Center(
           child: Material(
-        color: Colors.cyan[100],
         child: RaisedButton(
-          color: Colors.cyan,
+          color: Colors.green,
           child:
               Text('Done! Back to main', style: TextStyle(color: Colors.white)),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/');
+            Navigator.pushReplacementNamed(context, '/',
+                arguments: HomeTabId.CARD_MANAGEMENT);
           },
         ),
       )),
@@ -115,68 +116,72 @@ class _RemoveCardScreen extends State<RemoveCardScreen> {
             height: 5.0,
           ),
           Material(
-            color: Colors.cyan[100],
             child: Card(
-              color: Colors.cyan,
               child: Column(
                 children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                    child: Center(
-                      child: Text('Remove Credit Card',
-                          style: TextStyle(color: Colors.white)),
-                    ),
+                  SizedBox(
+                    height: 15.0,
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
                     child: Center(
-                      child: Text('Card Name: ' + card.name,
-                          style: TextStyle(color: Colors.white)),
+                      child: Text('Removing Credit Card'),
                     ),
+                  ),
+                  SizedBox(
+                    height: 15.0,
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
                     child: Center(
-                      child: Text('Card ID: ' + card.id,
-                          style: TextStyle(color: Colors.white)),
+                      child: Text('${card.name} (${card.id})'),
                     ),
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                    child: Center(
+                      child: Text('Once removed, it cannot be recovered!'),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15.0,
                   ),
                 ],
               ),
             ),
           ),
           Material(
-              color: Colors.cyan[100],
               child: Container(
-                padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-                child: RaisedButton(
-                  color: Colors.redAccent,
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                    child:
-                        Text('Delete', style: TextStyle(color: Colors.white)),
-                  ),
-                  onPressed: () {
-                    handleRemoveCard();
-                  },
-                ),
-              )),
+            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+            child: RaisedButton(
+              color: Colors.redAccent,
+              child: Container(
+                padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                child: Text('Delete', style: TextStyle(color: Colors.white)),
+              ),
+              onPressed: () {
+                handleRemoveCard();
+              },
+            ),
+          )),
           Material(
-              color: Colors.cyan[100],
               child: Container(
-                padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-                child: RaisedButton(
-                  color: Colors.green,
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                    child:
-                        Text('Cancel', style: TextStyle(color: Colors.white)),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              )),
+            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+            child: RaisedButton(
+              color: Colors.green,
+              child: Container(
+                padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                child: Text('Cancel', style: TextStyle(color: Colors.white)),
+              ),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/',
+                    arguments: HomeTabId.CARD_MANAGEMENT);
+              },
+            ),
+          )),
         ],
       ),
     );
@@ -187,9 +192,7 @@ class _RemoveCardScreen extends State<RemoveCardScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Remove Card'),
-        backgroundColor: Colors.cyan,
       ),
-      backgroundColor: Colors.cyan[100],
       body: renderContent(context),
     );
   }

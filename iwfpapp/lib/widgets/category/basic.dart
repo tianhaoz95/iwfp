@@ -10,20 +10,25 @@ class BasicCategory extends StatelessWidget {
     return Material(
         child: Card(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                SizedBox(height: 45.0, width: 25.0),
-                Text(categoryMetaData.name),
-                SizedBox(height: 45.0, width: 25.0),
-                FlatButton(
-                  child: Text('Select'),
-                  key: Key(categoryMetaData.id + '_select_btn'),
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/suggestion',
-                        arguments: categoryMetaData);
-                  },
-                ),
-              ],
-            )));
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width - 200.0,
+          child: Text(categoryMetaData.name),
+        ),
+        Container(
+          width: 100.0,
+          alignment: Alignment.centerRight,
+          child: FlatButton(
+            child: Text('Select'),
+            key: Key(categoryMetaData.id + '_select_btn'),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/suggestion',
+                  arguments: categoryMetaData);
+            },
+          ),
+        ),
+      ],
+    )));
   }
 }

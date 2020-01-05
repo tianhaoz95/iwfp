@@ -251,23 +251,25 @@ class _AddPromoScreen extends State<AddPromoScreen> {
                   SizedBox(
                     height: 15.0,
                   ),
-                  Text('Promotion Added',
-                      style: TextStyle(color: Colors.white)),
+                  Text('Promotion Added'),
                   SizedBox(
                     height: 15.0,
                   ),
-                  RaisedButton(
-                    color: Colors.amber[900],
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/edit_card',
-                          arguments: widget.dataStore.renewCard(card));
-                    },
-                    child: Text(
-                      'Back to Card Editing',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
                 ],
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+            child: RaisedButton(
+              color: Colors.green,
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/edit_card',
+                    arguments: widget.dataStore.renewCard(card));
+              },
+              child: Text(
+                'Back to Card Editing',
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ),

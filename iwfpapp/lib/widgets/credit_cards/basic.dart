@@ -48,10 +48,10 @@ class BasicCreditCard extends StatelessWidget {
               promoRate = promo.rate;
             }
             return Container(
-              padding: EdgeInsets.fromLTRB(1.0, 0.0, 1.0, 0.0),
-              child: Chip(
-                label: Text(promoName + '@' + promoRate.toString() + '%',
-                    style: TextStyle(color: Colors.white))));
+                padding: EdgeInsets.fromLTRB(1.0, 0.0, 1.0, 0.0),
+                child: Chip(
+                    label: Text(promoName + '@' + promoRate.toString() + '%',
+                        style: TextStyle(color: Colors.white))));
           }).toList(),
         ),
       ),
@@ -100,7 +100,6 @@ class BasicCreditCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: Card(
-            child: Column(children: getCardContent(context))));
+        child: Card(child: Column(children: getCardContent(context))));
   }
 }

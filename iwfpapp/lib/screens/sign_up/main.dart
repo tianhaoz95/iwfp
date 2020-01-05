@@ -52,7 +52,8 @@ class _SignUpScreen extends State<SignUpScreen> {
     String email = emailCtrl.text;
     String pwd = pwdCtrl.text;
     String pwdConfirm = pwdConfirmCtrl.text;
-    ValidationResponse registerValidationResponse = isValidRegisterInfo(email, pwd, pwdConfirm);
+    ValidationResponse registerValidationResponse =
+        isValidRegisterInfo(email, pwd, pwdConfirm);
     if (!registerValidationResponse.valid) {
       await promptWarning(context, registerValidationResponse.messages);
       return;
@@ -142,35 +143,33 @@ class _SignUpScreen extends State<SignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0))))),
           Material(
-              color: Colors.blue[100],
               child: Container(
-                padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-                child: RaisedButton(
-                  color: Colors.green,
-                  onPressed: () {
-                    handleSignUp();
-                  },
-                  child: Text(
-                    'Register',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              )),
+            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+            child: RaisedButton(
+              color: Colors.green,
+              onPressed: () {
+                handleSignUp();
+              },
+              child: Text(
+                'Register',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )),
           Material(
-              color: Colors.blue[100],
               child: Container(
-                padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-                child: RaisedButton(
-                  color: Colors.amber[900],
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/sign_in');
-                  },
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              )),
+            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+            child: RaisedButton(
+              color: Colors.amber[900],
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/sign_in');
+              },
+              child: Text(
+                'Cancel',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )),
         ],
       ),
     );
@@ -213,20 +212,19 @@ class _SignUpScreen extends State<SignUpScreen> {
       child: ListView(
         children: <Widget>[
           Material(
-              color: Colors.blue[100],
               child: Container(
-                padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-                child: RaisedButton(
-                  color: Colors.blue,
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/sign_in');
-                  },
-                  child: Text(
-                    'Done! Sign in.',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              )),
+            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+            child: RaisedButton(
+              color: Colors.green,
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/sign_in');
+              },
+              child: Text(
+                'Done! Sign in.',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )),
         ],
       ),
     );
@@ -277,7 +275,6 @@ class _SignUpScreen extends State<SignUpScreen> {
       appBar: AppBar(
         title: Text('Sign up for iwfpapp'),
       ),
-      backgroundColor: Colors.blue[100],
       body: renderContent(context),
     );
   }

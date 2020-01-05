@@ -12,7 +12,7 @@ class LogoutButton extends StatelessWidget {
         key: Key('logout_btn'),
         elevation: 0.0,
         borderRadius: BorderRadius.circular(30.0),
-        color: Colors.blue,
+        color: Colors.redAccent,
         child: MaterialButton(
             minWidth: MediaQuery.of(context).size.width,
             padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),

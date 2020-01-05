@@ -6,8 +6,7 @@ import 'mock_services/mock_auth.dart';
 import 'validators/obscure_input_validator.dart';
 
 void main() {
-  testWidgets('test sign up screen details',
-      (WidgetTester tester) async {
+  testWidgets('test sign up screen details', (WidgetTester tester) async {
     IwfpappAuth mockAuth = MockIwfpappAuth();
     await tester.pumpWidget(MaterialApp(
       title: 'stand-alone sign up screen',

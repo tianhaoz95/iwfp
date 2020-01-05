@@ -12,7 +12,8 @@ class UpdateSettingsButton extends StatelessWidget {
       child: Material(
         child: RaisedButton(
           color: Colors.green,
-          child: Text('Update Developer Settings', style: TextStyle(color: Colors.white)),
+          child: Text('Update Developer Settings',
+              style: TextStyle(color: Colors.white)),
           onPressed: () {
             handleUpdateSettings(context);
           },

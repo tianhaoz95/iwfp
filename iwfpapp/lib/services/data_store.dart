@@ -71,6 +71,7 @@ class DataStore {
       await removeCardCallable.call(<String, dynamic>{'cardUid': card.id});
       response.status = ResponseStatus.SUCCEESS;
       response.msg = 'na';
+      needRefresh = true;
       return response;
     } catch (err) {
       response.status = ResponseStatus.FAILURE;
