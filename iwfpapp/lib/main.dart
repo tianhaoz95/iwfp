@@ -6,6 +6,7 @@ import 'package:iwfpapp/screens/home/main.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/login/main.dart';
 import 'package:iwfpapp/screens/remove_promo/main.dart';
+import 'package:iwfpapp/screens/screen_tester/main.dart';
 import 'package:iwfpapp/screens/sign_up/main.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/services/data_store.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
         '/add_promo': (context) => AddPromoScreen(dataStore),
         '/remove_promo': (context) => RemovePromoScreen(dataStore),
         '/delete_account': (context) => DeleteAccountScreen(dataStore, auth),
+        '/screen_tester': (context) => ScreenTester(),
       },
     );
   }

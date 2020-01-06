@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/dev_nav_config.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
@@ -34,6 +35,15 @@ class _AddCardScreen extends State<AddCardScreen> {
       status = SubmitScreenStatus.ERROR;
     } else {
       dataStore = widget.dataStore;
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (ModalRoute.of(context).settings.arguments != null) {
+      DevNavConfig navConfig = ModalRoute.of(context).settings.arguments;
+      status = navConfig.status;
     }
   }
 
@@ -97,8 +107,24 @@ class _AddCardScreen extends State<AddCardScreen> {
 
   Widget renderLoading(BuildContext context) {
     return Container(
-      child: Center(
-        child: CircularProgressIndicator(),
+      child: ListView(
+        children: <Widget>[
+          LinearProgressIndicator(
+            backgroundColor: Colors.white,
+          ),
+          SizedBox(height: 25.0,),
+          Center(
+            child: Text('Adding credit card to your wallet...'),
+          ),
+          SizedBox(height: 25.0,),
+          Center(
+            child: Text('Please be patient...'),
+          ),
+          SizedBox(height: 25.0,),
+          Center(
+            child: Text('This should take a few seconds...'),
+          ),
+        ],
       ),
     );
   }

@@ -20,6 +20,12 @@ class DevelopCard extends StatelessWidget {
               Text('Developer Settings'),
               DevelopmentModeToggle(initIsDevVal, setIsDevCallbackFunc),
               DataStoreModeSelection(),
+              FlatButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/screen_tester');
+                },
+                child: Text('Go to Screen Tester'),
+              ),
             ],
           ),
         ),
