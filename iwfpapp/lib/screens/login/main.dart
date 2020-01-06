@@ -129,6 +129,13 @@ class _LoginScreen extends State<LoginScreen> {
       child: ListView(
         children: <Widget>[
           SizedBox(height: 25.0),
+          Container(
+            child: Center(
+              child: Text('Welcome Back!'),
+            ),
+            key: Key('sign_in_welcome_back_title'),
+          ),
+          SizedBox(height: 25.0),
           GoToHomeButton(
             onPressedCallback: () async {
               Navigator.pushReplacementNamed(context, '/');
