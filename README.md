@@ -12,7 +12,7 @@ iwfp (I want five percent) is a utility to help everyone who uses credit cards m
 
 **A quick look** (where you select a shopping category and it tells you which card is the best):
 
-<img height="500px" alt="demo app usage" src="./website/static/img/app_demo_animation.gif" />
+![App Screenshots](./website/static/img/app_screenshots.png)
 
 ## Getting Started
 
