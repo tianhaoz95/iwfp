@@ -31,7 +31,7 @@ class BasicCreditCard extends StatelessWidget {
       Row(
         children: <Widget>[
           SizedBox(height: 45.0, width: 25.0),
-          Text(renderCardName(), style: TextStyle(color: Colors.white)),
+          Text(renderCardName()),
         ],
       ),
       Container(
@@ -47,10 +47,11 @@ class BasicCreditCard extends StatelessWidget {
             if (promo.rate != null) {
               promoRate = promo.rate;
             }
-            return Chip(
-                backgroundColor: color[600],
-                label: Text(promoName + '@' + promoRate.toString() + '%',
-                    style: TextStyle(color: Colors.white)));
+            return Container(
+                padding: EdgeInsets.fromLTRB(1.0, 0.0, 1.0, 0.0),
+                child: Chip(
+                    label: Text(promoName + '@' + promoRate.toString() + '%',
+                        style: TextStyle(color: Colors.white))));
           }).toList(),
         ),
       ),
@@ -70,23 +71,23 @@ class BasicCreditCard extends StatelessWidget {
       return Row(
         children: <Widget>[
           Material(
-            color: color,
+            color: Colors.white,
             child: FlatButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/edit_card',
                     arguments: cardMetaData);
               },
-              child: Text('Edit', style: TextStyle(color: Colors.white)),
+              child: Text('Edit'),
             ),
           ),
           Material(
-            color: color,
+            color: Colors.white,
             child: FlatButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/remove_card',
                     arguments: cardMetaData);
               },
-              child: Text('Remove', style: TextStyle(color: Colors.white)),
+              child: Text('Remove'),
             ),
           )
         ],
@@ -99,8 +100,6 @@ class BasicCreditCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: color[100],
-        child: Card(
-            color: color, child: Column(children: getCardContent(context))));
+        child: Card(child: Column(children: getCardContent(context))));
   }
 }

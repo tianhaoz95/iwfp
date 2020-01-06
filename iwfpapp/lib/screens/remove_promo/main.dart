@@ -65,11 +65,13 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
             height: 5.0,
           ),
           Material(
-            color: Colors.cyan[100],
             child: Card(
-              color: Colors.cyan,
               child: Column(
                 children: <Widget>[
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text('Deleting promotion'),
                   SizedBox(
                     height: 5.0,
                   ),
@@ -77,19 +79,26 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
                       width: MediaQuery.of(context).size.width,
                       child: Center(
                         child: Text(
-                          'Delete promotion ' +
-                              removePromoMeta.promo.id +
-                              ' from ' +
-                              removePromoMeta.card.name,
-                          style: TextStyle(color: Colors.white),
-                        ),
+                            '${removePromoMeta.promo.name} (${removePromoMeta.promo.id})'),
+                      )),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text('from'),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: Text(
+                            '${removePromoMeta.card.name} (${removePromoMeta.card.id})'),
                       )),
                   SizedBox(
                     height: 5.0,
                   ),
                   Text(
-                    'It cannot be recovered',
-                    style: TextStyle(color: Colors.white),
+                    'Warning: It cannot be recovered',
                   ),
                   SizedBox(
                     height: 5.0,
@@ -164,9 +173,7 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
       child: ListView(
         children: <Widget>[
           Material(
-            color: Colors.cyan[100],
             child: Card(
-              color: Colors.cyan,
               child: Column(
                 children: <Widget>[
                   SizedBox(
@@ -177,7 +184,6 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
                     child: Center(
                       child: Text(
                         'Promotion removed',
-                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
@@ -195,11 +201,10 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
                 'Back to editing card',
                 style: TextStyle(color: Colors.white),
               ),
-              color: Colors.amber[900],
+              color: Colors.green,
               onPressed: () {
                 CreditCard modifiedCard = removePromoMeta.card;
                 modifiedCard.removePromo(removePromoMeta.promo);
-                Navigator.maybePop(context);
                 Navigator.pushReplacementNamed(context, '/edit_card',
                     arguments: modifiedCard);
               },
@@ -238,10 +243,8 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
         child: Scaffold(
           appBar: AppBar(
             title: Text('Remove Promotion'),
-            backgroundColor: Colors.cyan,
           ),
           body: renderContent(context),
-          backgroundColor: Colors.cyan[100],
         ));
   }
 }

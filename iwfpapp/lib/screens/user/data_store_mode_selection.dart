@@ -38,12 +38,10 @@ class _DataStoreModeSelection extends State<DataStoreModeSelection> {
       padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
       child: Row(
         children: <Widget>[
-          Text(label, style: TextStyle(color: Colors.white)),
+          Text(label),
           PopupMenuButton<DataStoreMode>(
-            color: Colors.orange[400],
             icon: Icon(
               Icons.arrow_drop_down_circle,
-              color: Colors.orange[100],
             ),
             initialValue: DataStoreMode.ONLINE,
             onSelected: (DataStoreMode nextMode) {
@@ -55,18 +53,15 @@ class _DataStoreModeSelection extends State<DataStoreModeSelection> {
                 <PopupMenuEntry<DataStoreMode>>[
               const PopupMenuItem<DataStoreMode>(
                 value: DataStoreMode.ONLINE,
-                child:
-                    Text('Online Mode', style: TextStyle(color: Colors.white)),
+                child: Text('Online Mode'),
               ),
               const PopupMenuItem<DataStoreMode>(
                 value: DataStoreMode.OFFLINE,
-                child:
-                    Text('Offline Mode', style: TextStyle(color: Colors.white)),
+                child: Text('Offline Mode'),
               ),
               const PopupMenuItem<DataStoreMode>(
                 value: DataStoreMode.IN_MEMORY,
-                child: Text('In-memory Mode',
-                    style: TextStyle(color: Colors.white)),
+                child: Text('In-memory Mode'),
               ),
             ],
           ),

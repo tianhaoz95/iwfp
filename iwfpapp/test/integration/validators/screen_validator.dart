@@ -18,7 +18,7 @@ void validateSignInFailedContent() {
 }
 
 void validateIsLoginScreenContent() {
-  expect(find.byKey(Key('iwfp_splash_img')), findsOneWidget);
+  expect(find.byKey(Key('sign_in_welcome_back_title')), findsOneWidget);
 }
 
 void validateIsShopScreenContent() {

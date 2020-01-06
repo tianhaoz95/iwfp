@@ -44,24 +44,14 @@ class _EditCardScreen extends State<EditCardScreen> {
     List<Widget> promos = renderPromotions(context);
     List<Widget> contentList = [
       Material(
-        color: Colors.cyan[100],
         child: Card(
-          color: Colors.cyan,
           child: Column(
             children: <Widget>[
               SizedBox(
                 height: 15.0,
               ),
               Center(
-                child: Text('Card Name: ' + card.name,
-                    style: TextStyle(color: Colors.white)),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Center(
-                child: Text('Card ID: ' + card.id,
-                    style: TextStyle(color: Colors.white)),
+                child: Text('${card.name} (${card.id})'),
               ),
               SizedBox(
                 height: 15.0,
@@ -148,10 +138,8 @@ class _EditCardScreen extends State<EditCardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Card ' + card.name),
-        backgroundColor: Colors.cyan,
+        title: Text('Edit Card'),
       ),
-      backgroundColor: Colors.cyan[100],
       body: renderContent(context),
     );
   }

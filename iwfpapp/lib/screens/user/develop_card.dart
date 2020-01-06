@@ -11,15 +11,13 @@ class DevelopCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Material(
-        color: Colors.orange[100],
         child: Card(
-          color: Colors.orange,
           child: Column(
             children: <Widget>[
               SizedBox(
                 height: 5.0,
               ),
-              Text('Developer Settings', style: TextStyle(color: Colors.white)),
+              Text('Developer Settings'),
               DevelopmentModeToggle(initIsDevVal, setIsDevCallbackFunc),
               DataStoreModeSelection(),
             ],

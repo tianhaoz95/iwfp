@@ -8,24 +8,27 @@ class BasicCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.teal[100],
         child: Card(
-            color: Colors.teal,
             child: Row(
-              children: <Widget>[
-                SizedBox(height: 45.0, width: 25.0),
-                Text(categoryMetaData.name,
-                    style: TextStyle(color: Colors.white)),
-                SizedBox(height: 45.0, width: 25.0),
-                FlatButton(
-                  child: Text('Select', style: TextStyle(color: Colors.white)),
-                  key: Key(categoryMetaData.id + '_select_btn'),
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/suggestion',
-                        arguments: categoryMetaData);
-                  },
-                ),
-              ],
-            )));
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width - 200.0,
+          child: Text(categoryMetaData.name),
+        ),
+        Container(
+          width: 100.0,
+          alignment: Alignment.centerRight,
+          child: FlatButton(
+            child: Text('Select'),
+            key: Key(categoryMetaData.id + '_select_btn'),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/suggestion',
+                  arguments: categoryMetaData);
+            },
+          ),
+        ),
+      ],
+    )));
   }
 }

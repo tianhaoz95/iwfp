@@ -15,6 +15,7 @@ import 'package:iwfpapp/screens/remove_card/main.dart';
 import 'package:iwfpapp/screens/edit_card/main.dart';
 import 'package:iwfpapp/services/mode.dart';
 import 'package:iwfpapp/screens/add_promo/main.dart';
+import 'package:iwfpapp/services/theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,9 +50,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'iwfp',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: theme,
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(mode, dataStore, auth),

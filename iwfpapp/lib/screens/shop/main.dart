@@ -67,9 +67,13 @@ class _ShopNow extends State<ShopNow> {
                     padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
                     child: RaisedButton(
                       color: Colors.green,
-                      child: Text('Go to card wallet', style: TextStyle(color: Colors.white),),
+                      child: Text(
+                        'Go to card wallet',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/', arguments: HomeTabId.CARD_MANAGEMENT);
+                        Navigator.pushReplacementNamed(context, '/',
+                            arguments: HomeTabId.CARD_MANAGEMENT);
                       },
                     ),
                   ),

@@ -70,13 +70,10 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
             height: 5.0,
           ),
           Material(
-            color: Colors.cyan[100],
             child: Card(
-              color: Colors.cyan,
               child: Container(
                 padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                child: Text('Card added from template',
-                    style: TextStyle(color: Colors.white)),
+                child: Text('Card added from template'),
               ),
             ),
           ),
@@ -180,7 +177,6 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[100],
       appBar: AppBar(
         title: Text('Add Card from Templates'),
         leading: FlatButton(
@@ -193,7 +189,6 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
             Navigator.pushReplacementNamed(context, '/add_card');
           },
         ),
-        backgroundColor: Colors.cyan,
       ),
       body: renderContent(context),
     );

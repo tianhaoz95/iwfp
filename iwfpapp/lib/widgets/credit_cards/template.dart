@@ -19,7 +19,7 @@ class TemplateCreditCard extends StatelessWidget {
         onPressed: () {
           onPressedAddTemplate();
         },
-        child: Text('Add Template', style: TextStyle(color: Colors.white)),
+        child: Text('Add Template'),
       ),
     );
   }

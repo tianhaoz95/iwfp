@@ -12,7 +12,7 @@ class GoToHomeButton extends StatelessWidget {
         key: Key('go_to_home_btn'),
         elevation: 0.0,
         borderRadius: BorderRadius.circular(30.0),
-        color: Colors.blue,
+        color: Theme.of(context).primaryColor,
         child: MaterialButton(
             minWidth: MediaQuery.of(context).size.width,
             padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
