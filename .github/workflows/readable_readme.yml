@@ -1,0 +1,17 @@
+name: readable readme
+on:
+  pull_request:
+    branches:
+      - "master"
+  push:
+    branches:
+      - "master"
+jobs:
+  lint-readme:
+    name: Lint readme files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Readable Readme
+        uses: tianhaoz95/readable-readme@v1.0.0-beta
+          with:
+            token: ${{ secrets.MY_GITHUB_TOKEN }}
