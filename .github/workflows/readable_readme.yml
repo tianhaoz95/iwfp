@@ -13,5 +13,5 @@ jobs:
     steps:
       - name: Readable Readme
         uses: tianhaoz95/readable-readme@v1.0.0-beta
-          with:
-            token: ${{ secrets.MY_GITHUB_TOKEN }}
+        with:
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
