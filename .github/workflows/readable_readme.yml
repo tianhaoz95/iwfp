@@ -1,5 +1,7 @@
 name: readable readme
 on:
+  schedule:
+    - cron: "0 2,14 * * *"
   pull_request:
     branches:
       - "master"
