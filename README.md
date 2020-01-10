@@ -23,6 +23,8 @@ iwfp is available on:
 - [ ] MacOS (not planned. Although [Flutter](https://flutter.dev/) will support it, who knows what will happen when I enable it :scream:)
 - [ ] Windows (not planned. Although [Flutter](https://flutter.dev/) will support it, who knows what will happen when I enable it :scream:)
 
+For the latest updates, please subscribe to [newsletter](https://jacksonz.substack.com).
+
 ## Contribute
 
 Contribution of any kind (code, docs, suggestions, etc) is appreciated! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
