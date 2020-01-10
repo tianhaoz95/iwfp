@@ -2,7 +2,7 @@
 
 ## Overview
 
-![tech stack](./website/static/img/tech_stack.png)
+![tech stack](./docs/assets/tech_stack.png)
 
 ## Getting Started with the client apps: `iwfpapp`
 
