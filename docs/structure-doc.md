@@ -8,6 +8,8 @@ sidebar_label: Project Structure
 
 iwfp is the overall project that aim to provide a utility tool for credit card users to maximize their cash back rewards.
 
+![tech stack](assets/tech_stack.png)
+
 iwfp project consists of:
 * iwfpapp
 * iwfpapi
