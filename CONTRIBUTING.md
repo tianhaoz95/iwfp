@@ -1,5 +1,9 @@
 # Contribute to the `iwfp` project
 
+## Overview
+
+![tech stack](./docs/assets/tech_stack.png)
+
 ## Getting Started with the client apps: `iwfpapp`
 
 This part contains all the client apps (Android, IOS and Web). The project is written in a cross-platform
