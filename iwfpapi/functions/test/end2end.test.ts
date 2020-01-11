@@ -78,16 +78,16 @@ describe("end 2 end tests", () => {
       expect(err.code).toBe("not-found");
     }
     await addCreditCardCallable({
-      cardData: "test_card_name_0",
-      cardUid: "test_card_0"
+      name: "test_card_name_0",
+      id: "test_card_0"
     });
     await addCreditCardCallable({
-      cardData: "test_card_name_1",
-      cardUid: "test_card_1"
+      name: "test_card_name_1",
+      id: "test_card_1"
     });
     await addCreditCardCallable({
-      cardData: "test_card_name_2",
-      cardUid: "test_card_2"
+      name: "test_card_name_2",
+      id: "test_card_2"
     });
     const cardsAfterAdding = await getCreditCardsCallable();
     expect(cardsAfterAdding.data["test_card_0"]).toBeDefined;
@@ -104,16 +104,16 @@ describe("end 2 end tests", () => {
 
   test("add card should not crash", async () => {
     const response = await addCreditCardCallable({
-      cardData: "test_card_name",
-      cardUid: "test_card_uid"
+      name: "test_card_name",
+      id: "test_card_uid"
     });
     expect(response).toBeNull;
   });
 
   test("add promo should not crash", async () => {
     const addCardResponse = await addCreditCardCallable({
-      cardData: "test_card_name",
-      cardUid: "test_card_uid"
+      name: "test_card_name",
+      id: "test_card_uid"
     });
     expect(addCardResponse).toBeNull;
     const addPromoResponse = await addPromoCallable(BasicPromo);
@@ -122,8 +122,8 @@ describe("end 2 end tests", () => {
 
   test("add promo content should match", async () => {
     const addCardResponse = await addCreditCardCallable({
-      cardData: "test_card_name",
-      cardUid: "test_card_uid"
+      name: "test_card_name",
+      id: "test_card_uid"
     });
     expect(addCardResponse).toBeNull;
     const addPromoResponse = await addPromoCallable(BasicPromo);
@@ -154,8 +154,8 @@ describe("end 2 end tests", () => {
 
   test("remove promo should clear data", async () => {
     const addCardResponse = await addCreditCardCallable({
-      cardData: "test_card_name",
-      cardUid: "test_card_uid"
+      name: "test_card_name",
+      id: "test_card_uid"
     });
     expect(addCardResponse).toBeNull;
     const addPromoResponse = await addPromoCallable(BasicPromo);
@@ -191,8 +191,8 @@ describe("end 2 end tests", () => {
 
   test("remove card should not crash", async () => {
     const addResponse = await addCreditCardCallable({
-      cardData: "test_card_name",
-      cardUid: "test_card_uid"
+      name: "test_card_name",
+      id: "test_card_uid"
     });
     expect(addResponse).toBeNull;
     const cardSnapAfterAdd = await db
@@ -221,8 +221,8 @@ describe("end 2 end tests", () => {
 
   test("add card backdoor validation", async () => {
     const response = await addCreditCardCallable({
-      cardData: "test_card_name",
-      cardUid: "test_card_uid"
+      name: "test_card_name",
+      id: "test_card_uid"
     });
     expect(response).toBeNull;
     const cardSnap = await db
@@ -253,8 +253,8 @@ describe("end 2 end tests", () => {
       expect(err.code).toBe("not-found");
     }
     const response = await addCreditCardCallable({
-      cardData: "test_card_name",
-      cardUid: "test_card_uid"
+      name: "test_card_name",
+      id: "test_card_uid"
     });
     expect(response).toBeNull;
     const cardsAfterAdding = await getCreditCardsCallable();
@@ -271,8 +271,8 @@ describe("end 2 end tests", () => {
 
   test("remove user should remove user data", async () => {
     const addCardResponse = await addCreditCardCallable({
-      cardData: "test_card_name",
-      cardUid: "test_card_uid"
+      name: "test_card_name",
+      id: "test_card_uid"
     });
     expect(addCardResponse).toBeNull;
     const cardSnapAfterAdd = await db

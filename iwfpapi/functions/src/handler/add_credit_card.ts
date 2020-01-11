@@ -1,19 +1,21 @@
 import { noAuthMsg } from "../config/consts";
 import { CreditCardIdConflictError } from "../config/errors";
-import getUserUid from "../util/uid_getter";
-import isValidAuth from "../util/validate_auth";
+import { CardData, FunctionContext } from "../config/typedefs";
 
-async function addCreditCardHandler(data, context, provider) {
-  if (isValidAuth(context, process.env.FUNCTIONS_EMULATOR)) {
-    const userUid: string = getUserUid(context, process.env.FUNCTIONS_EMULATOR);
+async function addCreditCardHandler(data: CardData, context: FunctionContext, provider) {
+  if (context.authenticated) {
+    const userUid: string = context.uid;
     const userRef = provider.getUserRef(userUid);
-    const cardRef = userRef.collection("cards").doc(data.cardUid);
+    const cardRef = userRef.collection("cards").doc(data.id);
     const cardSnap = await cardRef.get();
     if (cardSnap.exists) {
       throw CreditCardIdConflictError;
     } else {
-      const cardName: string = data.cardData;
-      const status = await cardRef.set({ card_name: cardName });
+      const cardName: string = data.name;
+      const status = await cardRef.set({
+        card_name: cardName,
+        card_id: data.id,
+      });
       return status;
     }
   } else {

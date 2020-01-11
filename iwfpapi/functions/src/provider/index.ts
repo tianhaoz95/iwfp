@@ -3,6 +3,7 @@ import * as admin from "firebase-admin";
 import { TestUserUid } from "../config/consts";
 import { AttemptDeleteNonTestUserError } from "../config/errors";
 import { FunctionContext } from "../config/typedefs";
+import getUserUid from "../util/uid_getter";
 
 class Provider {
   db: FirebaseFirestore.Firestore;
@@ -46,7 +47,22 @@ class Provider {
     }
   }
 
-  async token2auth(token: string): Promise<FunctionContext> {
+  fbContext2context(fbContext: functions.https.CallableContext): FunctionContext {
+    const context: FunctionContext = {
+      authenticated: false,
+      uid: "na",
+    };
+    if (fbContext.auth) {
+      context.authenticated = true;
+      context.uid = getUserUid(fbContext, process.env.FUNCTIONS_EMULATOR);
+    } else {
+      context.authenticated = false;
+      context.uid = "na";
+    }
+    return context;
+  }
+
+  async token2context(token: string): Promise<FunctionContext> {
     const context: FunctionContext = {
       authenticated: false,
       uid: "na",

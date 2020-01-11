@@ -1,4 +1,5 @@
 export interface CardData {
+  valid: boolean;
   id: string;
   name: string;
 }

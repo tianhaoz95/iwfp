@@ -7,11 +7,26 @@ import removePromoHandler from "./handler/remove_promo";
 import getCreditCardHandler from "./handler/get_credit_cards";
 import removeUserHandler from "./handler/remove_user";
 import Provider from "./provider";
+import { FunctionContext, CardData } from "./config/typedefs";
+import { parseCardDataFromRequest } from "./util/parsers/card_data_parser";
 
 const provider = new Provider();
 
-export const addCreditCard = functions.https.onCall(async (data, context) => {
-  await addCreditCardHandler(data, context, provider);
+export const addCreditCard = functions.https.onCall(async (data, fbContext) => {
+  const context: FunctionContext = provider.fbContext2context(fbContext);
+  const cardData: CardData = parseCardDataFromRequest(data);
+  await addCreditCardHandler(cardData, context, provider);
+});
+
+export const httpAddCreditCard = functions.https.onRequest(async (req, res) => {
+  const context: FunctionContext = await provider.token2context(req.body.token);
+  const cardData: CardData = parseCardDataFromRequest(req.body);
+  try {
+    await addCreditCardHandler(cardData, context, provider);
+  } catch (err) {
+    console.log(JSON.stringify(err));
+    res.sendStatus(500);
+  }
 });
 
 export const removeCreditCard = functions.https.onCall(
