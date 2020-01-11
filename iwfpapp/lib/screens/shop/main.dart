@@ -33,9 +33,7 @@ class _ShopNow extends State<ShopNow> {
               child: ListView(
                 children: <Widget>[
                   Material(
-                    color: Colors.teal[100],
                     child: Card(
-                      color: Colors.teal,
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -43,8 +41,7 @@ class _ShopNow extends State<ShopNow> {
                           ),
                           Center(
                             child: Text(
-                              'No shopping sector found',
-                              style: TextStyle(color: Colors.white),
+                              'No shopping sector found'
                             ),
                           ),
                           SizedBox(
@@ -52,8 +49,7 @@ class _ShopNow extends State<ShopNow> {
                           ),
                           Center(
                             child: Text(
-                              'Please consider adding cards',
-                              style: TextStyle(color: Colors.white),
+                              'Please consider adding cards'
                             ),
                           ),
                           SizedBox(
