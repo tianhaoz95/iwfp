@@ -3,7 +3,6 @@ import * as admin from "firebase-admin";
 import { TestUserUid } from "../config/consts";
 import { AttemptDeleteNonTestUserError } from "../config/errors";
 import { FunctionContext } from "../config/typedefs";
-import getUserUid from "../util/uid_getter";
 
 class Provider {
   db: FirebaseFirestore.Firestore;
@@ -52,9 +51,12 @@ class Provider {
       authenticated: false,
       uid: "na",
     };
-    if (fbContext.auth) {
+    if (process.env.FUNCTIONS_EMULATOR) {
       context.authenticated = true;
-      context.uid = getUserUid(fbContext, process.env.FUNCTIONS_EMULATOR);
+      context.uid = "test_user";
+    } else if (fbContext.auth) {
+      context.authenticated = true;
+      context.uid = fbContext.auth.uid;
     } else {
       context.authenticated = false;
       context.uid = "na";

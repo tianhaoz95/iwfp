@@ -14,7 +14,6 @@ async function addCreditCardHandler(data: CardData, context: FunctionContext, pr
       const cardName: string = data.name;
       const status = await cardRef.set({
         card_name: cardName,
-        card_id: data.id,
       });
       return status;
     }
