@@ -2,6 +2,7 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { TestUserUid } from "../config/consts";
 import { AttemptDeleteNonTestUserError } from "../config/errors";
+import { FunctionContext } from "../config/typedefs";
 
 class Provider {
   db: FirebaseFirestore.Firestore;
@@ -43,6 +44,23 @@ class Provider {
     } else {
       await this.auth.deleteUser(uid);
     }
+  }
+
+  async token2auth(token: string): Promise<FunctionContext> {
+    const context: FunctionContext = {
+      authenticated: false,
+      uid: "na",
+    };
+    try {
+      const verifyResult = await this.auth.verifyIdToken(token);
+      context.authenticated = true;
+      context.uid = verifyResult.uid;
+    } catch (err) {
+      console.log(err);
+      context.authenticated = false;
+      context.uid = 'na';
+    }
+    return context;
   }
 }
 
