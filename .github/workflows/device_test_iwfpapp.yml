@@ -66,6 +66,11 @@ jobs:
         run: |
           cd ./iwfpapi/functions
           npm run device
+      - name: upload offline screenshot
+        uses: actions/upload-artifact@master
+        with:
+          name: offline_screenshot_${{ matrix.device }}
+          path: /tmp/iwfpapp_screenshot
       - name: run online device end to end test
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
@@ -77,8 +82,8 @@ jobs:
           flutter pub get
           flutter test
           flutter drive --target=test_driver/app.dart
-      - name: upload screenshot
+      - name: upload online screenshot
         uses: actions/upload-artifact@master
         with:
-          name: screenshot_${{ matrix.device }}
+          name: online_screenshot_${{ matrix.device }}
           path: /tmp/iwfpapp_screenshot
