@@ -16,6 +16,7 @@ class TemplateCreditCard extends StatelessWidget {
   Widget renderTemplateActions(BuildContext context) {
     return Container(
       child: FlatButton(
+        key: Key(card.id + '_add_btn'),
         onPressed: () {
           onPressedAddTemplate();
         },

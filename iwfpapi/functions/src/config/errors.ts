@@ -29,3 +29,8 @@ export const AttemptDeleteNonTestUserError = new functions.https.HttpsError(
   "permission-denied",
   "Deleting normal users in testing mode is not allowed"
 );
+
+export const CardForDeletionNotExist = new functions.https.HttpsError(
+  "not-found",
+  "The credit card to be deleted does not exist"
+);

@@ -205,28 +205,35 @@ describe("end 2 end tests", () => {
       id: "test_card_uid"
     });
     expect(addResponse).toBeNull;
-    const cardSnapAfterAdd = await db
-      .collection("channel")
-      .doc("production-v1")
-      .collection("users")
-      .doc("test_user")
-      .collection("cards")
-      .doc("test_card_uid")
-      .get();
-    expect(cardSnapAfterAdd.exists).toBeTruthy;
+    const cardExistAfterAdd: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterAdd).toBeTruthy;
+    try {
+      await removeCreditCardCallable({
+        id: "test_card_wtf"
+      });
+    } catch (err) {
+      expect(err.code).toBe("not-found");
+    }
+    const cardExistAfterInvalidRemove: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterInvalidRemove).toBeTruthy;
     const removeResponse = await removeCreditCardCallable({
-      cardUid: "test_card_uid"
+      id: "test_card_uid"
     });
     expect(removeResponse).toBeNull;
-    const cardSnapAfterRemove = await db
-      .collection("channel")
-      .doc("production-v1")
-      .collection("users")
-      .doc("test_user")
-      .collection("cards")
-      .doc("test_card_uid")
-      .get();
-    expect(cardSnapAfterRemove.exists).toBeFalsy;
+    const cardExistAfterRemove: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterRemove).toBeFalsy;
   });
 
   test("add card backdoor validation", async () => {

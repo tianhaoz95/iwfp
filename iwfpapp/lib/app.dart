@@ -27,6 +27,7 @@ class IwfpApp extends StatelessWidget {
     return MaterialApp(
       title: 'iwfp',
       theme: theme,
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(mode, dataStore, auth),

@@ -99,6 +99,7 @@ class _HomeScreen extends State<HomeScreen> {
         onPressed: () {
           Navigator.pushReplacementNamed(context, '/add_card');
         },
+        key: Key('add_card_floating_btn'),
         child: Icon(Icons.add),
       );
     }

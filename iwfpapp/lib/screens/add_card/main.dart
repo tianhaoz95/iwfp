@@ -112,15 +112,21 @@ class _AddCardScreen extends State<AddCardScreen> {
           LinearProgressIndicator(
             backgroundColor: Colors.white,
           ),
-          SizedBox(height: 25.0,),
+          SizedBox(
+            height: 25.0,
+          ),
           Center(
             child: Text('Adding credit card to your wallet...'),
           ),
-          SizedBox(height: 25.0,),
+          SizedBox(
+            height: 25.0,
+          ),
           Center(
             child: Text('Please be patient...'),
           ),
-          SizedBox(height: 25.0,),
+          SizedBox(
+            height: 25.0,
+          ),
           Center(
             child: Text('This should take a few seconds...'),
           ),
@@ -160,6 +166,7 @@ class _AddCardScreen extends State<AddCardScreen> {
           RaisedButton(
             color: Colors.amber[900],
             child: Text('From Template', style: TextStyle(color: Colors.white)),
+            key: Key('go_to_add_card_from_template_btn'),
             onPressed: () {
               Navigator.pushReplacementNamed(
                   context, '/add_card_from_template');
@@ -236,7 +243,10 @@ class _AddCardScreen extends State<AddCardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Card'),
+        title: Text(
+          'Add Card',
+          key: Key('add_card_title'),
+        ),
       ),
       body: renderBodyContent(context),
     );

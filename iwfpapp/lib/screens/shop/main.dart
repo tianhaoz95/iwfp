@@ -40,17 +40,13 @@ class _ShopNow extends State<ShopNow> {
                             height: 5.0,
                           ),
                           Center(
-                            child: Text(
-                              'No shopping sector found'
-                            ),
+                            child: Text('No shopping sector found'),
                           ),
                           SizedBox(
                             height: 5.0,
                           ),
                           Center(
-                            child: Text(
-                              'Please consider adding cards'
-                            ),
+                            child: Text('Please consider adding cards'),
                           ),
                           SizedBox(
                             height: 5.0,
@@ -63,6 +59,7 @@ class _ShopNow extends State<ShopNow> {
                     padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
                     child: RaisedButton(
                       color: Colors.green,
+                      key: Key('empty_wallet_jump_to_card_management_btn'),
                       child: Text(
                         'Go to card wallet',
                         style: TextStyle(color: Colors.white),

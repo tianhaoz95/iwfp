@@ -46,13 +46,16 @@ void main() {
       await takeNamedScreenshot(driver, 'sign_in_screen_presubmit_online');
       await driver.tap(find.text('Sign In with Email'));
       await driver.waitFor(find.byValueKey('shop_title'));
-      await takeNamedScreenshot(driver, 'home_screen_online');
+      await takeNamedScreenshot(driver, 'shop_screen_online');
       await driver.tap(find.byValueKey('cards_nav_btn'));
       await driver.waitFor(find.byValueKey('cards_title'));
+      await takeNamedScreenshot(driver, 'card_management_screen_online');
       await driver.tap(find.byValueKey('user_nav_btn'));
       await driver.waitFor(find.byValueKey('user_title'));
+      await takeNamedScreenshot(driver, 'user_settings_screen_online');
       await driver.tap(find.byValueKey('contrib_nav_btn'));
       await driver.waitFor(find.byValueKey('contrib_title'));
+      await takeNamedScreenshot(driver, 'contrib_screen_online');
       await driver.tap(find.byValueKey('shop_nav_btn'));
     });
   });
