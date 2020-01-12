@@ -46,10 +46,12 @@ class Provider {
     }
   }
 
-  fbContext2context(fbContext: functions.https.CallableContext): FunctionContext {
+  fbContext2context(
+    fbContext: functions.https.CallableContext
+  ): FunctionContext {
     const context: FunctionContext = {
       authenticated: false,
-      uid: "na",
+      uid: "na"
     };
     if (process.env.FUNCTIONS_EMULATOR) {
       context.authenticated = true;
@@ -67,8 +69,13 @@ class Provider {
   async token2context(token: string): Promise<FunctionContext> {
     const context: FunctionContext = {
       authenticated: false,
-      uid: "na",
+      uid: "na"
     };
+    if (process.env.FUNCTIONS_EMULATOR) {
+      context.authenticated = true;
+      context.uid = "test_user";
+      return context;
+    }
     try {
       const verifyResult = await this.auth.verifyIdToken(token);
       context.authenticated = true;
@@ -76,7 +83,7 @@ class Provider {
     } catch (err) {
       console.log(err);
       context.authenticated = false;
-      context.uid = 'na';
+      context.uid = "na";
     }
     return context;
   }

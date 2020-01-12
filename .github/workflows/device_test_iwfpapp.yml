@@ -31,6 +31,11 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16.0'
+      - name: install firebase cli
+        run: npm install -g firebase-tools
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '1.12.13+hotfix.5'
@@ -53,7 +58,15 @@ jobs:
               '$1 == device { print $2 }'
           )
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
-      - name: run device end to end test
+      - name: install npm dependencies
+        run: |
+          cd ./iwfpapi/functions
+          npm install
+      - name: run offline device end to end test
+        run: |
+          cd ./iwfpapi/functions
+          npm run device
+      - name: run online device end to end test
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}

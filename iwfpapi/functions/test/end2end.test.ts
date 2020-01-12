@@ -1,12 +1,17 @@
 import * as firebase from "firebase";
 import clearDatabase from "./utilities/clear_database";
 import "firebase/functions";
+import axios, { AxiosResponse } from "axios";
 import {
   EmulatedAppConfig,
   DatabaseSettings,
-  CloudFunctionEmulatorAddress
+  CloudFunctionEmulatorAddress,
+  HttpAddCreditCardEndpoint
 } from "./config/const";
-import { BasicPromo } from "./fixture/promos";
+import { BasicPromo, BasicPromoInDatabase } from "./fixture/promos";
+import { backdoorCardExist } from "./utilities/validators/card_existence";
+import { backdoorPromoExist } from "./utilities/validators/promo_existence";
+import { backdoorGetPromo } from "./utilities/getters/promo";
 jest.setTimeout(20000);
 
 describe("end 2 end tests", () => {
@@ -102,12 +107,24 @@ describe("end 2 end tests", () => {
     }
   });
 
-  test("add card should not crash", async () => {
+  test("add card should succeed", async () => {
     const response = await addCreditCardCallable({
       name: "test_card_name",
       id: "test_card_uid"
     });
     expect(response).toBeNull;
+    const cardExist = await backdoorCardExist(db, "test_user", "test_card_uid");
+    expect(cardExist).toBeTruthy;
+  });
+
+  test("http add card should succeed", async () => {
+    const res: AxiosResponse = await axios.post(HttpAddCreditCardEndpoint, {
+      name: "test_card_name",
+      id: "test_card_uid"
+    });
+    expect(res.status).toEqual(200);
+    const cardExist = await backdoorCardExist(db, "test_user", "test_card_uid");
+    expect(cardExist).toBeTruthy;
   });
 
   test("add promo should not crash", async () => {
@@ -128,28 +145,21 @@ describe("end 2 end tests", () => {
     expect(addCardResponse).toBeNull;
     const addPromoResponse = await addPromoCallable(BasicPromo);
     expect(addPromoResponse).toBeNull;
-    const promoSnap = await db
-      .collection("channel")
-      .doc("production-v1")
-      .collection("users")
-      .doc("test_user")
-      .collection("cards")
-      .doc("test_card_uid")
-      .collection("promos")
-      .doc("test_promo")
-      .get();
-    expect(promoSnap.exists).toBeTruthy;
-    expect(promoSnap.data()).toMatchObject({
-      promo_category_id: "best_buy",
-      promo_category_name: "Best Buy",
-      promo_end: "06/01",
-      promo_id: "test_promo",
-      promo_name: "Test Promo",
-      promo_rate: "5",
-      promo_repeat_pattern: "annual",
-      promo_start: "03/01",
-      promo_type: "brand"
-    });
+    const promoExist: boolean = await backdoorPromoExist(
+      db,
+      "test_user",
+      "test_card_uid",
+      "test_promo"
+    );
+    expect(promoExist).toBeTruthy;
+    const promoData = await backdoorGetPromo(
+      db,
+      "test_user",
+      "test_card_uid",
+      "test_promo"
+    );
+    expect(promoData).toBeDefined;
+    expect(promoData).toMatchObject(BasicPromoInDatabase);
   });
 
   test("remove promo should clear data", async () => {

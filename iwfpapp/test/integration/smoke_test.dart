@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:iwfpapp/app.dart';
 import 'package:iwfpapp/services/mode.dart';
-import 'package:iwfpapp/main.dart';
 import 'validators/screen_validator.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
@@ -14,7 +14,7 @@ void main() {
     DataStore mockDataStore = MockDataStore();
     IwfpappAuth mockAuth = MockIwfpappAuth();
     RunningMode mockMode = MockRunningMode();
-    await tester.pumpWidget(MyApp(mockDataStore, mockAuth, mockMode));
+    await tester.pumpWidget(IwfpApp(mockDataStore, mockAuth, mockMode));
     await tester.pump();
     await tester.pumpAndSettle(new Duration(seconds: 5));
     await tester.enterText(

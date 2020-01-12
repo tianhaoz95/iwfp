@@ -1,8 +1,12 @@
 import { noAuthMsg } from "../config/consts";
 import { CreditCardIdConflictError } from "../config/errors";
-import { CardData, FunctionContext } from "../config/typedefs";
+import { CardCreationRequest, FunctionContext } from "../config/typedefs";
 
-async function addCreditCardHandler(data: CardData, context: FunctionContext, provider) {
+async function addCreditCardHandler(
+  data: CardCreationRequest,
+  context: FunctionContext,
+  provider
+) {
   if (context.authenticated) {
     const userUid: string = context.uid;
     const userRef = provider.getUserRef(userUid);
@@ -13,7 +17,7 @@ async function addCreditCardHandler(data: CardData, context: FunctionContext, pr
     } else {
       const cardName: string = data.name;
       const status = await cardRef.set({
-        card_name: cardName,
+        card_name: cardName
       });
       return status;
     }

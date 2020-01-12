@@ -1,22 +1,16 @@
 class RunningMode {
   bool isDev = false;
-  RunningMode() {
-    /**
-     * This is used to find out if the app is
-     * running under debug mode because assert
-     * only run in debug mode.
-     */
+  bool useEmulator = false;
+  RunningMode({bool emulator}) {
+    setInitialDevMode();
+    if (emulator != null) {
+      useEmulator = emulator;
+    }
+  }
+
+  void setInitialDevMode() {
     assert(() {
-      /**
-       * When the callback function is called
-       * it means the app is running in debug
-       * mode, so set isDev flag to true.
-       */
       isDev = true;
-      /**
-       * This is necessary because otherwise
-       * the assertion will fail.
-       */
       return true;
     }());
   }
