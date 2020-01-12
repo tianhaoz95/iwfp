@@ -4,7 +4,6 @@ import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:iwfpapp/services/mode.dart';
-import 'dart:io' show Platform;
 import 'package:iwfpapp/services/utilities/card_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
