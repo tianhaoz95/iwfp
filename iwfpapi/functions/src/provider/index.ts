@@ -2,6 +2,7 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { TestUserUid } from "../config/consts";
 import { AttemptDeleteNonTestUserError } from "../config/errors";
+import { FunctionContext } from "../config/typedefs";
 
 class Provider {
   db: FirebaseFirestore.Firestore;
@@ -43,6 +44,48 @@ class Provider {
     } else {
       await this.auth.deleteUser(uid);
     }
+  }
+
+  fbContext2context(
+    fbContext: functions.https.CallableContext
+  ): FunctionContext {
+    const context: FunctionContext = {
+      authenticated: false,
+      uid: "na"
+    };
+    if (process.env.FUNCTIONS_EMULATOR) {
+      context.authenticated = true;
+      context.uid = "test_user";
+    } else if (fbContext.auth) {
+      context.authenticated = true;
+      context.uid = fbContext.auth.uid;
+    } else {
+      context.authenticated = false;
+      context.uid = "na";
+    }
+    return context;
+  }
+
+  async token2context(token: string): Promise<FunctionContext> {
+    const context: FunctionContext = {
+      authenticated: false,
+      uid: "na"
+    };
+    if (process.env.FUNCTIONS_EMULATOR) {
+      context.authenticated = true;
+      context.uid = "test_user";
+      return context;
+    }
+    try {
+      const verifyResult = await this.auth.verifyIdToken(token);
+      context.authenticated = true;
+      context.uid = verifyResult.uid;
+    } catch (err) {
+      console.log(err);
+      context.authenticated = false;
+      context.uid = "na";
+    }
+    return context;
   }
 }
 

@@ -33,28 +33,20 @@ class _ShopNow extends State<ShopNow> {
               child: ListView(
                 children: <Widget>[
                   Material(
-                    color: Colors.teal[100],
                     child: Card(
-                      color: Colors.teal,
                       child: Column(
                         children: <Widget>[
                           SizedBox(
                             height: 5.0,
                           ),
                           Center(
-                            child: Text(
-                              'No shopping sector found',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            child: Text('No shopping sector found'),
                           ),
                           SizedBox(
                             height: 5.0,
                           ),
                           Center(
-                            child: Text(
-                              'Please consider adding cards',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            child: Text('Please consider adding cards'),
                           ),
                           SizedBox(
                             height: 5.0,
@@ -67,6 +59,7 @@ class _ShopNow extends State<ShopNow> {
                     padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
                     child: RaisedButton(
                       color: Colors.green,
+                      key: Key('empty_wallet_jump_to_card_management_btn'),
                       child: Text(
                         'Go to card wallet',
                         style: TextStyle(color: Colors.white),

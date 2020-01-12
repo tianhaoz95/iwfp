@@ -9,7 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  RunningMode mode = RunningMode();
+  RunningMode mode = RunningMode(emulator: true);
   DataStore dataStore = DataStore('firebase', mode);
   IwfpappAuth auth = IwfpappAuth(mode);
   runApp(IwfpApp(dataStore, auth, mode));

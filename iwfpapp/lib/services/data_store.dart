@@ -35,6 +35,10 @@ class DataStore {
   DataStore(this.serviceType, this.mode) {
     needRefresh = true;
     cloudFunc = CloudFunctions.instance;
+    if (mode.useEmulator) {
+      print('Using local emulator as backend...');
+      cloudFunc.useFunctionsEmulator(origin: 'http://localhost:5001');
+    }
     addCardCallable = cloudFunc.getHttpsCallable(
       functionName: 'addCreditCard',
     );
@@ -68,7 +72,7 @@ class DataStore {
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
-      await removeCardCallable.call(<String, dynamic>{'cardUid': card.id});
+      await removeCardCallable.call(<String, dynamic>{'id': card.id});
       response.status = ResponseStatus.SUCCEESS;
       response.msg = 'na';
       needRefresh = true;
@@ -132,8 +136,8 @@ class DataStore {
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       HttpsCallableResult result = await addCardCallable.call(<String, dynamic>{
-        'cardUid': card.id,
-        'cardData': card.name,
+        'id': card.id,
+        'name': card.name,
       });
       response.status = ResponseStatus.SUCCEESS;
       response.msg = result.toString();

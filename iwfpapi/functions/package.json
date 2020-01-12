@@ -9,6 +9,7 @@
     "start": "npm run shell",
     "test": "jest",
     "e2e": "npm run build && firebase emulators:exec --only functions,firestore \"npm test\"",
+    "device": "npm run build && firebase emulators:exec --only functions,firestore \"cd ../../iwfpapp && flutter drive --target=test_driver/emulator.dart\"",
     "emulator": "npm run build && firebase emulators:start --only firestore,functions",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
@@ -24,10 +25,9 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.25",
-    "@types/node": "^13.1.0",
+    "@types/node": "^13.1.6",
     "axios": "^0.19.1",
     "firebase": "^7.6.2",
-    "@types/node": "^13.1.6",
     "firebase-functions-test": "^0.1.7",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",

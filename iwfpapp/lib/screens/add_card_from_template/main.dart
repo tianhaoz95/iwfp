@@ -74,6 +74,7 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
               child: Container(
                 padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
                 child: Text('Card added from template'),
+                key: Key('add_card_template_success_confirmation'),
               ),
             ),
           ),
@@ -84,6 +85,7 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
                   Navigator.pushReplacementNamed(context, '/',
                       arguments: HomeTabId.CARD_MANAGEMENT);
                 },
+                key: Key('add_template_success_nav_btn'),
                 color: Colors.green,
                 child: Text(
                   'Back',
@@ -178,7 +180,10 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Card from Templates'),
+        title: Text(
+          'Add Card from Templates',
+          key: Key('add_card_from_template_title'),
+        ),
         leading: FlatButton(
           key: Key('template_back_btn'),
           child: Icon(
