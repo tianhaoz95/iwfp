@@ -9,3 +9,14 @@ class SignUpResponse {
   String msg;
   SignUpResponse(this.status, this.msg);
 }
+
+enum AuthStatus {
+  SUCCESS,
+  FAIL,
+  UNKNOWN,
+}
+
+class SendPasswordResetEmailResponse {
+  AuthStatus status;
+  SendPasswordResetEmailResponse(this.status);
+}
