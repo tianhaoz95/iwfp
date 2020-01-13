@@ -16,3 +16,5 @@ export const EmulatorHttpFunctionsEndpoint: string =
 export const HttpAddCreditCardScope: string = "/httpAddCreditCard";
 export const HttpAddCreditCardEndpoint: string =
   EmulatorHttpFunctionsEndpoint + HttpAddCreditCardScope;
+export const HttpRemoveCreditCardScope = "/httpRemoveCreditCard";
+export const HttpRemoveCreditCardEndpoint: string = EmulatorHttpFunctionsEndpoint + HttpRemoveCreditCardScope;

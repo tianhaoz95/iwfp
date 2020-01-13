@@ -6,7 +6,8 @@ import {
   EmulatedAppConfig,
   DatabaseSettings,
   CloudFunctionEmulatorAddress,
-  HttpAddCreditCardEndpoint
+  HttpAddCreditCardEndpoint,
+  HttpRemoveCreditCardEndpoint
 } from "./config/const";
 import { BasicPromo, BasicPromoInDatabase } from "./fixture/promos";
 import { backdoorCardExist } from "./utilities/validators/card_existence";
@@ -234,6 +235,31 @@ describe("end 2 end tests", () => {
       "test_card_uid"
     );
     expect(cardExistAfterRemove).toBeFalsy;
+  });
+
+  test("remove card through http should remove card data", async () => {
+    const response = await addCreditCardCallable({
+      name: "test_card_name",
+      id: "test_card_uid"
+    });
+    expect(response).toBeNull;
+    const cardExistAfterAdd: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterAdd).toBeTruthy;
+    const res: AxiosResponse = await axios.post(HttpRemoveCreditCardEndpoint, {
+      name: "test_card_name",
+      id: "test_card_uid"
+    });
+    expect(res.status).toEqual(200);
+    const cardExistAfterRemove: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterRemove).toBeTruthy;
   });
 
   test("add card backdoor validation", async () => {
