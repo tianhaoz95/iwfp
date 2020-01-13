@@ -61,4 +61,17 @@ class IwfpappAuth {
     }
     return true;
   }
+
+  Future<SendPasswordResetEmailResponse> handleSendPasswordResetEmail(
+      String email) async {
+    SendPasswordResetEmailResponse response =
+        SendPasswordResetEmailResponse(AuthStatus.SUCCESS);
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      response.status = AuthStatus.SUCCESS;
+    } catch (err) {
+      response.status = AuthStatus.FAIL;
+    }
+    return response;
+  }
 }

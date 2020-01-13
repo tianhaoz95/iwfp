@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/utilities/validators/email_validator.dart';
 import 'package:iwfpapp/services/utilities/validators/sign_in_validator.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
 import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
@@ -94,6 +96,17 @@ class _LoginScreen extends State<LoginScreen> {
         });
   }
 
+  void handleForgetPassword(BuildContext context) async {
+    String email = emailInputController.text;
+    ValidationResponse response = isValidEmail(email);
+    if (!response.valid) {
+      await promptWarning(context, response.messages);
+      return;
+    }
+    ForgotPasswordNavConfig navConfig = ForgotPasswordNavConfig(email: email);
+    Navigator.pushNamed(context, '/forgot_password', arguments: navConfig);
+  }
+
   Future<void> handleEmailSignIn(BuildContext context) async {
     String email = emailInputController.text;
     String pwd = pwdInputController.text;
@@ -157,11 +170,11 @@ class _LoginScreen extends State<LoginScreen> {
       padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 25.0),
+          SizedBox(height: 35.0),
           Container(
             child: Center(
               child: Text(
-                'Welcome to I want 5%',
+                'Welcome to I Want 5%',
                 style: TextStyle(fontSize: 25.0),
                 key: Key('iwfp_welcome_title'),
               ),
@@ -170,7 +183,7 @@ class _LoginScreen extends State<LoginScreen> {
           SizedBox(height: 25.0),
           Container(
             child: Center(
-              child: Text('May the 5% be with you',
+              child: Text('May the 5% Be With You!',
                   style: TextStyle(fontSize: 15.0),
                   key: Key('iwfp_welcome_subtitle')),
             ),
@@ -216,7 +229,7 @@ class _LoginScreen extends State<LoginScreen> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/placeholder');
+                handleForgetPassword(context);
               },
             ),
           ),

@@ -6,7 +6,6 @@ class PlaceholderScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Under Construction'),
-        backgroundColor: Colors.pink,
         key: Key('placeholder_title'),
       ),
       body: Container(
@@ -19,7 +18,6 @@ class PlaceholderScreen extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Colors.pink[100],
     );
   }
 }
