@@ -47,13 +47,33 @@ export const httpAddCreditCard = functions.https.onRequest(async (req, res) => {
 });
 
 export const removeCreditCard = functions.https.onCall(
-  async (data, context) => {
+  async (data, fbContext) => {
+    const context: FunctionContext = provider.fbContext2context(fbContext);
     const cardRemovalRequest: CardRemovalRequest = parseCardRemovalRequest(
       data
     );
     await removeCreditCardHandler(cardRemovalRequest, context, provider);
   }
 );
+
+export const httpRemoveCreditCard = functions.https.onRequest(async (req, res) => {
+  if (req.method != "POST") {
+    console.log("Remove credit card only accepts POST request");
+    res.sendStatus(403);
+    return;
+  }
+  const context: FunctionContext = await provider.token2context(req.body.token);
+  const cardRemovalRequest: CardRemovalRequest = parseCardRemovalRequest(
+    req.body
+  );
+  try {
+    await removeCreditCardHandler(cardRemovalRequest, context, provider);
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(JSON.stringify(err));
+    res.sendStatus(500);
+  }
+});
 
 export const editCreditCard = functions.https.onCall(async (data, context) => {
   await editCreditCardHandler(data, context, provider);

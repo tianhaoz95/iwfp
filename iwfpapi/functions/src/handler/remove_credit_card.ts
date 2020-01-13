@@ -1,16 +1,14 @@
 import { noAuthMsg } from "../config/consts";
-import getUserUid from "../util/uid_getter";
-import isValidAuth from "../util/validate_auth";
-import { CardRemovalRequest } from "../config/typedefs";
+import { CardRemovalRequest, FunctionContext } from "../config/typedefs";
 import { CardForDeletionNotExist } from "../config/errors";
 
 async function removeCreditCardHandler(
   data: CardRemovalRequest,
-  context,
+  context: FunctionContext,
   provider
 ) {
-  if (isValidAuth(context, process.env.FUNCTIONS_EMULATOR)) {
-    const userUid: string = getUserUid(context, process.env.FUNCTIONS_EMULATOR);
+  if (context.authenticated) {
+    const userUid: string = context.uid;
     const userRef = provider.getUserRef(userUid);
     const cardRef = userRef.collection("cards").doc(data.id);
     const cardSnap = await cardRef.get();
