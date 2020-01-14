@@ -8,9 +8,10 @@ import {
   CloudFunctionEmulatorAddress,
   HttpAddCreditCardEndpoint,
   HttpRemoveCreditCardEndpoint,
-  HttpEditCreditCardEndpoint
+  HttpEditCreditCardEndpoint,
+  HttpAddPromoEndpoint
 } from "./config/const";
-import { BasicPromo, BasicPromoInDatabase } from "./fixture/promos";
+import { BasicPromo, BasicPromoInDatabase, HttpSimpleAddPromoRequest } from "./fixture/promos";
 import { backdoorCardExist } from "./utilities/validators/card_existence";
 import { backdoorPromoExist } from "./utilities/validators/promo_existence";
 import { backdoorGetPromo } from "./utilities/getters/promo";
@@ -202,6 +203,20 @@ describe("end 2 end tests", () => {
     expect(addCardResponse).toBeNull;
     const addPromoResponse = await addPromoCallable(BasicPromo);
     expect(addPromoResponse).toBeNull;
+  });
+
+  test("http add promo should work", async () => {
+    const addCardResponse = await addCreditCardCallable({
+      name: "test_card_name",
+      id: "test_card_uid"
+    });
+    expect(addCardResponse).toBeNull;
+    const httpAddPromoResponse = await axios.post(HttpAddPromoEndpoint, HttpSimpleAddPromoRequest);
+    expect(httpAddPromoResponse.status).toEqual(200);
+    const promoAfterAdding = await backdoorGetPromo(db, "test_user", "test_card_uid", "test_promo");
+    expect(promoAfterAdding).toBeDefined;
+    expect(promoAfterAdding).not.toBeNull;
+    expect(promoAfterAdding).toMatchObject(BasicPromoInDatabase);
   });
 
   test("add promo content should match", async () => {
