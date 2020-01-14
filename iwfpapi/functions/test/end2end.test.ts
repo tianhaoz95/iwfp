@@ -129,6 +129,7 @@ describe("end 2 end tests", () => {
       card_name: "test_card_name"
     });
     const httpEditResponse = await axios.post(HttpEditCreditCardEndpoint, {
+      token: "test_token",
       cardUid: "test_card_id",
       cardData: "edited_test_card_name"
     });
@@ -187,6 +188,7 @@ describe("end 2 end tests", () => {
 
   test("http add card should succeed", async () => {
     const res: AxiosResponse = await axios.post(HttpAddCreditCardEndpoint, {
+      token: "test_token",
       name: "test_card_name",
       id: "test_card_uid"
     });
