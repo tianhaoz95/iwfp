@@ -137,15 +137,18 @@ export const httpAddPromo = functions.https.onRequest(async (req, res) => {
   }
 });
 
+// TODO(tianhaoz95): expand this to http
 export const removePromo = functions.https.onCall(async (data, context) => {
   await removePromoHandler(data, context, provider);
 });
 
+// TODO(tianhaoz95): expand this to http
 export const getCreditCards = functions.https.onCall(async (data, context) => {
   const response = await getCreditCardHandler(data, context, provider);
   return response;
 });
 
+// TODO(tianhaoz95): expand this to http
 export const removeUser = functions.https.onCall(async (data, context) => {
   await removeUserHandler(data, context, provider);
 });
