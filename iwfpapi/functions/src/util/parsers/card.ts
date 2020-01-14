@@ -1,4 +1,4 @@
-import { CardCreationRequest, CardRemovalRequest } from "../../config/typedefs";
+import { CardCreationRequest, CardRemovalRequest, CardEditRequest } from "../../config/typedefs";
 
 export function parseCardCreationRequest(req: any): CardCreationRequest {
   const cardCreateRequest: CardCreationRequest = {
@@ -34,4 +34,23 @@ export function parseCardRemovalRequest(req: any): CardRemovalRequest {
     cardRemovalRequst.id = "na";
   }
   return cardRemovalRequst;
+}
+
+export function parseCardEditRequest(req: any): CardEditRequest {
+  const cardEditRequest: CardCreationRequest = {
+    valid: true,
+    id: "na",
+    name: "na"
+  };
+  if (req.cardUid) {
+    cardEditRequest.id = req.cardUid;
+  } else {
+    cardEditRequest.valid = false;
+  }
+  if (req.cardData) {
+    cardEditRequest.name = req.cardData;
+  } else {
+    cardEditRequest.valid = false;
+  }
+  return cardEditRequest;
 }

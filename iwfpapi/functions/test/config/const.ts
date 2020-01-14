@@ -13,8 +13,19 @@ export const DatabaseSettings = {
 export const CloudFunctionScope: string = "/iwfpapp/us-central1";
 export const EmulatorHttpFunctionsEndpoint: string =
   "http://localhost:5001" + CloudFunctionScope;
+
+/**
+ * Firebase Emulator Suite http API scope definitions
+ */
 export const HttpAddCreditCardScope: string = "/httpAddCreditCard";
+export const HttpRemoveCreditCardScope = "/httpRemoveCreditCard";
+export const HttpEditCreditCardScope = "/httpEditCreditCard";
+
+/**
+ * Firebase Emulator Suite http AIP endpint definitions
+ */
 export const HttpAddCreditCardEndpoint: string =
   EmulatorHttpFunctionsEndpoint + HttpAddCreditCardScope;
-export const HttpRemoveCreditCardScope = "/httpRemoveCreditCard";
-export const HttpRemoveCreditCardEndpoint: string = EmulatorHttpFunctionsEndpoint + HttpRemoveCreditCardScope;
+export const HttpRemoveCreditCardEndpoint: string =
+  EmulatorHttpFunctionsEndpoint + HttpRemoveCreditCardScope;
+export const HttpEditCreditCardEndpoint = EmulatorHttpFunctionsEndpoint + HttpEditCreditCardScope;
