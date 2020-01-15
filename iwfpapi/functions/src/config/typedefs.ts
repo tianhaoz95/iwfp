@@ -17,14 +17,14 @@ export interface CardEditRequest {
 
 export interface AddPromoRequest {
   valid: boolean;
-  card: string; /** The ID of the target card */
-  promo: Promo; /** The promo to be added */
+  card: string /** The ID of the target card */;
+  promo: Promo /** The promo to be added */;
 }
 
 export interface RemovePromoRequest {
   valid: boolean;
-  card: string; /** The ID of the target card */
-  promo: string; /** The ID of the target promo */
+  card: string /** The ID of the target card */;
+  promo: string /** The ID of the target promo */;
 }
 
 export interface Category {

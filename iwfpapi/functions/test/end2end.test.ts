@@ -9,13 +9,21 @@ import {
   HttpAddCreditCardEndpoint,
   HttpRemoveCreditCardEndpoint,
   HttpEditCreditCardEndpoint,
-  HttpAddPromoEndpoint
+  HttpAddPromoEndpoint,
+  HttpRemoveUserEndpoint,
+  HttpRemovePromoEndpoint,
+  HttpGetCreditCardsEndpoint
 } from "./config/const";
-import { BasicPromo, BasicPromoInDatabase, HttpSimpleAddPromoRequest } from "./fixture/promos";
+import {
+  BasicPromo,
+  BasicPromoInDatabase,
+  HttpSimpleAddPromoRequest
+} from "./fixture/promos";
 import { backdoorCardExist } from "./utilities/validators/card_existence";
 import { backdoorPromoExist } from "./utilities/validators/promo_existence";
 import { backdoorGetPromo } from "./utilities/getters/promo";
 import { backdoorGetCardData } from "./utilities/getters/card";
+import { backdoorUserExist } from "./utilities/validators/user_existence";
 jest.setTimeout(20000);
 
 describe("end 2 end tests", () => {
@@ -213,9 +221,17 @@ describe("end 2 end tests", () => {
       id: "test_card_uid"
     });
     expect(addCardResponse).toBeNull;
-    const httpAddPromoResponse = await axios.post(HttpAddPromoEndpoint, HttpSimpleAddPromoRequest);
+    const httpAddPromoResponse = await axios.post(
+      HttpAddPromoEndpoint,
+      HttpSimpleAddPromoRequest
+    );
     expect(httpAddPromoResponse.status).toEqual(200);
-    const promoAfterAdding = await backdoorGetPromo(db, "test_user", "test_card_uid", "test_promo");
+    const promoAfterAdding = await backdoorGetPromo(
+      db,
+      "test_user",
+      "test_card_uid",
+      "test_promo"
+    );
     expect(promoAfterAdding).toBeDefined;
     expect(promoAfterAdding).not.toBeNull;
     expect(promoAfterAdding).toMatchObject(BasicPromoInDatabase);
@@ -244,6 +260,24 @@ describe("end 2 end tests", () => {
     );
     expect(promoData).toBeDefined;
     expect(promoData).toMatchObject(BasicPromoInDatabase);
+  });
+
+  test("http remove promo should work", async () => {
+    const addCardResponse = await addCreditCardCallable({
+      name: "test_card_name",
+      id: "test_card_uid"
+    });
+    const addPromoResponse = await addPromoCallable(BasicPromo);
+    expect(addPromoResponse).toBeNull;
+    expect(addCardResponse).toBeNull;
+    const httpRemovePromoResponse = await axios.post(HttpRemovePromoEndpoint, {
+      token: "test_token",
+      promoId: "test_promo",
+      cardUid: "test_card_uid"
+    });
+    expect(httpRemovePromoResponse.status).toEqual(200);
+    const promoExistAfterRemove = await backdoorPromoExist(db, "test_user", "test_card_uid", "test_promo");
+    expect(promoExistAfterRemove).toBeFalsy;
   });
 
   test("remove promo should clear data", async () => {
@@ -390,9 +424,66 @@ describe("end 2 end tests", () => {
     );
   });
 
+  test("http get cards from empty wallet should fail", async () => {
+    try {
+      await axios.get(HttpGetCreditCardsEndpoint + "?token=test_user");
+    } catch (err) {
+      expect(err).toBeDefined;
+    }
+  });
+
+  test("http get cards should word", async () => {
+    const responseFirstCard = await addCreditCardCallable({
+      name: "test_card_name_1",
+      id: "test_card_uid_1"
+    });
+    expect(responseFirstCard).toBeNull;
+    const responseSecondCard = await addCreditCardCallable({
+      name: "test_card_name_2",
+      id: "test_card_uid_2"
+    });
+    expect(responseSecondCard).toBeNull;
+    const httpGetCardsResponse = await axios.get(HttpGetCreditCardsEndpoint + "?token=test_user");
+    expect(httpGetCardsResponse.status).toEqual(200);
+    expect(httpGetCardsResponse.data).toMatchObject({
+      "test_card_uid_1": {
+        "card_name": "test_card_name_1"
+      }, 
+      "test_card_uid_2": {
+        "card_name": "test_card_name_2"
+      }
+    });
+  });
+
   test("remove user should not crash", async () => {
     const response = await removeUserCallable();
     expect(response).toBeNull;
+  });
+
+  test("http remove user should work", async () => {
+    const addCardResponse = await addCreditCardCallable({
+      name: "test_card_name",
+      id: "test_card_uid"
+    });
+    expect(addCardResponse).toBeNull;
+    const cardExistAfterAdd: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterAdd).toBeTruthy;
+    const removeUserResponse = await axios.post(HttpRemoveUserEndpoint, {
+      token: "test_token"
+    });
+    expect(removeUserResponse.status).toEqual(200);
+    const userExistAfterRemove = backdoorUserExist(db, "test_user");
+    expect(userExistAfterRemove).toBeFalsy;
+    const cardExistAfterRemove: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterRemove).toBeFalsy;
   });
 
   test("remove user should remove user data", async () => {
@@ -401,32 +492,21 @@ describe("end 2 end tests", () => {
       id: "test_card_uid"
     });
     expect(addCardResponse).toBeNull;
-    const cardSnapAfterAdd = await db
-      .collection("channel")
-      .doc("production-v1")
-      .collection("users")
-      .doc("test_user")
-      .collection("cards")
-      .doc("test_card_uid")
-      .get();
-    expect(cardSnapAfterAdd.exists).toBeTruthy;
+    const cardExistAfterAdd: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterAdd).toBeTruthy;
     const removeUserresponse = await removeUserCallable();
     expect(removeUserresponse).toBeNull;
-    const userSnapAfterRemove = await db
-      .collection("channel")
-      .doc("production-v1")
-      .collection("users")
-      .doc("test_user")
-      .get();
-    expect(userSnapAfterRemove.exists).toBeFalsy;
-    const cardSnapAfterRemove = await db
-      .collection("channel")
-      .doc("production-v1")
-      .collection("users")
-      .doc("test_user")
-      .collection("cards")
-      .doc("test_card_uid")
-      .get();
-    expect(cardSnapAfterRemove.exists).toBeFalsy;
+    const userExistAfterRemove = backdoorUserExist(db, "test_user");
+    expect(userExistAfterRemove).toBeFalsy;
+    const cardExistAfterRemove: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterRemove).toBeFalsy;
   });
 });

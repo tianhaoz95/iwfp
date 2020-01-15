@@ -21,6 +21,9 @@ export const HttpAddCreditCardScope: string = "/httpAddCreditCard";
 export const HttpRemoveCreditCardScope = "/httpRemoveCreditCard";
 export const HttpEditCreditCardScope = "/httpEditCreditCard";
 export const HttpAddPromoScope = "/httpAddPromo";
+export const HttpRemoveUserScope = "/httpRemoveUser";
+export const HttpRemovePromoScope = "/httpRemovePromo";
+export const HttpGetCreditCardsScope = "/httpGetCreditCards";
 
 /**
  * Firebase Emulator Suite http AIP endpint definitions
@@ -29,5 +32,12 @@ export const HttpAddCreditCardEndpoint: string =
   EmulatorHttpFunctionsEndpoint + HttpAddCreditCardScope;
 export const HttpRemoveCreditCardEndpoint: string =
   EmulatorHttpFunctionsEndpoint + HttpRemoveCreditCardScope;
-export const HttpEditCreditCardEndpoint = EmulatorHttpFunctionsEndpoint + HttpEditCreditCardScope;
-export const HttpAddPromoEndpoint = EmulatorHttpFunctionsEndpoint + HttpAddPromoScope;
+export const HttpEditCreditCardEndpoint: string =
+  EmulatorHttpFunctionsEndpoint + HttpEditCreditCardScope;
+export const HttpAddPromoEndpoint: string =
+  EmulatorHttpFunctionsEndpoint + HttpAddPromoScope;
+export const HttpRemoveUserEndpoint: string =
+  EmulatorHttpFunctionsEndpoint + HttpRemoveUserScope;
+export const HttpRemovePromoEndpoint: string =
+  EmulatorHttpFunctionsEndpoint + HttpRemovePromoScope;
+export const HttpGetCreditCardsEndpoint: string = EmulatorHttpFunctionsEndpoint + HttpGetCreditCardsScope;

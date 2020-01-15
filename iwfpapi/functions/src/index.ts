@@ -20,7 +20,10 @@ import {
   parseCardRemovalRequest,
   parseCardEditRequest
 } from "./util/parsers/card";
-import { parseAddPromoRequest, parseRemovePromoRequest } from "./util/parsers/promo";
+import {
+  parseAddPromoRequest,
+  parseRemovePromoRequest
+} from "./util/parsers/promo";
 
 const provider = new Provider();
 
@@ -125,9 +128,7 @@ export const httpAddPromo = functions.https.onRequest(async (req, res) => {
     res.sendStatus(403);
     return;
   }
-  const context: FunctionContext = await provider.token2context(
-    req.body.token
-  );
+  const context: FunctionContext = await provider.token2context(req.body.token);
   const addPromoRequest: AddPromoRequest = parseAddPromoRequest(req.body);
   try {
     await addPromoHandler(addPromoRequest, context, provider);
@@ -138,21 +139,72 @@ export const httpAddPromo = functions.https.onRequest(async (req, res) => {
   }
 });
 
-// TODO(tianhaoz95): expand this to http
 export const removePromo = functions.https.onCall(async (data, fbContext) => {
   const context: FunctionContext = provider.fbContext2context(fbContext);
   const removePromoRequest: RemovePromoRequest = parseRemovePromoRequest(data);
   await removePromoHandler(removePromoRequest, context, provider);
 });
 
-// TODO(tianhaoz95): expand this to http
-export const getCreditCards = functions.https.onCall(async (data, fbContext) => {
-  const context: FunctionContext = provider.fbContext2context(fbContext);
-  const response = await getCreditCardHandler(data, context, provider);
-  return response;
+export const httpRemovePromo = functions.https.onRequest(async (req, res) => {
+  if (req.method !== "POST") {
+    console.log("Remove promotion only accepts POST request");
+    res.sendStatus(403);
+    return;
+  }
+  const context: FunctionContext = await provider.token2context(req.body.token);
+  const removePromoRequest: RemovePromoRequest = parseRemovePromoRequest(
+    req.body
+  );
+  try {
+    await removePromoHandler(removePromoRequest, context, provider);
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(JSON.stringify(err));
+    res.sendStatus(500);
+  }
 });
 
-// TODO(tianhaoz95): expand this to http
-export const removeUser = functions.https.onCall(async (data, context) => {
+export const getCreditCards = functions.https.onCall(
+  async (data, fbContext) => {
+    const context: FunctionContext = provider.fbContext2context(fbContext);
+    const response = await getCreditCardHandler(data, context, provider);
+    return response;
+  }
+);
+
+export const httpGetCreditCards = functions.https.onRequest(async (req, res) => {
+  if (req.method !== "GET") {
+    console.log("Get cards only accepts GET request");
+    res.sendStatus(403);
+    return;
+  }
+  const context: FunctionContext = await provider.token2context(req.query.token);
+  try {
+    const response = await getCreditCardHandler(req.body, context, provider);
+    res.send(response);
+  } catch (err) {
+    console.log(JSON.stringify(err));
+    res.sendStatus(500);
+  }
+});
+
+export const removeUser = functions.https.onCall(async (data, fbContext) => {
+  const context: FunctionContext = provider.fbContext2context(fbContext);
   await removeUserHandler(data, context, provider);
+});
+
+export const httpRemoveUser = functions.https.onRequest(async (req, res) => {
+  if (req.method !== "POST") {
+    console.log("Add promotion only accepts POST request");
+    res.sendStatus(403);
+    return;
+  }
+  const context: FunctionContext = await provider.token2context(req.body.token);
+  try {
+    await removeUserHandler(req.body, context, provider);
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(JSON.stringify(err));
+    res.sendStatus(500);
+  }
 });

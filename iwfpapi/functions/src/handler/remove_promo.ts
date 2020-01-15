@@ -2,7 +2,11 @@ import { noAuthMsg, creditCardNotExistError } from "../config/consts";
 import { PromoNotExistError } from "../config/errors";
 import { FunctionContext, RemovePromoRequest } from "../config/typedefs";
 
-async function removePromoHandler(data: RemovePromoRequest, context: FunctionContext, provider) {
+async function removePromoHandler(
+  data: RemovePromoRequest,
+  context: FunctionContext,
+  provider
+) {
   if (context.authenticated) {
     const userUid: string = context.uid;
     const userRef = provider.getUserRef(userUid);

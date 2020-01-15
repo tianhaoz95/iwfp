@@ -5,7 +5,11 @@ import {
 } from "../config/consts";
 import { FunctionContext, AddPromoRequest } from "../config/typedefs";
 
-async function addPromoHandler(data: AddPromoRequest, context: FunctionContext, provider) {
+async function addPromoHandler(
+  data: AddPromoRequest,
+  context: FunctionContext,
+  provider
+) {
   if (context.authenticated) {
     const userUid: string = context.uid;
     const userRef = provider.getUserRef(userUid);
