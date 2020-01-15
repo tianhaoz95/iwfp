@@ -89,7 +89,7 @@ class DataStore {
   Future<CloudFuncResponse> fetchCards() async {
     CloudFuncResponse response =
         CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
-    if (!needRefresh) {
+    if (!needRefresh || kIsWeb) {
       response.status = ResponseStatus.SUCCEESS;
       response.msg = 'No need to fetch';
       return response;
@@ -117,9 +117,6 @@ class DataStore {
   }
 
   Future<void> forceRefresh() async {
-    if (kIsWeb) {
-      return;
-    }
     needRefresh = true;
     CloudFuncResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
