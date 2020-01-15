@@ -12,14 +12,15 @@ import {
   CardCreationRequest,
   CardRemovalRequest,
   CardEditRequest,
-  AddPromoRequest
+  AddPromoRequest,
+  RemovePromoRequest
 } from "./config/typedefs";
 import {
   parseCardCreationRequest,
   parseCardRemovalRequest,
   parseCardEditRequest
 } from "./util/parsers/card";
-import { parseAddPromoRequest } from "./util/parsers/promo";
+import { parseAddPromoRequest, parseRemovePromoRequest } from "./util/parsers/promo";
 
 const provider = new Provider();
 
@@ -138,8 +139,10 @@ export const httpAddPromo = functions.https.onRequest(async (req, res) => {
 });
 
 // TODO(tianhaoz95): expand this to http
-export const removePromo = functions.https.onCall(async (data, context) => {
-  await removePromoHandler(data, context, provider);
+export const removePromo = functions.https.onCall(async (data, fbContext) => {
+  const context: FunctionContext = provider.fbContext2context(fbContext);
+  const removePromoRequest: RemovePromoRequest = parseRemovePromoRequest(data);
+  await removePromoHandler(removePromoRequest, context, provider);
 });
 
 // TODO(tianhaoz95): expand this to http

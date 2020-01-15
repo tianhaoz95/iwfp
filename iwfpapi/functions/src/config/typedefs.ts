@@ -21,6 +21,12 @@ export interface AddPromoRequest {
   promo: Promo; /** The promo to be added */
 }
 
+export interface RemovePromoRequest {
+  valid: boolean;
+  card: string; /** The ID of the target card */
+  promo: string; /** The ID of the target promo */
+}
+
 export interface Category {
   id: string;
   name: string;

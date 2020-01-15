@@ -1,4 +1,23 @@
-import { AddPromoRequest } from "../../config/typedefs";
+import { AddPromoRequest, RemovePromoRequest } from "../../config/typedefs";
+
+export function parseRemovePromoRequest(req: any): RemovePromoRequest {
+  const removePromoRequest: RemovePromoRequest = {
+    valid: true,
+    card: "na",
+    promo: "na"
+  };
+  if (req.cardUid) {
+    removePromoRequest.card = req.cardUid;
+  } else {
+    removePromoRequest.valid = false;
+  }
+  if (req.promoId) {
+    removePromoRequest.promo = req.promoId;
+  } else {
+    removePromoRequest.valid = false;
+  }
+  return removePromoRequest;
+}
 
 export function parseAddPromoRequest(req: any): AddPromoRequest {
   const addPromoRequest: AddPromoRequest = {
