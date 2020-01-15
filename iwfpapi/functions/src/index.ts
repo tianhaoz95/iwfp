@@ -146,7 +146,8 @@ export const removePromo = functions.https.onCall(async (data, fbContext) => {
 });
 
 // TODO(tianhaoz95): expand this to http
-export const getCreditCards = functions.https.onCall(async (data, context) => {
+export const getCreditCards = functions.https.onCall(async (data, fbContext) => {
+  const context: FunctionContext = provider.fbContext2context(fbContext);
   const response = await getCreditCardHandler(data, context, provider);
   return response;
 });
