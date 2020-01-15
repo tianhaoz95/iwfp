@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
@@ -116,6 +117,9 @@ class DataStore {
   }
 
   Future<void> forceRefresh() async {
+    if (kIsWeb) {
+      return;
+    }
     needRefresh = true;
     CloudFuncResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
