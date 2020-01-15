@@ -1,11 +1,10 @@
 import { noAuthMsg } from "../config/consts";
 import { EmptyWalletError } from "../config/errors";
-import isValidAuth from "../util/validate_auth";
-import getUserUid from "../util/uid_getter";
+import { FunctionContext } from "../config/typedefs";
 
-async function getCreditCardsHandler(data, context, provider) {
-  if (isValidAuth(context, process.env.FUNCTIONS_EMULATOR)) {
-    const userUid: string = getUserUid(context, process.env.FUNCTIONS_EMULATOR);
+async function getCreditCardsHandler(data, context: FunctionContext, provider) {
+  if (context.authenticated) {
+    const userUid: string = context.uid;
     const userRef = provider.getUserRef(userUid);
     const cardRef = userRef.collection("cards");
     const cardSnap: FirebaseFirestore.QuerySnapshot = await cardRef.get();

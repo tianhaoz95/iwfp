@@ -1,16 +1,19 @@
 import { noAuthMsg, creditCardNotExistError } from "../config/consts";
 import { PromoNotExistError } from "../config/errors";
-import getUserUid from "../util/uid_getter";
-import isValidAuth from "../util/validate_auth";
+import { FunctionContext, RemovePromoRequest } from "../config/typedefs";
 
-async function removePromoHandler(data, context, provider) {
-  if (isValidAuth(context, process.env.FUNCTIONS_EMULATOR)) {
-    const userUid: string = getUserUid(context, process.env.FUNCTIONS_EMULATOR);
+async function removePromoHandler(
+  data: RemovePromoRequest,
+  context: FunctionContext,
+  provider
+) {
+  if (context.authenticated) {
+    const userUid: string = context.uid;
     const userRef = provider.getUserRef(userUid);
-    const cardRef = userRef.collection("cards").doc(data.cardUid);
+    const cardRef = userRef.collection("cards").doc(data.card);
     const cardSnap = await cardRef.get();
     if (cardSnap.exists) {
-      const promoId: string = data.promoId;
+      const promoId: string = data.promo;
       const promoRef = cardRef.collection("promos").doc(promoId);
       const promoSnap = await promoRef.get();
       if (promoSnap.exists) {

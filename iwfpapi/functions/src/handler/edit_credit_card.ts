@@ -1,17 +1,20 @@
 import { noAuthMsg, creditCardNotExistError } from "../config/consts";
-import getUserUid from "../util/uid_getter";
-import isValidAuth from "../util/validate_auth";
+import { CardEditRequest, FunctionContext } from "../config/typedefs";
 
-async function editCreditCardHandler(data, context, provider) {
-  if (isValidAuth(context, process.env.FUNCTIONS_EMULATOR)) {
-    const userUid: string = getUserUid(context, process.env.FUNCTIONS_EMULATOR);
+async function editCreditCardHandler(
+  data: CardEditRequest,
+  context: FunctionContext,
+  provider
+) {
+  if (context.authenticated) {
+    const userUid: string = context.uid;
     const userRef = provider.getUserRef(userUid);
-    const cardRef = userRef.collection("cards").doc(data.cardUid);
+    const cardRef = userRef.collection("cards").doc(data.id);
     const cardSnap = await cardRef.get();
     if (!cardSnap.exists) {
       throw creditCardNotExistError;
     } else {
-      const creditCardName: string = data.cardData;
+      const creditCardName: string = data.name;
       await cardRef.set({
         card_name: creditCardName
       });

@@ -7,12 +7,23 @@ import {
   DatabaseSettings,
   CloudFunctionEmulatorAddress,
   HttpAddCreditCardEndpoint,
-  HttpRemoveCreditCardEndpoint
+  HttpRemoveCreditCardEndpoint,
+  HttpEditCreditCardEndpoint,
+  HttpAddPromoEndpoint,
+  HttpRemoveUserEndpoint,
+  HttpRemovePromoEndpoint,
+  HttpGetCreditCardsEndpoint
 } from "./config/const";
-import { BasicPromo, BasicPromoInDatabase } from "./fixture/promos";
+import {
+  BasicPromo,
+  BasicPromoInDatabase,
+  HttpSimpleAddPromoRequest
+} from "./fixture/promos";
 import { backdoorCardExist } from "./utilities/validators/card_existence";
 import { backdoorPromoExist } from "./utilities/validators/promo_existence";
 import { backdoorGetPromo } from "./utilities/getters/promo";
+import { backdoorGetCardData } from "./utilities/getters/card";
+import { backdoorUserExist } from "./utilities/validators/user_existence";
 jest.setTimeout(20000);
 
 describe("end 2 end tests", () => {
@@ -21,6 +32,7 @@ describe("end 2 end tests", () => {
   let cloudFunctions: firebase.functions.Functions;
   let addCreditCardCallable: firebase.functions.HttpsCallable;
   let getCreditCardsCallable: firebase.functions.HttpsCallable;
+  let editCreditCardsCallable: firebase.functions.HttpsCallable;
   let removeCreditCardCallable: firebase.functions.HttpsCallable;
   let addPromoCallable: firebase.functions.HttpsCallable;
   let removePromoCallable: firebase.functions.HttpsCallable;
@@ -34,6 +46,7 @@ describe("end 2 end tests", () => {
     cloudFunctions.useFunctionsEmulator(CloudFunctionEmulatorAddress);
     addCreditCardCallable = cloudFunctions.httpsCallable("addCreditCard");
     getCreditCardsCallable = cloudFunctions.httpsCallable("getCreditCards");
+    editCreditCardsCallable = cloudFunctions.httpsCallable("editCreditCard");
     removeCreditCardCallable = cloudFunctions.httpsCallable("removeCreditCard");
     addPromoCallable = cloudFunctions.httpsCallable("addPromo");
     removePromoCallable = cloudFunctions.httpsCallable("removePromo");
@@ -108,6 +121,69 @@ describe("end 2 end tests", () => {
     }
   });
 
+  test("http edit card should work", async () => {
+    const addResponse = await addCreditCardCallable({
+      name: "test_card_name",
+      id: "test_card_id"
+    });
+    expect(addResponse).toBeNull;
+    const cardAfterAdding = await backdoorGetCardData(
+      db,
+      "test_user",
+      "test_card_id"
+    );
+    expect(cardAfterAdding).toBeDefined;
+    expect(cardAfterAdding).toMatchObject({
+      card_name: "test_card_name"
+    });
+    const httpEditResponse = await axios.post(HttpEditCreditCardEndpoint, {
+      token: "test_token",
+      cardUid: "test_card_id",
+      cardData: "edited_test_card_name"
+    });
+    expect(httpEditResponse.status).toEqual(200);
+    const cardAfterEditing = await backdoorGetCardData(
+      db,
+      "test_user",
+      "test_card_id"
+    );
+    expect(cardAfterEditing).toBeDefined;
+    expect(cardAfterEditing).toMatchObject({
+      card_name: "edited_test_card_name"
+    });
+  });
+
+  test("edit card should work", async () => {
+    const addResponse = await addCreditCardCallable({
+      name: "test_card_name",
+      id: "test_card_id"
+    });
+    expect(addResponse).toBeNull;
+    const cardAfterAdding = await backdoorGetCardData(
+      db,
+      "test_user",
+      "test_card_id"
+    );
+    expect(cardAfterAdding).toBeDefined;
+    expect(cardAfterAdding).toMatchObject({
+      card_name: "test_card_name"
+    });
+    const editResponse = await editCreditCardsCallable({
+      cardUid: "test_card_id",
+      cardData: "edited_test_card_name"
+    });
+    expect(editResponse).toBeNull;
+    const cardAfterEditing = await backdoorGetCardData(
+      db,
+      "test_user",
+      "test_card_id"
+    );
+    expect(cardAfterEditing).toBeDefined;
+    expect(cardAfterEditing).toMatchObject({
+      card_name: "edited_test_card_name"
+    });
+  });
+
   test("add card should succeed", async () => {
     const response = await addCreditCardCallable({
       name: "test_card_name",
@@ -120,6 +196,7 @@ describe("end 2 end tests", () => {
 
   test("http add card should succeed", async () => {
     const res: AxiosResponse = await axios.post(HttpAddCreditCardEndpoint, {
+      token: "test_token",
       name: "test_card_name",
       id: "test_card_uid"
     });
@@ -136,6 +213,28 @@ describe("end 2 end tests", () => {
     expect(addCardResponse).toBeNull;
     const addPromoResponse = await addPromoCallable(BasicPromo);
     expect(addPromoResponse).toBeNull;
+  });
+
+  test("http add promo should work", async () => {
+    const addCardResponse = await addCreditCardCallable({
+      name: "test_card_name",
+      id: "test_card_uid"
+    });
+    expect(addCardResponse).toBeNull;
+    const httpAddPromoResponse = await axios.post(
+      HttpAddPromoEndpoint,
+      HttpSimpleAddPromoRequest
+    );
+    expect(httpAddPromoResponse.status).toEqual(200);
+    const promoAfterAdding = await backdoorGetPromo(
+      db,
+      "test_user",
+      "test_card_uid",
+      "test_promo"
+    );
+    expect(promoAfterAdding).toBeDefined;
+    expect(promoAfterAdding).not.toBeNull;
+    expect(promoAfterAdding).toMatchObject(BasicPromoInDatabase);
   });
 
   test("add promo content should match", async () => {
@@ -161,6 +260,24 @@ describe("end 2 end tests", () => {
     );
     expect(promoData).toBeDefined;
     expect(promoData).toMatchObject(BasicPromoInDatabase);
+  });
+
+  test("http remove promo should work", async () => {
+    const addCardResponse = await addCreditCardCallable({
+      name: "test_card_name",
+      id: "test_card_uid"
+    });
+    const addPromoResponse = await addPromoCallable(BasicPromo);
+    expect(addPromoResponse).toBeNull;
+    expect(addCardResponse).toBeNull;
+    const httpRemovePromoResponse = await axios.post(HttpRemovePromoEndpoint, {
+      token: "test_token",
+      promoId: "test_promo",
+      cardUid: "test_card_uid"
+    });
+    expect(httpRemovePromoResponse.status).toEqual(200);
+    const promoExistAfterRemove = await backdoorPromoExist(db, "test_user", "test_card_uid", "test_promo");
+    expect(promoExistAfterRemove).toBeFalsy;
   });
 
   test("remove promo should clear data", async () => {
@@ -307,9 +424,66 @@ describe("end 2 end tests", () => {
     );
   });
 
+  test("http get cards from empty wallet should fail", async () => {
+    try {
+      await axios.get(HttpGetCreditCardsEndpoint + "?token=test_user");
+    } catch (err) {
+      expect(err).toBeDefined;
+    }
+  });
+
+  test("http get cards should word", async () => {
+    const responseFirstCard = await addCreditCardCallable({
+      name: "test_card_name_1",
+      id: "test_card_uid_1"
+    });
+    expect(responseFirstCard).toBeNull;
+    const responseSecondCard = await addCreditCardCallable({
+      name: "test_card_name_2",
+      id: "test_card_uid_2"
+    });
+    expect(responseSecondCard).toBeNull;
+    const httpGetCardsResponse = await axios.get(HttpGetCreditCardsEndpoint + "?token=test_user");
+    expect(httpGetCardsResponse.status).toEqual(200);
+    expect(httpGetCardsResponse.data).toMatchObject({
+      "test_card_uid_1": {
+        "card_name": "test_card_name_1"
+      }, 
+      "test_card_uid_2": {
+        "card_name": "test_card_name_2"
+      }
+    });
+  });
+
   test("remove user should not crash", async () => {
     const response = await removeUserCallable();
     expect(response).toBeNull;
+  });
+
+  test("http remove user should work", async () => {
+    const addCardResponse = await addCreditCardCallable({
+      name: "test_card_name",
+      id: "test_card_uid"
+    });
+    expect(addCardResponse).toBeNull;
+    const cardExistAfterAdd: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterAdd).toBeTruthy;
+    const removeUserResponse = await axios.post(HttpRemoveUserEndpoint, {
+      token: "test_token"
+    });
+    expect(removeUserResponse.status).toEqual(200);
+    const userExistAfterRemove = backdoorUserExist(db, "test_user");
+    expect(userExistAfterRemove).toBeFalsy;
+    const cardExistAfterRemove: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterRemove).toBeFalsy;
   });
 
   test("remove user should remove user data", async () => {
@@ -318,32 +492,21 @@ describe("end 2 end tests", () => {
       id: "test_card_uid"
     });
     expect(addCardResponse).toBeNull;
-    const cardSnapAfterAdd = await db
-      .collection("channel")
-      .doc("production-v1")
-      .collection("users")
-      .doc("test_user")
-      .collection("cards")
-      .doc("test_card_uid")
-      .get();
-    expect(cardSnapAfterAdd.exists).toBeTruthy;
+    const cardExistAfterAdd: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterAdd).toBeTruthy;
     const removeUserresponse = await removeUserCallable();
     expect(removeUserresponse).toBeNull;
-    const userSnapAfterRemove = await db
-      .collection("channel")
-      .doc("production-v1")
-      .collection("users")
-      .doc("test_user")
-      .get();
-    expect(userSnapAfterRemove.exists).toBeFalsy;
-    const cardSnapAfterRemove = await db
-      .collection("channel")
-      .doc("production-v1")
-      .collection("users")
-      .doc("test_user")
-      .collection("cards")
-      .doc("test_card_uid")
-      .get();
-    expect(cardSnapAfterRemove.exists).toBeFalsy;
+    const userExistAfterRemove = backdoorUserExist(db, "test_user");
+    expect(userExistAfterRemove).toBeFalsy;
+    const cardExistAfterRemove: boolean = await backdoorCardExist(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
+    expect(cardExistAfterRemove).toBeFalsy;
   });
 });
