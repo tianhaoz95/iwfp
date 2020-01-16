@@ -1,4 +1,4 @@
-# I want 5% (iwfp)
+![I want 5%! (a.k.a iwfp)](./website/static/img/readme_banner.png)
 
 [![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/package%20apps/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 [![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release-docs/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
