@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
