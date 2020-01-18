@@ -1,7 +1,7 @@
-class RunningMode {
+class AppContext {
   bool isDev = false;
   bool useEmulator = false;
-  RunningMode({bool emulator}) {
+  AppContext({bool emulator}) {
     setInitialDevMode();
     if (emulator != null) {
       useEmulator = emulator;

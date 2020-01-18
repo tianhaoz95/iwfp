@@ -5,7 +5,7 @@ import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/context.dart';
 import 'package:iwfpapp/services/utilities/card_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
@@ -14,7 +14,7 @@ class DataStore {
   List<ShopCategory> categories = [];
   List<CreditCard> cards = [];
   String serviceType;
-  RunningMode mode;
+  AppContext context;
   bool needRefresh;
   HttpsCallable addCardCallable;
   HttpsCallable addPromoCallable;
@@ -23,10 +23,10 @@ class DataStore {
   HttpsCallable removePromoCallable;
   HttpsCallable deleteAccountCallable;
   CloudFunctions cloudFunc;
-  DataStore(this.serviceType, this.mode) {
+  DataStore(this.serviceType, this.context) {
     needRefresh = true;
     cloudFunc = CloudFunctions.instance;
-    if (mode.useEmulator) {
+    if (context.useEmulator) {
       print('Using local emulator as backend...');
       cloudFunc.useFunctionsEmulator(origin: 'http://localhost:5001');
     }

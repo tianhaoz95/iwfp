@@ -14,15 +14,15 @@ import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/screens/add_card/main.dart';
 import 'package:iwfpapp/screens/remove_card/main.dart';
 import 'package:iwfpapp/screens/edit_card/main.dart';
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/context.dart';
 import 'package:iwfpapp/screens/add_promo/main.dart';
 import 'package:iwfpapp/services/theme.dart';
 
 class IwfpApp extends StatelessWidget {
   final DataStore dataStore;
   final IwfpappAuth auth;
-  final RunningMode mode;
-  const IwfpApp(this.dataStore, this.auth, this.mode);
+  final AppContext appContext;
+  const IwfpApp(this.dataStore, this.auth, this.appContext);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,8 +31,8 @@ class IwfpApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => HomeScreen(mode, dataStore, auth),
-        '/sign_in': (context) => LoginScreen(auth, mode, dataStore),
+        '/': (context) => HomeScreen(appContext, dataStore, auth),
+        '/sign_in': (context) => LoginScreen(auth, appContext, dataStore),
         '/sign_up': (context) => SignUpScreen(auth),
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(dataStore),

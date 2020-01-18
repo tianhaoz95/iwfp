@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/app.dart';
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/context.dart';
 import 'validators/screen_validator.dart';
 import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/auth.dart';
-import 'mock_services/mock_mode.dart';
+import 'mock_services/mock_context.dart';
 import 'mock_services/mock_data_store.dart';
 import 'mock_services/mock_auth.dart';
 
@@ -13,8 +13,8 @@ void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
     DataStore mockDataStore = MockDataStore();
     IwfpappAuth mockAuth = MockIwfpappAuth();
-    RunningMode mockMode = MockRunningMode();
-    await tester.pumpWidget(IwfpApp(mockDataStore, mockAuth, mockMode));
+    AppContext mockedAppContext = MockAppContext();
+    await tester.pumpWidget(IwfpApp(mockDataStore, mockAuth, mockedAppContext));
     await tester.pump();
     await tester.pumpAndSettle(new Duration(seconds: 5));
     await tester.enterText(

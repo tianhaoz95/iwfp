@@ -3,15 +3,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/services/config/typedefs/user_account.dart';
 import 'package:iwfpapp/services/data_store.dart';
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/context.dart';
 import 'package:iwfpapp/screens/home/main.dart';
 import 'mock_services/mock_auth.dart';
-import 'mock_services/mock_mode.dart';
+import 'mock_services/mock_context.dart';
 import 'mock_services/mock_data_store.dart';
 
 void main() {
   testWidgets('test home screen render no crash', (WidgetTester tester) async {
-    RunningMode mockMode = MockRunningMode();
+    AppContext mockedAppContext = MockAppContext();
     IwfpappAuth mockAuth = MockIwfpappAuth(
         overrideUser:
             UserAccount(email: 'test@iwfp.com', password: 'Wtf#12345'));
@@ -21,7 +21,7 @@ void main() {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(mockMode, mockDataStore, mockAuth),
+      home: HomeScreen(mockedAppContext, mockDataStore, mockAuth),
     ));
     await tester.pump();
     await tester.pumpAndSettle(new Duration(seconds: 5));

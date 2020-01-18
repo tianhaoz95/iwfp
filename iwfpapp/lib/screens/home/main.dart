@@ -10,7 +10,7 @@ import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/data_store.dart';
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/context.dart';
 
 const List<HomeTab> allDests = <HomeTab>[
   HomeTab('Shop Now!', Icons.shopping_cart, Colors.teal, Key('shop_nav_btn'),
@@ -24,10 +24,10 @@ const List<HomeTab> allDests = <HomeTab>[
 ];
 
 class HomeScreen extends StatefulWidget {
-  final RunningMode mode;
+  final AppContext appContext;
   final DataStore dataStore;
   final IwfpappAuth auth;
-  const HomeScreen(this.mode, this.dataStore, this.auth, {Key key})
+  const HomeScreen(this.appContext, this.dataStore, this.auth, {Key key})
       : super(key: key);
   @override
   _HomeScreen createState() {
@@ -46,7 +46,7 @@ class _HomeScreen extends State<HomeScreen> {
     _children = [
       ShopNow(widget.dataStore),
       ManageCard(widget.dataStore),
-      UserSettings(widget.mode),
+      UserSettings(widget.appContext),
       Contrib(),
     ];
     maybeNavigateToSignIn();
@@ -122,7 +122,8 @@ class _HomeScreen extends State<HomeScreen> {
   Widget renderDone(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.mode.devifyString(homeTabs[currentTabId].title),
+          title: Text(
+              widget.appContext.devifyString(homeTabs[currentTabId].title),
               key: homeTabs[currentTabId].titleKey),
           actions: <Widget>[
             FlatButton(

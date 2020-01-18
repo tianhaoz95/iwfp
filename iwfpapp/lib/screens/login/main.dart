@@ -7,25 +7,24 @@ import 'package:iwfpapp/services/utilities/validators/email_validator.dart';
 import 'package:iwfpapp/services/utilities/validators/sign_in_validator.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
 import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/context.dart';
 
 class LoginScreen extends StatefulWidget {
   final IwfpappAuth auth;
-  final RunningMode mode;
+  final AppContext appContext;
   final DataStore dataStore;
-  LoginScreen(this.auth, this.mode, this.dataStore);
+  LoginScreen(this.auth, this.appContext, this.dataStore);
   @override
-  _LoginScreen createState() => _LoginScreen(auth, mode);
+  _LoginScreen createState() => _LoginScreen(auth);
 }
 
 class _LoginScreen extends State<LoginScreen> {
   final emailInputController = TextEditingController();
   final pwdInputController = TextEditingController();
   final IwfpappAuth auth;
-  final RunningMode mode;
   String status;
 
-  _LoginScreen(this.auth, this.mode);
+  _LoginScreen(this.auth);
 
   @override
   void initState() {
@@ -282,7 +281,8 @@ class _LoginScreen extends State<LoginScreen> {
       bodyContent = renderLoading();
     }
     return Scaffold(
-        appBar: AppBar(title: Text(mode.devifyString('Welcome to iwfp'))),
+        appBar: AppBar(
+            title: Text(widget.appContext.devifyString('Welcome to iwfp'))),
         key: Key('login_screen'),
         body: bodyContent);
   }
