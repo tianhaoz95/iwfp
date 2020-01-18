@@ -22,7 +22,7 @@ class _DeleteAccountScreen extends State<DeleteAccountScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    CloudFuncResponse deleteAccountResponse =
+    BackendResponse deleteAccountResponse =
         await widget.dataStore.deleteAccount();
     if (deleteAccountResponse.status == ResponseStatus.SUCCEESS) {
       setState(() {

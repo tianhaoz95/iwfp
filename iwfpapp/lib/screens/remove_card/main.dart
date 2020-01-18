@@ -29,7 +29,7 @@ class _RemoveCardScreen extends State<RemoveCardScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    CloudFuncResponse reqStatus = await widget.dataStore.removeCard(card);
+    BackendResponse reqStatus = await widget.dataStore.removeCard(card);
     switch (reqStatus.status) {
       case ResponseStatus.SUCCEESS:
         setState(() {

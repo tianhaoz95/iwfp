@@ -86,8 +86,7 @@ class _AddCardScreen extends State<AddCardScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    CloudFuncResponse res =
-        await dataStore.addCard(CreditCard(cardName, cardId));
+    BackendResponse res = await dataStore.addCard(CreditCard(cardName, cardId));
     if (res == null) {
       setState(() {
         status = SubmitScreenStatus.ERROR;

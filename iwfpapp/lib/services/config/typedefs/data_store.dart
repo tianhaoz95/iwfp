@@ -1,10 +1,45 @@
+import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+
+enum DataBackendType {
+  IN_APP,
+  HTTPS,
+}
+
 enum ResponseStatus {
   SUCCEESS,
   FAILURE,
 }
 
-class CloudFuncResponse {
+class CreditCardInitRequest {
+  CreditCard card;
+  CreditCardInitRequest(this.card);
+}
+
+class CreditCardAdditionRequest {
+  CreditCard card;
+  CreditCardAdditionRequest(this.card);
+}
+
+class PromotionAdditionRequest {
+  CashbackPromo promo;
+  String target;
+  PromotionAdditionRequest(this.target, this.promo);
+}
+
+class CreditCardRemovalRequest {
+  String id;
+  CreditCardRemovalRequest(this.id);
+}
+
+class PromotionRemovalRequest {
+  String target;
+  String id;
+  PromotionRemovalRequest(this.target, this.id);
+}
+
+class BackendResponse {
   ResponseStatus status;
   String msg;
-  CloudFuncResponse(this.status, this.msg);
+  BackendResponse(this.status, this.msg);
 }

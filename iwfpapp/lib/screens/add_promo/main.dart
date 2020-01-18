@@ -109,7 +109,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
         promoRepeat,
         promoRate,
         ShopCategory(promoCategoryName, promoCategoryId));
-    CloudFuncResponse response = await widget.dataStore.addPromo(card, promo);
+    BackendResponse response = await widget.dataStore.addPromo(card, promo);
     if (response.status == ResponseStatus.SUCCEESS) {
       setState(() {
         status = SubmitScreenStatus.DONE;

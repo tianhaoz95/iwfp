@@ -51,7 +51,7 @@ class DataStore {
   }
 
   Future<List<ShopCategory>> getShopCategories() async {
-    CloudFuncResponse status = await fetchCards();
+    BackendResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
       print('fetch card failed');
       return [];
@@ -59,9 +59,9 @@ class DataStore {
     return getUniqueShoppingCategories(cards);
   }
 
-  Future<CloudFuncResponse> removeCard(CreditCard card) async {
-    CloudFuncResponse response =
-        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+  Future<BackendResponse> removeCard(CreditCard card) async {
+    BackendResponse response =
+        BackendResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       await removeCardCallable.call(<String, dynamic>{'id': card.id});
       response.status = ResponseStatus.SUCCEESS;
@@ -76,9 +76,9 @@ class DataStore {
     }
   }
 
-  Future<CloudFuncResponse> fetchCards() async {
-    CloudFuncResponse response =
-        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+  Future<BackendResponse> fetchCards() async {
+    BackendResponse response =
+        BackendResponse(ResponseStatus.FAILURE, 'Not started');
     if (!needRefresh || kIsWeb) {
       response.status = ResponseStatus.SUCCEESS;
       response.msg = 'No need to fetch';
@@ -108,23 +108,23 @@ class DataStore {
 
   Future<void> forceRefresh() async {
     needRefresh = true;
-    CloudFuncResponse status = await fetchCards();
+    BackendResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
       print('Refreshing data failed');
     }
   }
 
   Future<List<CreditCard>> getCards() async {
-    CloudFuncResponse status = await fetchCards();
+    BackendResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
       return [];
     }
     return cards;
   }
 
-  Future<CloudFuncResponse> addCard(CreditCard card) async {
-    CloudFuncResponse response =
-        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+  Future<BackendResponse> addCard(CreditCard card) async {
+    BackendResponse response =
+        BackendResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       HttpsCallableResult result = await addCardCallable.call(<String, dynamic>{
         'id': card.id,
@@ -141,12 +141,12 @@ class DataStore {
     }
   }
 
-  Future<CloudFuncResponse> addCardTemplate(CreditCard card) async {
+  Future<BackendResponse> addCardTemplate(CreditCard card) async {
     /// TODO(tianhaoz95): this idealy should be a atmoic
     /// operation to avoid incomplete failure. Server side
     /// work is needed to make the change.
-    CloudFuncResponse response =
-        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+    BackendResponse response =
+        BackendResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       await addCard(card);
     } catch (err) {
@@ -176,7 +176,7 @@ class DataStore {
   }
 
   Future<List<CreditCard>> getRankedCards(ShopCategory category) async {
-    CloudFuncResponse status = await fetchCards();
+    BackendResponse status = await fetchCards();
     if (status.status == ResponseStatus.FAILURE) {
       return [];
     }
@@ -184,11 +184,11 @@ class DataStore {
     return cards;
   }
 
-  Future<CloudFuncResponse> removePromo(RemovePromoMeta meta) async {
+  Future<BackendResponse> removePromo(RemovePromoMeta meta) async {
     CreditCard card = meta.card;
     CashbackPromo promo = meta.promo;
-    CloudFuncResponse response =
-        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+    BackendResponse response =
+        BackendResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       HttpsCallableResult result =
           await removePromoCallable.call(<String, dynamic>{
@@ -207,10 +207,9 @@ class DataStore {
     }
   }
 
-  Future<CloudFuncResponse> addPromo(
-      CreditCard card, CashbackPromo promo) async {
-    CloudFuncResponse response =
-        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+  Future<BackendResponse> addPromo(CreditCard card, CashbackPromo promo) async {
+    BackendResponse response =
+        BackendResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       HttpsCallableResult result =
           await addPromoCallable.call(<String, dynamic>{
@@ -238,9 +237,9 @@ class DataStore {
     }
   }
 
-  Future<CloudFuncResponse> deleteAccount() async {
-    CloudFuncResponse response =
-        CloudFuncResponse(ResponseStatus.FAILURE, 'Not started');
+  Future<BackendResponse> deleteAccount() async {
+    BackendResponse response =
+        BackendResponse(ResponseStatus.FAILURE, 'Not started');
     try {
       await deleteAccountCallable.call();
       response.status = ResponseStatus.SUCCEESS;

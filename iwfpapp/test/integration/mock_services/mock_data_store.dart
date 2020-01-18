@@ -17,10 +17,9 @@ class MockDataStore extends Mock implements DataStore {
   }
 
   @override
-  Future<CloudFuncResponse> addPromo(
-      CreditCard card, CashbackPromo promo) async {
-    CloudFuncResponse response =
-        CloudFuncResponse(ResponseStatus.SUCCEESS, 'Mocked');
+  Future<BackendResponse> addPromo(CreditCard card, CashbackPromo promo) async {
+    BackendResponse response =
+        BackendResponse(ResponseStatus.SUCCEESS, 'Mocked');
     return Future.delayed(Duration(seconds: 1), () => response);
   }
 

@@ -38,7 +38,7 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    CloudFuncResponse reqStatus =
+    BackendResponse reqStatus =
         await widget.dataStore.removePromo(removePromoMeta);
     switch (reqStatus.status) {
       case ResponseStatus.SUCCEESS:

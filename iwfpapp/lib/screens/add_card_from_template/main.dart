@@ -40,8 +40,7 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    CloudFuncResponse response =
-        await widget.dataStore.addCardTemplate(template);
+    BackendResponse response = await widget.dataStore.addCardTemplate(template);
     if (response.status == ResponseStatus.SUCCEESS) {
       setState(() {
         status = SubmitScreenStatus.DONE;
