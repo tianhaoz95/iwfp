@@ -20,24 +20,24 @@
   "main": "lib/src/index.js",
   "dependencies": {
     "@types/sinon": "^7.5.1",
-    "firebase-admin": "^8.9.0",
+    "firebase-admin": "^8.9.2",
     "firebase-functions": "^3.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.25",
-    "@types/node": "^13.1.6",
-    "axios": "^0.19.1",
-    "firebase": "^7.6.2",
+    "@types/node": "^13.5.0",
+    "@types/jest": "^25.1.0",
+    "axios": "^0.19.2",
+    "firebase": "^7.7.0",
     "firebase-functions-test": "^0.1.7",
-    "jest": "^24.9.0",
-    "jest-circus": "^24.9.0",
+    "jest": "^25.1.0",
+    "jest-circus": "^25.1.0",
     "prettier": "1.19.1",
-    "sinon": "^8.0.4",
-    "ts-jest": "^24.3.0",
+    "sinon": "^8.1.1",
+    "ts-jest": "^25.0.0",
     "ts-mockito": "^2.5.0",
     "ts-node": "^8.6.2",
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.4"
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5"
   },
   "private": true
 }
