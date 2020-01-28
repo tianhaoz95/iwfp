@@ -24,7 +24,7 @@
     "firebase-functions": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^13.5.0",
+    "@types/node": "^13.5.1",
     "@types/jest": "^25.1.0",
     "axios": "^0.19.2",
     "firebase": "^7.7.0",
