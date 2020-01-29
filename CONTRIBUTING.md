@@ -1,4 +1,4 @@
-# Contribute to the `iwfp` project
+# Contribute to I Want 5% Project
 
 ## Overview
 
@@ -8,6 +8,10 @@
 
 This part contains all the client apps (Android, IOS and Web). The project is written in a cross-platform
 framework, [@Flutter](https://flutter.dev/).
+
+### Choose an Editor
+
+I personally recommend VS Code. Alternatively you can [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/tianhaoz95/iwfp) which is a VS Code on the cloud.
 
 ### Install Flutter
 
@@ -33,5 +37,5 @@ browser should be running. [@Flutter](https://flutter.dev/) should be able to de
 ```bash
 cd iwfpapp
 flutter pub get
-flutter run 
+flutter run
 ```
