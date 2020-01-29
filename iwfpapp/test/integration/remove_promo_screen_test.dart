@@ -5,21 +5,21 @@ import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
-import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 
 import 'mock_services/mock_data_store.dart';
 
 void main() {
   testWidgets('test remove promo screen render no crash',
       (WidgetTester tester) async {
-    DataStore mockDataStore = MockDataStore();
+    DataBackend mockDataBackend = MockDataBackend();
     await tester.pumpWidget(MaterialApp(
       title: 'stand-alone remove promo screen',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: RemovePromoScreen(
-        mockDataStore,
+        mockDataBackend,
         defaultRemovePromoMeta: RemovePromoMeta(
             CreditCard('Mocked Card', 'mocked_card'),
             CashbackPromo(

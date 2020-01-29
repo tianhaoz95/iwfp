@@ -1,7 +1,7 @@
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:mockito/mockito.dart';
 
-class MockRunningMode extends Mock implements RunningMode {
+class MockAppContext extends Mock implements AppContext {
   @override
   String devifyString(String msg) {
     return msg;

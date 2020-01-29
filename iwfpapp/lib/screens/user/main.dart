@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/user/develop_card.dart';
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/screens/user/update_settings_btn.dart';
 
 class UserSettings extends StatefulWidget {
-  final RunningMode mode;
-  const UserSettings(this.mode);
+  final AppContext appContext;
+  const UserSettings(this.appContext);
   @override
   _UserSettings createState() {
     return _UserSettings();
@@ -17,11 +17,11 @@ class _UserSettings extends State<UserSettings> {
   @override
   void initState() {
     super.initState();
-    nextIsDevFlagVal = widget.mode.isDevMode();
+    nextIsDevFlagVal = widget.appContext.isDevMode();
   }
 
   handleUpdateSettings(BuildContext context) {
-    widget.mode.setRunningMode(nextIsDevFlagVal);
+    widget.appContext.setRunningMode(nextIsDevFlagVal);
     Navigator.pushReplacementNamed(context, '/');
   }
 
@@ -35,7 +35,7 @@ class _UserSettings extends State<UserSettings> {
             SizedBox(
               height: 5.0,
             ),
-            DevelopCard(widget.mode.isDevMode(), (bool nextDevVal) {
+            DevelopCard(widget.appContext.isDevMode(), (bool nextDevVal) {
               nextIsDevFlagVal = nextDevVal;
             }),
             UpdateSettingsButton(handleUpdateSettings),

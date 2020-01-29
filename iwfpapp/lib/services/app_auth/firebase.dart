@@ -1,15 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'dart:developer' as developer;
 
 import 'package:iwfpapp/services/config/typedefs/auth_status.dart';
-import 'package:iwfpapp/services/mode.dart';
 
-class IwfpappAuth {
+class AppAuthUsingFirebaseAuth extends AppAuth {
   FirebaseAuth _auth = FirebaseAuth.instance;
   AuthResult authResult;
-  RunningMode mode;
-
-  IwfpappAuth(this.mode);
 
   Future<void> handleSignInWithEmail(String email, String pwd) async {
     try {

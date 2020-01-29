@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
-import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/widgets/credit_cards/basic.dart';
 
 class SuggestionEntries extends StatefulWidget {
   final ShopCategory category;
-  final DataStore dataStore;
-  const SuggestionEntries(this.category, this.dataStore, {Key key})
+  final DataBackend dataBackend;
+  const SuggestionEntries(this.category, this.dataBackend, {Key key})
       : super(key: key);
   @override
   _SuggestionEntries createState() {
@@ -21,8 +21,7 @@ class _SuggestionEntries extends State<SuggestionEntries> {
   @override
   void initState() {
     super.initState();
-    // cards = getRankedCards('tianhaoz95', widget.category);
-    cards = widget.dataStore.getRankedCards(widget.category);
+    cards = widget.dataBackend.getRankedCreditCards(widget.category);
   }
 
   @override

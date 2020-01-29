@@ -1,7 +1,10 @@
-class RunningMode {
+import 'package:flutter/foundation.dart';
+import 'package:iwfpapp/services/config/typedefs/runtime_types.dart';
+
+class AppContext {
   bool isDev = false;
   bool useEmulator = false;
-  RunningMode({bool emulator}) {
+  AppContext({bool emulator}) {
     setInitialDevMode();
     if (emulator != null) {
       useEmulator = emulator;
@@ -21,6 +24,13 @@ class RunningMode {
 
   void setRunningMode(bool nextVal) {
     isDev = nextVal;
+  }
+
+  RuntimeType getRuntimeType() {
+    if (kIsWeb) {
+      return RuntimeType.WEB;
+    }
+    return RuntimeType.MOBILE;
   }
 
   String devifyString(String msg) {

@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
-import 'package:iwfpapp/services/data_store.dart';
-import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/utilities/validators/email_validator.dart';
 import 'package:iwfpapp/services/utilities/validators/sign_in_validator.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
 import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
 
 class LoginScreen extends StatefulWidget {
-  final IwfpappAuth auth;
-  final RunningMode mode;
-  final DataStore dataStore;
-  LoginScreen(this.auth, this.mode, this.dataStore);
+  final AppAuth auth;
+  final AppContext appContext;
+  final DataBackend dataBackend;
+  LoginScreen(this.auth, this.appContext, this.dataBackend);
   @override
-  _LoginScreen createState() => _LoginScreen(auth, mode);
+  _LoginScreen createState() => _LoginScreen(auth);
 }
 
 class _LoginScreen extends State<LoginScreen> {
   final emailInputController = TextEditingController();
   final pwdInputController = TextEditingController();
-  final IwfpappAuth auth;
-  final RunningMode mode;
+  final AppAuth auth;
   String status;
 
-  _LoginScreen(this.auth, this.mode);
+  _LoginScreen(this.auth);
 
   @override
   void initState() {
@@ -37,7 +36,7 @@ class _LoginScreen extends State<LoginScreen> {
   Future<void> getSignInStatus() async {
     bool signedIn = await auth.isSignedIn();
     if (signedIn) {
-      await widget.dataStore.fetchCards();
+      await widget.dataBackend.maybeRefreshCards();
       setState(() {
         status = 'signed_in';
       });
@@ -282,7 +281,8 @@ class _LoginScreen extends State<LoginScreen> {
       bodyContent = renderLoading();
     }
     return Scaffold(
-        appBar: AppBar(title: Text(mode.devifyString('Welcome to iwfp'))),
+        appBar: AppBar(
+            title: Text(widget.appContext.devifyString('Welcome to iwfp'))),
         key: Key('login_screen'),
         body: bodyContent);
   }
