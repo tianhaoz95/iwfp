@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/typedefs/user_account.dart';
 import 'package:iwfpapp/services/context.dart';
 import 'package:iwfpapp/screens/home/main.dart';

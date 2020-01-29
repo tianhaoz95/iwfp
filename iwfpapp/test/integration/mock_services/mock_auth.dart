@@ -1,4 +1,4 @@
-import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/typedefs/auth_status.dart';
 import 'package:iwfpapp/services/config/typedefs/user_account.dart';
 import 'package:mockito/mockito.dart';

@@ -4,7 +4,7 @@ import 'package:iwfpapp/screens/shop/main.dart';
 import 'package:iwfpapp/screens/cards/main.dart';
 import 'package:iwfpapp/screens/contrib/main.dart';
 import 'package:iwfpapp/screens/user/main.dart';
-import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';

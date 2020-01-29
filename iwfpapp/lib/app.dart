@@ -9,14 +9,14 @@ import 'package:iwfpapp/screens/remove_promo/main.dart';
 import 'package:iwfpapp/screens/screen_tester/main.dart';
 import 'package:iwfpapp/screens/sign_up/main.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
-import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/screens/add_card/main.dart';
 import 'package:iwfpapp/screens/remove_card/main.dart';
 import 'package:iwfpapp/screens/edit_card/main.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/context.dart';
 import 'package:iwfpapp/screens/add_promo/main.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
-import 'package:iwfpapp/services/theme.dart';
+import 'package:iwfpapp/services/config/themes/default.dart';
 
 class IwfpApp extends StatelessWidget {
   final DataBackend dataBackend;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
