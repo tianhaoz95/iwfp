@@ -4,13 +4,13 @@ import 'package:iwfpapp/screens/shop/main.dart';
 import 'package:iwfpapp/screens/cards/main.dart';
 import 'package:iwfpapp/screens/contrib/main.dart';
 import 'package:iwfpapp/screens/user/main.dart';
-import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
-import 'package:iwfpapp/services/data_store.dart';
-import 'package:iwfpapp/services/mode.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 
 const List<HomeTab> allDests = <HomeTab>[
   HomeTab('Shop Now!', Icons.shopping_cart, Colors.teal, Key('shop_nav_btn'),
@@ -24,10 +24,10 @@ const List<HomeTab> allDests = <HomeTab>[
 ];
 
 class HomeScreen extends StatefulWidget {
-  final RunningMode mode;
-  final DataStore dataStore;
-  final IwfpappAuth auth;
-  const HomeScreen(this.mode, this.dataStore, this.auth, {Key key})
+  final AppContext appContext;
+  final DataBackend dataBackend;
+  final AppAuth auth;
+  const HomeScreen(this.appContext, this.dataBackend, this.auth, {Key key})
       : super(key: key);
   @override
   _HomeScreen createState() {
@@ -44,13 +44,13 @@ class _HomeScreen extends State<HomeScreen> {
   void initState() {
     super.initState();
     _children = [
-      ShopNow(widget.dataStore),
-      ManageCard(widget.dataStore),
-      UserSettings(widget.mode),
+      ShopNow(widget.dataBackend),
+      ManageCard(widget.dataBackend),
+      UserSettings(widget.appContext),
       Contrib(),
     ];
     maybeNavigateToSignIn();
-    widget.dataStore.fetchCards();
+    widget.dataBackend.forceRefreshCards();
   }
 
   @override
@@ -87,7 +87,7 @@ class _HomeScreen extends State<HomeScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    await widget.dataStore.forceRefresh();
+    await widget.dataBackend.forceRefreshCards();
     setState(() {
       status = SubmitScreenStatus.DONE;
     });
@@ -122,7 +122,8 @@ class _HomeScreen extends State<HomeScreen> {
   Widget renderDone(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.mode.devifyString(homeTabs[currentTabId].title),
+          title: Text(
+              widget.appContext.devifyString(homeTabs[currentTabId].title),
               key: homeTabs[currentTabId].titleKey),
           actions: <Widget>[
             FlatButton(

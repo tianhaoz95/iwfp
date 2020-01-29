@@ -1,0 +1,4 @@
+enum RuntimeType {
+  MOBILE,
+  WEB
+}

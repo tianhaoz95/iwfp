@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/auth.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/typedefs/auth_status.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/utilities/validators/register_validator.dart';
 
 class SignUpScreen extends StatefulWidget {
-  final IwfpappAuth auth;
+  final AppAuth auth;
   const SignUpScreen(this.auth, {Key key}) : super(key: key);
   @override
   _SignUpScreen createState() {

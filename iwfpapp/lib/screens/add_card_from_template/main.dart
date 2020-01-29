@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
-import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/utilities/card_template.dart';
 import 'package:iwfpapp/widgets/credit_cards/template.dart';
 
 class AddCardFromTemplateScreen extends StatefulWidget {
-  final DataStore dataStore;
-  const AddCardFromTemplateScreen(this.dataStore, {Key key}) : super(key: key);
+  final DataBackend dataBackend;
+  const AddCardFromTemplateScreen(this.dataBackend, {Key key})
+      : super(key: key);
   @override
   _AddCardFromTemplateScreen createState() {
     return _AddCardFromTemplateScreen();
@@ -39,8 +41,8 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    CloudFuncResponse response =
-        await widget.dataStore.addCardTemplate(template);
+    BackendResponse response = await widget.dataBackend
+        .initCreditCardWithTemplate(CreditCardAdditionRequest(template));
     if (response.status == ResponseStatus.SUCCEESS) {
       setState(() {
         status = SubmitScreenStatus.DONE;

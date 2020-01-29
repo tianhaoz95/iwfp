@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
-import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/widgets/credit_cards/basic.dart';
 
 class ManageCard extends StatefulWidget {
-  final DataStore dataStore;
-  const ManageCard(this.dataStore, {Key key}) : super(key: key);
+  final DataBackend dataBackend;
+  const ManageCard(this.dataBackend, {Key key}) : super(key: key);
   @override
   _ManageCard createState() {
     return _ManageCard();
@@ -18,7 +18,7 @@ class _ManageCard extends State<ManageCard> {
   @override
   void initState() {
     super.initState();
-    cards = widget.dataStore.getCards();
+    cards = widget.dataBackend.getCreditCards();
   }
 
   @override
