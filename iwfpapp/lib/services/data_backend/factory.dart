@@ -1,5 +1,5 @@
 import 'package:iwfpapp/services/config/typedefs/backend.dart';
-import 'package:iwfpapp/services/context.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/data_backend/inapp.dart';
 

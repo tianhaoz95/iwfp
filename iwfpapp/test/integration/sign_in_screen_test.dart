@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/screens/login/main.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';
-import 'package:iwfpapp/services/context.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'mock_services/mock_context.dart';
 import 'mock_services/mock_data_store.dart';

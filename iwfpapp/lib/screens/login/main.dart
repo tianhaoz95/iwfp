@@ -7,7 +7,7 @@ import 'package:iwfpapp/services/utilities/validators/email_validator.dart';
 import 'package:iwfpapp/services/utilities/validators/sign_in_validator.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
 import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
-import 'package:iwfpapp/services/context.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
 
 class LoginScreen extends StatefulWidget {
   final AppAuth auth;

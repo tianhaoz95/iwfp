@@ -5,7 +5,7 @@ import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/app_auth/factory.dart';
 import 'package:iwfpapp/services/config/typedefs/app_auth_types.dart';
 import 'package:iwfpapp/services/config/typedefs/backend.dart';
-import 'package:iwfpapp/services/context.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/data_backend/factory.dart';
 

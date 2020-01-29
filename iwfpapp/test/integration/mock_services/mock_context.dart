@@ -1,4 +1,4 @@
-import 'package:iwfpapp/services/context.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:mockito/mockito.dart';
 
 class MockAppContext extends Mock implements AppContext {
