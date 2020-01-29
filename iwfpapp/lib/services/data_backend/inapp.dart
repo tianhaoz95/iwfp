@@ -2,7 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/context.dart';
-import 'package:iwfpapp/services/data_store/base.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 
 class InAppDataBackend extends DataBackend {

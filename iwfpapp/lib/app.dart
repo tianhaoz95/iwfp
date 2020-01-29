@@ -15,12 +15,12 @@ import 'package:iwfpapp/screens/remove_card/main.dart';
 import 'package:iwfpapp/screens/edit_card/main.dart';
 import 'package:iwfpapp/services/context.dart';
 import 'package:iwfpapp/screens/add_promo/main.dart';
-import 'package:iwfpapp/services/data_store/base.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/theme.dart';
 
 class IwfpApp extends StatelessWidget {
   final DataBackend dataBackend;
-  final IwfpappAuth auth;
+  final AppAuth auth;
   final AppContext appContext;
   const IwfpApp(this.dataBackend, this.auth, this.appContext);
   @override

@@ -6,7 +6,7 @@ import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
-import 'package:iwfpapp/services/data_store/base.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/utilities/validators/card_info_validator.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';

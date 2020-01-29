@@ -5,7 +5,7 @@ import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
-  final IwfpappAuth auth;
+  final AppAuth auth;
   const ForgotPasswordScreen(this.auth);
   @override
   _ForgotPasswordScreen createState() {

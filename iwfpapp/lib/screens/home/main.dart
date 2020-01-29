@@ -10,7 +10,7 @@ import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/context.dart';
-import 'package:iwfpapp/services/data_store/base.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 
 const List<HomeTab> allDests = <HomeTab>[
   HomeTab('Shop Now!', Icons.shopping_cart, Colors.teal, Key('shop_nav_btn'),
@@ -26,7 +26,7 @@ const List<HomeTab> allDests = <HomeTab>[
 class HomeScreen extends StatefulWidget {
   final AppContext appContext;
   final DataBackend dataBackend;
-  final IwfpappAuth auth;
+  final AppAuth auth;
   const HomeScreen(this.appContext, this.dataBackend, this.auth, {Key key})
       : super(key: key);
   @override

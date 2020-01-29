@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/auth.dart';
-import 'package:iwfpapp/services/data_store/base.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/utilities/validators/email_validator.dart';
 import 'package:iwfpapp/services/utilities/validators/sign_in_validator.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
@@ -10,7 +10,7 @@ import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
 import 'package:iwfpapp/services/context.dart';
 
 class LoginScreen extends StatefulWidget {
-  final IwfpappAuth auth;
+  final AppAuth auth;
   final AppContext appContext;
   final DataBackend dataBackend;
   LoginScreen(this.auth, this.appContext, this.dataBackend);
@@ -21,7 +21,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreen extends State<LoginScreen> {
   final emailInputController = TextEditingController();
   final pwdInputController = TextEditingController();
-  final IwfpappAuth auth;
+  final AppAuth auth;
   String status;
 
   _LoginScreen(this.auth);

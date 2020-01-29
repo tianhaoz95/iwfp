@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/app.dart';
 import 'package:iwfpapp/services/context.dart';
-import 'package:iwfpapp/services/data_store/base.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'validators/screen_validator.dart';
 import 'package:iwfpapp/services/auth.dart';
 import 'mock_services/mock_context.dart';
@@ -12,7 +12,7 @@ import 'mock_services/mock_auth.dart';
 void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
     DataBackend mockDataBackend = MockDataBackend();
-    IwfpappAuth mockAuth = MockIwfpappAuth();
+    AppAuth mockAuth = MockAppAuth();
     AppContext mockedAppContext = MockAppContext();
     await tester
         .pumpWidget(IwfpApp(mockDataBackend, mockAuth, mockedAppContext));

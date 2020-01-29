@@ -5,13 +5,13 @@ import 'package:mockito/mockito.dart';
 
 import '../fixtures/mock_accounts.dart';
 
-class MockIwfpappAuth extends Mock implements IwfpappAuth {
+class MockAppAuth extends Mock implements AppAuth {
   List<UserAccount> accounts = [];
   bool mockedIsSignedIn = false;
   UserAccount currentUser =
       UserAccount(email: 'wtf@iwfpapp.com', password: 'wtf#12345');
   @override
-  MockIwfpappAuth({UserAccount overrideUser}) {
+  MockAppAuth({UserAccount overrideUser}) {
     accounts = mockedAccounts;
     mockedIsSignedIn = false;
     if (overrideUser != null) {

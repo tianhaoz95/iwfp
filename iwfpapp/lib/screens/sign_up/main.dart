@@ -6,7 +6,7 @@ import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/utilities/validators/register_validator.dart';
 
 class SignUpScreen extends StatefulWidget {
-  final IwfpappAuth auth;
+  final AppAuth auth;
   const SignUpScreen(this.auth, {Key key}) : super(key: key);
   @override
   _SignUpScreen createState() {

@@ -3,11 +3,11 @@ import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
-import 'package:iwfpapp/services/data_store/base.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   final DataBackend dataBackend;
-  final IwfpappAuth auth;
+  final AppAuth auth;
   const DeleteAccountScreen(this.dataBackend, this.auth);
   @override
   _DeleteAccountScreen createState() {

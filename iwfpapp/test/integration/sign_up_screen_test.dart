@@ -7,7 +7,7 @@ import 'validators/obscure_input_validator.dart';
 
 void main() {
   testWidgets('test sign up screen details', (WidgetTester tester) async {
-    IwfpappAuth mockAuth = MockIwfpappAuth();
+    AppAuth mockAuth = MockAppAuth();
     await tester.pumpWidget(MaterialApp(
       title: 'stand-alone sign up screen',
       theme: ThemeData(

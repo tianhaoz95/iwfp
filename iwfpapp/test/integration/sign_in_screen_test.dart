@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/screens/login/main.dart';
 import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/services/context.dart';
-import 'package:iwfpapp/services/data_store/base.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'mock_services/mock_context.dart';
 import 'mock_services/mock_data_store.dart';
 import 'mock_services/mock_auth.dart';
@@ -12,7 +12,7 @@ import 'validators/screen_validator.dart';
 void main() {
   testWidgets('test sign in screen render no crash',
       (WidgetTester tester) async {
-    IwfpappAuth mockAuth = MockIwfpappAuth();
+    AppAuth mockAuth = MockAppAuth();
     AppContext mockedAppContext = MockAppContext();
     DataBackend mockDataBackend = MockDataBackend();
     await tester.pumpWidget(MaterialApp(

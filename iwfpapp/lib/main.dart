@@ -4,8 +4,8 @@ import 'package:iwfpapp/app.dart';
 import 'package:iwfpapp/services/auth.dart';
 import 'package:iwfpapp/services/config/typedefs/backend.dart';
 import 'package:iwfpapp/services/context.dart';
-import 'package:iwfpapp/services/data_store/base.dart';
-import 'package:iwfpapp/services/data_store/factory.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
+import 'package:iwfpapp/services/data_backend/factory.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +13,6 @@ void main() {
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
   AppContext appContext = AppContext();
   DataBackend dataBackend = getDataBackend(BackendType.IN_APP, appContext);
-  IwfpappAuth auth = IwfpappAuth(appContext);
+  AppAuth auth = AppAuth(appContext);
   runApp(IwfpApp(dataBackend, auth, appContext));
 }
