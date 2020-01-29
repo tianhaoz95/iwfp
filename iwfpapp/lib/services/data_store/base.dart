@@ -1,13 +1,29 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
+import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/context.dart';
+import 'package:iwfpapp/services/utilities/card_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
 
 abstract class DataBackend {
   bool dataOutdated;
   List<CreditCard> creditCards;
+  final AppContext appContext;
+
+  DataBackend(this.appContext) {
+    dataOutdated = true;
+  }
+
+  @protected
+  bool useEmulator() {
+    return this.appContext.useEmulator;
+  }
+
+  @protected
+  Future<BackendResponse> deleteAccountFromDatabase();
 
   @protected
   Future<List<CreditCard>> fetchCreditCardsFromDatabase();
@@ -81,6 +97,28 @@ abstract class DataBackend {
     return response;
   }
 
+  Future<BackendResponse> initCreditCardWithTemplate(
+      CreditCardAdditionRequest req) async {
+    BackendResponse response =
+        BackendResponse(ResponseStatus.FAILURE, 'Not started');
+    try {
+      await initCreditCard(CreditCardInitRequest(req.card));
+    } catch (err) {
+      response.status = ResponseStatus.FAILURE;
+      return response;
+    }
+    try {
+      for (CashbackPromo promo in req.card.promos) {
+        await addPromotion(PromotionAdditionRequest(req.card.id, promo));
+      }
+    } catch (err) {
+      response.status = ResponseStatus.FAILURE;
+      return response;
+    }
+    response.status = ResponseStatus.SUCCEESS;
+    return response;
+  }
+
   Future<BackendResponse> addCreditCard(CreditCardAdditionRequest req) async {
     BackendResponse response = await addCreditCardToDatabase(req);
     await setShouldRefresh();
@@ -99,11 +137,48 @@ abstract class DataBackend {
     return response;
   }
 
+  Future<BackendResponse> removePromotion(PromotionRemovalRequest req) async {
+    BackendResponse response = await removePromotionFromDatabase(req);
+    await setShouldRefresh();
+    return response;
+  }
+
   Future<List<ShopCategory>> getShopCategories() async {
     BackendResponse status = await maybeRefreshCards();
     if (status.status == ResponseStatus.FAILURE) {
       return [];
     }
     return getUniqueShoppingCategories(creditCards);
+  }
+
+  CreditCard renewCreditCardInfo(CreditCard card) {
+    for (CreditCard searchCard in creditCards) {
+      if (searchCard.id == card.id) {
+        return searchCard;
+      }
+    }
+    return card;
+  }
+
+  Future<List<CreditCard>> getCreditCards() async {
+    BackendResponse status = await maybeRefreshCards();
+    if (status.status == ResponseStatus.FAILURE) {
+      return [];
+    }
+    return creditCards;
+  }
+
+  Future<List<CreditCard>> getRankedCreditCards(ShopCategory category) async {
+    BackendResponse status = await maybeRefreshCards();
+    if (status.status == ResponseStatus.FAILURE) {
+      return [];
+    }
+    rankCards(creditCards, category);
+    return creditCards;
+  }
+
+  Future<BackendResponse> deleteAccount() async {
+    BackendResponse response = await deleteAccountFromDatabase();
+    return response;
   }
 }

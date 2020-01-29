@@ -6,13 +6,13 @@ import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
-import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/data_store/base.dart';
 import 'package:iwfpapp/services/utilities/validators/promo_info_validator.dart';
 
 class AddPromoScreen extends StatefulWidget {
-  final DataStore dataStore;
+  final DataBackend dataBackend;
   final CreditCard defaultCard;
-  const AddPromoScreen(this.dataStore, {Key key, this.defaultCard})
+  const AddPromoScreen(this.dataBackend, {Key key, this.defaultCard})
       : super(key: key);
   @override
   _AddPromoScreen createState() {
@@ -109,7 +109,8 @@ class _AddPromoScreen extends State<AddPromoScreen> {
         promoRepeat,
         promoRate,
         ShopCategory(promoCategoryName, promoCategoryId));
-    BackendResponse response = await widget.dataStore.addPromo(card, promo);
+    BackendResponse response = await widget.dataBackend
+        .addPromotion(PromotionAdditionRequest(card.id, promo));
     if (response.status == ResponseStatus.SUCCEESS) {
       setState(() {
         status = SubmitScreenStatus.DONE;
@@ -266,7 +267,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
               color: Colors.green,
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/edit_card',
-                    arguments: widget.dataStore.renewCard(card));
+                    arguments: widget.dataBackend.renewCreditCardInfo(card));
               },
               child: Text(
                 'Back to Card Editing',

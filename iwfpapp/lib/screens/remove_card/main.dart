@@ -3,11 +3,11 @@ import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
-import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/data_store/base.dart';
 
 class RemoveCardScreen extends StatefulWidget {
-  final DataStore dataStore;
-  const RemoveCardScreen(this.dataStore, {Key key}) : super(key: key);
+  final DataBackend dataBackend;
+  const RemoveCardScreen(this.dataBackend, {Key key}) : super(key: key);
   @override
   _RemoveCardScreen createState() {
     return _RemoveCardScreen();
@@ -29,7 +29,8 @@ class _RemoveCardScreen extends State<RemoveCardScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    BackendResponse reqStatus = await widget.dataStore.removeCard(card);
+    BackendResponse reqStatus = await widget.dataBackend
+        .removeCreditCard(CreditCardRemovalRequest(card.id));
     switch (reqStatus.status) {
       case ResponseStatus.SUCCEESS:
         setState(() {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/screens/login/main.dart';
 import 'package:iwfpapp/services/auth.dart';
-import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/context.dart';
+import 'package:iwfpapp/services/data_store/base.dart';
 import 'mock_services/mock_context.dart';
 import 'mock_services/mock_data_store.dart';
 import 'mock_services/mock_auth.dart';
@@ -14,13 +14,13 @@ void main() {
       (WidgetTester tester) async {
     IwfpappAuth mockAuth = MockIwfpappAuth();
     AppContext mockedAppContext = MockAppContext();
-    DataStore mockDataStore = MockDataStore();
+    DataBackend mockDataBackend = MockDataBackend();
     await tester.pumpWidget(MaterialApp(
       title: 'stand-alone sign in screen',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(mockAuth, mockedAppContext, mockDataStore),
+      home: LoginScreen(mockAuth, mockedAppContext, mockDataBackend),
     ));
     await tester.pumpAndSettle(new Duration(seconds: 5));
     validateIsSignInScreenContent();

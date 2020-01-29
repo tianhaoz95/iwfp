@@ -9,8 +9,8 @@ import 'package:iwfpapp/services/config/consts/home_tabs.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
-import 'package:iwfpapp/services/data_store.dart';
 import 'package:iwfpapp/services/context.dart';
+import 'package:iwfpapp/services/data_store/base.dart';
 
 const List<HomeTab> allDests = <HomeTab>[
   HomeTab('Shop Now!', Icons.shopping_cart, Colors.teal, Key('shop_nav_btn'),
@@ -25,9 +25,9 @@ const List<HomeTab> allDests = <HomeTab>[
 
 class HomeScreen extends StatefulWidget {
   final AppContext appContext;
-  final DataStore dataStore;
+  final DataBackend dataBackend;
   final IwfpappAuth auth;
-  const HomeScreen(this.appContext, this.dataStore, this.auth, {Key key})
+  const HomeScreen(this.appContext, this.dataBackend, this.auth, {Key key})
       : super(key: key);
   @override
   _HomeScreen createState() {
@@ -44,13 +44,13 @@ class _HomeScreen extends State<HomeScreen> {
   void initState() {
     super.initState();
     _children = [
-      ShopNow(widget.dataStore),
-      ManageCard(widget.dataStore),
+      ShopNow(widget.dataBackend),
+      ManageCard(widget.dataBackend),
       UserSettings(widget.appContext),
       Contrib(),
     ];
     maybeNavigateToSignIn();
-    widget.dataStore.fetchCards();
+    widget.dataBackend.forceRefreshCards();
   }
 
   @override
@@ -87,7 +87,7 @@ class _HomeScreen extends State<HomeScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    await widget.dataStore.forceRefresh();
+    await widget.dataBackend.forceRefreshCards();
     setState(() {
       status = SubmitScreenStatus.DONE;
     });

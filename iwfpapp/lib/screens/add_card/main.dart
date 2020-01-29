@@ -6,14 +6,14 @@ import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
-import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/data_store/base.dart';
 import 'package:iwfpapp/services/utilities/validators/card_info_validator.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
 
 class AddCardScreen extends StatefulWidget {
-  final DataStore dataStore;
-  const AddCardScreen(this.dataStore, {Key key}) : super(key: key);
+  final DataBackend dataBackend;
+  const AddCardScreen(this.dataBackend, {Key key}) : super(key: key);
 
   @override
   _AddCardScreen createState() {
@@ -25,17 +25,17 @@ class _AddCardScreen extends State<AddCardScreen> {
   final TextEditingController cardIdInputCtrl = TextEditingController();
   final TextEditingController cardNameInputCtrl = TextEditingController();
   SubmitScreenStatus status;
-  DataStore dataStore;
+  DataBackend dataBackend;
   String msg = 'No message yet';
 
   @override
   void initState() {
     super.initState();
     status = SubmitScreenStatus.PENDING;
-    if (widget.dataStore == null) {
+    if (widget.dataBackend == null) {
       status = SubmitScreenStatus.ERROR;
     } else {
-      dataStore = widget.dataStore;
+      dataBackend = widget.dataBackend;
     }
   }
 
@@ -86,7 +86,8 @@ class _AddCardScreen extends State<AddCardScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    BackendResponse res = await dataStore.addCard(CreditCard(cardName, cardId));
+    BackendResponse res = await dataBackend
+        .initCreditCard(CreditCardInitRequest(CreditCard(cardName, cardId)));
     if (res == null) {
       setState(() {
         status = SubmitScreenStatus.ERROR;

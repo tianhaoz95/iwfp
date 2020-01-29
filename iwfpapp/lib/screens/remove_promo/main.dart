@@ -3,13 +3,13 @@ import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
-import 'package:iwfpapp/services/data_store.dart';
+import 'package:iwfpapp/services/data_store/base.dart';
 
 class RemovePromoScreen extends StatefulWidget {
-  final DataStore dataStore;
+  final DataBackend dataBackend;
   final RemovePromoMeta defaultRemovePromoMeta;
   @override
-  const RemovePromoScreen(this.dataStore,
+  const RemovePromoScreen(this.dataBackend,
       {Key key, this.defaultRemovePromoMeta})
       : super(key: key);
   @override
@@ -38,8 +38,9 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    BackendResponse reqStatus =
-        await widget.dataStore.removePromo(removePromoMeta);
+    BackendResponse reqStatus = await widget.dataBackend.removePromotion(
+        PromotionRemovalRequest(
+            removePromoMeta.card.id, removePromoMeta.promo.id));
     switch (reqStatus.status) {
       case ResponseStatus.SUCCEESS:
         setState(() {
