@@ -78,7 +78,7 @@ jobs:
           mkdir -p ~/upload
           cp -r docs ~/upload/docs
           cd ~/upload/docs
-          cd ~/upload/docs
+          touch .nojekyll
           git config --global user.email "tianhaoz@umich.edu"
           git config --global user.name "Tianhao Zhou"
           git init
