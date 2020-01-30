@@ -1,6 +1,6 @@
-![I want 5%! (a.k.a iwfp)](./assets/readme_banner.png)
+<img alt="I want 5%! (a.k.a iwfp)" src="assets/readme_banner.png" height=100 />
 
-![may the 5% be with you](./assets/footer.png)
+<img alt="may the 5% be with you" src="assets/footer.png" height=100 />
 
 [![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/package%20apps/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 [![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release-docs/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
