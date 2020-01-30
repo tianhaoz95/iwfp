@@ -121,6 +121,48 @@ jobs:
           git remote add origin https://github.com/iwfp/iwfpapi-doc.git
           echo "machine github.com login tianhaoz95 password $GITHUB_TOKEN" > ~/.netrc
           git push -u -f origin master
+  release-iwfpapp-coverage-report:
+    name: release iwfpapp coverage report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.9.1+hotfix.4'
+          channel: 'stable'
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: install coverage visualization
+        run: sudo apt install lcov
+      - name: test iwfpapp with coverage
+        run: |
+          git clean -xffd
+          cd ./iwfpapp
+          flutter pub get
+          flutter test --coverage
+      - name: generate iwfpapp coverage report
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: |
+          cd ./iwfpapp
+          genhtml coverage/lcov.info -o coverage
+          mkdir -p ~/upload
+          cp -r coverage ~/upload/docs
+          cd ~/upload/docs
+          touch .nojekyll
+          git config --global user.email "tianhaoz@umich.edu"
+          git config --global user.name "Tianhao Zhou"
+          git init
+          git add -A
+          git commit -m "docs: update"
+          git remote add origin https://github.com/iwfp/iwfpapp-coverage-report.git
+          echo "machine github.com login tianhaoz95 password $GITHUB_TOKEN" > ~/.netrc
+          git push -u -f origin master
   release-docs:
     name: generate documentation
     runs-on: ubuntu-latest
