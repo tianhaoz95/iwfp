@@ -46,6 +46,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
           cd ./iwfpapp
+          mkdir -p ~/upload
           cp -r doc/api ~/upload/docs
           cd ~/upload/docs
           git config --global user.email "tianhaoz@umich.edu"
