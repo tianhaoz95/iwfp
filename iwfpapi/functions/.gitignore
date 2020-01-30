@@ -6,4 +6,8 @@
 # Typescript v1 declaration files
 typings/
 
+# Third-party packages
 node_modules/
+
+# Generated documentation
+docs/

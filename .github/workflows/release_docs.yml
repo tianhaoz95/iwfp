@@ -41,7 +41,7 @@ jobs:
           export PATH="$PATH:/usr/lib/dart/bin"
           flutter pub get
           dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
-      - name: upload api to repository
+      - name: upload doc to repository
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
@@ -55,6 +55,36 @@ jobs:
           git add -A
           git commit -m "docs: update"
           git remote add origin https://github.com/iwfp/iwfpapp-doc.git
+          echo "machine github.com login tianhaoz95 password $GITHUB_TOKEN" > ~/.netrc
+          git push -u -f origin master
+  build-iwfpapi-api-doc:
+    name: build iwfpapi API doc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16.0'
+      - name: generate doc
+        run: |
+          cd ./iwfpapi/functions
+          npm install
+          npm run docs
+      - name: upload doc to repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: |
+          cd ./iwfpapi/functions
+          mkdir -p ~/upload
+          cp -r docs ~/upload/docs
+          cd ~/upload/docs
+          cd ~/upload/docs
+          git config --global user.email "tianhaoz@umich.edu"
+          git config --global user.name "Tianhao Zhou"
+          git init
+          git add -A
+          git commit -m "docs: update"
+          git remote add origin https://github.com/iwfp/iwfpapi-doc.git
           echo "machine github.com login tianhaoz95 password $GITHUB_TOKEN" > ~/.netrc
           git push -u -f origin master
   release-docs:
