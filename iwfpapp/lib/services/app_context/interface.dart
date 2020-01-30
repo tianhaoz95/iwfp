@@ -34,10 +34,6 @@ class AppContext {
   }
 
   String devifyString(String msg) {
-    if (isDev) {
-      return '(Debug Mode) ' + msg;
-    } else {
-      return msg;
-    }
+    return msg;
   }
 }

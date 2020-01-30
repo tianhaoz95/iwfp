@@ -169,25 +169,20 @@ class _LoginScreen extends State<LoginScreen> {
       padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 35.0),
+          SizedBox(height: 15.0),
           Container(
-            child: Center(
-              child: Text(
-                'Welcome to I Want 5%',
-                style: TextStyle(fontSize: 25.0),
-                key: Key('iwfp_welcome_title'),
-              ),
+            padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+            child: Image(
+              image: AssetImage('assets/auth_screen_logo_high_resolution.png'),
             ),
           ),
-          SizedBox(height: 25.0),
           Container(
-            child: Center(
-              child: Text('May the 5% Be With You!',
-                  style: TextStyle(fontSize: 15.0),
-                  key: Key('iwfp_welcome_subtitle')),
+            padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+            child: Image(
+              image: AssetImage('assets/auth_screen_subtitle_high_resolution.png'),
             ),
           ),
-          SizedBox(height: 25.0),
+          SizedBox(height: 45.0),
           TextField(
               controller: emailInputController,
               key: Key('sign_in_email_input'),
@@ -282,7 +277,7 @@ class _LoginScreen extends State<LoginScreen> {
     }
     return Scaffold(
         appBar: AppBar(
-            title: Text(widget.appContext.devifyString('Welcome to iwfp'))),
+            title: Text(widget.appContext.devifyString('Welcome'))),
         key: Key('login_screen'),
         body: bodyContent);
   }
