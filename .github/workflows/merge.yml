@@ -24,16 +24,6 @@ jobs:
           npm run lint
           npm run build
           npm run e2e
-  build-doc:
-    name: build docs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install deps and compile docs
-        run: |
-          cd ./website
-          npm install
-          npm run build
   build-iwfp-home:
     name: build iwfp home site
     runs-on: ubuntu-latest
