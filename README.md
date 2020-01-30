@@ -25,6 +25,15 @@ iwfp is available on:
 
 For the latest updates, please subscribe to [newsletter](https://jacksonz.substack.com).
 
+## Helpful Resource
+
+* [Project Site](https://iwfp.github.io/iwfp-home/)
+* App (iwfpapp)
+  * [Coverage Report](https://iwfp.github.io/iwfpapp-coverage-report/)
+  * [Dev documentation](https://iwfp.github.io/iwfpapp-doc/)
+* API (iwfpapi)
+  * [Dev documentation](https://iwfp.github.io/iwfpapi-doc/)
+
 ## Contribute
 
 Contribution of any kind (code, docs, suggestions, etc) is appreciated! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
