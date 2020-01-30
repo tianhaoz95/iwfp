@@ -1,4 +1,4 @@
-name: release iwfpapi
+name: api release
 on:
   push:
     branches:

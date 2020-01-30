@@ -1,4 +1,4 @@
-name: release-docs
+name: doc release
 on:
   push:
     branches: 

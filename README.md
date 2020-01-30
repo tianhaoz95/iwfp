@@ -2,11 +2,10 @@
 
 ![may the 5% be with you](./assets/footer.png)
 
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/package%20apps/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release-docs/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release%20iwfpapi/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release%20iwfpapp%20android/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release%20iwfpapp%20web/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
+[![doc release status](https://github.com/tianhaoz95/iwfp/workflows/doc%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
+[![api release status](https://github.com/tianhaoz95/iwfp/workflows/api%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
+[![andorid release status](https://github.com/tianhaoz95/iwfp/workflows/android%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
+[![web release status](https://github.com/tianhaoz95/iwfp/workflows/web%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 
 I want 5% (iwfp) is a utility to help everyone who uses credit cards maximize cash back rewards.
 
