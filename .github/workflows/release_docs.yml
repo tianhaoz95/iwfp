@@ -76,6 +76,8 @@ jobs:
           yarn
           yarn docz build
       - name: upload doc
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
           cd ./iwfphome
           mkdir -p ~/upload
