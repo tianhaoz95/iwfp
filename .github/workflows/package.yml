@@ -1,4 +1,4 @@
-name: package apps
+name: package
 on:
   push:
     branches:

@@ -1,4 +1,4 @@
-name: release iwfpapp android
+name: android release
 on:
   push:
     branches:

@@ -1,29 +1,42 @@
-![I want 5%! (a.k.a iwfp)](./website/static/img/readme_banner.png)
+<img alt="I want 5%! (a.k.a iwfp)" src="assets/readme_banner.png" height=100 />
 
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/package%20apps/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release-docs/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release%20iwfpapi/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release%20iwfpapp%20android/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
-[![Actions Status](https://github.com/tianhaoz95/iwfp/workflows/release%20iwfpapp%20web/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
+<img alt="may the 5% be with you" src="assets/footer.png" height=100 />
 
-> May the ~~force~~ **five percent** be with you.
+[![doc release status](https://github.com/tianhaoz95/iwfp/workflows/doc%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
+[![api release status](https://github.com/tianhaoz95/iwfp/workflows/api%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
+[![andorid release status](https://github.com/tianhaoz95/iwfp/workflows/android%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
+[![web release status](https://github.com/tianhaoz95/iwfp/workflows/web%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 
-iwfp (I want five percent) is a utility to help everyone who uses credit cards maximize cash back rewards.
+I want 5% (iwfp) is a utility to help everyone who uses credit cards maximize cash back rewards.
 
 **A quick look** (where you select a shopping category and it tells you which card is the best):
 
-![App Screenshots](./website/static/img/app_screenshots.png)
+![App Screenshots](./assets/app_screenshots.png)
 
 ## Getting Started
 
-iwfp is available on:
+I want 5% is available on:
 - [x] Android (available on [Google Play Store](https://play.google.com/store/apps/details?id=com.jacksonz.iwfpapp&hl=en_US))
-- [ ] iOS (need sponsorship for the $99/year Apple developer account 	:broken_heart:)
-- [ ] Web (waiting for [flutterfire](https://github.com/FirebaseExtended/flutterfire) to support web)
-- [ ] MacOS (not planned. Although [Flutter](https://flutter.dev/) will support it, who knows what will happen when I enable it :scream:)
+- [x] Web (available at [I Want 5% Web](https://iwfpapp.web.app))
+- [ ] iOS
+  - [x] Code complete
+  - [x] Third-party compatibility
+  - [ ] Need sponsorship for the $99/year Apple developer account subscription :broken_heart:
+- [ ] MacOS
+  - [x] Code complete
+  - [ ] Third-party compatibility (`firebase_auth` & `firebase_core`)
 - [ ] Windows (not planned. Although [Flutter](https://flutter.dev/) will support it, who knows what will happen when I enable it :scream:)
 
 For the latest updates, please subscribe to [newsletter](https://jacksonz.substack.com).
+
+## Helpful Resource
+
+* [Project Site](https://iwfp.github.io/iwfp-home/)
+* Mobile Apps (iwfpapp)
+  * [Coverage Report](https://iwfp.github.io/iwfpapp-coverage-report/)
+  * [Dev documentation](https://iwfp.github.io/iwfpapp-doc/)
+* Backend APIs (iwfpapi)
+  * [Dev documentation](https://iwfp.github.io/iwfpapi-doc/)
 
 ## Contribute
 

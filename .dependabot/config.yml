@@ -8,7 +8,7 @@ update_configs:
     default_labels:
       - "gem dependency update"
   - package_manager: "javascript"
-    directory: "/website"
+    directory: "/iwfphome"
     update_schedule: "live"
     default_reviewers:
       - "tianhaoz95"
