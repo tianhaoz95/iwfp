@@ -22,10 +22,10 @@ I want 5% is available on:
 - [ ] iOS
   - [x] Code complete
   - [x] Third-party compatibility
-  - [ ] Need sponsorship for the $99/year Apple developer account :broken_heart:
+  - [ ] Need sponsorship for the $99/year Apple developer account subscription :broken_heart:
 - [ ] MacOS
   - [x] Code complete
-  - [ ] Third-party compatibility
+  - [ ] Third-party compatibility (`firebase_auth` & `firebase_core`)
 - [ ] Windows (not planned. Although [Flutter](https://flutter.dev/) will support it, who knows what will happen when I enable it :scream:)
 
 For the latest updates, please subscribe to [newsletter](https://jacksonz.substack.com).
@@ -33,10 +33,10 @@ For the latest updates, please subscribe to [newsletter](https://jacksonz.substa
 ## Helpful Resource
 
 * [Project Site](https://iwfp.github.io/iwfp-home/)
-* App (iwfpapp)
+* Mobile Apps (iwfpapp)
   * [Coverage Report](https://iwfp.github.io/iwfpapp-coverage-report/)
   * [Dev documentation](https://iwfp.github.io/iwfpapp-doc/)
-* API (iwfpapi)
+* Backend APIs (iwfpapi)
   * [Dev documentation](https://iwfp.github.io/iwfpapi-doc/)
 
 ## Contribute
