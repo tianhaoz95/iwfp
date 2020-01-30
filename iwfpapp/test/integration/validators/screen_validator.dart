@@ -48,5 +48,5 @@ void validateIsSignInScreenContent() {
   expect(find.text('Forgot Password'), findsOneWidget);
   expect(find.text('Continue as Guest'), findsOneWidget);
   expect(find.text('Register'), findsOneWidget);
-  expect(find.text('Welcome to iwfp'), findsOneWidget);
+  expect(find.text('Welcome'), findsOneWidget);
 }
