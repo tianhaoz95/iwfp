@@ -34,6 +34,37 @@ jobs:
           cd ./website
           npm install
           npm run build
+  build-iwfpapp-api-doc:
+    name: build iwfpapp API doc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.12.13+hotfix.5'
+          channel: 'stable'
+      - name: upgrade flutter
+        run: |
+          flutter channel master
+          flutter upgrade
+          flutter --version
+      - name: install dartdoc
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y apt-transport-https
+          sudo sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+          sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+          sudo apt-get update
+          sudo apt-get install dart
+      - name: build docs
+        run: |
+          cd ./iwfpapp
+          export PATH="$PATH:/usr/lib/dart/bin"
+          flutter pub get
+          dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
   build-web:
     name: build web app
     runs-on: ubuntu-latest
