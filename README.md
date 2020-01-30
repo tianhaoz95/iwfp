@@ -29,4 +29,4 @@ For the latest updates, please subscribe to [newsletter](https://jacksonz.substa
 
 Contribution of any kind (code, docs, suggestions, etc) is appreciated! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
-![may the 5% be with you](./assets/banner.png)
+![may the 5% be with you](./assets/footer.png)
