@@ -34,6 +34,24 @@ jobs:
           cd ./website
           npm install
           npm run build
+  build-iwfp-home:
+    name: build iwfp home site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16.0'
+      - name: install yarn
+        run: |
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          sudo apt update && sudo apt install yarn
+      - name: build doc
+        run: |
+          cd ./iwfphome
+          yarn
+          yarn docz build
   build-iwfpapi-api-doc:
     name: build iwfpapi API doc
     runs-on: ubuntu-latest
