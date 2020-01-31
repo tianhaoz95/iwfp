@@ -10,7 +10,9 @@ on:
       - "master"
 jobs:
   lint-readme:
-    name: Lint readme files
+    name: lint readme files
+    if: "github.event_name == 'schedule' || 
+    (github.event_name == 'pull_request' || github.event_name == 'push') && contains(github.event.head_commit.message, 'LINT_README')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
