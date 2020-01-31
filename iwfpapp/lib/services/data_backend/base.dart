@@ -6,7 +6,7 @@ import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
-import 'package:iwfpapp/services/utilities/card_ranker.dart';
+import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
 
 abstract class DataBackend {
