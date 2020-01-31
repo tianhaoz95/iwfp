@@ -19,7 +19,7 @@
     "docz": "latest",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "semver": "^7.1.1"
+    "semver": "^7.1.2"
   },
   "devDependencies": {
     "@types/react": "^16.8.23",
