@@ -9,6 +9,10 @@ import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/utilities/validators/promo_info_validator.dart';
 
+/// This screen prompts users to enter information
+/// of a credit card promotion.
+/// 
+/// {@category Screens}
 class AddPromoScreen extends StatefulWidget {
   final DataBackend dataBackend;
   final CreditCard defaultCard;

@@ -11,6 +11,10 @@ import 'package:iwfpapp/services/utilities/validators/card_info_validator.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
 
+/// The screen that prompts user to input
+/// information to initialize a credit card
+/// 
+/// {@category Screens}
 class AddCardScreen extends StatefulWidget {
   final DataBackend dataBackend;
   const AddCardScreen(this.dataBackend, {Key key}) : super(key: key);
