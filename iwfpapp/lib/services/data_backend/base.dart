@@ -1,5 +1,6 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
@@ -12,8 +13,9 @@ abstract class DataBackend {
   bool dataOutdated;
   List<CreditCard> creditCards;
   final AppContext appContext;
+  final AppAuth appAuth;
 
-  DataBackend(this.appContext) {
+  DataBackend(this.appContext, this.appAuth) {
     dataOutdated = true;
   }
 

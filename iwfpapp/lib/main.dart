@@ -15,10 +15,10 @@ void main() {
   Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
   AppContext appContext = AppContext();
-  DataBackend dataBackend = getDataBackend(BackendType.IN_APP, appContext);
-  if (appContext.getRuntimeType() == RuntimeType.WEB) {
-    dataBackend = getDataBackend(BackendType.USE_HTTP, appContext);
-  }
   AppAuth auth = getAppAuth(AppAuthType.FIREBASE_AUTH);
+  DataBackend dataBackend = getDataBackend(BackendType.IN_APP, appContext, auth);
+  if (appContext.getRuntimeType() == RuntimeType.WEB) {
+    dataBackend = getDataBackend(BackendType.USE_HTTP, appContext, auth);
+  }
   runApp(IwfpApp(dataBackend, auth, appContext));
 }
