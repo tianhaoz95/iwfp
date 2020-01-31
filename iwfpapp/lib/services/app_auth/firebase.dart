@@ -71,4 +71,11 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
     }
     return response;
   }
+
+  Future<String> generateToken() async {
+    FirebaseUser user = await _auth.currentUser();
+    IdTokenResult tokenResult = await user.getIdToken();
+    String token = tokenResult.token;
+    return token;
+  }
 }

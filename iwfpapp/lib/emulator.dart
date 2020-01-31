@@ -13,8 +13,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  AppContext appContext = AppContext(emulator: true);
-  DataBackend dataBackend = getDataBackend(BackendType.IN_APP, appContext);
   AppAuth auth = getAppAuth(AppAuthType.FIREBASE_AUTH);
+  AppContext appContext = AppContext(emulator: true);
+  DataBackend dataBackend = getDataBackend(BackendType.IN_APP, appContext, auth);
   runApp(IwfpApp(dataBackend, auth, appContext));
 }

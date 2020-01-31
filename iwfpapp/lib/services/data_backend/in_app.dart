@@ -1,4 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
@@ -15,7 +16,7 @@ class InAppDataBackend extends DataBackend {
   CloudFunctions cloudFunc;
 
   @override
-  InAppDataBackend(AppContext appContext) : super(appContext) {
+  InAppDataBackend(AppContext appContext, AppAuth appAuth) : super(appContext, appAuth) {
     cloudFunc = CloudFunctions.instance;
     if (useEmulator()) {
       print('Using local emulator as backend...');
