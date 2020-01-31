@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// This screen shows the ways users can contribute
+/// to I want 5% project.
+/// 
+/// {@category Screens}
 class Contrib extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
