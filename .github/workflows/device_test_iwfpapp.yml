@@ -18,6 +18,7 @@ on:
     - cron: 0 2 * * *
 jobs:
   ios_device_test:
+    if: github.event_name == "pull_request" || contains(github.event.head_commit.message, 'DEVICE_TEST')
     strategy:
       matrix:
         device:
