@@ -18,7 +18,9 @@ on:
     - cron: 0 2 * * *
 jobs:
   ios_device_test:
-    if: "github.event_name == 'schedule' || github.event_name == 'pull_request' || contains(github.event.head_commit.message, 'DEVICE_TEST')"
+    if: "github.event_name == 'schedule' ||
+    github.event_name == 'pull_request' ||
+    (github.event_name == 'push' && contains(github.event.head_commit.message, 'DEVICE_TEST'))"
     strategy:
       matrix:
         device:
@@ -49,7 +51,7 @@ jobs:
         run: git clean -xffd
       - name: "List all simulators"
         run: "xcrun instruments -s"
-      - name: "Start Simulator"
+      - name: start simulator
         run: |
           UDID=$(
             xcrun instruments -s |
