@@ -3,12 +3,11 @@ import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 
-List<CreditCard> data2cards(HttpsCallableResult rawResponse) {
-  print(rawResponse.data.toString());
+/// Converts dynamic map to credit cards
+List<CreditCard> dict2cards(Map<String, dynamic> dict) {
   List<CreditCard> cards = [];
-  Map<String, dynamic> docs = Map<String, dynamic>.from(rawResponse.data);
-  if (docs != null) {
-    docs.forEach((String cardId, dynamic cardDataRaw) {
+  if (dict != null) {
+    dict.forEach((String cardId, dynamic cardDataRaw) {
       Map<String, dynamic> cardData = Map<String, dynamic>.from(cardDataRaw);
       String cardName = cardData['card_name'] as String;
       CreditCard card = CreditCard(cardName, cardId);
@@ -26,7 +25,7 @@ List<CreditCard> data2cards(HttpsCallableResult rawResponse) {
               promoData['promo_start'],
               promoData['promo_end'],
               promoData['promo_repeat_pattern'],
-              promoData['promo_rate'],
+              int.parse(promoData['promo_rate']),
               ShopCategory(promoData['promo_category_name'],
                   promoData['promo_category_id']),
             );
@@ -38,4 +37,25 @@ List<CreditCard> data2cards(HttpsCallableResult rawResponse) {
     });
   }
   return cards;
+}
+
+/// Converts json docs to credit cards
+List<CreditCard> docs2cards(Map<String, dynamic> docs) {
+  try {
+    return dict2cards(docs);
+  } catch (err) {
+    print('Error paring cards: ' + err.toString());
+    return [];
+  }
+}
+
+/// Converts firebase http callable result to credit cards
+List<CreditCard> data2cards(HttpsCallableResult rawResponse) {
+  try {
+    Map<String, dynamic> docs = Map<String, dynamic>.from(rawResponse.data);
+    return docs2cards(docs);
+  } catch (err) {
+    print('Error parsing cards: ' + err.toString());
+    return [];
+  }
 }
