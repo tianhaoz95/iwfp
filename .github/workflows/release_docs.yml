@@ -49,6 +49,7 @@ jobs:
           mkdir -p ~/upload
           cp -r doc/api ~/upload/docs
           cd ~/upload/docs
+          touch .nojekyll
           git config --global user.email "tianhaoz@umich.edu"
           git config --global user.name "Tianhao Zhou"
           git init
@@ -65,16 +66,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '10.16.0'
-      - name: install yarn
-        run: |
-          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-          sudo apt update && sudo apt install yarn
       - name: build doc
         run: |
           cd ./iwfphome
-          yarn
-          yarn docz build
+          npm install
+          npm run build
       - name: upload doc
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
@@ -83,6 +79,7 @@ jobs:
           mkdir -p ~/upload
           cp -r .docz/dist ~/upload/docs
           cd ~/upload/docs
+          touch .nojekyll
           git config --global user.email "tianhaoz@umich.edu"
           git config --global user.name "Tianhao Zhou"
           git init
