@@ -12,7 +12,6 @@ export const Alert = ({ children, kind, ...rest }) => (
   <div
     style={{
       padding: 20,
-      background: 'white',
       borderRadius: 3,
       color: 'white',
       background: kinds[kind],
