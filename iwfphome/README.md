@@ -1,19 +1,19 @@
-# Typescript Docz example
+# Basic Docz example
 
 ## Using `create-docz-app`
 
 ```sh
-npx create-docz-app docz-app-typescript --example typescript
+npx create-docz-app docz-app-basic
 # or
-yarn create docz-app docz-app-typescript --example typescript
+yarn create docz-app docz-app-basic
 ```
 
 ## Download manually
 
 ```sh
-curl https://codeload.github.com/doczjs/docz/tar.gz/master | tar -xz --strip=2 docz-master/examples/typescript
-mv typescript docz-typescript-example
-cd docz-typescript-example
+curl https://codeload.github.com/doczjs/docz/tar.gz/master | tar -xz --strip=2 docz-master/examples/basic
+mv basic docz-basic-example
+cd docz-basic-example
 ```
 
 ## Setup
@@ -26,4 +26,16 @@ yarn # npm i
 
 ```sh
 yarn dev # npm run dev
+```
+
+## Build
+
+```sh
+yarn build # npm run build
+```
+
+## Serve built app
+
+```sh
+yarn serve # npm run serve
 ```
