@@ -16,7 +16,8 @@ void main() {
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
   AppContext appContext = AppContext();
   AppAuth auth = getAppAuth(AppAuthType.FIREBASE_AUTH);
-  DataBackend dataBackend = getDataBackend(BackendType.IN_APP, appContext, auth);
+  DataBackend dataBackend =
+      getDataBackend(BackendType.IN_APP, appContext, auth);
   if (appContext.getRuntimeType() == RuntimeType.WEB) {
     dataBackend = getDataBackend(BackendType.USE_HTTP, appContext, auth);
   }

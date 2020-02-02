@@ -9,7 +9,7 @@ import 'package:iwfpapp/widgets/credit_cards/template.dart';
 
 /// This screen lists pre-defined credit card templates
 /// for users to choose from.
-/// 
+///
 /// {@category Screens}
 class AddCardFromTemplateScreen extends StatefulWidget {
   final DataBackend dataBackend;

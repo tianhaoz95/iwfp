@@ -22,7 +22,7 @@ class PromotionChip extends StatelessWidget {
     return Container(
         padding: EdgeInsets.fromLTRB(1.0, 0.0, 1.0, 0.0),
         child: Chip(
-          backgroundColor: chipColor,
+            backgroundColor: chipColor,
             label: Text(promoName + '@' + promoRate.toString() + '%',
                 style: TextStyle(color: Colors.white))));
   }

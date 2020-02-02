@@ -179,7 +179,8 @@ class _LoginScreen extends State<LoginScreen> {
           Container(
             padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
             child: Image(
-              image: AssetImage('assets/auth_screen_subtitle_high_resolution.png'),
+              image:
+                  AssetImage('assets/auth_screen_subtitle_high_resolution.png'),
             ),
           ),
           SizedBox(height: 45.0),
@@ -276,8 +277,7 @@ class _LoginScreen extends State<LoginScreen> {
       bodyContent = renderLoading();
     }
     return Scaffold(
-        appBar: AppBar(
-            title: Text(widget.appContext.devifyString('Welcome'))),
+        appBar: AppBar(title: Text(widget.appContext.devifyString('Welcome'))),
         key: Key('login_screen'),
         body: bodyContent);
   }

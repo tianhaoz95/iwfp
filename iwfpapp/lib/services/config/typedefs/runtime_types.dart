@@ -1,4 +1,1 @@
-enum RuntimeType {
-  MOBILE,
-  WEB
-}
+enum RuntimeType { MOBILE, WEB }

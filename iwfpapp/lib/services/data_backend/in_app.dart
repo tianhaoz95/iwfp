@@ -16,7 +16,8 @@ class InAppDataBackend extends DataBackend {
   CloudFunctions cloudFunc;
 
   @override
-  InAppDataBackend(AppContext appContext, AppAuth appAuth) : super(appContext, appAuth) {
+  InAppDataBackend(AppContext appContext, AppAuth appAuth)
+      : super(appContext, appAuth) {
     cloudFunc = CloudFunctions.instance;
     if (useEmulator()) {
       print('Using local emulator as backend...');

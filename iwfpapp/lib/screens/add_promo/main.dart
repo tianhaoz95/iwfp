@@ -11,7 +11,7 @@ import 'package:iwfpapp/services/utilities/validators/promo_info_validator.dart'
 
 /// This screen prompts users to enter information
 /// of a credit card promotion.
-/// 
+///
 /// {@category Screens}
 class AddPromoScreen extends StatefulWidget {
   final DataBackend dataBackend;
