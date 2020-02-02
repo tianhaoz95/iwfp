@@ -4,7 +4,7 @@ import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/widgets/credit_cards/basic.dart';
 
 /// This screen shows all the credit cards in user wallet
-/// 
+///
 /// {@category Screens}
 class ManageCard extends StatefulWidget {
   final DataBackend dataBackend;

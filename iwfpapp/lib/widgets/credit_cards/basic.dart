@@ -40,7 +40,9 @@ class BasicCreditCard extends StatelessWidget {
         height: 45.0,
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: rankPromotionsWithTimeRange(cardMetaData.promos).reversed.map((CashbackPromo promo) {
+          children: rankPromotionsWithTimeRange(cardMetaData.promos)
+              .reversed
+              .map((CashbackPromo promo) {
             return PromotionChip(promo);
           }).toList(),
         ),
