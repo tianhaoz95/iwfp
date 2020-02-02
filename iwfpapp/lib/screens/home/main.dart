@@ -6,7 +6,10 @@ import 'package:iwfpapp/screens/contrib/main.dart';
 import 'package:iwfpapp/screens/user/main.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
+import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
@@ -25,8 +28,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   SubmitScreenStatus status = SubmitScreenStatus.LOADING;
+  Map<HomeTabId, HomeTab> tabs = homeTabs;
   HomeTabId currentTabId = HomeTabId.SHOPPING;
   List<Widget> _children = [];
+  List<CreditCard> cards = [];
+  List<ShopCategory> categories = [];
 
   @override
   void initState() {
@@ -37,6 +43,8 @@ class _HomeScreen extends State<HomeScreen> {
       UserSettings(widget.appContext),
       Contrib(),
     ];
+    tabs[HomeTabId.SHOPPING].onRefresh = this.handleRefresh;
+    tabs[HomeTabId.CARD_MANAGEMENT].onRefresh = this.handleRefresh;
     maybeNavigateToSignIn();
     widget.dataBackend.forceRefreshCards();
   }
@@ -76,7 +84,11 @@ class _HomeScreen extends State<HomeScreen> {
       status = SubmitScreenStatus.LOADING;
     });
     await widget.dataBackend.forceRefreshCards();
+    List<CreditCard> refreshedCards = await widget.dataBackend.getCreditCards();
+    List<ShopCategory> refershedCategories = await widget.dataBackend.getShopCategories();
     setState(() {
+      cards = refreshedCards;
+      categories = refershedCategories;
       status = SubmitScreenStatus.DONE;
     });
   }
@@ -111,8 +123,8 @@ class _HomeScreen extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-              homeTabs[currentTabId].title,
-              key: homeTabs[currentTabId].titleKey),
+              this.tabs[currentTabId].title,
+              key: this.tabs[currentTabId].titleKey),
           actions: <Widget>[
             ButtonTheme(
                 minWidth: 25.0,
@@ -154,28 +166,28 @@ class _HomeScreen extends State<HomeScreen> {
           currentIndex: homeTabId2Index(currentTabId),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(homeTabs[HomeTabId.SHOPPING].icon,
-                  key: homeTabs[HomeTabId.SHOPPING].btnKey),
+              icon: Icon(this.tabs[HomeTabId.SHOPPING].icon,
+                  key: this.tabs[HomeTabId.SHOPPING].btnKey),
               backgroundColor: Theme.of(context).primaryColor,
-              title: Text(homeTabs[HomeTabId.SHOPPING].title),
+              title: Text(this.tabs[HomeTabId.SHOPPING].title),
             ),
             BottomNavigationBarItem(
-              icon: Icon(homeTabs[HomeTabId.CARD_MANAGEMENT].icon,
-                  key: homeTabs[HomeTabId.CARD_MANAGEMENT].btnKey),
+              icon: Icon(this.tabs[HomeTabId.CARD_MANAGEMENT].icon,
+                  key: this.tabs[HomeTabId.CARD_MANAGEMENT].btnKey),
               backgroundColor: Theme.of(context).primaryColor,
-              title: Text(homeTabs[HomeTabId.CARD_MANAGEMENT].title),
+              title: Text(this.tabs[HomeTabId.CARD_MANAGEMENT].title),
             ),
             BottomNavigationBarItem(
-              icon: Icon(homeTabs[HomeTabId.USER_SETTINGS].icon,
-                  key: homeTabs[HomeTabId.USER_SETTINGS].btnKey),
+              icon: Icon(this.tabs[HomeTabId.USER_SETTINGS].icon,
+                  key: this.tabs[HomeTabId.USER_SETTINGS].btnKey),
               backgroundColor: Theme.of(context).primaryColor,
-              title: Text(homeTabs[HomeTabId.USER_SETTINGS].title),
+              title: Text(this.tabs[HomeTabId.USER_SETTINGS].title),
             ),
             BottomNavigationBarItem(
-              icon: Icon(homeTabs[HomeTabId.CONTRIB].icon,
-                  key: homeTabs[HomeTabId.CONTRIB].btnKey),
+              icon: Icon(this.tabs[HomeTabId.CONTRIB].icon,
+                  key: this.tabs[HomeTabId.CONTRIB].btnKey),
               backgroundColor: Theme.of(context).primaryColor,
-              title: Text(homeTabs[HomeTabId.CONTRIB].title),
+              title: Text(this.tabs[HomeTabId.CONTRIB].title),
             ),
           ],
         ));
