@@ -70,7 +70,7 @@ void main() {
       await driver.waitFor(find.byValueKey('add_card_from_template_title'));
       await takeNamedScreenshot(
           driver, 'add_card_from_template_screen_offline');
-      await driver.tap(find.byValueKey('discover_cashback_debit_card_add_btn'));
+      await driver.tap(find.byValueKey('discover_it_cashback_debit_add_btn'));
       await driver.waitFor(
           find.byValueKey('add_card_template_success_confirmation'),
           timeout: Duration(seconds: 30));
