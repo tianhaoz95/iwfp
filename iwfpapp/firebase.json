@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "iwfpapp",
     "public": "build/web",
     "ignore": [
       "firebase.json",
