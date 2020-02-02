@@ -31,7 +31,7 @@ For the latest updates, please subscribe to [newsletter](https://jacksonz.substa
 
 ## Helpful Resource
 
-* [Project Site](https://iwfp.github.io/iwfp-home/)
+* Project Site [Netlify](https://iwfp.netlify.com/) [Firebase](https://iwfp-project.web.app/)
 * [Blog](https://medium.com/i-want-5)
 * Mobile Apps (iwfpapp)
   * [Coverage Report](https://iwfp.github.io/iwfpapp-coverage-report/)
