@@ -6,22 +6,10 @@ import 'package:iwfpapp/screens/contrib/main.dart';
 import 'package:iwfpapp/screens/user/main.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
-import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
-
-const List<HomeTab> allDests = <HomeTab>[
-  HomeTab('Shop Now!', Icons.shopping_cart, Colors.teal, Key('shop_nav_btn'),
-      Key('shop_title')),
-  HomeTab('Manage Cards', Icons.credit_card, Colors.cyan, Key('cards_nav_btn'),
-      Key('cards_title')),
-  HomeTab('My Settings', Icons.account_circle, Colors.orange,
-      Key('user_nav_btn'), Key('user_title')),
-  HomeTab('Contribute', Icons.favorite, Colors.blue, Key('contrib_nav_btn'),
-      Key('contrib_title')),
-];
 
 class HomeScreen extends StatefulWidget {
   final AppContext appContext;
@@ -123,18 +111,38 @@ class _HomeScreen extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-              widget.appContext.devifyString(homeTabs[currentTabId].title),
+              homeTabs[currentTabId].title,
               key: homeTabs[currentTabId].titleKey),
           actions: <Widget>[
-            FlatButton(
-              child: Icon(
-                Icons.refresh,
-                color: Colors.white,
-              ),
-              onPressed: () async {
-                await handleRefresh();
-              },
-            ),
+            ButtonTheme(
+                minWidth: 25.0,
+                child: FlatButton(
+                  child: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                )),
+            ButtonTheme(
+                minWidth: 25.0,
+                child: FlatButton(
+                  child: Icon(
+                    Icons.location_on,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                )),
+            ButtonTheme(
+                minWidth: 25.0,
+                child: FlatButton(
+                  child: Icon(
+                    Icons.refresh,
+                    color: Colors.white,
+                  ),
+                  onPressed: () async {
+                    await handleRefresh();
+                  },
+                )),
           ],
         ),
         body: SafeArea(
