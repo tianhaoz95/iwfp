@@ -5,7 +5,7 @@ on:
       - "master"
       - "actions/release-iwfpapp-web__*"
     paths:
-      - "iwfpapp/pubspec.yaml"
+      - "iwfpapp/*"
       - ".github/workflows/release_iwfpapp_web.yml"
       - "Gemfile"
       - "Gemfile.lock"
