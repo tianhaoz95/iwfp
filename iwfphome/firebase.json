@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "site": "iwfp",
-    "public": "build/web",
+    "site": "iwfp-project",
+    "public": ".docz/dist",
     "ignore": [
       "firebase.json",
       "**/.*",

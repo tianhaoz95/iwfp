@@ -58,7 +58,26 @@ jobs:
           git remote add origin https://github.com/iwfp/iwfpapp-doc.git
           echo "machine github.com login tianhaoz95 password $GITHUB_TOKEN" > ~/.netrc
           git push -u -f origin master
-  build-iwfpapi-api-doc:
+  release-project-site:
+    name: build iwfp home site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16.0'
+      - name: install firebase cli
+        run: npm install -g firebase-tools
+      - name: build doc
+        run: |
+          cd ./iwfphome
+          npm install
+          npm run build
+      - name: upload to firebase hosting
+        run:
+          cd ./iwfphome
+          firebase deploy --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }} --only hosting:iwfp-project
+  release-iwfpapi-api-doc:
     name: build iwfpapi API doc
     runs-on: ubuntu-latest
     steps:

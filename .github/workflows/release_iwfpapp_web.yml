@@ -44,4 +44,4 @@ jobs:
       - name: deploy to firebase
         run: |
           cd ./iwfpapp
-          sudo firebase deploy --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
+          sudo firebase deploy --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }} --only hosting:iwfp
