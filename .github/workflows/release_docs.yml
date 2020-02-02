@@ -59,7 +59,7 @@ jobs:
           echo "machine github.com login tianhaoz95 password $GITHUB_TOKEN" > ~/.netrc
           git push -u -f origin master
   release-project-site:
-    name: build iwfp home site
+    name: release iwfp home site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -74,7 +74,7 @@ jobs:
           npm install
           npm run build
       - name: upload to firebase hosting
-        run:
+        run: |
           cd ./iwfphome
           firebase deploy --only hosting:iwfp-project --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
   release-iwfpapi-api-doc:
