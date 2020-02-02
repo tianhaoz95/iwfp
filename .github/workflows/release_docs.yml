@@ -76,7 +76,7 @@ jobs:
       - name: upload to firebase hosting
         run:
           cd ./iwfphome
-          firebase deploy --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }} --only hosting:iwfp-project
+          firebase deploy --only hosting:iwfp-project --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
   release-iwfpapi-api-doc:
     name: build iwfpapi API doc
     runs-on: ubuntu-latest

@@ -40,8 +40,8 @@ jobs:
           flutter test
           flutter build web
       - name: install firebase cli
-        run: sudo npm install -g firebase-tools
+        run: npm install -g firebase-tools
       - name: deploy to firebase
         run: |
           cd ./iwfpapp
-          sudo firebase deploy --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }} --only hosting:iwfp
+          firebase deploy --only hosting:iwfpapp --token ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
