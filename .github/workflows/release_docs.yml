@@ -58,36 +58,6 @@ jobs:
           git remote add origin https://github.com/iwfp/iwfpapp-doc.git
           echo "machine github.com login tianhaoz95 password $GITHUB_TOKEN" > ~/.netrc
           git push -u -f origin master
-  release-iwfp-home:
-    name: build iwfp home site
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '10.16.0'
-      - name: build doc
-        run: |
-          cd ./iwfphome
-          npm install
-          npm run build
-      - name: upload doc
-        env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-        run: |
-          cd ./iwfphome
-          mkdir -p ~/upload
-          cp -r .docz/dist ~/upload/docs
-          cd ~/upload/docs
-          touch .nojekyll
-          git config --global user.email "tianhaoz@umich.edu"
-          git config --global user.name "Tianhao Zhou"
-          git init
-          git add -A
-          git commit -m "docs: update"
-          git remote add origin https://github.com/iwfp/iwfp-home.git
-          echo "machine github.com login tianhaoz95 password $GITHUB_TOKEN" > ~/.netrc
-          git push -u -f origin master
   build-iwfpapi-api-doc:
     name: build iwfpapi API doc
     runs-on: ubuntu-latest

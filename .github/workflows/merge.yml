@@ -25,19 +25,6 @@ jobs:
           npm run lint
           npm run build
           npm run e2e
-  build-iwfp-home:
-    name: build iwfp home site
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '10.16.0'
-      - name: build doc
-        run: |
-          cd ./iwfphome
-          npm install
-          npm run build
   build-iwfpapi-api-doc:
     name: build iwfpapi API doc
     runs-on: ubuntu-latest
