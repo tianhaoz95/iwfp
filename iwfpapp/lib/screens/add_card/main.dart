@@ -13,7 +13,7 @@ import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
 
 /// The screen that prompts user to input
 /// information to initialize a credit card
-/// 
+///
 /// {@category Screens}
 class AddCardScreen extends StatefulWidget {
   final DataBackend dataBackend;

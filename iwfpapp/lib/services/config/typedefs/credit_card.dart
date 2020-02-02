@@ -8,7 +8,12 @@ class CreditCard {
   /// from list to map for better performance and
   /// readability.
   List<CashbackPromo> promos = [];
-  CreditCard(this.name, this.id);
+  CreditCard(this.name, this.id, {List<CashbackPromo> promos}) {
+    if (promos != null) {
+      this.promos = promos;
+    }
+  }
+
   void removePromo(CashbackPromo promo) {
     /// TODO(tianhaoz95): change this to a map find
     /// once promos switch its implementation from

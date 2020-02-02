@@ -9,7 +9,8 @@ abstract class AppAuth {
 
   Future<bool> isSignedIn();
 
-  Future<SendPasswordResetEmailResponse> handleSendPasswordResetEmail(String email);
+  Future<SendPasswordResetEmailResponse> handleSendPasswordResetEmail(
+      String email);
 
   Future<String> generateToken();
 }

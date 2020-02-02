@@ -4,12 +4,12 @@ import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
-import 'package:iwfpapp/services/utilities/card_template.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
 import 'package:iwfpapp/widgets/credit_cards/template.dart';
 
 /// This screen lists pre-defined credit card templates
 /// for users to choose from.
-/// 
+///
 /// {@category Screens}
 class AddCardFromTemplateScreen extends StatefulWidget {
   final DataBackend dataBackend;
