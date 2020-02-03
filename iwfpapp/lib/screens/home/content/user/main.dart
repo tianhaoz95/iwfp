@@ -29,7 +29,7 @@ class _UserSettings extends State<UserSettings> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        key: Key('contrib_screen_content'),
+        key: Key('user_screen_content'),
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         child: ListView(
           children: <Widget>[
@@ -65,11 +65,13 @@ class _UserSettings extends State<UserSettings> {
               child: Center(
                 child: Text(
                   'Dangerous Zone',
+                  key: Key('settings_screen_dangerous_zone_warning'),
                   style: TextStyle(color: Colors.redAccent),
                 ),
               ),
             ),
             Divider(
+              key: Key('settings_screen_dangerous_zone_divider'),
               color: Colors.redAccent,
             ),
             Container(
