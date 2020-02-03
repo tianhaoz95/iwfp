@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/screens/add_promo/promo_type_selector.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
@@ -156,6 +157,10 @@ class _AddPromoScreen extends State<AddPromoScreen> {
                 border: OutlineInputBorder(),
                 labelText: 'Promotion ID (unique)'),
           ),
+          SizedBox(
+            height: 5.0,
+          ),
+          PromotionTypeSelector(),
           SizedBox(
             height: 5.0,
           ),

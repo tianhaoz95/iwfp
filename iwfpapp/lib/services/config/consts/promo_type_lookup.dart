@@ -5,3 +5,9 @@ Map<String, CashbackPromoType> promoTypeLookup = {
   'sector': CashbackPromoType.SECTOR,
   'brand': CashbackPromoType.BRAND,
 };
+
+Map<CashbackPromoType, String> promoNameLookup = {
+  CashbackPromoType.UNIVERSAL: 'Universal',
+  CashbackPromoType.SECTOR: 'Sector',
+  CashbackPromoType.BRAND: 'Brand',
+};
