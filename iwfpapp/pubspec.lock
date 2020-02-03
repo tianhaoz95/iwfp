@@ -106,6 +106,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
+  edit_distance:
+    dependency: "direct main"
+    description:
+      name: edit_distance
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.1"
   file:
     dependency: transitive
     description:

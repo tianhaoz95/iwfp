@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/screens/user/develop_card.dart';
+import 'package:iwfpapp/screens/home/content/user/develop_card.dart';
+import 'package:iwfpapp/screens/home/content/user/update_settings_btn.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
-import 'package:iwfpapp/screens/user/update_settings_btn.dart';
 
 class UserSettings extends StatefulWidget {
   final AppContext appContext;

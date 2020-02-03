@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:iwfpapp/screens/shop/main.dart';
-import 'package:iwfpapp/screens/cards/main.dart';
-import 'package:iwfpapp/screens/contrib/main.dart';
-import 'package:iwfpapp/screens/user/main.dart';
+import 'package:iwfpapp/screens/home/appbar.dart';
+import 'package:iwfpapp/screens/home/bottom_nav.dart';
+import 'package:iwfpapp/screens/home/content/main.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/config/typedefs/shopping_context.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
+import 'package:iwfpapp/services/recommendation_engine/category_ranker.dart';
 
 class HomeScreen extends StatefulWidget {
   final AppContext appContext;
@@ -30,23 +31,17 @@ class _HomeScreen extends State<HomeScreen> {
   SubmitScreenStatus status = SubmitScreenStatus.LOADING;
   Map<HomeTabId, HomeTab> tabs = homeTabs;
   HomeTabId currentTabId = HomeTabId.SHOPPING;
-  List<Widget> _children = [];
   List<CreditCard> cards = [];
   List<ShopCategory> categories = [];
 
   @override
   void initState() {
     super.initState();
-    _children = [
-      ShopNow(widget.dataBackend),
-      ManageCard(widget.dataBackend),
-      UserSettings(widget.appContext),
-      Contrib(),
-    ];
-    tabs[HomeTabId.SHOPPING].onRefresh = this.handleRefresh;
-    tabs[HomeTabId.CARD_MANAGEMENT].onRefresh = this.handleRefresh;
+    this.tabs = homeTabs;
+    this.tabs[HomeTabId.SHOPPING].onRefresh = this.handleRefresh;
+    this.tabs[HomeTabId.SHOPPING].onQueryChange = this.onShoppingQueryChange;
+    this.tabs[HomeTabId.CARD_MANAGEMENT].onRefresh = this.handleRefresh;
     maybeNavigateToSignIn();
-    widget.dataBackend.forceRefreshCards();
   }
 
   @override
@@ -68,6 +63,7 @@ class _HomeScreen extends State<HomeScreen> {
       setState(() {
         status = SubmitScreenStatus.DONE;
       });
+      await handleRefresh();
     } else {
       Navigator.of(context).pushReplacementNamed('/sign_in');
     }
@@ -79,13 +75,22 @@ class _HomeScreen extends State<HomeScreen> {
     });
   }
 
+  Future<void> onShoppingQueryChange(String query) async {
+    List<ShopCategory> rankedCategories =
+        rankShopCategories(categories, ShoppingContext(query: query));
+    setState(() {
+      categories = rankedCategories;
+    });
+  }
+
   Future<void> handleRefresh() async {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
     await widget.dataBackend.forceRefreshCards();
     List<CreditCard> refreshedCards = await widget.dataBackend.getCreditCards();
-    List<ShopCategory> refershedCategories = await widget.dataBackend.getShopCategories();
+    List<ShopCategory> refershedCategories =
+        await widget.dataBackend.getShopCategories();
     setState(() {
       cards = refreshedCards;
       categories = refershedCategories;
@@ -121,91 +126,27 @@ class _HomeScreen extends State<HomeScreen> {
 
   Widget renderDone(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-              this.tabs[currentTabId].title,
-              key: this.tabs[currentTabId].titleKey),
-          actions: <Widget>[
-            ButtonTheme(
-                minWidth: 25.0,
-                child: FlatButton(
-                  child: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {},
-                )),
-            ButtonTheme(
-                minWidth: 25.0,
-                child: FlatButton(
-                  child: Icon(
-                    Icons.location_on,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {},
-                )),
-            ButtonTheme(
-                minWidth: 25.0,
-                child: FlatButton(
-                  child: Icon(
-                    Icons.refresh,
-                    color: Colors.white,
-                  ),
-                  onPressed: () async {
-                    await handleRefresh();
-                  },
-                )),
-          ],
-        ),
+        appBar: PreferredSize(
+            child: HomeAppBar(this.tabs[currentTabId]),
+            preferredSize: Size.fromHeight(kToolbarHeight)),
         body: SafeArea(
-            bottom: true, child: _children[homeTabId2Index(currentTabId)]),
+            bottom: true,
+            child: HomeScreenContent(this.currentTabId, widget.dataBackend,
+                widget.appContext, this.cards, this.categories)),
         floatingActionButton: renderActionBtn(context),
-        bottomNavigationBar: BottomNavigationBar(
-          key: Key('bottom_nav_bar'),
-          onTap: onTabTapped,
-          currentIndex: homeTabId2Index(currentTabId),
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(this.tabs[HomeTabId.SHOPPING].icon,
-                  key: this.tabs[HomeTabId.SHOPPING].btnKey),
-              backgroundColor: Theme.of(context).primaryColor,
-              title: Text(this.tabs[HomeTabId.SHOPPING].title),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(this.tabs[HomeTabId.CARD_MANAGEMENT].icon,
-                  key: this.tabs[HomeTabId.CARD_MANAGEMENT].btnKey),
-              backgroundColor: Theme.of(context).primaryColor,
-              title: Text(this.tabs[HomeTabId.CARD_MANAGEMENT].title),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(this.tabs[HomeTabId.USER_SETTINGS].icon,
-                  key: this.tabs[HomeTabId.USER_SETTINGS].btnKey),
-              backgroundColor: Theme.of(context).primaryColor,
-              title: Text(this.tabs[HomeTabId.USER_SETTINGS].title),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(this.tabs[HomeTabId.CONTRIB].icon,
-                  key: this.tabs[HomeTabId.CONTRIB].btnKey),
-              backgroundColor: Theme.of(context).primaryColor,
-              title: Text(this.tabs[HomeTabId.CONTRIB].title),
-            ),
-          ],
-        ));
+        bottomNavigationBar: HomeBottomNavigator(
+            this.tabs, this.currentTabId, this.onTabTapped));
   }
 
   Widget renderScreen(BuildContext context) {
-    Widget screenContent = renderLoading(context);
     switch (status) {
       case SubmitScreenStatus.LOADING:
-        screenContent = renderLoading(context);
-        break;
+        return renderLoading(context);
       case SubmitScreenStatus.DONE:
-        screenContent = renderDone(context);
-        break;
+        return renderDone(context);
       default:
-        screenContent = renderLoading(context);
+        return renderLoading(context);
     }
-    return screenContent;
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 
 typedef Future<void> QueryChangeHandler(String query);
 typedef Future<void> RefreshHandler();
@@ -9,21 +10,40 @@ class HomeTab {
   final MaterialColor color;
   final Key btnKey;
   final Key titleKey;
-  QueryChangeHandler onQueryChange; 
+  final HomeTabId id;
+  QueryChangeHandler onQueryChange;
   RefreshHandler onRefresh;
-  HomeTab(this.title, this.icon, this.color, this.btnKey, this.titleKey, {
+  HomeTab(
+    this.id,
+    this.title,
+    this.icon,
+    this.color,
+    this.btnKey,
+    this.titleKey, {
     QueryChangeHandler onQueryChange,
     RefreshHandler onRefresh,
   }) {
     if (onQueryChange != null) {
       this.onQueryChange = onQueryChange;
-    } else {
-      this.onQueryChange = (String query) async {};
     }
     if (onRefresh != null) {
       this.onRefresh = onRefresh;
+    }
+  }
+
+  bool hasRefreshHandler() {
+    if (this.onRefresh == null) {
+      return false;
     } else {
-      this.onRefresh = () async {};
+      return true;
+    }
+  }
+
+  bool hasQueryHandler() {
+    if (this.onQueryChange == null) {
+      return false;
+    } else {
+      return true;
     }
   }
 }
