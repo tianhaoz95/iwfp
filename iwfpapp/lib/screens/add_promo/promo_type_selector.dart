@@ -3,7 +3,11 @@ import 'package:iwfpapp/services/config/consts/promo_type_list.dart';
 import 'package:iwfpapp/services/config/consts/promo_type_lookup.dart';
 import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
 
+typedef void PromotionTypeChangeHandler(CashbackPromoType type);
+
 class PromotionTypeSelector extends StatefulWidget {
+  final PromotionTypeChangeHandler onPromotionTypeChange;
+  const PromotionTypeSelector(this.onPromotionTypeChange);
   @override
   _PromotionTypeSelector createState() {
     return _PromotionTypeSelector();
@@ -33,6 +37,7 @@ class _PromotionTypeSelector extends State<PromotionTypeSelector> {
         padding: EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
           child: DropdownButton<CashbackPromoType>(
         hint: Text('Select the type of the promotion'),
+        underline: Container(),
         icon: Icon(Icons.arrow_downward),
         value: this.selected,
         onChanged: (CashbackPromoType val) {

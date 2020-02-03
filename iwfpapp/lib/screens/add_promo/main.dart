@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/add_promo/promo_type_selector.dart';
+import 'package:iwfpapp/screens/add_promo/repeat_pattern_selector.dart';
+import 'package:iwfpapp/services/config/consts/promo_type_lookup.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
+import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
@@ -37,6 +40,13 @@ class _AddPromoScreen extends State<AddPromoScreen> {
   TextEditingController promoRateCtrl = TextEditingController();
   TextEditingController promoCategoryNameCtrl = TextEditingController();
   TextEditingController promoCategoryIdCtrl = TextEditingController();
+  String promotionType;
+
+  @override
+  void initState() {
+    super.initState();
+    promotionType = 'unknown';
+  }
 
   @override
   void didChangeDependencies() {
@@ -131,6 +141,10 @@ class _AddPromoScreen extends State<AddPromoScreen> {
     }
   }
 
+  void onPromotionTypeChange(CashbackPromoType type) {
+    promotionType = promoIdLookup[type];
+  }
+
   Widget renderPendingContent(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
@@ -160,7 +174,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
           SizedBox(
             height: 5.0,
           ),
-          PromotionTypeSelector(),
+          PromotionTypeSelector(this.onPromotionTypeChange),
           SizedBox(
             height: 5.0,
           ),
@@ -169,6 +183,10 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Promotion Type'),
           ),
+          SizedBox(
+            height: 5.0,
+          ),
+          RepeatPatternSelector((CashbackPromoRepeatPattern) {}),
           SizedBox(
             height: 5.0,
           ),
