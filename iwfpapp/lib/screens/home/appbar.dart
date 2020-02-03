@@ -70,7 +70,7 @@ class _HomeAppBar extends State<HomeAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleContent = Text(widget.tab.title, key: widget.tab.titleKey);
+    Widget titleContent = Text(widget.tab.title);
     if (this.query) {
       titleContent = Container(
           child: TextField(
@@ -86,6 +86,7 @@ class _HomeAppBar extends State<HomeAppBar> {
                       borderRadius: BorderRadius.circular(15.0)))));
     }
     return AppBar(
+      key: widget.tab.titleKey,
       title: titleContent,
       actions: this.actions,
     );

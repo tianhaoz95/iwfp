@@ -13,4 +13,6 @@ abstract class AppAuth {
       String email);
 
   Future<String> generateToken();
+
+  Future<String> getEmail();
 }

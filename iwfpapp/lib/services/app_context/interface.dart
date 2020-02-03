@@ -36,4 +36,8 @@ class AppContext {
   String devifyString(String msg) {
     return msg;
   }
+
+  bool isDeveloper(String email) {
+    return email == 'jacksonzhou666@gmail.com';
+  }
 }

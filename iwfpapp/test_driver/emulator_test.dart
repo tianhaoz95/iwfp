@@ -34,8 +34,8 @@ void main() {
       bool signedIn = await isSignedIn();
       if (signedIn) {
         await driver.tap(find.byValueKey('user_nav_btn'));
-        await driver.waitFor(find.text('Go to Authentication'));
-        await driver.tap(find.text('Go to Authentication'));
+        await driver.waitFor(find.text('Sign out'));
+        await driver.tap(find.text('Sign out'));
         await driver.waitFor(find.text('Logout'));
         await driver.tap(find.text('Logout'));
         await driver.waitFor(find.text('Sign In with Email'));
@@ -53,7 +53,7 @@ void main() {
       await driver.waitFor(find.byValueKey('cards_title'));
       await takeNamedScreenshot(driver, 'card_management_screen_offline');
       await driver.tap(find.byValueKey('user_nav_btn'));
-      await driver.waitFor(find.byValueKey('user_title'));
+      await driver.waitFor(find.text('Dangerous Zone'));
       await takeNamedScreenshot(driver, 'user_settings_screen_offline');
       await driver.tap(find.byValueKey('contrib_nav_btn'));
       await driver.waitFor(find.byValueKey('contrib_title'));

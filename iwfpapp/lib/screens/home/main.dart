@@ -132,7 +132,7 @@ class _HomeScreen extends State<HomeScreen> {
         body: SafeArea(
             bottom: true,
             child: HomeScreenContent(this.currentTabId, widget.dataBackend,
-                widget.appContext, this.cards, this.categories)),
+                widget.appContext, widget.auth, this.cards, this.categories)),
         floatingActionButton: renderActionBtn(context),
         bottomNavigationBar: HomeBottomNavigator(
             this.tabs, this.currentTabId, this.onTabTapped));

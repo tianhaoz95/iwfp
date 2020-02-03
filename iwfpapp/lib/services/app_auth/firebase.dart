@@ -78,4 +78,10 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
     String token = tokenResult.token;
     return token;
   }
+
+  Future<String> getEmail() async {
+    FirebaseUser user = await _auth.currentUser();
+    String email = user.email;
+    return email;
+  }
 }
