@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/screens/home/content/user/develop_card.dart';
-import 'package:iwfpapp/screens/home/content/user/update_settings_btn.dart';
+import 'package:iwfpapp/screens/home/content/user/developer/developer_section.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 
 class UserSettings extends StatefulWidget {
   final AppContext appContext;
-  const UserSettings(this.appContext);
+  final AppAuth appAuth;
+  const UserSettings(this.appContext, this.appAuth);
   @override
   _UserSettings createState() {
     return _UserSettings();
@@ -35,17 +36,20 @@ class _UserSettings extends State<UserSettings> {
             SizedBox(
               height: 5.0,
             ),
-            DevelopCard(widget.appContext.isDevMode(), (bool nextDevVal) {
-              nextIsDevFlagVal = nextDevVal;
-            }),
-            UpdateSettingsButton(handleUpdateSettings),
+            DeveloperSection(widget.appAuth, widget.appContext, this.handleUpdateSettings),
+            Container(
+              child: Center(
+                child: Text('User Settings'),
+              ),
+            ),
+            Divider(),
             Container(
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: RaisedButton(
                 key: Key('go_to_auth_btn'),
                 color: Theme.of(context).primaryColor,
                 child: Text(
-                  'Go to Authentication',
+                  'Sign out',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
@@ -53,6 +57,7 @@ class _UserSettings extends State<UserSettings> {
                 },
               ),
             ),
+            Divider(),
             SizedBox(
               height: 5.0,
             ),
