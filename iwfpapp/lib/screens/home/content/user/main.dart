@@ -36,7 +36,8 @@ class _UserSettings extends State<UserSettings> {
             SizedBox(
               height: 5.0,
             ),
-            DeveloperSection(widget.appAuth, widget.appContext, this.handleUpdateSettings),
+            DeveloperSection(
+                widget.appAuth, widget.appContext, this.handleUpdateSettings),
             Container(
               child: Center(
                 child: Text('User Settings'),

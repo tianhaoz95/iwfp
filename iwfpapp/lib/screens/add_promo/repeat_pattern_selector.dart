@@ -20,12 +20,13 @@ class _RepeatPatternSelector extends State<RepeatPatternSelector> {
   @override
   void initState() {
     super.initState();
-    selected = CashbackPromoRepeatPattern.CONST;
+    selected = CashbackPromoRepeatPattern.ANNUAL;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+        child: Container(
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
           side: BorderSide(
@@ -34,25 +35,27 @@ class _RepeatPatternSelector extends State<RepeatPatternSelector> {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
+          padding: EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
           child: DropdownButton<CashbackPromoRepeatPattern>(
-        hint: Text('Select the type of the promotion'),
-        underline: Container(),
-        icon: Icon(Icons.arrow_downward),
-        value: this.selected,
-        onChanged: (CashbackPromoRepeatPattern val) {
-          setState(() {
-            selected = val;
-          });
-        },
-        items: repeatPatternList.map<DropdownMenuItem<CashbackPromoRepeatPattern>>(
-            (CashbackPromoRepeatPattern repeatPattern) {
-          return DropdownMenuItem<CashbackPromoRepeatPattern>(
-            value: repeatPattern,
-            child: Text(repeatPatternNameLookup[repeatPattern]),
-          );
-        }).toList(),
-      )),
-    );
+            hint: Text('Select the type of the promotion'),
+            underline: Container(),
+            icon: Icon(Icons.calendar_today),
+            value: this.selected,
+            onChanged: (CashbackPromoRepeatPattern val) {
+              setState(() {
+                selected = val;
+              });
+              widget.onRepeatPatternChange(val);
+            },
+            items: repeatPatternList
+                .map<DropdownMenuItem<CashbackPromoRepeatPattern>>(
+                    (CashbackPromoRepeatPattern repeatPattern) {
+              return DropdownMenuItem<CashbackPromoRepeatPattern>(
+                value: repeatPattern,
+                child: Text(repeatPatternNameLookup[repeatPattern]),
+              );
+            }).toList(),
+          )),
+    ));
   }
 }

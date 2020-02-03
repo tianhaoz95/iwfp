@@ -34,25 +34,26 @@ class _PromotionTypeSelector extends State<PromotionTypeSelector> {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
+          padding: EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
           child: DropdownButton<CashbackPromoType>(
-        hint: Text('Select the type of the promotion'),
-        underline: Container(),
-        icon: Icon(Icons.arrow_downward),
-        value: this.selected,
-        onChanged: (CashbackPromoType val) {
-          setState(() {
-            selected = val;
-          });
-        },
-        items: promotionTypeList.map<DropdownMenuItem<CashbackPromoType>>(
-            (CashbackPromoType promoType) {
-          return DropdownMenuItem<CashbackPromoType>(
-            value: promoType,
-            child: Text(promoNameLookup[promoType]),
-          );
-        }).toList(),
-      )),
+            hint: Text('Select the type of the promotion'),
+            underline: Container(),
+            icon: Icon(Icons.shopping_cart),
+            value: this.selected,
+            onChanged: (CashbackPromoType type) {
+              setState(() {
+                selected = type;
+              });
+              widget.onPromotionTypeChange(type);
+            },
+            items: promotionTypeList.map<DropdownMenuItem<CashbackPromoType>>(
+                (CashbackPromoType promoType) {
+              return DropdownMenuItem<CashbackPromoType>(
+                value: promoType,
+                child: Text(promoNameLookup[promoType]),
+              );
+            }).toList(),
+          )),
     );
   }
 }

@@ -10,7 +10,8 @@ class DeveloperSection extends StatefulWidget {
   final AppContext appContext;
   final AppAuth appAuth;
   final DeveloperSettingsUpdator onDeveloperSettingsUpdate;
-  const DeveloperSection(this.appAuth, this.appContext, this.onDeveloperSettingsUpdate);
+  const DeveloperSection(
+      this.appAuth, this.appContext, this.onDeveloperSettingsUpdate);
   @override
   _DeveloperSection createState() {
     return _DeveloperSection();

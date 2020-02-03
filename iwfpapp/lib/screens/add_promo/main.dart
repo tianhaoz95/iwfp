@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/add_promo/promo_type_selector.dart';
 import 'package:iwfpapp/screens/add_promo/repeat_pattern_selector.dart';
 import 'package:iwfpapp/services/config/consts/promo_type_lookup.dart';
+import 'package:iwfpapp/services/config/consts/repeat_pattern_lookup.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
+import 'package:iwfpapp/services/config/typedefs/repeat_pattern.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
@@ -41,11 +43,14 @@ class _AddPromoScreen extends State<AddPromoScreen> {
   TextEditingController promoCategoryNameCtrl = TextEditingController();
   TextEditingController promoCategoryIdCtrl = TextEditingController();
   String promotionType;
+  String promoRepeatPattern;
+  bool editRepeatDetails;
 
   @override
   void initState() {
     super.initState();
-    promotionType = 'unknown';
+    this.promotionType = 'brand';
+    this.editRepeatDetails = true;
   }
 
   @override
@@ -90,10 +95,10 @@ class _AddPromoScreen extends State<AddPromoScreen> {
   Future<void> handleAddPromo() async {
     String promoName = promoNameCtrl.text;
     String promoId = promoIdCtrl.text;
-    String promoType = promoTypeCtrl.text;
+    String promoType = this.promotionType;
     String promoStart = promoStartCtrl.text;
     String promoEnd = promoEndCtrl.text;
-    String promoRepeat = promoRepeatCtrl.text;
+    String promoRepeat = this.promoRepeatPattern;
     String promoRateStr = promoRateCtrl.text;
     String promoCategoryName = promoCategoryNameCtrl.text;
     String promoCategoryId = promoCategoryIdCtrl.text;
@@ -142,7 +147,27 @@ class _AddPromoScreen extends State<AddPromoScreen> {
   }
 
   void onPromotionTypeChange(CashbackPromoType type) {
-    promotionType = promoIdLookup[type];
+    setState(() {
+      this.promotionType = promoIdLookup[type];
+    });
+  }
+
+  void onRepeatPatternChange(CashbackPromoRepeatPattern pattern) {
+    this.promoRepeatPattern = repeatPatternIdLookup[pattern];
+    if (pattern == CashbackPromoRepeatPattern.CONST) {
+      this.promoStartCtrl.text = 'Not Applicable';
+      this.promoEndCtrl.text = 'Not Applicable';
+      setState(() {
+        this.editRepeatDetails = false;
+      });
+    }
+    if (pattern == CashbackPromoRepeatPattern.ANNUAL) {
+      this.promoStartCtrl.text = '';
+      this.promoEndCtrl.text = '';
+      setState(() {
+        this.editRepeatDetails = true;
+      });
+    }
   }
 
   Widget renderPendingContent(BuildContext context) {
@@ -153,7 +178,12 @@ class _AddPromoScreen extends State<AddPromoScreen> {
           SizedBox(
             height: 5.0,
           ),
-          Text('Adding Promotion for ${card.name}...'),
+          Container(
+            child: Center(
+              child: Text('Repeat Pattern of Promotion'),
+            ),
+          ),
+          Divider(),
           SizedBox(
             height: 5.0,
           ),
@@ -174,24 +204,31 @@ class _AddPromoScreen extends State<AddPromoScreen> {
           SizedBox(
             height: 5.0,
           ),
+          TextField(
+            controller: promoRateCtrl,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), labelText: 'Cashback Rate'),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
           PromotionTypeSelector(this.onPromotionTypeChange),
           SizedBox(
             height: 5.0,
           ),
-          TextField(
-            controller: promoTypeCtrl,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), labelText: 'Promotion Type'),
+          Container(
+            child: Center(
+              child: Text('Promotion Repeat Pattern'),
+            ),
           ),
-          SizedBox(
-            height: 5.0,
-          ),
-          RepeatPatternSelector((CashbackPromoRepeatPattern) {}),
+          Divider(),
+          RepeatPatternSelector(this.onRepeatPatternChange),
           SizedBox(
             height: 5.0,
           ),
           TextField(
             controller: promoStartCtrl,
+            enabled: this.editRepeatDetails,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Start Date (MM/DD)'),
           ),
@@ -200,25 +237,19 @@ class _AddPromoScreen extends State<AddPromoScreen> {
           ),
           TextField(
             controller: promoEndCtrl,
+            enabled: this.editRepeatDetails,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'End Date (MM/DD)'),
           ),
           SizedBox(
             height: 5.0,
           ),
-          TextField(
-            controller: promoRepeatCtrl,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), labelText: 'Repeat Pattern'),
+          Container(
+            child: Center(
+              child: Text('Promotion Target'),
+            ),
           ),
-          SizedBox(
-            height: 5.0,
-          ),
-          TextField(
-            controller: promoRateCtrl,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), labelText: 'Cashback Rate'),
-          ),
+          Divider(),
           SizedBox(
             height: 5.0,
           ),
@@ -292,9 +323,14 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
             child: RaisedButton(
               color: Colors.green,
-              onPressed: () {
+              onPressed: () async {
+                setState(() {
+                  this.status = SubmitScreenStatus.LOADING;
+                });
+                CreditCard renewedCard =
+                    await widget.dataBackend.renewCreditCardInfo(card);
                 Navigator.pushReplacementNamed(context, '/edit_card',
-                    arguments: widget.dataBackend.renewCreditCardInfo(card));
+                    arguments: renewedCard);
               },
               child: Text(
                 'Back to Card Editing',
