@@ -34,7 +34,7 @@ void main() {
       bool signedIn = await isSignedIn();
       if (signedIn) {
         await driver.tap(find.byValueKey('user_nav_btn'));
-        await driver.waitFor(find.text('Go to Authentication'));
+        await driver.waitFor(find.text('Sign out'));
         await driver.tap(find.text('Sign out'));
         await driver.waitFor(find.text('Logout'));
         await driver.tap(find.text('Logout'));
