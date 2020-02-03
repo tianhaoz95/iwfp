@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/screens/user/develop_mode_toggle.dart';
-import 'package:iwfpapp/screens/user/data_store_mode_selection.dart';
+import 'package:iwfpapp/screens/home/content/user/data_store_mode_selection.dart';
+import 'package:iwfpapp/screens/home/content/user/develop_mode_toggle.dart';
 
 class DevelopCard extends StatelessWidget {
   final setIsDevValFuncType setIsDevCallbackFunc;
