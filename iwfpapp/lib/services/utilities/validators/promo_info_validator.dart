@@ -64,11 +64,11 @@ ValidationResponse isValidPromoEnd(String promoEnd) {
 
 ValidationResponse isValidConstRepeatStartEnd(String start, String end) {
   ValidationResponse response = ValidationResponse(valid: true);
-  if (start != 'na') {
+  if (start != 'Not Applicable') {
     response.valid = false;
     response.messages.add(promoConstStartNotNaErrorMessage);
   }
-  if (end != 'na') {
+  if (end != 'Not Applicable') {
     response.valid = false;
     response.messages.add(promoConstEndNotNaErrorMessage);
   }

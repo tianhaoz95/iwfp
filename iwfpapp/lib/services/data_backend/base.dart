@@ -153,7 +153,8 @@ abstract class DataBackend {
     return getUniqueShoppingCategories(creditCards);
   }
 
-  CreditCard renewCreditCardInfo(CreditCard card) {
+  Future<CreditCard> renewCreditCardInfo(CreditCard card) async {
+    await maybeRefreshCards();
     for (CreditCard searchCard in creditCards) {
       if (searchCard.id == card.id) {
         return searchCard;

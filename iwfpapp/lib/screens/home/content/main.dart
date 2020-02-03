@@ -17,8 +17,8 @@ class HomeScreenContent extends StatelessWidget {
   final AppAuth appAuth;
   final List<CreditCard> cards;
   final List<ShopCategory> categories;
-  const HomeScreenContent(
-      this.id, this.dataBackend, this.appContext, this.appAuth, this.cards, this.categories);
+  const HomeScreenContent(this.id, this.dataBackend, this.appContext,
+      this.appAuth, this.cards, this.categories);
 
   @override
   Widget build(BuildContext context) {
