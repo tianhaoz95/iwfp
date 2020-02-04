@@ -21,7 +21,7 @@ I want 5% is available on:
 - [ ] iOS
   - [x] Code complete
   - [x] Third-party compatibility
-  - [ ] Need sponsorship for the $99/year Apple developer account subscription :broken_heart:
+  - [ ] Need sponsorship (see [Contribute](#contribute)) for the $99/year [Apple Developer Program](https://developer.apple.com/support/compare-memberships/) subscription :broken_heart:
 - [ ] MacOS
   - [x] Code complete
   - [ ] Third-party compatibility (`firebase_auth` & `firebase_core`)
@@ -42,3 +42,7 @@ For the latest updates, please subscribe to [newsletter](https://jacksonz.substa
 ## Contribute
 
 Contribution of any kind (code, docs, suggestions, etc) is appreciated! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
+
+Sponsor the project for $99/year [Apple Developer Program](https://developer.apple.com/support/compare-memberships/) subscription:
+
+![venmo](./assets/venmo.jpg)
