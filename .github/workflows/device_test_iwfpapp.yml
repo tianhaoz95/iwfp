@@ -24,7 +24,6 @@ jobs:
         device:
           - "iPad Pro (12.9-inch) (3rd generation) (13.3)"
           - "iPhone 11 Pro Max (13.3)"
-          - "iPad (7th generation) (13.3)"
       fail-fast: false
     runs-on: macos-latest
     steps:
