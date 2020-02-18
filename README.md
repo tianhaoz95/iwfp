@@ -7,7 +7,7 @@
 [![andorid release status](https://github.com/tianhaoz95/iwfp/workflows/android%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 [![web release status](https://github.com/tianhaoz95/iwfp/workflows/web%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 
-I want 5% (iwfp) is a utility to help everyone who uses credit cards maximize cash back rewards.
+5% App is a utility that helps credit card users maximize cash back rewards across multiple credit cards.
 
 **A quick look** (where you select a shopping category and it tells you which card is the best):
 
@@ -15,9 +15,9 @@ I want 5% (iwfp) is a utility to help everyone who uses credit cards maximize ca
 
 ## Getting Started
 
-I want 5% is available on:
+5% App is available on:
 - [x] Android (available on [Google Play Store](https://play.google.com/store/apps/details?id=com.jacksonz.iwfpapp&hl=en_US))
-- [x] Web (available at [I Want 5% Web](https://iwfpapp.web.app))
+- [x] Web (available at [5% App Web](https://iwfpapp.web.app))
 - [ ] iOS
   - [x] Code complete
   - [x] Third-party compatibility
@@ -45,4 +45,4 @@ Contribution of any kind (code, docs, suggestions, etc) is appreciated! Please s
 
 Sponsor the project for $99/year [Apple Developer Program](https://developer.apple.com/support/compare-memberships/) subscription:
 
-![venmo](./assets/venmo.jpg)
+<img height="120px" src="assets/venmo.jpg" />
