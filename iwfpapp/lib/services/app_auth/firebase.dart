@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';
 import 'dart:developer' as developer;
 
@@ -53,6 +54,9 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
 
   Future<bool> isSignedIn() async {
     FirebaseUser user = await _auth.currentUser();
+    if (kIsWeb && user == null) {
+      user = await _auth.onAuthStateChanged.first;
+    }
     if (user == null) {
       return false;
     }
