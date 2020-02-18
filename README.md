@@ -1,4 +1,4 @@
-<img alt="may the 5% be with you" src="https://raw.githubusercontent.com/tianhaoz95/iwfp/master/assets/footer.png" height=260 />
+![logo](https://raw.githubusercontent.com/tianhaoz95/iwfp/master/assets/footer.png)
 
 [![doc release status](https://github.com/tianhaoz95/iwfp/workflows/doc%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 [![api release status](https://github.com/tianhaoz95/iwfp/workflows/api%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
