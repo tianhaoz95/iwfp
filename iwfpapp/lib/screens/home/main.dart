@@ -14,6 +14,7 @@ import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/recommendation_engine/category_ranker.dart';
+import 'package:iwfpapp/widgets/layout/home_screen_layout.dart';
 
 class HomeScreen extends StatefulWidget {
   final AppContext appContext;
