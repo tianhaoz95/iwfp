@@ -14,7 +14,6 @@ import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/recommendation_engine/category_ranker.dart';
-import 'package:iwfpapp/widgets/layout/home_screen_layout.dart';
 
 class HomeScreen extends StatefulWidget {
   final AppContext appContext;
@@ -29,7 +28,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  SubmitScreenStatus status = SubmitScreenStatus.LOADING;
+  SubmitScreenStatus status;
   Map<HomeTabId, HomeTab> tabs = homeTabs;
   HomeTabId currentTabId = HomeTabId.SHOPPING;
   List<CreditCard> cards = [];
@@ -39,6 +38,7 @@ class _HomeScreen extends State<HomeScreen> {
   void initState() {
     super.initState();
     this.tabs = homeTabs;
+    status = SubmitScreenStatus.LOADING;
     this.tabs[HomeTabId.SHOPPING].onRefresh = this.handleRefresh;
     this.tabs[HomeTabId.SHOPPING].onQueryChange = this.onShoppingQueryChange;
     this.tabs[HomeTabId.CARD_MANAGEMENT].onRefresh = this.handleRefresh;
@@ -112,46 +112,24 @@ class _HomeScreen extends State<HomeScreen> {
     return null;
   }
 
-  Widget renderLoading(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Preparing ...'),
-      ),
-      body: Container(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    );
-  }
-
-  Widget renderDone(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            child: HomeAppBar(this.tabs[currentTabId]),
+            child: HomeAppBar(this.tabs[currentTabId], this.status),
             preferredSize: Size.fromHeight(kToolbarHeight)),
         body: SafeArea(
             bottom: true,
-            child: HomeScreenContent(this.currentTabId, widget.dataBackend,
-                widget.appContext, widget.auth, this.cards, this.categories)),
+            child: HomeScreenContent(
+                this.currentTabId,
+                widget.dataBackend,
+                widget.appContext,
+                widget.auth,
+                this.cards,
+                this.categories,
+                this.status)),
         floatingActionButton: renderActionBtn(context),
         bottomNavigationBar: HomeBottomNavigator(
             this.tabs, this.currentTabId, this.onTabTapped));
-  }
-
-  Widget renderScreen(BuildContext context) {
-    switch (status) {
-      case SubmitScreenStatus.LOADING:
-        return renderLoading(context);
-      case SubmitScreenStatus.DONE:
-        return renderDone(context);
-      default:
-        return renderLoading(context);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return renderScreen(context);
   }
 }
