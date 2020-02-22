@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/screens/home/content/cards/main.dart';
+import 'package:iwfpapp/screens/home/content/cards/card_management_screen.dart';
 import 'package:iwfpapp/screens/home/content/contrib/main.dart';
-import 'package:iwfpapp/screens/home/content/shop/main.dart';
+import 'package:iwfpapp/screens/home/content/shop/shopping_screen.dart';
 import 'package:iwfpapp/screens/home/content/user/main.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
@@ -11,6 +11,9 @@ import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 
+/// home screen
+/// 
+/// {@category Screens}
 class HomeScreenContent extends StatelessWidget {
   final HomeTabId id;
   final SubmitScreenStatus status;

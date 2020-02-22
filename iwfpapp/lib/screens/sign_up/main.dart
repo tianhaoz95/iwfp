@@ -162,7 +162,7 @@ class _SignUpScreen extends State<SignUpScreen> {
             child: RaisedButton(
               color: Colors.amber[900],
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/sign_in');
+                Navigator.pop(context);
               },
               child: Text(
                 'Cancel',
