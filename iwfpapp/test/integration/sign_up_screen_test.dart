@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:iwfpapp/screens/sign_up/main.dart';
+import 'package:iwfpapp/screens/sign_up/sign_up_screen.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';
 import 'mock_services/mock_auth.dart';
 import 'validators/obscure_input_validator.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// card management screen with a empty wallet
-/// 
+///
 /// {@category Screens}
 /// {@subcategory CardManagementScreen}
 class EmptyWalletCardScreen extends StatelessWidget {
