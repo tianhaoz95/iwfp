@@ -46,10 +46,10 @@ Sponsor the project for $99/year [Apple Developer Program](https://developer.app
 <table>
   <tr>
     <td>
-      <img width="100px" src="assets/venmo.png" />
+      <img width="140px" src="assets/venmo.png" />
     </td>
     <td>
-      <img width="140px" src="assets/bitcoin.png" />
+      <img width="200px" src="assets/bitcoin.png" />
     </td>
   </tr>
 </table>
