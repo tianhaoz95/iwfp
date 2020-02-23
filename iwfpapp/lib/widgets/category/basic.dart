@@ -12,7 +12,7 @@ class BasicCategory extends StatelessWidget {
             child: Card(
                 child: FlatButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/suggestion',
+                      Navigator.pushNamed(context, '/suggestion',
                           arguments: categoryMetaData);
                     },
                     child: Row(

@@ -3,6 +3,7 @@ import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/screens/suggestion/entries.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
+import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 class SuggestionScreen extends StatelessWidget {
   final DataBackend dataBackend;
@@ -24,12 +25,11 @@ class SuggestionScreen extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/',
-                arguments: HomeTabId.SHOPPING);
+            Navigator.pop(context);
           },
         ),
       ),
-      body: SuggestionEntries(category, dataBackend),
+      body: PreferredWidthContent(child:SuggestionEntries(category, dataBackend)),
     );
   }
 }

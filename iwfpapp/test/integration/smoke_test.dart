@@ -26,6 +26,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(Key('email_sign_in_btn')));
     await tester.pumpAndSettle(new Duration(seconds: 5));
+    validateIsShopScreenContent();
     await tester.tap(find.byKey(Key('chase_pay_select_btn')));
     await tester.pumpAndSettle(new Duration(seconds: 5));
     validateSuggestionScreenContent();
@@ -48,9 +49,5 @@ void main() {
     await tester.pump();
     await tester.pumpAndSettle();
     validateIsUserScreenContent();
-    await tester.tap(find.byKey(Key('go_to_auth_btn')));
-    await tester.pump();
-    await tester.pumpAndSettle();
-    validateIsLoginScreenContent();
   });
 }

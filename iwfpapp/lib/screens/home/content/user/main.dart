@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/home/content/user/developer/developer_section.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
+import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 class UserSettings extends StatefulWidget {
   final AppContext appContext;
@@ -28,7 +29,7 @@ class _UserSettings extends State<UserSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return PreferredWidthContent(child: Container(
         key: Key('user_screen_content'),
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         child: ListView(
@@ -89,6 +90,6 @@ class _UserSettings extends State<UserSettings> {
               ),
             ),
           ],
-        ));
+        )));
   }
 }
