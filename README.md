@@ -43,5 +43,13 @@ Contribution of any kind (code, docs, suggestions, etc) is appreciated! Please s
 
 Sponsor the project for $99/year [Apple Developer Program](https://developer.apple.com/support/compare-memberships/) subscription:
 
-![venmo](assets/venmo.png)
-![bitcoin](assets/bitcoin.png)
+<table>
+  <tr>
+    <td>
+      <img width="100px" src="assets/venmo.png" />
+    </td>
+    <td>
+      <img width="140px" src="assets/bitcoin.png" />
+    </td>
+  </tr>
+</table>
