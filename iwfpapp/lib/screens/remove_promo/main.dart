@@ -247,7 +247,7 @@ class _RemovePromoScreen extends State<RemovePromoScreen> {
           appBar: AppBar(
             title: Text('Remove Promotion'),
           ),
-          body: PreferredWidthContent(child:renderContent(context)),
+          body: PreferredWidthContent(child: renderContent(context)),
         ));
   }
 }

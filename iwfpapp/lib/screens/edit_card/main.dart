@@ -141,7 +141,7 @@ class _EditCardScreen extends State<EditCardScreen> {
       appBar: AppBar(
         title: Text('Edit Card'),
       ),
-      body: PreferredWidthContent(child:renderContent(context)),
+      body: PreferredWidthContent(child: renderContent(context)),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/screens/suggestion/entries.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
@@ -29,7 +28,8 @@ class SuggestionScreen extends StatelessWidget {
           },
         ),
       ),
-      body: PreferredWidthContent(child:SuggestionEntries(category, dataBackend)),
+      body: PreferredWidthContent(
+          child: SuggestionEntries(category, dataBackend)),
     );
   }
 }

@@ -103,15 +103,16 @@ class _LoginScreen extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.appContext.devifyString('Welcome'))),
       key: Key('login_screen'),
-      body: PreferredWidthContent(child: AuthScreenContent(
-                    inputEnabled: this.inputEnabled,
-                    authState: this.authState,
-                    signOutHandler: this.handleSignOut,
-                    emailSignInHandler: this.handleEmailSignIn,
-                    forgetPasswordHandler: this.handleForgetPassword,
-                    emailInputController: this.emailInputController,
-                    pwdInputController: this.pwdInputController,
-                  )),
+      body: PreferredWidthContent(
+          child: AuthScreenContent(
+        inputEnabled: this.inputEnabled,
+        authState: this.authState,
+        signOutHandler: this.handleSignOut,
+        emailSignInHandler: this.handleEmailSignIn,
+        forgetPasswordHandler: this.handleForgetPassword,
+        emailInputController: this.emailInputController,
+        pwdInputController: this.pwdInputController,
+      )),
     );
   }
 }

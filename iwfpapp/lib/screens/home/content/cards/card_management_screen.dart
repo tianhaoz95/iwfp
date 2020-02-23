@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/home/content/cards/cards.dart';
 import 'package:iwfpapp/screens/home/content/cards/empty.dart';

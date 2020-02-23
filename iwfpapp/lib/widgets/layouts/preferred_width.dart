@@ -10,10 +10,7 @@ class PreferredWidthContent extends StatelessWidget {
     double contentWidth = min(MediaQuery.of(context).size.width, 600);
     return Container(
       child: Center(
-        child: Container(
-          width: contentWidth,
-          child: this.child
-        ),
+        child: Container(width: contentWidth, child: this.child),
       ),
     );
   }
