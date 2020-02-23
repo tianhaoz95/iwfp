@@ -1,8 +1,6 @@
 ![logo](https://raw.githubusercontent.com/tianhaoz95/iwfp/master/assets/footer.png)
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 [![doc release status](https://github.com/tianhaoz95/iwfp/workflows/doc%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 [![api release status](https://github.com/tianhaoz95/iwfp/workflows/api%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
 [![andorid release status](https://github.com/tianhaoz95/iwfp/workflows/android%20release/badge.svg)](https://github.com/tianhaoz95/iwfp/actions)
@@ -49,10 +47,10 @@ Sponsor the project for $99/year [Apple Developer Program](https://developer.app
 <table>
   <tr>
     <td>
-      <img width="140px" src="assets/venmo.png" />
+      <img height="200px" src="assets/venmo.png" />
     </td>
     <td>
-      <img width="200px" src="assets/bitcoin.png" />
+      <img height="200px" src="assets/bitcoin.png" />
     </td>
   </tr>
 </table>
