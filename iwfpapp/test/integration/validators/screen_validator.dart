@@ -17,10 +17,6 @@ void validateSignInFailedContent() {
   expect(find.byKey(Key('sign_in_failed_prompt')), findsOneWidget);
 }
 
-void validateIsLoginScreenContent() {
-  expect(find.byKey(Key('sign_in_welcome_back_title')), findsOneWidget);
-}
-
 void validateIsShopScreenContent() {
   expect(find.byKey(Key('shop_title')), findsOneWidget);
 }

@@ -6,6 +6,7 @@ import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
 import 'package:iwfpapp/widgets/credit_cards/template.dart';
+import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 /// This screen lists pre-defined credit card templates
 /// for users to choose from.
@@ -201,7 +202,7 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
           },
         ),
       ),
-      body: renderContent(context),
+      body: PreferredWidthContent(child: renderContent(context)),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
+import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   final DataBackend dataBackend;
@@ -168,7 +169,7 @@ class _DeleteAccountScreen extends State<DeleteAccountScreen> {
           },
         ),
       ),
-      body: renderContent(context),
+      body: PreferredWidthContent(child: renderContent(context)),
     );
   }
 }

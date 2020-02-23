@@ -30,12 +30,9 @@ class BasicCreditCard extends StatelessWidget {
 
   List<Widget> getCardContent(BuildContext context) {
     List<Widget> content = <Widget>[
-      Row(
-        children: <Widget>[
-          SizedBox(height: 45.0, width: 25.0),
-          Text(renderCardName()),
-        ],
-      ),
+      Container(
+          padding: EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 5.0),
+          child: Text(renderCardName())),
       Container(
         height: 45.0,
         child: ListView(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
+import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 
 class HomeAppBar extends StatefulWidget {
   final HomeTab tab;
-  HomeAppBar(this.tab);
+  final SubmitScreenStatus status;
+  HomeAppBar(this.tab, this.status);
   @override
   _HomeAppBar createState() {
     return _HomeAppBar();
@@ -84,6 +86,9 @@ class _HomeAppBar extends State<HomeAppBar> {
                   hintText: 'Search',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0)))));
+    }
+    if (widget.status == SubmitScreenStatus.LOADING) {
+      titleContent = Text('Loading...');
     }
     return AppBar(
       key: widget.tab.titleKey,

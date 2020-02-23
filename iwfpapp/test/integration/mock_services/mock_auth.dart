@@ -21,6 +21,13 @@ class MockAppAuth extends Mock implements AppAuth {
     }
   }
   @override
+  Future<void> handleSignOut() async {
+    mockedIsSignedIn = false;
+    currentUser = null;
+    return Future.delayed(Duration(seconds: 1), () => {});
+  }
+
+  @override
   Future<SignUpResponse> handleSignUpWithEmail(String email, String pwd) async {
     SignUpResponse response = SignUpResponse(SignUpStatus.SUCCESS, 'Mocked');
     bool shouldAdd = true;
