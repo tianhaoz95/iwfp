@@ -9,7 +9,7 @@ import 'package:iwfpapp/screens/remove_promo/main.dart';
 import 'package:iwfpapp/screens/screen_tester/main.dart';
 import 'package:iwfpapp/screens/sign_up/sign_up_screen.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
-import 'package:iwfpapp/screens/add_card/main.dart';
+import 'package:iwfpapp/screens/add_card/add_card_screen.dart';
 import 'package:iwfpapp/screens/remove_card/main.dart';
 import 'package:iwfpapp/screens/edit_card/main.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';

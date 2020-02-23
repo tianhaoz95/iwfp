@@ -7,6 +7,7 @@ import 'package:iwfpapp/services/config/typedefs/auth_status.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/utilities/validators/register_validator.dart';
+import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 /// The sign up screen
 ///
@@ -103,15 +104,11 @@ class _SignUpScreen extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double contentWidth = min(MediaQuery.of(context).size.width, 600);
     return Scaffold(
         appBar: AppBar(
           title: Text('Sign up for iwfpapp'),
         ),
-        body: Container(
-            child: Center(
-                child: Container(
-          width: contentWidth,
+        body: PreferredWidthContent(
           child: SignUpScreenContent(
             status: this.status,
             emailCtrl: this.emailCtrl,
@@ -120,6 +117,6 @@ class _SignUpScreen extends State<SignUpScreen> {
             signUpHandler: this.handleSignUp,
             errMsg: this.msg,
           ),
-        ))));
+        ));
   }
 }

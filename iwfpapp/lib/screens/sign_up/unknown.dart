@@ -17,7 +17,7 @@ class SignUpScreenUnknownContent extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/');
+                    Navigator.pop(context);
                   },
                 ),
               )),

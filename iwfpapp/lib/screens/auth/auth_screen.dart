@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/auth/auth_content.dart';
 import 'package:iwfpapp/screens/auth/prompt_auth_err.dart';
@@ -12,6 +10,7 @@ import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/utilities/validators/email_validator.dart';
 import 'package:iwfpapp/services/utilities/validators/sign_in_validator.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
+import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 class LoginScreen extends StatefulWidget {
   final AppAuth auth;
@@ -101,15 +100,10 @@ class _LoginScreen extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double contentWidth = min(MediaQuery.of(context).size.width, 600);
     return Scaffold(
       appBar: AppBar(title: Text(widget.appContext.devifyString('Welcome'))),
       key: Key('login_screen'),
-      body: Container(
-          child: Center(
-              child: Container(
-                  width: contentWidth,
-                  child: AuthScreenContent(
+      body: PreferredWidthContent(child: AuthScreenContent(
                     inputEnabled: this.inputEnabled,
                     authState: this.authState,
                     signOutHandler: this.handleSignOut,
@@ -117,7 +111,7 @@ class _LoginScreen extends State<LoginScreen> {
                     forgetPasswordHandler: this.handleForgetPassword,
                     emailInputController: this.emailInputController,
                     pwdInputController: this.pwdInputController,
-                  )))),
+                  )),
     );
   }
 }

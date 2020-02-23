@@ -1,9 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/home/content/shop/categories.dart';
 import 'package:iwfpapp/screens/home/content/shop/empty.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 class ShopNow extends StatelessWidget {
   final List<ShopCategory> categories;
@@ -12,16 +11,11 @@ class ShopNow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double contentWidth = min(MediaQuery.of(context).size.width, 600);
     if (this.categories.isEmpty) {
-      return Center(
-          child: Container(
-              width: contentWidth, child: EmptyWalletShoppingScreen()));
+      return PreferredWidthContent(child: EmptyWalletShoppingScreen());
     } else {
-      return Center(
-          child: Container(
-              width: contentWidth,
-              child: CategoriesShoppingScreen(categories: this.categories)));
+      return PreferredWidthContent(
+          child: CategoriesShoppingScreen(categories: this.categories));
     }
   }
 }

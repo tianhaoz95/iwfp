@@ -12,7 +12,7 @@ class SignUpScreenErrorContent extends StatelessWidget {
           Material(
             child: RaisedButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/sign_in');
+                Navigator.pop(context);
               },
               child: Text('Error, back to login'),
             ),
