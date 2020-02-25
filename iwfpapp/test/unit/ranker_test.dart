@@ -4,9 +4,9 @@ import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:test/test.dart';
 
-CreditCard generateCreditCard(String name, String id, List<int> rates) {
+CreditCard generateCreditCard(String name, String id, List<double> rates) {
   CreditCard card = CreditCard(name, id);
-  for (int rate in rates) {
+  for (double rate in rates) {
     CashbackPromo promo = CashbackPromo('Coffee Shop', 'coffee_shop', 'sector',
         'na', 'na', 'const', rate, ShopCategory('Coffee Shop', 'coffee_shop'));
     card.promos.add(promo);

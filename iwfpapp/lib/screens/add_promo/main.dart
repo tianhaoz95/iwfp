@@ -120,7 +120,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
     setState(() {
       status = SubmitScreenStatus.LOADING;
     });
-    int promoRate = int.parse(promoRateStr);
+    double promoRate = double.parse(promoRateStr);
     CashbackPromo promo = CashbackPromo(
         promoName,
         promoId,
