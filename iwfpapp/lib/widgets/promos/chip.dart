@@ -11,7 +11,7 @@ class PromotionChip extends StatelessWidget {
     if (promo.name != null) {
       promoName = promo.category.name;
     }
-    int promoRate = -1;
+    double promoRate = 0.0;
     if (promo.rate != null) {
       promoRate = promo.rate;
     }

@@ -1,11 +1,14 @@
 /// Converts dynamic type to cashback rate
-int dynamic2rate(dynamic dynamicRate) {
-  int promoRate = 0;
+double dynamic2rate(dynamic dynamicRate) {
+  double promoRate = 0;
   if (dynamicRate is int) {
+    promoRate = dynamicRate.toDouble();
+  } else if (dynamicRate is double) {
     promoRate = dynamicRate;
-  }
-  if (dynamicRate is String) {
-    promoRate = int.parse(dynamicRate);
+  } else if (dynamicRate is String) {
+    promoRate = double.parse(dynamicRate);
+  } else {
+    throw 'dynamicRate is not a number';
   }
   return promoRate;
 }

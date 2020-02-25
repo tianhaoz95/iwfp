@@ -21,7 +21,7 @@ class BasicCreditCard extends StatelessWidget {
     if (cardMetaData.name != null) {
       showCardName = cardMetaData.name;
       if (targetCategory != null) {
-        int maxRate = getMaxRate(cardMetaData, targetCategory);
+        double maxRate = getMaxRate(cardMetaData, targetCategory);
         showCardName = showCardName + ' w/ rate @ ' + maxRate.toString() + '%';
       }
     }

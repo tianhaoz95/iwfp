@@ -13,7 +13,7 @@ class CashbackPromo {
   /// * annual (repeats annually between start and end)
   /// * const (constant, always the same. In this case, start and end are ignored)
   final String repeat;
-  final int rate;
+  final double rate;
   const CashbackPromo(this.name, this.id, this.type, this.start, this.end,
       this.repeat, this.rate, this.category);
 }

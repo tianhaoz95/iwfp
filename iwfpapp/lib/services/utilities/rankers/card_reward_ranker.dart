@@ -4,8 +4,8 @@ import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/utilities/validators/card_expiration_validator.dart';
 
-int getMaxRate(CreditCard card, ShopCategory category) {
-  int maxRate = 0;
+double getMaxRate(CreditCard card, ShopCategory category) {
+  double maxRate = 0.0;
   for (CashbackPromo promo in card.promos) {
     if (isInValidTimeRange(promo)) {
       if (promo.category.id == category.id) {
@@ -22,8 +22,8 @@ int getMaxRate(CreditCard card, ShopCategory category) {
 
 void rankCards(List<CreditCard> cards, ShopCategory category) {
   cards.sort((CreditCard cardLhs, CreditCard cardRhs) {
-    int maxLhsRate = getMaxRate(cardLhs, category);
-    int maxRhsRate = getMaxRate(cardRhs, category);
+    double maxLhsRate = getMaxRate(cardLhs, category);
+    double maxRhsRate = getMaxRate(cardRhs, category);
     return maxRhsRate.compareTo(maxLhsRate);
   });
 }
