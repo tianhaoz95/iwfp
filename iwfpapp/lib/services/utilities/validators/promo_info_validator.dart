@@ -129,7 +129,7 @@ ValidationResponse isValidPromoRate(String promoRate) {
     response.messages.add(promoRateEmptyErrorMessage);
   }
   try {
-    int.parse(promoRate);
+    double.parse(promoRate);
   } catch (err) {
     response.valid = false;
     response.messages.add(promoRateNotIntErrorMessage);
