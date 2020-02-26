@@ -1,4 +1,4 @@
-name: checkin iwfpapp
+name: iwfpapp dependency update
 on:
   push:
     branches:
