@@ -8,6 +8,7 @@ on:
       - "release/*"
       - "refactor/*"
       - "fix/*"
+      - "chore/*"
     paths:
       - "iwfpapi/**"
       - ".github/workflows/checkin_iwfpapi.yml"
