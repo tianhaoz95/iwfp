@@ -21,7 +21,7 @@ jobs:
           flutter-version: '1.12.13+hotfix.5'
           channel: 'stable'
       - name: run flutter package updater
-        uses: tianhaoz95/update-flutter-packages@v0.0.1
+        uses: tianhaoz95/update-flutter-packages@v0.0.2
         with:
           flutter-project: './iwfpapp'
           git-email: 'tianhaoz@umich.edu'
