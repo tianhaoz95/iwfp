@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - "master"
-      - "ci/merge__*"
+      - "actions/merge__*"
 jobs:
   build-api:
     name: build api
