@@ -95,6 +95,8 @@ jobs:
         run: flutter test
   app-integration-test:
     name: app integration test
+    needs:
+      - app-unit-test
     strategy:
       matrix:
         device:
@@ -133,6 +135,7 @@ jobs:
     name: end to end test
     needs:
       - server-test
+      - app-unit-test
     strategy:
       matrix:
         device:
@@ -178,6 +181,8 @@ jobs:
   build-web-app:
     name: build web app
     runs-on: ubuntu-latest
+    needs:
+      - app-unit-test
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
@@ -201,6 +206,8 @@ jobs:
         run: flutter build web
   build-android-app:
     name: build android apk and app bundle
+    needs:
+      - app-unit-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -228,6 +235,8 @@ jobs:
         run: flutter build apk --split-per-abi
   build-ios-app:
     name: build iOS
+    needs:
+      - app-unit-test
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -246,6 +255,8 @@ jobs:
         run: flutter build ios --release --no-codesign
   build-macos-app:
     name: build macOS app
+    needs:
+      - app-unit-test
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
