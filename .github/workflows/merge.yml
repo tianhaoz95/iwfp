@@ -92,15 +92,7 @@ jobs:
       - name: list all simulators
         run: xcrun instruments -s
       - name: start simulator
-        run: |
-          UDID=$(
-            xcrun instruments -s |
-            awk \
-              -F ' *[][]' \
-              -v 'device=${{ matrix.device }}' \
-              '$1 == device { print $2 }'
-          )
-          xcrun simctl boot "${UDID:?No Simulator with this name found}"
+        run: xcrun simctl boot "${$(xcrun instruments -s awk -F ' *[][]' -v 'device=${{ matrix.device }}' '$1 == device { print $2 }'):?No Simulator with this name found}"
       - name: install server dependencies
         working-directory: ./iwfpapi/functions
         run: npm install
