@@ -8,7 +8,7 @@ on:
       - "master"
 jobs:
   build-server:
-    name: build backend server
+    name: build server
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
