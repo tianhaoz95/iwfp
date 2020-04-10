@@ -13,11 +13,6 @@ on:
     paths:
       - "app/*"
       - ".github/workflows/checkin_app.yml"
-  pull_request:
-    branches:
-      - "master"
-  schedule:
-    - cron: 0 2 * * *
 jobs:
   test:
     name: run checkin tests for app on ${{ matrix.os }}
@@ -32,16 +27,16 @@ jobs:
         with:
           flutter-version: '1.12.13+hotfix.9'
           channel: 'stable'
-      - name: upgrade flutter
+      - name: upgrade Flutter
         run: |
           flutter upgrade
           flutter --version
       - name: install Flutter dependencies
         working-directory: ./app
         run: flutter pub get
-      - name: lint dart code
+      - name: lint Dart code
         working-directory: ./app
         run: flutter analyze
-      - name: run iwfpapp unit tests
+      - name: run unit tests
         working-directory: ./app
         run: flutter test
