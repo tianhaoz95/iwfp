@@ -69,8 +69,8 @@ jobs:
       - name: build docs
         working-directory: ./app
         run: /usr/lib/dart/bin/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
-  server-app-test:
-    name: server-app-test
+  app_integration-test:
+    name: app integration test
     strategy:
       matrix:
         device:
@@ -80,6 +80,45 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.12.13+hotfix.9'
+          channel: 'stable'
+      - name: list all simulators
+        run: xcrun instruments -s
+      - name: start simulator
+        run: |
+          UDID=$(
+            xcrun instruments -s |
+            awk \
+              -F ' *[][]' \
+              -v 'device=${{ matrix.device }}' \
+              '$1 == device { print $2 }'
+          )
+          xcrun simctl boot "${UDID:?No Simulator with this name found}"
+      - name: install server dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: run offline device end to end test
+        working-directory: ./app
+        run: flutter drive --target=test_driver/app.dart
+  server-app-test:
+    name: server app end to end test
+    strategy:
+      matrix:
+        device:
+          - "iPad Pro (12.9-inch) (3rd generation) (13.3)"
+          - "iPhone 11 Pro Max (13.3)"
+      fail-fast: false
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.16.2'
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
