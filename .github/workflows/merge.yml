@@ -6,9 +6,11 @@ on:
   pull_request:
     branches:
       - "master"
+  schedule:
+    - cron: 0 2 * * *
 jobs:
-  build-server:
-    name: build server
+  server-test:
+    name: server test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -69,7 +71,28 @@ jobs:
       - name: build docs
         working-directory: ./app
         run: /usr/lib/dart/bin/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
-  app_integration-test:
+  app-unit-test:
+    name: app unit test
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.12.13+hotfix.9'
+          channel: 'stable'
+      - name: install Flutter dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: lint Dart code
+        working-directory: ./app
+        run: flutter analyze
+      - name: run unit tests
+        working-directory: ./app
+        run: flutter test
+  app-integration-test:
     name: app integration test
     strategy:
       matrix:
@@ -106,7 +129,9 @@ jobs:
         working-directory: ./app
         run: flutter drive --target=test_driver/app.dart
   server-app-test:
-    name: server app end to end test
+    name: end to end test
+    needs:
+      - server-test
     strategy:
       matrix:
         device:
