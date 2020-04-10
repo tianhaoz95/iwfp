@@ -13,11 +13,6 @@ on:
     paths:
       - "app/*"
       - ".github/workflows/checkin_app.yml"
-  pull_request:
-    branches:
-      - "master"
-  schedule:
-    - cron: 0 2 * * *
 jobs:
   test:
     name: run checkin tests for app on ${{ matrix.os }}
