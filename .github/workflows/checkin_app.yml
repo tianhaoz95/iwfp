@@ -1,4 +1,4 @@
-name: checkin iwfpapp
+name: checkin app
 on:
   push:
     branches:
@@ -9,9 +9,10 @@ on:
       - "fix/*"
       - "refactor/*"
       - "chore/*"
+      - "actions/checkin-app__*"
     paths:
-      - "iwfpapp/**"
-      - ".github/workflows/checkin_iwfpapp.yml"
+      - "app/*"
+      - ".github/workflows/checkin_app.yml"
   pull_request:
     branches:
       - "master"
@@ -19,34 +20,31 @@ on:
     - cron: 0 2 * * *
 jobs:
   test:
-    name: run iwfpapp checkin tests on ${{ matrix.os }}
+    name: run checkin tests for app on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
       fail-fast: false
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
-          java-version: '12.x'
+          java-version: '12.16.2'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.12.13+hotfix.5'
+          flutter-version: '1.12.13+hotfix.9'
           channel: 'stable'
       - name: upgrade flutter
         run: |
           flutter upgrade
           flutter --version
-      - name: install iwfpapp flutter dependencies
-        run: |
-          cd ./iwfpapp
-          flutter pub get
-      - name: lint iwfpapp dart code
-        run: |
-          cd ./iwfpapp
-          flutter analyze
+      - name: install Flutter dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: lint dart code
+        working-directory: ./app
+        run: flutter analyze
       - name: run iwfpapp unit tests
-        run: |
-          cd ./iwfpapp
-          flutter test
+        working-directory: ./app
+        run: flutter test
