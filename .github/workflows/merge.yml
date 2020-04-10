@@ -1,9 +1,11 @@
 name: guardians of the pull requests
 on:
+  push:
+    branches:
+      - "actions/merge__*"
   pull_request:
     branches:
       - "master"
-      - "actions/merge__*"
 jobs:
   build-server:
     name: build backend server
