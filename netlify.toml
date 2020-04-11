@@ -1,5 +1,0 @@
-# This a rule for Single Page Applications
-[[redirects]]
-  from = "/*"
-  to = "/"
-  status = 200

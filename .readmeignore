@@ -1,9 +1,0 @@
-!**/iwfpapp/ios/**/*
-!**/iwfpapp/android/**/*
-!**/iwfpapp/web/**/*
-!**/iwfpapp/build/**/*
-!**/iwfpapp/.dart_tool/**/*
-!**/iwfpapp/.idea/**/*
-!**/iwfpapp/.firebase/**/*
-!**/node_modules/**/*
-!CODE_OF_CONDUCT.md
