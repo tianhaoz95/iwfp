@@ -9,6 +9,7 @@ on:
       - "refactor/*"
       - "fix/*"
       - "chore/*"
+      - "actions/checkin-server__*"
     paths:
       - "iwfpapi/**"
       - ".github/workflows/checkin_iwfpapi.yml"
