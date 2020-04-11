@@ -1,0 +1,42 @@
+name: checkin app
+on:
+  push:
+    branches:
+      - "master"
+      - "dev/*"
+      - "feature/*"
+      - "release/*"
+      - "fix/*"
+      - "refactor/*"
+      - "chore/*"
+      - "actions/checkin-app__*"
+    paths:
+      - "app/*"
+      - ".github/workflows/checkin_app.yml"
+jobs:
+  test:
+    name: run app unit tests on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.12.13+hotfix.9'
+          channel: 'stable'
+      - name: upgrade Flutter
+        run: |
+          flutter upgrade
+          flutter --version
+      - name: install Flutter dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: lint Dart code
+        working-directory: ./app
+        run: flutter analyze
+      - name: run unit tests
+        working-directory: ./app
+        run: flutter test

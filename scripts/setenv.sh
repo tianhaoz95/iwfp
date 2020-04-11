@@ -48,19 +48,19 @@ else
 fi
 
 # Create the keystore for signing the Android app.
-rm -f $PROJ_ROOT/iwfpapp/android/key.properties
-echo "storePassword=$ANDROID_SIGN_PWD" >> $PROJ_ROOT/iwfpapp/android/key.properties
-echo "keyPassword=$ANDROID_SIGN_PWD" >> $PROJ_ROOT/iwfpapp/android/key.properties
-echo "keyAlias=key" >> $PROJ_ROOT/iwfpapp/android/key.properties
-echo "storeFile=key.jks" >> $PROJ_ROOT/iwfpapp/android/key.properties
+rm -f $PROJ_ROOT/app/android/key.properties
+echo "storePassword=$ANDROID_SIGN_PWD" >> $PROJ_ROOT/app/android/key.properties
+echo "keyPassword=$ANDROID_SIGN_PWD" >> $PROJ_ROOT/app/android/key.properties
+echo "keyAlias=key" >> $PROJ_ROOT/app/android/key.properties
+echo "storeFile=key.jks" >> $PROJ_ROOT/app/android/key.properties
 
 # Create the key file for Google Play Store service account.
 # This service account is used by fastlane to auto deploy to
 # Google Play Store.
-rm -f $PROJ_ROOT/iwfpapp/android/fastlane/Appfile
-echo "json_key_file \"$PROJ/$SECRET_REPO/iwfp/play_store_service_account_api_key.json\"" >> $PROJ_ROOT/iwfpapp/android/fastlane/Appfile
-echo "package_name \"com.jacksonz.iwfpapp\"" >> $PROJ_ROOT/iwfpapp/android/fastlane/Appfile
+rm -f $PROJ_ROOT/app/android/fastlane/Appfile
+echo "json_key_file \"$PROJ/$SECRET_REPO/iwfp/play_store_service_account_api_key.json\"" >> $PROJ_ROOT/app/android/fastlane/Appfile
+echo "package_name \"com.jacksonz.iwfpapp\"" >> $PROJ_ROOT/app/android/fastlane/Appfile
 
 # Copy the keystore into the project area as required by Android studio
-rm -f $PROJ_ROOT/iwfpapp/android/app/key.jks
-cp $PROJ/$SECRET_REPO/iwfp/key.jks $PROJ_ROOT/iwfpapp/android/app
+rm -f $PROJ_ROOT/app/android/app/key.jks
+cp $PROJ/$SECRET_REPO/iwfp/key.jks $PROJ_ROOT/app/android/app
