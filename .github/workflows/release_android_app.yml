@@ -23,6 +23,8 @@ jobs:
         with:
           flutter-version: '1.12.13+hotfix.9'
           channel: 'stable'
+      - name: install bundler
+        run: gem install bundler:1.17.3
       - name: install ruby packages
         working-directory: ./app/android
         run: bundle install
@@ -43,4 +45,4 @@ jobs:
         run: flutter build appbundle
       - name: publish to internal track
         working-directory: ./app/android
-        run: fastlane internal
+        run: bundle exec fastlane internal
