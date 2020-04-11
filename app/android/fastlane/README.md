@@ -16,16 +16,11 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## Android
-### android test
-```
-fastlane android test
-```
-Runs all the tests
 ### android internal
 ```
 fastlane android internal
 ```
-Submit a new Internal Testing Build
+Submit to internal track in Google Play Store
 ### android beta
 ```
 fastlane android beta
