@@ -2,16 +2,7 @@ fastlane_version "2.28.3"
 
 default_platform :android
 
-platform :android do
-  before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
-  end
-
-  desc "Runs all the tests"
-  lane :test do
-    puts 'Flutter testing is not supported yet, omit testing.'
-  end
-  
+platform :android do  
   desc "Submit to internal track in Google Play Store"
   lane :internal do
     begin
@@ -35,22 +26,6 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    puts 'Not implemented'
-  end
-
-  after_all do |lane|
-    # This block is called, only if the executed lane was successful
-    # slack(
-    #   message: "Successfully deployed new App Update."
-    # )
-    puts 'Not implemented'
-  end
-
-  error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
     puts 'Not implemented'
   end
 end
