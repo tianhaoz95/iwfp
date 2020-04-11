@@ -4,6 +4,7 @@ on:
     branches:
       - "master"
       - "actions/release-android-app__*"
+      - "refactor/android-infra__*"
     paths:
       - "app/pubspec.yaml"
       - "app/android/fastlane/Fastfile"
