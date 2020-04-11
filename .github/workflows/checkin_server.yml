@@ -1,0 +1,44 @@
+name: checkin iwfpapi
+on:
+  push:
+    branches:
+      - "master"
+      - "dev/*"
+      - "feature/*"
+      - "release/*"
+      - "refactor/*"
+      - "fix/*"
+      - "chore/*"
+      - "actions/checkin-server__*"
+    paths:
+      - "iwfpapi/*"
+      - ".github/workflows/checkin_server.yml"
+  pull_request:
+    branches:
+      - "master"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  unit-test:
+    name: run server tests on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.16.2'
+      - name: install firebase CLI
+        run: npm install -g firebase-tools
+      - name: install dependencies
+        working-directory: ./iwfpapi/functions
+        run: npm install
+      - name: lint code
+        working-directory: ./iwfpapi/functions
+        run: npm run lint
+      - name: run tests
+        working-directory: ./iwfpapi/functions
+        run: npm run e2e
