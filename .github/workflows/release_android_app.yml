@@ -6,6 +6,7 @@ on:
       - "actions/release-android-app__*"
     paths:
       - "app/pubspec.yaml"
+      - "app/android/fastlane/Fastfile"
       - ".github/workflows/release_android_app.yml"
 jobs:
   release-android-app:
