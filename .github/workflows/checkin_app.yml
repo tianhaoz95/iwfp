@@ -15,7 +15,7 @@ on:
       - ".github/workflows/checkin_app.yml"
 jobs:
   test:
-    name: run checkin tests for app on ${{ matrix.os }}
+    name: run app unit tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
