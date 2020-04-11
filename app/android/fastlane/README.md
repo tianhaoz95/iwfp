@@ -20,17 +20,7 @@ or alternatively using `brew cask install fastlane`
 ```
 fastlane android internal
 ```
-Submit to internal track in Google Play Store
-### android beta
-```
-fastlane android beta
-```
-Submit a new Beta Build to Crashlytics Beta
-### android deploy
-```
-fastlane android deploy
-```
-Deploy a new version to the Google Play
+submit to internal track in Google Play Store
 
 ----
 

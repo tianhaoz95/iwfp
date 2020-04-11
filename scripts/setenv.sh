@@ -59,7 +59,7 @@ echo "storeFile=key.jks" >> $PROJ_ROOT/app/android/key.properties
 # Google Play Store.
 rm -f $PROJ_ROOT/app/android/fastlane/Appfile
 echo "json_key_file \"$PROJ/$SECRET_REPO/iwfp/play_store_service_account_api_key.json\"" >> $PROJ_ROOT/app/android/fastlane/Appfile
-echo "package_name \"com.jacksonz.app\"" >> $PROJ_ROOT/app/android/fastlane/Appfile
+echo "package_name \"com.jacksonz.iwfpapp\"" >> $PROJ_ROOT/app/android/fastlane/Appfile
 
 # Copy the keystore into the project area as required by Android studio
 rm -f $PROJ_ROOT/app/android/app/key.jks
