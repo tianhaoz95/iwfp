@@ -1,1 +1,1 @@
-final String screenshotDir = '/tmp/screenshot';
+final String screenshotDir = '/tmp/screenshots';

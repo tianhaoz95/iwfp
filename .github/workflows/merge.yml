@@ -182,7 +182,7 @@ jobs:
       - name: upload online screenshot
         uses: actions/upload-artifact@master
         with:
-          name: online_screenshot_${{ matrix.device }}
+          name: offline_screenshot_${{ matrix.device }}
           path: /tmp/screenshots
   build-web-app:
     name: build web app
