@@ -1,1 +1,1 @@
-final String screenshotDir = '/tmp/iwfpapp_screenshot';
+final String screenshotDir = '/tmp/screenshot';

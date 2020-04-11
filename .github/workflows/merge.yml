@@ -131,6 +131,11 @@ jobs:
       - name: run offline device end to end test
         working-directory: ./app
         run: flutter drive --target=test_driver/app.dart
+      - name: upload online screenshot
+        uses: actions/upload-artifact@master
+        with:
+          name: online_screenshot_${{ matrix.device }}
+          path: /tmp/screenshots
   server-app-test:
     name: end to end test
     needs:
@@ -178,6 +183,11 @@ jobs:
       - name: run offline device end to end test
         working-directory: ./iwfpapi/functions
         run: npm run device
+      - name: upload online screenshot
+        uses: actions/upload-artifact@master
+        with:
+          name: online_screenshot_${{ matrix.device }}
+          path: /tmp/screenshots
   build-web-app:
     name: build web app
     runs-on: ubuntu-latest
