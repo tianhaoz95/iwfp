@@ -1,7 +1,7 @@
 version: 1
 update_configs:
   - package_manager: "ruby:bundler"
-    directory: "/"
+    directory: "app/android"
     update_schedule: "live"
     default_reviewers:
       - "tianhaoz95"
