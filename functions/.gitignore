@@ -1,8 +1,17 @@
 ## Compiled JavaScript files
 **/*.js
 **/*.js.map
+!jest.config.js
 
 # Typescript v1 declaration files
 typings/
 
+# Third-party packages
 node_modules/
+
+# Generated documentation
+/docs
+/coverage
+/lib
+/firestore-debug.log
+/firebase-debug.log
