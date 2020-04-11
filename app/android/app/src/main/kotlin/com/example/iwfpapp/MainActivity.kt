@@ -1,4 +1,4 @@
-package com.jacksonz.iwfpapp
+package com.example.iwfpapp
 
 import android.os.Bundle
 
