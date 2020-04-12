@@ -32,14 +32,6 @@ jobs:
         run: npm install -g yarn
       - name: install coverage visualization tools
         run: sudo apt install lcov
-      - name: install dartdoc
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y apt-transport-https
-          sudo sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
-          sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
-          sudo apt-get update
-          sudo apt-get install dart
       - name: switch to master channel
         run: flutter channel master
       - name: enable Flutter web
@@ -66,7 +58,7 @@ jobs:
         run: flutter build web
       - name: build app docs
         working-directory: ./app
-        run: /usr/lib/dart/bin/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
+        run: $FLUTTER_HOME/bin/cache/dart-sdk/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
       - name: build server docs
         working-directory: ./functions
         run: npm run docs
