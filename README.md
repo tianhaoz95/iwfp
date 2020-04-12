@@ -21,23 +21,24 @@
 - [ ] iOS
   - [x] Code complete
   - [x] Third-party compatibility
-  - [ ] Need sponsorship (see [Contribute](#contribute)) for the \$99/year [Apple Developer Program](https://developer.apple.com/support/compare-memberships/) subscription :broken_heart:
+  - [ ] Publish
 - [ ] MacOS
   - [x] Code complete
   - [ ] Third-party compatibility (`firebase_auth` & `firebase_core`)
-- [ ] Windows (not planned. Although [Flutter](https://flutter.dev/) will support it, who knows what will happen when I enable it :scream:)
+- [ ] Windows (pending on Flutter support)
+- [ ] Linux (pending on Flutter support)
 
 For the latest updates, please subscribe to [newsletter](https://jacksonz.substack.com).
 
 ## Helpful Resource
 
-- Project Site ([Netlify](https://iwfp.netlify.com/)) ([Firebase](https://iwfp-project.web.app/))
+- [Project Site](https://iwfp-project.web.app/))
 - [Blog](https://medium.com/i-want-5)
-- Mobile Apps (iwfpapp)
-  - [Coverage Report](https://iwfp.github.io/iwfpapp-coverage-report/)
-  - [Dev documentation](https://iwfp.github.io/iwfpapp-doc/)
-- Backend APIs (iwfpapi)
-  - [Dev documentation](https://iwfp.github.io/iwfpapi-doc/)
+- Apps
+  - [Coverage Report](https://iwfp-app-cov.web.app/)
+  - [Docs](https://iwfp-app-docs.web.app/)
+- Server
+  - [Docs](https://iwfp-server-docs.web.app/)
 
 ## Contribute
 
