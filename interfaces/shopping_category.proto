@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message ShoppingCategory {
+  string id = 1;
+  string display_name = 2;
+}

@@ -1,5 +1,10 @@
 name: checkin server
 on:
+  pull_request:
+    branches:
+      - "master"
+  schedule:
+    - cron: 0 2 * * *
   push:
     branches:
       - "master"
@@ -14,13 +19,8 @@ on:
     paths:
       - "iwfpapi/*"
       - ".github/workflows/checkin_server.yml"
-  pull_request:
-    branches:
-      - "master"
-  schedule:
-    - cron: 0 2 * * *
 jobs:
-  unit-test:
+  test:
     name: run server tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
