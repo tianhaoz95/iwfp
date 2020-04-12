@@ -31,7 +31,7 @@ jobs:
       - name: install yarn
         run: npm install -g yarn
       - name: install coverage visualization tools
-        run: sudo apt install lcov
+        run: sudo apt install -y lcov
       - name: switch to master channel
         run: flutter channel master
       - name: enable Flutter web
