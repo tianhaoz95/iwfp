@@ -1,4 +1,4 @@
-name: checkin iwfpapi
+name: checkin server
 on:
   push:
     branches:
