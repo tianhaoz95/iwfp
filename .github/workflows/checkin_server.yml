@@ -20,7 +20,7 @@ on:
       - "iwfpapi/*"
       - ".github/workflows/checkin_server.yml"
 jobs:
-  unit-test:
+  test:
     name: run server tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
