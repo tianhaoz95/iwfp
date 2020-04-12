@@ -16,7 +16,7 @@ describe("auth validator tests", () => {
     const token = instance(sampleToken);
     context.auth = {
       uid: "test_user_uid",
-      token: token
+      token: token,
     };
     expect(isValidAuth(context, undefined)).toBe(true);
   });

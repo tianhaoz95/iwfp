@@ -8,7 +8,7 @@ export const BasicPromo = {
   promoRepeat: "annual",
   promoRate: "5",
   promoCategoryId: "best_buy",
-  promoCategoryName: "Best Buy"
+  promoCategoryName: "Best Buy",
 };
 
 export const HttpSimpleAddPromoRequest = {
@@ -22,7 +22,7 @@ export const HttpSimpleAddPromoRequest = {
   promoRepeat: "annual",
   promoRate: "5",
   promoCategoryId: "best_buy",
-  promoCategoryName: "Best Buy"
+  promoCategoryName: "Best Buy",
 };
 
 export const BasicPromoInDatabase = {
@@ -34,5 +34,5 @@ export const BasicPromoInDatabase = {
   promo_rate: "5",
   promo_repeat_pattern: "annual",
   promo_start: "03/01",
-  promo_type: "brand"
+  promo_type: "brand",
 };

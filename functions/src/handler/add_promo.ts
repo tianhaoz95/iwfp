@@ -1,7 +1,7 @@
 import {
   noAuthMsg,
   creditCardNotExistError,
-  promoAlreadyExistError
+  promoAlreadyExistError,
 } from "../config/consts";
 import { FunctionContext, AddPromoRequest } from "../config/typedefs";
 
@@ -39,7 +39,7 @@ async function addPromoHandler(
           promo_repeat_pattern: promoRepeat,
           promo_rate: promoRate,
           promo_category_id: promoCategoryId,
-          promo_category_name: promoCategoryName
+          promo_category_name: promoCategoryName,
         });
       }
     } else {

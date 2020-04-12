@@ -4,12 +4,15 @@
   "description": "Iwfp project site.",
   "scripts": {
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "docs:format": "prettier --write docs/**/*.md docs/.vuepress/config.js",
+    "docs:lint": "prettier --check docs/**/*.md docs/.vuepress/config.js"
   },
   "repository": "https://github.com/tianhaoz95/iwfp",
   "author": "Tianhao Zhou",
   "license": "MIT",
   "devDependencies": {
+    "prettier": "^2.0.4",
     "vuepress": "^1.4.0"
   }
 }

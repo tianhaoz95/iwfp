@@ -1,20 +1,20 @@
-import * as admin from 'firebase-admin';
+import * as admin from "firebase-admin";
 
 export const DatabaseEmulatorAddress: string = "localhost:8080";
 export const CloudFunctionEmulatorAddress: string = "http://localhost:5001";
 
 export const EmulatedAppConfig = {
-  projectId: "iwfpapp"
+  projectId: "iwfpapp",
 };
 
 export const EmulatedAdminAppConfig = {
   credential: admin.credential.applicationDefault(),
-  databaseURL: DatabaseEmulatorAddress
-}
+  databaseURL: DatabaseEmulatorAddress,
+};
 
 export const DatabaseSettings = {
   host: DatabaseEmulatorAddress,
-  ssl: false
+  ssl: false,
 };
 
 export const CloudFunctionScope: string = "/iwfpapp/us-central1";
@@ -47,4 +47,5 @@ export const HttpRemoveUserEndpoint: string =
   EmulatorHttpFunctionsEndpoint + HttpRemoveUserScope;
 export const HttpRemovePromoEndpoint: string =
   EmulatorHttpFunctionsEndpoint + HttpRemovePromoScope;
-export const HttpGetCreditCardsEndpoint: string = EmulatorHttpFunctionsEndpoint + HttpGetCreditCardsScope;
+export const HttpGetCreditCardsEndpoint: string =
+  EmulatorHttpFunctionsEndpoint + HttpGetCreditCardsScope;
