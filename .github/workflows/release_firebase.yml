@@ -12,7 +12,7 @@ on:
       - ".github/workflows/release_firebase.yml"
 jobs:
   release-firebase:
-    name: release Firebase project
+    name: release Firebase
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
       - name: install yarn
         run: npm install -g yarn
       - name: install coverage visualization tools
-        run: sudo apt install lcov
+        run: sudo apt install -y lcov
       - name: switch to master channel
         run: flutter channel master
       - name: enable Flutter web
@@ -58,7 +58,7 @@ jobs:
         run: flutter build web
       - name: build app docs
         working-directory: ./app
-        run: $FLUTTER_HOME/bin/cache/dart-sdk/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
+        run: FLUTTER_ROOT=$FLUTTER_HOME $FLUTTER_HOME/bin/cache/dart-sdk/bin/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
       - name: build server docs
         working-directory: ./functions
         run: npm run docs
