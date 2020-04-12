@@ -1,9 +1,16 @@
+import * as admin from 'firebase-admin';
+
 export const DatabaseEmulatorAddress: string = "localhost:8080";
 export const CloudFunctionEmulatorAddress: string = "http://localhost:5001";
 
 export const EmulatedAppConfig = {
   projectId: "iwfpapp"
 };
+
+export const EmulatedAdminAppConfig = {
+  credential: admin.credential.applicationDefault(),
+  databaseURL: DatabaseEmulatorAddress
+}
 
 export const DatabaseSettings = {
   host: DatabaseEmulatorAddress,

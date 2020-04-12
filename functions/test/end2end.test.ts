@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import * as admin from 'firebase-admin';
 import clearDatabase from "./utilities/clear_database";
 import "firebase/functions";
 import axios, { AxiosResponse } from "axios";
@@ -12,7 +13,8 @@ import {
   HttpAddPromoEndpoint,
   HttpRemoveUserEndpoint,
   HttpRemovePromoEndpoint,
-  HttpGetCreditCardsEndpoint
+  HttpGetCreditCardsEndpoint,
+  EmulatedAdminAppConfig
 } from "./config/const";
 import {
   BasicPromo,
@@ -28,7 +30,9 @@ jest.setTimeout(20000);
 
 describe("end 2 end tests", () => {
   let app: firebase.app.App;
+  let adminApp: admin.app.App;
   let db: firebase.firestore.Firestore;
+  let adminDb: admin.firestore.Firestore;
   let cloudFunctions: firebase.functions.Functions;
   let addCreditCardCallable: firebase.functions.HttpsCallable;
   let getCreditCardsCallable: firebase.functions.HttpsCallable;
@@ -40,8 +44,10 @@ describe("end 2 end tests", () => {
 
   beforeAll(() => {
     app = firebase.initializeApp(EmulatedAppConfig);
+    adminApp = admin.initializeApp(EmulatedAdminAppConfig);
     db = app.firestore();
     db.settings(DatabaseSettings);
+    adminDb = adminApp.firestore();
     cloudFunctions = firebase.functions();
     cloudFunctions.useFunctionsEmulator(CloudFunctionEmulatorAddress);
     addCreditCardCallable = cloudFunctions.httpsCallable("addCreditCard");
@@ -70,15 +76,15 @@ describe("end 2 end tests", () => {
   });
 
   test("clear data should delete all docs", async () => {
-    await db
+    await adminDb
       .collection("test_clear")
       .doc("test0")
       .set({ wow: "wtf" });
-    await db
+    await adminDb
       .collection("test_clear")
       .doc("test1")
       .set({ wow: "wtf" });
-    await db
+    await adminDb
       .collection("test_clear")
       .doc("test2")
       .set({ wow: "wtf" });

@@ -2,14 +2,15 @@
   "compilerOptions": {
     "module": "commonjs",
     "noImplicitReturns": true,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017"
+    "types": ["jest"],
+    "target": "es2017",
+    "esModuleInterop": true
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+  "exclude": ["node_modules"]
 }
