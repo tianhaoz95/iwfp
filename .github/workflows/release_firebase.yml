@@ -57,6 +57,8 @@ jobs:
         working-directory: ./app
         run: flutter build web
       - name: build app docs
+        env:
+          FLUTTER_ROOT: $FLUTTER_HOME
         working-directory: ./app
         run: $FLUTTER_HOME/bin/cache/dart-sdk/bin/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
       - name: build server docs
