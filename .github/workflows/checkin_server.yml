@@ -19,11 +19,6 @@ on:
     paths:
       - "iwfpapi/*"
       - ".github/workflows/checkin_server.yml"
-  pull_request:
-    branches:
-      - "master"
-  schedule:
-    - cron: 0 2 * * *
 jobs:
   unit-test:
     name: run server tests on ${{ matrix.os }}
