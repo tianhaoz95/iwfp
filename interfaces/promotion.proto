@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "shopping_category.proto";
+
+message ProtoPromotion {
+  string id = 1;
+  string display_name = 2;
+  ProtoShoppingCategory category = 3;
+}

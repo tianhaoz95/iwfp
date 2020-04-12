@@ -8,6 +8,8 @@ PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
 
 npm install -g yarn
 npm install -g prettier
+npm install -g protobufjs
+pub global activate protoc_plugin
 
 cd $PROJ_ROOT/app
 flutter pub get

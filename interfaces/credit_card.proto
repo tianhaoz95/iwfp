@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "promotion.proto";
+
+message ProtoCreditCard {
+  string id = 1;
+  string display_name = 2;
+  repeated ProtoPromotion promotions = 3;
+}
