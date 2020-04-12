@@ -11,28 +11,28 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'shopping_category.pb.dart' as $0;
 
-class ProtoPromotion extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ProtoPromotion', createEmptyInstance: create)
+class Promotion extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Promotion', createEmptyInstance: create)
     ..aOS(1, 'id')
     ..aOS(2, 'displayName')
-    ..aOM<$0.ProtoShoppingCategory>(3, 'category', subBuilder: $0.ProtoShoppingCategory.create)
+    ..aOM<$0.ShoppingCategory>(3, 'category', subBuilder: $0.ShoppingCategory.create)
     ..hasRequiredFields = false
   ;
 
-  ProtoPromotion._() : super();
-  factory ProtoPromotion() => create();
-  factory ProtoPromotion.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ProtoPromotion.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ProtoPromotion clone() => ProtoPromotion()..mergeFromMessage(this);
-  ProtoPromotion copyWith(void Function(ProtoPromotion) updates) => super.copyWith((message) => updates(message as ProtoPromotion));
+  Promotion._() : super();
+  factory Promotion() => create();
+  factory Promotion.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Promotion.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  Promotion clone() => Promotion()..mergeFromMessage(this);
+  Promotion copyWith(void Function(Promotion) updates) => super.copyWith((message) => updates(message as Promotion));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ProtoPromotion create() => ProtoPromotion._();
-  ProtoPromotion createEmptyInstance() => create();
-  static $pb.PbList<ProtoPromotion> createRepeated() => $pb.PbList<ProtoPromotion>();
+  static Promotion create() => Promotion._();
+  Promotion createEmptyInstance() => create();
+  static $pb.PbList<Promotion> createRepeated() => $pb.PbList<Promotion>();
   @$core.pragma('dart2js:noInline')
-  static ProtoPromotion getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ProtoPromotion>(create);
-  static ProtoPromotion _defaultInstance;
+  static Promotion getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Promotion>(create);
+  static Promotion _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);
@@ -53,14 +53,14 @@ class ProtoPromotion extends $pb.GeneratedMessage {
   void clearDisplayName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $0.ProtoShoppingCategory get category => $_getN(2);
+  $0.ShoppingCategory get category => $_getN(2);
   @$pb.TagNumber(3)
-  set category($0.ProtoShoppingCategory v) { setField(3, v); }
+  set category($0.ShoppingCategory v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasCategory() => $_has(2);
   @$pb.TagNumber(3)
   void clearCategory() => clearField(3);
   @$pb.TagNumber(3)
-  $0.ProtoShoppingCategory ensureCategory() => $_ensure(2);
+  $0.ShoppingCategory ensureCategory() => $_ensure(2);
 }
 

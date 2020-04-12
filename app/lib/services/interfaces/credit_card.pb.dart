@@ -11,28 +11,28 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'promotion.pb.dart' as $1;
 
-class ProtoCreditCard extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ProtoCreditCard', createEmptyInstance: create)
+class CreditCard extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreditCard', createEmptyInstance: create)
     ..aOS(1, 'id')
     ..aOS(2, 'displayName')
-    ..pc<$1.ProtoPromotion>(3, 'promotions', $pb.PbFieldType.PM, subBuilder: $1.ProtoPromotion.create)
+    ..pc<$1.Promotion>(3, 'promotions', $pb.PbFieldType.PM, subBuilder: $1.Promotion.create)
     ..hasRequiredFields = false
   ;
 
-  ProtoCreditCard._() : super();
-  factory ProtoCreditCard() => create();
-  factory ProtoCreditCard.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ProtoCreditCard.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ProtoCreditCard clone() => ProtoCreditCard()..mergeFromMessage(this);
-  ProtoCreditCard copyWith(void Function(ProtoCreditCard) updates) => super.copyWith((message) => updates(message as ProtoCreditCard));
+  CreditCard._() : super();
+  factory CreditCard() => create();
+  factory CreditCard.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreditCard.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  CreditCard clone() => CreditCard()..mergeFromMessage(this);
+  CreditCard copyWith(void Function(CreditCard) updates) => super.copyWith((message) => updates(message as CreditCard));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ProtoCreditCard create() => ProtoCreditCard._();
-  ProtoCreditCard createEmptyInstance() => create();
-  static $pb.PbList<ProtoCreditCard> createRepeated() => $pb.PbList<ProtoCreditCard>();
+  static CreditCard create() => CreditCard._();
+  CreditCard createEmptyInstance() => create();
+  static $pb.PbList<CreditCard> createRepeated() => $pb.PbList<CreditCard>();
   @$core.pragma('dart2js:noInline')
-  static ProtoCreditCard getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ProtoCreditCard>(create);
-  static ProtoCreditCard _defaultInstance;
+  static CreditCard getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreditCard>(create);
+  static CreditCard _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);
@@ -53,6 +53,6 @@ class ProtoCreditCard extends $pb.GeneratedMessage {
   void clearDisplayName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$1.ProtoPromotion> get promotions => $_getList(2);
+  $core.List<$1.Promotion> get promotions => $_getList(2);
 }
 

@@ -9,26 +9,26 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.ProtoCreditCard = (function() {
+$root.CreditCard = (function() {
 
     /**
-     * Properties of a ProtoCreditCard.
-     * @exports IProtoCreditCard
-     * @interface IProtoCreditCard
-     * @property {string|null} [id] ProtoCreditCard id
-     * @property {string|null} [displayName] ProtoCreditCard displayName
-     * @property {Array.<IProtoPromotion>|null} [promotions] ProtoCreditCard promotions
+     * Properties of a CreditCard.
+     * @exports ICreditCard
+     * @interface ICreditCard
+     * @property {string|null} [id] CreditCard id
+     * @property {string|null} [displayName] CreditCard displayName
+     * @property {Array.<IPromotion>|null} [promotions] CreditCard promotions
      */
 
     /**
-     * Constructs a new ProtoCreditCard.
-     * @exports ProtoCreditCard
-     * @classdesc Represents a ProtoCreditCard.
-     * @implements IProtoCreditCard
+     * Constructs a new CreditCard.
+     * @exports CreditCard
+     * @classdesc Represents a CreditCard.
+     * @implements ICreditCard
      * @constructor
-     * @param {IProtoCreditCard=} [properties] Properties to set
+     * @param {ICreditCard=} [properties] Properties to set
      */
-    function ProtoCreditCard(properties) {
+    function CreditCard(properties) {
         this.promotions = [];
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -37,51 +37,51 @@ $root.ProtoCreditCard = (function() {
     }
 
     /**
-     * ProtoCreditCard id.
+     * CreditCard id.
      * @member {string} id
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @instance
      */
-    ProtoCreditCard.prototype.id = "";
+    CreditCard.prototype.id = "";
 
     /**
-     * ProtoCreditCard displayName.
+     * CreditCard displayName.
      * @member {string} displayName
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @instance
      */
-    ProtoCreditCard.prototype.displayName = "";
+    CreditCard.prototype.displayName = "";
 
     /**
-     * ProtoCreditCard promotions.
-     * @member {Array.<IProtoPromotion>} promotions
-     * @memberof ProtoCreditCard
+     * CreditCard promotions.
+     * @member {Array.<IPromotion>} promotions
+     * @memberof CreditCard
      * @instance
      */
-    ProtoCreditCard.prototype.promotions = $util.emptyArray;
+    CreditCard.prototype.promotions = $util.emptyArray;
 
     /**
-     * Creates a new ProtoCreditCard instance using the specified properties.
+     * Creates a new CreditCard instance using the specified properties.
      * @function create
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @static
-     * @param {IProtoCreditCard=} [properties] Properties to set
-     * @returns {ProtoCreditCard} ProtoCreditCard instance
+     * @param {ICreditCard=} [properties] Properties to set
+     * @returns {CreditCard} CreditCard instance
      */
-    ProtoCreditCard.create = function create(properties) {
-        return new ProtoCreditCard(properties);
+    CreditCard.create = function create(properties) {
+        return new CreditCard(properties);
     };
 
     /**
-     * Encodes the specified ProtoCreditCard message. Does not implicitly {@link ProtoCreditCard.verify|verify} messages.
+     * Encodes the specified CreditCard message. Does not implicitly {@link CreditCard.verify|verify} messages.
      * @function encode
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @static
-     * @param {IProtoCreditCard} message ProtoCreditCard message or plain object to encode
+     * @param {ICreditCard} message CreditCard message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    ProtoCreditCard.encode = function encode(message, writer) {
+    CreditCard.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
         if (message.id != null && message.hasOwnProperty("id"))
@@ -90,38 +90,38 @@ $root.ProtoCreditCard = (function() {
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
         if (message.promotions != null && message.promotions.length)
             for (var i = 0; i < message.promotions.length; ++i)
-                $root.ProtoPromotion.encode(message.promotions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                $root.Promotion.encode(message.promotions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
         return writer;
     };
 
     /**
-     * Encodes the specified ProtoCreditCard message, length delimited. Does not implicitly {@link ProtoCreditCard.verify|verify} messages.
+     * Encodes the specified CreditCard message, length delimited. Does not implicitly {@link CreditCard.verify|verify} messages.
      * @function encodeDelimited
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @static
-     * @param {IProtoCreditCard} message ProtoCreditCard message or plain object to encode
+     * @param {ICreditCard} message CreditCard message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    ProtoCreditCard.encodeDelimited = function encodeDelimited(message, writer) {
+    CreditCard.encodeDelimited = function encodeDelimited(message, writer) {
         return this.encode(message, writer).ldelim();
     };
 
     /**
-     * Decodes a ProtoCreditCard message from the specified reader or buffer.
+     * Decodes a CreditCard message from the specified reader or buffer.
      * @function decode
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
      * @param {number} [length] Message length if known beforehand
-     * @returns {ProtoCreditCard} ProtoCreditCard
+     * @returns {CreditCard} CreditCard
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    ProtoCreditCard.decode = function decode(reader, length) {
+    CreditCard.decode = function decode(reader, length) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ProtoCreditCard();
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CreditCard();
         while (reader.pos < end) {
             var tag = reader.uint32();
             switch (tag >>> 3) {
@@ -134,7 +134,7 @@ $root.ProtoCreditCard = (function() {
             case 3:
                 if (!(message.promotions && message.promotions.length))
                     message.promotions = [];
-                message.promotions.push($root.ProtoPromotion.decode(reader, reader.uint32()));
+                message.promotions.push($root.Promotion.decode(reader, reader.uint32()));
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -145,30 +145,30 @@ $root.ProtoCreditCard = (function() {
     };
 
     /**
-     * Decodes a ProtoCreditCard message from the specified reader or buffer, length delimited.
+     * Decodes a CreditCard message from the specified reader or buffer, length delimited.
      * @function decodeDelimited
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {ProtoCreditCard} ProtoCreditCard
+     * @returns {CreditCard} CreditCard
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    ProtoCreditCard.decodeDelimited = function decodeDelimited(reader) {
+    CreditCard.decodeDelimited = function decodeDelimited(reader) {
         if (!(reader instanceof $Reader))
             reader = new $Reader(reader);
         return this.decode(reader, reader.uint32());
     };
 
     /**
-     * Verifies a ProtoCreditCard message.
+     * Verifies a CreditCard message.
      * @function verify
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @static
      * @param {Object.<string,*>} message Plain object to verify
      * @returns {string|null} `null` if valid, otherwise the reason why it is not
      */
-    ProtoCreditCard.verify = function verify(message) {
+    CreditCard.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
         if (message.id != null && message.hasOwnProperty("id"))
@@ -181,7 +181,7 @@ $root.ProtoCreditCard = (function() {
             if (!Array.isArray(message.promotions))
                 return "promotions: array expected";
             for (var i = 0; i < message.promotions.length; ++i) {
-                var error = $root.ProtoPromotion.verify(message.promotions[i]);
+                var error = $root.Promotion.verify(message.promotions[i]);
                 if (error)
                     return "promotions." + error;
             }
@@ -190,44 +190,44 @@ $root.ProtoCreditCard = (function() {
     };
 
     /**
-     * Creates a ProtoCreditCard message from a plain object. Also converts values to their respective internal types.
+     * Creates a CreditCard message from a plain object. Also converts values to their respective internal types.
      * @function fromObject
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @static
      * @param {Object.<string,*>} object Plain object
-     * @returns {ProtoCreditCard} ProtoCreditCard
+     * @returns {CreditCard} CreditCard
      */
-    ProtoCreditCard.fromObject = function fromObject(object) {
-        if (object instanceof $root.ProtoCreditCard)
+    CreditCard.fromObject = function fromObject(object) {
+        if (object instanceof $root.CreditCard)
             return object;
-        var message = new $root.ProtoCreditCard();
+        var message = new $root.CreditCard();
         if (object.id != null)
             message.id = String(object.id);
         if (object.displayName != null)
             message.displayName = String(object.displayName);
         if (object.promotions) {
             if (!Array.isArray(object.promotions))
-                throw TypeError(".ProtoCreditCard.promotions: array expected");
+                throw TypeError(".CreditCard.promotions: array expected");
             message.promotions = [];
             for (var i = 0; i < object.promotions.length; ++i) {
                 if (typeof object.promotions[i] !== "object")
-                    throw TypeError(".ProtoCreditCard.promotions: object expected");
-                message.promotions[i] = $root.ProtoPromotion.fromObject(object.promotions[i]);
+                    throw TypeError(".CreditCard.promotions: object expected");
+                message.promotions[i] = $root.Promotion.fromObject(object.promotions[i]);
             }
         }
         return message;
     };
 
     /**
-     * Creates a plain object from a ProtoCreditCard message. Also converts values to other types if specified.
+     * Creates a plain object from a CreditCard message. Also converts values to other types if specified.
      * @function toObject
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @static
-     * @param {ProtoCreditCard} message ProtoCreditCard
+     * @param {CreditCard} message CreditCard
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    ProtoCreditCard.toObject = function toObject(message, options) {
+    CreditCard.toObject = function toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -244,45 +244,45 @@ $root.ProtoCreditCard = (function() {
         if (message.promotions && message.promotions.length) {
             object.promotions = [];
             for (var j = 0; j < message.promotions.length; ++j)
-                object.promotions[j] = $root.ProtoPromotion.toObject(message.promotions[j], options);
+                object.promotions[j] = $root.Promotion.toObject(message.promotions[j], options);
         }
         return object;
     };
 
     /**
-     * Converts this ProtoCreditCard to JSON.
+     * Converts this CreditCard to JSON.
      * @function toJSON
-     * @memberof ProtoCreditCard
+     * @memberof CreditCard
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    ProtoCreditCard.prototype.toJSON = function toJSON() {
+    CreditCard.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    return ProtoCreditCard;
+    return CreditCard;
 })();
 
-$root.ProtoPromotion = (function() {
+$root.Promotion = (function() {
 
     /**
-     * Properties of a ProtoPromotion.
-     * @exports IProtoPromotion
-     * @interface IProtoPromotion
-     * @property {string|null} [id] ProtoPromotion id
-     * @property {string|null} [displayName] ProtoPromotion displayName
-     * @property {IProtoShoppingCategory|null} [category] ProtoPromotion category
+     * Properties of a Promotion.
+     * @exports IPromotion
+     * @interface IPromotion
+     * @property {string|null} [id] Promotion id
+     * @property {string|null} [displayName] Promotion displayName
+     * @property {IShoppingCategory|null} [category] Promotion category
      */
 
     /**
-     * Constructs a new ProtoPromotion.
-     * @exports ProtoPromotion
-     * @classdesc Represents a ProtoPromotion.
-     * @implements IProtoPromotion
+     * Constructs a new Promotion.
+     * @exports Promotion
+     * @classdesc Represents a Promotion.
+     * @implements IPromotion
      * @constructor
-     * @param {IProtoPromotion=} [properties] Properties to set
+     * @param {IPromotion=} [properties] Properties to set
      */
-    function ProtoPromotion(properties) {
+    function Promotion(properties) {
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
@@ -290,51 +290,51 @@ $root.ProtoPromotion = (function() {
     }
 
     /**
-     * ProtoPromotion id.
+     * Promotion id.
      * @member {string} id
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @instance
      */
-    ProtoPromotion.prototype.id = "";
+    Promotion.prototype.id = "";
 
     /**
-     * ProtoPromotion displayName.
+     * Promotion displayName.
      * @member {string} displayName
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @instance
      */
-    ProtoPromotion.prototype.displayName = "";
+    Promotion.prototype.displayName = "";
 
     /**
-     * ProtoPromotion category.
-     * @member {IProtoShoppingCategory|null|undefined} category
-     * @memberof ProtoPromotion
+     * Promotion category.
+     * @member {IShoppingCategory|null|undefined} category
+     * @memberof Promotion
      * @instance
      */
-    ProtoPromotion.prototype.category = null;
+    Promotion.prototype.category = null;
 
     /**
-     * Creates a new ProtoPromotion instance using the specified properties.
+     * Creates a new Promotion instance using the specified properties.
      * @function create
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @static
-     * @param {IProtoPromotion=} [properties] Properties to set
-     * @returns {ProtoPromotion} ProtoPromotion instance
+     * @param {IPromotion=} [properties] Properties to set
+     * @returns {Promotion} Promotion instance
      */
-    ProtoPromotion.create = function create(properties) {
-        return new ProtoPromotion(properties);
+    Promotion.create = function create(properties) {
+        return new Promotion(properties);
     };
 
     /**
-     * Encodes the specified ProtoPromotion message. Does not implicitly {@link ProtoPromotion.verify|verify} messages.
+     * Encodes the specified Promotion message. Does not implicitly {@link Promotion.verify|verify} messages.
      * @function encode
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @static
-     * @param {IProtoPromotion} message ProtoPromotion message or plain object to encode
+     * @param {IPromotion} message Promotion message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    ProtoPromotion.encode = function encode(message, writer) {
+    Promotion.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
         if (message.id != null && message.hasOwnProperty("id"))
@@ -342,38 +342,38 @@ $root.ProtoPromotion = (function() {
         if (message.displayName != null && message.hasOwnProperty("displayName"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
         if (message.category != null && message.hasOwnProperty("category"))
-            $root.ProtoShoppingCategory.encode(message.category, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            $root.ShoppingCategory.encode(message.category, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
         return writer;
     };
 
     /**
-     * Encodes the specified ProtoPromotion message, length delimited. Does not implicitly {@link ProtoPromotion.verify|verify} messages.
+     * Encodes the specified Promotion message, length delimited. Does not implicitly {@link Promotion.verify|verify} messages.
      * @function encodeDelimited
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @static
-     * @param {IProtoPromotion} message ProtoPromotion message or plain object to encode
+     * @param {IPromotion} message Promotion message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    ProtoPromotion.encodeDelimited = function encodeDelimited(message, writer) {
+    Promotion.encodeDelimited = function encodeDelimited(message, writer) {
         return this.encode(message, writer).ldelim();
     };
 
     /**
-     * Decodes a ProtoPromotion message from the specified reader or buffer.
+     * Decodes a Promotion message from the specified reader or buffer.
      * @function decode
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
      * @param {number} [length] Message length if known beforehand
-     * @returns {ProtoPromotion} ProtoPromotion
+     * @returns {Promotion} Promotion
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    ProtoPromotion.decode = function decode(reader, length) {
+    Promotion.decode = function decode(reader, length) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ProtoPromotion();
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Promotion();
         while (reader.pos < end) {
             var tag = reader.uint32();
             switch (tag >>> 3) {
@@ -384,7 +384,7 @@ $root.ProtoPromotion = (function() {
                 message.displayName = reader.string();
                 break;
             case 3:
-                message.category = $root.ProtoShoppingCategory.decode(reader, reader.uint32());
+                message.category = $root.ShoppingCategory.decode(reader, reader.uint32());
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -395,30 +395,30 @@ $root.ProtoPromotion = (function() {
     };
 
     /**
-     * Decodes a ProtoPromotion message from the specified reader or buffer, length delimited.
+     * Decodes a Promotion message from the specified reader or buffer, length delimited.
      * @function decodeDelimited
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {ProtoPromotion} ProtoPromotion
+     * @returns {Promotion} Promotion
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    ProtoPromotion.decodeDelimited = function decodeDelimited(reader) {
+    Promotion.decodeDelimited = function decodeDelimited(reader) {
         if (!(reader instanceof $Reader))
             reader = new $Reader(reader);
         return this.decode(reader, reader.uint32());
     };
 
     /**
-     * Verifies a ProtoPromotion message.
+     * Verifies a Promotion message.
      * @function verify
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @static
      * @param {Object.<string,*>} message Plain object to verify
      * @returns {string|null} `null` if valid, otherwise the reason why it is not
      */
-    ProtoPromotion.verify = function verify(message) {
+    Promotion.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
         if (message.id != null && message.hasOwnProperty("id"))
@@ -428,7 +428,7 @@ $root.ProtoPromotion = (function() {
             if (!$util.isString(message.displayName))
                 return "displayName: string expected";
         if (message.category != null && message.hasOwnProperty("category")) {
-            var error = $root.ProtoShoppingCategory.verify(message.category);
+            var error = $root.ShoppingCategory.verify(message.category);
             if (error)
                 return "category." + error;
         }
@@ -436,39 +436,39 @@ $root.ProtoPromotion = (function() {
     };
 
     /**
-     * Creates a ProtoPromotion message from a plain object. Also converts values to their respective internal types.
+     * Creates a Promotion message from a plain object. Also converts values to their respective internal types.
      * @function fromObject
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @static
      * @param {Object.<string,*>} object Plain object
-     * @returns {ProtoPromotion} ProtoPromotion
+     * @returns {Promotion} Promotion
      */
-    ProtoPromotion.fromObject = function fromObject(object) {
-        if (object instanceof $root.ProtoPromotion)
+    Promotion.fromObject = function fromObject(object) {
+        if (object instanceof $root.Promotion)
             return object;
-        var message = new $root.ProtoPromotion();
+        var message = new $root.Promotion();
         if (object.id != null)
             message.id = String(object.id);
         if (object.displayName != null)
             message.displayName = String(object.displayName);
         if (object.category != null) {
             if (typeof object.category !== "object")
-                throw TypeError(".ProtoPromotion.category: object expected");
-            message.category = $root.ProtoShoppingCategory.fromObject(object.category);
+                throw TypeError(".Promotion.category: object expected");
+            message.category = $root.ShoppingCategory.fromObject(object.category);
         }
         return message;
     };
 
     /**
-     * Creates a plain object from a ProtoPromotion message. Also converts values to other types if specified.
+     * Creates a plain object from a Promotion message. Also converts values to other types if specified.
      * @function toObject
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @static
-     * @param {ProtoPromotion} message ProtoPromotion
+     * @param {Promotion} message Promotion
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    ProtoPromotion.toObject = function toObject(message, options) {
+    Promotion.toObject = function toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -482,43 +482,43 @@ $root.ProtoPromotion = (function() {
         if (message.displayName != null && message.hasOwnProperty("displayName"))
             object.displayName = message.displayName;
         if (message.category != null && message.hasOwnProperty("category"))
-            object.category = $root.ProtoShoppingCategory.toObject(message.category, options);
+            object.category = $root.ShoppingCategory.toObject(message.category, options);
         return object;
     };
 
     /**
-     * Converts this ProtoPromotion to JSON.
+     * Converts this Promotion to JSON.
      * @function toJSON
-     * @memberof ProtoPromotion
+     * @memberof Promotion
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    ProtoPromotion.prototype.toJSON = function toJSON() {
+    Promotion.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    return ProtoPromotion;
+    return Promotion;
 })();
 
-$root.ProtoShoppingCategory = (function() {
+$root.ShoppingCategory = (function() {
 
     /**
-     * Properties of a ProtoShoppingCategory.
-     * @exports IProtoShoppingCategory
-     * @interface IProtoShoppingCategory
-     * @property {string|null} [id] ProtoShoppingCategory id
-     * @property {string|null} [displayName] ProtoShoppingCategory displayName
+     * Properties of a ShoppingCategory.
+     * @exports IShoppingCategory
+     * @interface IShoppingCategory
+     * @property {string|null} [id] ShoppingCategory id
+     * @property {string|null} [displayName] ShoppingCategory displayName
      */
 
     /**
-     * Constructs a new ProtoShoppingCategory.
-     * @exports ProtoShoppingCategory
-     * @classdesc Represents a ProtoShoppingCategory.
-     * @implements IProtoShoppingCategory
+     * Constructs a new ShoppingCategory.
+     * @exports ShoppingCategory
+     * @classdesc Represents a ShoppingCategory.
+     * @implements IShoppingCategory
      * @constructor
-     * @param {IProtoShoppingCategory=} [properties] Properties to set
+     * @param {IShoppingCategory=} [properties] Properties to set
      */
-    function ProtoShoppingCategory(properties) {
+    function ShoppingCategory(properties) {
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
@@ -526,43 +526,43 @@ $root.ProtoShoppingCategory = (function() {
     }
 
     /**
-     * ProtoShoppingCategory id.
+     * ShoppingCategory id.
      * @member {string} id
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @instance
      */
-    ProtoShoppingCategory.prototype.id = "";
+    ShoppingCategory.prototype.id = "";
 
     /**
-     * ProtoShoppingCategory displayName.
+     * ShoppingCategory displayName.
      * @member {string} displayName
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @instance
      */
-    ProtoShoppingCategory.prototype.displayName = "";
+    ShoppingCategory.prototype.displayName = "";
 
     /**
-     * Creates a new ProtoShoppingCategory instance using the specified properties.
+     * Creates a new ShoppingCategory instance using the specified properties.
      * @function create
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @static
-     * @param {IProtoShoppingCategory=} [properties] Properties to set
-     * @returns {ProtoShoppingCategory} ProtoShoppingCategory instance
+     * @param {IShoppingCategory=} [properties] Properties to set
+     * @returns {ShoppingCategory} ShoppingCategory instance
      */
-    ProtoShoppingCategory.create = function create(properties) {
-        return new ProtoShoppingCategory(properties);
+    ShoppingCategory.create = function create(properties) {
+        return new ShoppingCategory(properties);
     };
 
     /**
-     * Encodes the specified ProtoShoppingCategory message. Does not implicitly {@link ProtoShoppingCategory.verify|verify} messages.
+     * Encodes the specified ShoppingCategory message. Does not implicitly {@link ShoppingCategory.verify|verify} messages.
      * @function encode
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @static
-     * @param {IProtoShoppingCategory} message ProtoShoppingCategory message or plain object to encode
+     * @param {IShoppingCategory} message ShoppingCategory message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    ProtoShoppingCategory.encode = function encode(message, writer) {
+    ShoppingCategory.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
         if (message.id != null && message.hasOwnProperty("id"))
@@ -573,33 +573,33 @@ $root.ProtoShoppingCategory = (function() {
     };
 
     /**
-     * Encodes the specified ProtoShoppingCategory message, length delimited. Does not implicitly {@link ProtoShoppingCategory.verify|verify} messages.
+     * Encodes the specified ShoppingCategory message, length delimited. Does not implicitly {@link ShoppingCategory.verify|verify} messages.
      * @function encodeDelimited
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @static
-     * @param {IProtoShoppingCategory} message ProtoShoppingCategory message or plain object to encode
+     * @param {IShoppingCategory} message ShoppingCategory message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    ProtoShoppingCategory.encodeDelimited = function encodeDelimited(message, writer) {
+    ShoppingCategory.encodeDelimited = function encodeDelimited(message, writer) {
         return this.encode(message, writer).ldelim();
     };
 
     /**
-     * Decodes a ProtoShoppingCategory message from the specified reader or buffer.
+     * Decodes a ShoppingCategory message from the specified reader or buffer.
      * @function decode
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
      * @param {number} [length] Message length if known beforehand
-     * @returns {ProtoShoppingCategory} ProtoShoppingCategory
+     * @returns {ShoppingCategory} ShoppingCategory
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    ProtoShoppingCategory.decode = function decode(reader, length) {
+    ShoppingCategory.decode = function decode(reader, length) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ProtoShoppingCategory();
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ShoppingCategory();
         while (reader.pos < end) {
             var tag = reader.uint32();
             switch (tag >>> 3) {
@@ -618,30 +618,30 @@ $root.ProtoShoppingCategory = (function() {
     };
 
     /**
-     * Decodes a ProtoShoppingCategory message from the specified reader or buffer, length delimited.
+     * Decodes a ShoppingCategory message from the specified reader or buffer, length delimited.
      * @function decodeDelimited
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {ProtoShoppingCategory} ProtoShoppingCategory
+     * @returns {ShoppingCategory} ShoppingCategory
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    ProtoShoppingCategory.decodeDelimited = function decodeDelimited(reader) {
+    ShoppingCategory.decodeDelimited = function decodeDelimited(reader) {
         if (!(reader instanceof $Reader))
             reader = new $Reader(reader);
         return this.decode(reader, reader.uint32());
     };
 
     /**
-     * Verifies a ProtoShoppingCategory message.
+     * Verifies a ShoppingCategory message.
      * @function verify
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @static
      * @param {Object.<string,*>} message Plain object to verify
      * @returns {string|null} `null` if valid, otherwise the reason why it is not
      */
-    ProtoShoppingCategory.verify = function verify(message) {
+    ShoppingCategory.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
         if (message.id != null && message.hasOwnProperty("id"))
@@ -654,17 +654,17 @@ $root.ProtoShoppingCategory = (function() {
     };
 
     /**
-     * Creates a ProtoShoppingCategory message from a plain object. Also converts values to their respective internal types.
+     * Creates a ShoppingCategory message from a plain object. Also converts values to their respective internal types.
      * @function fromObject
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @static
      * @param {Object.<string,*>} object Plain object
-     * @returns {ProtoShoppingCategory} ProtoShoppingCategory
+     * @returns {ShoppingCategory} ShoppingCategory
      */
-    ProtoShoppingCategory.fromObject = function fromObject(object) {
-        if (object instanceof $root.ProtoShoppingCategory)
+    ShoppingCategory.fromObject = function fromObject(object) {
+        if (object instanceof $root.ShoppingCategory)
             return object;
-        var message = new $root.ProtoShoppingCategory();
+        var message = new $root.ShoppingCategory();
         if (object.id != null)
             message.id = String(object.id);
         if (object.displayName != null)
@@ -673,15 +673,15 @@ $root.ProtoShoppingCategory = (function() {
     };
 
     /**
-     * Creates a plain object from a ProtoShoppingCategory message. Also converts values to other types if specified.
+     * Creates a plain object from a ShoppingCategory message. Also converts values to other types if specified.
      * @function toObject
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @static
-     * @param {ProtoShoppingCategory} message ProtoShoppingCategory
+     * @param {ShoppingCategory} message ShoppingCategory
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    ProtoShoppingCategory.toObject = function toObject(message, options) {
+    ShoppingCategory.toObject = function toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -697,17 +697,17 @@ $root.ProtoShoppingCategory = (function() {
     };
 
     /**
-     * Converts this ProtoShoppingCategory to JSON.
+     * Converts this ShoppingCategory to JSON.
      * @function toJSON
-     * @memberof ProtoShoppingCategory
+     * @memberof ShoppingCategory
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    ProtoShoppingCategory.prototype.toJSON = function toJSON() {
+    ShoppingCategory.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    return ProtoShoppingCategory;
+    return ShoppingCategory;
 })();
 
 module.exports = $root;

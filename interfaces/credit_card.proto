@@ -2,8 +2,8 @@ syntax = "proto3";
 
 import "promotion.proto";
 
-message ProtoCreditCard {
+message CreditCard {
   string id = 1;
   string display_name = 2;
-  repeated ProtoPromotion promotions = 3;
+  repeated Promotion promotions = 3;
 }

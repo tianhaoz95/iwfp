@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-message ProtoShoppingCategory {
+message ShoppingCategory {
   string id = 1;
   string display_name = 2;
 }

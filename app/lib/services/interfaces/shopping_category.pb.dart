@@ -9,27 +9,27 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class ProtoShoppingCategory extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ProtoShoppingCategory', createEmptyInstance: create)
+class ShoppingCategory extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ShoppingCategory', createEmptyInstance: create)
     ..aOS(1, 'id')
     ..aOS(2, 'displayName')
     ..hasRequiredFields = false
   ;
 
-  ProtoShoppingCategory._() : super();
-  factory ProtoShoppingCategory() => create();
-  factory ProtoShoppingCategory.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ProtoShoppingCategory.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ProtoShoppingCategory clone() => ProtoShoppingCategory()..mergeFromMessage(this);
-  ProtoShoppingCategory copyWith(void Function(ProtoShoppingCategory) updates) => super.copyWith((message) => updates(message as ProtoShoppingCategory));
+  ShoppingCategory._() : super();
+  factory ShoppingCategory() => create();
+  factory ShoppingCategory.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ShoppingCategory.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ShoppingCategory clone() => ShoppingCategory()..mergeFromMessage(this);
+  ShoppingCategory copyWith(void Function(ShoppingCategory) updates) => super.copyWith((message) => updates(message as ShoppingCategory));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ProtoShoppingCategory create() => ProtoShoppingCategory._();
-  ProtoShoppingCategory createEmptyInstance() => create();
-  static $pb.PbList<ProtoShoppingCategory> createRepeated() => $pb.PbList<ProtoShoppingCategory>();
+  static ShoppingCategory create() => ShoppingCategory._();
+  ShoppingCategory createEmptyInstance() => create();
+  static $pb.PbList<ShoppingCategory> createRepeated() => $pb.PbList<ShoppingCategory>();
   @$core.pragma('dart2js:noInline')
-  static ProtoShoppingCategory getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ProtoShoppingCategory>(create);
-  static ProtoShoppingCategory _defaultInstance;
+  static ShoppingCategory getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ShoppingCategory>(create);
+  static ShoppingCategory _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);

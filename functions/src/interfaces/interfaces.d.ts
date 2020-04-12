@@ -1,299 +1,299 @@
 import * as $protobuf from "protobufjs";
-/** Properties of a ProtoCreditCard. */
-export interface IProtoCreditCard {
+/** Properties of a CreditCard. */
+export interface ICreditCard {
 
-    /** ProtoCreditCard id */
+    /** CreditCard id */
     id?: (string|null);
 
-    /** ProtoCreditCard displayName */
+    /** CreditCard displayName */
     displayName?: (string|null);
 
-    /** ProtoCreditCard promotions */
-    promotions?: (IProtoPromotion[]|null);
+    /** CreditCard promotions */
+    promotions?: (IPromotion[]|null);
 }
 
-/** Represents a ProtoCreditCard. */
-export class ProtoCreditCard implements IProtoCreditCard {
+/** Represents a CreditCard. */
+export class CreditCard implements ICreditCard {
 
     /**
-     * Constructs a new ProtoCreditCard.
+     * Constructs a new CreditCard.
      * @param [properties] Properties to set
      */
-    constructor(properties?: IProtoCreditCard);
+    constructor(properties?: ICreditCard);
 
-    /** ProtoCreditCard id. */
+    /** CreditCard id. */
     public id: string;
 
-    /** ProtoCreditCard displayName. */
+    /** CreditCard displayName. */
     public displayName: string;
 
-    /** ProtoCreditCard promotions. */
-    public promotions: IProtoPromotion[];
+    /** CreditCard promotions. */
+    public promotions: IPromotion[];
 
     /**
-     * Creates a new ProtoCreditCard instance using the specified properties.
+     * Creates a new CreditCard instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns ProtoCreditCard instance
+     * @returns CreditCard instance
      */
-    public static create(properties?: IProtoCreditCard): ProtoCreditCard;
+    public static create(properties?: ICreditCard): CreditCard;
 
     /**
-     * Encodes the specified ProtoCreditCard message. Does not implicitly {@link ProtoCreditCard.verify|verify} messages.
-     * @param message ProtoCreditCard message or plain object to encode
+     * Encodes the specified CreditCard message. Does not implicitly {@link CreditCard.verify|verify} messages.
+     * @param message CreditCard message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: IProtoCreditCard, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: ICreditCard, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified ProtoCreditCard message, length delimited. Does not implicitly {@link ProtoCreditCard.verify|verify} messages.
-     * @param message ProtoCreditCard message or plain object to encode
+     * Encodes the specified CreditCard message, length delimited. Does not implicitly {@link CreditCard.verify|verify} messages.
+     * @param message CreditCard message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: IProtoCreditCard, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: ICreditCard, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a ProtoCreditCard message from the specified reader or buffer.
+     * Decodes a CreditCard message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns ProtoCreditCard
+     * @returns CreditCard
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ProtoCreditCard;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CreditCard;
 
     /**
-     * Decodes a ProtoCreditCard message from the specified reader or buffer, length delimited.
+     * Decodes a CreditCard message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns ProtoCreditCard
+     * @returns CreditCard
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ProtoCreditCard;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CreditCard;
 
     /**
-     * Verifies a ProtoCreditCard message.
+     * Verifies a CreditCard message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a ProtoCreditCard message from a plain object. Also converts values to their respective internal types.
+     * Creates a CreditCard message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns ProtoCreditCard
+     * @returns CreditCard
      */
-    public static fromObject(object: { [k: string]: any }): ProtoCreditCard;
+    public static fromObject(object: { [k: string]: any }): CreditCard;
 
     /**
-     * Creates a plain object from a ProtoCreditCard message. Also converts values to other types if specified.
-     * @param message ProtoCreditCard
+     * Creates a plain object from a CreditCard message. Also converts values to other types if specified.
+     * @param message CreditCard
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: ProtoCreditCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: CreditCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this ProtoCreditCard to JSON.
+     * Converts this CreditCard to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
 }
 
-/** Properties of a ProtoPromotion. */
-export interface IProtoPromotion {
+/** Properties of a Promotion. */
+export interface IPromotion {
 
-    /** ProtoPromotion id */
+    /** Promotion id */
     id?: (string|null);
 
-    /** ProtoPromotion displayName */
+    /** Promotion displayName */
     displayName?: (string|null);
 
-    /** ProtoPromotion category */
-    category?: (IProtoShoppingCategory|null);
+    /** Promotion category */
+    category?: (IShoppingCategory|null);
 }
 
-/** Represents a ProtoPromotion. */
-export class ProtoPromotion implements IProtoPromotion {
+/** Represents a Promotion. */
+export class Promotion implements IPromotion {
 
     /**
-     * Constructs a new ProtoPromotion.
+     * Constructs a new Promotion.
      * @param [properties] Properties to set
      */
-    constructor(properties?: IProtoPromotion);
+    constructor(properties?: IPromotion);
 
-    /** ProtoPromotion id. */
+    /** Promotion id. */
     public id: string;
 
-    /** ProtoPromotion displayName. */
+    /** Promotion displayName. */
     public displayName: string;
 
-    /** ProtoPromotion category. */
-    public category?: (IProtoShoppingCategory|null);
+    /** Promotion category. */
+    public category?: (IShoppingCategory|null);
 
     /**
-     * Creates a new ProtoPromotion instance using the specified properties.
+     * Creates a new Promotion instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns ProtoPromotion instance
+     * @returns Promotion instance
      */
-    public static create(properties?: IProtoPromotion): ProtoPromotion;
+    public static create(properties?: IPromotion): Promotion;
 
     /**
-     * Encodes the specified ProtoPromotion message. Does not implicitly {@link ProtoPromotion.verify|verify} messages.
-     * @param message ProtoPromotion message or plain object to encode
+     * Encodes the specified Promotion message. Does not implicitly {@link Promotion.verify|verify} messages.
+     * @param message Promotion message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: IProtoPromotion, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: IPromotion, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified ProtoPromotion message, length delimited. Does not implicitly {@link ProtoPromotion.verify|verify} messages.
-     * @param message ProtoPromotion message or plain object to encode
+     * Encodes the specified Promotion message, length delimited. Does not implicitly {@link Promotion.verify|verify} messages.
+     * @param message Promotion message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: IProtoPromotion, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: IPromotion, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a ProtoPromotion message from the specified reader or buffer.
+     * Decodes a Promotion message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns ProtoPromotion
+     * @returns Promotion
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ProtoPromotion;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Promotion;
 
     /**
-     * Decodes a ProtoPromotion message from the specified reader or buffer, length delimited.
+     * Decodes a Promotion message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns ProtoPromotion
+     * @returns Promotion
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ProtoPromotion;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Promotion;
 
     /**
-     * Verifies a ProtoPromotion message.
+     * Verifies a Promotion message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a ProtoPromotion message from a plain object. Also converts values to their respective internal types.
+     * Creates a Promotion message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns ProtoPromotion
+     * @returns Promotion
      */
-    public static fromObject(object: { [k: string]: any }): ProtoPromotion;
+    public static fromObject(object: { [k: string]: any }): Promotion;
 
     /**
-     * Creates a plain object from a ProtoPromotion message. Also converts values to other types if specified.
-     * @param message ProtoPromotion
+     * Creates a plain object from a Promotion message. Also converts values to other types if specified.
+     * @param message Promotion
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: ProtoPromotion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: Promotion, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this ProtoPromotion to JSON.
+     * Converts this Promotion to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
 }
 
-/** Properties of a ProtoShoppingCategory. */
-export interface IProtoShoppingCategory {
+/** Properties of a ShoppingCategory. */
+export interface IShoppingCategory {
 
-    /** ProtoShoppingCategory id */
+    /** ShoppingCategory id */
     id?: (string|null);
 
-    /** ProtoShoppingCategory displayName */
+    /** ShoppingCategory displayName */
     displayName?: (string|null);
 }
 
-/** Represents a ProtoShoppingCategory. */
-export class ProtoShoppingCategory implements IProtoShoppingCategory {
+/** Represents a ShoppingCategory. */
+export class ShoppingCategory implements IShoppingCategory {
 
     /**
-     * Constructs a new ProtoShoppingCategory.
+     * Constructs a new ShoppingCategory.
      * @param [properties] Properties to set
      */
-    constructor(properties?: IProtoShoppingCategory);
+    constructor(properties?: IShoppingCategory);
 
-    /** ProtoShoppingCategory id. */
+    /** ShoppingCategory id. */
     public id: string;
 
-    /** ProtoShoppingCategory displayName. */
+    /** ShoppingCategory displayName. */
     public displayName: string;
 
     /**
-     * Creates a new ProtoShoppingCategory instance using the specified properties.
+     * Creates a new ShoppingCategory instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns ProtoShoppingCategory instance
+     * @returns ShoppingCategory instance
      */
-    public static create(properties?: IProtoShoppingCategory): ProtoShoppingCategory;
+    public static create(properties?: IShoppingCategory): ShoppingCategory;
 
     /**
-     * Encodes the specified ProtoShoppingCategory message. Does not implicitly {@link ProtoShoppingCategory.verify|verify} messages.
-     * @param message ProtoShoppingCategory message or plain object to encode
+     * Encodes the specified ShoppingCategory message. Does not implicitly {@link ShoppingCategory.verify|verify} messages.
+     * @param message ShoppingCategory message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: IProtoShoppingCategory, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: IShoppingCategory, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified ProtoShoppingCategory message, length delimited. Does not implicitly {@link ProtoShoppingCategory.verify|verify} messages.
-     * @param message ProtoShoppingCategory message or plain object to encode
+     * Encodes the specified ShoppingCategory message, length delimited. Does not implicitly {@link ShoppingCategory.verify|verify} messages.
+     * @param message ShoppingCategory message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: IProtoShoppingCategory, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: IShoppingCategory, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a ProtoShoppingCategory message from the specified reader or buffer.
+     * Decodes a ShoppingCategory message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns ProtoShoppingCategory
+     * @returns ShoppingCategory
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ProtoShoppingCategory;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ShoppingCategory;
 
     /**
-     * Decodes a ProtoShoppingCategory message from the specified reader or buffer, length delimited.
+     * Decodes a ShoppingCategory message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns ProtoShoppingCategory
+     * @returns ShoppingCategory
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ProtoShoppingCategory;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ShoppingCategory;
 
     /**
-     * Verifies a ProtoShoppingCategory message.
+     * Verifies a ShoppingCategory message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a ProtoShoppingCategory message from a plain object. Also converts values to their respective internal types.
+     * Creates a ShoppingCategory message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns ProtoShoppingCategory
+     * @returns ShoppingCategory
      */
-    public static fromObject(object: { [k: string]: any }): ProtoShoppingCategory;
+    public static fromObject(object: { [k: string]: any }): ShoppingCategory;
 
     /**
-     * Creates a plain object from a ProtoShoppingCategory message. Also converts values to other types if specified.
-     * @param message ProtoShoppingCategory
+     * Creates a plain object from a ShoppingCategory message. Also converts values to other types if specified.
+     * @param message ShoppingCategory
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: ProtoShoppingCategory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: ShoppingCategory, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this ProtoShoppingCategory to JSON.
+     * Converts this ShoppingCategory to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
