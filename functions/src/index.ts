@@ -14,21 +14,21 @@ import {
   CardRemovalRequest,
   CardEditRequest,
   AddPromoRequest,
-  RemovePromoRequest
+  RemovePromoRequest,
 } from "./config/typedefs";
 import {
   parseCardCreationRequest,
   parseCardRemovalRequest,
-  parseCardEditRequest
+  parseCardEditRequest,
 } from "./util/parsers/card";
 import {
   parseAddPromoRequest,
-  parseRemovePromoRequest
+  parseRemovePromoRequest,
 } from "./util/parsers/promo";
 
 const provider = new Provider();
 const corsHandler = cors({
-  origin: true
+  origin: true,
 });
 
 export const addCreditCard = functions.https.onCall(async (data, fbContext) => {
@@ -201,26 +201,30 @@ export const getCreditCards = functions.https.onCall(
   }
 );
 
-export const httpGetCreditCards = functions.https.onRequest(async (req, res) => {
-  if (req.method !== "GET") {
-    console.log("Get cards only accepts GET request");
-    return corsHandler(req, res, () => {
-      res.sendStatus(403);
-    });
+export const httpGetCreditCards = functions.https.onRequest(
+  async (req, res) => {
+    if (req.method !== "GET") {
+      console.log("Get cards only accepts GET request");
+      return corsHandler(req, res, () => {
+        res.sendStatus(403);
+      });
+    }
+    const context: FunctionContext = await provider.token2context(
+      req.query.token
+    );
+    try {
+      const response = await getCreditCardHandler(req.body, context, provider);
+      return corsHandler(req, res, () => {
+        res.send(response);
+      });
+    } catch (err) {
+      console.log(JSON.stringify(err));
+      return corsHandler(req, res, () => {
+        res.sendStatus(500);
+      });
+    }
   }
-  const context: FunctionContext = await provider.token2context(req.query.token);
-  try {
-    const response = await getCreditCardHandler(req.body, context, provider);
-    return corsHandler(req, res, () => {
-      res.send(response);
-    });
-  } catch (err) {
-    console.log(JSON.stringify(err));
-    return corsHandler(req, res, () => {
-      res.sendStatus(500);
-    });
-  }
-});
+);
 
 export const removeUser = functions.https.onCall(async (data, fbContext) => {
   const context: FunctionContext = provider.fbContext2context(fbContext);

@@ -21,4 +21,3 @@ update_configs:
       - "tianhaoz95"
     default_labels:
       - "api dependency update"
-      

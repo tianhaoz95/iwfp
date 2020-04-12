@@ -11,10 +11,10 @@ github:
     addBadge: true
     addLabel: true
 tasks:
-- command: |
-    mkdir -p /home/gitpod/.android
-    touch /home/gitpod/.android/repositories.cfg
-    export PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/bin:$PATH
+  - command: |
+      mkdir -p /home/gitpod/.android
+      touch /home/gitpod/.android/repositories.cfg
+      export PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/bin:$PATH
 
 vscode:
   extensions:

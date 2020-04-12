@@ -17,7 +17,7 @@ async function addCreditCardHandler(
     } else {
       const cardName: string = data.name;
       const status = await cardRef.set({
-        card_name: cardName
+        card_name: cardName,
       });
       return status;
     }

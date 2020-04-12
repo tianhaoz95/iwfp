@@ -16,7 +16,7 @@ describe("uid getter tests", () => {
     const token = instance(sampleToken);
     context.auth = {
       uid: "non_emulated_uid",
-      token: token
+      token: token,
     };
     expect(getUserUid(context, undefined)).toMatch("non_emulated_uid");
   });
@@ -26,7 +26,7 @@ describe("uid getter tests", () => {
     const token = instance(sampleToken);
     context.auth = {
       uid: "non_emulated_uid",
-      token: token
+      token: token,
     };
     expect(getUserUid(context, "true")).toMatch("test_user");
   });

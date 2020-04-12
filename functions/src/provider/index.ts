@@ -11,7 +11,7 @@ class Provider {
   constructor() {
     if (process.env.FUNCTIONS_EMULATOR) {
       const firebaseConfig = {
-        projectId: "iwfpapp"
+        projectId: "iwfpapp",
       };
       admin.initializeApp(firebaseConfig);
     } else {
@@ -22,7 +22,7 @@ class Provider {
       this.db.settings({
         ssl: false,
         host: "localhost:8080",
-        servicePath: undefined
+        servicePath: undefined,
       });
     }
     this.root = this.db.collection("channel").doc("production-v1");
@@ -51,7 +51,7 @@ class Provider {
   ): FunctionContext {
     const context: FunctionContext = {
       authenticated: false,
-      uid: "na"
+      uid: "na",
     };
     if (process.env.FUNCTIONS_EMULATOR) {
       context.authenticated = true;
@@ -69,7 +69,7 @@ class Provider {
   async token2context(token: string): Promise<FunctionContext> {
     const context: FunctionContext = {
       authenticated: false,
-      uid: "na"
+      uid: "na",
     };
     if (process.env.FUNCTIONS_EMULATOR) {
       context.authenticated = true;

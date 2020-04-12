@@ -16,7 +16,7 @@ async function editCreditCardHandler(
     } else {
       const creditCardName: string = data.name;
       await cardRef.set({
-        card_name: creditCardName
+        card_name: creditCardName,
       });
     }
   } else {
