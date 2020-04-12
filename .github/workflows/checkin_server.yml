@@ -10,6 +10,7 @@ on:
       - "fix/*"
       - "chore/*"
       - "actions/checkin-server__*"
+      - "actions/server-refactor__*"
     paths:
       - "iwfpapi/*"
       - ".github/workflows/checkin_server.yml"
@@ -34,11 +35,11 @@ jobs:
       - name: install firebase CLI
         run: npm install -g firebase-tools
       - name: install dependencies
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm install
       - name: lint code
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm run lint
       - name: run tests
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm run e2e

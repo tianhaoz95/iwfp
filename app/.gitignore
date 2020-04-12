@@ -78,4 +78,5 @@
 /.flutter-plugins
 /.flutter-plugins-dependencies
 
-/coverage/
+/coverage
+/doc

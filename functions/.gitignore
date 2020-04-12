@@ -10,4 +10,8 @@ typings/
 node_modules/
 
 # Generated documentation
-docs/
+/docs
+/coverage
+/lib
+/firestore-debug.log
+/firebase-debug.log

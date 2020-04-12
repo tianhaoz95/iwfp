@@ -10,7 +10,7 @@
     "start": "npm run shell",
     "test": "jest",
     "e2e": "npm run build && firebase emulators:exec --only functions,firestore \"npm test\"",
-    "device": "npm run build && firebase emulators:exec --only functions,firestore \"cd ../../app && flutter drive --target=test_driver/emulator.dart\"",
+    "device": "npm run build && firebase emulators:exec --only functions,firestore \"cd ../app && flutter drive --target=test_driver/emulator.dart\"",
     "emulator": "npm run build && firebase emulators:start --only firestore,functions",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"

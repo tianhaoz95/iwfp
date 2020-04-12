@@ -1,0 +1,15 @@
+{
+  "name": "iwfp-project",
+  "version": "0.0.1",
+  "description": "Iwfp project site.",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": "https://github.com/tianhaoz95/iwfp",
+  "author": "Tianhao Zhou",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.4.0"
+  }
+}

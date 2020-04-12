@@ -8,14 +8,14 @@ update_configs:
     default_labels:
       - "gem dependency update"
   - package_manager: "javascript"
-    directory: "/iwfphome"
+    directory: "site"
     update_schedule: "live"
     default_reviewers:
       - "tianhaoz95"
     default_labels:
       - "docs dependency update"
   - package_manager: "javascript"
-    directory: "/iwfpapi/functions"
+    directory: "functions"
     update_schedule: "live"
     default_reviewers:
       - "tianhaoz95"

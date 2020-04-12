@@ -20,16 +20,16 @@ jobs:
       - name: install Firebase CLI
         run: npm install -g firebase-tools
       - name: install dependencies
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm install
       - name: lint test
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm run lint
       - name: build test
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm run build
       - name: end to end test
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm run e2e
   build-server-docs:
     name: build server docs
@@ -40,10 +40,10 @@ jobs:
         with:
           node-version: '12.16.2'
       - name: install dependencies
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm install
       - name: build docs
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm run docs
   build-app-docs:
     name: build app docs
@@ -171,13 +171,13 @@ jobs:
           )
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
       - name: install server dependencies
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm install
       - name: install server dependencies
         working-directory: ./app
         run: flutter pub get
       - name: run offline device end to end test
-        working-directory: ./iwfpapi/functions
+        working-directory: ./functions
         run: npm run device
       - name: upload online screenshot
         uses: actions/upload-artifact@master
