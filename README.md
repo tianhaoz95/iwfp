@@ -32,7 +32,7 @@ For the latest updates, please subscribe to [newsletter](https://jacksonz.substa
 
 ## Helpful Resource
 
-- [Project Site](https://iwfp-project.web.app/))
+- [Project Site](https://iwfp-project.web.app/)
 - [Blog](https://medium.com/i-want-5)
 - Apps
   - [Coverage Report](https://iwfp-app-cov.web.app/)
