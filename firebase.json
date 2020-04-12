@@ -12,20 +12,41 @@
       "npm --prefix \"$RESOURCE_DIR\" run build"
     ]
   },
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  },
+  "hosting": [
+    {
+      "site": "iwfpapp",
+      "public": "app/build/web",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "site": "iwfp-app-docs",
+      "public": "app/doc/api"
+    },
+    {
+      "site": "iwfp-app-cov",
+      "public": "app/coverage"
+    },
+    {
+      "site": "iwfp-server-docs",
+      "public": "functions/docs"
+    },
+    {
+      "site": "iwfp-project",
+      "public": "site/docs/.vuepress/dist",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
   "storage": {
     "rules": "storage.rules"
   },
