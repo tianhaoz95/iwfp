@@ -12,17 +12,13 @@ import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/screens/add_card/add_card_screen.dart';
 import 'package:iwfpapp/screens/remove_card/main.dart';
 import 'package:iwfpapp/screens/edit_card/main.dart';
-import 'package:iwfpapp/services/app_auth/base.dart';
-import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/screens/add_promo/main.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/config/themes/default.dart';
 
 class IwfpApp extends StatelessWidget {
   final DataBackend dataBackend;
-  final AppAuth auth;
-  final AppContext appContext;
-  const IwfpApp(this.dataBackend, this.auth, this.appContext);
+  const IwfpApp(this.dataBackend);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
