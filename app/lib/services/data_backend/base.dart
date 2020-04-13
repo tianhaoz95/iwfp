@@ -1,27 +1,30 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
-import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
-import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
 
 abstract class DataBackend {
   bool dataOutdated;
+  String token;
+  bool useEmulator;
   List<CreditCard> creditCards;
-  final AppContext appContext;
-  final AppAuth appAuth;
 
-  DataBackend(this.appContext, this.appAuth) {
+  DataBackend() {
     dataOutdated = true;
+    useEmulator = false;
+    token = 'unknown';
   }
 
-  @protected
-  bool useEmulator() {
-    return this.appContext.useEmulator;
+  void setUseEmulator(bool setVal) {
+    useEmulator = setVal;
+  }
+
+  void setToken(String tokenVal) {
+    token = tokenVal;
   }
 
   @protected

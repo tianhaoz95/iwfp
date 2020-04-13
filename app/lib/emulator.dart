@@ -14,8 +14,8 @@ void main() {
   Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
   AppAuth auth = getAppAuth(AppAuthType.FIREBASE_AUTH);
-  AppContext appContext = AppContext(emulator: true);
-  DataBackend dataBackend =
-      getDataBackend(BackendType.IN_APP, appContext, auth);
+  AppContext appContext = AppContext();
+  DataBackend dataBackend = getDataBackend(BackendType.IN_APP);
+  dataBackend.setUseEmulator(true);
   runApp(IwfpApp(dataBackend, auth, appContext));
 }

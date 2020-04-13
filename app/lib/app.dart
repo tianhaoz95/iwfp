@@ -32,7 +32,7 @@ class IwfpApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(appContext, dataBackend, auth),
-        '/sign_in': (context) => LoginScreen(auth, appContext, dataBackend),
+        '/sign_in': (context) => LoginScreen(),
         '/sign_up': (context) => SignUpScreen(auth),
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(dataBackend),

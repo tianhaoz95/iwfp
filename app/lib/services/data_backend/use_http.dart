@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:iwfpapp/services/app_auth/base.dart';
-import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/config/consts/endpoints.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
@@ -10,9 +8,12 @@ import 'package:http/http.dart' as http;
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 import 'package:iwfpapp/services/utilities/converters/token2get_cards_request.dart';
 
+/// Since the in-app SDK has all the support required, the
+/// http variant is currently deprecated. It will remain in
+/// the code for a while until we are sure that there is no
+/// future use cases for it.
 class UseHttpDataBackend extends DataBackend {
-  UseHttpDataBackend(AppContext appContext, AppAuth appAuth)
-      : super(appContext, appAuth);
+  UseHttpDataBackend() : super();
 
   @override
   Future<BackendResponse> addCreditCardToDatabase(
@@ -23,7 +24,6 @@ class UseHttpDataBackend extends DataBackend {
   @override
   Future<BackendResponse> addPromitionToDatabase(
       PromotionAdditionRequest req) async {
-    String token = await appAuth.generateToken();
     http.Response response = await http.post(AddPromotionEndpoint, body: {
       'cardUid': req.target,
       'promoName': req.promo.name,
@@ -47,7 +47,6 @@ class UseHttpDataBackend extends DataBackend {
 
   @override
   Future<BackendResponse> deleteAccountFromDatabase() async {
-    String token = await appAuth.generateToken();
     http.Response response =
         await http.post(DeleteAccountEndpoint, body: {'token': token});
     if (response.statusCode == 200) {
@@ -63,7 +62,6 @@ class UseHttpDataBackend extends DataBackend {
   /// authenticate the request.
   @override
   Future<List<CreditCard>> fetchCreditCardsFromDatabase() async {
-    String token = await appAuth.generateToken();
     String request = token2getCardsRequest(token);
     http.Response response = await http.get(request);
     if (response.statusCode == 200) {
@@ -80,7 +78,6 @@ class UseHttpDataBackend extends DataBackend {
   @override
   Future<BackendResponse> initCreditCardInDatabase(
       CreditCardInitRequest req) async {
-    String token = await appAuth.generateToken();
     http.Response response = await http.post(AddCreditCardEndpoint,
         body: {'id': req.card.id, 'name': req.card.name, 'token': token});
     if (response.statusCode == 200) {
@@ -96,7 +93,6 @@ class UseHttpDataBackend extends DataBackend {
   @override
   Future<BackendResponse> removeCreditCardFromDatabase(
       CreditCardRemovalRequest req) async {
-    String token = await appAuth.generateToken();
     http.Response response = await http
         .post(RemoveCreditCardEndpoint, body: {'id': req.id, 'token': token});
     if (response.statusCode == 200) {
@@ -110,7 +106,6 @@ class UseHttpDataBackend extends DataBackend {
   @override
   Future<BackendResponse> removePromotionFromDatabase(
       PromotionRemovalRequest req) async {
-    String token = await appAuth.generateToken();
     http.Response response = await http.post(RemovePromotionEndpoint,
         body: {'cardUid': req.target, 'promoId': req.id, 'token': token});
     if (response.statusCode == 200) {

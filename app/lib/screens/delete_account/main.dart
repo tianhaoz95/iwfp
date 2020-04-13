@@ -29,7 +29,7 @@ class _DeleteAccountScreen extends State<DeleteAccountScreen> {
       setState(() {
         status = SubmitScreenStatus.DONE;
       });
-      await widget.auth.handleSignOut();
+      await widget.auth.signOut();
       Navigator.pushReplacementNamed(context, '/sign_in');
     } else {
       setState(() {

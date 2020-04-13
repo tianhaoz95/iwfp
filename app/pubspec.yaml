@@ -33,6 +33,8 @@ dependencies:
   cloud_functions: ^0.4.2+3
   # protobuf support
   protobuf: ^1.0.1
+  # provider package for dependency injection
+  provider: ^4.0.5
 
 dev_dependencies:
   flutter_test:

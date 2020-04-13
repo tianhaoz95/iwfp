@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
 import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
-
-typedef Future<void> SignOutHandler();
+import 'package:provider/provider.dart';
 
 class AuthScreenSignedInContent extends StatelessWidget {
-  final SignOutHandler signOutHandler;
-  const AuthScreenSignedInContent({this.signOutHandler});
+  const AuthScreenSignedInContent();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +28,7 @@ class AuthScreenSignedInContent extends StatelessWidget {
           SizedBox(height: 25.0),
           LogoutButton(
             onPressedCallback: () async {
-              await this.signOutHandler();
+              await Provider.of<AppAuth>(context, listen: false).signOut();
             },
           )
         ],

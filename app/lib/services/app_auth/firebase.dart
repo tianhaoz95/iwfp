@@ -9,13 +9,8 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
   FirebaseAuth _auth = FirebaseAuth.instance;
   AuthResult authResult;
 
-  Future<void> handleSignInWithEmail(String email, String pwd) async {
-    try {
-      authResult =
-          await _auth.signInWithEmailAndPassword(email: email, password: pwd);
-    } catch (err) {
-      developer.log(err.toString(), name: 'iwfpapp.services.auth.sign_in');
-    }
+  Future<void> signInWithEmailHandler(String email, String pwd) async {
+    authResult = await _auth.signInWithEmailAndPassword(email: email, password: pwd);
   }
 
   Future<SignUpResponse> handleSignUpWithEmail(String email, String pwd) async {
@@ -36,7 +31,7 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
     return authResponse;
   }
 
-  Future<void> handleSignOut() async {
+  Future<void> signOutHandler() async {
     if (_auth.currentUser() == null) {
       developer.log('not signed in, exit',
           name: 'iwfpapp.services.auth.sign_out');
