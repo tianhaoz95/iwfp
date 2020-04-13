@@ -48,17 +48,8 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
     return true;
   }
 
-  Future<SendPasswordResetEmailResponse> handleSendPasswordResetEmail(
-      String email) async {
-    SendPasswordResetEmailResponse response =
-        SendPasswordResetEmailResponse(AuthStatus.SUCCESS);
-    try {
-      await _auth.sendPasswordResetEmail(email: email);
-      response.status = AuthStatus.SUCCESS;
-    } catch (err) {
-      response.status = AuthStatus.FAIL;
-    }
-    return response;
+  Future<void> sendPasswordResetEmailHandler(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
   }
 
   Future<String> generateToken() async {

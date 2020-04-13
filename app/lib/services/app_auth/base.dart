@@ -1,16 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/config/typedefs/auth_states.dart';
-import 'package:iwfpapp/services/config/typedefs/auth_status.dart';
+import 'package:iwfpapp/services/config/typedefs/reset_email_states.dart';
 
 abstract class AppAuth extends ChangeNotifier {
   AuthState authState;
+  ResetEmailState resetEmailState;
 
   AppAuth() {
     authState = AuthState.NOT_SIGNED_IN;
+    resetEmailState = ResetEmailState.PENDING;
   }
 
   AuthState getAuthState() {
     return authState;
+  }
+
+  ResetEmailState getResetEmailState() {
+    return resetEmailState;
   }
 
   Future<void> signInWithEmail(String email, String pwd) async {
@@ -78,6 +84,20 @@ abstract class AppAuth extends ChangeNotifier {
     }
   }
 
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      resetEmailState = ResetEmailState.SENDING;
+      notifyListeners();
+      await sendPasswordResetEmailHandler(email);
+      resetEmailState = ResetEmailState.SENT;
+      notifyListeners();
+    } catch (err) {
+      print(err.toString());
+      resetEmailState = ResetEmailState.ERROR;
+      notifyListeners();
+    }
+  }
+
   Future<void> signInWithEmailHandler(String email, String pwd);
 
   Future<void> signUpWithEmailHandler(String email, String pwd);
@@ -86,8 +106,7 @@ abstract class AppAuth extends ChangeNotifier {
 
   Future<bool> isSignedInHandler();
 
-  Future<SendPasswordResetEmailResponse> handleSendPasswordResetEmail(
-      String email);
+  Future<void> sendPasswordResetEmailHandler(String email);
 
   Future<String> generateToken();
 

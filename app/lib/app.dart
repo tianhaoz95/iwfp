@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/add_card_from_template/main.dart';
 import 'package:iwfpapp/screens/delete_account/main.dart';
-import 'package:iwfpapp/screens/forgot_password/main.dart';
+import 'package:iwfpapp/screens/forgot_password/forgot_password_screen.dart';
 import 'package:iwfpapp/screens/home/main.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/auth/auth_screen.dart';
@@ -45,7 +45,7 @@ class IwfpApp extends StatelessWidget {
         '/remove_promo': (context) => RemovePromoScreen(dataBackend),
         '/delete_account': (context) => DeleteAccountScreen(dataBackend, auth),
         '/screen_tester': (context) => ScreenTester(),
-        '/forgot_password': (context) => ForgotPasswordScreen(auth),
+        '/forgot_password': (context) => ForgotPasswordScreen(),
       },
     );
   }
