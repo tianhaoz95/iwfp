@@ -31,11 +31,11 @@ class IwfpApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => HomeScreen(appContext, dataBackend, auth),
+        '/': (context) => HomeScreen(),
         '/sign_in': (context) => LoginScreen(),
-        '/sign_up': (context) => SignUpScreen(auth),
+        '/sign_up': (context) => SignUpScreen(),
         '/placeholder': (context) => PlaceholderScreen(),
-        '/suggestion': (context) => SuggestionScreen(dataBackend),
+        '/suggestion': (context) => SuggestionScreen(),
         '/add_card': (context) => AddCardScreen(dataBackend),
         '/add_card_from_template': (context) =>
             AddCardFromTemplateScreen(dataBackend),

@@ -21,6 +21,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => appAuth),
+        ChangeNotifierProvider(create: (context) => dataBackend),
+        ChangeNotifierProvider(create: (context) => appContext),
       ],
       child: IwfpApp(dataBackend, appAuth, appContext),
     ),

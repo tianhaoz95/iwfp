@@ -7,16 +7,20 @@ import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
 
-abstract class DataBackend {
-  bool dataOutdated;
+abstract class DataBackend extends ChangeNotifier {
   String token;
   bool useEmulator;
+  DataBackendStatus status;
   List<CreditCard> creditCards;
 
   DataBackend() {
-    dataOutdated = true;
     useEmulator = false;
+    status = DataBackendStatus.OUTDATED;
     token = 'unknown';
+  }
+
+  DataBackendStatus getStatus() {
+    return status;
   }
 
   void setUseEmulator(bool setVal) {
@@ -27,47 +31,25 @@ abstract class DataBackend {
     token = tokenVal;
   }
 
-  @protected
-  Future<BackendResponse> deleteAccountFromDatabase();
-
-  @protected
-  Future<List<CreditCard>> fetchCreditCardsFromDatabase();
-
-  @protected
-  Future<BackendResponse> initCreditCardInDatabase(CreditCardInitRequest req);
-
-  @protected
-  Future<BackendResponse> addCreditCardToDatabase(
-      CreditCardAdditionRequest req);
-
-  @protected
-  Future<BackendResponse> removeCreditCardFromDatabase(
-      CreditCardRemovalRequest req);
-
-  @protected
-  Future<BackendResponse> addPromitionToDatabase(PromotionAdditionRequest req);
-
-  @protected
-  Future<BackendResponse> removePromotionFromDatabase(
-      PromotionRemovalRequest req);
-
-  Future<bool> shouldRefresh() async {
-    if (dataOutdated) {
+  bool shouldRefresh() {
+    if (status == DataBackendStatus.OUTDATED) {
       return true;
     }
     return false;
   }
 
-  Future<void> setShouldRefresh() async {
-    dataOutdated = true;
+  void setShouldRefresh() {
+    status = DataBackendStatus.OUTDATED;
+    notifyListeners();
   }
 
-  Future<void> setRefreshed() async {
-    dataOutdated = false;
+  void setRefreshed() {
+    status = DataBackendStatus.AVAILABLE;
+    notifyListeners();
   }
 
   Future<BackendResponse> forceRefreshCards() async {
-    await setShouldRefresh();
+    setShouldRefresh();
     BackendResponse response = await maybeRefreshCards();
     return response;
   }
@@ -75,13 +57,13 @@ abstract class DataBackend {
   Future<BackendResponse> maybeRefreshCards() async {
     BackendResponse response =
         BackendResponse(ResponseStatus.FAILURE, 'Not started');
-    bool refresh = await shouldRefresh();
+    bool refresh = shouldRefresh();
     if (refresh) {
       try {
         creditCards = await fetchCreditCardsFromDatabase();
         response.status = ResponseStatus.SUCCEESS;
         response.msg = 'n/a, fetch succeeded';
-        await setRefreshed();
+        setRefreshed();
       } on CloudFunctionsException catch (cloudFuncError) {
         response.status = ResponseStatus.FAILURE;
         response.msg = cloudFuncError.message;
@@ -98,7 +80,7 @@ abstract class DataBackend {
 
   Future<BackendResponse> initCreditCard(CreditCardInitRequest req) async {
     BackendResponse response = await initCreditCardInDatabase(req);
-    await setShouldRefresh();
+    setShouldRefresh();
     return response;
   }
 
@@ -126,25 +108,25 @@ abstract class DataBackend {
 
   Future<BackendResponse> addCreditCard(CreditCardAdditionRequest req) async {
     BackendResponse response = await addCreditCardToDatabase(req);
-    await setShouldRefresh();
+    setShouldRefresh();
     return response;
   }
 
   Future<BackendResponse> removeCreditCard(CreditCardRemovalRequest req) async {
     BackendResponse response = await removeCreditCardFromDatabase(req);
-    await setShouldRefresh();
+    setShouldRefresh();
     return response;
   }
 
   Future<BackendResponse> addPromotion(PromotionAdditionRequest req) async {
     BackendResponse response = await addPromitionToDatabase(req);
-    await setShouldRefresh();
+    setShouldRefresh();
     return response;
   }
 
   Future<BackendResponse> removePromotion(PromotionRemovalRequest req) async {
     BackendResponse response = await removePromotionFromDatabase(req);
-    await setShouldRefresh();
+    setShouldRefresh();
     return response;
   }
 
@@ -153,6 +135,10 @@ abstract class DataBackend {
     if (status.status == ResponseStatus.FAILURE) {
       return [];
     }
+    return getUniqueShoppingCategories(creditCards);
+  }
+
+  List<ShopCategory> getShopCategoriesSync() {
     return getUniqueShoppingCategories(creditCards);
   }
 
@@ -174,6 +160,10 @@ abstract class DataBackend {
     return creditCards;
   }
 
+  List<CreditCard> getCreditCardsSync() {
+    return creditCards;
+  }
+
   Future<List<CreditCard>> getRankedCreditCards(ShopCategory category) async {
     BackendResponse status = await maybeRefreshCards();
     if (status.status == ResponseStatus.FAILURE) {
@@ -183,8 +173,37 @@ abstract class DataBackend {
     return creditCards;
   }
 
+  List<CreditCard> getRankedCreditCardsSync(ShopCategory category) {
+    rankCards(creditCards, category);
+    return creditCards;
+  }
+
   Future<BackendResponse> deleteAccount() async {
     BackendResponse response = await deleteAccountFromDatabase();
     return response;
   }
+
+  @protected
+  Future<BackendResponse> deleteAccountFromDatabase();
+
+  @protected
+  Future<List<CreditCard>> fetchCreditCardsFromDatabase();
+
+  @protected
+  Future<BackendResponse> initCreditCardInDatabase(CreditCardInitRequest req);
+
+  @protected
+  Future<BackendResponse> addCreditCardToDatabase(
+      CreditCardAdditionRequest req);
+
+  @protected
+  Future<BackendResponse> removeCreditCardFromDatabase(
+      CreditCardRemovalRequest req);
+
+  @protected
+  Future<BackendResponse> addPromitionToDatabase(PromotionAdditionRequest req);
+
+  @protected
+  Future<BackendResponse> removePromotionFromDatabase(
+      PromotionRemovalRequest req);
 }

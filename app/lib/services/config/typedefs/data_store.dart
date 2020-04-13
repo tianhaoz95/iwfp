@@ -1,6 +1,13 @@
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 
+enum DataBackendStatus {
+  LOADING,
+  AVAILABLE,
+  OUTDATED,
+  ERROR
+}
+
 enum DataBackendType {
   IN_APP,
   HTTPS,

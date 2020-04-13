@@ -1,52 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/screens/suggestion/entries_error.dart';
+import 'package:iwfpapp/screens/suggestion/entries_outdated.dart';
+import 'package:iwfpapp/screens/suggestion/fetching_entries.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/widgets/credit_cards/basic.dart';
+import 'package:iwfpapp/widgets/generic/unknown_error.dart';
+import 'package:provider/provider.dart';
 
-class SuggestionEntries extends StatefulWidget {
+class SuggestionEntries extends StatelessWidget {
   final ShopCategory category;
-  final DataBackend dataBackend;
-  const SuggestionEntries(this.category, this.dataBackend, {Key key})
-      : super(key: key);
-  @override
-  _SuggestionEntries createState() {
-    return _SuggestionEntries();
-  }
-}
-
-class _SuggestionEntries extends State<SuggestionEntries> {
-  Future<List<CreditCard>> cards;
-
-  @override
-  void initState() {
-    super.initState();
-    cards = widget.dataBackend.getRankedCreditCards(widget.category);
-  }
-
+  const SuggestionEntries(this.category);
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<CreditCard>>(
-      future: cards,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Container(
-              key: Key('suggested_categories'),
-              child: Center(
-                  child: ListView(
-                children: snapshot.data.map((CreditCard card) {
-                  /// TOOD(tianhaoz95): here the highest corresponding
-                  /// reward rate should show with the card.
-                  return BasicCreditCard(card, Colors.teal, false,
-                      targetCategory: widget.category);
-                }).toList(),
-              )));
-        } else if (snapshot.hasError) {
-          return Center(child: Text('error'));
+    return Consumer<DataBackend>(
+      builder: (context, backend, child) {
+        switch (backend.getStatus()) {
+          case DataBackendStatus.AVAILABLE:
+            return Container(
+                key: Key('suggested_categories'),
+                child: Center(
+                    child: ListView(
+                  children: backend
+                      .getRankedCreditCardsSync(this.category)
+                      .map((CreditCard card) {
+                    return BasicCreditCard(card, Colors.teal, false,
+                        targetCategory: this.category);
+                  }).toList(),
+                )));
+          case DataBackendStatus.ERROR:
+            return EntriesError();
+          case DataBackendStatus.OUTDATED:
+            return EntriesOutdated();
+          case DataBackendStatus.LOADING:
+            return FetchingEntries();
+          default:
+            return UnknownError();
         }
-        return Center(
-          child: CircularProgressIndicator(),
-        );
       },
     );
   }

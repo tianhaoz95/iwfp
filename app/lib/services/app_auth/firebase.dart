@@ -13,22 +13,12 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
     authResult = await _auth.signInWithEmailAndPassword(email: email, password: pwd);
   }
 
-  Future<SignUpResponse> handleSignUpWithEmail(String email, String pwd) async {
-    SignUpResponse authResponse = SignUpResponse(SignUpStatus.UNKNOWN, 'na');
-    try {
-      AuthResult res = await _auth.createUserWithEmailAndPassword(
-          email: email, password: pwd);
-      if (res.user != null) {
-        authResponse.status = SignUpStatus.SUCCESS;
-      } else {
-        authResponse.status = SignUpStatus.FAIL;
-        authResponse.msg = 'Returned user is null';
-      }
-    } catch (err) {
-      authResponse.status = SignUpStatus.UNKNOWN;
-      authResponse.msg = err.toString();
+  Future<void> signUpWithEmailHandler(String email, String pwd) async {
+    AuthResult res = await _auth.createUserWithEmailAndPassword(
+        email: email, password: pwd);
+    if (res.user == null) {
+      throw 'whoops failed';
     }
-    return authResponse;
   }
 
   Future<void> signOutHandler() async {
@@ -47,7 +37,7 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
     }
   }
 
-  Future<bool> isSignedIn() async {
+  Future<bool> isSignedInHandler() async {
     FirebaseUser user = await _auth.currentUser();
     if (kIsWeb && user == null) {
       user = await _auth.onAuthStateChanged.first;

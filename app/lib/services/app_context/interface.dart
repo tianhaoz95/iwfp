@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/config/typedefs/runtime_types.dart';
 
-class AppContext {
+class AppContext extends ChangeNotifier {
   bool isDev = false;
   AppContext() {
     setInitialDevMode();

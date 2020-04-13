@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/home/content/user/developer/developer_section.dart';
-import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
+import 'package:provider/provider.dart';
 
 class UserSettings extends StatefulWidget {
-  final AppContext appContext;
-  final AppAuth appAuth;
-  const UserSettings(this.appContext, this.appAuth);
+  const UserSettings();
   @override
   _UserSettings createState() {
     return _UserSettings();
@@ -16,14 +14,17 @@ class UserSettings extends StatefulWidget {
 
 class _UserSettings extends State<UserSettings> {
   bool nextIsDevFlagVal = false;
+
   @override
-  void initState() {
-    super.initState();
-    nextIsDevFlagVal = widget.appContext.isDevMode();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    nextIsDevFlagVal =
+        Provider.of<AppContext>(context, listen: false).isDevMode();
   }
 
   handleUpdateSettings(BuildContext context) {
-    widget.appContext.setRunningMode(nextIsDevFlagVal);
+    Provider.of<AppContext>(context, listen: false)
+        .setRunningMode(nextIsDevFlagVal);
     Navigator.pushReplacementNamed(context, '/');
   }
 
@@ -38,8 +39,7 @@ class _UserSettings extends State<UserSettings> {
                 SizedBox(
                   height: 5.0,
                 ),
-                DeveloperSection(widget.appAuth, widget.appContext,
-                    this.handleUpdateSettings),
+                DeveloperSection(this.handleUpdateSettings),
                 Container(
                   child: Center(
                     child: Text('User Settings'),

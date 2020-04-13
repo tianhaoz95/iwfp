@@ -50,13 +50,41 @@ abstract class AppAuth extends ChangeNotifier {
     }
   }
 
+  Future<bool> isSignedIn() async {
+    bool isSignedIn = await isSignedInHandler();
+    if (isSignedIn) {
+      authState = AuthState.SIGNED_IN;
+    } else {
+      authState = AuthState.NOT_SIGNED_IN;
+    }
+    return isSignedIn;
+  }
+
+  Future<void> signUpWithEmail(String email, String pwd, String pwdConfirm) async {
+    if (pwd != pwdConfirm) {
+      authState = AuthState.ERROR;
+      notifyListeners();
+    }
+    try {
+      authState = AuthState.LOADING;
+      notifyListeners();
+      await signUpWithEmailHandler(email, pwd);
+      authState = AuthState.SIGNED_IN;
+      notifyListeners();
+    } catch (err) {
+      print(err.toString());
+      authState = AuthState.ERROR;
+      notifyListeners();
+    }
+  }
+
   Future<void> signInWithEmailHandler(String email, String pwd);
 
-  Future<SignUpResponse> handleSignUpWithEmail(String email, String pwd);
+  Future<void> signUpWithEmailHandler(String email, String pwd);
 
   Future<void> signOutHandler();
 
-  Future<bool> isSignedIn();
+  Future<bool> isSignedInHandler();
 
   Future<SendPasswordResetEmailResponse> handleSendPasswordResetEmail(
       String email);

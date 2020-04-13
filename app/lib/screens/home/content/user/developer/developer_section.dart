@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/home/content/user/developer/develop_card.dart';
 import 'package:iwfpapp/screens/home/content/user/developer/update_settings_btn.dart';
-import 'package:iwfpapp/services/app_auth/base.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
+import 'package:provider/provider.dart';
 
 typedef void DeveloperSettingsUpdator(BuildContext context);
 
 class DeveloperSection extends StatefulWidget {
-  final AppContext appContext;
-  final AppAuth appAuth;
   final DeveloperSettingsUpdator onDeveloperSettingsUpdate;
-  const DeveloperSection(
-      this.appAuth, this.appContext, this.onDeveloperSettingsUpdate);
+  const DeveloperSection(this.onDeveloperSettingsUpdate);
   @override
   _DeveloperSection createState() {
     return _DeveloperSection();
@@ -22,9 +19,10 @@ class _DeveloperSection extends State<DeveloperSection> {
   bool nextIsDevFlagVal = false;
 
   @override
-  void initState() {
-    super.initState();
-    nextIsDevFlagVal = widget.appContext.isDevMode();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    nextIsDevFlagVal =
+        Provider.of<AppContext>(context, listen: false).isDevMode();
   }
 
   @override
@@ -38,7 +36,9 @@ class _DeveloperSection extends State<DeveloperSection> {
             ),
           ),
           Divider(),
-          DevelopCard(widget.appContext.isDevMode(), (bool nextDevVal) {
+          DevelopCard(
+              Provider.of<AppContext>(context, listen: false).isDevMode(),
+              (bool nextDevVal) {
             nextIsDevFlagVal = nextDevVal;
           }),
           UpdateSettingsButton(widget.onDeveloperSettingsUpdate),
