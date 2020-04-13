@@ -41,25 +41,8 @@ class InAppDataBackend extends DataBackend {
   }
 
   @override
-  Future<BackendResponse> deleteAccountFromDatabase() async {
-    BackendResponse response =
-        BackendResponse(ResponseStatus.FAILURE, 'Not started');
-    try {
-      await deleteAccountCallable.call();
-      response.status = ResponseStatus.SUCCEESS;
-      return response;
-    } on CloudFunctionsException catch (cloudFuncError) {
-      response.status = ResponseStatus.FAILURE;
-      print('fetch card failed with cloud function error');
-      print(cloudFuncError.code);
-      print(cloudFuncError.message);
-      return response;
-    } catch (err) {
-      response.status = ResponseStatus.FAILURE;
-      response.msg = err.toString();
-      print(err.toString());
-      return response;
-    }
+  Future<void> deleteAccountFromDatabase() async {
+    await deleteAccountCallable.call();
   }
 
   @override

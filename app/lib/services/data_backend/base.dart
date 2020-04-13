@@ -11,16 +11,22 @@ abstract class DataBackend extends ChangeNotifier {
   String token;
   bool useEmulator;
   DataBackendStatus status;
+  DeleteAccountStatus deleteAccountStatus;
   List<CreditCard> creditCards;
 
   DataBackend() {
     useEmulator = false;
     status = DataBackendStatus.OUTDATED;
+    deleteAccountStatus = DeleteAccountStatus.PENDING;
     token = 'unknown';
   }
 
   DataBackendStatus getStatus() {
     return status;
+  }
+
+  DeleteAccountStatus getDeleteAccountStatus() {
+    return deleteAccountStatus;
   }
 
   void setUseEmulator(bool setVal) {
@@ -178,13 +184,27 @@ abstract class DataBackend extends ChangeNotifier {
     return creditCards;
   }
 
-  Future<BackendResponse> deleteAccount() async {
-    BackendResponse response = await deleteAccountFromDatabase();
-    return response;
+  Future<void> deleteAccount() async {
+    try {
+      deleteAccountStatus = DeleteAccountStatus.DELETEING;
+      notifyListeners();
+      await deleteAccountFromDatabase();
+      deleteAccountStatus = DeleteAccountStatus.DELETED;
+      notifyListeners();
+    } on CloudFunctionsException catch (cloudFuncError) {
+      print(cloudFuncError.code);
+      print(cloudFuncError.message);
+      deleteAccountStatus = DeleteAccountStatus.ERROR;
+      notifyListeners();
+    } catch (err) {
+      print(err.toString());
+      deleteAccountStatus = DeleteAccountStatus.ERROR;
+      notifyListeners();
+    }
   }
 
   @protected
-  Future<BackendResponse> deleteAccountFromDatabase();
+  Future<void> deleteAccountFromDatabase();
 
   @protected
   Future<List<CreditCard>> fetchCreditCardsFromDatabase();

@@ -46,14 +46,11 @@ class UseHttpDataBackend extends DataBackend {
   }
 
   @override
-  Future<BackendResponse> deleteAccountFromDatabase() async {
+  Future<void> deleteAccountFromDatabase() async {
     http.Response response =
         await http.post(DeleteAccountEndpoint, body: {'token': token});
-    if (response.statusCode == 200) {
-      return BackendResponse(ResponseStatus.SUCCEESS, 'na');
-    } else {
-      return BackendResponse(
-          ResponseStatus.FAILURE, response.statusCode.toString());
+    if (response.statusCode != 200) {
+      throw 'wtf';
     }
   }
 

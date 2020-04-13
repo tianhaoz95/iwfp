@@ -33,17 +33,23 @@ abstract class AppAuth extends ChangeNotifier {
     }
   }
 
-  Future<void> signOut() async {
+  Future<void> signOut({bool silent = false}) async {
     try {
       authState = AuthState.LOADING;
-      notifyListeners();
+      if (!silent) {
+        notifyListeners();
+      }
       await signOutHandler();
       authState = AuthState.NOT_SIGNED_IN;
-      notifyListeners();
+      if (!silent) {
+        notifyListeners();
+      }
     } catch (err) {
       print(err.toString());
       authState = AuthState.ERROR;
-      notifyListeners();
+      if (!silent) {
+        notifyListeners();
+      }
     }
   }
 

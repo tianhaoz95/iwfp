@@ -3,8 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/app_auth/base.dart';
 import 'dart:developer' as developer;
 
-import 'package:iwfpapp/services/config/typedefs/auth_status.dart';
-
 class AppAuthUsingFirebaseAuth extends AppAuth {
   FirebaseAuth _auth = FirebaseAuth.instance;
   AuthResult authResult;
@@ -23,17 +21,9 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
 
   Future<void> signOutHandler() async {
     if (_auth.currentUser() == null) {
-      developer.log('not signed in, exit',
-          name: 'iwfpapp.services.auth.sign_out');
+      throw 'already_signed_out';
     } else {
-      try {
-        developer.log('signing out...', name: 'iwfpapp.services.auth.sign_out');
-        await _auth.signOut();
-        developer.log('sign out completed',
-            name: 'iwfpapp.services.auth.sign_out');
-      } catch (err) {
-        developer.log(err.toString(), name: 'iwfpapp.services.auth.sign_out');
-      }
+      await _auth.signOut();
     }
   }
 
