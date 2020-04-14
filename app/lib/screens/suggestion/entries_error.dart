@@ -5,9 +5,7 @@ class EntriesError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: ListView(
-        children: [
-          Text('Error')
-        ],
+        children: [Text('Error')],
       ),
     );
   }

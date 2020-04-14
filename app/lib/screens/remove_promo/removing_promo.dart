@@ -9,5 +9,4 @@ class RemovingPromo extends StatelessWidget {
       ),
     );
   }
-  
 }

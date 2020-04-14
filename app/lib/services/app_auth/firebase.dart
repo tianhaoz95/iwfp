@@ -8,12 +8,13 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
   AuthResult authResult;
 
   Future<void> signInWithEmailHandler(String email, String pwd) async {
-    authResult = await _auth.signInWithEmailAndPassword(email: email, password: pwd);
+    authResult =
+        await _auth.signInWithEmailAndPassword(email: email, password: pwd);
   }
 
   Future<void> signUpWithEmailHandler(String email, String pwd) async {
-    AuthResult res = await _auth.createUserWithEmailAndPassword(
-        email: email, password: pwd);
+    AuthResult res =
+        await _auth.createUserWithEmailAndPassword(email: email, password: pwd);
     if (res.user == null) {
       throw 'whoops failed';
     }

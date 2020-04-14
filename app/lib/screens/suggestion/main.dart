@@ -26,8 +26,7 @@ class SuggestionScreen extends StatelessWidget {
           },
         ),
       ),
-      body: PreferredWidthContent(
-          child: SuggestionEntries(category)),
+      body: PreferredWidthContent(child: SuggestionEntries(category)),
     );
   }
 }

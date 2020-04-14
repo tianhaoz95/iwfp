@@ -8,8 +8,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Welcome')),
       key: Key('login_screen'),
-      body: PreferredWidthContent(
-          child: AuthScreenContent()),
+      body: PreferredWidthContent(child: AuthScreenContent()),
     );
   }
 }

@@ -5,9 +5,7 @@ class UnknownError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: ListView(
-        children: [
-          Text('Whoops! Unknown Error!')
-        ],
+        children: [Text('Whoops! Unknown Error!')],
       ),
     );
   }

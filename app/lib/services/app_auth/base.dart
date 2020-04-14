@@ -72,7 +72,8 @@ abstract class AppAuth extends ChangeNotifier {
     return isSignedIn;
   }
 
-  Future<void> signUpWithEmail(String email, String pwd, String pwdConfirm) async {
+  Future<void> signUpWithEmail(
+      String email, String pwd, String pwdConfirm) async {
     if (pwd != pwdConfirm) {
       authState = AuthState.ERROR;
       notifyListeners();

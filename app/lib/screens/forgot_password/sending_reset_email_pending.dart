@@ -11,9 +11,13 @@ class SendingResetEmailPending extends StatelessWidget {
       child: ListView(
         children: [
           Text('send email?'),
-          RaisedButton(onPressed: () {
-            Provider.of<AppAuth>(context, listen: false).sendPasswordResetEmail(this.email);
-          }, child: Text('send!'),)
+          RaisedButton(
+            onPressed: () {
+              Provider.of<AppAuth>(context, listen: false)
+                  .sendPasswordResetEmail(this.email);
+            },
+            child: Text('send!'),
+          )
         ],
       ),
     );

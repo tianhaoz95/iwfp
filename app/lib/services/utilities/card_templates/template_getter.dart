@@ -18,9 +18,3 @@ List<CreditCard> getLocalCreditCardTemplates() {
   ];
   return creditCardMetadataList;
 }
-
-/// Gets local and remote credit card templates and combines
-Future<List<CreditCard>> getCreditCardTemplates() async {
-  List<CreditCard> creditCardTemplateList = getLocalCreditCardTemplates();
-  return creditCardTemplateList;
-}

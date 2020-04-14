@@ -16,8 +16,7 @@ class UseHttpDataBackend extends DataBackend {
   UseHttpDataBackend() : super();
 
   @override
-  Future<void> addCreditCardToDatabase(
-      CreditCardAdditionRequest req) async {
+  Future<void> addCreditCardToDatabase(CreditCardAdditionRequest req) async {
     return;
   }
 
@@ -73,8 +72,7 @@ class UseHttpDataBackend extends DataBackend {
   }
 
   @override
-  Future<void> initCreditCardInDatabase(
-      CreditCardInitRequest req) async {
+  Future<void> initCreditCardInDatabase(CreditCardInitRequest req) async {
     http.Response response = await http.post(AddCreditCardEndpoint,
         body: {'id': req.card.id, 'name': req.card.name, 'token': token});
     if (response.statusCode != 200) {
@@ -95,8 +93,7 @@ class UseHttpDataBackend extends DataBackend {
   }
 
   @override
-  Future<void> removePromotionFromDatabase(
-      PromotionRemovalRequest req) async {
+  Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
     http.Response response = await http.post(RemovePromotionEndpoint,
         body: {'cardUid': req.target, 'promoId': req.id, 'token': token});
     if (response.statusCode != 200) {

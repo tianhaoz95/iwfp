@@ -47,19 +47,9 @@ class InAppDataBackend extends DataBackend {
 
   @override
   Future<List<CreditCard>> fetchCreditCardsFromDatabase() async {
-    try {
-      HttpsCallableResult result = await getCardsCallable.call();
-      List<CreditCard> fetchedCards = data2cards(result);
-      return fetchedCards;
-    } on CloudFunctionsException catch (cloudFuncError) {
-      print('fetch card failed with cloud function error');
-      print(cloudFuncError.code);
-      print(cloudFuncError.message);
-      return [];
-    } catch (err) {
-      print(err.toString());
-      return [];
-    }
+    HttpsCallableResult result = await getCardsCallable.call();
+    List<CreditCard> fetchedCards = data2cards(result);
+    return fetchedCards;
   }
 
   @override

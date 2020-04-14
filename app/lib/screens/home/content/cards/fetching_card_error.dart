@@ -5,9 +5,7 @@ class FetchingCardError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: ListView(
-        children: [
-          Text('Error Fetching Cards')
-        ],
+        children: [Text('Error Fetching Cards')],
       ),
     );
   }

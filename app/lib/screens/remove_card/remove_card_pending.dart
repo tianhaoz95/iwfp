@@ -64,7 +64,8 @@ class RemoveCardPending extends StatelessWidget {
                 child: Text('Delete', style: TextStyle(color: Colors.white)),
               ),
               onPressed: () {
-                Provider.of<DataBackend>(context, listen: false).removeCreditCard(CreditCardRemovalRequest(this.card.id));
+                Provider.of<DataBackend>(context, listen: false)
+                    .removeCreditCard(CreditCardRemovalRequest(this.card.id));
               },
             ),
           )),

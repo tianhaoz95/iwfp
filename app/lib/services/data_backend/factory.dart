@@ -3,8 +3,7 @@ import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/data_backend/in_app.dart';
 import 'package:iwfpapp/services/data_backend/use_http.dart';
 
-DataBackend getDataBackend(
-    BackendType type) {
+DataBackend getDataBackend(BackendType type) {
   switch (type) {
     case BackendType.IN_APP:
       return InAppDataBackend();

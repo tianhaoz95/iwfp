@@ -42,7 +42,8 @@ class DeleteAccountPending extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
             child: RaisedButton(
               onPressed: () {
-                Provider.of<DataBackend>(context, listen: false).deleteAccount();
+                Provider.of<DataBackend>(context, listen: false)
+                    .deleteAccount();
               },
               color: Colors.redAccent,
               child: Text(
@@ -55,5 +56,4 @@ class DeleteAccountPending extends StatelessWidget {
       ),
     );
   }
-  
 }

@@ -2,12 +2,7 @@ import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 
 /// The data fetching status
-enum DataBackendStatus {
-  LOADING,
-  AVAILABLE,
-  OUTDATED,
-  ERROR
-}
+enum DataBackendStatus { LOADING, AVAILABLE, OUTDATED, ERROR }
 
 /// The stages in deleting an account
 /// TODO(#453): merge this with [DataBackendStatus]

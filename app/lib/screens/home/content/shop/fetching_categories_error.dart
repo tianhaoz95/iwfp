@@ -5,9 +5,7 @@ class FetchingCategoriesError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: ListView(
-        children: [
-          Text('Error Fetching Categories')
-        ],
+        children: [Text('Error Fetching Categories')],
       ),
     );
   }

@@ -9,7 +9,8 @@ class RegisterFormSignUpScreenContent extends StatefulWidget {
   }
 }
 
-class _RegisterFormSignUpScreenContent extends State<RegisterFormSignUpScreenContent> {
+class _RegisterFormSignUpScreenContent
+    extends State<RegisterFormSignUpScreenContent> {
   TextEditingController emailCtrl;
   TextEditingController pwdCtrl;
   TextEditingController pwdConfirmCtrl;
@@ -21,7 +22,7 @@ class _RegisterFormSignUpScreenContent extends State<RegisterFormSignUpScreenCon
     this.pwdCtrl = TextEditingController();
     this.pwdConfirmCtrl = TextEditingController();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,7 +80,8 @@ class _RegisterFormSignUpScreenContent extends State<RegisterFormSignUpScreenCon
                 String email = emailCtrl.text;
                 String pwd = pwdCtrl.text;
                 String pwdConfirm = pwdConfirmCtrl.text;
-                Provider.of<AppAuth>(context, listen: false).signUpWithEmail(email, pwd, pwdConfirm);
+                Provider.of<AppAuth>(context, listen: false)
+                    .signUpWithEmail(email, pwd, pwdConfirm);
               },
               child: Text(
                 'Register',

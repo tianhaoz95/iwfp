@@ -28,7 +28,9 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
       appBar: AppBar(
         title: Text('Forgot Password?'),
       ),
-      body: ForgotPasswordContent(email: this.email,),
+      body: ForgotPasswordContent(
+        email: this.email,
+      ),
     );
   }
 }

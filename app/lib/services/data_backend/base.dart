@@ -4,20 +4,40 @@ import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
 
 abstract class DataBackend extends ChangeNotifier {
-  String token;
-  bool useEmulator;
   DataBackendStatus status;
+
+  /// TODO(#453): merge it with status
   DeleteAccountStatus deleteAccountStatus;
   List<CreditCard> creditCards;
+  bool creditCardsDirty;
+  List<CreditCard> creditCardTemplates;
+  bool creditCardTempaltesDirty;
+
+  /// Token is use in http requests to perform
+  /// user authentication and authorization.
+  /// It is not needed in the in-app API calls
+  /// since it has been taken care of by the
+  /// Firebase SDK.
+  String token;
+
+  /// Indicates whether a Firebase emulator is
+  /// used as backend.
+  /// TODO(#454): make it a subclass
+  bool useEmulator;
 
   DataBackend() {
     useEmulator = false;
     status = DataBackendStatus.OUTDATED;
     deleteAccountStatus = DeleteAccountStatus.PENDING;
+    creditCards = [];
+    creditCardsDirty = true;
+    creditCardTemplates = [];
+    creditCardTempaltesDirty = true;
     token = 'unknown';
   }
 
@@ -37,59 +57,101 @@ abstract class DataBackend extends ChangeNotifier {
     token = tokenVal;
   }
 
-  bool shouldRefresh() {
-    if (status == DataBackendStatus.OUTDATED) {
-      return true;
-    }
-    return false;
+  List<CreditCard> getCreditCards() {
+    return creditCards;
   }
 
-  void setShouldRefresh() {
+  List<CreditCard> getCreditCardTemplates() {
+    return creditCardTemplates;
+  }
+
+  Future<void> forceRefresh() async {
     status = DataBackendStatus.OUTDATED;
-    notifyListeners();
+    creditCardsDirty = true;
+    creditCardTempaltesDirty = true;
+    await maybeRefreshCards();
   }
 
-  void setRefreshed() {
-    status = DataBackendStatus.AVAILABLE;
-    notifyListeners();
+  Future<void> maybeRefresh() async {
+    try {
+      await maybeRefreshCards();
+      await maybeRefreshCreditCardTemplates();
+    } catch (err) {
+      print(err.toString());
+    }
   }
 
-  Future<BackendResponse> forceRefreshCards() async {
-    setShouldRefresh();
-    BackendResponse response = await maybeRefreshCards();
-    return response;
-  }
-
-  Future<BackendResponse> maybeRefreshCards() async {
-    BackendResponse response =
-        BackendResponse(ResponseStatus.FAILURE, 'Not started');
-    bool refresh = shouldRefresh();
-    if (refresh) {
+  Future<void> maybeRefreshCards() async {
+    if (creditCardsDirty || status == DataBackendStatus.ERROR) {
       try {
+        await Future.delayed(Duration(milliseconds: 200));
+        status = DataBackendStatus.LOADING;
+        notifyListeners();
         creditCards = await fetchCreditCardsFromDatabase();
-        response.status = ResponseStatus.SUCCEESS;
-        response.msg = 'n/a, fetch succeeded';
-        setRefreshed();
+        creditCardsDirty = false;
+        status = DataBackendStatus.AVAILABLE;
+        notifyListeners();
       } on CloudFunctionsException catch (cloudFuncError) {
-        response.status = ResponseStatus.FAILURE;
-        response.msg = cloudFuncError.message;
+        print(cloudFuncError.message);
+        status = DataBackendStatus.ERROR;
+        notifyListeners();
       } catch (err) {
-        response.status = ResponseStatus.FAILURE;
-        response.msg = err.toString();
+        print(err.toString());
+        status = DataBackendStatus.ERROR;
+        notifyListeners();
       }
     } else {
-      response.status = ResponseStatus.SUCCEESS;
-      response.msg = 'Data up to date, no need to refresh';
+      print('Data up to date, no need to refresh');
     }
-    return response;
+  }
+
+  Future<void> maybeRefreshCreditCardTemplates() async {
+    if (creditCardTempaltesDirty || status == DataBackendStatus.ERROR) {
+      try {
+        await Future.delayed(Duration(milliseconds: 200));
+        status = DataBackendStatus.LOADING;
+        notifyListeners();
+        creditCardTemplates = await getLocalCreditCardTemplates();
+        await Duration(milliseconds: 200);
+        creditCardTempaltesDirty = false;
+        status = DataBackendStatus.AVAILABLE;
+        notifyListeners();
+      } catch (err) {
+        print(err.toString());
+        creditCardTemplates = [];
+        status = DataBackendStatus.ERROR;
+        notifyListeners();
+      }
+    } else {
+      print('Tempalte up-to-date.');
+    }
   }
 
   Future<void> initCreditCard(CreditCardInitRequest req) async {
-    maybeRefreshCards();
     try {
       status = DataBackendStatus.LOADING;
       notifyListeners();
       await initCreditCardInDatabase(req);
+      status = DataBackendStatus.OUTDATED;
+      creditCardsDirty = true;
+      notifyListeners();
+    } catch (err) {
+      print(err.toString());
+      status = DataBackendStatus.ERROR;
+      notifyListeners();
+    }
+  }
+
+  Future<void> initCreditCardWithTemplate(
+      CreditCardAdditionRequest req) async {
+    try {
+      status = DataBackendStatus.LOADING;
+      notifyListeners();
+      await initCreditCard(CreditCardInitRequest(req.card));
+      for (CashbackPromo promo in req.card.promos) {
+        await addPromotion(PromotionAdditionRequest(req.card.id, promo));
+      }
+      creditCardsDirty = true;
       status = DataBackendStatus.OUTDATED;
       notifyListeners();
     } catch (err) {
@@ -99,34 +161,14 @@ abstract class DataBackend extends ChangeNotifier {
     }
   }
 
-  Future<BackendResponse> initCreditCardWithTemplate(
-      CreditCardAdditionRequest req) async {
-    BackendResponse response =
-        BackendResponse(ResponseStatus.FAILURE, 'Not started');
-    try {
-      await initCreditCard(CreditCardInitRequest(req.card));
-    } catch (err) {
-      response.status = ResponseStatus.FAILURE;
-      return response;
-    }
-    try {
-      for (CashbackPromo promo in req.card.promos) {
-        await addPromotion(PromotionAdditionRequest(req.card.id, promo));
-      }
-    } catch (err) {
-      response.status = ResponseStatus.FAILURE;
-      return response;
-    }
-    response.status = ResponseStatus.SUCCEESS;
-    return response;
-  }
-
   Future<void> addCreditCard(CreditCardAdditionRequest req) async {
     try {
       status = DataBackendStatus.LOADING;
       notifyListeners();
       await addCreditCardToDatabase(req);
-      setShouldRefresh();
+      creditCardsDirty = true;
+      status = DataBackendStatus.OUTDATED;
+      notifyListeners();
       status = DataBackendStatus.OUTDATED;
       notifyListeners();
     } catch (err) {
@@ -141,6 +183,7 @@ abstract class DataBackend extends ChangeNotifier {
       status = DataBackendStatus.LOADING;
       notifyListeners();
       await removeCreditCardFromDatabase(req);
+      creditCardsDirty = true;
       status = DataBackendStatus.OUTDATED;
       notifyListeners();
     } catch (err) {
@@ -152,7 +195,8 @@ abstract class DataBackend extends ChangeNotifier {
 
   Future<BackendResponse> addPromotion(PromotionAdditionRequest req) async {
     BackendResponse response = await addPromitionToDatabase(req);
-    setShouldRefresh();
+    status = DataBackendStatus.OUTDATED;
+    notifyListeners();
     return response;
   }
 
@@ -161,6 +205,7 @@ abstract class DataBackend extends ChangeNotifier {
       status = DataBackendStatus.LOADING;
       notifyListeners();
       await removePromotionFromDatabase(req);
+      creditCardsDirty = true;
       status = DataBackendStatus.OUTDATED;
       notifyListeners();
     } catch (err) {
@@ -168,14 +213,6 @@ abstract class DataBackend extends ChangeNotifier {
       status = DataBackendStatus.ERROR;
       notifyListeners();
     }
-  }
-
-  Future<List<ShopCategory>> getShopCategories() async {
-    BackendResponse status = await maybeRefreshCards();
-    if (status.status == ResponseStatus.FAILURE) {
-      return [];
-    }
-    return getUniqueShoppingCategories(creditCards);
   }
 
   List<ShopCategory> getShopCategoriesSync() {
@@ -190,27 +227,6 @@ abstract class DataBackend extends ChangeNotifier {
       }
     }
     return card;
-  }
-
-  Future<List<CreditCard>> getCreditCards() async {
-    BackendResponse status = await maybeRefreshCards();
-    if (status.status == ResponseStatus.FAILURE) {
-      return [];
-    }
-    return creditCards;
-  }
-
-  List<CreditCard> getCreditCardsSync() {
-    return creditCards;
-  }
-
-  Future<List<CreditCard>> getRankedCreditCards(ShopCategory category) async {
-    BackendResponse status = await maybeRefreshCards();
-    if (status.status == ResponseStatus.FAILURE) {
-      return [];
-    }
-    rankCards(creditCards, category);
-    return creditCards;
   }
 
   List<CreditCard> getRankedCreditCardsSync(ShopCategory category) {
