@@ -85,28 +85,22 @@ class UseHttpDataBackend extends DataBackend {
   /// Remove a credit card from a users wallet by triggering
   /// the remove credit card http API
   @override
-  Future<BackendResponse> removeCreditCardFromDatabase(
+  Future<void> removeCreditCardFromDatabase(
       CreditCardRemovalRequest req) async {
     http.Response response = await http
         .post(RemoveCreditCardEndpoint, body: {'id': req.id, 'token': token});
-    if (response.statusCode == 200) {
-      return BackendResponse(ResponseStatus.SUCCEESS, 'na');
-    } else {
-      return BackendResponse(
-          ResponseStatus.FAILURE, response.statusCode.toString());
+    if (response.statusCode != 200) {
+      throw 'remove_credit_card_failed';
     }
   }
 
   @override
-  Future<BackendResponse> removePromotionFromDatabase(
+  Future<void> removePromotionFromDatabase(
       PromotionRemovalRequest req) async {
     http.Response response = await http.post(RemovePromotionEndpoint,
         body: {'cardUid': req.target, 'promoId': req.id, 'token': token});
-    if (response.statusCode == 200) {
-      return BackendResponse(ResponseStatus.SUCCEESS, 'na');
-    } else {
-      return BackendResponse(
-          ResponseStatus.FAILURE, response.statusCode.toString());
+    if (response.statusCode != 200) {
+      throw 'remove_promo_failed';
     }
   }
 }

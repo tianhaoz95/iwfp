@@ -5,12 +5,12 @@ import 'package:iwfpapp/screens/forgot_password/forgot_password_screen.dart';
 import 'package:iwfpapp/screens/home/main.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/auth/auth_screen.dart';
-import 'package:iwfpapp/screens/remove_promo/main.dart';
+import 'package:iwfpapp/screens/remove_card/remove_card_screen.dart';
+import 'package:iwfpapp/screens/remove_promo/remove_promo_screen.dart';
 import 'package:iwfpapp/screens/screen_tester/main.dart';
 import 'package:iwfpapp/screens/sign_up/sign_up_screen.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/screens/add_card/add_card_screen.dart';
-import 'package:iwfpapp/screens/remove_card/main.dart';
 import 'package:iwfpapp/screens/edit_card/main.dart';
 import 'package:iwfpapp/screens/add_promo/main.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
@@ -35,10 +35,10 @@ class IwfpApp extends StatelessWidget {
         '/add_card': (context) => AddCardScreen(),
         '/add_card_from_template': (context) =>
             AddCardFromTemplateScreen(dataBackend),
-        '/remove_card': (context) => RemoveCardScreen(dataBackend),
+        '/remove_card': (context) => RemoveCardScreen(),
         '/edit_card': (context) => EditCardScreen(),
         '/add_promo': (context) => AddPromoScreen(dataBackend),
-        '/remove_promo': (context) => RemovePromoScreen(dataBackend),
+        '/remove_promo': (context) => RemovePromoScreen(),
         '/delete_account': (context) => DeleteAccountScreen(),
         '/screen_tester': (context) => ScreenTester(),
         '/forgot_password': (context) => ForgotPasswordScreen(),

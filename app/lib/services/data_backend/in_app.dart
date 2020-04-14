@@ -63,8 +63,7 @@ class InAppDataBackend extends DataBackend {
   }
 
   @override
-  Future<void> initCreditCardInDatabase(
-      CreditCardInitRequest req) async {
+  Future<void> initCreditCardInDatabase(CreditCardInitRequest req) async {
     await addCardCallable.call(<String, dynamic>{
       'id': req.card.id,
       'name': req.card.name,
@@ -79,21 +78,9 @@ class InAppDataBackend extends DataBackend {
   }
 
   @override
-  Future<BackendResponse> removeCreditCardFromDatabase(
+  Future<void> removeCreditCardFromDatabase(
       CreditCardRemovalRequest req) async {
-    BackendResponse response =
-        BackendResponse(ResponseStatus.FAILURE, 'Not started');
-    try {
-      await removeCardCallable.call(<String, dynamic>{'id': req.id});
-      response.status = ResponseStatus.SUCCEESS;
-      response.msg = 'na';
-      return response;
-    } catch (err) {
-      response.status = ResponseStatus.FAILURE;
-      response.msg = err.toString();
-      print(err.toString());
-      return response;
-    }
+    await removeCardCallable.call(<String, dynamic>{'id': req.id});
   }
 
   @override
@@ -126,23 +113,10 @@ class InAppDataBackend extends DataBackend {
   }
 
   @override
-  Future<BackendResponse> removePromotionFromDatabase(
-      PromotionRemovalRequest req) async {
-    BackendResponse response =
-        BackendResponse(ResponseStatus.FAILURE, 'Not started');
-    try {
-      HttpsCallableResult result =
-          await removePromoCallable.call(<String, dynamic>{
-        'cardUid': req.target,
-        'promoId': req.id,
-      });
-      response.status = ResponseStatus.SUCCEESS;
-      response.msg = result.toString();
-      return response;
-    } catch (err) {
-      response.status = ResponseStatus.FAILURE;
-      response.msg = err.toString();
-      return response;
-    }
+  Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
+    await removePromoCallable.call(<String, dynamic>{
+      'cardUid': req.target,
+      'promoId': req.id,
+    });
   }
 }
