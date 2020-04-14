@@ -10,6 +10,7 @@ enum DataBackendStatus {
 }
 
 /// The stages in deleting an account
+/// TODO(#453): merge this with [DataBackendStatus]
 enum DeleteAccountStatus {
   PENDING,
   DELETEING,

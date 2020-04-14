@@ -16,9 +16,9 @@ class UseHttpDataBackend extends DataBackend {
   UseHttpDataBackend() : super();
 
   @override
-  Future<BackendResponse> addCreditCardToDatabase(
+  Future<void> addCreditCardToDatabase(
       CreditCardAdditionRequest req) async {
-    return BackendResponse(ResponseStatus.SUCCEESS, 'na');
+    return;
   }
 
   @override
@@ -73,15 +73,12 @@ class UseHttpDataBackend extends DataBackend {
   }
 
   @override
-  Future<BackendResponse> initCreditCardInDatabase(
+  Future<void> initCreditCardInDatabase(
       CreditCardInitRequest req) async {
     http.Response response = await http.post(AddCreditCardEndpoint,
         body: {'id': req.card.id, 'name': req.card.name, 'token': token});
-    if (response.statusCode == 200) {
-      return BackendResponse(ResponseStatus.SUCCEESS, 'na');
-    } else {
-      return BackendResponse(
-          ResponseStatus.FAILURE, response.statusCode.toString());
+    if (response.statusCode != 200) {
+      throw 'init_credit_card_failed';
     }
   }
 

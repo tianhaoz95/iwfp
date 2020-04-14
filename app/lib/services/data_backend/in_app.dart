@@ -63,23 +63,12 @@ class InAppDataBackend extends DataBackend {
   }
 
   @override
-  Future<BackendResponse> initCreditCardInDatabase(
+  Future<void> initCreditCardInDatabase(
       CreditCardInitRequest req) async {
-    BackendResponse response =
-        BackendResponse(ResponseStatus.FAILURE, 'Not started');
-    try {
-      HttpsCallableResult result = await addCardCallable.call(<String, dynamic>{
-        'id': req.card.id,
-        'name': req.card.name,
-      });
-      response.status = ResponseStatus.SUCCEESS;
-      response.msg = result.toString();
-      return response;
-    } catch (err) {
-      response.status = ResponseStatus.FAILURE;
-      response.msg = err.toString();
-      return response;
-    }
+    await addCardCallable.call(<String, dynamic>{
+      'id': req.card.id,
+      'name': req.card.name,
+    });
   }
 
   @override

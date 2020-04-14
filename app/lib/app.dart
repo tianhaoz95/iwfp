@@ -32,7 +32,7 @@ class IwfpApp extends StatelessWidget {
         '/sign_up': (context) => SignUpScreen(),
         '/placeholder': (context) => PlaceholderScreen(),
         '/suggestion': (context) => SuggestionScreen(),
-        '/add_card': (context) => AddCardScreen(dataBackend),
+        '/add_card': (context) => AddCardScreen(),
         '/add_card_from_template': (context) =>
             AddCardFromTemplateScreen(dataBackend),
         '/remove_card': (context) => RemoveCardScreen(dataBackend),

@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
+import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
+import 'package:provider/provider.dart';
 
-typedef Future<void> AddCardHandler();
+class AddCardScreenAddCardFormContent extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _AddCardScreenAddCardFormContent();
+  }
+}
 
-class AddCardScreenAddCardFormContent extends StatelessWidget {
-  final TextEditingController cardIdInputCtrl;
-  final TextEditingController cardNameInputCtrl;
-  final AddCardHandler addCardHandler;
-  const AddCardScreenAddCardFormContent(
-      {@required this.addCardHandler,
-      @required this.cardIdInputCtrl,
-      @required this.cardNameInputCtrl});
+class _AddCardScreenAddCardFormContent
+    extends State<AddCardScreenAddCardFormContent> {
+  TextEditingController cardIdInputCtrl;
+  TextEditingController cardNameInputCtrl;
+
+  @override
+  void initState() {
+    super.initState();
+    this.cardIdInputCtrl = TextEditingController();
+    this.cardNameInputCtrl = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +44,9 @@ class AddCardScreenAddCardFormContent extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () async {
-              await this.addCardHandler();
+              Provider.of<DataBackend>(context, listen: false).initCreditCard(
+                  CreditCardInitRequest(CreditCard(
+                      cardNameInputCtrl.text, cardIdInputCtrl.text)));
             },
           ),
           RaisedButton(

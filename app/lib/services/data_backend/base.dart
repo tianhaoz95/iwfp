@@ -84,10 +84,19 @@ abstract class DataBackend extends ChangeNotifier {
     return response;
   }
 
-  Future<BackendResponse> initCreditCard(CreditCardInitRequest req) async {
-    BackendResponse response = await initCreditCardInDatabase(req);
-    setShouldRefresh();
-    return response;
+  Future<void> initCreditCard(CreditCardInitRequest req) async {
+    maybeRefreshCards();
+    try {
+      status = DataBackendStatus.LOADING;
+      notifyListeners();
+      await initCreditCardInDatabase(req);
+      status = DataBackendStatus.OUTDATED;
+      notifyListeners();
+    } catch (err) {
+      print(err.toString());
+      status = DataBackendStatus.ERROR;
+      notifyListeners();
+    }
   }
 
   Future<BackendResponse> initCreditCardWithTemplate(
@@ -112,10 +121,19 @@ abstract class DataBackend extends ChangeNotifier {
     return response;
   }
 
-  Future<BackendResponse> addCreditCard(CreditCardAdditionRequest req) async {
-    BackendResponse response = await addCreditCardToDatabase(req);
-    setShouldRefresh();
-    return response;
+  Future<void> addCreditCard(CreditCardAdditionRequest req) async {
+    try {
+      status = DataBackendStatus.LOADING;
+      notifyListeners();
+      await addCreditCardToDatabase(req);
+      setShouldRefresh();
+      status = DataBackendStatus.OUTDATED;
+      notifyListeners();
+    } catch (err) {
+      print(err.toString());
+      status = DataBackendStatus.ERROR;
+      notifyListeners();
+    }
   }
 
   Future<BackendResponse> removeCreditCard(CreditCardRemovalRequest req) async {
@@ -210,10 +228,10 @@ abstract class DataBackend extends ChangeNotifier {
   Future<List<CreditCard>> fetchCreditCardsFromDatabase();
 
   @protected
-  Future<BackendResponse> initCreditCardInDatabase(CreditCardInitRequest req);
+  Future<void> initCreditCardInDatabase(CreditCardInitRequest req);
 
   @protected
-  Future<BackendResponse> addCreditCardToDatabase(
+  Future<void> addCreditCardToDatabase(
       CreditCardAdditionRequest req);
 
   @protected
