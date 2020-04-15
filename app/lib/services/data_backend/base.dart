@@ -131,6 +131,15 @@ abstract class DataBackend extends ChangeNotifier {
     }
   }
 
+  CreditCard queryCreditCard(String id) {
+    for (CreditCard card in creditCards) {
+      if (card.id == id) {
+        return card;
+      }
+    }
+    return CreditCard('Unknown', 'unknown');
+  }
+
   Future<void> initCreditCard(CreditCardInitRequest req) async {
     try {
       status = DataBackendStatus.LOADING;

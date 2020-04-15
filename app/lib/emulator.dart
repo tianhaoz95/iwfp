@@ -17,5 +17,5 @@ void main() {
   AppContext appContext = AppContext();
   DataBackend dataBackend = getDataBackend(BackendType.IN_APP);
   dataBackend.setUseEmulator(true);
-  runApp(IwfpApp(dataBackend));
+  runApp(IwfpApp());
 }

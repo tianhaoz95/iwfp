@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 void main() {
   group('card template tests', () {
     test('templates should not contain duplicated id', () async {
-      List<CreditCard> templates = await getCreditCardTemplates();
+      List<CreditCard> templates = await getLocalCreditCardTemplates();
       Map<String, int> templateIdCntDict = {};
       for (CreditCard template in templates) {
         if (templateIdCntDict.containsKey(template.id)) {

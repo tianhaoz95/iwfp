@@ -24,7 +24,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => dataBackend),
         ChangeNotifierProvider(create: (context) => appContext),
       ],
-      child: IwfpApp(dataBackend),
+      child: IwfpApp(),
     ),
   );
 }
