@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:iwfpapp/services/app_auth/base.dart';
+import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/config/typedefs/user_account.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/screens/home/main.dart';
-import 'package:iwfpapp/services/data_backend/base.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'mock_services/mock_auth.dart';
 import 'mock_services/mock_context.dart';
 import 'mock_services/mock_data_store.dart';

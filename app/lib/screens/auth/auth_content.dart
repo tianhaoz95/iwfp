@@ -4,7 +4,7 @@ import 'package:iwfpapp/screens/auth/auth_loading.dart';
 import 'package:iwfpapp/screens/auth/not_signed_in.dart';
 import 'package:iwfpapp/screens/auth/signed_in.dart';
 import 'package:iwfpapp/screens/auth/unknown_auth_err.dart';
-import 'package:iwfpapp/services/app_auth/base.dart';
+import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/config/typedefs/auth_states.dart';
 import 'package:provider/provider.dart';
 

@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:iwfpapp/services/app_auth/base.dart';
-import 'dart:developer' as developer;
+import 'package:iwfpapp/services/app_auth/base_auth.dart';
 
 class AppAuthUsingFirebaseAuth extends AppAuth {
   FirebaseAuth _auth = FirebaseAuth.instance;

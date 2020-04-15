@@ -11,7 +11,7 @@ import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
 import 'package:iwfpapp/services/config/typedefs/repeat_pattern.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
-import 'package:iwfpapp/services/data_backend/base.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/services/utilities/validators/promo_info_validator.dart';
 import 'package:provider/provider.dart';
 

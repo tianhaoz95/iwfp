@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/screens/home/bottom_nav.dart';
 import 'package:iwfpapp/screens/home/content/main.dart';
-import 'package:iwfpapp/services/app_auth/base.dart';
+import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
-import 'package:iwfpapp/services/data_backend/base.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {

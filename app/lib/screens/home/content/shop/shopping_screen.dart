@@ -4,7 +4,7 @@ import 'package:iwfpapp/screens/home/content/shop/categories_outdated.dart';
 import 'package:iwfpapp/screens/home/content/shop/fetching_categories.dart';
 import 'package:iwfpapp/screens/home/content/shop/fetching_categories_error.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
-import 'package:iwfpapp/services/data_backend/base.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/widgets/generic/unknown_error.dart';
 import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 import 'package:provider/provider.dart';
