@@ -74,32 +74,19 @@ class InAppDataBackend extends DataBackend {
   }
 
   @override
-  Future<BackendResponse> addPromitionToDatabase(
-      PromotionAdditionRequest req) async {
-    BackendResponse response =
-        BackendResponse(ResponseStatus.FAILURE, 'Not started');
-    try {
-      HttpsCallableResult result =
-          await addPromoCallable.call(<String, dynamic>{
-        'cardUid': req.target,
-        'promoName': req.promo.name,
-        'promoId': req.promo.id,
-        'promoType': req.promo.type,
-        'promoStart': req.promo.start,
-        'promoEnd': req.promo.end,
-        'promoRepeat': req.promo.repeat,
-        'promoRate': req.promo.rate,
-        'promoCategoryName': req.promo.category.name,
-        'promoCategoryId': req.promo.category.id,
-      });
-      response.status = ResponseStatus.SUCCEESS;
-      response.msg = result.toString();
-      return response;
-    } catch (err) {
-      response.status = ResponseStatus.FAILURE;
-      response.msg = err.toString();
-      return response;
-    }
+  Future<void> addPromitionToDatabase(PromotionAdditionRequest req) async {
+    await addPromoCallable.call(<String, dynamic>{
+      'cardUid': req.target,
+      'promoName': req.promo.name,
+      'promoId': req.promo.id,
+      'promoType': req.promo.type,
+      'promoStart': req.promo.start,
+      'promoEnd': req.promo.end,
+      'promoRepeat': req.promo.repeat,
+      'promoRate': req.promo.rate,
+      'promoCategoryName': req.promo.category.name,
+      'promoCategoryId': req.promo.category.id,
+    });
   }
 
   @override

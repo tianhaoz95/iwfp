@@ -20,7 +20,8 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Provider.of<DataBackend>(context, listen: false).maybeRefreshCreditCardTemplates();
+    Provider.of<DataBackend>(context, listen: false)
+        .maybeRefreshCreditCardTemplates();
   }
 
   @override

@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/add_promo/promo_type_selector.dart';
 import 'package:iwfpapp/screens/add_promo/repeat_pattern_selector.dart';
+import 'package:iwfpapp/screens/auth/prompt_warning.dart';
 import 'package:iwfpapp/services/config/consts/promo_type_lookup.dart';
 import 'package:iwfpapp/services/config/consts/repeat_pattern_lookup.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
@@ -10,39 +10,30 @@ import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
 import 'package:iwfpapp/services/config/typedefs/repeat_pattern.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
-import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/services/utilities/validators/promo_info_validator.dart';
-import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
+import 'package:provider/provider.dart';
 
-/// This screen prompts users to enter information
-/// of a credit card promotion.
-///
-/// {@category Screens}
-class AddPromoScreen extends StatefulWidget {
-  final DataBackend dataBackend;
-  final CreditCard defaultCard;
-  const AddPromoScreen(this.dataBackend, {Key key, this.defaultCard})
-      : super(key: key);
+class AddPromoPending extends StatefulWidget {
+  final CreditCard card;
+  const AddPromoPending({@required this.card});
   @override
-  _AddPromoScreen createState() {
-    return _AddPromoScreen();
+  State<StatefulWidget> createState() {
+    return _AddPromoPending();
   }
 }
 
-class _AddPromoScreen extends State<AddPromoScreen> {
-  CreditCard card;
-  SubmitScreenStatus status = SubmitScreenStatus.PENDING;
-  TextEditingController promoNameCtrl = TextEditingController();
-  TextEditingController promoIdCtrl = TextEditingController();
-  TextEditingController promoTypeCtrl = TextEditingController();
-  TextEditingController promoStartCtrl = TextEditingController();
-  TextEditingController promoEndCtrl = TextEditingController();
-  TextEditingController promoRepeatCtrl = TextEditingController();
-  TextEditingController promoRateCtrl = TextEditingController();
-  TextEditingController promoCategoryNameCtrl = TextEditingController();
-  TextEditingController promoCategoryIdCtrl = TextEditingController();
+class _AddPromoPending extends State<AddPromoPending> {
+  TextEditingController promoNameCtrl;
+  TextEditingController promoIdCtrl;
+  TextEditingController promoTypeCtrl;
+  TextEditingController promoStartCtrl;
+  TextEditingController promoEndCtrl;
+  TextEditingController promoRepeatCtrl;
+  TextEditingController promoRateCtrl;
+  TextEditingController promoCategoryNameCtrl;
+  TextEditingController promoCategoryIdCtrl;
   String promotionType;
   String promoRepeatPattern;
   bool editRepeatDetails;
@@ -52,45 +43,15 @@ class _AddPromoScreen extends State<AddPromoScreen> {
     super.initState();
     this.promotionType = 'brand';
     this.editRepeatDetails = true;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (ModalRoute.of(context).settings.arguments != null) {
-      card = ModalRoute.of(context).settings.arguments;
-    } else {
-      if (widget.defaultCard != null) {
-        card = widget.defaultCard;
-      }
-    }
-  }
-
-  Future<void> promptWarning(
-      BuildContext context, List<String> messages) async {
-    List<Widget> content = messages.map((String message) {
-      return Text(message);
-    }).toList();
-    await showDialog<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('error'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: content,
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Back'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+    promoNameCtrl = TextEditingController();
+    promoIdCtrl = TextEditingController();
+    promoTypeCtrl = TextEditingController();
+    promoStartCtrl = TextEditingController();
+    promoEndCtrl = TextEditingController();
+    promoRepeatCtrl = TextEditingController();
+    promoRateCtrl = TextEditingController();
+    promoCategoryNameCtrl = TextEditingController();
+    promoCategoryIdCtrl = TextEditingController();
   }
 
   Future<void> handleAddPromo() async {
@@ -117,9 +78,6 @@ class _AddPromoScreen extends State<AddPromoScreen> {
       await promptWarning(context, validationResponse.messages);
       return;
     }
-    setState(() {
-      status = SubmitScreenStatus.LOADING;
-    });
     double promoRate = double.parse(promoRateStr);
     CashbackPromo promo = CashbackPromo(
         promoName,
@@ -130,21 +88,8 @@ class _AddPromoScreen extends State<AddPromoScreen> {
         promoRepeat,
         promoRate,
         ShopCategory(promoCategoryName, promoCategoryId));
-    BackendResponse response = await widget.dataBackend
-        .addPromotion(PromotionAdditionRequest(card.id, promo));
-    if (response.status == ResponseStatus.SUCCEESS) {
-      setState(() {
-        status = SubmitScreenStatus.DONE;
-      });
-    } else if (response.status == ResponseStatus.FAILURE) {
-      setState(() {
-        status = SubmitScreenStatus.ERROR;
-      });
-    } else {
-      setState(() {
-        status = SubmitScreenStatus.UNKNOWN;
-      });
-    }
+    Provider.of<DataBackend>(context, listen: false)
+        .addPromotion(PromotionAdditionRequest(widget.card.id, promo));
   }
 
   void onPromotionTypeChange(CashbackPromoType type) {
@@ -171,7 +116,8 @@ class _AddPromoScreen extends State<AddPromoScreen> {
     }
   }
 
-  Widget renderPendingContent(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
       child: ListView(
@@ -189,7 +135,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
-            controller: promoNameCtrl,
+            controller: this.promoNameCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Promotion Name'),
           ),
@@ -197,7 +143,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
-            controller: promoIdCtrl,
+            controller: this.promoIdCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Promotion ID (unique)'),
@@ -206,7 +152,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
-            controller: promoRateCtrl,
+            controller: this.promoRateCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Cashback Rate'),
           ),
@@ -228,7 +174,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
-            controller: promoStartCtrl,
+            controller: this.promoStartCtrl,
             enabled: this.editRepeatDetails,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Start Date (MM/DD)'),
@@ -237,7 +183,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
-            controller: promoEndCtrl,
+            controller: this.promoEndCtrl,
             enabled: this.editRepeatDetails,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'End Date (MM/DD)'),
@@ -255,7 +201,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
-            controller: promoCategoryNameCtrl,
+            controller: this.promoCategoryNameCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), labelText: 'Category Name'),
           ),
@@ -263,7 +209,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             height: 5.0,
           ),
           TextField(
-            controller: promoCategoryIdCtrl,
+            controller: this.promoCategoryIdCtrl,
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Category ID (unique)'),
@@ -275,7 +221,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
             child: RaisedButton(
               color: Colors.green,
               onPressed: () {
-                handleAddPromo();
+                this.handleAddPromo();
               },
               child: Text(
                 'Add Promotion',
@@ -288,7 +234,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
               color: Colors.redAccent,
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/edit_card',
-                    arguments: card);
+                    arguments: widget.card);
               },
               child: Text(
                 'Cancel',
@@ -298,100 +244,6 @@ class _AddPromoScreen extends State<AddPromoScreen> {
           )
         ],
       ),
-    );
-  }
-
-  Widget renderDoneContent(BuildContext context) {
-    return Container(
-      child: ListView(
-        children: <Widget>[
-          Material(
-            child: Card(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Text('Promotion Added'),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-            child: RaisedButton(
-              color: Colors.green,
-              onPressed: () async {
-                setState(() {
-                  this.status = SubmitScreenStatus.LOADING;
-                });
-                CreditCard renewedCard =
-                    await widget.dataBackend.renewCreditCardInfo(card);
-                Navigator.pushReplacementNamed(context, '/edit_card',
-                    arguments: renewedCard);
-              },
-              child: Text(
-                'Back to Card Editing',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget renderErrorContent(BuildContext context) {
-    return Container(
-      child: Text('error'),
-    );
-  }
-
-  Widget renderLoadingContent(BuildContext context) {
-    return Container(
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
-
-  Widget renderUnknownContent(BuildContext context) {
-    return Container(
-      child: Text('unknown'),
-    );
-  }
-
-  Widget renderContent(BuildContext context) {
-    Widget content = renderUnknownContent(context);
-    switch (status) {
-      case SubmitScreenStatus.DONE:
-        content = renderDoneContent(context);
-        break;
-      case SubmitScreenStatus.PENDING:
-        content = renderPendingContent(context);
-        break;
-      case SubmitScreenStatus.ERROR:
-        content = renderErrorContent(context);
-        break;
-      case SubmitScreenStatus.LOADING:
-        content = renderLoadingContent(context);
-        break;
-      default:
-        content = renderUnknownContent(context);
-    }
-    return content;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Promotion'),
-      ),
-      body: PreferredWidthContent(child: renderContent(context)),
     );
   }
 }

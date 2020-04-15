@@ -65,6 +65,10 @@ abstract class DataBackend extends ChangeNotifier {
     return creditCardTemplates;
   }
 
+  List<ShopCategory> getShopCategories() {
+    return getUniqueShoppingCategories(creditCards);
+  }
+
   Future<void> forceRefresh() async {
     status = DataBackendStatus.OUTDATED;
     creditCardsDirty = true;
@@ -142,8 +146,7 @@ abstract class DataBackend extends ChangeNotifier {
     }
   }
 
-  Future<void> initCreditCardWithTemplate(
-      CreditCardAdditionRequest req) async {
+  Future<void> initCreditCardWithTemplate(CreditCardAdditionRequest req) async {
     try {
       status = DataBackendStatus.LOADING;
       notifyListeners();
@@ -193,11 +196,19 @@ abstract class DataBackend extends ChangeNotifier {
     }
   }
 
-  Future<BackendResponse> addPromotion(PromotionAdditionRequest req) async {
-    BackendResponse response = await addPromitionToDatabase(req);
-    status = DataBackendStatus.OUTDATED;
-    notifyListeners();
-    return response;
+  Future<void> addPromotion(PromotionAdditionRequest req) async {
+    try {
+      status = DataBackendStatus.LOADING;
+      notifyListeners();
+      await addPromitionToDatabase(req);
+      creditCardsDirty = true;
+      status = DataBackendStatus.OUTDATED;
+      notifyListeners();
+    } catch (err) {
+      print(err.toString());
+      status = DataBackendStatus.ERROR;
+      notifyListeners();
+    }
   }
 
   Future<void> removePromotion(PromotionRemovalRequest req) async {
@@ -213,10 +224,6 @@ abstract class DataBackend extends ChangeNotifier {
       status = DataBackendStatus.ERROR;
       notifyListeners();
     }
-  }
-
-  List<ShopCategory> getShopCategoriesSync() {
-    return getUniqueShoppingCategories(creditCards);
   }
 
   Future<CreditCard> renewCreditCardInfo(CreditCard card) async {
@@ -269,7 +276,7 @@ abstract class DataBackend extends ChangeNotifier {
   Future<void> removeCreditCardFromDatabase(CreditCardRemovalRequest req);
 
   @protected
-  Future<BackendResponse> addPromitionToDatabase(PromotionAdditionRequest req);
+  Future<void> addPromitionToDatabase(PromotionAdditionRequest req);
 
   @protected
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req);

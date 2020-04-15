@@ -21,8 +21,7 @@ class UseHttpDataBackend extends DataBackend {
   }
 
   @override
-  Future<BackendResponse> addPromitionToDatabase(
-      PromotionAdditionRequest req) async {
+  Future<void> addPromitionToDatabase(PromotionAdditionRequest req) async {
     http.Response response = await http.post(AddPromotionEndpoint, body: {
       'cardUid': req.target,
       'promoName': req.promo.name,
@@ -36,11 +35,8 @@ class UseHttpDataBackend extends DataBackend {
       'promoCategoryId': req.promo.category.id,
       'token': token
     });
-    if (response.statusCode == 200) {
-      return BackendResponse(ResponseStatus.SUCCEESS, 'na');
-    } else {
-      return BackendResponse(
-          ResponseStatus.FAILURE, response.statusCode.toString());
+    if (response.statusCode != 200) {
+      throw 'add_promo_failed';
     }
   }
 

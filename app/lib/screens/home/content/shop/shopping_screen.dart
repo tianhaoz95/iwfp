@@ -18,7 +18,7 @@ class ShopNow extends StatelessWidget {
           case DataBackendStatus.AVAILABLE:
             return PreferredWidthContent(
                 child: CategoriesShoppingScreen(
-                    categories: backend.getShopCategoriesSync()));
+                    categories: backend.getShopCategories()));
           case DataBackendStatus.ERROR:
             return FetchingCategoriesError();
           case DataBackendStatus.LOADING:
