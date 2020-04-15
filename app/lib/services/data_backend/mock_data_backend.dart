@@ -1,3 +1,4 @@
+import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
@@ -51,7 +52,7 @@ class MockDataBackend extends DataBackend {
     if (cardDatabase.containsKey(req.card.id)) {
       throw 'card_exist';
     } else {
-      cardDatabase[req.card.id] = req.card;
+      cardDatabase[req.card.id] = CreditCard(req.card.name, req.card.id);
     }
   }
 
@@ -70,9 +71,9 @@ class MockDataBackend extends DataBackend {
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (cardDatabase.containsKey(req.target)) {
-      for (int i = 0; i < cardDatabase[req.target].promos.length; ++i) {
-        if (cardDatabase[req.target].promos[i].id == req.id) {
-          cardDatabase[req.target].promos.removeAt(i);
+      for (CashbackPromo promo in cardDatabase[req.target].promos) {
+        if (promo.id == req.id) {
+          cardDatabase[req.target].promos.remove(promo);
           return;
         }
       }

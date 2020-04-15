@@ -25,13 +25,7 @@ abstract class DataBackend extends ChangeNotifier {
   /// Firebase SDK.
   String token;
 
-  /// Indicates whether a Firebase emulator is
-  /// used as backend.
-  /// TODO(#454): make it a subclass
-  bool useEmulator;
-
   DataBackend() {
-    useEmulator = false;
     status = DataBackendStatus.OUTDATED;
     deleteAccountStatus = DeleteAccountStatus.PENDING;
     creditCards = [];
@@ -47,10 +41,6 @@ abstract class DataBackend extends ChangeNotifier {
 
   DeleteAccountStatus getDeleteAccountStatus() {
     return deleteAccountStatus;
-  }
-
-  void setUseEmulator(bool setVal) {
-    useEmulator = setVal;
   }
 
   void setToken(String tokenVal) {
@@ -140,18 +130,25 @@ abstract class DataBackend extends ChangeNotifier {
     return CreditCard('Unknown', 'unknown');
   }
 
-  Future<void> initCreditCard(CreditCardInitRequest req) async {
+  Future<void> initCreditCard(CreditCardInitRequest req,
+      {bool silent = false}) async {
     try {
       status = DataBackendStatus.LOADING;
-      notifyListeners();
+      if (!silent) {
+        notifyListeners();
+      }
       await initCreditCardInDatabase(req);
       status = DataBackendStatus.OUTDATED;
       creditCardsDirty = true;
-      notifyListeners();
+      if (!silent) {
+        notifyListeners();
+      }
     } catch (err) {
       print(err.toString());
       status = DataBackendStatus.ERROR;
-      notifyListeners();
+      if (!silent) {
+        notifyListeners();
+      }
     }
   }
 
@@ -159,9 +156,10 @@ abstract class DataBackend extends ChangeNotifier {
     try {
       status = DataBackendStatus.LOADING;
       notifyListeners();
-      await initCreditCard(CreditCardInitRequest(req.card));
+      await initCreditCard(CreditCardInitRequest(req.card), silent: true);
       for (CashbackPromo promo in req.card.promos) {
-        await addPromotion(PromotionAdditionRequest(req.card.id, promo));
+        await addPromotion(PromotionAdditionRequest(req.card.id, promo),
+            silent: true);
       }
       creditCardsDirty = true;
       status = DataBackendStatus.OUTDATED;
@@ -205,18 +203,25 @@ abstract class DataBackend extends ChangeNotifier {
     }
   }
 
-  Future<void> addPromotion(PromotionAdditionRequest req) async {
+  Future<void> addPromotion(PromotionAdditionRequest req,
+      {bool silent = false}) async {
     try {
       status = DataBackendStatus.LOADING;
-      notifyListeners();
+      if (!silent) {
+        notifyListeners();
+      }
       await addPromitionToDatabase(req);
       creditCardsDirty = true;
       status = DataBackendStatus.OUTDATED;
-      notifyListeners();
+      if (!silent) {
+        notifyListeners();
+      }
     } catch (err) {
       print(err.toString());
       status = DataBackendStatus.ERROR;
-      notifyListeners();
+      if (!silent) {
+        notifyListeners();
+      }
     }
   }
 

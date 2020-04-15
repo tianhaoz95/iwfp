@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/app/theme.dart';
 import 'package:iwfpapp/screens/add_card_from_template/add_card_from_template_screen.dart';
 import 'package:iwfpapp/screens/add_promo/add_promo_screen.dart';
 import 'package:iwfpapp/screens/delete_account/delete_account_screen.dart';
@@ -13,14 +14,13 @@ import 'package:iwfpapp/screens/screen_tester/main.dart';
 import 'package:iwfpapp/screens/sign_up/sign_up_screen.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/screens/add_card/add_card_screen.dart';
-import 'package:iwfpapp/services/config/themes/default.dart';
 
 class IwfpApp extends StatelessWidget {
   const IwfpApp();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'iwfp',
+      title: '5% App',
       theme: theme,
       debugShowCheckedModeBanner: false,
       initialRoute: '/',

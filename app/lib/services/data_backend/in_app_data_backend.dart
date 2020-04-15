@@ -16,10 +16,6 @@ class InAppDataBackend extends DataBackend {
   @override
   InAppDataBackend() : super() {
     cloudFunc = CloudFunctions.instance;
-    if (useEmulator) {
-      print('Using local emulator as backend...');
-      cloudFunc.useFunctionsEmulator(origin: 'http://localhost:5001');
-    }
     addCardCallable = cloudFunc.getHttpsCallable(
       functionName: 'addCreditCard',
     );

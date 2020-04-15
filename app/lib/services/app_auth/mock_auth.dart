@@ -2,11 +2,15 @@ import 'package:iwfpapp/services/app_auth/base_auth.dart';
 
 class MockAuth extends AppAuth {
   Map<String, String> users;
+  String userEmail;
   bool signedIn;
 
   MockAuth() : super() {
-    users = {};
-    signedIn = false;
+    users = {
+      'test@test.com': '123456'
+    };
+    signedIn = true;
+    userEmail = 'test@test.com';
   }
 
   @override
@@ -18,7 +22,7 @@ class MockAuth extends AppAuth {
   @override
   Future<String> getEmail() async {
     await Future.delayed(Duration(milliseconds: 200));
-    return 'test@test.com';
+    return userEmail;
   }
 
   @override
@@ -37,6 +41,7 @@ class MockAuth extends AppAuth {
     await Future.delayed(Duration(milliseconds: 200));
     if (users.containsKey(email) && users[email] == pwd) {
       signedIn = true;
+      userEmail = email;
     } else {
       throw 'sign_in_failed';
     }
@@ -55,6 +60,8 @@ class MockAuth extends AppAuth {
       throw 'email_exist';
     } else {
       users[email] = pwd;
+      signedIn = true;
+      userEmail = email;
     }
   }
 }

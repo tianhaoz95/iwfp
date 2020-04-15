@@ -4,8 +4,8 @@ import 'package:iwfpapp/services/config/typedefs/backend.dart';
 
 void main() {
   startApp(
-    appAuthType: AppAuthType.FIREBASE_AUTH,
-    backendType: BackendType.IN_APP,
+    appAuthType: AppAuthType.MOCK_AUTH,
+    backendType: BackendType.MOCK,
     shouldReportDevCrashes: false,
   );
 }
