@@ -6,9 +6,7 @@ class MockAuth extends AppAuth {
   bool signedIn;
 
   MockAuth() : super() {
-    users = {
-      'test@test.com': '123456'
-    };
+    users = {'test@test.com': '123456'};
     signedIn = true;
     userEmail = 'test@test.com';
   }

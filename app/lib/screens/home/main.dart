@@ -30,12 +30,12 @@ class _HomeScreen extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    currentTabId = HomeTabId.SHOPPING;
     if (ModalRoute.of(context).settings.arguments != null) {
       currentTabId = ModalRoute.of(context).settings.arguments;
     }
     maybeNavigateToSignIn();
     Provider.of<DataBackend>(context, listen: false).maybeRefresh();
-    currentTabId = HomeTabId.SHOPPING;
   }
 
   Future<void> maybeNavigateToSignIn() async {
@@ -68,6 +68,7 @@ class _HomeScreen extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          key: Key('home_screen_appbar'),
           title: Text('5% App'),
           actions: [
             ButtonTheme(
