@@ -1,5 +1,5 @@
 import 'package:flutter_driver/driver_extension.dart';
-import 'package:iwfpapp/main.dart' as app;
+import 'package:iwfpapp/entrypoint/mock.dart' as app;
 
 void main() {
   enableFlutterDriverExtension();

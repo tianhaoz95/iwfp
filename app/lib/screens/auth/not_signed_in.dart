@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/app_auth/base_auth.dart';
+import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
+import 'package:provider/provider.dart';
 
 typedef Future<void> EmailSignInHandler(BuildContext context);
 typedef void ForgetPasswordHandler(BuildContext context);
 
 class AuthNotSignedInContent extends StatefulWidget {
-  final bool enabled;
-  final EmailSignInHandler emailSignInHandler;
-  final ForgetPasswordHandler forgetPasswordHandler;
-  final TextEditingController emailInputController;
-  final TextEditingController pwdInputController;
-  const AuthNotSignedInContent(
-      {this.enabled,
-      this.emailSignInHandler,
-      this.forgetPasswordHandler,
-      this.emailInputController,
-      this.pwdInputController});
   @override
   State<StatefulWidget> createState() {
     return _AuthNotSignedInContent();
@@ -22,6 +14,16 @@ class AuthNotSignedInContent extends StatefulWidget {
 }
 
 class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
+  TextEditingController emailInputController;
+  TextEditingController pwdInputController;
+
+  @override
+  void initState() {
+    super.initState();
+    this.emailInputController = TextEditingController();
+    this.pwdInputController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,21 +40,19 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
           ),
           SizedBox(height: 45.0),
           TextField(
-              controller: widget.emailInputController,
+              controller: this.emailInputController,
               key: Key('sign_in_email_input'),
               decoration: InputDecoration(
-                  enabled: widget.enabled,
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   hintText: 'email',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0)))),
           SizedBox(height: 25.0),
           TextField(
-              controller: widget.pwdInputController,
+              controller: this.pwdInputController,
               obscureText: true,
               key: Key('sign_in_password_input'),
               decoration: InputDecoration(
-                  enabled: widget.enabled,
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   hintText: 'password',
                   border: OutlineInputBorder(
@@ -66,11 +66,11 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                 'Sign In with Email',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: widget.enabled
-                  ? () {
-                      widget.emailSignInHandler(context);
-                    }
-                  : null,
+              onPressed: () {
+                Provider.of<AppAuth>(context, listen: false).signInWithEmail(
+                    this.emailInputController.text,
+                    this.pwdInputController.text);
+              },
             ),
           ),
           Material(
@@ -80,11 +80,11 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                 'Forgot Password',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: widget.enabled
-                  ? () {
-                      widget.emailSignInHandler(context);
-                    }
-                  : null,
+              onPressed: () {
+                Navigator.pushNamed(context, '/forgot_password',
+                    arguments: ForgotPasswordNavConfig(
+                        email: emailInputController.text));
+              },
             ),
           ),
           Material(
@@ -94,11 +94,9 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                 'Continue as Guest',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: widget.enabled
-                  ? () {
-                      Navigator.pushNamed(context, '/placeholder');
-                    }
-                  : null,
+              onPressed: () {
+                Navigator.pushNamed(context, '/placeholder');
+              },
             ),
           ),
           Material(
@@ -108,11 +106,9 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                 'Register',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: widget.enabled
-                  ? () {
-                      Navigator.pushNamed(context, '/sign_up');
-                    }
-                  : null,
+              onPressed: () {
+                Navigator.pushNamed(context, '/sign_up');
+              },
             ),
           ),
         ],

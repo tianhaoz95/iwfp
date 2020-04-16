@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/app_auth/base_auth.dart';
+import 'package:provider/provider.dart';
 
-typedef Future<void> SignUpHandler();
+class RegisterFormSignUpScreenContent extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _RegisterFormSignUpScreenContent();
+  }
+}
 
-class RegisterFormSignUpScreenContent extends StatelessWidget {
-  final TextEditingController emailCtrl;
-  final TextEditingController pwdCtrl;
-  final TextEditingController pwdConfirmCtrl;
-  final SignUpHandler signUpHandler;
-  const RegisterFormSignUpScreenContent(
-      {@required this.signUpHandler,
-      @required this.emailCtrl,
-      @required this.pwdCtrl,
-      @required this.pwdConfirmCtrl});
+class _RegisterFormSignUpScreenContent
+    extends State<RegisterFormSignUpScreenContent> {
+  TextEditingController emailCtrl;
+  TextEditingController pwdCtrl;
+  TextEditingController pwdConfirmCtrl;
+
+  @override
+  void initState() {
+    super.initState();
+    this.emailCtrl = TextEditingController();
+    this.pwdCtrl = TextEditingController();
+    this.pwdConfirmCtrl = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,7 +77,11 @@ class RegisterFormSignUpScreenContent extends StatelessWidget {
             child: RaisedButton(
               color: Colors.green,
               onPressed: () {
-                signUpHandler();
+                String email = emailCtrl.text;
+                String pwd = pwdCtrl.text;
+                String pwdConfirm = pwdConfirmCtrl.text;
+                Provider.of<AppAuth>(context, listen: false)
+                    .signUpWithEmail(email, pwd, pwdConfirm);
               },
               child: Text(
                 'Register',

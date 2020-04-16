@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/screens/suggestion/entries.dart';
-import 'package:iwfpapp/services/data_backend/base.dart';
 import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 class SuggestionScreen extends StatelessWidget {
-  final DataBackend dataBackend;
-  const SuggestionScreen(this.dataBackend);
+  const SuggestionScreen();
   @override
   Widget build(BuildContext context) {
     ShopCategory category = ShopCategory('Unknown Category', 'unknown');
@@ -28,8 +26,7 @@ class SuggestionScreen extends StatelessWidget {
           },
         ),
       ),
-      body: PreferredWidthContent(
-          child: SuggestionEntries(category, dataBackend)),
+      body: PreferredWidthContent(child: SuggestionEntries(category)),
     );
   }
 }

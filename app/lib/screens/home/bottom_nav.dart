@@ -12,7 +12,7 @@ class HomeBottomNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      key: Key('bottom_nav_bar'),
+      key: Key('home_screen_bottom_nav_bar'),
       onTap: this.onTapped,
       currentIndex: homeTabId2Index(currentTabId),
       items: <BottomNavigationBarItem>[

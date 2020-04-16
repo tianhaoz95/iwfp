@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:iwfpapp/screens/home/appbar.dart';
 import 'package:iwfpapp/screens/home/bottom_nav.dart';
 import 'package:iwfpapp/screens/home/content/main.dart';
-import 'package:iwfpapp/services/app_auth/base.dart';
+import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
-import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
-import 'package:iwfpapp/services/config/typedefs/shopping_context.dart';
-import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
-import 'package:iwfpapp/services/app_context/interface.dart';
-import 'package:iwfpapp/services/data_backend/base.dart';
-import 'package:iwfpapp/services/recommendation_engine/category_ranker.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  final AppContext appContext;
-  final DataBackend dataBackend;
-  final AppAuth auth;
-  const HomeScreen(this.appContext, this.dataBackend, this.auth, {Key key})
-      : super(key: key);
+  const HomeScreen({Key key}) : super(key: key);
   @override
   _HomeScreen createState() {
     return _HomeScreen();
@@ -28,44 +18,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  SubmitScreenStatus status;
-  Map<HomeTabId, HomeTab> tabs = homeTabs;
+  Map<HomeTabId, HomeTab> tabs;
   HomeTabId currentTabId = HomeTabId.SHOPPING;
-  List<CreditCard> cards = [];
-  List<ShopCategory> categories = [];
 
   @override
   void initState() {
     super.initState();
     this.tabs = homeTabs;
-    status = SubmitScreenStatus.LOADING;
-    this.tabs[HomeTabId.SHOPPING].onRefresh = this.handleRefresh;
-    this.tabs[HomeTabId.SHOPPING].onQueryChange = this.onShoppingQueryChange;
-    this.tabs[HomeTabId.CARD_MANAGEMENT].onRefresh = this.handleRefresh;
-    maybeNavigateToSignIn();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    currentTabId = HomeTabId.SHOPPING;
     if (ModalRoute.of(context).settings.arguments != null) {
       currentTabId = ModalRoute.of(context).settings.arguments;
-    } else {
-      currentTabId = HomeTabId.SHOPPING;
     }
+    maybeNavigateToSignIn();
+    Provider.of<DataBackend>(context, listen: false).maybeRefresh();
   }
 
   Future<void> maybeNavigateToSignIn() async {
-    setState(() {
-      status = SubmitScreenStatus.LOADING;
-    });
-    bool signedIn = await widget.auth.isSignedIn();
-    if (signedIn) {
-      setState(() {
-        status = SubmitScreenStatus.DONE;
-      });
-      await handleRefresh();
-    } else {
+    bool signedIn = await Provider.of<AppAuth>(context).isSignedIn();
+    if (!signedIn) {
       Navigator.of(context).pushReplacementNamed('/sign_in');
     }
   }
@@ -73,29 +48,6 @@ class _HomeScreen extends State<HomeScreen> {
   void onTabTapped(int index) {
     setState(() {
       currentTabId = homeTabIndex2Id(index);
-    });
-  }
-
-  Future<void> onShoppingQueryChange(String query) async {
-    List<ShopCategory> rankedCategories =
-        rankShopCategories(categories, ShoppingContext(query: query));
-    setState(() {
-      categories = rankedCategories;
-    });
-  }
-
-  Future<void> handleRefresh() async {
-    setState(() {
-      status = SubmitScreenStatus.LOADING;
-    });
-    await widget.dataBackend.forceRefreshCards();
-    List<CreditCard> refreshedCards = await widget.dataBackend.getCreditCards();
-    List<ShopCategory> refershedCategories =
-        await widget.dataBackend.getShopCategories();
-    setState(() {
-      cards = refreshedCards;
-      categories = refershedCategories;
-      status = SubmitScreenStatus.DONE;
     });
   }
 
@@ -115,19 +67,26 @@ class _HomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            child: HomeAppBar(this.tabs[currentTabId], this.status),
-            preferredSize: Size.fromHeight(kToolbarHeight)),
-        body: SafeArea(
-            bottom: true,
-            child: HomeScreenContent(
-                this.currentTabId,
-                widget.dataBackend,
-                widget.appContext,
-                widget.auth,
-                this.cards,
-                this.categories,
-                this.status)),
+        appBar: AppBar(
+          key: Key('home_screen_appbar'),
+          title: Text('5% App'),
+          actions: [
+            ButtonTheme(
+                minWidth: 25.0,
+                child: FlatButton(
+                  child: Icon(
+                    Icons.refresh,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Provider.of<DataBackend>(context, listen: false)
+                        .forceRefresh();
+                  },
+                ))
+          ],
+        ),
+        body:
+            SafeArea(bottom: true, child: HomeScreenContent(this.currentTabId)),
         floatingActionButton: renderActionBtn(context),
         bottomNavigationBar: HomeBottomNavigator(
             this.tabs, this.currentTabId, this.onTabTapped));

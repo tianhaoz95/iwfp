@@ -109,6 +109,10 @@ jobs:
         with:
           flutter-version: "1.12.13+hotfix.9"
           channel: "stable"
+      - name: use master channel
+        run: flutter channel master
+      - name: upgrade Flutter
+        run: flutter upgrade
       - name: list all simulators
         run: xcrun instruments -s
       - name: start simulator
@@ -156,6 +160,10 @@ jobs:
         with:
           flutter-version: "1.12.13+hotfix.9"
           channel: "stable"
+      - name: use master channel
+        run: flutter channel master
+      - name: upgrade Flutter
+        run: flutter upgrade
       - name: install firebase CLI
         run: npm install -g firebase-tools
       - name: list all simulators
