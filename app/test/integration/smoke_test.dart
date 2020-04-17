@@ -21,7 +21,7 @@ void main() {
       ],
       child: IwfpApp(),
     ));
-    await homeScreenWalkaround(tester);
     await signOutAndSignIn(tester);
+    await homeScreenWalkaround(tester);
   });
 }

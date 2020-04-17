@@ -2,9 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 
-class PromoRemoved extends StatelessWidget {
+class PromoRemoved extends StatefulWidget {
   final RemovePromoMeta removePromoMeta;
-  const PromoRemoved({@required this.removePromoMeta});
+  final bool autoNav;
+
+  const PromoRemoved(
+      {Key key, @required this.removePromoMeta, this.autoNav = true})
+      : super(key: key);
+  @override
+  State<StatefulWidget> createState() {
+    return _PromoRemoved();
+  }
+}
+
+class _PromoRemoved extends State<PromoRemoved> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (widget.autoNav) {
+      navToEditCard();
+    }
+  }
+
+  Future<void> navToEditCard() async {
+    await Future.delayed(Duration(milliseconds: 200));
+    CreditCard modifiedCard = widget.removePromoMeta.card;
+    modifiedCard.removePromo(widget.removePromoMeta.promo);
+    Navigator.pushReplacementNamed(context, '/edit_card',
+        arguments: modifiedCard);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,22 +57,6 @@ class PromoRemoved extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-            child: RaisedButton(
-              child: Text(
-                'Back to editing card',
-                style: TextStyle(color: Colors.white),
-              ),
-              color: Colors.green,
-              onPressed: () {
-                CreditCard modifiedCard = removePromoMeta.card;
-                modifiedCard.removePromo(removePromoMeta.promo);
-                Navigator.pushReplacementNamed(context, '/edit_card',
-                    arguments: modifiedCard);
-              },
             ),
           ),
         ],
