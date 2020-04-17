@@ -1,7 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 
-class CardAddedFromTemplate extends StatelessWidget {
+class CardAddedFromTemplate extends StatefulWidget {
+  final bool autoNav;
+
+  const CardAddedFromTemplate({Key key, this.autoNav = true}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _CardAddedFromTemplate();
+  }
+}
+
+class _CardAddedFromTemplate extends State<CardAddedFromTemplate> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (widget.autoNav) {
+      navToWallet();
+    }
+  }
+
+  Future<void> navToWallet() async {
+    await Future.delayed(Duration(milliseconds: 200));
+    Navigator.pushReplacementNamed(context, '/',
+        arguments: HomeTabId.CARD_MANAGEMENT);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,20 +44,6 @@ class CardAddedFromTemplate extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/',
-                      arguments: HomeTabId.CARD_MANAGEMENT);
-                },
-                key: Key('add_template_success_nav_btn'),
-                color: Colors.green,
-                child: Text(
-                  'Back',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ))
         ],
       ),
     );

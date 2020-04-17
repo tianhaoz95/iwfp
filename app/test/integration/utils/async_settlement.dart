@@ -1,7 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 
-Future<void> settleAsyncUpdate(WidgetTester tester) async {
+Future<void> settleAsyncUpdate(WidgetTester tester,
+    {bool extraWait = true}) async {
   await tester.pump();
-  await tester.pumpAndSettle(new Duration(seconds: 3));
+  if (extraWait) {
+    await tester.pumpAndSettle(new Duration(seconds: 3));
+  }
   await tester.pumpAndSettle();
 }

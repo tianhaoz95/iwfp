@@ -1,9 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 
-class PromoAdded extends StatelessWidget {
+class PromoAdded extends StatefulWidget {
   final CreditCard card;
-  const PromoAdded({@required this.card});
+  final bool autoNav;
+
+  const PromoAdded({Key key, @required this.card, this.autoNav = true})
+      : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _PromoAdded();
+  }
+}
+
+class _PromoAdded extends State<PromoAdded> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (widget.autoNav) {
+      navToEditCard();
+    }
+  }
+
+  Future<void> navToEditCard() async {
+    await Future.delayed(Duration(milliseconds: 200));
+    Navigator.pushReplacementNamed(context, '/edit_card',
+        arguments: widget.card);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,20 +46,6 @@ class PromoAdded extends StatelessWidget {
                     height: 15.0,
                   ),
                 ],
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-            child: RaisedButton(
-              color: Colors.green,
-              onPressed: () async {
-                Navigator.pushReplacementNamed(context, '/edit_card',
-                    arguments: this.card);
-              },
-              child: Text(
-                'Back to Card Editing',
-                style: TextStyle(color: Colors.white),
               ),
             ),
           ),

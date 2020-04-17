@@ -1,6 +1,6 @@
 import 'package:flutter_driver/flutter_driver.dart';
-import 'utilities/is_signed_in.dart';
-import 'utilities/screenshot.dart';
+import '../utilities/is_signed_in.dart';
+import '../utilities/screenshot.dart';
 
 Future<void> smokeTestRoutine(FlutterDriver driver) async {
   await prepareScreenshotArea();
@@ -44,6 +44,5 @@ Future<void> smokeTestRoutine(FlutterDriver driver) async {
       timeout: Duration(seconds: 30));
   await takeNamedScreenshot(
       driver, 'add_card_from_template_success_screen_offline');
-  await driver.tap(find.byValueKey('add_template_success_nav_btn'));
   await driver.waitFor(find.byValueKey('home_screen_appbar'));
 }
