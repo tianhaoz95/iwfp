@@ -105,6 +105,10 @@ abstract class AppAuth extends ChangeNotifier {
     }
   }
 
+  void resetSendPasswordResetEmailState() {
+    resetEmailState = ResetEmailState.PENDING;
+  }
+
   Future<void> signInWithEmailHandler(String email, String pwd);
 
   Future<void> signUpWithEmailHandler(String email, String pwd);
