@@ -7,11 +7,11 @@ Future<void> smokeTestRoutine(FlutterDriver driver) async {
   bool signedIn = await isSignedIn(driver);
   if (signedIn) {
     await driver.tap(find.byValueKey('user_nav_btn'));
-    await driver.waitFor(find.text('Sign out'));
-    await driver.tap(find.text('Sign out'));
-    await driver.waitFor(find.text('Logout'));
-    await driver.tap(find.text('Logout'));
-    await driver.waitFor(find.text('Sign In with Email'));
+    await driver.waitFor(find.byValueKey('go_to_auth_btn'));
+    await driver.tap(find.byValueKey('go_to_auth_btn'));
+    await driver.waitFor(find.byValueKey('logout_btn'));
+    await driver.tap(find.byValueKey('logout_btn'));
+    await driver.waitFor(find.byValueKey('email_sign_in_btn'));
   }
   await takeNamedScreenshot(driver, 'sign_in_screen_pending_offline');
   await driver.tap(find.byValueKey('sign_in_email_input'));
@@ -19,7 +19,7 @@ Future<void> smokeTestRoutine(FlutterDriver driver) async {
   await driver.tap(find.byValueKey('sign_in_password_input'));
   await driver.enterText('123456');
   await takeNamedScreenshot(driver, 'sign_in_screen_presubmit_offline');
-  await driver.tap(find.text('Sign In with Email'));
+  await driver.tap(find.byValueKey('email_sign_in_btn'));
   await driver.waitFor(find.byValueKey('go_to_home_btn'));
   await driver.tap(find.byValueKey('go_to_home_btn'));
   await driver.waitFor(find.byValueKey('home_screen_appbar'));
