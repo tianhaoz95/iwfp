@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
-import 'package:iwfpapp/widgets/buttons/go_to_home_btn.dart';
-import 'package:iwfpapp/widgets/buttons/logout_btn.dart';
+import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:provider/provider.dart';
 
 class AuthScreenSignedInContent extends StatelessWidget {
@@ -20,17 +19,23 @@ class AuthScreenSignedInContent extends StatelessWidget {
             key: Key('sign_in_welcome_back_title'),
           ),
           SizedBox(height: 25.0),
-          GoToHomeButton(
-            onPressedCallback: () async {
-              Navigator.pushReplacementNamed(context, '/');
-            },
+          Material(
+            child: RaisedButton(
+                key: Key('go_to_home_btn'),
+                child: Text('Get started!'),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/',
+                      arguments: HomeTabId.USER_SETTINGS);
+                }),
           ),
-          SizedBox(height: 25.0),
-          LogoutButton(
-            onPressedCallback: () async {
-              await Provider.of<AppAuth>(context, listen: false).signOut();
-            },
-          )
+          Material(
+            child: RaisedButton(
+                key: Key('logout_btn'),
+                child: Text('Sign out'),
+                onPressed: () {
+                  Provider.of<AppAuth>(context, listen: false).signOut();
+                }),
+          ),
         ],
       ),
     );

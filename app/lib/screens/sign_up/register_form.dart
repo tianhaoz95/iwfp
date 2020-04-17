@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:provider/provider.dart';
 
 class RegisterFormSignUpScreenContent extends StatefulWidget {
@@ -31,8 +32,16 @@ class _RegisterFormSignUpScreenContent
           SizedBox(
             height: 5.0,
           ),
-          Container(
-              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+          ListViewItem(
+            child: Image(
+              image:
+                  AssetImage('assets/auth_screen_subtitle_high_resolution.png'),
+            ),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          ListViewItem(
               child: TextField(
                   controller: emailCtrl,
                   decoration: InputDecoration(
@@ -44,8 +53,7 @@ class _RegisterFormSignUpScreenContent
           SizedBox(
             height: 5.0,
           ),
-          Container(
-              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+          ListViewItem(
               child: TextField(
                   controller: pwdCtrl,
                   obscureText: true,
@@ -59,8 +67,7 @@ class _RegisterFormSignUpScreenContent
           SizedBox(
             height: 5.0,
           ),
-          Container(
-              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+          ListViewItem(
               child: TextField(
                   controller: pwdConfirmCtrl,
                   obscureText: true,
@@ -71,9 +78,8 @@ class _RegisterFormSignUpScreenContent
                       hintText: 'confirm password',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0))))),
-          Material(
-              child: Container(
-            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+          ListViewItem(
+              child: Material(
             child: RaisedButton(
               color: Colors.green,
               onPressed: () {
@@ -89,11 +95,10 @@ class _RegisterFormSignUpScreenContent
               ),
             ),
           )),
-          Material(
-              child: Container(
-            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+          ListViewItem(
+              child: Material(
             child: RaisedButton(
-              color: Colors.amber[900],
+              color: Colors.redAccent,
               onPressed: () {
                 Navigator.pop(context);
               },

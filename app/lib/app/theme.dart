@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 ThemeData theme = ThemeData(
-  primaryColor: Colors.black,
-  accentColor: Colors.black,
-  appBarTheme: AppBarTheme(color: Colors.black),
-  scaffoldBackgroundColor: Colors.white,
-  cardTheme: CardTheme(
-    color: Colors.white,
+  primaryColor: Colors.green,
+  buttonTheme: ButtonThemeData(
+      buttonColor: Colors.deepPurpleAccent,
+      textTheme: ButtonTextTheme.primary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      )),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: Colors.green
   ),
   chipTheme: ChipThemeData(
     backgroundColor: Colors.black45,

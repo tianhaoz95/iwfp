@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:provider/provider.dart';
 
 typedef Future<void> EmailSignInHandler(BuildContext context);
@@ -27,38 +28,40 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 45.0),
-          Container(
-            padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+          SizedBox(
+            height: 5.0,
+          ),
+          ListViewItem(
             child: Image(
               image:
                   AssetImage('assets/auth_screen_subtitle_high_resolution.png'),
             ),
           ),
-          SizedBox(height: 45.0),
-          TextField(
-              controller: this.emailInputController,
-              key: Key('sign_in_email_input'),
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                  hintText: 'email',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0)))),
-          SizedBox(height: 25.0),
-          TextField(
-              controller: this.pwdInputController,
-              obscureText: true,
-              key: Key('sign_in_password_input'),
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                  hintText: 'password',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0)))),
-          SizedBox(height: 25.0),
-          Material(
+          ListViewItem(
+              child: TextField(
+                  controller: this.emailInputController,
+                  key: Key('sign_in_email_input'),
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      hintText: 'email',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))))),
+          ListViewItem(
+              child: TextField(
+                  controller: this.pwdInputController,
+                  obscureText: true,
+                  key: Key('sign_in_password_input'),
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      hintText: 'password',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))))),
+          ListViewItem(
+              child: Material(
             child: RaisedButton(
               color: Colors.green,
               key: Key('email_sign_in_btn'),
@@ -72,8 +75,9 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                     this.pwdInputController.text);
               },
             ),
-          ),
-          Material(
+          )),
+          ListViewItem(
+              child: Material(
             child: RaisedButton(
               color: Colors.redAccent,
               child: Text(
@@ -81,13 +85,16 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
+                Provider.of<AppAuth>(context, listen: false)
+                    .resetSendPasswordResetEmailState();
                 Navigator.pushNamed(context, '/forgot_password',
                     arguments: ForgotPasswordNavConfig(
                         email: emailInputController.text));
               },
             ),
-          ),
-          Material(
+          )),
+          ListViewItem(
+              child: Material(
             child: RaisedButton(
               color: Colors.amber[900],
               child: Text(
@@ -98,8 +105,9 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                 Navigator.pushNamed(context, '/placeholder');
               },
             ),
-          ),
-          Material(
+          )),
+          ListViewItem(
+              child: Material(
             child: RaisedButton(
               color: Colors.blue,
               child: Text(
@@ -110,7 +118,7 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                 Navigator.pushNamed(context, '/sign_up');
               },
             ),
-          ),
+          )),
         ],
       ),
     );
