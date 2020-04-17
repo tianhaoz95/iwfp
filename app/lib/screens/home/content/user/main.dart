@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/screens/home/content/user/developer/developer_section.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +38,6 @@ class _UserSettings extends State<UserSettings> {
                 SizedBox(
                   height: 5.0,
                 ),
-                DeveloperSection(this.handleUpdateSettings),
                 Container(
                   child: Center(
                     child: Text('User Settings'),
