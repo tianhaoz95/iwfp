@@ -29,6 +29,10 @@
       "public": "app/doc/api"
     },
     {
+      "site": "iwfp-app-catalog",
+      "public": "app/build/catalog"
+    },
+    {
       "site": "iwfp-app-cov",
       "public": "app/coverage"
     },

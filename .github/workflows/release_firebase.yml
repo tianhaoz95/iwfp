@@ -53,6 +53,12 @@ jobs:
       - name: generate app coverage report
         working-directory: ./app
         run: genhtml coverage/lcov.info -o coverage
+      - name: build app catalog
+        working-directory: ./app
+        run: flutter build web --target lib/entrypoint/ui.dart
+      - name: move app catalog
+        working-directory: ./app
+        run: mv build/web build/catalog
       - name: build web app
         working-directory: ./app
         run: flutter build web

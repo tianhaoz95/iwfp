@@ -52,7 +52,9 @@ class FivePercentUiDevApp extends StatelessWidget {
         '/add_promo': (context) => AddPromoScreen(
               autoNav: false,
             ),
-        '/remove_promo': (context) => RemovePromoScreen(autoNav: false,),
+        '/remove_promo': (context) => RemovePromoScreen(
+              autoNav: false,
+            ),
         '/delete_account': (context) => DeleteAccountScreen(),
         '/forgot_password': (context) => ForgotPasswordScreen(),
       },

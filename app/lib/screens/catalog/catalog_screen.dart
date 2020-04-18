@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/app_auth/base_auth.dart';
-import 'package:iwfpapp/services/config/typedefs/auth_states.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
-import 'package:iwfpapp/services/config/typedefs/data_store.dart';
-import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
-import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
-import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
-import 'package:iwfpapp/services/utilities/category_counter.dart';
+import 'package:iwfpapp/screens/catalog/catalog_content.dart';
+import 'package:iwfpapp/services/config/typedefs/catalog_categories.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
-import 'package:provider/provider.dart';
 
-class CatalogScreen extends StatelessWidget {
+class CatalogScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _CatalogScreen();
+  }
+}
+
+class _CatalogScreen extends State<CatalogScreen> {
+  CatalogCategory category;
+
+  @override
+  void initState() {
+    super.initState();
+    category = CatalogCategory.SIGN_IN;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,686 +28,129 @@ class CatalogScreen extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: [
-            FlatButton(onPressed: () {}, child: Text('test'))
-          ],
-        ),
-      ),
-      body: Container(
-        child: ListView(
-          children: [
-            ListViewItem(
-              child: Center(
-                child: Text('Sign In'),
-              ),
+            SizedBox(
+              height: 25.0,
             ),
-            Divider(),
             ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<AppAuth>(
-                        context,
-                        listen: false,
-                      ).authState = AuthState.LOADING;
-                      Navigator.pushNamed(context, '/sign_in');
-                    }),
+              child: Image(
+                image: AssetImage(
+                    'assets/auth_screen_subtitle_high_resolution.png'),
               ),
             ),
             ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<AppAuth>(
-                        context,
-                        listen: false,
-                      ).authState = AuthState.ERROR;
-                      Navigator.pushNamed(context, '/sign_in');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.ADD_CARD;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Add Card')),
             ),
             ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Success'),
-                    onPressed: () {
-                      Provider.of<AppAuth>(
-                        context,
-                        listen: false,
-                      ).authState = AuthState.SIGNED_IN;
-                      Navigator.pushNamed(context, '/sign_in');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.ADD_FROM_TEMPLATE;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Add From Template')),
             ),
             ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Pending'),
-                    onPressed: () {
-                      Provider.of<AppAuth>(
-                        context,
-                        listen: false,
-                      ).authState = AuthState.NOT_SIGNED_IN;
-                      Navigator.pushNamed(context, '/sign_in');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.ADD_PROMOTION;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Add Promotion')),
             ),
             ListViewItem(
-              child: Center(
-                child: Text('Home'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.LOADING;
-                      Navigator.pushNamed(context, '/home');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.EDIT_CARD;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Edit Card')),
             ),
             ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Available (Empty)'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.AVAILABLE;
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).creditCards = [];
-                      Navigator.pushNamed(context, '/home');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.HOME;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Home')),
             ),
             ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Available'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.AVAILABLE;
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).creditCards = getLocalCreditCardTemplates();
-                      Navigator.pushNamed(context, '/home');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.PLACEHOLDER;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Placeholder')),
             ),
             ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Outdated'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.OUTDATED;
-                      Navigator.pushNamed(context, '/home');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.RECOMMENDATIONS;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Recommendations')),
             ),
             ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.ERROR;
-                      Navigator.pushNamed(context, '/home');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.REMOVE_CARD;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Remove Card')),
             ),
             ListViewItem(
-              child: Center(
-                child: Text('Placeholder'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Pending'),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/placeholder');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.REMOVE_PROMOTION;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Remove Promotion')),
             ),
             ListViewItem(
-              child: Center(
-                child: Text('Edit Card'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Pending'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.AVAILABLE;
-                      List<CreditCard> cardTemplates =
-                          getLocalCreditCardTemplates();
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).creditCards = cardTemplates;
-                      Navigator.pushNamed(context, '/edit_card',
-                          arguments: getRandomCreditCardTemplate());
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.SIGN_IN;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Sign In')),
             ),
             ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.LOADING;
-                      Navigator.pushNamed(context, '/edit_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.ERROR;
-                      Navigator.pushNamed(context, '/edit_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Completed'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.OUTDATED;
-                      Navigator.pushNamed(context, '/edit_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Center(
-                child: Text('Remove Card'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Pending'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.AVAILABLE;
-                      List<CreditCard> cardTemplates =
-                          getLocalCreditCardTemplates();
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).creditCards = cardTemplates;
-                      Navigator.pushNamed(context, '/remove_card',
-                          arguments: getRandomCreditCardTemplate());
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.LOADING;
-                      Navigator.pushNamed(context, '/remove_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Completed'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.OUTDATED;
-                      Navigator.pushNamed(context, '/remove_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.ERROR;
-                      Navigator.pushNamed(context, '/remove_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Center(
-                child: Text('Add Promotion'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Pending'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.AVAILABLE;
-                      Navigator.pushNamed(context, '/add_promo',
-                          arguments: getRandomCreditCardTemplate());
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.ERROR;
-                      Navigator.pushNamed(context, '/add_promo',
-                          arguments: getRandomCreditCardTemplate());
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.LOADING;
-                      Navigator.pushNamed(context, '/add_promo',
-                          arguments: getRandomCreditCardTemplate());
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Completed'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.OUTDATED;
-                      Navigator.pushNamed(context, '/add_promo',
-                          arguments: getRandomCreditCardTemplate());
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Center(
-                child: Text('Add Card'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Pending'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.AVAILABLE;
-                      Navigator.pushNamed(context, '/add_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.LOADING;
-                      Navigator.pushNamed(context, '/add_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.ERROR;
-                      Navigator.pushNamed(context, '/add_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Completed'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.OUTDATED;
-                      Navigator.pushNamed(context, '/add_card');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Center(
-                child: Text('Add from Template'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Pending'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.AVAILABLE;
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).creditCardTemplates = getLocalCreditCardTemplates();
-                      Navigator.pushNamed(context, '/add_card_from_template');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.ERROR;
-                      Navigator.pushNamed(context, '/add_card_from_template');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Completed'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.OUTDATED;
-                      Navigator.pushNamed(context, '/add_card_from_template');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.LOADING;
-                      Navigator.pushNamed(context, '/add_card_from_template');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Center(
-                child: Text('Remove Promotion'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Pending'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.AVAILABLE;
-                      CreditCard target = getRandomCreditCardTemplate();
-                      Navigator.pushNamed(context, '/remove_promo',
-                          arguments: RemovePromoMeta(target, target.promos[0]));
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.LOADING;
-                      CreditCard target = getRandomCreditCardTemplate();
-                      Navigator.pushNamed(context, '/remove_promo',
-                          arguments: RemovePromoMeta(target, target.promos[0]));
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.ERROR;
-                      CreditCard target = getRandomCreditCardTemplate();
-                      Navigator.pushNamed(context, '/remove_promo',
-                          arguments: RemovePromoMeta(target, target.promos[0]));
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Completed'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.OUTDATED;
-                      CreditCard target = getRandomCreditCardTemplate();
-                      Navigator.pushNamed(context, '/remove_promo',
-                          arguments: RemovePromoMeta(target, target.promos[0]));
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Center(
-                child: Text('Recmomendations'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Pending'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.AVAILABLE;
-                      List<CreditCard> cards = getLocalCreditCardTemplates();
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).creditCards = cards;
-                      Navigator.pushNamed(context, '/suggestion',
-                          arguments: getRandomShoppingCategories(cards));
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.LOADING;
-                      List<CreditCard> cards = getLocalCreditCardTemplates();
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).creditCards = cards;
-                      Navigator.pushNamed(context, '/suggestion',
-                          arguments: getRandomShoppingCategories(cards));
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Outdated'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.OUTDATED;
-                      List<CreditCard> cards = getLocalCreditCardTemplates();
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).creditCards = cards;
-                      Navigator.pushNamed(context, '/suggestion',
-                          arguments: getRandomShoppingCategories(cards));
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).status = DataBackendStatus.ERROR;
-                      List<CreditCard> cards = getLocalCreditCardTemplates();
-                      Provider.of<DataBackend>(
-                        context,
-                        listen: false,
-                      ).creditCards = cards;
-                      Navigator.pushNamed(context, '/suggestion',
-                          arguments: getRandomShoppingCategories(cards));
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Center(
-                child: Text('Sign Up'),
-              ),
-            ),
-            Divider(),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Signed In'),
-                    onPressed: () {
-                      Provider.of<AppAuth>(
-                        context,
-                        listen: false,
-                      ).authState = AuthState.SIGNED_IN;
-                      Navigator.pushNamed(context, '/sign_up');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Not Signed In'),
-                    onPressed: () {
-                      Provider.of<AppAuth>(
-                        context,
-                        listen: false,
-                      ).authState = AuthState.NOT_SIGNED_IN;
-                      Navigator.pushNamed(context, '/sign_up');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Loading'),
-                    onPressed: () {
-                      Provider.of<AppAuth>(
-                        context,
-                        listen: false,
-                      ).authState = AuthState.LOADING;
-                      Navigator.pushNamed(context, '/sign_up');
-                    }),
-              ),
-            ),
-            ListViewItem(
-              child: Material(
-                child: RaisedButton(
-                    child: Text('Error'),
-                    onPressed: () {
-                      Provider.of<AppAuth>(
-                        context,
-                        listen: false,
-                      ).authState = AuthState.ERROR;
-                      Navigator.pushNamed(context, '/sign_up');
-                    }),
-              ),
+              child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      category = CatalogCategory.SIGN_UP;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Text('Sign Up')),
             ),
           ],
         ),
       ),
+      body: CatalogContent(category: this.category),
     );
   }
 }
