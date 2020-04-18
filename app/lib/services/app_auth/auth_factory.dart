@@ -1,4 +1,5 @@
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
+import 'package:iwfpapp/services/app_auth/dumb_auth.dart';
 import 'package:iwfpapp/services/app_auth/firebase_auth.dart';
 import 'package:iwfpapp/services/app_auth/mock_auth.dart';
 import 'package:iwfpapp/services/config/typedefs/app_auth_types.dart';
@@ -9,6 +10,8 @@ AppAuth getAppAuth(AppAuthType type) {
       return AppAuthUsingFirebaseAuth();
     case AppAuthType.MOCK_AUTH:
       return MockAuth();
+    case AppAuthType.DUMB_AUTH:
+      return DumbAuth();
     default:
       return AppAuthUsingFirebaseAuth();
   }

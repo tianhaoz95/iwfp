@@ -8,9 +8,8 @@ ThemeData theme = ThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
       )),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Colors.green
-  ),
+  floatingActionButtonTheme:
+      FloatingActionButtonThemeData(backgroundColor: Colors.green),
   chipTheme: ChipThemeData(
     backgroundColor: Colors.black45,
     disabledColor: Colors.grey,
@@ -23,4 +22,8 @@ ThemeData theme = ThemeData(
     padding: EdgeInsets.fromLTRB(1.0, 1.0, 1.0, 1.0),
     selectedColor: Colors.black45,
   ),
+);
+
+ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
 );

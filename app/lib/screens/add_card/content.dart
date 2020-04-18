@@ -9,6 +9,9 @@ import 'package:iwfpapp/widgets/generic/unknown_error.dart';
 import 'package:provider/provider.dart';
 
 class AddCardScreenContent extends StatelessWidget {
+  final bool autoNav;
+
+  const AddCardScreenContent({Key key, this.autoNav = true}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Consumer<DataBackend>(
@@ -21,7 +24,9 @@ class AddCardScreenContent extends StatelessWidget {
           case DataBackendStatus.ERROR:
             return AddCardScreenErrorContent();
           case DataBackendStatus.OUTDATED:
-            return AddCardScreenCardAddedContent();
+            return AddCardScreenCardAddedContent(
+              autoNav: this.autoNav,
+            );
           default:
             return UnknownError();
         }

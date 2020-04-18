@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/utilities/card_templates/amazon_prime_rewards_visa_signature_card.dart';
 import 'package:iwfpapp/services/utilities/card_templates/amazon_prime_store_card.dart';
@@ -17,4 +19,10 @@ List<CreditCard> getLocalCreditCardTemplates() {
     petal,
   ];
   return creditCardMetadataList;
+}
+
+CreditCard getRandomCreditCardTemplate() {
+  List<CreditCard> cardTemplates = getLocalCreditCardTemplates();
+  Random randomGenerator = Random();
+  return cardTemplates[randomGenerator.nextInt(cardTemplates.length)];
 }

@@ -9,6 +9,11 @@ import 'package:iwfpapp/widgets/generic/unknown_error.dart';
 import 'package:provider/provider.dart';
 
 class AddCardFromTemplateContent extends StatelessWidget {
+  final bool autoNav;
+
+  const AddCardFromTemplateContent({Key key, this.autoNav = true})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<DataBackend>(
@@ -21,7 +26,9 @@ class AddCardFromTemplateContent extends StatelessWidget {
           case DataBackendStatus.LOADING:
             return AddingCardFromTemplate();
           case DataBackendStatus.OUTDATED:
-            return CardAddedFromTemplate();
+            return CardAddedFromTemplate(
+              autoNav: this.autoNav,
+            );
           default:
             return UnknownError();
         }

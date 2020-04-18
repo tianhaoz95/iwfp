@@ -10,7 +10,6 @@ import 'package:iwfpapp/screens/placeholder/main.dart';
 import 'package:iwfpapp/screens/auth/auth_screen.dart';
 import 'package:iwfpapp/screens/remove_card/remove_card_screen.dart';
 import 'package:iwfpapp/screens/remove_promo/remove_promo_screen.dart';
-import 'package:iwfpapp/screens/screen_tester/main.dart';
 import 'package:iwfpapp/screens/sign_up/sign_up_screen.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/screens/add_card/add_card_screen.dart';
@@ -22,6 +21,7 @@ class IwfpApp extends StatelessWidget {
     return MaterialApp(
       title: '5% App',
       theme: theme,
+      darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
@@ -37,7 +37,6 @@ class IwfpApp extends StatelessWidget {
         '/add_promo': (context) => AddPromoScreen(),
         '/remove_promo': (context) => RemovePromoScreen(),
         '/delete_account': (context) => DeleteAccountScreen(),
-        '/screen_tester': (context) => ScreenTester(),
         '/forgot_password': (context) => ForgotPasswordScreen(),
       },
     );

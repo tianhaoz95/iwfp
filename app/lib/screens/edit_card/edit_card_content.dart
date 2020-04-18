@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/edit_card/card_edited.dart';
+import 'package:iwfpapp/screens/edit_card/edit_card_error.dart';
 import 'package:iwfpapp/screens/edit_card/edit_card_pending.dart';
 import 'package:iwfpapp/screens/edit_card/editing_card.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
@@ -23,9 +24,7 @@ class EditCardContent extends StatelessWidget {
           case DataBackendStatus.LOADING:
             return EditingCard();
           case DataBackendStatus.ERROR:
-            return EditCardContent(
-              card: this.card,
-            );
+            return EditCardError();
           case DataBackendStatus.OUTDATED:
             return CardEdited();
           default:
