@@ -1,4 +1,3 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/app/ui_dev_app.dart';
 import 'package:iwfpapp/services/app_auth/auth_factory.dart';

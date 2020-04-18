@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/sign_up/content.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
-import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 /// The sign up screen
 ///
