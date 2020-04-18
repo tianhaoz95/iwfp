@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 
 class AddCardScreenCardAddedContent extends StatefulWidget {
   final bool autoNav;
@@ -34,15 +35,10 @@ class _AddCardScreenCardAddedContent
       padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
       child: ListView(
         children: <Widget>[
-          SizedBox(
-            height: 15.0,
-          ),
-          Center(
+          ListViewItem(
+              child: Center(
             child: Text('Add card succeeded!'),
-          ),
-          SizedBox(
-            height: 15.0,
-          ),
+          )),
         ],
       ),
     );

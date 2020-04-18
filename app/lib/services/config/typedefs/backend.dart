@@ -3,4 +3,5 @@ enum BackendType {
   USE_HTTP,
   EMULATOR,
   MOCK,
+  DUMB,
 }

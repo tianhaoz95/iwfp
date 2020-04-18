@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 
 class AddCardScreenLoadingContent extends StatelessWidget {
   @override
@@ -12,20 +13,19 @@ class AddCardScreenLoadingContent extends StatelessWidget {
           SizedBox(
             height: 25.0,
           ),
-          Center(
-            child: Text('Adding credit card to your wallet...'),
+          ListViewItem(
+            child: Center(
+              child: Text('Adding credit card to your wallet...'),
+            ),
           ),
-          SizedBox(
-            height: 25.0,
-          ),
-          Center(
+          ListViewItem(
+              child: Center(
             child: Text('Please be patient...'),
-          ),
-          SizedBox(
-            height: 25.0,
-          ),
-          Center(
-            child: Text('This should take a few seconds...'),
+          )),
+          ListViewItem(
+            child: Center(
+              child: Text('This should take a few seconds...'),
+            ),
           ),
         ],
       ),

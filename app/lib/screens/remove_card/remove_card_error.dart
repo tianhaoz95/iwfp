@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 
 class RemoveCardError extends StatelessWidget {
   @override
@@ -6,7 +7,11 @@ class RemoveCardError extends StatelessWidget {
     return Container(
       child: ListView(
         children: [
-          Text('error'),
+          ListViewItem(
+            child: Center(
+              child: Text('Error Removing Card'),
+            ),
+          ),
         ],
       ),
     );

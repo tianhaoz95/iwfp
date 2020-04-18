@@ -11,7 +11,9 @@ import 'package:provider/provider.dart';
 
 class RemovePromoContent extends StatelessWidget {
   final RemovePromoMeta removePromoMeta;
-  const RemovePromoContent({@required this.removePromoMeta});
+  /// see [RemovePromoScreen.autoNav]
+  final bool autoNav;
+  const RemovePromoContent({@required this.removePromoMeta, this.autoNav = true});
   @override
   Widget build(BuildContext context) {
     return Consumer<DataBackend>(
@@ -28,6 +30,7 @@ class RemovePromoContent extends StatelessWidget {
           case DataBackendStatus.OUTDATED:
             return PromoRemoved(
               removePromoMeta: this.removePromoMeta,
+              autoNav: this.autoNav,
             );
           default:
             return UnknownError();

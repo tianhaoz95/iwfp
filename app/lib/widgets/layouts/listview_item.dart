@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 class ListViewItem extends StatelessWidget {
   final Widget child;
@@ -7,10 +8,11 @@ class ListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-      child: this.child,
+    return PreferredWidthContent(
+      child: Container(
+        padding: EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
+        child: this.child,
+      ),
     );
   }
-  
 }

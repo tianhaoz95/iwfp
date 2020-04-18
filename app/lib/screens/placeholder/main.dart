@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 
 class PlaceholderScreen extends StatelessWidget {
   @override
@@ -11,9 +12,20 @@ class PlaceholderScreen extends StatelessWidget {
       body: Container(
         child: Column(
           children: <Widget>[
-            Image.asset(
+            ListViewItem(
+                child: Image.asset(
               'assets/coming_soon.png',
               key: Key('coming_soon_img'),
+            )),
+            ListViewItem(
+              child: Center(
+                child: Text('The feature is under construction.'),
+              ),
+            ),
+            ListViewItem(
+              child: Center(
+                child: Text('Please check back later :)'),
+              ),
             ),
           ],
         ),

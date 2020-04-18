@@ -24,11 +24,10 @@ class _SignUpScreen extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Sign up for iwfpapp'),
-        ),
-        body: PreferredWidthContent(
-          child: SignUpScreenContent(),
-        ));
+      appBar: AppBar(
+        title: Text('Sign up for iwfpapp'),
+      ),
+      body: SignUpScreenContent(),
+    );
   }
 }

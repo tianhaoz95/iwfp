@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 
 class CardAddedFromTemplate extends StatefulWidget {
   final bool autoNav;
@@ -32,15 +33,15 @@ class _CardAddedFromTemplate extends State<CardAddedFromTemplate> {
     return Container(
       child: ListView(
         children: <Widget>[
-          SizedBox(
-            height: 5.0,
-          ),
-          Material(
-            child: Card(
-              child: Container(
-                padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                child: Text('Card added from template'),
-                key: Key('add_card_template_success_confirmation'),
+          ListViewItem(
+            child: Material(
+              child: Card(
+                child: Container(
+                  child: Center(
+                    child: Text('Card added from template'),
+                  ),
+                  key: Key('add_card_template_success_confirmation'),
+                ),
               ),
             ),
           ),

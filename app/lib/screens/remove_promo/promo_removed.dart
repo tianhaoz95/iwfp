@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 
 class PromoRemoved extends StatefulWidget {
   final RemovePromoMeta removePromoMeta;
+
+  /// see [RemovePromoScreen.autoNav]
   final bool autoNav;
 
   const PromoRemoved(
@@ -37,25 +40,27 @@ class _PromoRemoved extends State<PromoRemoved> {
     return Container(
       child: ListView(
         children: <Widget>[
-          Material(
-            child: Card(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Center(
-                      child: Text(
-                        'Promotion removed',
+          ListViewItem(
+            child: Material(
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: Text(
+                          'Promotion removed',
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                ],
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

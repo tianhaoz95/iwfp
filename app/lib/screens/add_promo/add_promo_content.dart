@@ -11,7 +11,8 @@ import 'package:provider/provider.dart';
 
 class AddPromoContent extends StatelessWidget {
   final CreditCard card;
-  const AddPromoContent({@required this.card});
+  final bool autoNav;
+  const AddPromoContent({@required this.card, this.autoNav = true});
   @override
   Widget build(BuildContext context) {
     return Consumer<DataBackend>(
@@ -26,6 +27,7 @@ class AddPromoContent extends StatelessWidget {
           case DataBackendStatus.OUTDATED:
             return PromoAdded(
               card: this.card,
+              autoNav: this.autoNav,
             );
           case DataBackendStatus.ERROR:
             return AddPromoError();

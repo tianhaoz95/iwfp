@@ -3,6 +3,7 @@ import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/widgets/credit_cards/template.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:provider/provider.dart';
 
 class AddCardFromTemplatePending extends StatelessWidget {
@@ -13,7 +14,8 @@ class AddCardFromTemplatePending extends StatelessWidget {
         children: Provider.of<DataBackend>(context, listen: false)
             .getCreditCardTemplates()
             .map((CreditCard cardTemplate) {
-          return TemplateCreditCard(
+          return ListViewItem(
+              child: TemplateCreditCard(
             card: cardTemplate,
             color: Colors.cyan,
             onPressedAddTemplate: () {
@@ -21,7 +23,7 @@ class AddCardFromTemplatePending extends StatelessWidget {
                   .initCreditCardWithTemplate(
                       CreditCardAdditionRequest(cardTemplate));
             },
-          );
+          ));
         }).toList(),
       ),
     );

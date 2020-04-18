@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 
 class AddCardFromTemplateError extends StatelessWidget {
   @override
@@ -6,32 +7,26 @@ class AddCardFromTemplateError extends StatelessWidget {
     return Container(
         child: ListView(
       children: <Widget>[
-        SizedBox(
-          height: 5.0,
-        ),
-        Material(
-          color: Colors.cyan[100],
-          child: Card(
-            color: Colors.cyan,
-            child: Container(
-                padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                child: Text('Error using template',
-                    style: TextStyle(color: Colors.white))),
+        ListViewItem(
+          child: Material(
+            child: Card(
+              child: Container(
+                  child: Center(
+                      child: Text(
+                'Error using template',
+              ))),
+            ),
           ),
         ),
-        SizedBox(
-          height: 5.0,
-        ),
-        Container(
-          padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+        ListViewItem(
+            child: Material(
           child: RaisedButton(
-            color: Colors.redAccent,
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/');
             },
-            child: Text('Back', style: TextStyle(color: Colors.white)),
+            child: Text('Back'),
           ),
-        )
+        )),
       ],
     ));
   }

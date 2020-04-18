@@ -10,7 +10,11 @@ import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  final bool autoAuthCheck;
+  final bool autoRefresh;
+  const HomeScreen(
+      {Key key, this.autoAuthCheck = true, this.autoRefresh = true})
+      : super(key: key);
   @override
   _HomeScreen createState() {
     return _HomeScreen();
@@ -34,8 +38,12 @@ class _HomeScreen extends State<HomeScreen> {
     if (ModalRoute.of(context).settings.arguments != null) {
       currentTabId = ModalRoute.of(context).settings.arguments;
     }
-    maybeNavigateToSignIn();
-    Provider.of<DataBackend>(context, listen: false).maybeRefresh();
+    if (widget.autoAuthCheck) {
+      maybeNavigateToSignIn();
+    }
+    if (widget.autoRefresh) {
+      Provider.of<DataBackend>(context, listen: false).maybeRefresh();
+    }
   }
 
   Future<void> maybeNavigateToSignIn() async {

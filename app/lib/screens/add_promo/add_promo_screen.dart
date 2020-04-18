@@ -11,7 +11,9 @@ import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 /// {@category Screens}
 class AddPromoScreen extends StatefulWidget {
   final CreditCard defaultCard;
-  const AddPromoScreen({Key key, this.defaultCard}) : super(key: key);
+  final bool autoNav;
+  const AddPromoScreen({Key key, this.defaultCard, this.autoNav = true})
+      : super(key: key);
   @override
   _AddPromoScreen createState() {
     return _AddPromoScreen();
@@ -43,6 +45,7 @@ class _AddPromoScreen extends State<AddPromoScreen> {
       body: PreferredWidthContent(
           child: AddPromoContent(
         card: this.card,
+        autoNav: widget.autoNav,
       )),
     );
   }

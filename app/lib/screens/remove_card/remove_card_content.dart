@@ -11,7 +11,8 @@ import 'package:provider/provider.dart';
 
 class RemoveCardContent extends StatelessWidget {
   final CreditCard card;
-  const RemoveCardContent({@required this.card});
+  final bool autoNav;
+  const RemoveCardContent({@required this.card, this.autoNav = true});
   @override
   Widget build(BuildContext context) {
     return Consumer<DataBackend>(
@@ -24,7 +25,9 @@ class RemoveCardContent extends StatelessWidget {
           case DataBackendStatus.ERROR:
             return RemoveCardError();
           case DataBackendStatus.OUTDATED:
-            return CardRemoved();
+            return CardRemoved(
+              autoNav: this.autoNav,
+            );
           default:
             return UnknownError();
         }

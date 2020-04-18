@@ -5,6 +5,7 @@ import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
+import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:provider/provider.dart';
 
 class AddCardScreenAddCardFormContent extends StatefulWidget {
@@ -32,12 +33,14 @@ class _AddCardScreenAddCardFormContent
       padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 25.0),
-          AddCardIdInput(this.cardIdInputCtrl),
-          SizedBox(height: 25.0),
-          AddCardNameInput(this.cardNameInputCtrl),
-          SizedBox(height: 25.0),
-          RaisedButton(
+          ListViewItem(
+            child: AddCardIdInput(this.cardIdInputCtrl),
+          ),
+          ListViewItem(
+            child: AddCardNameInput(this.cardNameInputCtrl),
+          ),
+          ListViewItem(
+              child: RaisedButton(
             color: Colors.green,
             child: Text(
               'Add Card',
@@ -48,8 +51,9 @@ class _AddCardScreenAddCardFormContent
                   CreditCardInitRequest(CreditCard(
                       cardNameInputCtrl.text, cardIdInputCtrl.text)));
             },
-          ),
-          RaisedButton(
+          )),
+          ListViewItem(
+              child: RaisedButton(
             color: Colors.amber[900],
             child: Text('From Template', style: TextStyle(color: Colors.white)),
             key: Key('go_to_add_card_from_template_btn'),
@@ -57,8 +61,9 @@ class _AddCardScreenAddCardFormContent
               Navigator.pushReplacementNamed(
                   context, '/add_card_from_template');
             },
-          ),
-          RaisedButton(
+          )),
+          ListViewItem(
+              child: RaisedButton(
             color: Colors.redAccent,
             child: Text(
               'Cancel',
@@ -68,7 +73,7 @@ class _AddCardScreenAddCardFormContent
               Navigator.pushReplacementNamed(context, '/',
                   arguments: HomeTabId.CARD_MANAGEMENT);
             },
-          ),
+          )),
         ],
       ),
     );
