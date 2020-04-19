@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ThemeData theme = ThemeData(
+ThemeData greenTheme = ThemeData(
   primaryColor: Colors.green,
   buttonTheme: ButtonThemeData(
       buttonColor: Colors.deepPurpleAccent,
@@ -22,8 +22,4 @@ ThemeData theme = ThemeData(
     padding: EdgeInsets.fromLTRB(1.0, 1.0, 1.0, 1.0),
     selectedColor: Colors.black45,
   ),
-);
-
-ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
 );

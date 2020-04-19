@@ -55,20 +55,6 @@ class _AddCardFromTemplateScreen extends State<AddCardFromTemplateScreen> {
           'Add Card from Templates',
           key: Key('add_card_from_template_title'),
         ),
-        leading: FlatButton(
-          key: Key('template_back_btn'),
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            if (widget.popNav) {
-              Navigator.pop(context);
-            } else {
-              Navigator.pushReplacementNamed(context, '/add_card');
-            }
-          },
-        ),
       ),
       body: AddCardFromTemplateContent(
         autoNav: widget.autoNav,
