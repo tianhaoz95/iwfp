@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-ThemeData theme = ThemeData(
-  primaryColor: Colors.green,
+ThemeData pinkTheme = ThemeData(
+  primaryColor: Colors.pink,
+  cardTheme: CardTheme(
+    color: Colors.white,
+  ),
   buttonTheme: ButtonThemeData(
-      buttonColor: Colors.deepPurpleAccent,
+      buttonColor: Colors.white,
       textTheme: ButtonTextTheme.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -22,8 +25,4 @@ ThemeData theme = ThemeData(
     padding: EdgeInsets.fromLTRB(1.0, 1.0, 1.0, 1.0),
     selectedColor: Colors.black45,
   ),
-);
-
-ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
 );

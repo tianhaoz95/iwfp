@@ -30,8 +30,7 @@ Future<void> smokeTestRoutine(FlutterDriver driver) async {
   await takeNamedScreenshot(driver, 'user_settings_screen_offline');
   await driver.tap(find.byValueKey('contrib_nav_btn'));
   await takeNamedScreenshot(driver, 'contrib_screen_offline');
-  await driver.tap(find.byValueKey('shop_nav_btn'));
-  await driver.tap(find.byValueKey('empty_wallet_jump_to_card_management_btn'));
+  await driver.tap(find.byValueKey('cards_nav_btn'));
   await driver.tap(find.byValueKey('add_card_floating_btn'));
   await driver.waitFor(find.byValueKey('add_card_title'));
   await takeNamedScreenshot(driver, 'add_card_screen_offline');

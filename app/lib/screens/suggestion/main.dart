@@ -15,16 +15,6 @@ class SuggestionScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('For ' + category.name + ', I should use ...'),
         key: Key('suggestion_title'),
-        leading: FlatButton(
-          key: Key('suggestion_back_btn'),
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
       ),
       body: PreferredWidthContent(child: SuggestionEntries(category)),
     );

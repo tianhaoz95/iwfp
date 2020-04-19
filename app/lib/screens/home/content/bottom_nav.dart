@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 
-typedef void TapHandler(int index);
+typedef void TapHandler(int index, {bool shouldPop});
 
 class HomeBottomNavigator extends StatelessWidget {
   final Map<HomeTabId, HomeTab> tabs;

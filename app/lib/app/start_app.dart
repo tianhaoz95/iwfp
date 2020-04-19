@@ -8,6 +8,7 @@ import 'package:iwfpapp/services/config/typedefs/app_auth_types.dart';
 import 'package:iwfpapp/services/config/typedefs/backend.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/services/data_backend/data_backend_factory.dart';
+import 'package:iwfpapp/services/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 void startApp({
@@ -22,10 +23,12 @@ void startApp({
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
   AppContext appContext = AppContext();
   AppAuth appAuth = getAppAuth(appAuthType);
+  AppTheme appTheme = AppTheme();
   DataBackend dataBackend = getDataBackend(backendType);
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => appTheme),
         ChangeNotifierProvider(create: (context) => appAuth),
         ChangeNotifierProvider(create: (context) => dataBackend),
         ChangeNotifierProvider(create: (context) => appContext),
