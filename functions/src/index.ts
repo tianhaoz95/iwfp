@@ -209,8 +209,14 @@ export const httpGetCreditCards = functions.https.onRequest(
         res.sendStatus(403);
       });
     }
+    let requestToken: string = "Unknown";
+    try {
+      requestToken = req.query.token as string;
+    } catch (err) {
+      res.sendStatus(500);
+    }
     const context: FunctionContext = await provider.token2context(
-      req.query.token
+      requestToken
     );
     try {
       const response = await getCreditCardHandler(req.body, context, provider);
