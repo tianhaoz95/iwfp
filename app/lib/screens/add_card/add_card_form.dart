@@ -58,8 +58,7 @@ class _AddCardScreenAddCardFormContent
             child: Text('From Template', style: TextStyle(color: Colors.white)),
             key: Key('go_to_add_card_from_template_btn'),
             onPressed: () {
-              Navigator.pushNamed(
-                  context, '/add_card_from_template');
+              Navigator.pushNamed(context, '/add_card_from_template');
             },
           )),
           ListViewItem(

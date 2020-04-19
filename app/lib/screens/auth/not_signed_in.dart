@@ -29,6 +29,7 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
   Widget build(BuildContext context) {
     return Container(
       child: ListView(
+        key: Key('sign_in_form'),
         children: <Widget>[
           SizedBox(
             height: 5.0,

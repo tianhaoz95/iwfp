@@ -22,6 +22,7 @@ class VerticalHomeMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      key: Key('vertical_home_menu'),
       children: [
         SizedBox(
           height: 25.0,
@@ -37,6 +38,7 @@ class VerticalHomeMenu extends StatelessWidget {
         ),
         ListViewItem(
           child: FlatButton(
+              key: this.tabs[HomeTabId.SHOPPING].btnKey,
               onPressed: () {
                 this.onTabTappedHandler(0,
                     shouldPop: mode == HomeScreenMode.DRAWER);
@@ -57,6 +59,7 @@ class VerticalHomeMenu extends StatelessWidget {
         ),
         ListViewItem(
           child: FlatButton(
+              key: this.tabs[HomeTabId.CARD_MANAGEMENT].btnKey,
               onPressed: () {
                 this.onTabTappedHandler(1,
                     shouldPop: mode == HomeScreenMode.DRAWER);
@@ -77,6 +80,7 @@ class VerticalHomeMenu extends StatelessWidget {
         ),
         ListViewItem(
           child: FlatButton(
+              key: this.tabs[HomeTabId.USER_SETTINGS].btnKey,
               onPressed: () {
                 this.onTabTappedHandler(2,
                     shouldPop: mode == HomeScreenMode.DRAWER);
@@ -97,6 +101,7 @@ class VerticalHomeMenu extends StatelessWidget {
         ),
         ListViewItem(
           child: FlatButton(
+              key: this.tabs[HomeTabId.CONTRIB].btnKey,
               onPressed: () {
                 this.onTabTappedHandler(3,
                     shouldPop: mode == HomeScreenMode.DRAWER);

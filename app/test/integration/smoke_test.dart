@@ -14,8 +14,7 @@ void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
     await tester.pumpWidget(MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (context) => AppTheme()),
+        ChangeNotifierProvider(create: (context) => AppTheme()),
         ChangeNotifierProvider(
             create: (context) => getAppAuth(AppAuthType.MOCK_AUTH)),
         ChangeNotifierProvider(

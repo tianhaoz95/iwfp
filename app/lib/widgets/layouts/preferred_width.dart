@@ -9,7 +9,8 @@ class PreferredWidthContent extends StatelessWidget {
   const PreferredWidthContent({this.child});
   @override
   Widget build(BuildContext context) {
-    double contentWidth = min(MediaQuery.of(context).size.width, PreferredWidth);
+    double contentWidth =
+        min(MediaQuery.of(context).size.width, PreferredWidth);
     return Container(
       child: Center(
         child: Container(width: contentWidth, child: this.child),
