@@ -24,6 +24,7 @@ class _CardAddedFromTemplate extends State<CardAddedFromTemplate> {
 
   Future<void> navToWallet() async {
     await Future.delayed(Duration(milliseconds: 200));
+    Navigator.pop(context);
     Navigator.pushReplacementNamed(context, '/',
         arguments: HomeTabId.CARD_MANAGEMENT);
   }

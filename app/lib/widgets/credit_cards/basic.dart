@@ -60,7 +60,6 @@ class BasicCreditCard extends StatelessWidget {
       return Row(
         children: <Widget>[
           Material(
-            color: Colors.white,
             child: FlatButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/edit_card',
@@ -70,7 +69,6 @@ class BasicCreditCard extends StatelessWidget {
             ),
           ),
           Material(
-            color: Colors.white,
             child: FlatButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/remove_card',
