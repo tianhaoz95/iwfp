@@ -2,15 +2,12 @@ import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
-import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
 
 class MockDataBackend extends DataBackend {
   Map<String, CreditCard> cardDatabase;
 
   MockDataBackend() : super() {
     cardDatabase = {};
-    CreditCard randomCard = getRandomCreditCardTemplate();
-    cardDatabase[randomCard.id] = randomCard;
   }
 
   @override
