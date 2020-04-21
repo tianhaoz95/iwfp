@@ -69,7 +69,7 @@ class _HomeScreen extends State<HomeScreen> {
     if (currentTabId == HomeTabId.CARD_MANAGEMENT) {
       return FloatingActionButton(
         onPressed: () {
-          Navigator.pushReplacementNamed(context, '/add_card');
+          Navigator.pushNamed(context, '/add_card');
         },
         key: Key('add_card_floating_btn'),
         child: Icon(Icons.add),
