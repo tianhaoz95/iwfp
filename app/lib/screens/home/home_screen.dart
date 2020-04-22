@@ -5,6 +5,7 @@ import 'package:iwfpapp/screens/home/content/content_adapter.dart';
 import 'package:iwfpapp/screens/home/content/vertical_menu.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
+import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/home_screen_mode.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab.dart';
 import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
@@ -102,8 +103,15 @@ class _HomeScreen extends State<HomeScreen> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  Provider.of<DataBackend>(context, listen: false)
-                      .forceRefresh();
+                  if (Provider.of<DataBackend>(context, listen: false)
+                          .getStatus() ==
+                      DataBackendStatus.ERROR) {
+                    Provider.of<DataBackend>(context, listen: false)
+                        .recoverFromError();
+                  } else {
+                    Provider.of<DataBackend>(context, listen: false)
+                        .forceRefresh();
+                  }
                 },
               ))
         ],

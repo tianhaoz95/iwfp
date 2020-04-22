@@ -66,55 +66,69 @@ abstract class DataBackend extends ChangeNotifier {
     await maybeRefreshCards();
   }
 
-  Future<void> maybeRefresh() async {
+  Future<void> maybeRefresh({bool silent = false}) async {
     try {
-      await maybeRefreshCards();
-      await maybeRefreshCreditCardTemplates();
+      await maybeRefreshCards(silent: silent);
+      await maybeRefreshCreditCardTemplates(silent: silent);
     } catch (err) {
       print(err.toString());
     }
   }
 
-  Future<void> maybeRefreshCards() async {
+  Future<void> maybeRefreshCards({bool silent = false}) async {
     if (creditCardsDirty || status == DataBackendStatus.ERROR) {
       try {
         await Future.delayed(Duration(milliseconds: 200));
         status = DataBackendStatus.LOADING;
-        notifyListeners();
+        if (!silent) {
+          notifyListeners();
+        }
         creditCards = await fetchCreditCardsFromDatabase();
         creditCardsDirty = false;
         status = DataBackendStatus.AVAILABLE;
-        notifyListeners();
+        if (!silent) {
+          notifyListeners();
+        }
       } on CloudFunctionsException catch (cloudFuncError) {
         print(cloudFuncError.message);
         status = DataBackendStatus.ERROR;
-        notifyListeners();
+        if (!silent) {
+          notifyListeners();
+        }
       } catch (err) {
         print(err.toString());
         status = DataBackendStatus.ERROR;
-        notifyListeners();
+        if (!silent) {
+          notifyListeners();
+        }
       }
     } else {
       print('Data up to date, no need to refresh');
     }
   }
 
-  Future<void> maybeRefreshCreditCardTemplates() async {
+  Future<void> maybeRefreshCreditCardTemplates({bool silent = false}) async {
     if (creditCardTempaltesDirty || status == DataBackendStatus.ERROR) {
       try {
         await Future.delayed(Duration(milliseconds: 200));
         status = DataBackendStatus.LOADING;
-        notifyListeners();
+        if (!silent) {
+          notifyListeners();
+        }
         creditCardTemplates = await getLocalCreditCardTemplates();
         await Duration(milliseconds: 200);
         creditCardTempaltesDirty = false;
         status = DataBackendStatus.AVAILABLE;
-        notifyListeners();
+        if (!silent) {
+          notifyListeners();
+        }
       } catch (err) {
         print(err.toString());
         creditCardTemplates = [];
         status = DataBackendStatus.ERROR;
-        notifyListeners();
+        if (!silent) {
+          notifyListeners();
+        }
       }
     } else {
       print('Tempalte up-to-date.');
@@ -128,6 +142,19 @@ abstract class DataBackend extends ChangeNotifier {
       }
     }
     return CreditCard('Unknown', 'unknown');
+  }
+
+  Future<void> recoverFromError() async {
+    await Future.delayed(Duration(milliseconds: 100));
+    status = DataBackendStatus.LOADING;
+    notifyListeners();
+    await maybeRefresh(silent: true);
+    if (status == DataBackendStatus.ERROR) {
+      creditCards = [];
+      creditCardTemplates = getLocalCreditCardTemplates();
+      status = DataBackendStatus.AVAILABLE;
+    }
+    notifyListeners();
   }
 
   Future<void> initCreditCard(CreditCardInitRequest req,
@@ -148,6 +175,8 @@ abstract class DataBackend extends ChangeNotifier {
       status = DataBackendStatus.ERROR;
       if (!silent) {
         notifyListeners();
+      } else {
+        throw err;
       }
     }
   }
@@ -221,6 +250,8 @@ abstract class DataBackend extends ChangeNotifier {
       status = DataBackendStatus.ERROR;
       if (!silent) {
         notifyListeners();
+      } else {
+        throw err;
       }
     }
   }
