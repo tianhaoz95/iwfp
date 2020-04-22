@@ -4,4 +4,5 @@ enum BackendType {
   EMULATOR,
   MOCK,
   DUMB,
+  ERROR,
 }

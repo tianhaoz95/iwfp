@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
+import 'package:provider/provider.dart';
 
 class AddCardFromTemplateError extends StatelessWidget {
   @override
@@ -19,14 +21,14 @@ class AddCardFromTemplateError extends StatelessWidget {
           ),
         ),
         ListViewItem(
-            child: Material(
           child: RaisedButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/');
+              Provider.of<DataBackend>(context, listen: false)
+                  .recoverFromError();
             },
-            child: Text('Back'),
+            child: Text('Try again'),
           ),
-        )),
+        ),
       ],
     ));
   }
