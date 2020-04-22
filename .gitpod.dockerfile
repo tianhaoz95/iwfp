@@ -7,6 +7,7 @@ ENV FLUTTER_BIN="${FLUTTER_HOME}/bin"
 ENV DART_BIN="${FLUTTER_BIN}/cache/dart-sdk/bin/"
 ENV PATH="${PATH}:${FLUTTER_BIN}"
 ENV PATH="${PATH}:${DART_BIN}"
+ENV PATH="${PATH}:${FLUTTER_HOME}/.pub-cache/bin
 
 RUN mkdir -p ${DEV_HOME} && \
   cd ${DEV_HOME} && \
