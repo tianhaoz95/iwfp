@@ -62,18 +62,6 @@ class _AddCardScreenAddCardFormContent
                   context, '/add_card_from_template');
             },
           )),
-          ListViewItem(
-              child: RaisedButton(
-            color: Colors.redAccent,
-            child: Text(
-              'Cancel',
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/',
-                  arguments: HomeTabId.CARD_MANAGEMENT);
-            },
-          )),
         ],
       ),
     );

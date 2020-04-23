@@ -69,21 +69,6 @@ class RemoveCardPending extends StatelessWidget {
               },
             ),
           )),
-          Material(
-              child: Container(
-            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-            child: RaisedButton(
-              color: Colors.green,
-              child: Container(
-                padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                child: Text('Cancel', style: TextStyle(color: Colors.white)),
-              ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/',
-                    arguments: HomeTabId.CARD_MANAGEMENT);
-              },
-            ),
-          )),
         ],
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:provider/provider.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 
 class PromoAdded extends StatefulWidget {
   final CreditCard card;
@@ -25,8 +27,8 @@ class _PromoAdded extends State<PromoAdded> {
 
   Future<void> navToEditCard() async {
     await Future.delayed(Duration(milliseconds: 200));
-    Navigator.pushReplacementNamed(context, '/edit_card',
-        arguments: widget.card);
+    Provider.of<DataBackend>(context, listen: false).maybeRefresh();
+    Navigator.pop(context);
   }
 
   @override

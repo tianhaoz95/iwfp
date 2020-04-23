@@ -28,7 +28,7 @@ class PromoEntry extends StatelessWidget {
                     RaisedButton(
                       color: Colors.redAccent,
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/remove_promo',
+                        Navigator.pushNamed(context, '/remove_promo',
                             arguments: RemovePromoMeta(card, promo));
                       },
                       child:

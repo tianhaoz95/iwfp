@@ -229,19 +229,6 @@ class _AddPromoPending extends State<AddPromoPending> {
               ),
             ),
           ),
-          Material(
-            child: RaisedButton(
-              color: Colors.redAccent,
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/edit_card',
-                    arguments: widget.card);
-              },
-              child: Text(
-                'Cancel',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          )
         ],
       ),
     );

@@ -74,20 +74,6 @@ class RemovePromoPending extends StatelessWidget {
               ),
             ),
           ),
-          ListViewItem(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-              child: RaisedButton(
-                color: Colors.green,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Cancel',
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
