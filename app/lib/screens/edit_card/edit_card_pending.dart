@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
-import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/widgets/promos/entry_view.dart';
 import 'package:provider/provider.dart';
@@ -50,19 +49,8 @@ class EditCardPending extends StatelessWidget {
             color: Colors.green,
             child: Text('Add Promotion', style: TextStyle(color: Colors.white)),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/add_promo',
+              Navigator.pushNamed(context, '/add_promo',
                   arguments: updatedCard);
-            },
-          ),
-        ));
-        contentList.add(Container(
-          padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-          child: RaisedButton(
-            color: Colors.amber[900],
-            child: Text('Cancel', style: TextStyle(color: Colors.white)),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/',
-                  arguments: HomeTabId.CARD_MANAGEMENT);
             },
           ),
         ));

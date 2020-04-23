@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
+import 'package:provider/provider.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 
 class CardRemoved extends StatefulWidget {
   final bool autoNav;
@@ -23,8 +24,8 @@ class _CardRemoved extends State<CardRemoved> {
 
   Future<void> navToWallet() async {
     await Future.delayed(Duration(milliseconds: 200));
-    Navigator.pushReplacementNamed(context, '/',
-        arguments: HomeTabId.CARD_MANAGEMENT);
+    Provider.of<DataBackend>(context, listen: false).maybeRefresh();
+    Navigator.pop(context);
   }
 
   @override

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
-import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:provider/provider.dart';
 
@@ -66,21 +65,6 @@ class RemoveCardPending extends StatelessWidget {
               onPressed: () {
                 Provider.of<DataBackend>(context, listen: false)
                     .removeCreditCard(CreditCardRemovalRequest(this.card.id));
-              },
-            ),
-          )),
-          Material(
-              child: Container(
-            padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-            child: RaisedButton(
-              color: Colors.green,
-              child: Container(
-                padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                child: Text('Cancel', style: TextStyle(color: Colors.white)),
-              ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/',
-                    arguments: HomeTabId.CARD_MANAGEMENT);
               },
             ),
           )),

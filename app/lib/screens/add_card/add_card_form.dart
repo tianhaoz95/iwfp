@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
-import 'package:iwfpapp/services/config/typedefs/home_tab_id.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
@@ -60,18 +59,6 @@ class _AddCardScreenAddCardFormContent
             onPressed: () {
               Navigator.pushReplacementNamed(
                   context, '/add_card_from_template');
-            },
-          )),
-          ListViewItem(
-              child: RaisedButton(
-            color: Colors.redAccent,
-            child: Text(
-              'Cancel',
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/',
-                  arguments: HomeTabId.CARD_MANAGEMENT);
             },
           )),
         ],

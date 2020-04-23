@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
+import 'package:provider/provider.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 
 class PromoRemoved extends StatefulWidget {
   final RemovePromoMeta removePromoMeta;
@@ -29,10 +30,8 @@ class _PromoRemoved extends State<PromoRemoved> {
 
   Future<void> navToEditCard() async {
     await Future.delayed(Duration(milliseconds: 200));
-    CreditCard modifiedCard = widget.removePromoMeta.card;
-    modifiedCard.removePromo(widget.removePromoMeta.promo);
-    Navigator.pushReplacementNamed(context, '/edit_card',
-        arguments: modifiedCard);
+    Provider.of<DataBackend>(context, listen: false).maybeRefresh();
+    Navigator.pop(context);
   }
 
   @override
