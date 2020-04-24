@@ -207,7 +207,11 @@ describe("end 2 end tests", () => {
     expect(response).toBeNull;
     const cardExist = await backdoorCardExist(db, "test_user", "test_card_uid");
     expect(cardExist).toBeTruthy;
-    const cardPromoCnt: number = await backdoorCardPromoCnt(db, "test_user", "test_card_uid");
+    const cardPromoCnt: number = await backdoorCardPromoCnt(
+      db,
+      "test_user",
+      "test_card_uid"
+    );
     expect(cardPromoCnt).toBe(2);
     const promoAfterAdding = await backdoorGetPromo(
       db,

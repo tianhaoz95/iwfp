@@ -1,9 +1,5 @@
 {
   "dart.analysisExcludedFolders": [
     "./iwfpapp/lib/generated_plugin_registrant.dart"
-  ],
-  "jest.pathToJest": "./iwfpapi/functions/node_modules/.bin/jest",
-  "jest.pathToConfig": "./iwfpapi/functions/jest.config.js",
-  "jest.autoEnable": false,
-  "jest.runAllTestsFirst": false
+  ]
 }

@@ -80,7 +80,7 @@ export function parsePromo(req: any): Promo {
     valid = false;
   }
   if (!valid) {
-    throw 'promo parsing failed';
+    throw new Error('promo parsing failed');
   }
   return promo;
 }

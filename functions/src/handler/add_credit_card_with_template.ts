@@ -1,6 +1,9 @@
 import { noAuthMsg } from "../config/consts";
 import { CreditCardIdConflictError } from "../config/errors";
-import {  FunctionContext, CardCreationWithTemplateRequest } from "../config/typedefs";
+import {
+  FunctionContext,
+  CardCreationWithTemplateRequest,
+} from "../config/typedefs";
 import addPromoHandler from "./add_promo";
 
 async function addCreditCardWithTemplateHandler(
