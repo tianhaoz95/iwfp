@@ -15,21 +15,38 @@ import {
   CardEditRequest,
   AddPromoRequest,
   RemovePromoRequest,
+  CardCreationWithTemplateRequest,
 } from "./config/typedefs";
 import {
   parseCardCreationRequest,
   parseCardRemovalRequest,
   parseCardEditRequest,
+  parseCardCreationWithTemplateRequest,
 } from "./util/parsers/card";
 import {
   parseAddPromoRequest,
   parseRemovePromoRequest,
 } from "./util/parsers/promo";
+import addCreditCardWithTemplateHandler from "./handler/add_credit_card_with_template";
 
 const provider = new Provider();
 const corsHandler = cors({
   origin: true,
 });
+
+export const addCreditCardWithTemplate = functions.https.onCall(
+  async (data, fbContext) => {
+    const context: FunctionContext = provider.fbContext2context(fbContext);
+    const cardCreationWithTemplateRequest: CardCreationWithTemplateRequest = parseCardCreationWithTemplateRequest(
+      data
+    );
+    await addCreditCardWithTemplateHandler(
+      cardCreationWithTemplateRequest,
+      context,
+      provider
+    );
+  }
+);
 
 export const addCreditCard = functions.https.onCall(async (data, fbContext) => {
   const context: FunctionContext = provider.fbContext2context(fbContext);
@@ -215,9 +232,7 @@ export const httpGetCreditCards = functions.https.onRequest(
     } catch (err) {
       res.sendStatus(500);
     }
-    const context: FunctionContext = await provider.token2context(
-      requestToken
-    );
+    const context: FunctionContext = await provider.token2context(requestToken);
     try {
       const response = await getCreditCardHandler(req.body, context, provider);
       return corsHandler(req, res, () => {

@@ -1,4 +1,4 @@
-import { AddPromoRequest, RemovePromoRequest } from "../../config/typedefs";
+import { AddPromoRequest, RemovePromoRequest, Promo } from "../../config/typedefs";
 
 export function parseRemovePromoRequest(req: any): RemovePromoRequest {
   const removePromoRequest: RemovePromoRequest = {
@@ -17,6 +17,72 @@ export function parseRemovePromoRequest(req: any): RemovePromoRequest {
     removePromoRequest.valid = false;
   }
   return removePromoRequest;
+}
+
+export function parsePromo(req: any): Promo {
+  const promo: Promo = {
+    id: "na",
+    name: "na",
+    type: "na",
+    start: "na",
+    end: "na",
+    repeat: "na",
+    rate: "0",
+    category: {
+      id: "na",
+      name: "na",
+    }
+  }
+  let valid: boolean = true;
+  if (req.promoId) {
+    promo.id = req.promoId;
+  } else {
+    valid = false;
+  }
+  if(req.promoName) {
+    promo.name = req.promoName;
+  } else {
+    valid = false;
+  }
+  if(req.promoType) {
+    promo.type = req.promoType;
+  } else {
+    valid = false;
+  }
+  if(req.promoStart) {
+    promo.start = req.promoStart;
+  } else {
+    valid = false;
+  }
+  if(req.promoEnd) {
+    promo.end = req.promoEnd;
+  } else {
+    valid = false;
+  }
+  if(req.promoRepeat) {
+    promo.repeat = req.promoRepeat;
+  } else {
+    valid = false;
+  }
+  if(req.promoRate) {
+    promo.rate = req.promoRate;
+  } else {
+    valid = false;
+  }
+  if(req.promoCategoryId) {
+    promo.category.id = req.promoCategoryId;
+  } else {
+    valid = false;
+  }
+  if(req.promoCategoryName) {
+    promo.category.name = req.promoCategoryName;
+  } else {
+    valid = false;
+  }
+  if (!valid) {
+    throw 'promo parsing failed';
+  }
+  return promo;
 }
 
 export function parseAddPromoRequest(req: any): AddPromoRequest {
@@ -42,49 +108,10 @@ export function parseAddPromoRequest(req: any): AddPromoRequest {
   } else {
     addPromoRequest.valid = false;
   }
-  if (req.promoId) {
-    addPromoRequest.promo.id = req.promoId;
-  } else {
-    addPromoRequest.valid = false;
-  }
-  if(req.promoName) {
-    addPromoRequest.promo.name = req.promoName;
-  } else {
-    addPromoRequest.valid = false;
-  }
-  if(req.promoType) {
-    addPromoRequest.promo.type = req.promoType;
-  } else {
-    addPromoRequest.valid = false;
-  }
-  if(req.promoStart) {
-    addPromoRequest.promo.start = req.promoStart;
-  } else {
-    addPromoRequest.valid = false;
-  }
-  if(req.promoEnd) {
-    addPromoRequest.promo.end = req.promoEnd;
-  } else {
-    addPromoRequest.valid = false;
-  }
-  if(req.promoRepeat) {
-    addPromoRequest.promo.repeat = req.promoRepeat;
-  } else {
-    addPromoRequest.valid = false;
-  }
-  if(req.promoRate) {
-    addPromoRequest.promo.rate = req.promoRate;
-  } else {
-    addPromoRequest.valid = false;
-  }
-  if(req.promoCategoryId) {
-    addPromoRequest.promo.category.id = req.promoCategoryId;
-  } else {
-    addPromoRequest.valid = false;
-  }
-  if(req.promoCategoryName) {
-    addPromoRequest.promo.category.name = req.promoCategoryName;
-  } else {
+  try {
+    const promo: Promo = parsePromo(req);
+    addPromoRequest.promo = promo;
+  } catch (err) {
     addPromoRequest.valid = false;
   }
   return addPromoRequest;

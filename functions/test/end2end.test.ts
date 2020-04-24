@@ -20,12 +20,15 @@ import {
   BasicPromo,
   BasicPromoInDatabase,
   HttpSimpleAddPromoRequest,
+  BasicPromoAlternative,
+  BasicPromoAlternativeInDatabase,
 } from "./fixture/promos";
 import { backdoorCardExist } from "./utilities/validators/card_existence";
 import { backdoorPromoExist } from "./utilities/validators/promo_existence";
 import { backdoorGetPromo } from "./utilities/getters/promo";
 import { backdoorGetCardData } from "./utilities/getters/card";
 import { backdoorUserExist } from "./utilities/validators/user_existence";
+import { backdoorCardPromoCnt } from "./utilities/validators/promo_count";
 jest.setTimeout(20000);
 
 describe("end 2 end tests", () => {
@@ -35,6 +38,7 @@ describe("end 2 end tests", () => {
   let adminDb: admin.firestore.Firestore;
   let cloudFunctions: firebase.functions.Functions;
   let addCreditCardCallable: firebase.functions.HttpsCallable;
+  let addCreditCardWithTemplateCallable: firebase.functions.HttpsCallable;
   let getCreditCardsCallable: firebase.functions.HttpsCallable;
   let editCreditCardsCallable: firebase.functions.HttpsCallable;
   let removeCreditCardCallable: firebase.functions.HttpsCallable;
@@ -51,6 +55,9 @@ describe("end 2 end tests", () => {
     cloudFunctions = firebase.functions();
     cloudFunctions.useFunctionsEmulator(CloudFunctionEmulatorAddress);
     addCreditCardCallable = cloudFunctions.httpsCallable("addCreditCard");
+    addCreditCardWithTemplateCallable = cloudFunctions.httpsCallable(
+      "addCreditCardWithTemplate"
+    );
     getCreditCardsCallable = cloudFunctions.httpsCallable("getCreditCards");
     editCreditCardsCallable = cloudFunctions.httpsCallable("editCreditCard");
     removeCreditCardCallable = cloudFunctions.httpsCallable("removeCreditCard");
@@ -189,6 +196,39 @@ describe("end 2 end tests", () => {
     expect(response).toBeNull;
     const cardExist = await backdoorCardExist(db, "test_user", "test_card_uid");
     expect(cardExist).toBeTruthy;
+  });
+
+  test("add card with template should succeed", async () => {
+    const response = await addCreditCardWithTemplateCallable({
+      name: "test_card_name",
+      id: "test_card_uid",
+      promos: [BasicPromo, BasicPromoAlternative],
+    });
+    expect(response).toBeNull;
+    const cardExist = await backdoorCardExist(db, "test_user", "test_card_uid");
+    expect(cardExist).toBeTruthy;
+    const cardPromoCnt: number = await backdoorCardPromoCnt(db, "test_user", "test_card_uid");
+    expect(cardPromoCnt).toBe(2);
+    const promoAfterAdding = await backdoorGetPromo(
+      db,
+      "test_user",
+      "test_card_uid",
+      "test_promo"
+    );
+    expect(promoAfterAdding).toBeDefined;
+    expect(promoAfterAdding).not.toBeNull;
+    expect(promoAfterAdding).toMatchObject(BasicPromoInDatabase);
+    const promoAlternativeAfterAdding = await backdoorGetPromo(
+      db,
+      "test_user",
+      "test_card_uid",
+      "test_promo_alternative"
+    );
+    expect(promoAlternativeAfterAdding).toBeDefined;
+    expect(promoAlternativeAfterAdding).not.toBeNull;
+    expect(promoAlternativeAfterAdding).toMatchObject(
+      BasicPromoAlternativeInDatabase
+    );
   });
 
   test("http add card should succeed", async () => {

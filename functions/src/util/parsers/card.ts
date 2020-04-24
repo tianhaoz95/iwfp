@@ -1,4 +1,20 @@
-import { CardCreationRequest, CardRemovalRequest, CardEditRequest } from "../../config/typedefs";
+import { CardCreationRequest, CardRemovalRequest, CardEditRequest, CardCreationWithTemplateRequest } from "../../config/typedefs";
+import { parseAddPromoRequest } from "./promo";
+
+export function parseCardCreationWithTemplateRequest(req: any): CardCreationWithTemplateRequest {
+  const cardCreationWithTemplateRequest: CardCreationWithTemplateRequest = {
+    valid: true,
+    id: "na",
+    name: "na",
+    promos: [],
+  };
+  cardCreationWithTemplateRequest.name = req.name;
+  cardCreationWithTemplateRequest.id = req.id;
+  for (const promo of req.promos) {
+    cardCreationWithTemplateRequest.promos.push(parseAddPromoRequest(promo));
+  }
+  return cardCreationWithTemplateRequest;
+}
 
 export function parseCardCreationRequest(req: any): CardCreationRequest {
   const cardCreateRequest: CardCreationRequest = {

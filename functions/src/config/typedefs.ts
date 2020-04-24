@@ -4,6 +4,13 @@ export interface CardCreationRequest {
   name: string;
 }
 
+export interface CardCreationWithTemplateRequest {
+  valid: boolean;
+  id: string;
+  name: string;
+  promos: AddPromoRequest[];
+}
+
 export interface CardRemovalRequest {
   valid: boolean;
   id: string;
