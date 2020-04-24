@@ -1,7 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { mock, instance } from "ts-mockito";
-import getUserUid from "../../src/util/uid_getter";
+import getUserUid from "../../../src/util/uid_getter";
 
 describe("uid getter tests", () => {
   const sampleContext: functions.https.CallableContext = mock<

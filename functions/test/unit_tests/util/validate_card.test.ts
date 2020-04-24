@@ -1,4 +1,5 @@
-import isValidCardData from "../../src/util/validate_card";
+import isValidCardData from "../../../src/util/validate_card";
+
 
 describe("card validator tests", () => {
   test("card data validator should not crash", () => {

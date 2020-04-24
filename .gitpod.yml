@@ -15,6 +15,12 @@ ports:
     onOpen: open-preview
   - port: 3300
     onOpen: open-preview
+  - port: 8080
+    onOpen: ignore
+  - port: 4400
+    onOpen: ignore
+  - port: 5001
+    onOpen: ignore
 tasks:
   - init: ./scripts/gitpod_init.sh
   - command: ./scripts/run_app_catalog_web.sh

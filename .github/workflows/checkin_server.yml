@@ -40,6 +40,9 @@ jobs:
       - name: lint code
         working-directory: ./functions
         run: npm run lint
-      - name: run tests
+      - name: run unit tests
+        working-directory: ./functions
+        run: npm test
+      - name: run integration tests
         working-directory: ./functions
         run: npm run e2e

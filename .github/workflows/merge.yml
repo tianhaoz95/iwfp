@@ -28,7 +28,10 @@ jobs:
       - name: build test
         working-directory: ./functions
         run: npm run build
-      - name: end to end test
+      - name: run unit test
+        working-directory: ./functions
+        run: npm test
+      - name: run end to end test
         working-directory: ./functions
         run: npm run e2e
   build-server-docs:

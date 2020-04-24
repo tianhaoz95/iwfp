@@ -1,7 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { mock, instance } from "ts-mockito";
-import isValidAuth from "../../src/util/validate_auth";
+import isValidAuth from "../../../src/util/validate_auth";
 
 describe("auth validator tests", () => {
   const sampleContext: functions.https.CallableContext = mock<
