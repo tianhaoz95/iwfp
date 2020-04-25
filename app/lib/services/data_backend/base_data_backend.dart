@@ -1,6 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
@@ -185,11 +184,15 @@ abstract class DataBackend extends ChangeNotifier {
     try {
       status = DataBackendStatus.LOADING;
       notifyListeners();
+      /// TODO: add this to child classes
+      /*
       await initCreditCard(CreditCardInitRequest(req.card), silent: true);
       for (CashbackPromo promo in req.card.promos) {
         await addPromotion(PromotionAdditionRequest(req.card.id, promo),
             silent: true);
       }
+      */
+      await initCreditCardWithTemplateInDatabase(req);
       creditCardsDirty = true;
       status = DataBackendStatus.OUTDATED;
       notifyListeners();
@@ -313,6 +316,10 @@ abstract class DataBackend extends ChangeNotifier {
 
   @protected
   Future<void> initCreditCardInDatabase(CreditCardInitRequest req);
+
+  @protected
+  Future<void> initCreditCardWithTemplateInDatabase(
+      CreditCardAdditionRequest req);
 
   @protected
   Future<void> addCreditCardToDatabase(CreditCardAdditionRequest req);

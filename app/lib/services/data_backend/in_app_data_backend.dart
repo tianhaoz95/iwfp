@@ -1,4 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
@@ -6,6 +7,7 @@ import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 
 class InAppDataBackend extends DataBackend {
   HttpsCallable addCardCallable;
+  HttpsCallable addCardWithTemplateCallable;
   HttpsCallable addPromoCallable;
   HttpsCallable getCardsCallable;
   HttpsCallable removeCardCallable;
@@ -19,6 +21,8 @@ class InAppDataBackend extends DataBackend {
     addCardCallable = cloudFunc.getHttpsCallable(
       functionName: 'addCreditCard',
     );
+    addCardWithTemplateCallable =
+        cloudFunc.getHttpsCallable(functionName: 'addCreditCardWithTemplate');
     getCardsCallable = cloudFunc.getHttpsCallable(
       functionName: 'getCreditCards',
     );
@@ -54,6 +58,34 @@ class InAppDataBackend extends DataBackend {
       'id': req.card.id,
       'name': req.card.name,
     });
+  }
+
+  @override
+  Future<void> initCreditCardWithTemplateInDatabase(
+      CreditCardAdditionRequest req) async {
+    Map<String, dynamic> serverRequest = {
+      'name': req.card.name,
+      'id': req.card.id,
+      'promos': []
+    };
+    List<dynamic> promos = [];
+    for (CashbackPromo promo in req.card.promos) {
+      Map<String, dynamic> promoData = {
+        'cardUid': req.card.id,
+        'promoId': promo.id,
+        'promoName': promo.name,
+        'promoType': promo.type,
+        'promoStart': promo.start,
+        'promoEnd': promo.end,
+        'promoRepeat': promo.repeat,
+        'promoRate': promo.rate,
+        'promoCategoryId': promo.category.id,
+        'promoCategoryName': promo.category.name,
+      };
+      promos.add(promoData);
+    }
+    serverRequest['promos'] = promos;
+    await addCardWithTemplateCallable.call(serverRequest);
   }
 
   @override
