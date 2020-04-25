@@ -17,7 +17,7 @@ on:
       - "actions/checkin-server__*"
       - "actions/server-refactor__*"
     paths:
-      - "iwfpapi/*"
+      - "functions/*"
       - ".github/workflows/checkin_server.yml"
 jobs:
   test:
