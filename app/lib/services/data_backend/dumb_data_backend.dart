@@ -30,6 +30,12 @@ class DumbDataBackend extends DataBackend {
   }
 
   @override
+  Future<void> initCreditCardWithTemplateInDatabase(
+      CreditCardAdditionRequest req) async {
+    await Future.delayed(Duration(milliseconds: 200));
+  }
+
+  @override
   Future<void> removeCreditCardFromDatabase(
       CreditCardRemovalRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));

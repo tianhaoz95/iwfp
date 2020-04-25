@@ -6,6 +6,10 @@ import {
 } from "../config/typedefs";
 import addPromoHandler from "./add_promo";
 
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
 async function addCreditCardWithTemplateHandler(
   data: CardCreationWithTemplateRequest,
   context: FunctionContext,

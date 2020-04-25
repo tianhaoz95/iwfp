@@ -76,6 +76,12 @@ class UseHttpDataBackend extends DataBackend {
     }
   }
 
+  @override
+  Future<void> initCreditCardWithTemplateInDatabase(
+      CreditCardAdditionRequest req) async {
+    await Future.delayed(Duration(milliseconds: 200));
+  }
+
   /// Remove a credit card from a users wallet by triggering
   /// the remove credit card http API
   @override
