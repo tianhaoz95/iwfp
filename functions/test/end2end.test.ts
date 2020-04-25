@@ -69,7 +69,10 @@ describe("end 2 end tests", () => {
   afterAll(async () => {
     await db.terminate();
     await db.clearPersistence();
+    await adminDb.terminate();
     await app.delete();
+    await adminApp.delete();
+    console.log("All services terminated.");
   });
 
   beforeEach(async () => {

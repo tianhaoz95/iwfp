@@ -17,7 +17,7 @@ on:
       - "actions/checkin-server__*"
       - "actions/server-refactor__*"
     paths:
-      - "iwfpapi/*"
+      - "functions/*"
       - ".github/workflows/checkin_server.yml"
 jobs:
   test:
@@ -25,7 +25,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
@@ -40,6 +40,14 @@ jobs:
       - name: lint code
         working-directory: ./functions
         run: npm run lint
-      - name: run tests
+      - name: run unit tests (windows)
+        if: contains(matrix.os,'windows')
+        working-directory: ./functions
+        run: npm run wintest
+      - name: run unit tests (non windows)
+        if: contains(matrix.os,'ubuntu') || contains(matrix.os,'macos')
+        working-directory: ./functions
+        run: npm test
+      - name: run integration tests
         working-directory: ./functions
         run: npm run e2e

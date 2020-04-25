@@ -1,7 +1,7 @@
 ## Compiled JavaScript files
 **/*.js
 **/*.js.map
-!/jest.config.js
+!/*.config.js
 !/src/interfaces/interfaces.js
 
 # Typescript v1 declaration files
