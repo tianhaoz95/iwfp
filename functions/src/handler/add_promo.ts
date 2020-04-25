@@ -20,6 +20,15 @@ async function addPromoHandler(
       const promoRef = cardRef.collection("promos").doc(promoId);
       const promoSnap = await promoRef.get();
       if (promoSnap.exists) {
+        // TODO(tianhaoz): consoildate the logging into a separate
+        // function for better reusability.
+        console.log(
+          "Cannot add " +
+            promoId +
+            " to " +
+            data.card +
+            ", because it already exists."
+        );
         throw promoAlreadyExistError;
       } else {
         const promoName: string = data.promo.name;

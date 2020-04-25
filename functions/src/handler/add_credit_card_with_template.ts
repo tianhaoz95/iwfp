@@ -24,7 +24,12 @@ async function addCreditCardWithTemplateHandler(
         card_name: cardName,
       });
       for (const promo of data.promos) {
+        // The loggings are here to check if there is a
+        // race condition. It's not likely, but good to
+        // know.
+        console.log("start adding " + promo.promo.id);
         await addPromoHandler(promo, context, provider);
+        console.log("finished adding" + promo.promo.id);
       }
       return;
     }
