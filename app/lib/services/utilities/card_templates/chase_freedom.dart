@@ -4,7 +4,7 @@ import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 
 CreditCard chaseFreedom = CreditCard(
   'Chase Freedom',
-  'chase freedom',
+  'chase_freedom',
   promos: [
     CashbackPromo(
       'Gas Station',
@@ -29,8 +29,6 @@ CreditCard chaseFreedom = CreditCard(
         'annual',
         5,
         ShopCategory('Home Improvement Stores', 'home_improvement_stores')),
-    CashbackPromo('Gas Stations', 'gas_stations', 'sector', '07/01', '09/30',
-        'annual', 5, ShopCategory('Gas Stations', 'gas_stations')),
     CashbackPromo(
         'Streaming Services',
         'streaming_services',

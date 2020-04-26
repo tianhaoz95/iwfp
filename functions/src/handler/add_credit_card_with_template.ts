@@ -29,7 +29,7 @@ async function addCreditCardWithTemplateHandler(
         // know.
         console.log("start adding " + promo.promo.id);
         await addPromoHandler(promo, context, provider);
-        console.log("finished adding" + promo.promo.id);
+        console.log("finished adding " + promo.promo.id);
       }
       return;
     }

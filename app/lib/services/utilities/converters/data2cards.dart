@@ -56,7 +56,7 @@ List<CreditCard> data2cards(HttpsCallableResult rawResponse) {
     Map<String, dynamic> docs = Map<String, dynamic>.from(rawResponse.data);
     return docs2cards(docs);
   } catch (err) {
-    print('Error parsing cards: ' + err.toString());
-    return [];
+    String errMsg = 'Error parsing cards: ' + err.toString();
+    throw errMsg;
   }
 }

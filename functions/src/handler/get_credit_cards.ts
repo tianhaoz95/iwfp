@@ -7,6 +7,14 @@ async function getCreditCardsHandler(data, context: FunctionContext, provider) {
     const userRef = provider.getUserRef(userUid);
     const cardRef = userRef.collection("cards");
     const cardSnap: FirebaseFirestore.QuerySnapshot = await cardRef.get();
+    console.log(
+      "cards under the user " +
+        userUid +
+        " with size " +
+        cardSnap.size +
+        " are: " +
+        cardSnap.docs
+    );
     const response = {};
     for (const card of cardSnap.docs) {
       console.log("retrieve card: ", card.id, "=>", card.data());
