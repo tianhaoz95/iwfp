@@ -60,6 +60,11 @@ class MockDataBackend extends DataBackend {
   Future<void> initCreditCardWithTemplateInDatabase(
       CreditCardAdditionRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
+    if (cardDatabase.containsKey(req.card.id)) {
+      throw 'card_exist';
+    } else {
+      cardDatabase[req.card.id] = req.card;
+    }
   }
 
   @override

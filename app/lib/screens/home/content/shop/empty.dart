@@ -33,11 +33,9 @@ class EmptyWalletShoppingScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
             child: RaisedButton(
-              color: Colors.green,
               key: Key('empty_wallet_jump_to_card_management_btn'),
               child: Text(
                 'Go to card wallet',
-                style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/',

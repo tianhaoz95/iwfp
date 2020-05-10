@@ -34,7 +34,8 @@ class BasicCreditCard extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 5.0),
           child: Text(renderCardName())),
       Container(
-        height: 45.0,
+        height: 70.0,
+        padding: EdgeInsets.fromLTRB(4.0, 12.0, 4.0, 4.0),
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: rankPromotionsWithTimeRange(cardMetaData.promos)
@@ -58,25 +59,25 @@ class BasicCreditCard extends StatelessWidget {
   Widget getEditContent(BuildContext context) {
     if (edit == true) {
       return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Material(
-            child: FlatButton(
+          IconButton(
+              icon: Icon(Icons.edit),
+              color: Colors.green,
+              key: Key(this.cardMetaData.id + '_edit_btn'),
               onPressed: () {
                 Navigator.pushNamed(context, '/edit_card',
                     arguments: cardMetaData);
-              },
-              child: Text('Edit'),
-            ),
+              }),
+          IconButton(
+            icon: Icon(Icons.delete),
+            color: Colors.redAccent,
+            key: Key(this.cardMetaData.id + '_delete_btn'),
+            onPressed: () {
+              Navigator.pushNamed(context, '/remove_card',
+                  arguments: cardMetaData);
+            },
           ),
-          Material(
-            child: FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/remove_card',
-                    arguments: cardMetaData);
-              },
-              child: Text('Remove'),
-            ),
-          )
         ],
       );
     } else {

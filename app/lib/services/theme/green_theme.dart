@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 ThemeData greenTheme = ThemeData(
   primaryColor: Colors.green,
   buttonTheme: ButtonThemeData(
-      buttonColor: Colors.deepPurpleAccent,
+      buttonColor: Colors.green,
       textTheme: ButtonTextTheme.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
