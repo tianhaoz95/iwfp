@@ -6,13 +6,13 @@ ThemeData pinkTheme = ThemeData(
     color: Colors.white,
   ),
   buttonTheme: ButtonThemeData(
-      buttonColor: Colors.white,
+      buttonColor: Colors.pink,
       textTheme: ButtonTextTheme.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
       )),
   floatingActionButtonTheme:
-      FloatingActionButtonThemeData(backgroundColor: Colors.green),
+      FloatingActionButtonThemeData(backgroundColor: Colors.pink),
   chipTheme: ChipThemeData(
     backgroundColor: Colors.black45,
     disabledColor: Colors.grey,
