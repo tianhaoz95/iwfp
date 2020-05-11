@@ -48,7 +48,7 @@ class _PromoEntries extends State<PromoEntries> {
           ))),
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Container(
-              child: Text('${promo.name}'),
+              child: Center(child: Text('${promo.name}')),
             );
           }));
     }
