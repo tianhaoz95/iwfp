@@ -3,63 +3,48 @@ import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/widgets/promos/entry_view.dart';
 import 'package:provider/provider.dart';
+import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 class EditCardPending extends StatelessWidget {
   final String cardId;
   const EditCardPending({@required this.cardId});
-  List<Widget> renderPromotions(CreditCard card) {
+  Widget renderPromotions(CreditCard card) {
     if (card.promos.isEmpty) {
-      return [Text('empty')];
+      return Text('empty');
     } else {
-      return card.promos.map((promo) => PromoEntry(promo, card)).toList();
+      return PromoEntries(card);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DataBackend>(
-      builder: (BuildContext context, DataBackend backend, Widget child) {
-        CreditCard updatedCard = backend.queryCreditCard(this.cardId);
-        List<Widget> promos = renderPromotions(updatedCard);
-        List<Widget> contentList = [
-          Material(
-            child: Card(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Center(
-                    child: Text('${updatedCard.name} (${updatedCard.id})'),
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                ],
+    CreditCard updatedCard = Provider.of<DataBackend>(context, listen: false)
+        .queryCreditCard(this.cardId);
+    return Container(
+      child: PreferredWidthContent(
+        child: ListView(
+          children: <Widget>[
+            Material(
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Center(
+                      child: Text('${updatedCard.name} (${updatedCard.id})'),
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ];
-        promos.forEach((Widget promo) {
-          contentList.add(promo);
-        });
-        contentList.add(Container(
-          padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-          child: RaisedButton(
-            color: Colors.green,
-            child: Text('Add Promotion', style: TextStyle(color: Colors.white)),
-            onPressed: () {
-              Navigator.pushNamed(context, '/add_promo',
-                  arguments: updatedCard);
-            },
-          ),
-        ));
-        return Container(
-          child: ListView(
-            children: contentList,
-          ),
-        );
-      },
+            this.renderPromotions(updatedCard),
+          ],
+        ),
+      ),
     );
   }
 }

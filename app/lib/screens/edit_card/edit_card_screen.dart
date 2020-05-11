@@ -5,6 +5,8 @@ import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 import 'package:provider/provider.dart';
 
+import '../../services/config/typedefs/data_store.dart';
+
 class EditCardScreen extends StatefulWidget {
   /// This is to control the behavior of refreshing the
   /// data (e.g. credit cards or credit card templates)
@@ -37,12 +39,31 @@ class _EditCardScreen extends State<EditCardScreen> {
     }
   }
 
+  Widget getActionBtn() {
+    if (Provider.of<DataBackend>(context, listen: false).getStatus() ==
+        DataBackendStatus.AVAILABLE) {
+      return FloatingActionButton(
+        onPressed: () {
+          CreditCard updatedCard =
+              Provider.of<DataBackend>(context, listen: false)
+                  .queryCreditCard(this.card.id);
+          Navigator.pushNamed(context, '/add_promo', arguments: updatedCard);
+        },
+        key: Key('add_promo_floating_btn'),
+        child: Icon(Icons.add),
+      );
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Card'),
       ),
+      floatingActionButton: getActionBtn(),
       body: PreferredWidthContent(
           child: EditCardContent(
         card: this.card,
