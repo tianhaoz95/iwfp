@@ -35,6 +35,9 @@ dependencies:
   protobuf: ^1.0.1
   # provider package for dependency injection
   provider: ^4.0.5
+  # Hive database
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +46,12 @@ dev_dependencies:
     sdk: flutter
   test: any
   mockito: ^4.1.1
+  # Hive database
+  hive_generator: ^0.7.0+2
+  build_runner: ^1.10.0
+
+dependency_overrides:
+  path: 1.7.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
