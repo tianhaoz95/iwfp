@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
-import 'package:iwfpapp/services/theme/theme_provider.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
+import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -15,14 +14,17 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreen extends State<SplashScreen> {
   Future<void> initAppData() async {
-    await Hive.initFlutter();
+    if (Provider.of<AppTheme>(context, listen: false).needHive()) {
+      await Hive.initFlutter();
+    }
     await maybeNavigateToSignIn();
     await Provider.of<AppTheme>(context, listen: false).initialize();
     Navigator.pushReplacementNamed(context, '/home');
   }
 
   Future<void> maybeNavigateToSignIn() async {
-    bool signedIn = await Provider.of<AppAuth>(context, listen: false).isSignedIn();
+    bool signedIn =
+        await Provider.of<AppAuth>(context, listen: false).isSignedIn();
     if (!signedIn) {
       Navigator.pushReplacementNamed(context, '/sign_in');
     }

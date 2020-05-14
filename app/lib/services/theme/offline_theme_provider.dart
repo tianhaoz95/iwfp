@@ -1,18 +1,23 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:iwfpapp/services/config/typedefs/theme_type.dart';
-import 'package:iwfpapp/services/theme/dark_theme.dart';
-import 'package:iwfpapp/services/theme/green_theme.dart';
-import 'package:iwfpapp/services/theme/pink_theme.dart';
-import 'package:iwfpapp/services/theme/theme_mapping.dart';
+import 'package:iwfpapp/services/theme/base_theme_provider.dart';
+import 'package:iwfpapp/services/theme/data/dark_theme.dart';
+import 'package:iwfpapp/services/theme/data/green_theme.dart';
+import 'package:iwfpapp/services/theme/data/pink_theme.dart';
+import 'package:iwfpapp/services/theme/util/theme_mapping.dart';
 
-class AppTheme extends ChangeNotifier {
+class OfflineAppTheme extends AppTheme {
   ThemeType themeType;
   Box themeDb;
   bool useSystem;
 
-  AppTheme({this.themeType = ThemeType.GREEN, this.useSystem = false});
+  OfflineAppTheme({this.themeType = ThemeType.GREEN, this.useSystem = false});
+
+  @override
+  bool needHive() {
+    return true;
+  }
 
   Future<void> initialize() async {
     themeDb = await Hive.openBox('theme');

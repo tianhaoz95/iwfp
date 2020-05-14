@@ -13,7 +13,7 @@ import 'package:iwfpapp/screens/sign_up/sign_up_screen.dart';
 import 'package:iwfpapp/screens/splash/splash_screen.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/screens/add_card/add_card_screen.dart';
-import 'package:iwfpapp/services/theme/theme_provider.dart';
+import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class IwfpApp extends StatelessWidget {
