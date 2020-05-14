@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/screens/home/content/bottom_nav.dart';
 import 'package:iwfpapp/screens/home/content/content_adapter.dart';
 import 'package:iwfpapp/screens/home/content/vertical_menu.dart';
-import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/config/consts/home_tabs.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/home_screen_mode.dart';
@@ -42,18 +41,8 @@ class _HomeScreen extends State<HomeScreen> {
     if (ModalRoute.of(context).settings.arguments != null) {
       currentTabId = ModalRoute.of(context).settings.arguments;
     }
-    if (widget.autoAuthCheck) {
-      maybeNavigateToSignIn();
-    }
     if (widget.autoRefresh) {
       Provider.of<DataBackend>(context, listen: false).maybeRefresh();
-    }
-  }
-
-  Future<void> maybeNavigateToSignIn() async {
-    bool signedIn = await Provider.of<AppAuth>(context).isSignedIn();
-    if (!signedIn) {
-      Navigator.of(context).pushReplacementNamed('/sign_in');
     }
   }
 

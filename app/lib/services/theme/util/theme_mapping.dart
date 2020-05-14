@@ -18,3 +18,12 @@ String getThemeText(ThemeType type) {
   };
   return themeTextMapping[type];
 }
+
+ThemeType getThemeType(String type) {
+  Map<String, ThemeType> themeTypeMapping = {
+    'Green': ThemeType.GREEN,
+    'Pink': ThemeType.PINK,
+    'Dark': ThemeType.DARK,
+  };
+  return themeTypeMapping[type];
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/theme_type.dart';
-import 'package:iwfpapp/services/theme/theme_mapping.dart';
-import 'package:iwfpapp/services/theme/theme_provider.dart';
+import 'package:iwfpapp/services/theme/util/theme_mapping.dart';
+import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class ThemeSelector extends StatelessWidget {

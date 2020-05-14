@@ -184,6 +184,7 @@ abstract class DataBackend extends ChangeNotifier {
     try {
       status = DataBackendStatus.LOADING;
       notifyListeners();
+
       /// TODO: add this to child classes
       /*
       await initCreditCard(CreditCardInitRequest(req.card), silent: true);

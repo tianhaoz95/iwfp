@@ -10,9 +10,10 @@ import 'package:iwfpapp/screens/auth/auth_screen.dart';
 import 'package:iwfpapp/screens/remove_card/remove_card_screen.dart';
 import 'package:iwfpapp/screens/remove_promo/remove_promo_screen.dart';
 import 'package:iwfpapp/screens/sign_up/sign_up_screen.dart';
+import 'package:iwfpapp/screens/splash/splash_screen.dart';
 import 'package:iwfpapp/screens/suggestion/main.dart';
 import 'package:iwfpapp/screens/add_card/add_card_screen.dart';
-import 'package:iwfpapp/services/theme/theme_provider.dart';
+import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class IwfpApp extends StatelessWidget {
@@ -28,7 +29,8 @@ class IwfpApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: {
-            '/': (context) => HomeScreen(),
+            '/': (context) => SplashScreen(),
+            '/home': (context) => HomeScreen(),
             '/sign_in': (context) => LoginScreen(),
             '/sign_up': (context) => SignUpScreen(),
             '/placeholder': (context) => PlaceholderScreen(),

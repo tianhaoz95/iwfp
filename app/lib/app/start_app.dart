@@ -5,16 +5,20 @@ import 'package:iwfpapp/services/app_auth/auth_factory.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/config/typedefs/app_auth_types.dart';
+import 'package:iwfpapp/services/config/typedefs/app_theme_types.dart';
 import 'package:iwfpapp/services/config/typedefs/backend.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/services/data_backend/data_backend_factory.dart';
-import 'package:iwfpapp/services/theme/theme_provider.dart';
+import 'package:iwfpapp/services/theme/base_theme_provider.dart';
+import 'package:iwfpapp/services/theme/theme_provider_factory.dart';
 import 'package:provider/provider.dart';
 
 void startApp({
   AppAuthType appAuthType = AppAuthType.FIREBASE_AUTH,
   BackendType backendType = BackendType.IN_APP,
+  AppThemeType appThemeType = AppThemeType.OFFLINE,
   bool shouldReportDevCrashes = true,
+  bool shouldInitHive = true,
 }) {
   WidgetsFlutterBinding.ensureInitialized();
   if (shouldReportDevCrashes) {
@@ -23,7 +27,7 @@ void startApp({
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
   AppContext appContext = AppContext();
   AppAuth appAuth = getAppAuth(appAuthType);
-  AppTheme appTheme = AppTheme();
+  AppTheme appTheme = getAppTheme(appThemeType);
   DataBackend dataBackend = getDataBackend(backendType);
   runApp(
     MultiProvider(
