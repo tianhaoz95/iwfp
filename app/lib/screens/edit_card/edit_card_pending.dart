@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
-import 'package:iwfpapp/widgets/promos/entry_view.dart';
+import 'package:iwfpapp/widgets/promos/entry_view/entry_view.dart';
 import 'package:provider/provider.dart';
 import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
@@ -32,7 +32,7 @@ class EditCardPending extends StatelessWidget {
                       height: 15.0,
                     ),
                     Center(
-                      child: Text('${updatedCard.name} (${updatedCard.id})'),
+                      child: Text('${updatedCard.name}'),
                     ),
                     SizedBox(
                       height: 15.0,

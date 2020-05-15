@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
+import 'package:iwfpapp/widgets/promos/entry_view/edit_actions.dart';
+import 'package:iwfpapp/widgets/promos/entry_view/entry_row_elt.dart';
 
 class PromoEntries extends StatefulWidget {
   final CreditCard card;
@@ -29,23 +31,29 @@ class _PromoEntries extends State<PromoEntries> {
           canTapOnHeader: true,
           isExpanded: this.expandCtrl[index],
           body: Container(
-              child: Center(
-                  child: Column(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('${promo.name} (${promo.id})'),
-              Text('${promo.type} ${promo.repeat} ${promo.start}~${promo.end}'),
-              Text(
-                  '@ ${promo.rate.toString()}% for ${promo.category.name} (${promo.category.id})'),
-              RaisedButton(
-                color: Colors.redAccent,
-                onPressed: () {
+              PromoEntryRowElement(text: 'Name: ${promo.name}'),
+              PromoEntryRowElement(text: 'ID: ${promo.id}'),
+              PromoEntryRowElement(text: 'Type: ${promo.type}'),
+              PromoEntryRowElement(text: 'Pattern: ${promo.repeat}'),
+              PromoEntryRowElement(text: 'Period: ${promo.start}~${promo.end}'),
+              PromoEntryRowElement(text: 'Rate: ${promo.rate.toString()}%'),
+              PromoEntryRowElement(
+                  text: 'Category Name: ${promo.category.name}'),
+              PromoEntryRowElement(text: 'Category ID: ${promo.category.id}'),
+              PromoEntryEditActions(
+                onDeleteTappedHandler: () {
                   Navigator.pushNamed(context, '/remove_promo',
                       arguments: RemovePromoMeta(this.widget.card, promo));
                 },
-                child: Text('Remove', style: TextStyle(color: Colors.white)),
+                onEditTappedHandler: () {
+                  Navigator.pushNamed(context, '/placeholder');
+                },
               )
             ],
-          ))),
+          )),
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Container(
               child: Center(child: Text('${promo.name}')),
