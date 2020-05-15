@@ -3,6 +3,7 @@ import 'package:flutter/src/material/theme_data.dart';
 import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:iwfpapp/services/theme/data/dark_theme.dart';
 import 'package:iwfpapp/services/theme/data/green_theme.dart';
+import 'package:iwfpapp/services/theme/data/pink_theme.dart';
 
 class MockThemeProvider extends AppTheme {
   ThemeType themeType;
@@ -23,11 +24,18 @@ class MockThemeProvider extends AppTheme {
   @override
   void setTheme(ThemeType type) {
     themeType = type;
+    notifyListeners();
   }
 
   @override
   void setUseSystem(bool shouldUse) {
     useSystem = shouldUse;
+    notifyListeners();
+  }
+
+  @override
+  bool getUseSystem() {
+    return useSystem;
   }
 
   @override
@@ -42,11 +50,24 @@ class MockThemeProvider extends AppTheme {
 
   @override
   ThemeData getTheme() {
-    return greenTheme;
+    switch (this.themeType) {
+      case ThemeType.GREEN:
+        return greenTheme;
+      case ThemeType.PINK:
+        return pinkTheme;
+      case ThemeType.DARK:
+        return darkTheme;
+      default:
+        return greenTheme;
+    }
   }
 
   @override
   ThemeData getDarkTheme() {
-    return darkTheme;
+    if (useSystem) {
+      return darkTheme;
+    } else {
+      return getTheme();
+    }
   }
 }

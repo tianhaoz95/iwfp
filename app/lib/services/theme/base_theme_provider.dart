@@ -11,6 +11,8 @@ abstract class AppTheme extends ChangeNotifier {
 
   void setUseSystem(bool shouldUse);
 
+  bool getUseSystem();
+
   Future<void> loadSettings();
 
   Future<void> persistSettings();

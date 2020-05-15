@@ -19,23 +19,32 @@ class OfflineAppTheme extends AppTheme {
     return true;
   }
 
+  @override
   Future<void> initialize() async {
     themeDb = await Hive.openBox('theme');
     await loadSettings();
     notifyListeners();
   }
 
+  @override
   void setTheme(ThemeType type) {
     themeType = type;
     persistSettings();
     notifyListeners();
   }
 
+  @override
   void setUseSystem(bool shouldUse) {
     useSystem = shouldUse;
     notifyListeners();
   }
 
+  @override
+  bool getUseSystem() {
+    return useSystem;
+  }
+
+  @override
   Future<void> loadSettings() async {
     await Future.delayed(Duration(microseconds: 200));
     String themeTypeName = themeDb.get('type');
@@ -44,14 +53,22 @@ class OfflineAppTheme extends AppTheme {
       print('load theme settings with type ${parsedThemeType}');
       themeType = parsedThemeType;
     }
+    bool useSystemSettings = themeDb.get('type');
+    if (useSystemSettings != null) {
+      print('load theme settings with type ${useSystemSettings}');
+      useSystem = useSystemSettings;
+    }
   }
 
+  @override
   Future<void> persistSettings() async {
     await Future.delayed(Duration(microseconds: 200));
     themeDb.put('type', getThemeText(themeType));
+    themeDb.put('useSystem', this.useSystem);
     print('theme settings saved');
   }
 
+  @override
   ThemeData getTheme() {
     switch (this.themeType) {
       case ThemeType.GREEN:
@@ -65,6 +82,7 @@ class OfflineAppTheme extends AppTheme {
     }
   }
 
+  @override
   ThemeData getDarkTheme() {
     if (useSystem) {
       return darkTheme;
