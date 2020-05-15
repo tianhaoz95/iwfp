@@ -6,9 +6,17 @@ pull_request_rules:
       merge:
         method: squash
         strict: smart
+  - name: auto merge for dependabot
+    conditions:
+      - "author~=^dependabot(|-preview)\[bot\]$"
+    actions:
+      merge:
+        method: squash
   - name: auto merge on approval
     conditions:
+      - "^(?!dependabot)"
       - "#approved-reviews-by>=1"
     actions:
       merge:
         method: squash
+        strict: smart
