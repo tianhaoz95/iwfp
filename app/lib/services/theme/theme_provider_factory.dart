@@ -5,7 +5,7 @@ import 'package:iwfpapp/services/theme/mock_theme_provider.dart';
 import 'package:iwfpapp/services/theme/offline_theme_provider.dart';
 
 AppTheme getAppTheme(AppThemeType type,
-    {ThemeType theme = ThemeType.GREEN, bool useSystem = true}) {
+    {ThemeType theme = ThemeType.WHITE, bool useSystem = true}) {
   switch (type) {
     case AppThemeType.OFFLINE:
       return OfflineAppTheme(themeType: theme, useSystem: useSystem);
