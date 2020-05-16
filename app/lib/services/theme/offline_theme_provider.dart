@@ -5,6 +5,7 @@ import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:iwfpapp/services/theme/data/dark_theme.dart';
 import 'package:iwfpapp/services/theme/data/green_theme.dart';
 import 'package:iwfpapp/services/theme/data/pink_theme.dart';
+import 'package:iwfpapp/services/theme/data/white_theme.dart';
 import 'package:iwfpapp/services/theme/util/theme_mapping.dart';
 
 class OfflineAppTheme extends AppTheme {
@@ -12,7 +13,7 @@ class OfflineAppTheme extends AppTheme {
   Box themeDb;
   bool useSystem;
 
-  OfflineAppTheme({this.themeType = ThemeType.GREEN, this.useSystem = false});
+  OfflineAppTheme({this.themeType = ThemeType.WHITE, this.useSystem = false});
 
   @override
   bool needHive() {
@@ -75,15 +76,21 @@ class OfflineAppTheme extends AppTheme {
 
   @override
   ThemeData getTheme() {
-    switch (this.themeType) {
-      case ThemeType.GREEN:
-        return greenTheme;
-      case ThemeType.PINK:
-        return pinkTheme;
-      case ThemeType.DARK:
-        return darkTheme;
-      default:
-        return greenTheme;
+    if (useSystem) {
+      return whiteTheme;
+    } else {
+      switch (this.themeType) {
+        case ThemeType.GREEN:
+          return greenTheme;
+        case ThemeType.PINK:
+          return pinkTheme;
+        case ThemeType.DARK:
+          return darkTheme;
+        case ThemeType.WHITE:
+          return whiteTheme;
+        default:
+          return greenTheme;
+      }
     }
   }
 

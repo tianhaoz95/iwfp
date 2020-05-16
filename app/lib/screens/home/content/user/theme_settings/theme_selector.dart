@@ -4,52 +4,61 @@ import 'package:iwfpapp/services/theme/util/theme_mapping.dart';
 import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:provider/provider.dart';
 
+class ColorSelectorCard extends StatelessWidget {
+  final ThemeType themeType;
+
+  const ColorSelectorCard({Key key, this.themeType}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.fromLTRB(0.0, 4.0, 8.0, 4.0),
+        child: SizedBox(
+          width: 32.0,
+          child: Material(
+            child: RaisedButton(
+              color: getThemeColor(this.themeType),
+              onPressed: () {
+                Provider.of<AppTheme>(context, listen: false)
+                    .setTheme(this.themeType);
+              },
+              child: Container(),
+            ),
+          ),
+        ));
+  }
+}
+
 class ThemeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 36.0,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          Material(
-            child: RaisedButton(
-              color: getThemeColor(ThemeType.GREEN),
-              onPressed: () {
-                Provider.of<AppTheme>(context, listen: false)
-                    .setTheme(ThemeType.GREEN);
-              },
-              child: Text(getThemeText(ThemeType.GREEN)),
+    if (Provider.of<AppTheme>(context).getUseSystem()) {
+      return Container();
+    } else {
+      return Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Text('Select Theme', style: TextStyle(
+                fontSize: 16.0,
+              ),),
             ),
-          ),
-          SizedBox(
-            width: 8.0,
-          ),
-          Material(
-            child: RaisedButton(
-              color: getThemeColor(ThemeType.PINK),
-              onPressed: () {
-                Provider.of<AppTheme>(context, listen: false)
-                    .setTheme(ThemeType.PINK);
-              },
-              child: Text(getThemeText(ThemeType.PINK)),
-            ),
-          ),
-          SizedBox(
-            width: 8.0,
-          ),
-          Material(
-            child: RaisedButton(
-              color: getThemeColor(ThemeType.DARK),
-              onPressed: () {
-                Provider.of<AppTheme>(context, listen: false)
-                    .setTheme(ThemeType.DARK);
-              },
-              child: Text(getThemeText(ThemeType.DARK)),
-            ),
-          ),
-        ],
-      ),
-    );
+            SizedBox(
+              height: 36.0,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  ColorSelectorCard(themeType: ThemeType.WHITE),
+                  ColorSelectorCard(themeType: ThemeType.GREEN),
+                  ColorSelectorCard(themeType: ThemeType.PINK),
+                  ColorSelectorCard(themeType: ThemeType.DARK),
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+    }
   }
 }

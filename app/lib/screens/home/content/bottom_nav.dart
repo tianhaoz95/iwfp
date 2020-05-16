@@ -14,6 +14,8 @@ class HomeBottomNavigator extends StatelessWidget {
     return BottomNavigationBar(
       key: Key('home_screen_bottom_nav_bar'),
       onTap: this.onTapped,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       backgroundColor: Theme.of(context).primaryColor,
       selectedItemColor: Theme.of(context).textSelectionColor,
       unselectedItemColor: Theme.of(context).unselectedWidgetColor,
