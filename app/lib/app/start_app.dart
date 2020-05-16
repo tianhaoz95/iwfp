@@ -18,6 +18,7 @@ void startApp({
   BackendType backendType = BackendType.IN_APP,
   AppThemeType appThemeType = AppThemeType.OFFLINE,
   bool shouldReportDevCrashes = true,
+  bool allowDynamicLink = true,
   bool shouldInitHive = true,
 }) {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,7 @@ void startApp({
     Crashlytics.instance.enableInDevMode = true;
   }
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  AppContext appContext = AppContext();
+  AppContext appContext = AppContext(allowDynamicLink: allowDynamicLink);
   AppAuth appAuth = getAppAuth(appAuthType);
   AppTheme appTheme = getAppTheme(appThemeType);
   DataBackend dataBackend = getDataBackend(backendType);

@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/config/typedefs/runtime_types.dart';
 
 class AppContext extends ChangeNotifier {
-  bool isDev = false;
-  AppContext() {
+  bool isDev;
+  bool allowDynamicLink;
+  AppContext({this.allowDynamicLink = true}) {
     setInitialDevMode();
   }
 
@@ -12,6 +13,10 @@ class AppContext extends ChangeNotifier {
       isDev = true;
       return true;
     }());
+  }
+
+  bool getAllowDynamicLink() {
+    return allowDynamicLink;
   }
 
   bool isDevMode() {

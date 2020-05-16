@@ -1,6 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
+import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -20,8 +21,11 @@ class _SplashScreen extends State<SplashScreen> {
     }
     await maybeNavigateToSignIn();
     await Provider.of<AppTheme>(context, listen: false).initialize();
-    await maybeUseDynamicLink();
-    Navigator.pushReplacementNamed(context, '/home');
+    if (Provider.of<AppContext>(context, listen: false).getAllowDynamicLink()) {
+      await maybeUseDynamicLink();
+    } else {
+      Navigator.pushReplacementNamed(context, '/home');
+    }
   }
 
   Future<void> maybeNavigateToSignIn() async {
@@ -33,23 +37,27 @@ class _SplashScreen extends State<SplashScreen> {
   }
 
   Future<void> maybeUseDynamicLink() async {
-    final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink();
+    final PendingDynamicLinkData data =
+        await FirebaseDynamicLinks.instance.getInitialLink();
     final Uri deepLink = data?.link;
     if (deepLink != null) {
       Navigator.pushReplacementNamed(context, deepLink.path);
+    } else {
+      Navigator.pushReplacementNamed(context, '/home');
     }
     FirebaseDynamicLinks.instance.onLink(
-      onSuccess: (PendingDynamicLinkData dynamicLink) async {
-        final Uri deepLink = dynamicLink?.link;
-        if (deepLink != null) {
-          Navigator.pushReplacementNamed(context, deepLink.path);
-        }
-      },
-      onError: (OnLinkErrorException err) async {
-        print('Handle dynamic link failed');
-        print(err.message);
+        onSuccess: (PendingDynamicLinkData dynamicLink) async {
+      final Uri deepLink = dynamicLink?.link;
+      if (deepLink != null) {
+        Navigator.pushReplacementNamed(context, deepLink.path);
+      } else {
+        Navigator.pushReplacementNamed(context, '/home');
       }
-    );
+    }, onError: (OnLinkErrorException err) async {
+      print('Handle dynamic link failed');
+      print(err.message);
+      Navigator.pushReplacementNamed(context, '/home');
+    });
   }
 
   @override

@@ -21,7 +21,7 @@ void main() {
             create: (context) => getAppAuth(AppAuthType.MOCK_AUTH)),
         ChangeNotifierProvider(
             create: (context) => getDataBackend(BackendType.MOCK)),
-        ChangeNotifierProvider(create: (context) => AppContext()),
+        ChangeNotifierProvider(create: (context) => AppContext(allowDynamicLink: false)),
       ],
       child: IwfpApp(),
     ));
