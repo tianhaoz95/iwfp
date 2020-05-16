@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/screens/home/content/user/theme_selector.dart';
+import 'package:iwfpapp/screens/home/content/user/theme_settings/theme_settings.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:provider/provider.dart';
@@ -36,13 +36,7 @@ class _UserSettings extends State<UserSettings> {
         child: ListView(
           children: <Widget>[
             ListViewItem(
-              child: Text(
-                'Change Theme',
-                style: TextStyle(fontSize: 24.0),
-              ),
-            ),
-            ListViewItem(
-              child: ThemeSelector(),
+              child: ThemeSettings(),
             ),
             Divider(
               thickness: 1.0,

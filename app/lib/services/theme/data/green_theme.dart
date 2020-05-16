@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData greenTheme = ThemeData(
   primaryColor: Colors.green,
+  textSelectionColor: Colors.white,
   buttonTheme: ButtonThemeData(
       buttonColor: Colors.green,
       textTheme: ButtonTextTheme.primary,
