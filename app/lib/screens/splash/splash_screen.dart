@@ -1,3 +1,4 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/theme/base_theme_provider.dart';
@@ -19,6 +20,7 @@ class _SplashScreen extends State<SplashScreen> {
     }
     await maybeNavigateToSignIn();
     await Provider.of<AppTheme>(context, listen: false).initialize();
+    await maybeUseDynamicLink();
     Navigator.pushReplacementNamed(context, '/home');
   }
 
@@ -28,6 +30,26 @@ class _SplashScreen extends State<SplashScreen> {
     if (!signedIn) {
       Navigator.pushReplacementNamed(context, '/sign_in');
     }
+  }
+
+  Future<void> maybeUseDynamicLink() async {
+    final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink();
+    final Uri deepLink = data?.link;
+    if (deepLink != null) {
+      Navigator.pushReplacementNamed(context, deepLink.path);
+    }
+    FirebaseDynamicLinks.instance.onLink(
+      onSuccess: (PendingDynamicLinkData dynamicLink) async {
+        final Uri deepLink = dynamicLink?.link;
+        if (deepLink != null) {
+          Navigator.pushReplacementNamed(context, deepLink.path);
+        }
+      },
+      onError: (OnLinkErrorException err) async {
+        print('Handle dynamic link failed');
+        print(err.message);
+      }
+    );
   }
 
   @override
