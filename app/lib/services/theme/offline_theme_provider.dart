@@ -46,17 +46,22 @@ class OfflineAppTheme extends AppTheme {
 
   @override
   Future<void> loadSettings() async {
-    await Future.delayed(Duration(microseconds: 200));
-    String themeTypeName = themeDb.get('type');
-    ThemeType parsedThemeType = getThemeType(themeTypeName);
-    if (parsedThemeType != null) {
-      print('load theme settings with type ${parsedThemeType}');
-      themeType = parsedThemeType;
-    }
-    bool useSystemSettings = themeDb.get('type');
-    if (useSystemSettings != null) {
+    try {
+      await Future.delayed(Duration(microseconds: 200));
+      String themeTypeName = themeDb.get('type');
+      ThemeType parsedThemeType = getThemeType(themeTypeName);
+      if (parsedThemeType != null) {
+        print('load theme settings with type ${parsedThemeType}');
+        themeType = parsedThemeType;
+      }
+      bool useSystemSettings = themeDb.get('type').toLowerCase() == 'true';
+      ;
       print('load theme settings with type ${useSystemSettings}');
       useSystem = useSystemSettings;
+    } catch (err) {
+      print('error loading theme config: ' + err.toString());
+      useSystem = false;
+      themeType = ThemeType.GREEN;
     }
   }
 
@@ -64,7 +69,7 @@ class OfflineAppTheme extends AppTheme {
   Future<void> persistSettings() async {
     await Future.delayed(Duration(microseconds: 200));
     themeDb.put('type', getThemeText(themeType));
-    themeDb.put('useSystem', this.useSystem);
+    themeDb.put('useSystem', this.useSystem.toString());
     print('theme settings saved');
   }
 
