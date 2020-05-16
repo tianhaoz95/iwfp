@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/screens/home/content/user/auth_settings/auth_settings.dart';
+import 'package:iwfpapp/screens/home/content/user/dangerous_settings/dangerous_settings.dart';
 import 'package:iwfpapp/screens/home/content/user/theme_settings/theme_settings.dart';
 import 'package:iwfpapp/services/app_context/interface.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
@@ -42,32 +44,13 @@ class _UserSettings extends State<UserSettings> {
               thickness: 1.0,
             ),
             ListViewItem(
-              child: RaisedButton(
-                key: Key('go_to_auth_btn'),
-                color: Theme.of(context).primaryColor,
-                child: Text(
-                  'Sign out',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/sign_in');
-                },
-              ),
+              child: AuthSettings(),
             ),
             Divider(
               thickness: 1.0,
             ),
             ListViewItem(
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/delete_account');
-                },
-                color: Colors.redAccent,
-                child: Text(
-                  'Delete Account',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+              child: DangerousSettings(),
             ),
           ],
         ));
