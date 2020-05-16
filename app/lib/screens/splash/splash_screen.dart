@@ -39,13 +39,20 @@ class _SplashScreen extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Welcome to 5% App'),
-      ),
       body: Container(
         child: ListView(
           children: [
-            LinearProgressIndicator(),
+            SizedBox(
+              height: 50.0,
+            ),
+            Container(
+              child: Center(
+                child: Text(
+                  '5% App',
+                  style: TextStyle(fontSize: 32.0),
+                ),
+              ),
+            ),
             Container(
               child: Center(
                 child: Text('Loading your settings...'),
