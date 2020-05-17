@@ -4,7 +4,7 @@ import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:iwfpapp/services/theme/util/theme_mapping.dart';
 
 /// Offline App Theme
-/// 
+///
 /// This implementation of [AppTheme] uses Hive, a local
 /// key-val pair storage solution as backend to persist
 /// theme settings and configurations between app sessions.
@@ -41,14 +41,18 @@ class OfflineAppTheme extends AppTheme {
         print('load theme settings with type ${parsedThemeType}');
         themeType = parsedThemeType;
       }
-      bool useSystemSettings = themeDb.get('type').toLowerCase() == 'true';
-      ;
-      print('load theme settings with type ${useSystemSettings}');
+      bool useSystemSettings = themeDb.get('useSystem') != null
+          ? themeDb.get('useSystem').toLowerCase() == 'true'
+          : false;
+      print('useSystemSettings: ${useSystemSettings}');
       useSystem = useSystemSettings;
+      notifyListeners();
     } catch (err) {
-      print('error loading theme config: ' + err.toString());
+      print('Error loading theme config');
+      print('Reason: ' + err.toString());
       useSystem = false;
-      themeType = ThemeType.GREEN;
+      themeType = ThemeType.WHITE;
+      notifyListeners();
     }
   }
 
