@@ -24,7 +24,7 @@ class FivePercentUiDevApp extends StatelessWidget {
       builder: (BuildContext context, AppTheme theme, Widget child) {
         return MaterialApp(
           title: '5% App',
-          theme: theme.getTheme(),
+          theme: theme.getLightTheme(),
           darkTheme: theme.getDarkTheme(),
           debugShowCheckedModeBanner: false,
           initialRoute: '/',

@@ -40,9 +40,12 @@ class ThemeSelector extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              child: Text('Select Theme', style: TextStyle(
-                fontSize: 16.0,
-              ),),
+              child: Text(
+                'Select Theme',
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
             ),
             SizedBox(
               height: 36.0,
