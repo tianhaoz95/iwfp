@@ -89,7 +89,6 @@ class _HomeScreen extends State<HomeScreen> {
               child: FlatButton(
                 child: Icon(
                   Icons.refresh,
-                  color: Colors.white,
                 ),
                 onPressed: () {
                   if (Provider.of<DataBackend>(context, listen: false)
