@@ -19,8 +19,8 @@ class _SplashScreen extends State<SplashScreen> {
     if (Provider.of<AppTheme>(context, listen: false).needHive()) {
       await Hive.initFlutter();
     }
-    await maybeNavigateToSignIn();
     await Provider.of<AppTheme>(context, listen: false).initialize();
+    await maybeNavigateToSignIn();
     if (Provider.of<AppContext>(context, listen: false).getAllowDynamicLink()) {
       await maybeUseDynamicLink();
     } else {
