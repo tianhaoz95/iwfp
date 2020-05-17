@@ -1,16 +1,20 @@
 import 'package:iwfpapp/services/config/typedefs/theme_type.dart';
-import 'package:flutter/src/material/theme_data.dart';
 import 'package:iwfpapp/services/theme/base_theme_provider.dart';
-import 'package:iwfpapp/services/theme/data/dark_theme.dart';
-import 'package:iwfpapp/services/theme/data/green_theme.dart';
-import 'package:iwfpapp/services/theme/data/pink_theme.dart';
-import 'package:iwfpapp/services/theme/data/white_theme.dart';
 
-class MockThemeProvider extends AppTheme {
-  ThemeType themeType;
-  bool useSystem;
-
-  MockThemeProvider({this.themeType = ThemeType.WHITE, this.useSystem = false});
+/// Mock App Theme
+/// 
+/// This is a dummy implementation of [AppTheme] which
+/// is used for local development and unit testing.
+/// All of its methods are trivial conforming only to
+/// the async nature of the base class restriction.
+class MockAppTheme extends AppTheme {
+  MockAppTheme({
+    ThemeType themeType = ThemeType.WHITE,
+    bool useSystem = false,
+  }) : super(
+          themeType: themeType,
+          useSystem: useSystem,
+        );
 
   @override
   bool needHive() {
@@ -23,23 +27,6 @@ class MockThemeProvider extends AppTheme {
   }
 
   @override
-  void setTheme(ThemeType type) {
-    themeType = type;
-    notifyListeners();
-  }
-
-  @override
-  void setUseSystem(bool shouldUse) {
-    useSystem = shouldUse;
-    notifyListeners();
-  }
-
-  @override
-  bool getUseSystem() {
-    return useSystem;
-  }
-
-  @override
   Future<void> loadSettings() async {
     await Future.delayed(Duration(microseconds: 200));
   }
@@ -47,34 +34,5 @@ class MockThemeProvider extends AppTheme {
   @override
   Future<void> persistSettings() async {
     await Future.delayed(Duration(microseconds: 200));
-  }
-
-  @override
-  ThemeData getTheme() {
-    if (useSystem) {
-      return whiteTheme;
-    } else {
-      switch (this.themeType) {
-        case ThemeType.GREEN:
-          return greenTheme;
-        case ThemeType.PINK:
-          return pinkTheme;
-        case ThemeType.DARK:
-          return darkTheme;
-        case ThemeType.WHITE:
-          return whiteTheme;
-        default:
-          return greenTheme;
-      }
-    }
-  }
-
-  @override
-  ThemeData getDarkTheme() {
-    if (useSystem) {
-      return darkTheme;
-    } else {
-      return getTheme();
-    }
   }
 }

@@ -1,19 +1,23 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:iwfpapp/services/config/typedefs/theme_type.dart';
 import 'package:iwfpapp/services/theme/base_theme_provider.dart';
-import 'package:iwfpapp/services/theme/data/dark_theme.dart';
-import 'package:iwfpapp/services/theme/data/green_theme.dart';
-import 'package:iwfpapp/services/theme/data/pink_theme.dart';
-import 'package:iwfpapp/services/theme/data/white_theme.dart';
 import 'package:iwfpapp/services/theme/util/theme_mapping.dart';
 
+/// Offline App Theme
+/// 
+/// This implementation of [AppTheme] uses Hive, a local
+/// key-val pair storage solution as backend to persist
+/// theme settings and configurations between app sessions.
 class OfflineAppTheme extends AppTheme {
-  ThemeType themeType;
   Box themeDb;
-  bool useSystem;
 
-  OfflineAppTheme({this.themeType = ThemeType.WHITE, this.useSystem = false});
+  OfflineAppTheme({
+    ThemeType themeType = ThemeType.WHITE,
+    bool useSystem = false,
+  }) : super(
+          themeType: themeType,
+          useSystem: useSystem,
+        );
 
   @override
   bool needHive() {
@@ -25,24 +29,6 @@ class OfflineAppTheme extends AppTheme {
     themeDb = await Hive.openBox('theme');
     await loadSettings();
     notifyListeners();
-  }
-
-  @override
-  void setTheme(ThemeType type) {
-    themeType = type;
-    persistSettings();
-    notifyListeners();
-  }
-
-  @override
-  void setUseSystem(bool shouldUse) {
-    useSystem = shouldUse;
-    notifyListeners();
-  }
-
-  @override
-  bool getUseSystem() {
-    return useSystem;
   }
 
   @override
@@ -72,34 +58,5 @@ class OfflineAppTheme extends AppTheme {
     themeDb.put('type', getThemeText(themeType));
     themeDb.put('useSystem', this.useSystem.toString());
     print('theme settings saved');
-  }
-
-  @override
-  ThemeData getTheme() {
-    if (useSystem) {
-      return whiteTheme;
-    } else {
-      switch (this.themeType) {
-        case ThemeType.GREEN:
-          return greenTheme;
-        case ThemeType.PINK:
-          return pinkTheme;
-        case ThemeType.DARK:
-          return darkTheme;
-        case ThemeType.WHITE:
-          return whiteTheme;
-        default:
-          return greenTheme;
-      }
-    }
-  }
-
-  @override
-  ThemeData getDarkTheme() {
-    if (useSystem) {
-      return darkTheme;
-    } else {
-      return getTheme();
-    }
   }
 }
