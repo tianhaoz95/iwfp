@@ -42,7 +42,7 @@
     "ts-node": "^8.10.1",
     "tslint": "^6.1.2",
     "typedoc": "^0.17.7",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.3"
   },
   "private": true
 }
