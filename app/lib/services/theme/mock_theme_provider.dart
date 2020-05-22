@@ -2,7 +2,7 @@ import 'package:iwfpapp/services/config/typedefs/theme_type.dart';
 import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 
 /// Mock App Theme
-/// 
+///
 /// This is a dummy implementation of [AppTheme] which
 /// is used for local development and unit testing.
 /// All of its methods are trivial conforming only to

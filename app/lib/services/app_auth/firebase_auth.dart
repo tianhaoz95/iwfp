@@ -1,14 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 
 class AppAuthUsingFirebaseAuth extends AppAuth {
   FirebaseAuth _auth = FirebaseAuth.instance;
+  GoogleSignIn _googleSignIn = GoogleSignIn();
   AuthResult authResult;
 
   Future<void> signInWithEmailHandler(String email, String pwd) async {
     authResult =
         await _auth.signInWithEmailAndPassword(email: email, password: pwd);
+  }
+
+  Future<void> signInWithGoogleHandler() async {
+    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    AuthCredential cred = GoogleAuthProvider.getCredential(
+        idToken: googleAuth.accessToken, accessToken: googleAuth.idToken);
+    authResult = await _auth.signInWithCredential(cred);
+  }
+
+  Future<void> signInWithGitHubHandler() async {
+    AuthCredential cred =
+        GithubAuthProvider.getCredential(token: 'cf66baec2260c0d635dd');
+    authResult = await _auth.signInWithCredential(cred);
   }
 
   Future<void> signUpWithEmailHandler(String email, String pwd) async {

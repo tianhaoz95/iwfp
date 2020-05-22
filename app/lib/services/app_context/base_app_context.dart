@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/config/typedefs/runtime_types.dart';
 
-class AppContext extends ChangeNotifier {
+abstract class AppContext extends ChangeNotifier {
   bool isDev;
   bool allowDynamicLink;
   AppContext({this.allowDynamicLink = true}) {
@@ -40,5 +40,17 @@ class AppContext extends ChangeNotifier {
 
   bool isDeveloper(String email) {
     return email == 'jacksonzhou666@gmail.com';
+  }
+
+  bool allowGoogleSignIn() {
+    return false;
+  }
+
+  bool allowGitHubSignIn() {
+    return false;
+  }
+
+  bool allowContinueAsGuest() {
+    return false;
   }
 }

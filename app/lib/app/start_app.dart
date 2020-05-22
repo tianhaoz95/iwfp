@@ -3,8 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/app/app.dart';
 import 'package:iwfpapp/services/app_auth/auth_factory.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
-import 'package:iwfpapp/services/app_context/interface.dart';
+import 'package:iwfpapp/services/app_context/app_context_factory.dart';
+import 'package:iwfpapp/services/app_context/base_app_context.dart';
 import 'package:iwfpapp/services/config/typedefs/app_auth_types.dart';
+import 'package:iwfpapp/services/config/typedefs/app_context_types.dart';
 import 'package:iwfpapp/services/config/typedefs/app_theme_types.dart';
 import 'package:iwfpapp/services/config/typedefs/backend.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
@@ -17,6 +19,7 @@ void startApp({
   AppAuthType appAuthType = AppAuthType.FIREBASE_AUTH,
   BackendType backendType = BackendType.IN_APP,
   AppThemeType appThemeType = AppThemeType.OFFLINE,
+  AppContextType appContextType = AppContextType.PROD,
   bool shouldReportDevCrashes = true,
   bool allowDynamicLink = true,
   bool shouldInitHive = true,
@@ -26,7 +29,8 @@ void startApp({
     Crashlytics.instance.enableInDevMode = true;
   }
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  AppContext appContext = AppContext(allowDynamicLink: allowDynamicLink);
+  AppContext appContext =
+      getAppContext(appContextType, allowDynamicLink: allowDynamicLink);
   AppAuth appAuth = getAppAuth(appAuthType);
   AppTheme appTheme = getAppTheme(appThemeType);
   DataBackend dataBackend = getDataBackend(backendType);

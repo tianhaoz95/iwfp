@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1095575038101-794mbk6tjupdkvravj1r6fp5dttq2558.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jacksonz.iwfpapp",
+            "certificate_hash": "e8cb2db431df2a68f27124123cd42de509c41eb9"
+          }
+        },
+        {
           "client_id": "1095575038101-4lqb5rmv8n9v27qklrap2pg1nons4rut.apps.googleusercontent.com",
           "client_type": 3
         }

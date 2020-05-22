@@ -1,8 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iwfpapp/app/app.dart';
 import 'package:iwfpapp/services/app_auth/auth_factory.dart';
-import 'package:iwfpapp/services/app_context/interface.dart';
+import 'package:iwfpapp/services/app_context/app_context_factory.dart';
 import 'package:iwfpapp/services/config/typedefs/app_auth_types.dart';
+import 'package:iwfpapp/services/config/typedefs/app_context_types.dart';
 import 'package:iwfpapp/services/config/typedefs/app_theme_types.dart';
 import 'package:iwfpapp/services/config/typedefs/backend.dart';
 import 'package:iwfpapp/services/data_backend/data_backend_factory.dart';
@@ -22,7 +23,8 @@ void main() {
         ChangeNotifierProvider(
             create: (context) => getDataBackend(BackendType.MOCK)),
         ChangeNotifierProvider(
-            create: (context) => AppContext(allowDynamicLink: false)),
+            create: (context) =>
+                getAppContext(AppContextType.MOCK, allowDynamicLink: false)),
       ],
       child: IwfpApp(),
     ));

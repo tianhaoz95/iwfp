@@ -1,7 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
-import 'package:iwfpapp/services/app_context/interface.dart';
+import 'package:iwfpapp/services/app_context/base_app_context.dart';
 import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';

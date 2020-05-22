@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/auth/auth_error.dart';
 import 'package:iwfpapp/screens/auth/auth_loading.dart';
-import 'package:iwfpapp/screens/auth/not_signed_in.dart';
+import 'package:iwfpapp/screens/auth/not_signed_in/not_signed_in.dart';
 import 'package:iwfpapp/screens/auth/signed_in.dart';
 import 'package:iwfpapp/screens/auth/unknown_auth_err.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
