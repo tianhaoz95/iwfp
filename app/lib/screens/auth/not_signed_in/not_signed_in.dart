@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/screens/auth/not_signed_in/continue_as_guest.dart';
+import 'package:iwfpapp/screens/auth/not_signed_in/github_sign_in.dart';
+import 'package:iwfpapp/screens/auth/not_signed_in/google_sign_in.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
@@ -77,34 +80,8 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
               },
             ),
           )),
-          ListViewItem(
-              child: Material(
-            child: RaisedButton(
-              color: Colors.green,
-              key: Key('google_sign_in_btn'),
-              child: Text(
-                'Sign In with Google',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Provider.of<AppAuth>(context, listen: false).signInWithGoogle();
-              },
-            ),
-          )),
-          ListViewItem(
-              child: Material(
-            child: RaisedButton(
-              color: Colors.green,
-              key: Key('github_sign_in_btn'),
-              child: Text(
-                'Sign In with GitHub',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Provider.of<AppAuth>(context, listen: false).signInWithGitHub();
-              },
-            ),
-          )),
+          GoogleSignInBtn(),
+          GitHubSignInBtn(),
           ListViewItem(
               child: Material(
             child: RaisedButton(
@@ -122,19 +99,7 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
               },
             ),
           )),
-          ListViewItem(
-              child: Material(
-            child: RaisedButton(
-              color: Colors.amber[900],
-              child: Text(
-                'Continue as Guest',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/placeholder');
-              },
-            ),
-          )),
+          ContinueAsGuest(),
           ListViewItem(
               child: Material(
             child: RaisedButton(

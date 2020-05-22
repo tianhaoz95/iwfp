@@ -49,4 +49,8 @@ abstract class AppContext extends ChangeNotifier {
   bool allowGitHubSignIn() {
     return false;
   }
+
+  bool allowContinueAsGuest() {
+    return false;
+  }
 }
