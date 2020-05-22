@@ -80,6 +80,34 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
           ListViewItem(
               child: Material(
             child: RaisedButton(
+              color: Colors.green,
+              key: Key('google_sign_in_btn'),
+              child: Text(
+                'Sign In with Google',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Provider.of<AppAuth>(context, listen: false).signInWithGoogle();
+              },
+            ),
+          )),
+          ListViewItem(
+              child: Material(
+            child: RaisedButton(
+              color: Colors.green,
+              key: Key('github_sign_in_btn'),
+              child: Text(
+                'Sign In with GitHub',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Provider.of<AppAuth>(context, listen: false).signInWithGitHub();
+              },
+            ),
+          )),
+          ListViewItem(
+              child: Material(
+            child: RaisedButton(
               color: Colors.redAccent,
               child: Text(
                 'Forgot Password',

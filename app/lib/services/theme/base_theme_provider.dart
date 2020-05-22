@@ -7,7 +7,7 @@ import 'package:iwfpapp/services/theme/data/pink_theme.dart';
 import 'package:iwfpapp/services/theme/data/white_theme.dart';
 
 /// App Theme
-/// 
+///
 /// This is the service provider that controls the
 /// overall theme for the app.
 /// It is implemented with:

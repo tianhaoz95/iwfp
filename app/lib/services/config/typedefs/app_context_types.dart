@@ -1,0 +1,4 @@
+enum AppContextType {
+  PROD,
+  MOCK,
+}

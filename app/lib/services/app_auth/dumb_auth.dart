@@ -30,6 +30,16 @@ class DumbAuth extends AppAuth {
   }
 
   @override
+  Future<void> signInWithGoogleHandler() async {
+    await Future.delayed(Duration(milliseconds: 200));
+  }
+
+  @override
+  Future<void> signInWithGitHubHandler() async {
+    await Future.delayed(Duration(milliseconds: 200));
+  }
+
+  @override
   Future<void> signOutHandler() async {
     await Future.delayed(Duration(milliseconds: 200));
   }

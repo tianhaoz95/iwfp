@@ -5,7 +5,7 @@ import 'package:iwfpapp/services/theme/mock_theme_provider.dart';
 import 'package:iwfpapp/services/theme/offline_theme_provider.dart';
 
 /// App Theme Getter
-/// 
+///
 /// This is a utility wrapper that abstract the creation of
 /// theme service provider. Code outside the theme directory
 /// should only use this method to access theme service.

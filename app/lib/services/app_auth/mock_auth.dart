@@ -46,6 +46,20 @@ class MockAuth extends AppAuth {
   }
 
   @override
+  Future<void> signInWithGoogleHandler() async {
+    await Future.delayed(Duration(milliseconds: 200));
+    signedIn = true;
+    userEmail = 'example@googleauth.com';
+  }
+
+  @override
+  Future<void> signInWithGitHubHandler() async {
+    await Future.delayed(Duration(milliseconds: 200));
+    signedIn = true;
+    userEmail = 'example@googleauth.com';
+  }
+
+  @override
   Future<void> signOutHandler() async {
     await Future.delayed(Duration(milliseconds: 200));
     signedIn = false;

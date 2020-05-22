@@ -33,6 +33,34 @@ abstract class AppAuth extends ChangeNotifier {
     }
   }
 
+  Future<void> signInWithGoogle() async {
+    try {
+      authState = AuthState.LOADING;
+      notifyListeners();
+      await signInWithGoogleHandler();
+      authState = AuthState.SIGNED_IN;
+      notifyListeners();
+    } catch (err) {
+      print(err.toString());
+      authState = AuthState.ERROR;
+      notifyListeners();
+    }
+  }
+
+  Future<void> signInWithGitHub() async {
+    try {
+      authState = AuthState.LOADING;
+      notifyListeners();
+      await signInWithGitHubHandler();
+      authState = AuthState.SIGNED_IN;
+      notifyListeners();
+    } catch (err) {
+      print(err.toString());
+      authState = AuthState.ERROR;
+      notifyListeners();
+    }
+  }
+
   Future<void> signOut({bool silent = false}) async {
     try {
       authState = AuthState.LOADING;
@@ -110,6 +138,10 @@ abstract class AppAuth extends ChangeNotifier {
   }
 
   Future<void> signInWithEmailHandler(String email, String pwd);
+
+  Future<void> signInWithGoogleHandler();
+
+  Future<void> signInWithGitHubHandler();
 
   Future<void> signUpWithEmailHandler(String email, String pwd);
 
