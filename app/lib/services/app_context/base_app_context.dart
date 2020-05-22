@@ -41,4 +41,12 @@ abstract class AppContext extends ChangeNotifier {
   bool isDeveloper(String email) {
     return email == 'jacksonzhou666@gmail.com';
   }
+
+  bool allowGoogleSignIn() {
+    return false;
+  }
+
+  bool allowGitHubSignIn() {
+    return false;
+  }
 }
