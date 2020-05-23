@@ -22,6 +22,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   # basic utilites
   http: ^0.12.0+4
+  url_launcher: ^5.4.10
   # third party utilities
   edit_distance: ^0.4.1
   # firebase packages

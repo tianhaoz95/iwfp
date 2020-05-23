@@ -37,6 +37,9 @@ class _UserSettings extends State<UserSettings> {
         padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
         child: ListView(
           children: <Widget>[
+            SizedBox(
+              height: 16.0,
+            ),
             ListViewItem(
               child: ThemeSettings(),
             ),
