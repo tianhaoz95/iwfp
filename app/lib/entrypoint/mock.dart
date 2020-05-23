@@ -8,6 +8,7 @@ void main() {
     appAuthType: AppAuthType.MOCK_AUTH,
     backendType: BackendType.MOCK,
     appThemeType: AppThemeType.MOCK,
+    allowDynamicLink: false,
     shouldReportDevCrashes: false,
   );
 }
