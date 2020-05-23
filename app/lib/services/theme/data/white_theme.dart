@@ -26,4 +26,11 @@ ThemeData whiteTheme = ThemeData(
     padding: EdgeInsets.fromLTRB(1.0, 1.0, 1.0, 1.0),
     selectedColor: Colors.black45,
   ),
+  inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.grey,
+      ),
+    ),
+  ),
 );
