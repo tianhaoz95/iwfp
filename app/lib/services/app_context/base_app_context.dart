@@ -19,6 +19,10 @@ abstract class AppContext extends ChangeNotifier {
     return allowDynamicLink;
   }
 
+  bool needRemoteConfig() {
+    return true;
+  }
+
   bool isDevMode() {
     return isDev;
   }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/screens/home/content/contrib/checkout_repository.dart';
+import 'package:iwfpapp/screens/home/content/contrib/report_bug.dart';
+import 'package:iwfpapp/screens/home/content/contrib/request_feature.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,6 +16,9 @@ class Contrib extends StatelessWidget {
         key: Key('contrib_screen_content'),
         child: ListView(
           children: <Widget>[
+            SizedBox(
+              height: 16.0,
+            ),
             ListViewItem(
                 child: Text(
               'All contributions are appreciated!',
@@ -25,18 +31,7 @@ class Contrib extends StatelessWidget {
             ),
             SizedBox(height: 25.0),
             ListViewItem(
-              child: Container(
-                child: RaisedButton(
-                    child: Text('Checkoout the repository'),
-                    onPressed: () async {
-                      String url = 'https://github.com/tianhaoz95/iwfp';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        print('launch ${url} failed');
-                      }
-                    }),
-              ),
+              child: CheckoutGitHubRepository(),
             ),
             SizedBox(height: 25.0),
             ListViewItem(
@@ -44,34 +39,10 @@ class Contrib extends StatelessWidget {
             ),
             SizedBox(height: 25.0),
             ListViewItem(
-              child: Container(
-                child: RaisedButton(
-                    child: Text('Report a bug'),
-                    onPressed: () async {
-                      String url =
-                          'https://github.com/tianhaoz95/iwfp/issues/new?assignees=&labels=bug&template=bug_report.md&title=';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        print('launch ${url} failed');
-                      }
-                    }),
-              ),
+              child: ReportBug(),
             ),
             ListViewItem(
-              child: Container(
-                child: RaisedButton(
-                    child: Text('Request a feature'),
-                    onPressed: () async {
-                      String url =
-                          'https://github.com/tianhaoz95/iwfp/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        print('launch ${url} failed');
-                      }
-                    }),
-              ),
+              child: RequestFeature(),
             ),
             ListViewItem(
               child: Container(
