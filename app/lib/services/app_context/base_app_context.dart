@@ -19,10 +19,6 @@ abstract class AppContext extends ChangeNotifier {
     return allowDynamicLink;
   }
 
-  bool needRemoteConfig() {
-    return true;
-  }
-
   bool isDevMode() {
     return isDev;
   }
@@ -57,4 +53,6 @@ abstract class AppContext extends ChangeNotifier {
   bool allowContinueAsGuest() {
     return false;
   }
+
+  bool needRemoteConfig();
 }
