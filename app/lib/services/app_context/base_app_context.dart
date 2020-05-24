@@ -53,4 +53,6 @@ abstract class AppContext extends ChangeNotifier {
   bool allowContinueAsGuest() {
     return false;
   }
+
+  bool needRemoteConfig();
 }

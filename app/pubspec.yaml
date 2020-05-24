@@ -34,6 +34,7 @@ dependencies:
   cloud_functions: ^0.4.2+3
   firebase_dynamic_links: ^0.5.0+11
   google_sign_in: ^4.5.1
+  firebase_remote_config: ^0.3.0+3
   # protobuf support
   protobuf: ^1.0.1
   # provider package for dependency injection
@@ -103,3 +104,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: iwfpapp
+      fonts:
+        - asset: fonts/Iwfpapp.ttf

@@ -1,4 +1,5 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/app_context/base_app_context.dart';
@@ -18,6 +19,11 @@ class _SplashScreen extends State<SplashScreen> {
   Future<void> initAppData() async {
     if (Provider.of<AppTheme>(context, listen: false).needHive()) {
       await Hive.initFlutter();
+    }
+    if (Provider.of<AppContext>(context).needRemoteConfig()) {
+      RemoteConfig remoteConfig = await RemoteConfig.instance;
+      await remoteConfig.fetch(expiration: const Duration(hours: 6));
+      await remoteConfig.activateFetched();
     }
     await Provider.of<AppTheme>(context, listen: false).initialize();
     await maybeNavigateToSignIn();
