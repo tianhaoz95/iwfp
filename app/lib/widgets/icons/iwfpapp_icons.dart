@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/Iwfpapp.ttf
 ///
-/// 
+///
 /// * Material Design Icons, Copyright (C) Google, Inc
 ///         Author:    Google
 ///         License:   Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
@@ -37,14 +37,24 @@ class Iwfpapp {
   static const _kFontFam = 'Iwfpapp';
   static const _kFontPkg = null;
 
-  static const IconData fiber_new = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData bug = IconData(0xf188, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData free_code_camp = IconData(0xf2c5, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData mark_github = IconData(0xf308, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData git_commit = IconData(0xf315, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData git_branch = IconData(0xf346, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData git_merge = IconData(0xf3b1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData git_pull_request = IconData(0xf3b6, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData git_compare = IconData(0xf3bf, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData laptop_code = IconData(0xf5fc, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData fiber_new =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData bug =
+      IconData(0xf188, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData free_code_camp =
+      IconData(0xf2c5, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData mark_github =
+      IconData(0xf308, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData git_commit =
+      IconData(0xf315, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData git_branch =
+      IconData(0xf346, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData git_merge =
+      IconData(0xf3b1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData git_pull_request =
+      IconData(0xf3b6, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData git_compare =
+      IconData(0xf3bf, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData laptop_code =
+      IconData(0xf5fc, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
