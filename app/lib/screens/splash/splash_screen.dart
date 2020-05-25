@@ -20,7 +20,7 @@ class _SplashScreen extends State<SplashScreen> {
     if (Provider.of<AppTheme>(context, listen: false).needHive()) {
       await Hive.initFlutter();
     }
-    if (Provider.of<AppContext>(context).needRemoteConfig()) {
+    if (Provider.of<AppContext>(context, listen: false).needRemoteConfig()) {
       RemoteConfig remoteConfig = await RemoteConfig.instance;
       await remoteConfig.fetch(expiration: const Duration(hours: 6));
       await remoteConfig.activateFetched();

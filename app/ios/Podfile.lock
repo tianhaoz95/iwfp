@@ -32,6 +32,9 @@ PODS:
   - Firebase/Performance (6.14.0):
     - Firebase/CoreOnly
     - FirebasePerformance (~> 3.1.8)
+  - Firebase/RemoteConfig (6.14.0):
+    - Firebase/CoreOnly
+    - FirebaseRemoteConfig (~> 4.4.6)
   - firebase_analytics (0.0.1):
     - Firebase/Analytics (~> 6.0)
     - Firebase/Core
@@ -58,6 +61,9 @@ PODS:
   - firebase_performance (0.0.1):
     - Firebase/Core
     - Firebase/Performance
+    - Flutter
+  - firebase_remote_config (0.0.1):
+    - Firebase/RemoteConfig
     - Flutter
   - FirebaseABTesting (3.1.2):
     - FirebaseAnalyticsInterop (~> 1.3)
@@ -202,6 +208,7 @@ DEPENDENCIES:
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
   - firebase_dynamic_links (from `.symlinks/plugins/firebase_dynamic_links/ios`)
   - firebase_performance (from `.symlinks/plugins/firebase_performance/ios`)
+  - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - Flutter (from `Flutter`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - google_sign_in_web (from `.symlinks/plugins/google_sign_in_web/ios`)
@@ -262,6 +269,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_dynamic_links/ios"
   firebase_performance:
     :path: ".symlinks/plugins/firebase_performance/ios"
+  firebase_remote_config:
+    :path: ".symlinks/plugins/firebase_remote_config/ios"
   Flutter:
     :path: Flutter
   google_sign_in:
@@ -294,6 +303,7 @@ SPEC CHECKSUMS:
   firebase_crashlytics: bd8c58df07f107cb7e1a20cb190b9a468e0a69fd
   firebase_dynamic_links: 7aaa8cbd086b55de330e34912dd144687e7d5c47
   firebase_performance: 96d9912b36a93e55201c24e386915d2a0dac1be9
+  firebase_remote_config: f3581c5addecc691a968f2a7f2bcdf0878509bfd
   FirebaseABTesting: 0d10f3cdc3fa00f3f175b5b56c1003c8e888299f
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
   FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
