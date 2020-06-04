@@ -9,7 +9,7 @@ class PromotionChip extends StatelessWidget {
   Widget build(BuildContext context) {
     String promoName = 'Unknown';
     if (promo.name != null) {
-      promoName = promo.category.name;
+      promoName = promo.category.displayName;
     }
     double promoRate = 0.0;
     if (promo.rate != null) {

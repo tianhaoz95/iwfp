@@ -1,14 +1,22 @@
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
-import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/interfaces/shopping_category.pb.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:test/test.dart';
 
 CreditCard generateCreditCard(String name, String id, List<double> rates) {
   CreditCard card = CreditCard(name, id);
   for (double rate in rates) {
-    CashbackPromo promo = CashbackPromo('Coffee Shop', 'coffee_shop', 'sector',
-        'na', 'na', 'const', rate, ShopCategory('Coffee Shop', 'coffee_shop'));
+    CashbackPromo promo = CashbackPromo(
+        'Coffee Shop',
+        'coffee_shop',
+        'sector',
+        'na',
+        'na',
+        'const',
+        rate,
+        createShoppingCategory('Coffee Shop', 'coffee_shop'));
     card.promos.add(promo);
   }
   return card;
@@ -31,7 +39,8 @@ void main() {
   group('ranker tests', () {
     test('finds highest matching rate basic case', () {
       List<CreditCard> cards = generateCreditCardsNoGenericPromo();
-      ShopCategory category = ShopCategory('Coffee Shop', 'coffee_shop');
+      ShoppingCategory category =
+          createShoppingCategory('Coffee Shop', 'coffee_shop');
       rankCards(cards, category);
       expect(cards[0].name, 'Card 7');
       expect(cards[1].name, 'Card 6');

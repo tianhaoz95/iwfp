@@ -31,7 +31,7 @@ class UseHttpDataBackend extends DataBackend {
       'promoEnd': req.promo.end,
       'promoRepeat': req.promo.repeat,
       'promoRate': req.promo.rate.toString(),
-      'promoCategoryName': req.promo.category.name,
+      'promoCategoryName': req.promo.category.displayName,
       'promoCategoryId': req.promo.category.id,
       'token': token
     });

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/interfaces/shopping_category.pb.dart';
 
 class BasicCategory extends StatelessWidget {
-  final ShopCategory categoryMetaData;
+  final ShoppingCategory categoryMetaData;
   const BasicCategory(this.categoryMetaData);
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class BasicCategory extends StatelessWidget {
                             width: 200.0,
                             child: Align(
                               alignment: Alignment.bottomLeft,
-                              child: Text(categoryMetaData.name),
+                              child: Text(categoryMetaData.displayName),
                             )),
                         Container(
                             child: Align(

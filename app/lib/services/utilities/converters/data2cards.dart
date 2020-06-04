@@ -1,7 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
-import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/services/utilities/converters/dynamic2rate.dart';
 
 /// Converts dynamic map to credit cards
@@ -27,7 +27,7 @@ List<CreditCard> dict2cards(Map<String, dynamic> dict) {
               promoData['promo_end'],
               promoData['promo_repeat_pattern'],
               dynamic2rate(promoData['promo_rate']),
-              ShopCategory(promoData['promo_category_name'],
+              createShoppingCategory(promoData['promo_category_name'],
                   promoData['promo_category_id']),
             );
             card.promos.add(promo);

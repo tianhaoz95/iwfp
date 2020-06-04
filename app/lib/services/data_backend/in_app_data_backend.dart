@@ -80,7 +80,7 @@ class InAppDataBackend extends DataBackend {
         'promoRepeat': promo.repeat,
         'promoRate': promo.rate,
         'promoCategoryId': promo.category.id,
-        'promoCategoryName': promo.category.name,
+        'promoCategoryName': promo.category.displayName,
       };
       promos.add(promoData);
     }
@@ -112,7 +112,7 @@ class InAppDataBackend extends DataBackend {
       'promoEnd': req.promo.end,
       'promoRepeat': req.promo.repeat,
       'promoRate': req.promo.rate,
-      'promoCategoryName': req.promo.category.name,
+      'promoCategoryName': req.promo.category.displayName,
       'promoCategoryId': req.promo.category.id,
     });
   }

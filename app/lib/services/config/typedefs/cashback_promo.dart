@@ -1,4 +1,4 @@
-import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/interfaces/shopping_category.pbserver.dart';
 
 class CashbackPromo {
   final String name;
@@ -6,7 +6,7 @@ class CashbackPromo {
   final String type;
   final String start;
   final String end;
-  final ShopCategory category;
+  final ShoppingCategory category;
 
   /// repeat indicates the rule for how the promotion repeats.
   /// supported types are:

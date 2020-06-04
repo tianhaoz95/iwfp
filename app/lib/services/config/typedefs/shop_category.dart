@@ -1,5 +1,5 @@
-class ShopCategory {
+class ShopCategoryLegacy {
   final String name;
   final String id;
-  const ShopCategory(this.name, this.id);
+  const ShopCategoryLegacy(this.name, this.id);
 }

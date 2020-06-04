@@ -2,7 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
-import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/interfaces/shopping_category.pbserver.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:iwfpapp/services/utilities/category_counter.dart';
@@ -54,7 +54,7 @@ abstract class DataBackend extends ChangeNotifier {
     return creditCardTemplates;
   }
 
-  List<ShopCategory> getShopCategories() {
+  List<ShoppingCategory> getShopCategories() {
     return getUniqueShoppingCategories(creditCards);
   }
 
@@ -285,7 +285,7 @@ abstract class DataBackend extends ChangeNotifier {
     return card;
   }
 
-  List<CreditCard> getRankedCreditCardsSync(ShopCategory category) {
+  List<CreditCard> getRankedCreditCardsSync(ShoppingCategory category) {
     rankCards(creditCards, category);
     return creditCards;
   }

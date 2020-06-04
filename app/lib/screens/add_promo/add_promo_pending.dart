@@ -9,9 +9,9 @@ import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
 import 'package:iwfpapp/services/config/typedefs/repeat_pattern.dart';
-import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/services/utilities/validators/promo_info_validator.dart';
 import 'package:provider/provider.dart';
 
@@ -87,7 +87,7 @@ class _AddPromoPending extends State<AddPromoPending> {
         promoEnd,
         promoRepeat,
         promoRate,
-        ShopCategory(promoCategoryName, promoCategoryId));
+        createShoppingCategory(promoCategoryName, promoCategoryId));
     Provider.of<DataBackend>(context, listen: false)
         .addPromotion(PromotionAdditionRequest(widget.card.id, promo));
   }

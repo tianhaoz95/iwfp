@@ -41,7 +41,7 @@ class _PromoEntries extends State<PromoEntries> {
               PromoEntryRowElement(text: 'Period: ${promo.start}~${promo.end}'),
               PromoEntryRowElement(text: 'Rate: ${promo.rate.toString()}%'),
               PromoEntryRowElement(
-                  text: 'Category Name: ${promo.category.name}'),
+                  text: 'Category Name: ${promo.category.displayName}'),
               PromoEntryRowElement(text: 'Category ID: ${promo.category.id}'),
               PromoEntryEditActions(
                 onDeleteTappedHandler: () {
