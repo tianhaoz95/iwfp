@@ -1,12 +1,12 @@
 import 'dart:math';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/interfaces/shopping_category.pbserver.dart';
 import 'package:iwfpapp/services/utilities/validators/card_expiration_validator.dart';
 
 double getMaxRate(CreditCard card, ShoppingCategory category) {
   double maxRate = 0.0;
-  for (Promotion promo in card.promos) {
+  for (Promotion promo in card.promotions) {
     if (isInValidTimeRange(promo)) {
       if (promo.category.id == category.id) {
         maxRate = max(maxRate, promo.rate);

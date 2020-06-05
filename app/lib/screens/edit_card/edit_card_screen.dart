@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/edit_card/edit_card_content.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,7 @@ class EditCardScreen extends StatefulWidget {
 }
 
 class _EditCardScreen extends State<EditCardScreen> {
-  CreditCard card = CreditCard('Unknown', 'unknown');
+  CreditCard card = createCreditCard('Unknown', 'unknown');
 
   @override
   void didChangeDependencies() {

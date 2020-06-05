@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:provider/provider.dart';
 
 class RemoveCardPending extends StatelessWidget {
@@ -34,7 +34,7 @@ class RemoveCardPending extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
                     child: Center(
-                      child: Text('${card.name} (${card.id})'),
+                      child: Text('${card.displayName} (${card.id})'),
                     ),
                   ),
                   SizedBox(

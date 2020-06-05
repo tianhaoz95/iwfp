@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
 import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
@@ -47,7 +47,7 @@ class _AddCardScreenAddCardFormContent
             ),
             onPressed: () async {
               Provider.of<DataBackend>(context, listen: false).initCreditCard(
-                  CreditCardInitRequest(CreditCard(
+                  CreditCardInitRequest(createCreditCard(
                       cardNameInputCtrl.text, cardIdInputCtrl.text)));
             },
           )),

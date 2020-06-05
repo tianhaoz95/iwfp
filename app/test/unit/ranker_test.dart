@@ -1,4 +1,4 @@
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/interfaces/shopping_category.pb.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
@@ -6,7 +6,7 @@ import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:test/test.dart';
 
 CreditCard generateCreditCard(String name, String id, List<double> rates) {
-  CreditCard card = CreditCard(name, id);
+  CreditCard card = createCreditCard(name, id);
   for (double rate in rates) {
     Promotion promo = createPromotion(
         'Coffee Shop',
@@ -17,7 +17,7 @@ CreditCard generateCreditCard(String name, String id, List<double> rates) {
         'const',
         rate,
         createShoppingCategory('Coffee Shop', 'coffee_shop'));
-    card.promos.add(promo);
+    card.promotions.add(promo);
   }
   return card;
 }
@@ -42,13 +42,13 @@ void main() {
       ShoppingCategory category =
           createShoppingCategory('Coffee Shop', 'coffee_shop');
       rankCards(cards, category);
-      expect(cards[0].name, 'Card 7');
-      expect(cards[1].name, 'Card 6');
-      expect(cards[2].name, 'Card 5');
-      expect(cards[3].name, 'Card 4');
-      expect(cards[4].name, 'Card 3');
-      expect(cards[5].name, 'Card 2');
-      expect(cards[6].name, 'Card 1');
+      expect(cards[0].displayName, 'Card 7');
+      expect(cards[1].displayName, 'Card 6');
+      expect(cards[2].displayName, 'Card 5');
+      expect(cards[3].displayName, 'Card 4');
+      expect(cards[4].displayName, 'Card 3');
+      expect(cards[5].displayName, 'Card 2');
+      expect(cards[6].displayName, 'Card 1');
     });
   });
 }

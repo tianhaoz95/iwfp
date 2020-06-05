@@ -1,3 +1,4 @@
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/interfaces/shopping_category.pb.dart';
 
@@ -27,4 +28,15 @@ Promotion createPromotion(
   promo.rate = rate;
   promo.category = shoppingCategory;
   return promo;
+}
+
+CreditCard createCreditCard(String displayName, String id,
+    {List<Promotion> promos}) {
+  CreditCard card = CreditCard.create();
+  card.displayName = displayName;
+  card.id = id;
+  if (promos != null) {
+    card.promotions.addAll(promos);
+  }
+  return card;
 }

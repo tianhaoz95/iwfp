@@ -1,7 +1,7 @@
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 
-CreditCard discoverItCashbackCreditCard = CreditCard(
+CreditCard discoverItCashbackCreditCard = createCreditCard(
     'Discover it Cashback Credit Card', 'discover_it_cashback_credit_card',
     promos: [
       createPromotion(

@@ -1,7 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 
@@ -56,7 +56,7 @@ class InAppDataBackend extends DataBackend {
   Future<void> initCreditCardInDatabase(CreditCardInitRequest req) async {
     await addCardCallable.call(<String, dynamic>{
       'id': req.card.id,
-      'name': req.card.name,
+      'name': req.card.displayName,
     });
   }
 
@@ -64,12 +64,12 @@ class InAppDataBackend extends DataBackend {
   Future<void> initCreditCardWithTemplateInDatabase(
       CreditCardAdditionRequest req) async {
     Map<String, dynamic> serverRequest = {
-      'name': req.card.name,
+      'name': req.card.displayName,
       'id': req.card.id,
       'promos': []
     };
     List<dynamic> promos = [];
-    for (Promotion promo in req.card.promos) {
+    for (Promotion promo in req.card.promotions) {
       Map<String, dynamic> promoData = {
         'cardUid': req.card.id,
         'promoId': promo.id,

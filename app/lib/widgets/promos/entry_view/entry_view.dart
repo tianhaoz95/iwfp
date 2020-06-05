@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/widgets/promos/entry_view/edit_actions.dart';
 import 'package:iwfpapp/widgets/promos/entry_view/entry_row_elt.dart';
@@ -20,13 +20,13 @@ class _PromoEntries extends State<PromoEntries> {
   @override
   void initState() {
     super.initState();
-    expandCtrl = List.filled(this.widget.card.promos.length, false);
+    expandCtrl = List.filled(this.widget.card.promotions.length, false);
   }
 
   List<ExpansionPanel> getPromoList() {
     List<ExpansionPanel> list = [];
-    for (int index = 0; index < this.widget.card.promos.length; ++index) {
-      Promotion promo = this.widget.card.promos[index];
+    for (int index = 0; index < this.widget.card.promotions.length; ++index) {
+      Promotion promo = this.widget.card.promotions[index];
       list.add(ExpansionPanel(
           canTapOnHeader: true,
           isExpanded: this.expandCtrl[index],

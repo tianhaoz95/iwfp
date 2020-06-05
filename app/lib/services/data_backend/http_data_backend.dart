@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:iwfpapp/services/config/consts/endpoints.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:http/http.dart' as http;
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 import 'package:iwfpapp/services/utilities/converters/token2get_cards_request.dart';
 
@@ -69,8 +69,11 @@ class UseHttpDataBackend extends DataBackend {
 
   @override
   Future<void> initCreditCardInDatabase(CreditCardInitRequest req) async {
-    http.Response response = await http.post(AddCreditCardEndpoint,
-        body: {'id': req.card.id, 'name': req.card.name, 'token': token});
+    http.Response response = await http.post(AddCreditCardEndpoint, body: {
+      'id': req.card.id,
+      'name': req.card.displayName,
+      'token': token
+    });
     if (response.statusCode != 200) {
       throw 'init_credit_card_failed';
     }

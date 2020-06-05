@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,8 @@ class RemovePromotionCatalog extends StatelessWidget {
                     ).status = DataBackendStatus.AVAILABLE;
                     CreditCard target = getRandomCreditCardTemplate();
                     Navigator.pushNamed(context, '/remove_promo',
-                        arguments: RemovePromoMeta(target, target.promos[0]));
+                        arguments:
+                            RemovePromoMeta(target, target.promotions[0]));
                   }),
             ),
           ),
@@ -45,7 +46,8 @@ class RemovePromotionCatalog extends StatelessWidget {
                     ).status = DataBackendStatus.LOADING;
                     CreditCard target = getRandomCreditCardTemplate();
                     Navigator.pushNamed(context, '/remove_promo',
-                        arguments: RemovePromoMeta(target, target.promos[0]));
+                        arguments:
+                            RemovePromoMeta(target, target.promotions[0]));
                   }),
             ),
           ),
@@ -60,7 +62,8 @@ class RemovePromotionCatalog extends StatelessWidget {
                     ).status = DataBackendStatus.ERROR;
                     CreditCard target = getRandomCreditCardTemplate();
                     Navigator.pushNamed(context, '/remove_promo',
-                        arguments: RemovePromoMeta(target, target.promos[0]));
+                        arguments:
+                            RemovePromoMeta(target, target.promotions[0]));
                   }),
             ),
           ),
@@ -75,7 +78,8 @@ class RemovePromotionCatalog extends StatelessWidget {
                     ).status = DataBackendStatus.OUTDATED;
                     CreditCard target = getRandomCreditCardTemplate();
                     Navigator.pushNamed(context, '/remove_promo',
-                        arguments: RemovePromoMeta(target, target.promos[0]));
+                        arguments:
+                            RemovePromoMeta(target, target.promotions[0]));
                   }),
             ),
           ),

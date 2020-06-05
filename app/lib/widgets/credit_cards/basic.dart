@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/interfaces/shopping_category.pb.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
@@ -18,8 +18,8 @@ class BasicCreditCard extends StatelessWidget {
 
   String renderCardName() {
     String showCardName = 'Unknown';
-    if (cardMetaData.name != null) {
-      showCardName = cardMetaData.name;
+    if (cardMetaData.promotions != null) {
+      showCardName = cardMetaData.displayName;
       if (targetCategory != null) {
         double maxRate = getMaxRate(cardMetaData, targetCategory);
         showCardName = showCardName + ' w/ rate @ ' + maxRate.toString() + '%';
@@ -38,7 +38,7 @@ class BasicCreditCard extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(4.0, 12.0, 4.0, 4.0),
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: rankPromotionsWithTimeRange(cardMetaData.promos)
+          children: rankPromotionsWithTimeRange(cardMetaData.promotions)
               .reversed
               .map((Promotion promo) {
             return PromotionChip(promo);

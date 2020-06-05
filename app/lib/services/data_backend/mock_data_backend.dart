@@ -1,7 +1,8 @@
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 
 class MockDataBackend extends DataBackend {
   Map<String, CreditCard> cardDatabase;
@@ -24,7 +25,7 @@ class MockDataBackend extends DataBackend {
   Future<void> addPromitionToDatabase(PromotionAdditionRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (cardDatabase.containsKey(req.target)) {
-      cardDatabase[req.target].promos.add(req.promo);
+      cardDatabase[req.target].promotions.add(req.promo);
     } else {
       throw 'card_not_found';
     }
@@ -52,7 +53,8 @@ class MockDataBackend extends DataBackend {
     if (cardDatabase.containsKey(req.card.id)) {
       throw 'card_exist';
     } else {
-      cardDatabase[req.card.id] = CreditCard(req.card.name, req.card.id);
+      cardDatabase[req.card.id] =
+          createCreditCard(req.card.displayName, req.card.id);
     }
   }
 
@@ -82,9 +84,9 @@ class MockDataBackend extends DataBackend {
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (cardDatabase.containsKey(req.target)) {
-      for (Promotion promo in cardDatabase[req.target].promos) {
+      for (Promotion promo in cardDatabase[req.target].promotions) {
         if (promo.id == req.id) {
-          cardDatabase[req.target].promos.remove(promo);
+          cardDatabase[req.target].promotions.remove(promo);
           return;
         }
       }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/remove_card/remove_card_content.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 class RemoveCardScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class RemoveCardScreen extends StatefulWidget {
 }
 
 class _RemoveCardScreen extends State<RemoveCardScreen> {
-  CreditCard card = CreditCard('Unknown', 'unknown');
+  CreditCard card = createCreditCard('Unknown', 'unknown');
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
