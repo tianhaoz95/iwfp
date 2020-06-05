@@ -1,4 +1,4 @@
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pb.dart';
 
 class CreditCard {
   final String name;
@@ -7,14 +7,14 @@ class CreditCard {
   /// TODO(tianhaoz95): change promos implementation
   /// from list to map for better performance and
   /// readability.
-  List<CashbackPromo> promos = [];
-  CreditCard(this.name, this.id, {List<CashbackPromo> promos}) {
+  List<Promotion> promos = [];
+  CreditCard(this.name, this.id, {List<Promotion> promos}) {
     if (promos != null) {
       this.promos = promos;
     }
   }
 
-  void removePromo(CashbackPromo promo) {
+  void removePromo(Promotion promo) {
     /// TODO(tianhaoz95): change this to a map find
     /// once promos switch its implementation from
     /// list to map.

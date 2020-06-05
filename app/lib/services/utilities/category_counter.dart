@@ -1,14 +1,14 @@
 import 'dart:math';
 
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/interfaces/shopping_category.pbserver.dart';
 
 List<ShoppingCategory> getUniqueShoppingCategories(List<CreditCard> cards) {
   Map<String, bool> promoIdDict = {};
   List<ShoppingCategory> uniqueCategories = [];
   for (CreditCard card in cards) {
-    for (CashbackPromo promo in card.promos) {
+    for (Promotion promo in card.promos) {
       if (!promoIdDict.containsKey(promo.id)) {
         promoIdDict[promo.id] = true;
         uniqueCategories.add(promo.category);

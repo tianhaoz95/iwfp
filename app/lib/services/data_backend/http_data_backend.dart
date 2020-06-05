@@ -24,12 +24,12 @@ class UseHttpDataBackend extends DataBackend {
   Future<void> addPromitionToDatabase(PromotionAdditionRequest req) async {
     http.Response response = await http.post(AddPromotionEndpoint, body: {
       'cardUid': req.target,
-      'promoName': req.promo.name,
+      'promoName': req.promo.displayName,
       'promoId': req.promo.id,
       'promoType': req.promo.type,
-      'promoStart': req.promo.start,
-      'promoEnd': req.promo.end,
-      'promoRepeat': req.promo.repeat,
+      'promoStart': req.promo.startDate,
+      'promoEnd': req.promo.endDate,
+      'promoRepeat': req.promo.repeatPattern,
       'promoRate': req.promo.rate.toString(),
       'promoCategoryName': req.promo.category.displayName,
       'promoCategoryId': req.promo.category.id,

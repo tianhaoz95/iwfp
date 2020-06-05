@@ -1,8 +1,8 @@
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 
-bool isInValidTimeRange(CashbackPromo promo, {DateTime useCurrentTime}) {
+bool isInValidTimeRange(Promotion promo, {DateTime useCurrentTime}) {
   bool valid = false;
-  switch (promo.repeat) {
+  switch (promo.repeatPattern) {
     case 'const':
       {
         valid = true;
@@ -16,10 +16,10 @@ bool isInValidTimeRange(CashbackPromo promo, {DateTime useCurrentTime}) {
           currentTime = useCurrentTime;
         }
         int currentYear = currentTime.year;
-        int startMonth = int.parse(promo.start.split('/')[0]);
-        int startDay = int.parse(promo.start.split('/')[1]);
-        int endMonth = int.parse(promo.end.split('/')[0]);
-        int endDay = int.parse(promo.end.split('/')[1]);
+        int startMonth = int.parse(promo.startDate.split('/')[0]);
+        int startDay = int.parse(promo.startDate.split('/')[1]);
+        int endMonth = int.parse(promo.endDate.split('/')[0]);
+        int endDay = int.parse(promo.endDate.split('/')[1]);
         DateTime startTime =
             new DateTime.utc(currentYear, startMonth, startDay);
         DateTime endTime = new DateTime.utc(currentYear, endMonth, endDay);

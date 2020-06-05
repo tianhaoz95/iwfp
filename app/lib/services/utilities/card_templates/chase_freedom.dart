@@ -1,4 +1,3 @@
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 
@@ -6,7 +5,7 @@ CreditCard chaseFreedom = CreditCard(
   'Chase Freedom',
   'chase_freedom',
   promos: [
-    CashbackPromo(
+    createPromotion(
       'Gas Station',
       'gas_stations',
       'sector',
@@ -16,9 +15,9 @@ CreditCard chaseFreedom = CreditCard(
       5,
       createShoppingCategory('Gas Station', 'gas_stations'),
     ),
-    CashbackPromo('Grag Stores', 'drag_stores', 'sector', '01/01', '03/31',
+    createPromotion('Grag Stores', 'drag_stores', 'sector', '01/01', '03/31',
         'annual', 5, createShoppingCategory('Grag Stores', 'drag_stores')),
-    CashbackPromo(
+    createPromotion(
         'Grocery Stores',
         'grocery_stores',
         'sector',
@@ -27,7 +26,7 @@ CreditCard chaseFreedom = CreditCard(
         'annual',
         5,
         createShoppingCategory('Grocery Stores', 'grocery_stores')),
-    CashbackPromo(
+    createPromotion(
         'Home Improvement Stores',
         'home_improvement_stores',
         'sector',
@@ -37,7 +36,7 @@ CreditCard chaseFreedom = CreditCard(
         5,
         createShoppingCategory(
             'Home Improvement Stores', 'home_improvement_stores')),
-    CashbackPromo(
+    createPromotion(
         'Streaming Services',
         'streaming_services',
         'sector',
@@ -46,11 +45,11 @@ CreditCard chaseFreedom = CreditCard(
         'annual',
         5,
         createShoppingCategory('Streaming Services', 'streaming_services')),
-    CashbackPromo('Chase Pay', 'chase_pay', 'payment', '10/01', '12/31',
+    createPromotion('Chase Pay', 'chase_pay', 'payment', '10/01', '12/31',
         'annual', 5, createShoppingCategory('Chase Pay', 'chase_pay')),
-    CashbackPromo('PayPal', 'paypal', 'payment', '10/01', '12/31', 'annual', 5,
-        createShoppingCategory('PayPal', 'paypal')),
-    CashbackPromo('All Purchases', 'all_purchase', 'universal', 'nan', 'nan',
+    createPromotion('PayPal', 'paypal', 'payment', '10/01', '12/31', 'annual',
+        5, createShoppingCategory('PayPal', 'paypal')),
+    createPromotion('All Purchases', 'all_purchase', 'universal', 'nan', 'nan',
         'const', 1, createShoppingCategory('All Purchases', 'all_purchase')),
   ],
 );

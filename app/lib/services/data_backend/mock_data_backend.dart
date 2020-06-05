@@ -1,7 +1,7 @@
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 
 class MockDataBackend extends DataBackend {
   Map<String, CreditCard> cardDatabase;
@@ -82,7 +82,7 @@ class MockDataBackend extends DataBackend {
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (cardDatabase.containsKey(req.target)) {
-      for (CashbackPromo promo in cardDatabase[req.target].promos) {
+      for (Promotion promo in cardDatabase[req.target].promos) {
         if (promo.id == req.id) {
           cardDatabase[req.target].promos.remove(promo);
           return;

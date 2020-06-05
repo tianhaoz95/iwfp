@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/widgets/promos/entry_view/edit_actions.dart';
 import 'package:iwfpapp/widgets/promos/entry_view/entry_row_elt.dart';
 
@@ -26,7 +26,7 @@ class _PromoEntries extends State<PromoEntries> {
   List<ExpansionPanel> getPromoList() {
     List<ExpansionPanel> list = [];
     for (int index = 0; index < this.widget.card.promos.length; ++index) {
-      CashbackPromo promo = this.widget.card.promos[index];
+      Promotion promo = this.widget.card.promos[index];
       list.add(ExpansionPanel(
           canTapOnHeader: true,
           isExpanded: this.expandCtrl[index],
@@ -34,11 +34,12 @@ class _PromoEntries extends State<PromoEntries> {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              PromoEntryRowElement(text: 'Name: ${promo.name}'),
+              PromoEntryRowElement(text: 'Name: ${promo.displayName}'),
               PromoEntryRowElement(text: 'ID: ${promo.id}'),
               PromoEntryRowElement(text: 'Type: ${promo.type}'),
-              PromoEntryRowElement(text: 'Pattern: ${promo.repeat}'),
-              PromoEntryRowElement(text: 'Period: ${promo.start}~${promo.end}'),
+              PromoEntryRowElement(text: 'Pattern: ${promo.repeatPattern}'),
+              PromoEntryRowElement(
+                  text: 'Period: ${promo.startDate}~${promo.endDate}'),
               PromoEntryRowElement(text: 'Rate: ${promo.rate.toString()}%'),
               PromoEntryRowElement(
                   text: 'Category Name: ${promo.category.displayName}'),
@@ -56,7 +57,7 @@ class _PromoEntries extends State<PromoEntries> {
           )),
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Container(
-              child: Center(child: Text('${promo.name}')),
+              child: Center(child: Text('${promo.displayName}')),
             );
           }));
     }

@@ -1,8 +1,8 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 
 class InAppDataBackend extends DataBackend {
@@ -69,15 +69,15 @@ class InAppDataBackend extends DataBackend {
       'promos': []
     };
     List<dynamic> promos = [];
-    for (CashbackPromo promo in req.card.promos) {
+    for (Promotion promo in req.card.promos) {
       Map<String, dynamic> promoData = {
         'cardUid': req.card.id,
         'promoId': promo.id,
-        'promoName': promo.name,
+        'promoName': promo.displayName,
         'promoType': promo.type,
-        'promoStart': promo.start,
-        'promoEnd': promo.end,
-        'promoRepeat': promo.repeat,
+        'promoStart': promo.startDate,
+        'promoEnd': promo.endDate,
+        'promoRepeat': promo.repeatPattern,
         'promoRate': promo.rate,
         'promoCategoryId': promo.category.id,
         'promoCategoryName': promo.category.displayName,
@@ -105,12 +105,12 @@ class InAppDataBackend extends DataBackend {
   Future<void> addPromitionToDatabase(PromotionAdditionRequest req) async {
     await addPromoCallable.call(<String, dynamic>{
       'cardUid': req.target,
-      'promoName': req.promo.name,
+      'promoName': req.promo.displayName,
       'promoId': req.promo.id,
       'promoType': req.promo.type,
-      'promoStart': req.promo.start,
-      'promoEnd': req.promo.end,
-      'promoRepeat': req.promo.repeat,
+      'promoStart': req.promo.startDate,
+      'promoEnd': req.promo.endDate,
+      'promoRepeat': req.promo.repeatPattern,
       'promoRate': req.promo.rate,
       'promoCategoryName': req.promo.category.displayName,
       'promoCategoryId': req.promo.category.id,

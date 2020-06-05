@@ -16,7 +16,12 @@ class Promotion extends $pb.GeneratedMessage {
       $pb.BuilderInfo('Promotion', createEmptyInstance: create)
         ..aOS(1, 'id')
         ..aOS(2, 'displayName')
-        ..aOM<$0.ShoppingCategory>(3, 'category',
+        ..aOS(3, 'startDate')
+        ..aOS(4, 'endDate')
+        ..aOS(5, 'type')
+        ..aOS(6, 'repeatPattern')
+        ..a<$core.double>(7, 'rate', $pb.PbFieldType.OF)
+        ..aOM<$0.ShoppingCategory>(8, 'category',
             subBuilder: $0.ShoppingCategory.create)
         ..hasRequiredFields = false;
 
@@ -66,16 +71,76 @@ class Promotion extends $pb.GeneratedMessage {
   void clearDisplayName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $0.ShoppingCategory get category => $_getN(2);
+  $core.String get startDate => $_getSZ(2);
   @$pb.TagNumber(3)
-  set category($0.ShoppingCategory v) {
-    setField(3, v);
+  set startDate($core.String v) {
+    $_setString(2, v);
   }
 
   @$pb.TagNumber(3)
-  $core.bool hasCategory() => $_has(2);
+  $core.bool hasStartDate() => $_has(2);
   @$pb.TagNumber(3)
-  void clearCategory() => clearField(3);
-  @$pb.TagNumber(3)
-  $0.ShoppingCategory ensureCategory() => $_ensure(2);
+  void clearStartDate() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get endDate => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set endDate($core.String v) {
+    $_setString(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasEndDate() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEndDate() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get type => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set type($core.String v) {
+    $_setString(4, v);
+  }
+
+  @$pb.TagNumber(5)
+  $core.bool hasType() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearType() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get repeatPattern => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set repeatPattern($core.String v) {
+    $_setString(5, v);
+  }
+
+  @$pb.TagNumber(6)
+  $core.bool hasRepeatPattern() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearRepeatPattern() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.double get rate => $_getN(6);
+  @$pb.TagNumber(7)
+  set rate($core.double v) {
+    $_setFloat(6, v);
+  }
+
+  @$pb.TagNumber(7)
+  $core.bool hasRate() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearRate() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $0.ShoppingCategory get category => $_getN(7);
+  @$pb.TagNumber(8)
+  set category($0.ShoppingCategory v) {
+    setField(8, v);
+  }
+
+  @$pb.TagNumber(8)
+  $core.bool hasCategory() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCategory() => clearField(8);
+  @$pb.TagNumber(8)
+  $0.ShoppingCategory ensureCategory() => $_ensure(7);
 }

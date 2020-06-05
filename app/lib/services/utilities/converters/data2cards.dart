@@ -1,6 +1,6 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/services/utilities/converters/dynamic2rate.dart';
 
@@ -19,7 +19,7 @@ List<CreditCard> dict2cards(Map<String, dynamic> dict) {
           promos.forEach((String promoId, dynamic promoDataRaw) {
             Map<String, dynamic> promoData =
                 Map<String, dynamic>.from(promoDataRaw);
-            CashbackPromo promo = CashbackPromo(
+            Promotion promo = createPromotion(
               promoData['promo_name'],
               promoData['promo_id'],
               promoData['promo_type'],

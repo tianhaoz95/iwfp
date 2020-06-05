@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/interfaces/shopping_category.pb.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:iwfpapp/services/utilities/rankers/time_range_promo_ranker.dart';
@@ -40,7 +40,7 @@ class BasicCreditCard extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children: rankPromotionsWithTimeRange(cardMetaData.promos)
               .reversed
-              .map((CashbackPromo promo) {
+              .map((Promotion promo) {
             return PromotionChip(promo);
           }).toList(),
         ),

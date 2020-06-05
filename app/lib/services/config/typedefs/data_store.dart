@@ -1,5 +1,5 @@
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pb.dart';
 
 /// The data fetching status
 enum DataBackendStatus { LOADING, AVAILABLE, OUTDATED, ERROR }
@@ -34,7 +34,7 @@ class CreditCardAdditionRequest {
 }
 
 class PromotionAdditionRequest {
-  CashbackPromo promo;
+  Promotion promo;
   String target;
   PromotionAdditionRequest(this.target, this.promo);
 }

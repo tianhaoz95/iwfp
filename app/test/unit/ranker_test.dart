@@ -1,5 +1,5 @@
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/interfaces/shopping_category.pb.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 CreditCard generateCreditCard(String name, String id, List<double> rates) {
   CreditCard card = CreditCard(name, id);
   for (double rate in rates) {
-    CashbackPromo promo = CashbackPromo(
+    Promotion promo = createPromotion(
         'Coffee Shop',
         'coffee_shop',
         'sector',

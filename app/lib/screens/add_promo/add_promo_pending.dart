@@ -4,13 +4,13 @@ import 'package:iwfpapp/screens/add_promo/repeat_pattern_selector.dart';
 import 'package:iwfpapp/screens/auth/prompt_warning.dart';
 import 'package:iwfpapp/services/config/consts/promo_type_lookup.dart';
 import 'package:iwfpapp/services/config/consts/repeat_pattern_lookup.dart';
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
 import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/promo_types.dart';
 import 'package:iwfpapp/services/config/typedefs/repeat_pattern.dart';
 import 'package:iwfpapp/services/config/typedefs/validation_response.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/services/utilities/validators/promo_info_validator.dart';
 import 'package:provider/provider.dart';
@@ -79,7 +79,7 @@ class _AddPromoPending extends State<AddPromoPending> {
       return;
     }
     double promoRate = double.parse(promoRateStr);
-    CashbackPromo promo = CashbackPromo(
+    Promotion promo = createPromotion(
         promoName,
         promoId,
         promoType,

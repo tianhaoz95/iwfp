@@ -5,5 +5,10 @@ import "shopping_category.proto";
 message Promotion {
   string id = 1;
   string display_name = 2;
-  ShoppingCategory category = 3;
+  string start_date = 3;
+  string end_date = 4;
+  string type = 5;
+  string repeat_pattern = 6;
+  float rate = 7;
+  ShoppingCategory category = 8;
 }

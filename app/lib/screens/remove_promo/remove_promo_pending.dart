@@ -29,7 +29,7 @@ class RemovePromoPending extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: Center(
                           child: Text(
-                              '${removePromoMeta.promo.name} (${removePromoMeta.promo.id})'),
+                              '${removePromoMeta.promo.displayName} (${removePromoMeta.promo.id})'),
                         )),
                     SizedBox(
                       height: 5.0,
