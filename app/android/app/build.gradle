@@ -31,6 +31,15 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
+println 'Value of ANDROID_DEBUG: '
+println System.getenv('ANDROID_DEBUG')
+
+if (System.getenv('ANDROID_DEBUG')) {
+    println 'Using Android debug build...'
+} else {
+    println 'Using Android release build...'
+}
+
 android {
     compileSdkVersion 28
 
@@ -53,20 +62,16 @@ android {
     }
 
     signingConfigs {
-       release {
-           keyAlias keystoreProperties['keyAlias']
-           keyPassword keystoreProperties['keyPassword']
-           storeFile file(keystoreProperties['storeFile'])
-           storePassword keystoreProperties['storePassword']
-       }
+        release {
+            keyAlias System.getenv('ANDROID_DEBUG') ? null : keystoreProperties['keyAlias']
+            keyPassword System.getenv('ANDROID_DEBUG') ? null : keystoreProperties['keyPassword']
+            storeFile System.getenv('ANDROID_DEBUG') ? null : file(keystoreProperties['storeFile'])
+            storePassword System.getenv('ANDROID_DEBUG') ? null : keystoreProperties['storePassword']
+        }
     }
     buildTypes {
         release {
-            // use this for testing locally
-            // signingConfig signingConfigs.debug
-
-            // use this for releaing to the app store
-            signingConfig signingConfigs.release
+            signingConfig System.getenv('ANDROID_DEBUG') ? signingConfigs.debug : signingConfigs.release
             minifyEnabled true
             useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
