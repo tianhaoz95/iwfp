@@ -1,4 +1,4 @@
-import { ShoppingCategory } from "../interfaces/interfaces";
+import { Promotion } from "../interfaces/interfaces";
 
 export interface CardCreationRequest {
   valid: boolean;
@@ -27,24 +27,13 @@ export interface CardEditRequest {
 export interface AddPromoRequest {
   valid: boolean;
   card: string /** The ID of the target card */;
-  promo: Promo /** The promo to be added */;
+  promo: Promotion /** The promo to be added */;
 }
 
 export interface RemovePromoRequest {
   valid: boolean;
   card: string /** The ID of the target card */;
   promo: string /** The ID of the target promo */;
-}
-
-export interface Promo {
-  id: string;
-  name: string;
-  type: string;
-  start: string;
-  end: string;
-  repeat: string;
-  rate: string;
-  category: ShoppingCategory;
 }
 
 export interface FunctionContext {

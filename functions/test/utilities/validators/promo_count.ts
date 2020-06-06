@@ -4,7 +4,7 @@ import "firebase/functions";
 export async function backdoorCardPromoCnt(
   db: firebase.firestore.Firestore,
   userId: string,
-  cardId: string,
+  cardId: string
 ): Promise<number> {
   const promosCollectionSnap = await db
     .collection("channel")

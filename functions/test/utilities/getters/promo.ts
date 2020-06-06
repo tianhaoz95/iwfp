@@ -5,8 +5,10 @@ export async function backdoorGetPromoSnap(
   db: firebase.firestore.Firestore,
   userId: string,
   cardId: string,
-  promoId: string,
-): Promise<firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>> {
+  promoId: string
+): Promise<
+  firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>
+> {
   const promoSnap = await db
     .collection("channel")
     .doc("production-v1")
@@ -24,8 +26,8 @@ export async function backdoorGetPromo(
   db: firebase.firestore.Firestore,
   userId: string,
   cardId: string,
-  promoId: string,
-): Promise<Object|undefined> {
+  promoId: string
+): Promise<Object | undefined> {
   const promoSnap = await backdoorGetPromoSnap(db, userId, cardId, promoId);
   return promoSnap.data();
 }

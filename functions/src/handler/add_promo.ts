@@ -31,14 +31,20 @@ async function addPromoHandler(
         );
         throw promoAlreadyExistError;
       } else {
-        const promoName: string = data.promo.name;
+        const promoName: string = data.promo.displayName;
         const promoType: string = data.promo.type;
-        const promoStart: string = data.promo.start;
-        const promoEnd: string = data.promo.end;
-        const promoRepeat: string = data.promo.repeat;
-        const promoRate: string = data.promo.rate;
-        const promoCategoryId: string = data.promo.category.id;
-        const promoCategoryName: string = data.promo.category.displayName;
+        const promoStart: string = data.promo.startDate;
+        const promoEnd: string = data.promo.endDate;
+        const promoRepeat: string = data.promo.repeatPattern;
+        const promoRate: number = data.promo.rate;
+        const promoCategoryId: string =
+          data.promo.category && data.promo.category.id
+            ? data.promo.category.id
+            : "unknwon";
+        const promoCategoryName: string =
+          data.promo.category && data.promo.category.displayName
+            ? data.promo.category.displayName
+            : "unknown";
         await promoRef.set({
           promo_name: promoName,
           promo_id: promoId,

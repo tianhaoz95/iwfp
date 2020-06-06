@@ -1,7 +1,14 @@
-import { CardCreationRequest, CardRemovalRequest, CardEditRequest, CardCreationWithTemplateRequest } from "../../config/typedefs";
+import {
+  CardCreationRequest,
+  CardRemovalRequest,
+  CardEditRequest,
+  CardCreationWithTemplateRequest,
+} from "../../config/typedefs";
 import { parseAddPromoRequest } from "./promo";
 
-export function parseCardCreationWithTemplateRequest(req: any): CardCreationWithTemplateRequest {
+export function parseCardCreationWithTemplateRequest(
+  req: any
+): CardCreationWithTemplateRequest {
   const cardCreationWithTemplateRequest: CardCreationWithTemplateRequest = {
     valid: true,
     id: "na",
@@ -20,7 +27,7 @@ export function parseCardCreationRequest(req: any): CardCreationRequest {
   const cardCreateRequest: CardCreationRequest = {
     valid: true,
     id: "na",
-    name: "na"
+    name: "na",
   };
   if (req.name) {
     cardCreateRequest.name = req.name;
@@ -40,8 +47,8 @@ export function parseCardCreationRequest(req: any): CardCreationRequest {
 export function parseCardRemovalRequest(req: any): CardRemovalRequest {
   const cardRemovalRequst: CardRemovalRequest = {
     valid: true,
-    id: "na"
-  }
+    id: "na",
+  };
   if (req.id) {
     cardRemovalRequst.valid = true;
     cardRemovalRequst.id = req.id;
@@ -56,7 +63,7 @@ export function parseCardEditRequest(req: any): CardEditRequest {
   const cardEditRequest: CardCreationRequest = {
     valid: true,
     id: "na",
-    name: "na"
+    name: "na",
   };
   if (req.cardUid) {
     cardEditRequest.id = req.cardUid;

@@ -1,11 +1,11 @@
-import { AddPromoRequest, RemovePromoRequest, Promo } from "../../config/typedefs";
-import { ShoppingCategory } from "../../interfaces/interfaces";
+import { AddPromoRequest, RemovePromoRequest } from "../../config/typedefs";
+import { ShoppingCategory, Promotion } from "../../interfaces/interfaces";
 
 export function parseRemovePromoRequest(req: any): RemovePromoRequest {
   const removePromoRequest: RemovePromoRequest = {
     valid: true,
     card: "na",
-    promo: "na"
+    promo: "na",
   };
   if (req.cardUid) {
     removePromoRequest.card = req.cardUid;
@@ -20,89 +20,89 @@ export function parseRemovePromoRequest(req: any): RemovePromoRequest {
   return removePromoRequest;
 }
 
-export function parsePromo(req: any): Promo {
-  const promo: Promo = {
+export function parsePromo(req: any): Promotion {
+  const promotion: Promotion = Promotion.create({
     id: "na",
-    name: "na",
+    displayName: "na",
     type: "na",
-    start: "na",
-    end: "na",
-    repeat: "na",
-    rate: "0",
+    startDate: "na",
+    endDate: "na",
+    repeatPattern: "na",
+    rate: 0.0,
     category: ShoppingCategory.create({
-      id: 'na',
-      displayName: 'na'
+      id: "na",
+      displayName: "na",
     }),
-  }
+  });
   let valid: boolean = true;
   if (req.promoId) {
-    promo.id = req.promoId;
+    promotion.id = req.promoId;
   } else {
     valid = false;
   }
   if (req.promoName) {
-    promo.name = req.promoName;
+    promotion.displayName = req.promoName;
   } else {
     valid = false;
   }
   if (req.promoType) {
-    promo.type = req.promoType;
+    promotion.type = req.promoType;
   } else {
     valid = false;
   }
   if (req.promoStart) {
-    promo.start = req.promoStart;
+    promotion.startDate = req.promoStart;
   } else {
     valid = false;
   }
   if (req.promoEnd) {
-    promo.end = req.promoEnd;
+    promotion.endDate = req.promoEnd;
   } else {
     valid = false;
   }
   if (req.promoRepeat) {
-    promo.repeat = req.promoRepeat;
+    promotion.repeatPattern = req.promoRepeat;
   } else {
     valid = false;
   }
   if (req.promoRate) {
-    promo.rate = req.promoRate;
+    promotion.rate = req.promoRate;
   } else {
     valid = false;
   }
-  if (req.promoCategoryId) {
-    promo.category.id = req.promoCategoryId;
+  if (req.promoCategoryId && promotion.category) {
+    promotion.category.id = req.promoCategoryId;
   } else {
     valid = false;
   }
-  if (req.promoCategoryName) {
-    promo.category.displayName = req.promoCategoryName;
+  if (req.promoCategoryName && promotion.category) {
+    promotion.category.displayName = req.promoCategoryName;
   } else {
     valid = false;
   }
   if (!valid) {
-    throw new Error('promo parsing failed');
+    throw new Error("promo parsing failed");
   }
-  return promo;
+  return promotion;
 }
 
 export function parseAddPromoRequest(req: any): AddPromoRequest {
   const addPromoRequest: AddPromoRequest = {
     valid: true,
     card: "na",
-    promo: {
+    promo: Promotion.create({
       id: "na",
-      name: "na",
+      displayName: "na",
       type: "na",
-      start: "na",
-      end: "na",
-      repeat: "na",
-      rate: "0",
+      startDate: "na",
+      endDate: "na",
+      repeatPattern: "na",
+      rate: 0.0,
       category: ShoppingCategory.create({
-        id: 'na',
-        displayName: 'na'
+        id: "na",
+        displayName: "na",
       }),
-    }
+    }),
   };
   if (req.cardUid) {
     addPromoRequest.card = req.cardUid;
@@ -110,7 +110,7 @@ export function parseAddPromoRequest(req: any): AddPromoRequest {
     addPromoRequest.valid = false;
   }
   try {
-    const promo: Promo = parsePromo(req);
+    const promo: Promotion = parsePromo(req);
     addPromoRequest.promo = promo;
   } catch (err) {
     addPromoRequest.valid = false;

@@ -4,7 +4,7 @@ import "firebase/functions";
 export async function backdoorCardExist(
   db: firebase.firestore.Firestore,
   userId: string,
-  cardId: string,
+  cardId: string
 ): Promise<boolean> {
   const cardSnap = await db
     .collection("channel")

@@ -4,8 +4,10 @@ import "firebase/functions";
 export async function backdoorGetCardSnap(
   db: firebase.firestore.Firestore,
   userId: string,
-  cardId: string,
-): Promise<firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>> {
+  cardId: string
+): Promise<
+  firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>
+> {
   const cardSnap = await db
     .collection("channel")
     .doc("production-v1")
@@ -20,8 +22,8 @@ export async function backdoorGetCardSnap(
 export async function backdoorGetCardData(
   db: firebase.firestore.Firestore,
   userId: string,
-  cardId: string,
-): Promise<Object|undefined> {
+  cardId: string
+): Promise<Object | undefined> {
   const cardSnap = await backdoorGetCardSnap(db, userId, cardId);
   return cardSnap.data();
 }
