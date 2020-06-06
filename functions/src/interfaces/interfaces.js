@@ -84,9 +84,9 @@ $root.CreditCard = (function() {
     CreditCard.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.id != null && message.hasOwnProperty("id"))
+        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-        if (message.displayName != null && message.hasOwnProperty("displayName"))
+        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
         if (message.promotions != null && message.promotions.length)
             for (var i = 0; i < message.promotions.length; ++i)
@@ -271,6 +271,11 @@ $root.Promotion = (function() {
      * @interface IPromotion
      * @property {string|null} [id] Promotion id
      * @property {string|null} [displayName] Promotion displayName
+     * @property {string|null} [startDate] Promotion startDate
+     * @property {string|null} [endDate] Promotion endDate
+     * @property {string|null} [type] Promotion type
+     * @property {string|null} [repeatPattern] Promotion repeatPattern
+     * @property {number|null} [rate] Promotion rate
      * @property {IShoppingCategory|null} [category] Promotion category
      */
 
@@ -306,6 +311,46 @@ $root.Promotion = (function() {
     Promotion.prototype.displayName = "";
 
     /**
+     * Promotion startDate.
+     * @member {string} startDate
+     * @memberof Promotion
+     * @instance
+     */
+    Promotion.prototype.startDate = "";
+
+    /**
+     * Promotion endDate.
+     * @member {string} endDate
+     * @memberof Promotion
+     * @instance
+     */
+    Promotion.prototype.endDate = "";
+
+    /**
+     * Promotion type.
+     * @member {string} type
+     * @memberof Promotion
+     * @instance
+     */
+    Promotion.prototype.type = "";
+
+    /**
+     * Promotion repeatPattern.
+     * @member {string} repeatPattern
+     * @memberof Promotion
+     * @instance
+     */
+    Promotion.prototype.repeatPattern = "";
+
+    /**
+     * Promotion rate.
+     * @member {number} rate
+     * @memberof Promotion
+     * @instance
+     */
+    Promotion.prototype.rate = 0;
+
+    /**
      * Promotion category.
      * @member {IShoppingCategory|null|undefined} category
      * @memberof Promotion
@@ -337,12 +382,22 @@ $root.Promotion = (function() {
     Promotion.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.id != null && message.hasOwnProperty("id"))
+        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-        if (message.displayName != null && message.hasOwnProperty("displayName"))
+        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
-        if (message.category != null && message.hasOwnProperty("category"))
-            $root.ShoppingCategory.encode(message.category, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+        if (message.startDate != null && Object.hasOwnProperty.call(message, "startDate"))
+            writer.uint32(/* id 3, wireType 2 =*/26).string(message.startDate);
+        if (message.endDate != null && Object.hasOwnProperty.call(message, "endDate"))
+            writer.uint32(/* id 4, wireType 2 =*/34).string(message.endDate);
+        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+            writer.uint32(/* id 5, wireType 2 =*/42).string(message.type);
+        if (message.repeatPattern != null && Object.hasOwnProperty.call(message, "repeatPattern"))
+            writer.uint32(/* id 6, wireType 2 =*/50).string(message.repeatPattern);
+        if (message.rate != null && Object.hasOwnProperty.call(message, "rate"))
+            writer.uint32(/* id 7, wireType 5 =*/61).float(message.rate);
+        if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+            $root.ShoppingCategory.encode(message.category, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
         return writer;
     };
 
@@ -384,6 +439,21 @@ $root.Promotion = (function() {
                 message.displayName = reader.string();
                 break;
             case 3:
+                message.startDate = reader.string();
+                break;
+            case 4:
+                message.endDate = reader.string();
+                break;
+            case 5:
+                message.type = reader.string();
+                break;
+            case 6:
+                message.repeatPattern = reader.string();
+                break;
+            case 7:
+                message.rate = reader.float();
+                break;
+            case 8:
                 message.category = $root.ShoppingCategory.decode(reader, reader.uint32());
                 break;
             default:
@@ -427,6 +497,21 @@ $root.Promotion = (function() {
         if (message.displayName != null && message.hasOwnProperty("displayName"))
             if (!$util.isString(message.displayName))
                 return "displayName: string expected";
+        if (message.startDate != null && message.hasOwnProperty("startDate"))
+            if (!$util.isString(message.startDate))
+                return "startDate: string expected";
+        if (message.endDate != null && message.hasOwnProperty("endDate"))
+            if (!$util.isString(message.endDate))
+                return "endDate: string expected";
+        if (message.type != null && message.hasOwnProperty("type"))
+            if (!$util.isString(message.type))
+                return "type: string expected";
+        if (message.repeatPattern != null && message.hasOwnProperty("repeatPattern"))
+            if (!$util.isString(message.repeatPattern))
+                return "repeatPattern: string expected";
+        if (message.rate != null && message.hasOwnProperty("rate"))
+            if (typeof message.rate !== "number")
+                return "rate: number expected";
         if (message.category != null && message.hasOwnProperty("category")) {
             var error = $root.ShoppingCategory.verify(message.category);
             if (error)
@@ -451,6 +536,16 @@ $root.Promotion = (function() {
             message.id = String(object.id);
         if (object.displayName != null)
             message.displayName = String(object.displayName);
+        if (object.startDate != null)
+            message.startDate = String(object.startDate);
+        if (object.endDate != null)
+            message.endDate = String(object.endDate);
+        if (object.type != null)
+            message.type = String(object.type);
+        if (object.repeatPattern != null)
+            message.repeatPattern = String(object.repeatPattern);
+        if (object.rate != null)
+            message.rate = Number(object.rate);
         if (object.category != null) {
             if (typeof object.category !== "object")
                 throw TypeError(".Promotion.category: object expected");
@@ -475,12 +570,27 @@ $root.Promotion = (function() {
         if (options.defaults) {
             object.id = "";
             object.displayName = "";
+            object.startDate = "";
+            object.endDate = "";
+            object.type = "";
+            object.repeatPattern = "";
+            object.rate = 0;
             object.category = null;
         }
         if (message.id != null && message.hasOwnProperty("id"))
             object.id = message.id;
         if (message.displayName != null && message.hasOwnProperty("displayName"))
             object.displayName = message.displayName;
+        if (message.startDate != null && message.hasOwnProperty("startDate"))
+            object.startDate = message.startDate;
+        if (message.endDate != null && message.hasOwnProperty("endDate"))
+            object.endDate = message.endDate;
+        if (message.type != null && message.hasOwnProperty("type"))
+            object.type = message.type;
+        if (message.repeatPattern != null && message.hasOwnProperty("repeatPattern"))
+            object.repeatPattern = message.repeatPattern;
+        if (message.rate != null && message.hasOwnProperty("rate"))
+            object.rate = options.json && !isFinite(message.rate) ? String(message.rate) : message.rate;
         if (message.category != null && message.hasOwnProperty("category"))
             object.category = $root.ShoppingCategory.toObject(message.category, options);
         return object;
@@ -565,9 +675,9 @@ $root.ShoppingCategory = (function() {
     ShoppingCategory.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.id != null && message.hasOwnProperty("id"))
+        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-        if (message.displayName != null && message.hasOwnProperty("displayName"))
+        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
         return writer;
     };

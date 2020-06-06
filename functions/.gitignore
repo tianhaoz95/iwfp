@@ -16,3 +16,6 @@ node_modules/
 /lib
 /firestore-debug.log
 /firebase-debug.log
+
+# Logging artifact
+/*.log
