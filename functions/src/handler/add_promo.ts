@@ -38,7 +38,7 @@ async function addPromoHandler(
         const promoRepeat: string = data.promo.repeat;
         const promoRate: string = data.promo.rate;
         const promoCategoryId: string = data.promo.category.id;
-        const promoCategoryName: string = data.promo.category.name;
+        const promoCategoryName: string = data.promo.category.displayName;
         await promoRef.set({
           promo_name: promoName,
           promo_id: promoId,

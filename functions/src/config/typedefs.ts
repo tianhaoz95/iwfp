@@ -1,3 +1,5 @@
+import { ShoppingCategory } from "../interfaces/interfaces";
+
 export interface CardCreationRequest {
   valid: boolean;
   id: string;
@@ -34,11 +36,6 @@ export interface RemovePromoRequest {
   promo: string /** The ID of the target promo */;
 }
 
-export interface Category {
-  id: string;
-  name: string;
-}
-
 export interface Promo {
   id: string;
   name: string;
@@ -47,7 +44,7 @@ export interface Promo {
   end: string;
   repeat: string;
   rate: string;
-  category: Category;
+  category: ShoppingCategory;
 }
 
 export interface FunctionContext {

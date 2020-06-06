@@ -1,4 +1,5 @@
 import { AddPromoRequest, RemovePromoRequest, Promo } from "../../config/typedefs";
+import { ShoppingCategory } from "../../interfaces/interfaces";
 
 export function parseRemovePromoRequest(req: any): RemovePromoRequest {
   const removePromoRequest: RemovePromoRequest = {
@@ -28,10 +29,10 @@ export function parsePromo(req: any): Promo {
     end: "na",
     repeat: "na",
     rate: "0",
-    category: {
-      id: "na",
-      name: "na",
-    }
+    category: ShoppingCategory.create({
+      id: 'na',
+      displayName: 'na'
+    }),
   }
   let valid: boolean = true;
   if (req.promoId) {
@@ -39,43 +40,43 @@ export function parsePromo(req: any): Promo {
   } else {
     valid = false;
   }
-  if(req.promoName) {
+  if (req.promoName) {
     promo.name = req.promoName;
   } else {
     valid = false;
   }
-  if(req.promoType) {
+  if (req.promoType) {
     promo.type = req.promoType;
   } else {
     valid = false;
   }
-  if(req.promoStart) {
+  if (req.promoStart) {
     promo.start = req.promoStart;
   } else {
     valid = false;
   }
-  if(req.promoEnd) {
+  if (req.promoEnd) {
     promo.end = req.promoEnd;
   } else {
     valid = false;
   }
-  if(req.promoRepeat) {
+  if (req.promoRepeat) {
     promo.repeat = req.promoRepeat;
   } else {
     valid = false;
   }
-  if(req.promoRate) {
+  if (req.promoRate) {
     promo.rate = req.promoRate;
   } else {
     valid = false;
   }
-  if(req.promoCategoryId) {
+  if (req.promoCategoryId) {
     promo.category.id = req.promoCategoryId;
   } else {
     valid = false;
   }
-  if(req.promoCategoryName) {
-    promo.category.name = req.promoCategoryName;
+  if (req.promoCategoryName) {
+    promo.category.displayName = req.promoCategoryName;
   } else {
     valid = false;
   }
@@ -97,10 +98,10 @@ export function parseAddPromoRequest(req: any): AddPromoRequest {
       end: "na",
       repeat: "na",
       rate: "0",
-      category: {
-        id: "na",
-        name: "na",
-      }
+      category: ShoppingCategory.create({
+        id: 'na',
+        displayName: 'na'
+      }),
     }
   };
   if (req.cardUid) {
