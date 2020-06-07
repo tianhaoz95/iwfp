@@ -26,8 +26,14 @@ import {
   PromotionAdditionRequest,
   PromotionRemovalRequest,
   CreditCardRemovalRequest,
+  Promotion,
 } from "../src/interfaces/interfaces";
-import { testCreditCard, testCreditCardTemplate } from "./fixture/cards";
+import {
+  createTestCreditCard,
+  createTestCreditCardTemplate,
+} from "./fixture/cards";
+import { populateWalletWithCreditCard } from "./utilities/initializers/populate_cards";
+import { testUserId } from "./fixture/users";
 jest.setTimeout(20000);
 
 describe("end 2 end tests", () => {
@@ -141,22 +147,22 @@ describe("end 2 end tests", () => {
   });
 
   test("edit card should work", async () => {
-    const addResponse = await addCreditCardCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCard,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCardTemplate();
+    const addResponse = await populateWalletWithCreditCard(
+      addCreditCardCallable,
+      testCard
     );
     expect(addResponse).toBeNull;
     const cardAfterAdding = await backdoorGetCardData(
       db,
-      "test_user",
-      "test_card_id"
+      testUserId,
+      testCard.id
     );
     expect(cardAfterAdding).toBeDefined;
     expect(cardAfterAdding).toMatchObject({
-      card_name: "test_card_name",
+      card_name: testCard.displayName,
     });
-    const updatedTestCard = testCreditCard;
+    const updatedTestCard = createTestCreditCardTemplate();
     updatedTestCard.displayName = "edited_test_card_name";
     const editResponse = await editCreditCardsCallable(
       CreditCardUpdateRequest.create({
@@ -166,8 +172,8 @@ describe("end 2 end tests", () => {
     expect(editResponse).toBeNull;
     const cardAfterEditing = await backdoorGetCardData(
       db,
-      "test_user",
-      "test_card_id"
+      testUserId,
+      testCard.id
     );
     expect(cardAfterEditing).toBeDefined;
     expect(cardAfterEditing).toMatchObject({
@@ -176,45 +182,45 @@ describe("end 2 end tests", () => {
   });
 
   test("add card should succeed", async () => {
-    const response = await addCreditCardCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCard,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCard();
+    const response = await populateWalletWithCreditCard(
+      addCreditCardCallable,
+      testCard
     );
     expect(response).toBeNull;
-    const cardExist = await backdoorCardExist(db, "test_user", "test_card_id");
+    const cardExist = await backdoorCardExist(db, testUserId, testCard.id);
     expect(cardExist).toBeTruthy;
   });
 
   test("add card with template should succeed", async () => {
-    const response = await addCreditCardWithTemplateCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCardTemplate,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCardTemplate();
+    const response = await populateWalletWithCreditCard(
+      addCreditCardWithTemplateCallable,
+      testCard
     );
     expect(response).toBeNull;
-    const cardExist = await backdoorCardExist(db, "test_user", "test_card_id");
+    const cardExist = await backdoorCardExist(db, testUserId, testCard.id);
     expect(cardExist).toBeTruthy;
     const cardPromoCnt: number = await backdoorCardPromoCnt(
       db,
-      "test_user",
-      "test_card_id"
+      testUserId,
+      testCard.id
     );
     expect(cardPromoCnt).toBe(2);
     const promoAfterAdding = await backdoorGetPromo(
       db,
-      "test_user",
-      "test_card_id",
-      "test_promo"
+      testUserId,
+      testCard.id,
+      testCard.promotions[0].id ? testCard.promotions[0].id : "wtf"
     );
     expect(promoAfterAdding).toBeDefined;
     expect(promoAfterAdding).not.toBeNull;
     expect(promoAfterAdding).toMatchObject(BasicPromoInDatabase);
     const promoAlternativeAfterAdding = await backdoorGetPromo(
       db,
-      "test_user",
-      "test_card_id",
-      "test_promo_alternative"
+      testUserId,
+      testCard.id,
+      testCard.promotions[1].id ? testCard.promotions[1].id : "wtf"
     );
     expect(promoAlternativeAfterAdding).toBeDefined;
     expect(promoAlternativeAfterAdding).not.toBeNull;
@@ -224,15 +230,15 @@ describe("end 2 end tests", () => {
   });
 
   test("add promo should not crash", async () => {
-    const addCardResponse = await addCreditCardCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCardTemplate,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCard();
+    const addCardResponse = await populateWalletWithCreditCard(
+      addCreditCardCallable,
+      testCard
     );
     expect(addCardResponse).toBeNull;
     const addPromoResponse = await addPromoCallable(
       PromotionAdditionRequest.create({
-        targetCardId: "test_card_id",
+        targetCardId: testCard.id,
         promotionData: createBasicPromotion(),
       }).toJSON()
     );
@@ -240,47 +246,49 @@ describe("end 2 end tests", () => {
   });
 
   test("add promo content should match", async () => {
-    const addCardResponse = await addCreditCardCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCardTemplate,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCard();
+    const testPromo: Promotion = createBasicPromotion();
+    const addCardResponse = await populateWalletWithCreditCard(
+      addCreditCardCallable,
+      testCard
     );
     expect(addCardResponse).toBeNull;
     const addPromoResponse = await addPromoCallable(
       PromotionAdditionRequest.create({
-        targetCardId: "test_card_id",
-        promotionData: createBasicPromotion(),
+        targetCardId: testCard.id,
+        promotionData: testPromo,
       }).toJSON()
     );
     expect(addPromoResponse).toBeNull;
     const promoExist: boolean = await backdoorPromoExist(
       db,
-      "test_user",
-      "test_card_id",
-      "test_promo"
+      testUserId,
+      testCard.id,
+      testPromo.id
     );
     expect(promoExist).toBeTruthy;
     const promoData = await backdoorGetPromo(
       db,
-      "test_user",
-      "test_card_id",
-      "test_promo"
+      testUserId,
+      testCard.id,
+      testPromo.id
     );
     expect(promoData).toBeDefined;
     expect(promoData).toMatchObject(BasicPromoInDatabase);
   });
 
   test("remove promo should clear data", async () => {
-    const addCardResponse = await addCreditCardCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCardTemplate,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCard();
+    const testPromo: Promotion = createBasicPromotion();
+    const addCardResponse = await populateWalletWithCreditCard(
+      addCreditCardCallable,
+      testCard
     );
     expect(addCardResponse).toBeNull;
     const addPromoResponse = await addPromoCallable(
       PromotionAdditionRequest.create({
-        targetCardId: "test_card_id",
-        promotionData: createBasicPromotion(),
+        targetCardId: testCard.id,
+        promotionData: testPromo,
       }).toJSON()
     );
     expect(addPromoResponse).toBeNull;
@@ -288,17 +296,17 @@ describe("end 2 end tests", () => {
       .collection("channel")
       .doc("production-v1")
       .collection("users")
-      .doc("test_user")
+      .doc(testUserId)
       .collection("cards")
-      .doc("test_card_uid")
+      .doc(testCard.id)
       .collection("promos")
-      .doc("test_promo")
+      .doc(testPromo.id)
       .get();
     expect(promoSnap.exists).toBeTruthy;
     const removePromoResponse = await removePromoCallable(
       PromotionRemovalRequest.create({
-        targetCardId: "test_card_id",
-        targetPromotionId: "test_promo",
+        targetCardId: testCard.id,
+        targetPromotionId: testPromo.id,
       }).toJSON()
     );
     expect(removePromoResponse).toBeNull;
@@ -306,26 +314,26 @@ describe("end 2 end tests", () => {
       .collection("channel")
       .doc("production-v1")
       .collection("users")
-      .doc("test_user")
+      .doc(testUserId)
       .collection("cards")
-      .doc("test_card_uid")
+      .doc(testCard.id)
       .collection("promos")
-      .doc("test_promo")
+      .doc(testPromo.id)
       .get();
     expect(promoSnapAfterRemoval.exists).toBeFalsy;
   });
 
   test("remove card should not crash", async () => {
-    const addResponse = await addCreditCardCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCardTemplate,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCard();
+    const addCardResponse = await populateWalletWithCreditCard(
+      addCreditCardCallable,
+      testCard
     );
-    expect(addResponse).toBeNull;
+    expect(addCardResponse).toBeNull;
     const cardExistAfterAdd: boolean = await backdoorCardExist(
       db,
-      "test_user",
-      "test_card_id"
+      testUserId,
+      testCard.id
     );
     expect(cardExistAfterAdd).toBeTruthy;
     try {
@@ -339,42 +347,42 @@ describe("end 2 end tests", () => {
     }
     const cardExistAfterInvalidRemove: boolean = await backdoorCardExist(
       db,
-      "test_user",
-      "test_card_id"
+      testUserId,
+      testCard.id
     );
     expect(cardExistAfterInvalidRemove).toBeTruthy;
     const removeResponse = await removeCreditCardCallable(
       CreditCardRemovalRequest.create({
-        cardId: "test_card_id",
+        cardId: testCard.id,
       })
     );
     expect(removeResponse).toBeNull;
     const cardExistAfterRemove: boolean = await backdoorCardExist(
       db,
-      "test_user",
-      "test_card_id"
+      testUserId,
+      testCard.id
     );
     expect(cardExistAfterRemove).toBeFalsy;
   });
 
   test("add card backdoor validation", async () => {
-    const response = await addCreditCardCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCardTemplate,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCard();
+    const addCardResponse = await populateWalletWithCreditCard(
+      addCreditCardCallable,
+      testCard
     );
-    expect(response).toBeNull;
+    expect(addCardResponse).toBeNull;
     const cardSnap = await db
       .collection("channel")
       .doc("production-v1")
       .collection("users")
-      .doc("test_user")
+      .doc(testUserId)
       .collection("cards")
-      .doc("test_card_id")
+      .doc(testCard.id)
       .get();
     expect(cardSnap.exists).toBeTruthy;
-    expect(cardSnap.id).toBe("test_card_id");
-    expect(cardSnap.data()).toMatchObject({ card_name: "test_card_name" });
+    expect(cardSnap.id).toBe(testCard.id);
+    expect(cardSnap.data()).toMatchObject({ card_name: testCard.displayName });
   });
 
   test("get cards from empty wallet should fail", async () => {
@@ -391,16 +399,16 @@ describe("end 2 end tests", () => {
     } catch (err) {
       expect(err.code).toBe("not-found");
     }
-    const response = await addCreditCardCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCardTemplate,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCard();
+    const addCardResponse = await populateWalletWithCreditCard(
+      addCreditCardCallable,
+      testCard
     );
-    expect(response).toBeNull;
+    expect(addCardResponse).toBeNull;
     const cardsAfterAdding = await getCreditCardsCallable();
-    expect(cardsAfterAdding.data["test_card_id"]).not.toBeNull;
-    expect(cardsAfterAdding.data["test_card_id"]["card_name"]).toBe(
-      "test_card_name"
+    expect(cardsAfterAdding.data[testCard.id]).not.toBeNull;
+    expect(cardsAfterAdding.data[testCard.id]["card_name"]).toBe(
+      testCard.displayName
     );
   });
 
@@ -410,26 +418,26 @@ describe("end 2 end tests", () => {
   });
 
   test("remove user should remove user data", async () => {
-    const addCardResponse = await addCreditCardCallable(
-      CreditCardCreationRequest.create({
-        cardData: testCreditCardTemplate,
-      }).toJSON()
+    const testCard: CreditCard = createTestCreditCard();
+    const addCardResponse = await populateWalletWithCreditCard(
+      addCreditCardCallable,
+      testCard
     );
     expect(addCardResponse).toBeNull;
     const cardExistAfterAdd: boolean = await backdoorCardExist(
       db,
-      "test_user",
-      "test_card_id"
+      testUserId,
+      testCard.id
     );
     expect(cardExistAfterAdd).toBeTruthy;
     const removeUserresponse = await removeUserCallable();
     expect(removeUserresponse).toBeNull;
-    const userExistAfterRemove = backdoorUserExist(db, "test_user");
+    const userExistAfterRemove = backdoorUserExist(db, testUserId);
     expect(userExistAfterRemove).toBeFalsy;
     const cardExistAfterRemove: boolean = await backdoorCardExist(
       db,
-      "test_user",
-      "test_card_id"
+      testUserId,
+      testCard.id
     );
     expect(cardExistAfterRemove).toBeFalsy;
   });
