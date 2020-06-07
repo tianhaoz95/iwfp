@@ -7,8 +7,8 @@ export const EmulatedAppConfig = {
   projectId: "iwfpapp",
 };
 
-export const EmulatedAdminAppConfig = {
-  credential: admin.credential.applicationDefault(),
+export const EmulatedAdminAppConfig: admin.AppOptions = {
+  projectId: "iwfpapp",
   databaseURL: DatabaseEmulatorAddress,
 };
 

@@ -19,3 +19,6 @@ node_modules/
 
 # Logging artifact
 /*.log
+
+# Credentials
+/iwfpapp-firebase-adminsdk.json

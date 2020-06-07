@@ -2,7 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
-import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
+import 'package:iwfpapp/services/interfaces/request.pbserver.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 
 class InAppDataBackend extends DataBackend {
@@ -53,44 +53,19 @@ class InAppDataBackend extends DataBackend {
   }
 
   @override
-  Future<void> initCreditCardInDatabase(CreditCardInitRequest req) async {
-    await addCardCallable.call(<String, dynamic>{
-      'id': req.card.id,
-      'name': req.card.displayName,
-    });
+  Future<void> initCreditCardInDatabase(CreditCardCreationRequest req) async {
+    await addCardCallable.call(req.writeToJson());
   }
 
   @override
   Future<void> initCreditCardWithTemplateInDatabase(
-      CreditCardAdditionRequest req) async {
-    Map<String, dynamic> serverRequest = {
-      'name': req.card.displayName,
-      'id': req.card.id,
-      'promos': []
-    };
-    List<dynamic> promos = [];
-    for (Promotion promo in req.card.promotions) {
-      Map<String, dynamic> promoData = {
-        'cardUid': req.card.id,
-        'promoId': promo.id,
-        'promoName': promo.displayName,
-        'promoType': promo.type,
-        'promoStart': promo.startDate,
-        'promoEnd': promo.endDate,
-        'promoRepeat': promo.repeatPattern,
-        'promoRate': promo.rate,
-        'promoCategoryId': promo.category.id,
-        'promoCategoryName': promo.category.displayName,
-      };
-      promos.add(promoData);
-    }
-    serverRequest['promos'] = promos;
-    await addCardWithTemplateCallable.call(serverRequest);
+      CreditCardCreationRequest req) async {
+    await addCardWithTemplateCallable.call(req.writeToJson());
   }
 
   @override
   Future<BackendResponse> addCreditCardToDatabase(
-      CreditCardAdditionRequest req) async {
+      CreditCardCreationRequest req) async {
     BackendResponse response = BackendResponse(ResponseStatus.SUCCEESS, 'na');
     return response;
   }
@@ -98,30 +73,16 @@ class InAppDataBackend extends DataBackend {
   @override
   Future<void> removeCreditCardFromDatabase(
       CreditCardRemovalRequest req) async {
-    await removeCardCallable.call(<String, dynamic>{'id': req.id});
+    await removeCardCallable.call(req.writeToJson());
   }
 
   @override
   Future<void> addPromitionToDatabase(PromotionAdditionRequest req) async {
-    await addPromoCallable.call(<String, dynamic>{
-      'cardUid': req.target,
-      'promoName': req.promo.displayName,
-      'promoId': req.promo.id,
-      'promoType': req.promo.type,
-      'promoStart': req.promo.startDate,
-      'promoEnd': req.promo.endDate,
-      'promoRepeat': req.promo.repeatPattern,
-      'promoRate': req.promo.rate,
-      'promoCategoryName': req.promo.category.displayName,
-      'promoCategoryId': req.promo.category.id,
-    });
+    await addPromoCallable.call(req.writeToJson());
   }
 
   @override
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
-    await removePromoCallable.call(<String, dynamic>{
-      'cardUid': req.target,
-      'promoId': req.id,
-    });
+    await removePromoCallable.call(req.writeToJson());
   }
 }

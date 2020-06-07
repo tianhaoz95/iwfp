@@ -2,6 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:iwfpapp/services/interfaces/request.pb.dart';
 import 'package:iwfpapp/services/interfaces/shopping_category.pbserver.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
@@ -157,7 +158,7 @@ abstract class DataBackend extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> initCreditCard(CreditCardInitRequest req,
+  Future<void> initCreditCard(CreditCardCreationRequest req,
       {bool silent = false}) async {
     try {
       status = DataBackendStatus.LOADING;
@@ -181,7 +182,7 @@ abstract class DataBackend extends ChangeNotifier {
     }
   }
 
-  Future<void> initCreditCardWithTemplate(CreditCardAdditionRequest req) async {
+  Future<void> initCreditCardWithTemplate(CreditCardCreationRequest req) async {
     try {
       status = DataBackendStatus.LOADING;
       notifyListeners();
@@ -205,7 +206,7 @@ abstract class DataBackend extends ChangeNotifier {
     }
   }
 
-  Future<void> addCreditCard(CreditCardAdditionRequest req) async {
+  Future<void> addCreditCard(CreditCardCreationRequest req) async {
     try {
       status = DataBackendStatus.LOADING;
       notifyListeners();
@@ -317,14 +318,14 @@ abstract class DataBackend extends ChangeNotifier {
   Future<List<CreditCard>> fetchCreditCardsFromDatabase();
 
   @protected
-  Future<void> initCreditCardInDatabase(CreditCardInitRequest req);
+  Future<void> initCreditCardInDatabase(CreditCardCreationRequest req);
 
   @protected
   Future<void> initCreditCardWithTemplateInDatabase(
-      CreditCardAdditionRequest req);
+      CreditCardCreationRequest req);
 
   @protected
-  Future<void> addCreditCardToDatabase(CreditCardAdditionRequest req);
+  Future<void> addCreditCardToDatabase(CreditCardCreationRequest req);
 
   @protected
   Future<void> removeCreditCardFromDatabase(CreditCardRemovalRequest req);

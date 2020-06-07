@@ -1,6 +1,6 @@
-import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:iwfpapp/services/interfaces/request.pb.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
 
 /// Error data backend
@@ -18,7 +18,7 @@ class ErrorDataBackend extends DataBackend {
   }
 
   @override
-  Future<void> addCreditCardToDatabase(CreditCardAdditionRequest req) async {
+  Future<void> addCreditCardToDatabase(CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     throw UnimplementedError();
   }
@@ -42,14 +42,14 @@ class ErrorDataBackend extends DataBackend {
   }
 
   @override
-  Future<void> initCreditCardInDatabase(CreditCardInitRequest req) async {
+  Future<void> initCreditCardInDatabase(CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     throw UnimplementedError();
   }
 
   @override
   Future<void> initCreditCardWithTemplateInDatabase(
-      CreditCardAdditionRequest req) async {
+      CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     throw UnimplementedError();
   }

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:iwfpapp/services/config/consts/endpoints.dart';
-import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:http/http.dart' as http;
 import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:iwfpapp/services/interfaces/request.pb.dart';
 import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 import 'package:iwfpapp/services/utilities/converters/token2get_cards_request.dart';
 
@@ -16,25 +16,14 @@ class UseHttpDataBackend extends DataBackend {
   UseHttpDataBackend() : super();
 
   @override
-  Future<void> addCreditCardToDatabase(CreditCardAdditionRequest req) async {
+  Future<void> addCreditCardToDatabase(CreditCardCreationRequest req) async {
     return;
   }
 
   @override
   Future<void> addPromitionToDatabase(PromotionAdditionRequest req) async {
-    http.Response response = await http.post(AddPromotionEndpoint, body: {
-      'cardUid': req.target,
-      'promoName': req.promo.displayName,
-      'promoId': req.promo.id,
-      'promoType': req.promo.type,
-      'promoStart': req.promo.startDate,
-      'promoEnd': req.promo.endDate,
-      'promoRepeat': req.promo.repeatPattern,
-      'promoRate': req.promo.rate.toString(),
-      'promoCategoryName': req.promo.category.displayName,
-      'promoCategoryId': req.promo.category.id,
-      'token': token
-    });
+    http.Response response =
+        await http.post(AddPromotionEndpoint, body: req.writeToJson());
     if (response.statusCode != 200) {
       throw 'add_promo_failed';
     }
@@ -68,12 +57,9 @@ class UseHttpDataBackend extends DataBackend {
   }
 
   @override
-  Future<void> initCreditCardInDatabase(CreditCardInitRequest req) async {
-    http.Response response = await http.post(AddCreditCardEndpoint, body: {
-      'id': req.card.id,
-      'name': req.card.displayName,
-      'token': token
-    });
+  Future<void> initCreditCardInDatabase(CreditCardCreationRequest req) async {
+    http.Response response =
+        await http.post(AddCreditCardEndpoint, body: req.writeToJson());
     if (response.statusCode != 200) {
       throw 'init_credit_card_failed';
     }
@@ -81,7 +67,7 @@ class UseHttpDataBackend extends DataBackend {
 
   @override
   Future<void> initCreditCardWithTemplateInDatabase(
-      CreditCardAdditionRequest req) async {
+      CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
   }
 
@@ -90,8 +76,8 @@ class UseHttpDataBackend extends DataBackend {
   @override
   Future<void> removeCreditCardFromDatabase(
       CreditCardRemovalRequest req) async {
-    http.Response response = await http
-        .post(RemoveCreditCardEndpoint, body: {'id': req.id, 'token': token});
+    http.Response response =
+        await http.post(RemoveCreditCardEndpoint, body: req.writeToJson());
     if (response.statusCode != 200) {
       throw 'remove_credit_card_failed';
     }
@@ -99,8 +85,8 @@ class UseHttpDataBackend extends DataBackend {
 
   @override
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
-    http.Response response = await http.post(RemovePromotionEndpoint,
-        body: {'cardUid': req.target, 'promoId': req.id, 'token': token});
+    http.Response response =
+        await http.post(RemovePromotionEndpoint, body: req.writeToJson());
     if (response.statusCode != 200) {
       throw 'remove_promo_failed';
     }
