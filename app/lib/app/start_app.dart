@@ -22,7 +22,6 @@ void startApp({
   AppContextType appContextType = AppContextType.PROD,
   bool shouldReportDevCrashes = true,
   bool allowDynamicLink = true,
-  bool shouldInitHive = true,
 }) {
   WidgetsFlutterBinding.ensureInitialized();
   if (shouldReportDevCrashes) {

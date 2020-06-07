@@ -1,23 +1,28 @@
-import { AddPromoRequest, RemovePromoRequest } from "../../config/typedefs";
-import { ShoppingCategory, Promotion } from "../../interfaces/interfaces";
+import {
+  ShoppingCategory,
+  Promotion,
+  PromotionRemovalRequest,
+  PromotionAdditionRequest,
+} from "../../interfaces/interfaces";
 
-export function parseRemovePromoRequest(req: any): RemovePromoRequest {
-  const removePromoRequest: RemovePromoRequest = {
-    valid: true,
-    card: "na",
-    promo: "na",
-  };
+export function parseRemovePromoRequest(req: any): PromotionRemovalRequest {
+  const promotionRemovalRequest: PromotionRemovalRequest = PromotionRemovalRequest.create(
+    {
+      targetCardId: "na",
+      targetPromotionId: "na",
+    }
+  );
   if (req.cardUid) {
-    removePromoRequest.card = req.cardUid;
+    promotionRemovalRequest.targetCardId = req.cardUid;
   } else {
-    removePromoRequest.valid = false;
+    promotionRemovalRequest.valid = false;
   }
   if (req.promoId) {
-    removePromoRequest.promo = req.promoId;
+    promotionRemovalRequest.targetPromotionId = req.promoId;
   } else {
-    removePromoRequest.valid = false;
+    promotionRemovalRequest.valid = false;
   }
-  return removePromoRequest;
+  return promotionRemovalRequest;
 }
 
 export function parsePromo(req: any): Promotion {
@@ -86,34 +91,36 @@ export function parsePromo(req: any): Promotion {
   return promotion;
 }
 
-export function parseAddPromoRequest(req: any): AddPromoRequest {
-  const addPromoRequest: AddPromoRequest = {
-    valid: true,
-    card: "na",
-    promo: Promotion.create({
-      id: "na",
-      displayName: "na",
-      type: "na",
-      startDate: "na",
-      endDate: "na",
-      repeatPattern: "na",
-      rate: 0.0,
-      category: ShoppingCategory.create({
+export function parseAddPromoRequest(req: any): PromotionAdditionRequest {
+  const promotionAdditionRequest: PromotionAdditionRequest = PromotionAdditionRequest.create(
+    {
+      valid: true,
+      targetCardId: "na",
+      promotionData: Promotion.create({
         id: "na",
         displayName: "na",
+        type: "na",
+        startDate: "na",
+        endDate: "na",
+        repeatPattern: "na",
+        rate: 0.0,
+        category: ShoppingCategory.create({
+          id: "na",
+          displayName: "na",
+        }),
       }),
-    }),
-  };
+    }
+  );
   if (req.cardUid) {
-    addPromoRequest.card = req.cardUid;
+    promotionAdditionRequest.targetCardId = req.cardUid;
   } else {
-    addPromoRequest.valid = false;
+    promotionAdditionRequest.valid = false;
   }
   try {
     const promo: Promotion = parsePromo(req);
-    addPromoRequest.promo = promo;
+    promotionAdditionRequest.promotionData = promo;
   } catch (err) {
-    addPromoRequest.valid = false;
+    promotionAdditionRequest.valid = false;
   }
-  return addPromoRequest;
+  return promotionAdditionRequest;
 }

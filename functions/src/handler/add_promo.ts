@@ -3,20 +3,24 @@ import {
   creditCardNotExistError,
   promoAlreadyExistError,
 } from "../config/consts";
-import { FunctionContext, AddPromoRequest } from "../config/typedefs";
+import { FunctionContext } from "../config/typedefs";
+import { PromotionAdditionRequest } from "../interfaces/interfaces";
 
 async function addPromoHandler(
-  data: AddPromoRequest,
+  data: PromotionAdditionRequest,
   context: FunctionContext,
   provider
 ) {
   if (context.authenticated) {
     const userUid: string = context.uid;
     const userRef = provider.getUserRef(userUid);
-    const cardRef = userRef.collection("cards").doc(data.card);
+    const cardRef = userRef.collection("cards").doc(data.targetCardId);
     const cardSnap = await cardRef.get();
     if (cardSnap.exists) {
-      const promoId: string = data.promo.id;
+      const promoId: string =
+        data.promotionData && data.promotionData.id
+          ? data.promotionData.id
+          : "na";
       const promoRef = cardRef.collection("promos").doc(promoId);
       const promoSnap = await promoRef.get();
       if (promoSnap.exists) {
@@ -26,25 +30,47 @@ async function addPromoHandler(
           "Cannot add " +
             promoId +
             " to " +
-            data.card +
+            data.targetCardId +
             ", because it already exists."
         );
         throw promoAlreadyExistError;
       } else {
-        const promoName: string = data.promo.displayName;
-        const promoType: string = data.promo.type;
-        const promoStart: string = data.promo.startDate;
-        const promoEnd: string = data.promo.endDate;
-        const promoRepeat: string = data.promo.repeatPattern;
-        const promoRate: number = data.promo.rate;
+        const promoName: string =
+          data.promotionData && data.promotionData.displayName
+            ? data.promotionData.displayName
+            : "na";
+        const promoType: string =
+          data.promotionData && data.promotionData.type
+            ? data.promotionData.type
+            : "na";
+        const promoStart: string =
+          data.promotionData && data.promotionData.startDate
+            ? data.promotionData.startDate
+            : "na";
+        const promoEnd: string =
+          data.promotionData && data.promotionData.endDate
+            ? data.promotionData.endDate
+            : "na";
+        const promoRepeat: string =
+          data.promotionData && data.promotionData.repeatPattern
+            ? data.promotionData.repeatPattern
+            : "na";
+        const promoRate: number =
+          data.promotionData && data.promotionData.rate
+            ? data.promotionData.rate
+            : 0;
         const promoCategoryId: string =
-          data.promo.category && data.promo.category.id
-            ? data.promo.category.id
-            : "unknwon";
+          data.promotionData &&
+          data.promotionData.category &&
+          data.promotionData.category.id
+            ? data.promotionData.category.id
+            : "na";
         const promoCategoryName: string =
-          data.promo.category && data.promo.category.displayName
-            ? data.promo.category.displayName
-            : "unknown";
+          data.promotionData &&
+          data.promotionData.category &&
+          data.promotionData.category.displayName
+            ? data.promotionData.category.displayName
+            : "na";
         await promoRef.set({
           promo_name: promoName,
           promo_id: promoId,

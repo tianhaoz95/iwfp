@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile proto interfaces",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/generate_interface.sh",
+      "windows": {
+        "command": "${workspaceFolder}\\scripts\\generate_interface_win.ps1"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

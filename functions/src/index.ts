@@ -8,15 +8,7 @@ import removePromoHandler from "./handler/remove_promo";
 import getCreditCardHandler from "./handler/get_credit_cards";
 import removeUserHandler from "./handler/remove_user";
 import Provider from "./provider";
-import {
-  FunctionContext,
-  CardCreationRequest,
-  CardRemovalRequest,
-  CardEditRequest,
-  AddPromoRequest,
-  RemovePromoRequest,
-  CardCreationWithTemplateRequest,
-} from "./config/typedefs";
+import { FunctionContext } from "./config/typedefs";
 import {
   parseCardCreationRequest,
   parseCardRemovalRequest,
@@ -28,6 +20,13 @@ import {
   parseRemovePromoRequest,
 } from "./util/parsers/promo";
 import addCreditCardWithTemplateHandler from "./handler/add_credit_card_with_template";
+import {
+  PromotionRemovalRequest,
+  CreditCardRemovalRequest,
+  CreditCardCreationRequest,
+  PromotionAdditionRequest,
+  CreditCardUpdateRequest,
+} from "./interfaces/interfaces";
 
 const provider = new Provider();
 const corsHandler = cors({
@@ -37,7 +36,7 @@ const corsHandler = cors({
 export const addCreditCardWithTemplate = functions.https.onCall(
   async (data, fbContext) => {
     const context: FunctionContext = provider.fbContext2context(fbContext);
-    const cardCreationWithTemplateRequest: CardCreationWithTemplateRequest = parseCardCreationWithTemplateRequest(
+    const cardCreationWithTemplateRequest: CreditCardCreationRequest = parseCardCreationWithTemplateRequest(
       data
     );
     await addCreditCardWithTemplateHandler(
@@ -50,7 +49,7 @@ export const addCreditCardWithTemplate = functions.https.onCall(
 
 export const addCreditCard = functions.https.onCall(async (data, fbContext) => {
   const context: FunctionContext = provider.fbContext2context(fbContext);
-  const cardCreationRequest: CardCreationRequest = parseCardCreationRequest(
+  const cardCreationRequest: CreditCardCreationRequest = parseCardCreationRequest(
     data
   );
   await addCreditCardHandler(cardCreationRequest, context, provider);
@@ -64,7 +63,7 @@ export const httpAddCreditCard = functions.https.onRequest(async (req, res) => {
     });
   }
   const context: FunctionContext = await provider.token2context(req.body.token);
-  const cardCreationRequest: CardCreationRequest = parseCardCreationRequest(
+  const cardCreationRequest: CreditCardCreationRequest = parseCardCreationRequest(
     req.body
   );
   try {
@@ -83,7 +82,7 @@ export const httpAddCreditCard = functions.https.onRequest(async (req, res) => {
 export const removeCreditCard = functions.https.onCall(
   async (data, fbContext) => {
     const context: FunctionContext = provider.fbContext2context(fbContext);
-    const cardRemovalRequest: CardRemovalRequest = parseCardRemovalRequest(
+    const cardRemovalRequest: CreditCardRemovalRequest = parseCardRemovalRequest(
       data
     );
     await removeCreditCardHandler(cardRemovalRequest, context, provider);
@@ -101,7 +100,7 @@ export const httpRemoveCreditCard = functions.https.onRequest(
     const context: FunctionContext = await provider.token2context(
       req.body.token
     );
-    const cardRemovalRequest: CardRemovalRequest = parseCardRemovalRequest(
+    const cardRemovalRequest: CreditCardRemovalRequest = parseCardRemovalRequest(
       req.body
     );
     try {
@@ -121,8 +120,10 @@ export const httpRemoveCreditCard = functions.https.onRequest(
 export const editCreditCard = functions.https.onCall(
   async (data, fbContext) => {
     const context: FunctionContext = provider.fbContext2context(fbContext);
-    const cardEditRequest: CardEditRequest = parseCardEditRequest(data);
-    await editCreditCardHandler(cardEditRequest, context, provider);
+    const creditCardUpdateRequest: CreditCardUpdateRequest = parseCardEditRequest(
+      data
+    );
+    await editCreditCardHandler(creditCardUpdateRequest, context, provider);
   }
 );
 
@@ -137,9 +138,11 @@ export const httpEditCreditCard = functions.https.onRequest(
     const context: FunctionContext = await provider.token2context(
       req.body.token
     );
-    const cardEditRequest: CardEditRequest = parseCardEditRequest(req.body);
+    const creditCardUpdateRequest: CreditCardUpdateRequest = parseCardEditRequest(
+      req.body
+    );
     try {
-      await editCreditCardHandler(cardEditRequest, context, provider);
+      await editCreditCardHandler(creditCardUpdateRequest, context, provider);
       return corsHandler(req, res, () => {
         res.sendStatus(200);
       });
@@ -154,7 +157,7 @@ export const httpEditCreditCard = functions.https.onRequest(
 
 export const addPromo = functions.https.onCall(async (data, fbContext) => {
   const context: FunctionContext = provider.fbContext2context(fbContext);
-  const addPromoRequest: AddPromoRequest = parseAddPromoRequest(data);
+  const addPromoRequest: PromotionAdditionRequest = parseAddPromoRequest(data);
   await addPromoHandler(addPromoRequest, context, provider);
 });
 
@@ -166,7 +169,9 @@ export const httpAddPromo = functions.https.onRequest(async (req, res) => {
     });
   }
   const context: FunctionContext = await provider.token2context(req.body.token);
-  const addPromoRequest: AddPromoRequest = parseAddPromoRequest(req.body);
+  const addPromoRequest: PromotionAdditionRequest = parseAddPromoRequest(
+    req.body
+  );
   try {
     await addPromoHandler(addPromoRequest, context, provider);
     return corsHandler(req, res, () => {
@@ -182,7 +187,9 @@ export const httpAddPromo = functions.https.onRequest(async (req, res) => {
 
 export const removePromo = functions.https.onCall(async (data, fbContext) => {
   const context: FunctionContext = provider.fbContext2context(fbContext);
-  const removePromoRequest: RemovePromoRequest = parseRemovePromoRequest(data);
+  const removePromoRequest: PromotionRemovalRequest = parseRemovePromoRequest(
+    data
+  );
   await removePromoHandler(removePromoRequest, context, provider);
 });
 
@@ -194,7 +201,7 @@ export const httpRemovePromo = functions.https.onRequest(async (req, res) => {
     });
   }
   const context: FunctionContext = await provider.token2context(req.body.token);
-  const removePromoRequest: RemovePromoRequest = parseRemovePromoRequest(
+  const removePromoRequest: PromotionRemovalRequest = parseRemovePromoRequest(
     req.body
   );
   try {

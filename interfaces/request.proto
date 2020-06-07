@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "credit_card.proto";
+import "promotion.proto";
+
+message CreditCardCreationRequest {
+  bool valid = 1;
+  CreditCard card_data = 2;
+}
+
+message CreditCardUpdateRequest {
+  bool valid = 1;
+  CreditCard updated_card_data = 2;
+}
+
+message CreditCardRemovalRequest {
+  bool valid = 1;
+  string card_id = 2;
+}
+
+message PromotionAdditionRequest {
+  bool valid = 1;
+  string target_card_id = 2;
+  Promotion promotion_data = 3;
+}
+
+message PromotionRemovalRequest {
+  bool valid = 1;
+  string target_card_id = 2;
+  string target_promotion_id = 3;
+}
+
+message PromotionUpdateRequest {
+  string target_card_id = 1;
+  Promotion updated_promotion_data = 2;
+}

@@ -1,79 +1,92 @@
+import { parsePromo } from "./promo";
 import {
-  CardCreationRequest,
-  CardRemovalRequest,
-  CardEditRequest,
-  CardCreationWithTemplateRequest,
-} from "../../config/typedefs";
-import { parseAddPromoRequest } from "./promo";
+  CreditCardRemovalRequest,
+  CreditCardCreationRequest,
+  CreditCard,
+  CreditCardUpdateRequest,
+} from "../../interfaces/interfaces";
 
 export function parseCardCreationWithTemplateRequest(
   req: any
-): CardCreationWithTemplateRequest {
-  const cardCreationWithTemplateRequest: CardCreationWithTemplateRequest = {
-    valid: true,
-    id: "na",
-    name: "na",
-    promos: [],
-  };
-  cardCreationWithTemplateRequest.name = req.name;
-  cardCreationWithTemplateRequest.id = req.id;
+): CreditCardCreationRequest {
+  const creditCardCreationRequest: CreditCardCreationRequest = CreditCardCreationRequest.create(
+    {
+      valid: true,
+      cardData: CreditCard.create({
+        id: "na",
+        displayName: "na",
+      }),
+    }
+  );
+  if (creditCardCreationRequest.cardData) {
+    creditCardCreationRequest.cardData.displayName = req.name;
+    creditCardCreationRequest.cardData.id = req.id;
+  }
   for (const promo of req.promos) {
-    cardCreationWithTemplateRequest.promos.push(parseAddPromoRequest(promo));
+    creditCardCreationRequest.cardData?.promotions?.push(parsePromo(promo));
   }
-  return cardCreationWithTemplateRequest;
+  return creditCardCreationRequest;
 }
 
-export function parseCardCreationRequest(req: any): CardCreationRequest {
-  const cardCreateRequest: CardCreationRequest = {
-    valid: true,
-    id: "na",
-    name: "na",
-  };
-  if (req.name) {
-    cardCreateRequest.name = req.name;
+export function parseCardCreationRequest(req: any): CreditCardCreationRequest {
+  const creditCardCreationRequest: CreditCardCreationRequest = CreditCardCreationRequest.create(
+    {
+      valid: true,
+      cardData: CreditCard.create({
+        id: "na",
+        displayName: "na",
+      }),
+    }
+  );
+  if (req.name && creditCardCreationRequest.cardData) {
+    creditCardCreationRequest.cardData.displayName = req.name;
   } else {
-    cardCreateRequest.valid = false;
-    cardCreateRequest.name = "na";
+    creditCardCreationRequest.valid = false;
   }
+  if (req.id && creditCardCreationRequest.cardData) {
+    creditCardCreationRequest.cardData.id = req.id;
+  } else {
+    creditCardCreationRequest.valid = false;
+  }
+  return creditCardCreationRequest;
+}
+
+export function parseCardRemovalRequest(req: any): CreditCardRemovalRequest {
+  const creditCardRemovalRequest: CreditCardRemovalRequest = CreditCardRemovalRequest.create(
+    {
+      valid: true,
+      cardId: "na",
+    }
+  );
   if (req.id) {
-    cardCreateRequest.id = req.id;
+    creditCardRemovalRequest.valid = true;
+    creditCardRemovalRequest.cardId = req.id;
   } else {
-    cardCreateRequest.valid = false;
-    cardCreateRequest.id = "na";
+    creditCardRemovalRequest.valid = false;
+    creditCardRemovalRequest.cardId = "na";
   }
-  return cardCreateRequest;
+  return creditCardRemovalRequest;
 }
 
-export function parseCardRemovalRequest(req: any): CardRemovalRequest {
-  const cardRemovalRequst: CardRemovalRequest = {
-    valid: true,
-    id: "na",
-  };
-  if (req.id) {
-    cardRemovalRequst.valid = true;
-    cardRemovalRequst.id = req.id;
+export function parseCardEditRequest(req: any): CreditCardUpdateRequest {
+  const creditCardCreationRequest: CreditCardUpdateRequest = CreditCardUpdateRequest.create(
+    {
+      valid: true,
+      updatedCardData: CreditCard.create({
+        id: "na",
+        displayName: "na",
+      }),
+    }
+  );
+  if (req.cardUid && creditCardCreationRequest.updatedCardData) {
+    creditCardCreationRequest.updatedCardData.id = req.cardUid;
   } else {
-    cardRemovalRequst.valid = false;
-    cardRemovalRequst.id = "na";
+    creditCardCreationRequest.valid = false;
   }
-  return cardRemovalRequst;
-}
-
-export function parseCardEditRequest(req: any): CardEditRequest {
-  const cardEditRequest: CardCreationRequest = {
-    valid: true,
-    id: "na",
-    name: "na",
-  };
-  if (req.cardUid) {
-    cardEditRequest.id = req.cardUid;
+  if (req.cardData && creditCardCreationRequest.updatedCardData) {
+    creditCardCreationRequest.updatedCardData.displayName = req.cardData;
   } else {
-    cardEditRequest.valid = false;
+    creditCardCreationRequest.valid = false;
   }
-  if (req.cardData) {
-    cardEditRequest.name = req.cardData;
-  } else {
-    cardEditRequest.valid = false;
-  }
-  return cardEditRequest;
+  return creditCardCreationRequest;
 }

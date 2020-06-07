@@ -1,6 +1,6 @@
 import { BasicPromo, BasicPromoAlternative } from "../../../fixture/promos";
 import { parseCardCreationWithTemplateRequest } from "../../../../src/util/parsers/card";
-import { CardCreationWithTemplateRequest } from "../../../../src/config/typedefs";
+import { CreditCardCreationRequest } from "../../../../src/interfaces/interfaces";
 
 describe("card parser test", () => {
   test("should contain the correct number of promos", () => {
@@ -9,10 +9,10 @@ describe("card parser test", () => {
       id: "test_card_uid",
       promos: [BasicPromo, BasicPromoAlternative],
     };
-    const request: CardCreationWithTemplateRequest = parseCardCreationWithTemplateRequest(
+    const request: CreditCardCreationRequest = parseCardCreationWithTemplateRequest(
       rawRequest
     );
-    expect(request.promos.length).toBe(2);
+    expect(request.cardData?.promotions?.length).toBe(2);
   });
 
   test("should contain the correct card content", () => {
@@ -21,10 +21,10 @@ describe("card parser test", () => {
       id: "test_card_uid",
       promos: [BasicPromo, BasicPromoAlternative],
     };
-    const request: CardCreationWithTemplateRequest = parseCardCreationWithTemplateRequest(
+    const request: CreditCardCreationRequest = parseCardCreationWithTemplateRequest(
       rawRequest
     );
-    expect(request.id).toMatch("test_card_uid");
-    expect(request.name).toMatch("test_card_name");
+    expect(request.cardData?.id).toMatch("test_card_uid");
+    expect(request.cardData?.displayName).toMatch("test_card_name");
   });
 });
