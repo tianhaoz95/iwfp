@@ -54,13 +54,16 @@ class InAppDataBackend extends DataBackend {
 
   @override
   Future<void> initCreditCardInDatabase(CreditCardCreationRequest req) async {
-    await addCardCallable.call(req.writeToJson());
+    await addCardCallable.call(req.toProto3Json());
   }
 
   @override
   Future<void> initCreditCardWithTemplateInDatabase(
       CreditCardCreationRequest req) async {
-    await addCardWithTemplateCallable.call(req.writeToJson());
+    print('before sending template');
+    print(req.toProto3Json());
+    await addCardWithTemplateCallable.call(req.toProto3Json());
+    print('after sending template');
   }
 
   @override
@@ -73,16 +76,16 @@ class InAppDataBackend extends DataBackend {
   @override
   Future<void> removeCreditCardFromDatabase(
       CreditCardRemovalRequest req) async {
-    await removeCardCallable.call(req.writeToJson());
+    await removeCardCallable.call(req.toProto3Json());
   }
 
   @override
   Future<void> addPromitionToDatabase(PromotionAdditionRequest req) async {
-    await addPromoCallable.call(req.writeToJson());
+    await addPromoCallable.call(req.toProto3Json());
   }
 
   @override
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
-    await removePromoCallable.call(req.writeToJson());
+    await removePromoCallable.call(req.toProto3Json());
   }
 }

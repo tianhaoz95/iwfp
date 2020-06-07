@@ -35,6 +35,7 @@ const corsHandler = cors({
 
 export const addCreditCardWithTemplate = functions.https.onCall(
   async (data, fbContext) => {
+    console.log(data);
     const context: FunctionContext = provider.fbContext2context(fbContext);
     const cardCreationWithTemplateRequest: CreditCardCreationRequest = parseCardCreationWithTemplateRequest(
       data
