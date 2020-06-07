@@ -1,12 +1,11 @@
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
-import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 
-CreditCard chaseFreedom = CreditCard(
+CreditCard chaseFreedom = createCreditCard(
   'Chase Freedom',
   'chase_freedom',
   promos: [
-    CashbackPromo(
+    createPromotion(
       'Gas Station',
       'gas_stations',
       'sector',
@@ -14,13 +13,20 @@ CreditCard chaseFreedom = CreditCard(
       '03/31',
       'annual',
       5,
-      ShopCategory('Gas Station', 'gas_stations'),
+      createShoppingCategory('Gas Station', 'gas_stations'),
     ),
-    CashbackPromo('Grag Stores', 'drag_stores', 'sector', '01/01', '03/31',
-        'annual', 5, ShopCategory('Grag Stores', 'drag_stores')),
-    CashbackPromo('Grocery Stores', 'grocery_stores', 'sector', '04/01',
-        '06/30', 'annual', 5, ShopCategory('Grocery Stores', 'grocery_stores')),
-    CashbackPromo(
+    createPromotion('Grag Stores', 'drag_stores', 'sector', '01/01', '03/31',
+        'annual', 5, createShoppingCategory('Grag Stores', 'drag_stores')),
+    createPromotion(
+        'Grocery Stores',
+        'grocery_stores',
+        'sector',
+        '04/01',
+        '06/30',
+        'annual',
+        5,
+        createShoppingCategory('Grocery Stores', 'grocery_stores')),
+    createPromotion(
         'Home Improvement Stores',
         'home_improvement_stores',
         'sector',
@@ -28,8 +34,9 @@ CreditCard chaseFreedom = CreditCard(
         '06/30',
         'annual',
         5,
-        ShopCategory('Home Improvement Stores', 'home_improvement_stores')),
-    CashbackPromo(
+        createShoppingCategory(
+            'Home Improvement Stores', 'home_improvement_stores')),
+    createPromotion(
         'Streaming Services',
         'streaming_services',
         'sector',
@@ -37,12 +44,12 @@ CreditCard chaseFreedom = CreditCard(
         '09/30',
         'annual',
         5,
-        ShopCategory('Streaming Services', 'streaming_services')),
-    CashbackPromo('Chase Pay', 'chase_pay', 'payment', '10/01', '12/31',
-        'annual', 5, ShopCategory('Chase Pay', 'chase_pay')),
-    CashbackPromo('PayPal', 'paypal', 'payment', '10/01', '12/31', 'annual', 5,
-        ShopCategory('PayPal', 'paypal')),
-    CashbackPromo('All Purchases', 'all_purchase', 'universal', 'nan', 'nan',
-        'const', 1, ShopCategory('All Purchases', 'all_purchase')),
+        createShoppingCategory('Streaming Services', 'streaming_services')),
+    createPromotion('Chase Pay', 'chase_pay', 'payment', '10/01', '12/31',
+        'annual', 5, createShoppingCategory('Chase Pay', 'chase_pay')),
+    createPromotion('PayPal', 'paypal', 'payment', '10/01', '12/31', 'annual',
+        5, createShoppingCategory('PayPal', 'paypal')),
+    createPromotion('All Purchases', 'all_purchase', 'universal', 'nan', 'nan',
+        'const', 1, createShoppingCategory('All Purchases', 'all_purchase')),
   ],
 );

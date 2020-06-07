@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/utilities/validators/card_expiration_validator.dart';
 
 class PromotionChip extends StatelessWidget {
-  final CashbackPromo promo;
+  final Promotion promo;
   const PromotionChip(this.promo);
   @override
   Widget build(BuildContext context) {
     String promoName = 'Unknown';
-    if (promo.name != null) {
-      promoName = promo.category.name;
+    if (promo.displayName != null) {
+      promoName = promo.category.displayName;
     }
     double promoRate = 0.0;
     if (promo.rate != null) {

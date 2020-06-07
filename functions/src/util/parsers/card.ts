@@ -1,72 +1,36 @@
-import { CardCreationRequest, CardRemovalRequest, CardEditRequest, CardCreationWithTemplateRequest } from "../../config/typedefs";
-import { parseAddPromoRequest } from "./promo";
+import {
+  CreditCardRemovalRequest,
+  CreditCardCreationRequest,
+  CreditCardUpdateRequest,
+} from "../../interfaces/interfaces";
 
-export function parseCardCreationWithTemplateRequest(req: any): CardCreationWithTemplateRequest {
-  const cardCreationWithTemplateRequest: CardCreationWithTemplateRequest = {
-    valid: true,
-    id: "na",
-    name: "na",
-    promos: [],
-  };
-  cardCreationWithTemplateRequest.name = req.name;
-  cardCreationWithTemplateRequest.id = req.id;
-  for (const promo of req.promos) {
-    cardCreationWithTemplateRequest.promos.push(parseAddPromoRequest(promo));
-  }
-  return cardCreationWithTemplateRequest;
+export function parseCardCreationWithTemplateRequest(
+  req: any
+): CreditCardCreationRequest {
+  const creditCardCreationRequest: CreditCardCreationRequest = CreditCardCreationRequest.fromObject(
+    req
+  );
+  return creditCardCreationRequest;
 }
 
-export function parseCardCreationRequest(req: any): CardCreationRequest {
-  const cardCreateRequest: CardCreationRequest = {
-    valid: true,
-    id: "na",
-    name: "na"
-  };
-  if (req.name) {
-    cardCreateRequest.name = req.name;
-  } else {
-    cardCreateRequest.valid = false;
-    cardCreateRequest.name = "na";
-  }
-  if (req.id) {
-    cardCreateRequest.id = req.id;
-  } else {
-    cardCreateRequest.valid = false;
-    cardCreateRequest.id = "na";
-  }
-  return cardCreateRequest;
+export function parseCardCreationRequest(req: any): CreditCardCreationRequest {
+  console.log(req);
+  const creditCardCreationRequest: CreditCardCreationRequest = CreditCardCreationRequest.fromObject(
+    req
+  );
+  return creditCardCreationRequest;
 }
 
-export function parseCardRemovalRequest(req: any): CardRemovalRequest {
-  const cardRemovalRequst: CardRemovalRequest = {
-    valid: true,
-    id: "na"
-  }
-  if (req.id) {
-    cardRemovalRequst.valid = true;
-    cardRemovalRequst.id = req.id;
-  } else {
-    cardRemovalRequst.valid = false;
-    cardRemovalRequst.id = "na";
-  }
-  return cardRemovalRequst;
+export function parseCardRemovalRequest(req: any): CreditCardRemovalRequest {
+  const creditCardRemovalRequest: CreditCardRemovalRequest = CreditCardRemovalRequest.fromObject(
+    req
+  );
+  return creditCardRemovalRequest;
 }
 
-export function parseCardEditRequest(req: any): CardEditRequest {
-  const cardEditRequest: CardCreationRequest = {
-    valid: true,
-    id: "na",
-    name: "na"
-  };
-  if (req.cardUid) {
-    cardEditRequest.id = req.cardUid;
-  } else {
-    cardEditRequest.valid = false;
-  }
-  if (req.cardData) {
-    cardEditRequest.name = req.cardData;
-  } else {
-    cardEditRequest.valid = false;
-  }
-  return cardEditRequest;
+export function parseCardEditRequest(req: any): CreditCardUpdateRequest {
+  const creditCardCreationRequest: CreditCardUpdateRequest = CreditCardUpdateRequest.fromObject(
+    req
+  );
+  return creditCardCreationRequest;
 }

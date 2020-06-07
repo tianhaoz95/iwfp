@@ -1,10 +1,10 @@
-import 'package:iwfpapp/services/config/typedefs/data_store.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:iwfpapp/services/interfaces/request.pbserver.dart';
 
 class DumbDataBackend extends DataBackend {
   @override
-  Future<void> addCreditCardToDatabase(CreditCardAdditionRequest req) async {
+  Future<void> addCreditCardToDatabase(CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
   }
 
@@ -25,13 +25,13 @@ class DumbDataBackend extends DataBackend {
   }
 
   @override
-  Future<void> initCreditCardInDatabase(CreditCardInitRequest req) async {
+  Future<void> initCreditCardInDatabase(CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
   }
 
   @override
   Future<void> initCreditCardWithTemplateInDatabase(
-      CreditCardAdditionRequest req) async {
+      CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
   }
 

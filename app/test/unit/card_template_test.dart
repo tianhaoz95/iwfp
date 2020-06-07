@@ -1,4 +1,4 @@
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_getter.dart';
 import 'package:test/test.dart';
 

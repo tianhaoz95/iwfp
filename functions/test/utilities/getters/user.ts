@@ -3,8 +3,10 @@ import "firebase/functions";
 
 export async function backdoorGetUserSnap(
   db: firebase.firestore.Firestore,
-  userId: string,
-): Promise<firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>> {
+  userId: string
+): Promise<
+  firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>
+> {
   const userSnap = await db
     .collection("channel")
     .doc("production-v1")

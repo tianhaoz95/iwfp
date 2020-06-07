@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/config/typedefs/remove_promo.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/utilities/interface/creators.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +29,7 @@ class RemovePromoPending extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: Center(
                           child: Text(
-                              '${removePromoMeta.promo.name} (${removePromoMeta.promo.id})'),
+                              '${removePromoMeta.promo.displayName} (${removePromoMeta.promo.id})'),
                         )),
                     SizedBox(
                       height: 5.0,
@@ -42,7 +42,7 @@ class RemovePromoPending extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: Center(
                           child: Text(
-                              '${removePromoMeta.card.name} (${removePromoMeta.card.id})'),
+                              '${removePromoMeta.card.displayName} (${removePromoMeta.card.id})'),
                         )),
                     SizedBox(
                       height: 5.0,
@@ -65,8 +65,9 @@ class RemovePromoPending extends StatelessWidget {
                 color: Colors.redAccent,
                 onPressed: () async {
                   Provider.of<DataBackend>(context, listen: false)
-                      .removePromotion(PromotionRemovalRequest(
-                          removePromoMeta.card.id, removePromoMeta.promo.id));
+                      .removePromotion(createPromotionRemovalRequest(
+                          targetCardId: removePromoMeta.card.id,
+                          targetPromotionId: removePromoMeta.promo.id));
                 },
                 child: Text(
                   'Remove Promotion',

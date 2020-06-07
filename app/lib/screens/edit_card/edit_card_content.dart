@@ -3,9 +3,9 @@ import 'package:iwfpapp/screens/edit_card/card_edited.dart';
 import 'package:iwfpapp/screens/edit_card/edit_card_error.dart';
 import 'package:iwfpapp/screens/edit_card/edit_card_pending.dart';
 import 'package:iwfpapp/screens/edit_card/editing_card.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/widgets/generic/unknown_error.dart';
 import 'package:provider/provider.dart';
 

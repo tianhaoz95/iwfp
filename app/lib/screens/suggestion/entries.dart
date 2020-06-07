@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/suggestion/entries_error.dart';
 import 'package:iwfpapp/screens/suggestion/entries_outdated.dart';
 import 'package:iwfpapp/screens/suggestion/fetching_entries.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/data_store.dart';
-import 'package:iwfpapp/services/config/typedefs/shop_category.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:iwfpapp/services/interfaces/shopping_category.pb.dart';
 import 'package:iwfpapp/widgets/credit_cards/basic.dart';
 import 'package:iwfpapp/widgets/generic/unknown_error.dart';
 import 'package:provider/provider.dart';
 
 class SuggestionEntries extends StatelessWidget {
-  final ShopCategory category;
+  final ShoppingCategory category;
   const SuggestionEntries(this.category);
   @override
   Widget build(BuildContext context) {

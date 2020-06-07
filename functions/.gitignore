@@ -16,3 +16,9 @@ node_modules/
 /lib
 /firestore-debug.log
 /firebase-debug.log
+
+# Logging artifact
+/*.log
+
+# Credentials
+/iwfpapp-firebase-adminsdk.json

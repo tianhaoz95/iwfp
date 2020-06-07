@@ -3,6 +3,7 @@
     "module": "commonjs",
     "noImplicitReturns": true,
     "noImplicitAny": false,
+    "allowJs": true,
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
@@ -12,5 +13,10 @@
     "esModuleInterop": true
   },
   "compileOnSave": true,
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.test.ts",
+    "src/interfaces/interfaces.js"
+  ],
   "exclude": ["node_modules"]
 }

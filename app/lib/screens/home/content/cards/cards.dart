@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/home/content/cards/empty.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/widgets/credit_cards/basic.dart';
 
 /// card management screen with card list

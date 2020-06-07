@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/add_promo/add_promo_content.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
 import 'package:iwfpapp/services/config/typedefs/submission_screen_status.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/widgets/layouts/preferred_width.dart';
 
 /// This screen prompts users to enter information

@@ -1,5 +1,5 @@
-import 'package:iwfpapp/services/config/typedefs/cashback_promo.dart';
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:iwfpapp/services/interfaces/promotion.pb.dart';
 
 class RemovePromoMeta {
   /// The target card that contains the promotion to
@@ -10,6 +10,6 @@ class RemovePromoMeta {
 
   /// The target promotion to be removed. The only
   /// required field is the ID.
-  final CashbackPromo promo;
+  final Promotion promo;
   const RemovePromoMeta(this.card, this.promo);
 }

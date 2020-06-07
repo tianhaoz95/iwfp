@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:iwfpapp/services/config/typedefs/credit_card.dart';
+import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/utilities/card_templates/amazon_prime_rewards_visa_signature_card.dart';
 import 'package:iwfpapp/services/utilities/card_templates/amazon_prime_store_card.dart';
 import 'package:iwfpapp/services/utilities/card_templates/chase_freedom.dart';
