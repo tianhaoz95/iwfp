@@ -6,4 +6,6 @@ CreditCard amazonPrimeStoreCard = createCreditCard(
     promos: [
       createPromotion('Amazon.com', 'amazon', 'brand', 'nan', 'nan', 'const', 5,
           createShoppingCategory('Amazon.com', 'amazon')),
-    ]);
+    ],
+    officialUrl:
+        'https://www.amazon.com/gp/cobrandcard/marketing.html?pr=conplcc');

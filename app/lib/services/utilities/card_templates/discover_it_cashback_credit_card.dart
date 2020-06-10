@@ -52,4 +52,6 @@ CreditCard discoverItCashbackCreditCard = createCreditCard(
           'const',
           1,
           createShoppingCategory('All Purchases', 'all_purchase')),
-    ]);
+    ],
+    officialUrl:
+        'https://www.discover.com/credit-cards/cashback-bonus/cashback-calendar.html');

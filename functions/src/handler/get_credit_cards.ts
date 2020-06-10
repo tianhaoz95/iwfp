@@ -16,6 +16,8 @@ async function getCreditCardsHandler(data, context: FunctionContext, provider) {
         cardSnap.docs
     );
     const response = {};
+    // TODO(tianhaoz95): refactor this to be a proto response instead of
+    // parsing the JSON.
     for (const card of cardSnap.docs) {
       console.log("retrieve card: ", card.id, "=>", card.data());
       response[card.id] = card.data();

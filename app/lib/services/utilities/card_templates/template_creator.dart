@@ -31,10 +31,13 @@ Promotion createPromotion(
 }
 
 CreditCard createCreditCard(String displayName, String id,
-    {List<Promotion> promos}) {
+    {List<Promotion> promos, String officialUrl}) {
   CreditCard card = CreditCard.create();
   card.displayName = displayName;
   card.id = id;
+  if (officialUrl != null) {
+    card.officialUrl = officialUrl;
+  }
   if (promos != null) {
     card.promotions.addAll(promos);
   }

@@ -18,6 +18,7 @@ class CreditCard extends $pb.GeneratedMessage {
         ..aOS(2, 'displayName')
         ..pc<$1.Promotion>(3, 'promotions', $pb.PbFieldType.PM,
             subBuilder: $1.Promotion.create)
+        ..aOS(4, 'officialUrl')
         ..hasRequiredFields = false;
 
   CreditCard._() : super();
@@ -67,4 +68,16 @@ class CreditCard extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(3)
   $core.List<$1.Promotion> get promotions => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.String get officialUrl => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set officialUrl($core.String v) {
+    $_setString(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasOfficialUrl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearOfficialUrl() => clearField(4);
 }

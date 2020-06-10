@@ -12,6 +12,15 @@ List<CreditCard> dict2cards(Map<String, dynamic> dict) {
       Map<String, dynamic> cardData = Map<String, dynamic>.from(cardDataRaw);
       String cardName = cardData['card_name'] as String;
       CreditCard card = createCreditCard(cardName, cardId);
+
+      /// Refactor all the to be casting from JSON to a proto instead of
+      /// dumb parsing.
+      try {
+        String officialUrl = cardData['official_url'] as String;
+        card.officialUrl = officialUrl;
+      } catch (err) {
+        print('Error parsing official url');
+      }
       if (cardData['promos'] != null) {
         Map<String, dynamic> promos =
             Map<String, dynamic>.from(cardData['promos']);

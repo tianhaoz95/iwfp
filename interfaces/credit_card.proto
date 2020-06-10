@@ -6,4 +6,7 @@ message CreditCard {
   string id = 1;
   string display_name = 2;
   repeated Promotion promotions = 3;
+  // A link to the official url for the
+  // credit card as a reference.
+  string official_url = 4;
 }

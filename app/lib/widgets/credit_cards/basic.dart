@@ -6,6 +6,7 @@ import 'package:iwfpapp/services/interfaces/shopping_category.pb.dart';
 import 'package:iwfpapp/services/utilities/rankers/card_reward_ranker.dart';
 import 'package:iwfpapp/services/utilities/rankers/time_range_promo_ranker.dart';
 import 'package:iwfpapp/widgets/promos/chip.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BasicCreditCard extends StatelessWidget {
   final CreditCard cardMetaData;
@@ -61,6 +62,21 @@ class BasicCreditCard extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.link),
+            color: Colors.blue,
+            key: Key(this.cardMetaData.id + '_link_btn'),
+            onPressed: this.cardMetaData.hasOfficialUrl()
+                ? () async {
+                    String url = this.cardMetaData.officialUrl;
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  }
+                : null,
+          ),
           IconButton(
               icon: Icon(Icons.edit),
               color: Colors.green,

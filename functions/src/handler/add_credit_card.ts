@@ -20,8 +20,12 @@ async function addCreditCardHandler(
         data.cardData && data.cardData.displayName
           ? data.cardData.displayName
           : "na";
+      const officialUrl: string = data.cardData?.officialUrl
+        ? data.cardData?.officialUrl
+        : "na";
       const status = await cardRef.set({
         card_name: cardName,
+        official_url: officialUrl,
       });
       return status;
     }

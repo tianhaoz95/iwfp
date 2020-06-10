@@ -19,8 +19,12 @@ async function editCreditCardHandler(
         data.updatedCardData && data.updatedCardData.displayName
           ? data.updatedCardData.displayName
           : "na";
+      const officialUrl: string = data.updatedCardData?.officialUrl
+        ? data.updatedCardData?.officialUrl
+        : "na";
       await cardRef.set({
         card_name: creditCardName,
+        official_url: officialUrl,
       });
     }
   } else {
