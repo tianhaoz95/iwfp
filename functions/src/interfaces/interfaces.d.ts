@@ -9,6 +9,9 @@ export interface ICreditCard {
 
   /** CreditCard promotions */
   promotions?: IPromotion[] | null;
+
+  /** CreditCard officialUrl */
+  officialUrl?: string | null;
 }
 
 /** Represents a CreditCard. */
@@ -27,6 +30,9 @@ export class CreditCard implements ICreditCard {
 
   /** CreditCard promotions. */
   public promotions: IPromotion[];
+
+  /** CreditCard officialUrl. */
+  public officialUrl: string;
 
   /**
    * Creates a new CreditCard instance using the specified properties.

@@ -8,4 +8,5 @@ CreditCard petal = createCreditCard(
     createPromotion('All Purchases', 'all_purchase', 'universal', 'nan', 'nan',
         'const', 1, createShoppingCategory('All Purchases', 'all_purchase')),
   ],
+  officialUrl: 'https://www.petalcard.com/the-card',
 );

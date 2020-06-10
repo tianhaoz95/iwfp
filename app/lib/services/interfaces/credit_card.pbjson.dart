@@ -18,5 +18,6 @@ const CreditCard$json = const {
       '6': '.Promotion',
       '10': 'promotions'
     },
+    const {'1': 'official_url', '3': 4, '4': 1, '5': 9, '10': 'officialUrl'},
   ],
 };

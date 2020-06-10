@@ -24,8 +24,12 @@ async function addCreditCardWithTemplateHandler(
         const cardName: string = data.cardData.displayName
           ? data.cardData.displayName
           : "na";
+        const officialUrl: string = data.cardData?.officialUrl
+          ? data.cardData?.officialUrl
+          : "na";
         await cardRef.set({
           card_name: cardName,
+          official_url: officialUrl,
         });
         if (data.cardData.promotions) {
           for (const promo of data.cardData.promotions) {

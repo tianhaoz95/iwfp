@@ -25,4 +25,6 @@ CreditCard amazonPrimeRewardsVisaSignatureCard = createCreditCard(
     createPromotion('All Purchases', 'all_purchase', 'universal', 'nan', 'nan',
         'const', 1, createShoppingCategory('All Purchases', 'all_purchase')),
   ],
+  officialUrl:
+      'https://www.amazon.com/Amazon-Prime-Rewards-Visa-Signature-Card/dp/BT00LN946S',
 );

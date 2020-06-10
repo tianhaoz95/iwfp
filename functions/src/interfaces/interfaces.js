@@ -18,6 +18,7 @@ $root.CreditCard = (function() {
      * @property {string|null} [id] CreditCard id
      * @property {string|null} [displayName] CreditCard displayName
      * @property {Array.<IPromotion>|null} [promotions] CreditCard promotions
+     * @property {string|null} [officialUrl] CreditCard officialUrl
      */
 
     /**
@@ -61,6 +62,14 @@ $root.CreditCard = (function() {
     CreditCard.prototype.promotions = $util.emptyArray;
 
     /**
+     * CreditCard officialUrl.
+     * @member {string} officialUrl
+     * @memberof CreditCard
+     * @instance
+     */
+    CreditCard.prototype.officialUrl = "";
+
+    /**
      * Creates a new CreditCard instance using the specified properties.
      * @function create
      * @memberof CreditCard
@@ -91,6 +100,8 @@ $root.CreditCard = (function() {
         if (message.promotions != null && message.promotions.length)
             for (var i = 0; i < message.promotions.length; ++i)
                 $root.Promotion.encode(message.promotions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+        if (message.officialUrl != null && Object.hasOwnProperty.call(message, "officialUrl"))
+            writer.uint32(/* id 4, wireType 2 =*/34).string(message.officialUrl);
         return writer;
     };
 
@@ -135,6 +146,9 @@ $root.CreditCard = (function() {
                 if (!(message.promotions && message.promotions.length))
                     message.promotions = [];
                 message.promotions.push($root.Promotion.decode(reader, reader.uint32()));
+                break;
+            case 4:
+                message.officialUrl = reader.string();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -186,6 +200,9 @@ $root.CreditCard = (function() {
                     return "promotions." + error;
             }
         }
+        if (message.officialUrl != null && message.hasOwnProperty("officialUrl"))
+            if (!$util.isString(message.officialUrl))
+                return "officialUrl: string expected";
         return null;
     };
 
@@ -215,6 +232,8 @@ $root.CreditCard = (function() {
                 message.promotions[i] = $root.Promotion.fromObject(object.promotions[i]);
             }
         }
+        if (object.officialUrl != null)
+            message.officialUrl = String(object.officialUrl);
         return message;
     };
 
@@ -236,6 +255,7 @@ $root.CreditCard = (function() {
         if (options.defaults) {
             object.id = "";
             object.displayName = "";
+            object.officialUrl = "";
         }
         if (message.id != null && message.hasOwnProperty("id"))
             object.id = message.id;
@@ -246,6 +266,8 @@ $root.CreditCard = (function() {
             for (var j = 0; j < message.promotions.length; ++j)
                 object.promotions[j] = $root.Promotion.toObject(message.promotions[j], options);
         }
+        if (message.officialUrl != null && message.hasOwnProperty("officialUrl"))
+            object.officialUrl = message.officialUrl;
         return object;
     };
 
