@@ -11,8 +11,8 @@ async function addCreditCardWithTemplateHandler(
 ) {
   if (context.authenticated) {
     if (data.cardData) {
-      const userUid: string = context.uid;
-      const userRef = provider.getUserRef(userUid);
+      const userId: string = context.uid;
+      const userRef = provider.getUserRef(userId);
       const cardRef = userRef.collection("cards").doc(data.cardData.id);
       const cardSnap = await cardRef.get();
       if (cardSnap.exists) {
@@ -36,7 +36,7 @@ async function addCreditCardWithTemplateHandler(
             console.log("start adding " + promo.id);
             if (data.cardData.id) {
               await setPromotion(
-                userUid,
+                userId,
                 data.cardData.id,
                 Promotion.create(promo),
                 provider
