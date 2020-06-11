@@ -2,6 +2,7 @@ import { noAuthMsg } from "../config/consts";
 import { FunctionContext } from "../config/typedefs";
 import { PromotionAdditionRequest, Promotion } from "../interfaces/interfaces";
 import { setPromotion } from "./setters/set_promotion";
+import { PromotionDataMissingError } from "../config/errors";
 
 async function addPromoHandler(
   data: PromotionAdditionRequest,
@@ -17,7 +18,7 @@ async function addPromoHandler(
         provider
       );
     } else {
-      throw new Error("no_data");
+      throw PromotionDataMissingError;
     }
   } else {
     throw noAuthMsg;

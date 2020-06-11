@@ -1,8 +1,13 @@
 import { noAuthMsg, requestDataIncomplete } from "../config/consts";
 import { CreditCardIdConflictError } from "../config/errors";
 import { FunctionContext } from "../config/typedefs";
-import { CreditCardCreationRequest, Promotion } from "../interfaces/interfaces";
+import {
+  CreditCardCreationRequest,
+  Promotion,
+  CreditCard,
+} from "../interfaces/interfaces";
 import { setPromotion } from "./setters/set_promotion";
+import { setCreditCard } from "./setters/set_credit_card";
 
 async function addCreditCardWithTemplateHandler(
   data: CreditCardCreationRequest,
@@ -18,16 +23,7 @@ async function addCreditCardWithTemplateHandler(
       if (cardSnap.exists) {
         throw CreditCardIdConflictError;
       } else {
-        const cardName: string = data.cardData.displayName
-          ? data.cardData.displayName
-          : "na";
-        const officialUrl: string = data.cardData?.officialUrl
-          ? data.cardData?.officialUrl
-          : "na";
-        await cardRef.set({
-          card_name: cardName,
-          official_url: officialUrl,
-        });
+        await setCreditCard(userId, CreditCard.create(data.cardData), provider);
         if (data.cardData.promotions) {
           for (const promo of data.cardData.promotions) {
             // The loggings are here to check if there is a

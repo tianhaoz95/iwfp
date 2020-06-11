@@ -45,3 +45,8 @@ export const PromotionIdMissingError = new functions.https.HttpsError(
   "not-found",
   "The ID of the promotion is missing"
 );
+
+export const PromotionDataMissingError = new functions.https.HttpsError(
+  "not-found",
+  "The promotion data is missing. Please check if the request object is properly constructed"
+);

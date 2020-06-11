@@ -177,7 +177,8 @@ describe("end 2 end tests", () => {
     );
     expect(cardAfterEditing).toBeDefined;
     expect(cardAfterEditing).toMatchObject({
-      card_name: "edited_test_card_name",
+      id: "test_card_id",
+      displayName: "edited_test_card_name",
     });
   });
 
