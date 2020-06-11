@@ -4,6 +4,7 @@ import {
   creditCardNotExistError,
   promoAlreadyExistError,
 } from "../../config/consts";
+import { PromotionIdMissingError } from "../../config/errors";
 
 export async function setPromotion(
   userId: string,
@@ -15,22 +16,16 @@ export async function setPromotion(
   const cardRef = userRef.collection("cards").doc(targetCardId);
   const cardSnap = await cardRef.get();
   if (cardSnap.exists) {
-    const promoId: string = promotion.id ? promotion.id : "na";
-    const promoRef = cardRef.collection("promos").doc(promoId);
-    const promoSnap = await promoRef.get();
-    if (promoSnap.exists) {
-      // TODO(tianhaoz): consoildate the logging into a separate
-      // function for better reusability.
-      console.log(
-        "Cannot add " +
-          promoId +
-          " to " +
-          targetCardId +
-          ", because it already exists."
-      );
-      throw promoAlreadyExistError;
+    if (promotion.id) {
+      const promoRef = cardRef.collection("promos").doc(promotion.id);
+      const promoSnap = await promoRef.get();
+      if (promoSnap.exists) {
+        throw promoAlreadyExistError;
+      } else {
+        await promoRef.set(promotion.toJSON());
+      }
     } else {
-      await promoRef.set(promotion.toJSON());
+      throw PromotionIdMissingError;
     }
   } else {
     throw creditCardNotExistError;
