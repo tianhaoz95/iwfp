@@ -1,11 +1,8 @@
 import { noAuthMsg, requestDataIncomplete } from "../config/consts";
 import { CreditCardIdConflictError } from "../config/errors";
 import { FunctionContext } from "../config/typedefs";
-import addPromoHandler from "./add_promo";
-import {
-  CreditCardCreationRequest,
-  PromotionAdditionRequest,
-} from "../interfaces/interfaces";
+import { CreditCardCreationRequest, Promotion } from "../interfaces/interfaces";
+import { setPromotion } from "./setters/set_promotion";
 
 async function addCreditCardWithTemplateHandler(
   data: CreditCardCreationRequest,
@@ -37,14 +34,14 @@ async function addCreditCardWithTemplateHandler(
             // race condition. It's not likely, but good to
             // know.
             console.log("start adding " + promo.id);
-            await addPromoHandler(
-              PromotionAdditionRequest.create({
-                targetCardId: data.cardData.id,
-                promotionData: promo,
-              }),
-              context,
-              provider
-            );
+            if (data.cardData.id) {
+              await setPromotion(
+                userUid,
+                data.cardData.id,
+                Promotion.create(promo),
+                provider
+              );
+            }
             console.log("finished adding " + promo.id);
           }
         }
