@@ -30,37 +30,7 @@ export async function setPromotion(
       );
       throw promoAlreadyExistError;
     } else {
-      const promoName: string = promotion.displayName
-        ? promotion.displayName
-        : "na";
-      const promoType: string = promotion.type ? promotion.type : "na";
-      const promoStart: string = promotion.startDate
-        ? promotion.startDate
-        : "na";
-      const promoEnd: string = promotion.endDate ? promotion.endDate : "na";
-      const promoRepeat: string = promotion.repeatPattern
-        ? promotion.repeatPattern
-        : "na";
-      const promoRate: number = promotion.rate ? promotion.rate : 0;
-      const promoCategoryId: string =
-        promotion.category && promotion.category.id
-          ? promotion.category.id
-          : "na";
-      const promoCategoryName: string =
-        promotion.category && promotion.category.displayName
-          ? promotion.category.displayName
-          : "na";
-      await promoRef.set({
-        promo_name: promoName,
-        promo_id: promoId,
-        promo_type: promoType,
-        promo_start: promoStart,
-        promo_end: promoEnd,
-        promo_repeat_pattern: promoRepeat,
-        promo_rate: promoRate,
-        promo_category_id: promoCategoryId,
-        promo_category_name: promoCategoryName,
-      });
+      await promoRef.set(promotion.toJSON());
     }
   } else {
     throw creditCardNotExistError;

@@ -61,25 +61,29 @@ export const HttpSimpleAddPromoRequest = {
 };
 
 export const BasicPromoInDatabase = {
-  promo_category_id: "best_buy",
-  promo_category_name: "Best Buy",
-  promo_end: "06/01",
-  promo_id: "test_promo",
-  promo_name: "Test Promo",
-  promo_rate: 5.0,
-  promo_repeat_pattern: "annual",
-  promo_start: "03/01",
-  promo_type: "brand",
+  category: {
+    displayName: "Best Buy",
+    id: "best_buy",
+  },
+  endDate: "06/01",
+  id: "test_promo",
+  displayName: "Test Promo",
+  rate: 5.0,
+  repeatPattern: "annual",
+  startDate: "03/01",
+  type: "brand",
 };
 
 export const BasicPromoAlternativeInDatabase = {
-  promo_category_id: "best_buy",
-  promo_category_name: "Best Buy",
-  promo_end: "06/01",
-  promo_id: "test_promo_alternative",
-  promo_name: "Test Promo",
-  promo_rate: 5.0,
-  promo_repeat_pattern: "annual",
-  promo_start: "03/01",
-  promo_type: "brand",
+  category: {
+    displayName: "Best Buy",
+    id: "best_buy",
+  },
+  endDate: "06/01",
+  id: "test_promo_alternative",
+  displayName: "Test Promo",
+  rate: 5.0,
+  repeatPattern: "annual",
+  startDate: "03/01",
+  type: "brand",
 };
