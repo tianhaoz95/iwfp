@@ -2166,4 +2166,212 @@ $root.PromotionUpdateRequest = (function() {
     return PromotionUpdateRequest;
 })();
 
+$root.GetCreditCardResponse = (function() {
+
+    /**
+     * Properties of a GetCreditCardResponse.
+     * @exports IGetCreditCardResponse
+     * @interface IGetCreditCardResponse
+     * @property {Array.<ICreditCard>|null} [cards] GetCreditCardResponse cards
+     */
+
+    /**
+     * Constructs a new GetCreditCardResponse.
+     * @exports GetCreditCardResponse
+     * @classdesc Represents a GetCreditCardResponse.
+     * @implements IGetCreditCardResponse
+     * @constructor
+     * @param {IGetCreditCardResponse=} [properties] Properties to set
+     */
+    function GetCreditCardResponse(properties) {
+        this.cards = [];
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * GetCreditCardResponse cards.
+     * @member {Array.<ICreditCard>} cards
+     * @memberof GetCreditCardResponse
+     * @instance
+     */
+    GetCreditCardResponse.prototype.cards = $util.emptyArray;
+
+    /**
+     * Creates a new GetCreditCardResponse instance using the specified properties.
+     * @function create
+     * @memberof GetCreditCardResponse
+     * @static
+     * @param {IGetCreditCardResponse=} [properties] Properties to set
+     * @returns {GetCreditCardResponse} GetCreditCardResponse instance
+     */
+    GetCreditCardResponse.create = function create(properties) {
+        return new GetCreditCardResponse(properties);
+    };
+
+    /**
+     * Encodes the specified GetCreditCardResponse message. Does not implicitly {@link GetCreditCardResponse.verify|verify} messages.
+     * @function encode
+     * @memberof GetCreditCardResponse
+     * @static
+     * @param {IGetCreditCardResponse} message GetCreditCardResponse message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    GetCreditCardResponse.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.cards != null && message.cards.length)
+            for (var i = 0; i < message.cards.length; ++i)
+                $root.CreditCard.encode(message.cards[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+        return writer;
+    };
+
+    /**
+     * Encodes the specified GetCreditCardResponse message, length delimited. Does not implicitly {@link GetCreditCardResponse.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof GetCreditCardResponse
+     * @static
+     * @param {IGetCreditCardResponse} message GetCreditCardResponse message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    GetCreditCardResponse.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a GetCreditCardResponse message from the specified reader or buffer.
+     * @function decode
+     * @memberof GetCreditCardResponse
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {GetCreditCardResponse} GetCreditCardResponse
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    GetCreditCardResponse.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GetCreditCardResponse();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                if (!(message.cards && message.cards.length))
+                    message.cards = [];
+                message.cards.push($root.CreditCard.decode(reader, reader.uint32()));
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a GetCreditCardResponse message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof GetCreditCardResponse
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {GetCreditCardResponse} GetCreditCardResponse
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    GetCreditCardResponse.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a GetCreditCardResponse message.
+     * @function verify
+     * @memberof GetCreditCardResponse
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    GetCreditCardResponse.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.cards != null && message.hasOwnProperty("cards")) {
+            if (!Array.isArray(message.cards))
+                return "cards: array expected";
+            for (var i = 0; i < message.cards.length; ++i) {
+                var error = $root.CreditCard.verify(message.cards[i]);
+                if (error)
+                    return "cards." + error;
+            }
+        }
+        return null;
+    };
+
+    /**
+     * Creates a GetCreditCardResponse message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof GetCreditCardResponse
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {GetCreditCardResponse} GetCreditCardResponse
+     */
+    GetCreditCardResponse.fromObject = function fromObject(object) {
+        if (object instanceof $root.GetCreditCardResponse)
+            return object;
+        var message = new $root.GetCreditCardResponse();
+        if (object.cards) {
+            if (!Array.isArray(object.cards))
+                throw TypeError(".GetCreditCardResponse.cards: array expected");
+            message.cards = [];
+            for (var i = 0; i < object.cards.length; ++i) {
+                if (typeof object.cards[i] !== "object")
+                    throw TypeError(".GetCreditCardResponse.cards: object expected");
+                message.cards[i] = $root.CreditCard.fromObject(object.cards[i]);
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a GetCreditCardResponse message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof GetCreditCardResponse
+     * @static
+     * @param {GetCreditCardResponse} message GetCreditCardResponse
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    GetCreditCardResponse.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.arrays || options.defaults)
+            object.cards = [];
+        if (message.cards && message.cards.length) {
+            object.cards = [];
+            for (var j = 0; j < message.cards.length; ++j)
+                object.cards[j] = $root.CreditCard.toObject(message.cards[j], options);
+        }
+        return object;
+    };
+
+    /**
+     * Converts this GetCreditCardResponse to JSON.
+     * @function toJSON
+     * @memberof GetCreditCardResponse
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    GetCreditCardResponse.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return GetCreditCardResponse;
+})();
+
 module.exports = $root;

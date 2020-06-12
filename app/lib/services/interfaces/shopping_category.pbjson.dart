@@ -12,3 +12,4 @@ const ShoppingCategory$json = const {
     const {'1': 'display_name', '3': 2, '4': 1, '5': 9, '10': 'displayName'},
   ],
 };
+

@@ -12,47 +12,37 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'shopping_category.pb.dart' as $0;
 
 class Promotion extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('Promotion', createEmptyInstance: create)
-        ..aOS(1, 'id')
-        ..aOS(2, 'displayName')
-        ..aOS(3, 'startDate')
-        ..aOS(4, 'endDate')
-        ..aOS(5, 'type')
-        ..aOS(6, 'repeatPattern')
-        ..a<$core.double>(7, 'rate', $pb.PbFieldType.OF)
-        ..aOM<$0.ShoppingCategory>(8, 'category',
-            subBuilder: $0.ShoppingCategory.create)
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Promotion', createEmptyInstance: create)
+    ..aOS(1, 'id')
+    ..aOS(2, 'displayName')
+    ..aOS(3, 'startDate')
+    ..aOS(4, 'endDate')
+    ..aOS(5, 'type')
+    ..aOS(6, 'repeatPattern')
+    ..a<$core.double>(7, 'rate', $pb.PbFieldType.OF)
+    ..aOM<$0.ShoppingCategory>(8, 'category', subBuilder: $0.ShoppingCategory.create)
+    ..hasRequiredFields = false
+  ;
 
   Promotion._() : super();
   factory Promotion() => create();
-  factory Promotion.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory Promotion.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory Promotion.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Promotion.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   Promotion clone() => Promotion()..mergeFromMessage(this);
-  Promotion copyWith(void Function(Promotion) updates) =>
-      super.copyWith((message) => updates(message as Promotion));
+  Promotion copyWith(void Function(Promotion) updates) => super.copyWith((message) => updates(message as Promotion));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Promotion create() => Promotion._();
   Promotion createEmptyInstance() => create();
   static $pb.PbList<Promotion> createRepeated() => $pb.PbList<Promotion>();
   @$core.pragma('dart2js:noInline')
-  static Promotion getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Promotion>(create);
+  static Promotion getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Promotion>(create);
   static Promotion _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set id($core.String v) {
-    $_setString(0, v);
-  }
-
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
@@ -61,10 +51,7 @@ class Promotion extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get displayName => $_getSZ(1);
   @$pb.TagNumber(2)
-  set displayName($core.String v) {
-    $_setString(1, v);
-  }
-
+  set displayName($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasDisplayName() => $_has(1);
   @$pb.TagNumber(2)
@@ -73,10 +60,7 @@ class Promotion extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get startDate => $_getSZ(2);
   @$pb.TagNumber(3)
-  set startDate($core.String v) {
-    $_setString(2, v);
-  }
-
+  set startDate($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasStartDate() => $_has(2);
   @$pb.TagNumber(3)
@@ -85,10 +69,7 @@ class Promotion extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.String get endDate => $_getSZ(3);
   @$pb.TagNumber(4)
-  set endDate($core.String v) {
-    $_setString(3, v);
-  }
-
+  set endDate($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasEndDate() => $_has(3);
   @$pb.TagNumber(4)
@@ -97,10 +78,7 @@ class Promotion extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.String get type => $_getSZ(4);
   @$pb.TagNumber(5)
-  set type($core.String v) {
-    $_setString(4, v);
-  }
-
+  set type($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasType() => $_has(4);
   @$pb.TagNumber(5)
@@ -109,10 +87,7 @@ class Promotion extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.String get repeatPattern => $_getSZ(5);
   @$pb.TagNumber(6)
-  set repeatPattern($core.String v) {
-    $_setString(5, v);
-  }
-
+  set repeatPattern($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasRepeatPattern() => $_has(5);
   @$pb.TagNumber(6)
@@ -121,10 +96,7 @@ class Promotion extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.double get rate => $_getN(6);
   @$pb.TagNumber(7)
-  set rate($core.double v) {
-    $_setFloat(6, v);
-  }
-
+  set rate($core.double v) { $_setFloat(6, v); }
   @$pb.TagNumber(7)
   $core.bool hasRate() => $_has(6);
   @$pb.TagNumber(7)
@@ -133,10 +105,7 @@ class Promotion extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $0.ShoppingCategory get category => $_getN(7);
   @$pb.TagNumber(8)
-  set category($0.ShoppingCategory v) {
-    setField(8, v);
-  }
-
+  set category($0.ShoppingCategory v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasCategory() => $_has(7);
   @$pb.TagNumber(8)
@@ -144,3 +113,4 @@ class Promotion extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $0.ShoppingCategory ensureCategory() => $_ensure(7);
 }
+

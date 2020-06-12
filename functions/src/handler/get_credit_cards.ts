@@ -1,5 +1,6 @@
 import { noAuthMsg } from "../config/consts";
 import { FunctionContext } from "../config/typedefs";
+import { GetCreditCardResponse, CreditCard, Promotion } from "../interfaces/interfaces";
 
 async function getCreditCardsHandler(data, context: FunctionContext, provider) {
   if (context.authenticated) {
@@ -15,29 +16,26 @@ async function getCreditCardsHandler(data, context: FunctionContext, provider) {
         " are: " +
         cardSnap.docs
     );
-    const response = {};
-    // TODO(tianhaoz95): refactor this to be a proto response instead of
-    // parsing the JSON.
-    for (const card of cardSnap.docs) {
-      console.log("retrieve card: ", card.id, "=>", card.data());
-      response[card.id] = card.data();
+    let response: GetCreditCardResponse = GetCreditCardResponse.create();
+    for (const cardDoc of cardSnap.docs) {
+      const card: CreditCard = CreditCard.fromObject(cardDoc.data());
       const promoRef = cardRef.doc(card.id).collection("promos");
       const promoSnap: FirebaseFirestore.QuerySnapshot = await promoRef.get();
-      const promos = {};
       if (promoSnap.empty) {
         console.log("no promo found");
       } else {
         console.log("promos found, retrieve promos");
-        for (const promo of promoSnap.docs) {
-          console.log("retrieved promo: ", promo.id, "=>", promo.data());
-          promos[promo.id] = promo.data();
+        for (const promoDoc of promoSnap.docs) {
+          const promo: Promotion = Promotion.fromObject(promoDoc.data());
+          card.promotions.push(promo);
         }
-        response[card.id]["promos"] = promos;
-        console.log("card data and all promos retrieved");
       }
+      response.cards.push(card);
     }
-    console.log("return response: ", response);
-    return response;
+    const serializedBytes: Uint8Array = GetCreditCardResponse.encode(response).finish();
+    return {
+      serialized: Array.from(serializedBytes),
+    };
   } else {
     throw noAuthMsg;
   }
