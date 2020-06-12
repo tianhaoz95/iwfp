@@ -1,7 +1,10 @@
-import { noAuthMsg, creditCardNotExistError } from "../config/consts";
 import { FunctionContext } from "../config/typedefs";
 import { CreditCardUpdateRequest, CreditCard } from "../interfaces/interfaces";
 import { setCreditCard } from "./setters/set_credit_card";
+import {
+  UnauthenticatedUserError,
+  CreditCardNotExistError,
+} from "../config/errors";
 
 async function editCreditCardHandler(
   data: CreditCardUpdateRequest,
@@ -14,7 +17,7 @@ async function editCreditCardHandler(
     const cardRef = userRef.collection("cards").doc(data.updatedCardData?.id);
     const cardSnap = await cardRef.get();
     if (!cardSnap.exists) {
-      throw creditCardNotExistError;
+      throw CreditCardNotExistError;
     } else {
       if (data.updatedCardData) {
         await setCreditCard(
@@ -25,7 +28,7 @@ async function editCreditCardHandler(
       }
     }
   } else {
-    throw noAuthMsg;
+    throw UnauthenticatedUserError;
   }
 }
 

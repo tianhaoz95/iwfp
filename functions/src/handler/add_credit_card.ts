@@ -1,5 +1,8 @@
-import { noAuthMsg, requestDataIncomplete } from "../config/consts";
-import { CreditCardIdConflictError } from "../config/errors";
+import {
+  CreditCardIdConflictError,
+  CreditCardDataMissing,
+  UnauthenticatedUserError,
+} from "../config/errors";
 import { FunctionContext } from "../config/typedefs";
 import {
   CreditCardCreationRequest,
@@ -26,10 +29,6 @@ async function addCreditCardHandler(
         await setCreditCard(userId, CreditCard.create(data.cardData), provider);
         if (data.cardData.promotions) {
           for (const promo of data.cardData.promotions) {
-            // The loggings are here to check if there is a
-            // race condition. It's not likely, but good to
-            // know.
-            console.log("start adding " + promo.id);
             if (data.cardData.id) {
               await setPromotion(
                 userId,
@@ -38,15 +37,14 @@ async function addCreditCardHandler(
                 provider
               );
             }
-            console.log("finished adding " + promo.id);
           }
         }
       }
     } else {
-      throw requestDataIncomplete;
+      throw CreditCardDataMissing;
     }
   } else {
-    throw noAuthMsg;
+    throw UnauthenticatedUserError;
   }
 }
 
