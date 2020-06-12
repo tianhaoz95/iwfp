@@ -8,7 +8,13 @@
 const GetCreditCardResponse$json = const {
   '1': 'GetCreditCardResponse',
   '2': const [
-    const {'1': 'cards', '3': 1, '4': 3, '5': 11, '6': '.CreditCard', '10': 'cards'},
+    const {
+      '1': 'cards',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.CreditCard',
+      '10': 'cards'
+    },
   ],
 };
-

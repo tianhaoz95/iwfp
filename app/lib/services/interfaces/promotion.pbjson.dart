@@ -13,9 +13,21 @@ const Promotion$json = const {
     const {'1': 'start_date', '3': 3, '4': 1, '5': 9, '10': 'startDate'},
     const {'1': 'end_date', '3': 4, '4': 1, '5': 9, '10': 'endDate'},
     const {'1': 'type', '3': 5, '4': 1, '5': 9, '10': 'type'},
-    const {'1': 'repeat_pattern', '3': 6, '4': 1, '5': 9, '10': 'repeatPattern'},
+    const {
+      '1': 'repeat_pattern',
+      '3': 6,
+      '4': 1,
+      '5': 9,
+      '10': 'repeatPattern'
+    },
     const {'1': 'rate', '3': 7, '4': 1, '5': 2, '10': 'rate'},
-    const {'1': 'category', '3': 8, '4': 1, '5': 11, '6': '.ShoppingCategory', '10': 'category'},
+    const {
+      '1': 'category',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.ShoppingCategory',
+      '10': 'category'
+    },
   ],
 };
-

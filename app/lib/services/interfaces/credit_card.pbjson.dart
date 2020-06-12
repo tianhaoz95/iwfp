@@ -10,8 +10,14 @@ const CreditCard$json = const {
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     const {'1': 'display_name', '3': 2, '4': 1, '5': 9, '10': 'displayName'},
-    const {'1': 'promotions', '3': 3, '4': 3, '5': 11, '6': '.Promotion', '10': 'promotions'},
+    const {
+      '1': 'promotions',
+      '3': 3,
+      '4': 3,
+      '5': 11,
+      '6': '.Promotion',
+      '10': 'promotions'
+    },
     const {'1': 'official_url', '3': 4, '4': 1, '5': 9, '10': 'officialUrl'},
   ],
 };
-

@@ -1,6 +1,10 @@
 import { noAuthMsg } from "../config/consts";
 import { FunctionContext } from "../config/typedefs";
-import { GetCreditCardResponse, CreditCard, Promotion } from "../interfaces/interfaces";
+import {
+  GetCreditCardResponse,
+  CreditCard,
+  Promotion,
+} from "../interfaces/interfaces";
 
 async function getCreditCardsHandler(data, context: FunctionContext, provider) {
   if (context.authenticated) {
@@ -16,7 +20,7 @@ async function getCreditCardsHandler(data, context: FunctionContext, provider) {
         " are: " +
         cardSnap.docs
     );
-    let response: GetCreditCardResponse = GetCreditCardResponse.create();
+    const response: GetCreditCardResponse = GetCreditCardResponse.create();
     for (const cardDoc of cardSnap.docs) {
       const card: CreditCard = CreditCard.fromObject(cardDoc.data());
       const promoRef = cardRef.doc(card.id).collection("promos");
@@ -32,7 +36,9 @@ async function getCreditCardsHandler(data, context: FunctionContext, provider) {
       }
       response.cards.push(card);
     }
-    const serializedBytes: Uint8Array = GetCreditCardResponse.encode(response).finish();
+    const serializedBytes: Uint8Array = GetCreditCardResponse.encode(
+      response
+    ).finish();
     return {
       serialized: Array.from(serializedBytes),
     };

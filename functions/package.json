@@ -1,6 +1,6 @@
 {
   "name": "ifwp_server",
-  "version": "1.1.25",
+  "version": "1.1.27",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "fix": "tslint --fix --project tsconfig.json && prettier --write ./src/**/*.ts ./test/**/*.ts ./src/*.ts ./test/*.ts",
