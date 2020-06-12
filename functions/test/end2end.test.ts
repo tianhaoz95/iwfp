@@ -27,6 +27,7 @@ import {
   PromotionRemovalRequest,
   CreditCardRemovalRequest,
   Promotion,
+  GetCreditCardResponse,
 } from "../src/interfaces/interfaces";
 import {
   createTestCreditCard,
@@ -405,9 +406,11 @@ describe("end 2 end tests", () => {
     );
     expect(addCardResponse).toBeNull;
     const cardsAfterAdding = await getCreditCardsCallable();
-    expect(cardsAfterAdding.data[testCard.id]).not.toBeNull;
-    expect(cardsAfterAdding.data[testCard.id]["displayName"]).toBe(
-      testCard.displayName
+    const getCreditCardsResponse: GetCreditCardResponse = GetCreditCardResponse.decode(
+      cardsAfterAdding["data"]["serialized"]
+    );
+    expect(getCreditCardsResponse.cards[0].displayName).toMatch(
+      "test_card_name"
     );
   });
 

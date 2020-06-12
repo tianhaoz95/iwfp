@@ -1054,3 +1054,107 @@ export class PromotionUpdateRequest implements IPromotionUpdateRequest {
    */
   public toJSON(): { [k: string]: any };
 }
+
+/** Properties of a GetCreditCardResponse. */
+export interface IGetCreditCardResponse {
+  /** GetCreditCardResponse cards */
+  cards?: ICreditCard[] | null;
+}
+
+/** Represents a GetCreditCardResponse. */
+export class GetCreditCardResponse implements IGetCreditCardResponse {
+  /**
+   * Constructs a new GetCreditCardResponse.
+   * @param [properties] Properties to set
+   */
+  constructor(properties?: IGetCreditCardResponse);
+
+  /** GetCreditCardResponse cards. */
+  public cards: ICreditCard[];
+
+  /**
+   * Creates a new GetCreditCardResponse instance using the specified properties.
+   * @param [properties] Properties to set
+   * @returns GetCreditCardResponse instance
+   */
+  public static create(
+    properties?: IGetCreditCardResponse
+  ): GetCreditCardResponse;
+
+  /**
+   * Encodes the specified GetCreditCardResponse message. Does not implicitly {@link GetCreditCardResponse.verify|verify} messages.
+   * @param message GetCreditCardResponse message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encode(
+    message: IGetCreditCardResponse,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Encodes the specified GetCreditCardResponse message, length delimited. Does not implicitly {@link GetCreditCardResponse.verify|verify} messages.
+   * @param message GetCreditCardResponse message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encodeDelimited(
+    message: IGetCreditCardResponse,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Decodes a GetCreditCardResponse message from the specified reader or buffer.
+   * @param reader Reader or buffer to decode from
+   * @param [length] Message length if known beforehand
+   * @returns GetCreditCardResponse
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decode(
+    reader: $protobuf.Reader | Uint8Array,
+    length?: number
+  ): GetCreditCardResponse;
+
+  /**
+   * Decodes a GetCreditCardResponse message from the specified reader or buffer, length delimited.
+   * @param reader Reader or buffer to decode from
+   * @returns GetCreditCardResponse
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decodeDelimited(
+    reader: $protobuf.Reader | Uint8Array
+  ): GetCreditCardResponse;
+
+  /**
+   * Verifies a GetCreditCardResponse message.
+   * @param message Plain object to verify
+   * @returns `null` if valid, otherwise the reason why it is not
+   */
+  public static verify(message: { [k: string]: any }): string | null;
+
+  /**
+   * Creates a GetCreditCardResponse message from a plain object. Also converts values to their respective internal types.
+   * @param object Plain object
+   * @returns GetCreditCardResponse
+   */
+  public static fromObject(object: { [k: string]: any }): GetCreditCardResponse;
+
+  /**
+   * Creates a plain object from a GetCreditCardResponse message. Also converts values to other types if specified.
+   * @param message GetCreditCardResponse
+   * @param [options] Conversion options
+   * @returns Plain object
+   */
+  public static toObject(
+    message: GetCreditCardResponse,
+    options?: $protobuf.IConversionOptions
+  ): { [k: string]: any };
+
+  /**
+   * Converts this GetCreditCardResponse to JSON.
+   * @returns JSON object
+   */
+  public toJSON(): { [k: string]: any };
+}
