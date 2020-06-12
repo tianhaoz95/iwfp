@@ -1,5 +1,4 @@
 import * as functions from "firebase-functions";
-import addCreditCardHandler from "./handler/add_credit_card";
 import removeCreditCardHandler from "./handler/remove_credit_card";
 import editCreditCardHandler from "./handler/edit_credit_card";
 import addPromoHandler from "./handler/add_promo";
@@ -9,7 +8,6 @@ import removeUserHandler from "./handler/remove_user";
 import Provider from "./provider";
 import { FunctionContext } from "./config/typedefs";
 import {
-  parseCardCreationRequest,
   parseCardRemovalRequest,
   parseCardEditRequest,
   parseCardCreationWithTemplateRequest,
@@ -18,7 +16,6 @@ import {
   parseAddPromoRequest,
   parseRemovePromoRequest,
 } from "./util/parsers/promo";
-import addCreditCardWithTemplateHandler from "./handler/add_credit_card_with_template";
 import {
   PromotionRemovalRequest,
   CreditCardRemovalRequest,
@@ -26,29 +23,20 @@ import {
   PromotionAdditionRequest,
   CreditCardUpdateRequest,
 } from "./interfaces/interfaces";
+import addCreditCardHandler from "./handler/add_credit_card";
 
 const provider = new Provider();
 
-export const addCreditCardWithTemplate = functions.https.onCall(
-  async (data, fbContext) => {
-    const context: FunctionContext = provider.fbContext2context(fbContext);
-    const cardCreationWithTemplateRequest: CreditCardCreationRequest = parseCardCreationWithTemplateRequest(
-      data
-    );
-    await addCreditCardWithTemplateHandler(
-      cardCreationWithTemplateRequest,
-      context,
-      provider
-    );
-  }
-);
-
 export const addCreditCard = functions.https.onCall(async (data, fbContext) => {
   const context: FunctionContext = provider.fbContext2context(fbContext);
-  const cardCreationRequest: CreditCardCreationRequest = parseCardCreationRequest(
+  const cardCreationWithTemplateRequest: CreditCardCreationRequest = parseCardCreationWithTemplateRequest(
     data
   );
-  await addCreditCardHandler(cardCreationRequest, context, provider);
+  await addCreditCardHandler(
+    cardCreationWithTemplateRequest,
+    context,
+    provider
+  );
 });
 
 export const removeCreditCard = functions.https.onCall(
