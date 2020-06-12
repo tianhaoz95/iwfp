@@ -43,7 +43,6 @@ describe("end 2 end tests", () => {
   let adminDb: admin.firestore.Firestore;
   let cloudFunctions: firebase.functions.Functions;
   let addCreditCardCallable: firebase.functions.HttpsCallable;
-  let addCreditCardWithTemplateCallable: firebase.functions.HttpsCallable;
   let getCreditCardsCallable: firebase.functions.HttpsCallable;
   let editCreditCardsCallable: firebase.functions.HttpsCallable;
   let removeCreditCardCallable: firebase.functions.HttpsCallable;
@@ -60,9 +59,6 @@ describe("end 2 end tests", () => {
     cloudFunctions = firebase.functions();
     cloudFunctions.useFunctionsEmulator(CloudFunctionEmulatorAddress);
     addCreditCardCallable = cloudFunctions.httpsCallable("addCreditCard");
-    addCreditCardWithTemplateCallable = cloudFunctions.httpsCallable(
-      "addCreditCardWithTemplate"
-    );
     getCreditCardsCallable = cloudFunctions.httpsCallable("getCreditCards");
     editCreditCardsCallable = cloudFunctions.httpsCallable("editCreditCard");
     removeCreditCardCallable = cloudFunctions.httpsCallable("removeCreditCard");
@@ -160,7 +156,7 @@ describe("end 2 end tests", () => {
     );
     expect(cardAfterAdding).toBeDefined;
     expect(cardAfterAdding).toMatchObject({
-      card_name: testCard.displayName,
+      displayName: testCard.displayName,
     });
     const updatedTestCard = createTestCreditCardTemplate();
     updatedTestCard.displayName = "edited_test_card_name";
@@ -196,7 +192,7 @@ describe("end 2 end tests", () => {
   test("add card with template should succeed", async () => {
     const testCard: CreditCard = createTestCreditCardTemplate();
     const response = await populateWalletWithCreditCard(
-      addCreditCardWithTemplateCallable,
+      addCreditCardCallable,
       testCard
     );
     expect(response).toBeNull;
@@ -383,7 +379,9 @@ describe("end 2 end tests", () => {
       .get();
     expect(cardSnap.exists).toBeTruthy;
     expect(cardSnap.id).toBe(testCard.id);
-    expect(cardSnap.data()).toMatchObject({ card_name: testCard.displayName });
+    expect(cardSnap.data()).toMatchObject({
+      displayName: testCard.displayName,
+    });
   });
 
   test("get cards from empty wallet should fail", async () => {
@@ -408,7 +406,7 @@ describe("end 2 end tests", () => {
     expect(addCardResponse).toBeNull;
     const cardsAfterAdding = await getCreditCardsCallable();
     expect(cardsAfterAdding.data[testCard.id]).not.toBeNull;
-    expect(cardsAfterAdding.data[testCard.id]["card_name"]).toBe(
+    expect(cardsAfterAdding.data[testCard.id]["displayName"]).toBe(
       testCard.displayName
     );
   });

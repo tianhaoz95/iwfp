@@ -7,7 +7,6 @@ import 'package:iwfpapp/services/utilities/converters/data2cards.dart';
 
 class InAppDataBackend extends DataBackend {
   HttpsCallable addCardCallable;
-  HttpsCallable addCardWithTemplateCallable;
   HttpsCallable addPromoCallable;
   HttpsCallable getCardsCallable;
   HttpsCallable removeCardCallable;
@@ -21,8 +20,6 @@ class InAppDataBackend extends DataBackend {
     addCardCallable = cloudFunc.getHttpsCallable(
       functionName: 'addCreditCard',
     );
-    addCardWithTemplateCallable =
-        cloudFunc.getHttpsCallable(functionName: 'addCreditCardWithTemplate');
     getCardsCallable = cloudFunc.getHttpsCallable(
       functionName: 'getCreditCards',
     );
@@ -60,10 +57,7 @@ class InAppDataBackend extends DataBackend {
   @override
   Future<void> initCreditCardWithTemplateInDatabase(
       CreditCardCreationRequest req) async {
-    print('before sending template');
-    print(req.toProto3Json());
-    await addCardWithTemplateCallable.call(req.toProto3Json());
-    print('after sending template');
+    await addCardCallable.call(req.toProto3Json());
   }
 
   @override
