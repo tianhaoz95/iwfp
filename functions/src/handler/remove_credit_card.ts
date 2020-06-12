@@ -1,6 +1,8 @@
-import { noAuthMsg } from "../config/consts";
 import { FunctionContext } from "../config/typedefs";
-import { CardForDeletionNotExist } from "../config/errors";
+import {
+  CardForDeletionNotExist,
+  UnauthenticatedUserError,
+} from "../config/errors";
 import { CreditCardRemovalRequest } from "../interfaces/interfaces";
 
 async function removeCreditCardHandler(
@@ -19,7 +21,7 @@ async function removeCreditCardHandler(
       throw CardForDeletionNotExist;
     }
   } else {
-    throw noAuthMsg;
+    throw UnauthenticatedUserError;
   }
 }
 

@@ -1,10 +1,10 @@
-import { noAuthMsg } from "../config/consts";
 import { FunctionContext } from "../config/typedefs";
 import {
   GetCreditCardResponse,
   CreditCard,
   Promotion,
 } from "../interfaces/interfaces";
+import { UnauthenticatedUserError } from "../config/errors";
 
 async function getCreditCardsHandler(data, context: FunctionContext, provider) {
   if (context.authenticated) {
@@ -43,7 +43,7 @@ async function getCreditCardsHandler(data, context: FunctionContext, provider) {
       serialized: Array.from(serializedBytes),
     };
   } else {
-    throw noAuthMsg;
+    throw UnauthenticatedUserError;
   }
 }
 

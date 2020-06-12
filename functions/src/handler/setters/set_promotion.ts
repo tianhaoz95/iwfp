@@ -1,10 +1,10 @@
 import { Promotion } from "../../interfaces/interfaces";
 import Provider from "../../provider";
 import {
-  creditCardNotExistError,
-  promoAlreadyExistError,
-} from "../../config/consts";
-import { PromotionIdMissingError } from "../../config/errors";
+  PromotionIdMissingError,
+  CreditCardNotExistError,
+  PromotionAlreadyExistError,
+} from "../../config/errors";
 
 export async function setPromotion(
   userId: string,
@@ -20,7 +20,7 @@ export async function setPromotion(
       const promoRef = cardRef.collection("promos").doc(promotion.id);
       const promoSnap = await promoRef.get();
       if (promoSnap.exists) {
-        throw promoAlreadyExistError;
+        throw PromotionAlreadyExistError;
       } else {
         await promoRef.set(promotion.toJSON());
       }
@@ -28,6 +28,6 @@ export async function setPromotion(
       throw PromotionIdMissingError;
     }
   } else {
-    throw creditCardNotExistError;
+    throw CreditCardNotExistError;
   }
 }

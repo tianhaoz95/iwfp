@@ -1,5 +1,8 @@
-import { noAuthMsg, creditCardNotExistError } from "../config/consts";
-import { PromoNotExistError } from "../config/errors";
+import {
+  PromoNotExistError,
+  UnauthenticatedUserError,
+  CreditCardNotExistError,
+} from "../config/errors";
 import { FunctionContext } from "../config/typedefs";
 import { PromotionRemovalRequest } from "../interfaces/interfaces";
 
@@ -23,10 +26,10 @@ async function removePromoHandler(
         throw PromoNotExistError;
       }
     } else {
-      throw creditCardNotExistError;
+      throw CreditCardNotExistError;
     }
   } else {
-    throw noAuthMsg;
+    throw UnauthenticatedUserError;
   }
 }
 

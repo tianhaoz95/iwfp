@@ -34,11 +34,26 @@ export const CardForDeletionNotExist = new functions.https.HttpsError(
   "The credit card to be deleted does not exist"
 );
 
+export const CreditCardDataMissing = new functions.https.HttpsError(
+  "not-found",
+  "The credit card data is missing"
+);
+
+export const CreditCardNotExistError = new functions.https.HttpsError(
+  "not-found",
+  "The credit card does not exist"
+);
+
 // Promotion related errors
 
 export const PromoNotExistError = new functions.https.HttpsError(
   "not-found",
   "The promotion ID does not exist"
+);
+
+export const PromotionAlreadyExistError = new functions.https.HttpsError(
+  "already-exists",
+  "A promotion with the same ID has already existed"
 );
 
 export const PromotionIdMissingError = new functions.https.HttpsError(
