@@ -10,13 +10,13 @@ List<CreditCard> dict2cards(Map<String, dynamic> dict) {
   if (dict != null) {
     dict.forEach((String cardId, dynamic cardDataRaw) {
       Map<String, dynamic> cardData = Map<String, dynamic>.from(cardDataRaw);
-      String cardName = cardData['card_name'] as String;
+      String cardName = cardData['displayName'] as String;
       CreditCard card = createCreditCard(cardName, cardId);
 
       /// Refactor all the to be casting from JSON to a proto instead of
       /// dumb parsing.
       try {
-        String officialUrl = cardData['official_url'] as String;
+        String officialUrl = cardData['officialUrl'] as String;
         card.officialUrl = officialUrl;
       } catch (err) {
         print('Error parsing official url');
@@ -29,15 +29,15 @@ List<CreditCard> dict2cards(Map<String, dynamic> dict) {
             Map<String, dynamic> promoData =
                 Map<String, dynamic>.from(promoDataRaw);
             Promotion promo = createPromotion(
-              promoData['promo_name'],
-              promoData['promo_id'],
-              promoData['promo_type'],
-              promoData['promo_start'],
-              promoData['promo_end'],
-              promoData['promo_repeat_pattern'],
-              dynamic2rate(promoData['promo_rate']),
-              createShoppingCategory(promoData['promo_category_name'],
-                  promoData['promo_category_id']),
+              promoData['displayName'],
+              promoData['id'],
+              promoData['type'],
+              promoData['startDate'],
+              promoData['endDate'],
+              promoData['repeatPattern'],
+              dynamic2rate(promoData['rate']),
+              createShoppingCategory(promoData['category']['displayName'],
+                  promoData['category']['id']),
             );
             card.promotions.add(promo);
           });

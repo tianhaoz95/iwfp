@@ -1,11 +1,13 @@
 import { noAuthMsg, requestDataIncomplete } from "../config/consts";
 import { CreditCardIdConflictError } from "../config/errors";
 import { FunctionContext } from "../config/typedefs";
-import addPromoHandler from "./add_promo";
 import {
   CreditCardCreationRequest,
-  PromotionAdditionRequest,
+  Promotion,
+  CreditCard,
 } from "../interfaces/interfaces";
+import { setPromotion } from "./setters/set_promotion";
+import { setCreditCard } from "./setters/set_credit_card";
 
 async function addCreditCardWithTemplateHandler(
   data: CreditCardCreationRequest,
@@ -14,37 +16,28 @@ async function addCreditCardWithTemplateHandler(
 ) {
   if (context.authenticated) {
     if (data.cardData) {
-      const userUid: string = context.uid;
-      const userRef = provider.getUserRef(userUid);
+      const userId: string = context.uid;
+      const userRef = provider.getUserRef(userId);
       const cardRef = userRef.collection("cards").doc(data.cardData.id);
       const cardSnap = await cardRef.get();
       if (cardSnap.exists) {
         throw CreditCardIdConflictError;
       } else {
-        const cardName: string = data.cardData.displayName
-          ? data.cardData.displayName
-          : "na";
-        const officialUrl: string = data.cardData?.officialUrl
-          ? data.cardData?.officialUrl
-          : "na";
-        await cardRef.set({
-          card_name: cardName,
-          official_url: officialUrl,
-        });
+        await setCreditCard(userId, CreditCard.create(data.cardData), provider);
         if (data.cardData.promotions) {
           for (const promo of data.cardData.promotions) {
             // The loggings are here to check if there is a
             // race condition. It's not likely, but good to
             // know.
             console.log("start adding " + promo.id);
-            await addPromoHandler(
-              PromotionAdditionRequest.create({
-                targetCardId: data.cardData.id,
-                promotionData: promo,
-              }),
-              context,
-              provider
-            );
+            if (data.cardData.id) {
+              await setPromotion(
+                userId,
+                data.cardData.id,
+                Promotion.create(promo),
+                provider
+              );
+            }
             console.log("finished adding " + promo.id);
           }
         }
