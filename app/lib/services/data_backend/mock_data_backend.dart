@@ -2,7 +2,6 @@ import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
 import 'package:iwfpapp/services/interfaces/promotion.pbserver.dart';
 import 'package:iwfpapp/services/interfaces/request.pb.dart';
-import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 
 class MockDataBackend extends DataBackend {
   Map<String, CreditCard> cardDatabase;
@@ -15,7 +14,7 @@ class MockDataBackend extends DataBackend {
   Future<void> addCreditCardToDatabase(CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (cardDatabase.containsKey(req.cardData.id)) {
-      throw 'card_exist';
+      throw Exception('The credit card has already existed');
     } else {
       cardDatabase[req.cardData.id] = req.cardData;
     }
@@ -27,7 +26,7 @@ class MockDataBackend extends DataBackend {
     if (cardDatabase.containsKey(req.targetCardId)) {
       cardDatabase[req.targetCardId].promotions.add(req.promotionData);
     } else {
-      throw 'card_not_found';
+      throw Exception('The credit card is not found');
     }
   }
 
@@ -51,10 +50,9 @@ class MockDataBackend extends DataBackend {
   Future<void> initCreditCardInDatabase(CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (cardDatabase.containsKey(req.cardData.id)) {
-      throw 'card_exist';
+      throw Exception('The credit card has already existed');
     } else {
-      cardDatabase[req.cardData.id] =
-          createCreditCard(req.cardData.displayName, req.cardData.id);
+      cardDatabase[req.cardData.id] = req.cardData;
     }
   }
 
@@ -63,7 +61,7 @@ class MockDataBackend extends DataBackend {
       CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
     if (cardDatabase.containsKey(req.cardData.id)) {
-      throw 'card_exist';
+      throw Exception('The credit card has already existed');
     } else {
       cardDatabase[req.cardData.id] = req.cardData;
     }
@@ -76,7 +74,7 @@ class MockDataBackend extends DataBackend {
     if (cardDatabase.containsKey(req.cardId)) {
       cardDatabase.remove(req.cardId);
     } else {
-      throw 'card_not_exist';
+      throw Exception('The credit card is not found');
     }
   }
 
@@ -90,9 +88,9 @@ class MockDataBackend extends DataBackend {
           return;
         }
       }
-      throw 'promo_not_found';
+      throw Exception('The promotion is not found');
     } else {
-      throw 'card_not_found';
+      throw Exception('The credit card is not found');
     }
   }
 }

@@ -63,6 +63,20 @@ class BasicCreditCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           IconButton(
+            icon: Icon(
+              Icons.report_problem,
+              color: Colors.amber,
+            ),
+            onPressed: () async {
+              String url = 'https://github.com/tianhaoz95/iwfp/issues/new';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+          ),
+          IconButton(
             icon: Icon(Icons.link),
             color: Colors.blue,
             key: Key(this.cardMetaData.id + '_link_btn'),

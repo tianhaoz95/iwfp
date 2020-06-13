@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/screens/add_card/add_card_pending/add_card_id_input.dart';
+import 'package:iwfpapp/screens/add_card/add_card_pending/add_card_name_input.dart';
+import 'package:iwfpapp/screens/add_card/add_card_pending/add_card_official_url_input.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/services/utilities/card_templates/template_creator.dart';
 import 'package:iwfpapp/services/utilities/interface/creators.dart';
-import 'package:iwfpapp/widgets/inputs/add_card_id_input.dart';
-import 'package:iwfpapp/widgets/inputs/add_card_name_input.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:provider/provider.dart';
 
-class AddCardScreenAddCardFormContent extends StatefulWidget {
+class AddCardScreenAddCardPendingContent extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _AddCardScreenAddCardFormContent();
+    return _AddCardScreenAddCardPendingContent();
   }
 }
 
-class _AddCardScreenAddCardFormContent
-    extends State<AddCardScreenAddCardFormContent> {
+class _AddCardScreenAddCardPendingContent
+    extends State<AddCardScreenAddCardPendingContent> {
   TextEditingController cardIdInputCtrl;
   TextEditingController cardNameInputCtrl;
+  TextEditingController cardOfficialUrlInputCtrl;
 
   @override
   void initState() {
     super.initState();
     this.cardIdInputCtrl = TextEditingController();
     this.cardNameInputCtrl = TextEditingController();
+    this.cardOfficialUrlInputCtrl = TextEditingController();
   }
 
   @override
@@ -32,11 +35,17 @@ class _AddCardScreenAddCardFormContent
       padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
       child: ListView(
         children: <Widget>[
+          SizedBox(
+            height: 12.0,
+          ),
           ListViewItem(
             child: AddCardIdInput(this.cardIdInputCtrl),
           ),
           ListViewItem(
             child: AddCardNameInput(this.cardNameInputCtrl),
+          ),
+          ListViewItem(
+            child: AddCardOfficialUrlInput(this.cardOfficialUrlInputCtrl),
           ),
           ListViewItem(
               child: RaisedButton(
@@ -51,6 +60,7 @@ class _AddCardScreenAddCardFormContent
                 cardData: createCreditCard(
                   cardNameInputCtrl.text,
                   cardIdInputCtrl.text,
+                  officialUrl: cardOfficialUrlInputCtrl.text,
                 ),
               ));
             },
