@@ -2,5 +2,3 @@
 # TODO(tianhaoz95): retire this once the flutter bug is addressed
 analyzer:
   exclude: [lib/generated_plugin_registrant.dart]
-  enable-experiment:
-    - non-nullable
