@@ -24,7 +24,7 @@ jobs:
           node-version: "12.16.2"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.12.13+hotfix.9"
+          flutter-version: "1.17.5"
           channel: "stable"
       - name: install firebase cli
         run: npm install -g firebase-tools
