@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-gem "fastlane", "2.152.0"
+gem "fastlane", "2.153.0"
 
