@@ -22,7 +22,7 @@
   },
   "main": "lib/src/index.js",
   "dependencies": {
-    "@types/cors": "^2.8.6",
+    "@types/cors": "^2.8.7",
     "@types/sinon": "^9.0.4",
     "cors": "^2.8.5",
     "firebase-admin": "^8.13.0",
