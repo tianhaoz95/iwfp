@@ -34,6 +34,7 @@ jobs:
           channel: "stable"
       - name: upgrade Flutter
         run: |
+          flutter channel master
           flutter upgrade
           flutter --version
       - name: install Flutter dependencies
