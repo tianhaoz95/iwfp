@@ -60,6 +60,11 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: |
+          flutter channel master
+          flutter upgrade
       - name: install dependencies
         working-directory: ./app
         run: flutter pub get
@@ -75,6 +80,11 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: |
+          flutter channel master
+          flutter upgrade
       - name: install Flutter dependencies
         working-directory: ./app
         run: flutter pub get
@@ -205,6 +215,9 @@ jobs:
         run: flutter channel master
       - name: enable flutter web
         run: flutter config --enable-web
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: flutter upgrade
       - name: check Flutter version
         run: flutter --version
       - name: install dependencies
@@ -231,6 +244,9 @@ jobs:
         run: flutter channel master
       - name: enable flutter web
         run: flutter config --enable-web
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: flutter upgrade
       - name: check Flutter version
         run: flutter --version
       - name: install dependencies
@@ -253,6 +269,11 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: |
+          flutter channel master
+          flutter upgrade
       - name: prepare credentials
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
@@ -282,6 +303,11 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: |
+          flutter channel master
+          flutter upgrade
       - name: install dependencies
         working-directory: ./app
         run: flutter pub get
@@ -306,6 +332,9 @@ jobs:
         run: flutter channel master
       - name: enable desktop support
         run: flutter config --enable-macos-desktop
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: flutter upgrade
       - name: check Flutter version
         run: flutter --version
       - name: install dependencies

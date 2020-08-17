@@ -36,6 +36,9 @@ jobs:
         run: flutter channel master
       - name: enable Flutter web
         run: flutter config --enable-web
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: flutter upgrade
       - name: verify Flutter version
         run: flutter --version
       - name: install app dependencies
