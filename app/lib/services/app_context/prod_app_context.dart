@@ -8,4 +8,9 @@ class ProdAppContext extends AppContext {
   bool needRemoteConfig() {
     return true;
   }
+
+  @override
+  bool needFirebase() {
+    return true;
+  }
 }

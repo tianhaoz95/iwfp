@@ -26,15 +26,15 @@ dependencies:
   # third party utilities
   edit_distance: ^0.4.1
   # firebase packages
-  firebase_core: ^0.4.5
-  firebase_analytics: ^5.0.16
-  firebase_auth: ^0.16.1
+  firebase_core: ^0.5.0
+  firebase_analytics: ^6.0.0
+  firebase_auth: ^0.18.0
   firebase_crashlytics: ^0.1.4+1
-  firebase_performance: ^0.3.2
-  cloud_functions: ^0.5.0
-  firebase_dynamic_links: ^0.5.0+11
+  firebase_performance: ^0.4.0
+  cloud_functions: ^0.6.0
+  firebase_dynamic_links: ^0.5.3
   google_sign_in: ^4.5.1
-  firebase_remote_config: ^0.3.1+1
+  firebase_remote_config: ^0.4.0
   # protobuf support
   protobuf: ^1.0.1
   # provider package for dependency injection
@@ -42,6 +42,9 @@ dependencies:
   # Hive database
   hive: ^1.4.3
   hive_flutter: ^0.3.1
+  # The feedback library that provides in-app feedback
+  # For details, see https://pub.dev/packages/feedback
+  feedback: 0.3.0
 
 dev_dependencies:
   flutter_test:

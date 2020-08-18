@@ -1,3 +1,4 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/screens/home/content/bottom_nav.dart';
@@ -85,7 +86,19 @@ class _HomeScreen extends State<HomeScreen> {
         title: Text('5% App'),
         actions: [
           ButtonTheme(
-              minWidth: 25.0,
+              key: Key('home_feedback_btn'),
+              minWidth: 20.0,
+              child: FlatButton(
+                child: Icon(
+                  Icons.feedback,
+                ),
+                onPressed: () {
+                  BetterFeedback.of(context).show();
+                },
+              )),
+          ButtonTheme(
+              key: Key('home_refresh_btn'),
+              minWidth: 20.0,
               child: FlatButton(
                 child: Icon(
                   Icons.refresh,
@@ -101,7 +114,7 @@ class _HomeScreen extends State<HomeScreen> {
                         .forceRefresh();
                   }
                 },
-              ))
+              )),
         ],
       ),
       drawer: (mode == HomeScreenMode.DRAWER)

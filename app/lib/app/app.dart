@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/screens/add_card_from_template/add_card_from_template_screen.dart';
 import 'package:iwfpapp/screens/add_promo/add_promo_screen.dart';
@@ -22,29 +25,36 @@ class IwfpApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppTheme>(
       builder: (BuildContext context, AppTheme theme, Widget child) {
-        return MaterialApp(
-          title: '5% App',
-          theme: theme.getLightTheme(),
-          darkTheme: theme.getDarkTheme(),
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/',
-          routes: {
-            '/': (context) => SplashScreen(),
-            '/home': (context) => HomeScreen(),
-            '/sign_in': (context) => LoginScreen(),
-            '/sign_up': (context) => SignUpScreen(),
-            '/placeholder': (context) => PlaceholderScreen(),
-            '/suggestion': (context) => SuggestionScreen(),
-            '/add_card': (context) => AddCardScreen(),
-            '/add_card_from_template': (context) => AddCardFromTemplateScreen(),
-            '/remove_card': (context) => RemoveCardScreen(),
-            '/edit_card': (context) => EditCardScreen(),
-            '/add_promo': (context) => AddPromoScreen(),
-            '/remove_promo': (context) => RemovePromoScreen(),
-            '/delete_account': (context) => DeleteAccountScreen(),
-            '/forgot_password': (context) => ForgotPasswordScreen(),
-          },
-        );
+        return BetterFeedback(
+            onFeedback: (BuildContext context, String feedback,
+                Uint8List feedbackScreenshot) {
+              print('Feedback detected');
+              BetterFeedback.of(context).hide();
+            },
+            child: MaterialApp(
+              title: '5% App',
+              theme: theme.getLightTheme(),
+              darkTheme: theme.getDarkTheme(),
+              debugShowCheckedModeBanner: false,
+              initialRoute: '/',
+              routes: {
+                '/': (context) => SplashScreen(),
+                '/home': (context) => HomeScreen(),
+                '/sign_in': (context) => LoginScreen(),
+                '/sign_up': (context) => SignUpScreen(),
+                '/placeholder': (context) => PlaceholderScreen(),
+                '/suggestion': (context) => SuggestionScreen(),
+                '/add_card': (context) => AddCardScreen(),
+                '/add_card_from_template': (context) =>
+                    AddCardFromTemplateScreen(),
+                '/remove_card': (context) => RemoveCardScreen(),
+                '/edit_card': (context) => EditCardScreen(),
+                '/add_promo': (context) => AddPromoScreen(),
+                '/remove_promo': (context) => RemovePromoScreen(),
+                '/delete_account': (context) => DeleteAccountScreen(),
+                '/forgot_password': (context) => ForgotPasswordScreen(),
+              },
+            ));
       },
     );
   }

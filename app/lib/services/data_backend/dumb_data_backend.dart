@@ -45,4 +45,9 @@ class DumbDataBackend extends DataBackend {
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
   }
+
+  @override
+  Future<void> initialize() async {
+    await Future.delayed(Duration(milliseconds: 200));
+  }
 }

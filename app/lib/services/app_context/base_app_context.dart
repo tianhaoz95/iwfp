@@ -55,4 +55,6 @@ abstract class AppContext extends ChangeNotifier {
   }
 
   bool needRemoteConfig();
+
+  bool needFirebase();
 }

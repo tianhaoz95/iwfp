@@ -15,7 +15,7 @@ class InAppDataBackend extends DataBackend {
   CloudFunctions cloudFunc;
 
   @override
-  InAppDataBackend() : super() {
+  Future<void> initialize() async {
     cloudFunc = CloudFunctions.instance;
     addCardCallable = cloudFunc.getHttpsCallable(
       functionName: 'addCreditCard',

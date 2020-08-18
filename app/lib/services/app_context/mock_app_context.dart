@@ -8,4 +8,9 @@ class MockAppContext extends AppContext {
   bool needRemoteConfig() {
     return false;
   }
+
+  @override
+  bool needFirebase() {
+    return false;
+  }
 }

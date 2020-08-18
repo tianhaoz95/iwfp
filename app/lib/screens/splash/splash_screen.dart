@@ -1,8 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/app_context/base_app_context.dart';
+import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/services/theme/base_theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -17,6 +19,12 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreen extends State<SplashScreen> {
   Future<void> initAppData() async {
+    if (Provider.of<AppContext>(context, listen: false).needFirebase()) {
+      /// Only initialize Firebase core if the app is in production mode.
+      await Firebase.initializeApp();
+    }
+    await Provider.of<AppAuth>(context, listen: false).initialize();
+    await Provider.of<DataBackend>(context, listen: false).initialize();
     if (Provider.of<AppTheme>(context, listen: false).needHive()) {
       await Hive.initFlutter();
     }
