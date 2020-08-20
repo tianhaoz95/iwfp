@@ -95,7 +95,7 @@ jobs:
         working-directory: ./app
         run: flutter test
   android-integration-test:
-    name: run integration test on Android emulator
+    name: run integration test on Android
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -129,7 +129,7 @@ jobs:
             cd ./app && flutter pub get
             cd ./app && flutter drive --target=test_driver/app.dart
   ipad-integration-test:
-    name: app integration test
+    name: run integration test on iPad
     needs:
       - app-unit-test
     runs-on: macos-latest
@@ -170,7 +170,7 @@ jobs:
           name: online_screenshot_ios
           path: /tmp/screenshots
   iphone-integration-test:
-    name: app integration test
+    name: run integration test on iPhone
     needs:
       - app-unit-test
     runs-on: macos-latest
@@ -211,7 +211,7 @@ jobs:
           name: online_screenshot_iphone
           path: /tmp/screenshots
   server-app-test:
-    name: end to end test
+    name: app test with emulated server
     needs:
       - server-test
       - app-unit-test
