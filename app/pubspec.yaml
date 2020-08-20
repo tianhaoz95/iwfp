@@ -44,7 +44,9 @@ dependencies:
   hive_flutter: ^0.3.1
   # The feedback library that provides in-app feedback
   # For details, see https://pub.dev/packages/feedback
-  feedback: 0.3.0
+  feedback: ^0.3.0
+  # Logger for debugging
+  logger: ^0.9.2
 
 dev_dependencies:
   flutter_test:
