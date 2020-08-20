@@ -125,10 +125,9 @@ jobs:
           script: |
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
             sleep 20
-            cd ./app && ls
             flutter doctor -v
-            flutter pub get
-            flutter drive --target=test_driver/app.dart
+            cd ./app && flutter pub get
+            cd ./app && flutter drive --target=test_driver/app.dart
   app-integration-test:
     name: app integration test
     needs:
