@@ -116,13 +116,16 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2.6.0
         env:
           ANDROID_DEBUG: "true"
+          ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
+          SECRET_REPO: ${{ secrets.SECRET_REPO }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         with:
           api-level: 28
           profile: "pixel_xl"
           script: |
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
-            sleep 20 && ./scripts/setenv.sh
-            cd ./photochatapp
+            sleep 20
+            cd ./app
             flutter doctor -v
             flutter pub get
             flutter drive --target=test_driver/app.dart
