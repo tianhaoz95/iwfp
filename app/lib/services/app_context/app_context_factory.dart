@@ -1,4 +1,5 @@
 import 'package:iwfpapp/services/app_context/base_app_context.dart';
+import 'package:iwfpapp/services/app_context/emulator_app_context.dart';
 import 'package:iwfpapp/services/app_context/mock_app_context.dart';
 import 'package:iwfpapp/services/app_context/prod_app_context.dart';
 import 'package:iwfpapp/services/config/typedefs/app_context_types.dart';
@@ -9,6 +10,8 @@ AppContext getAppContext(AppContextType type, {bool allowDynamicLink = true}) {
       return ProdAppContext(allowDynamicLink: allowDynamicLink);
     case AppContextType.MOCK:
       return MockAppContext(allowDynamicLink: allowDynamicLink);
+    case AppContextType.EMULATOR:
+      return EmulatorAppContext(allowDynamicLink: allowDynamicLink);
     default:
       return ProdAppContext(allowDynamicLink: allowDynamicLink);
   }
