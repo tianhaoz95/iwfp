@@ -90,14 +90,19 @@ abstract class AppAuth extends ChangeNotifier {
     }
   }
 
+  void setSignInState() {
+    authState = AuthState.SIGNED_IN;
+    notifyListeners();
+  }
+
+  void setSignOutState() {
+    authState = AuthState.NOT_SIGNED_IN;
+    notifyListeners();
+  }
+
   Future<bool> isSignedIn() async {
-    bool isSignedIn = await isSignedInHandler();
-    if (isSignedIn) {
-      authState = AuthState.SIGNED_IN;
-    } else {
-      authState = AuthState.NOT_SIGNED_IN;
-    }
-    return isSignedIn;
+    await Future.delayed(Duration(milliseconds: 200));
+    return authState == AuthState.SIGNED_IN;
   }
 
   Future<void> signUpWithEmail(
@@ -147,11 +152,11 @@ abstract class AppAuth extends ChangeNotifier {
 
   Future<void> signOutHandler();
 
-  Future<bool> isSignedInHandler();
-
   Future<void> sendPasswordResetEmailHandler(String email);
 
   Future<String> generateToken();
 
   Future<String> getEmail();
+
+  Future<void> initialize();
 }

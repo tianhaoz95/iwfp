@@ -93,4 +93,9 @@ class MockDataBackend extends DataBackend {
       throw Exception('The credit card is not found');
     }
   }
+
+  @override
+  Future<void> initialize() async {
+    await Future.delayed(Duration(milliseconds: 200));
+  }
 }

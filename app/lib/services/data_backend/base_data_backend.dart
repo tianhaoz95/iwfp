@@ -335,4 +335,6 @@ abstract class DataBackend extends ChangeNotifier {
 
   @protected
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req);
+
+  Future<void> initialize();
 }

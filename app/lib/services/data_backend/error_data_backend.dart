@@ -66,4 +66,9 @@ class ErrorDataBackend extends DataBackend {
     await Future.delayed(Duration(milliseconds: 200));
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> initialize() async {
+    await Future.delayed(Duration(milliseconds: 200));
+  }
 }

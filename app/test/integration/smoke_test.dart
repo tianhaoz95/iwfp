@@ -8,12 +8,14 @@ import 'package:iwfpapp/services/config/typedefs/app_theme_types.dart';
 import 'package:iwfpapp/services/config/typedefs/backend.dart';
 import 'package:iwfpapp/services/data_backend/data_backend_factory.dart';
 import 'package:iwfpapp/services/theme/theme_provider_factory.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'routines/home_screen_walkaround.dart';
 import 'routines/sign_out_and_sign_in.dart';
 
 void main() {
   testWidgets('smoke test walk through', (WidgetTester tester) async {
+    Logger logger = Logger();
     await tester.pumpWidget(MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -34,6 +36,6 @@ void main() {
     await tester.pumpAndSettle();
     print('start sign out');
     await signOutAndSignIn(tester);
-    await homeScreenWalkaround(tester);
+    await homeScreenWalkaround(tester, logger);
   });
 }

@@ -14,12 +14,6 @@ class DumbAuth extends AppAuth {
   }
 
   @override
-  Future<bool> isSignedInHandler() async {
-    await Future.delayed(Duration(milliseconds: 200));
-    return true;
-  }
-
-  @override
   Future<void> sendPasswordResetEmailHandler(String email) async {
     await Future.delayed(Duration(milliseconds: 200));
   }
@@ -47,5 +41,11 @@ class DumbAuth extends AppAuth {
   @override
   Future<void> signUpWithEmailHandler(String email, String pwd) async {
     await Future.delayed(Duration(milliseconds: 200));
+  }
+
+  @override
+  Future<void> initialize() async {
+    await Future.delayed(Duration(milliseconds: 200));
+    setSignInState();
   }
 }

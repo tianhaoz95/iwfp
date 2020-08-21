@@ -94,16 +94,44 @@ jobs:
       - name: run unit tests
         working-directory: ./app
         run: flutter test
-  app-integration-test:
-    name: app integration test
+  android-integration-test:
+    name: run integration test on Android
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "8.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "1.20.2"
+          channel: "stable"
+      - name: upgrade flutter to dev latest
+        run: |
+          flutter channel master
+          flutter upgrade
+          flutter --version
+      - name: run tests
+        timeout-minutes: 30
+        uses: reactivecircus/android-emulator-runner@v2.6.0
+        env:
+          ANDROID_DEBUG: "true"
+          ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
+          SECRET_REPO: ${{ secrets.SECRET_REPO }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        with:
+          api-level: 28
+          profile: "pixel_xl"
+          script: |
+            /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
+            sleep 20
+            flutter doctor -v
+            cd ./app && flutter pub get
+            cd ./app && flutter drive --target=test_driver/app.dart
+  ipad-integration-test:
+    name: run integration test on iPad
     needs:
       - app-unit-test
-    strategy:
-      matrix:
-        device:
-          - "iPad Pro (12.9-inch) (4th generation) (13.6)"
-          - "iPhone 11 Pro Max (13.6)"
-      fail-fast: false
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -126,7 +154,7 @@ jobs:
             xcrun instruments -s |
             awk \
               -F ' *[][]' \
-              -v 'device=${{ matrix.device }}' \
+              -v 'device=iPad Pro (12.9-inch) (4th generation) (13.6)' \
               '$1 == device { print $2 }'
           )
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
@@ -139,19 +167,54 @@ jobs:
       - name: upload online screenshot
         uses: actions/upload-artifact@master
         with:
-          name: online_screenshot_${{ matrix.device }}
+          name: online_screenshot_ios
+          path: /tmp/screenshots
+  iphone-integration-test:
+    name: run integration test on iPhone
+    needs:
+      - app-unit-test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "1.20.2"
+          channel: "stable"
+      - name: use master channel
+        run: flutter channel master
+      - name: upgrade Flutter
+        run: flutter upgrade
+      - name: list all simulators
+        run: xcrun instruments -s
+      - name: start simulator
+        run: |
+          UDID=$(
+            xcrun instruments -s |
+            awk \
+              -F ' *[][]' \
+              -v 'device=iPhone 11 Pro Max (13.6)' \
+              '$1 == device { print $2 }'
+          )
+          xcrun simctl boot "${UDID:?No Simulator with this name found}"
+      - name: install server dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: run offline device end to end test
+        working-directory: ./app
+        run: flutter drive --target=test_driver/app.dart
+      - name: upload online screenshot
+        uses: actions/upload-artifact@master
+        with:
+          name: online_screenshot_iphone
           path: /tmp/screenshots
   server-app-test:
-    name: end to end test
+    name: app test with emulated server
     needs:
       - server-test
       - app-unit-test
-    strategy:
-      matrix:
-        device:
-          - "iPad Pro (12.9-inch) (4th generation) (13.6)"
-          - "iPhone 11 Pro Max (13.6)"
-      fail-fast: false
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -179,7 +242,7 @@ jobs:
             xcrun instruments -s |
             awk \
               -F ' *[][]' \
-              -v 'device=${{ matrix.device }}' \
+              -v 'device=iPhone 11 Pro Max (13.6)' \
               '$1 == device { print $2 }'
           )
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
@@ -195,7 +258,7 @@ jobs:
       - name: upload online screenshot
         uses: actions/upload-artifact@master
         with:
-          name: offline_screenshot_${{ matrix.device }}
+          name: offline_screenshot_iphone
           path: /tmp/screenshots
   build-web-app:
     name: build web app

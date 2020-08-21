@@ -1,7 +1,7 @@
 import 'package:iwfpapp/services/app_context/base_app_context.dart';
 
-class MockAppContext extends AppContext {
-  MockAppContext({bool allowDynamicLink = true})
+class EmulatorAppContext extends AppContext {
+  EmulatorAppContext({bool allowDynamicLink = true})
       : super(allowDynamicLink: allowDynamicLink);
 
   @override
@@ -11,6 +11,6 @@ class MockAppContext extends AppContext {
 
   @override
   bool needFirebase() {
-    return false;
+    return true;
   }
 }

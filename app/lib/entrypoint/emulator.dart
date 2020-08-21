@@ -9,7 +9,7 @@ void main() {
     appAuthType: AppAuthType.MOCK_AUTH,
     backendType: BackendType.EMULATOR,
     appThemeType: AppThemeType.MOCK,
-    appContextType: AppContextType.MOCK,
+    appContextType: AppContextType.EMULATOR,
     shouldReportDevCrashes: false,
     allowDynamicLink: false,
   );

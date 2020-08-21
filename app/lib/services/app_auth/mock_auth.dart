@@ -24,12 +24,6 @@ class MockAuth extends AppAuth {
   }
 
   @override
-  Future<bool> isSignedInHandler() async {
-    await Future.delayed(Duration(milliseconds: 200));
-    return signedIn;
-  }
-
-  @override
   Future<void> sendPasswordResetEmailHandler(String email) async {
     await Future.delayed(Duration(milliseconds: 200));
   }
@@ -75,5 +69,11 @@ class MockAuth extends AppAuth {
       signedIn = true;
       userEmail = email;
     }
+  }
+
+  @override
+  Future<void> initialize() async {
+    await Future.delayed(Duration(milliseconds: 200));
+    setSignInState();
   }
 }

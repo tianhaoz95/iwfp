@@ -18,5 +18,5 @@ Future<void> signOutAndSignIn(WidgetTester tester) async {
   await tester.pumpAndSettle();
   expect(find.byKey(Key('go_to_home_btn')), findsOneWidget);
   await tester.tap(find.byKey(Key('go_to_home_btn')));
-  await tester.pumpAndSettle();
+  await tester.pumpAndSettle(Duration(seconds: 3));
 }
