@@ -80,11 +80,6 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: |
-          flutter channel master
-          flutter upgrade
       - name: install Flutter dependencies
         working-directory: ./app
         run: flutter pub get
@@ -106,11 +101,6 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: upgrade flutter to dev latest
-        run: |
-          flutter channel master
-          flutter upgrade
-          flutter --version
       - name: run tests
         timeout-minutes: 30
         uses: reactivecircus/android-emulator-runner@v2.6.0
@@ -142,10 +132,6 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: use master channel
-        run: flutter channel master
-      - name: upgrade Flutter
-        run: flutter upgrade
       - name: list all simulators
         run: xcrun instruments -s
       - name: start simulator
@@ -183,10 +169,6 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: use master channel
-        run: flutter channel master
-      - name: upgrade Flutter
-        run: flutter upgrade
       - name: list all simulators
         run: xcrun instruments -s
       - name: start simulator
@@ -228,10 +210,6 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: use master channel
-        run: flutter channel master
-      - name: upgrade Flutter
-        run: flutter upgrade
       - name: install firebase CLI
         run: npm install -g firebase-tools
       - name: list all simulators
@@ -278,11 +256,6 @@ jobs:
         run: flutter channel master
       - name: enable flutter web
         run: flutter config --enable-web
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: flutter upgrade
-      - name: check Flutter version
-        run: flutter --version
       - name: install dependencies
         working-directory: ./app
         run: flutter pub get
@@ -303,15 +276,8 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: switch to master channel
-        run: flutter channel master
       - name: enable flutter web
         run: flutter config --enable-web
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: flutter upgrade
-      - name: check Flutter version
-        run: flutter --version
       - name: install dependencies
         working-directory: ./app
         run: flutter pub get
@@ -332,11 +298,6 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: |
-          flutter channel master
-          flutter upgrade
       - name: prepare credentials
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
@@ -366,11 +327,6 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: |
-          flutter channel master
-          flutter upgrade
       - name: install dependencies
         working-directory: ./app
         run: flutter pub get
@@ -391,8 +347,6 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: switch to master channel
-        run: flutter channel master
       - name: enable desktop support
         run: flutter config --enable-macos-desktop
       - name: upgrade Flutter

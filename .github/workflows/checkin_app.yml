@@ -32,11 +32,6 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: upgrade Flutter
-        run: |
-          flutter channel master
-          flutter upgrade
-          flutter --version
       - name: install Flutter dependencies
         working-directory: ./app
         run: flutter pub get

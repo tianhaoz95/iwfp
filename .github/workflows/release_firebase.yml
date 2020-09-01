@@ -32,15 +32,8 @@ jobs:
         run: npm install -g yarn
       - name: install coverage visualization tools
         run: sudo apt install -y lcov
-      - name: switch to master channel
-        run: flutter channel master
       - name: enable Flutter web
         run: flutter config --enable-web
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: flutter upgrade
-      - name: verify Flutter version
-        run: flutter --version
       - name: install app dependencies
         working-directory: ./app
         run: flutter pub get
