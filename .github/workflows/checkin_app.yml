@@ -33,16 +33,14 @@ jobs:
           flutter-version: "1.20.2"
           channel: "stable"
       - name: upgrade Flutter
-        run: |
-          flutter channel master
-          flutter upgrade
-          flutter --version
+        working-directory: scripts
+        run: install_dependencies.sh
       - name: install Flutter dependencies
-        working-directory: ./app
+        working-directory: app
         run: flutter pub get
       - name: lint Dart code
-        working-directory: ./app
+        working-directory: app
         run: flutter analyze
       - name: run unit tests
-        working-directory: ./app
+        working-directory: app
         run: flutter test

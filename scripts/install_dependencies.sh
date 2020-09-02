@@ -8,7 +8,10 @@ PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
 
 flutter channel master
 flutter config --enable-web
+flutter config --enable-macos-desktop
+flutter config --enable-linux-desktop
 flutter upgrade
+flutter doctor -v
 flutter --version
 
 npm install -g yarn
