@@ -36,8 +36,13 @@ jobs:
           flutter-version: "1.20.2"
           channel: "stable"
       - name: upgrade Flutter
-        working-directory: scripts
+        if: matrix.os != 'windows-latest'
+        working-directory: scripts/linux
         run: ./install_dependencies.sh
+      - name: upgrade Flutter
+        if: matrix.os == 'windows-latest'
+        working-directory: scripts/windows
+        run: ./install_dependencies.ps1
       - name: lint Dart code
         working-directory: app
         run: flutter analyze
