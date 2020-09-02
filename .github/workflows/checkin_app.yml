@@ -28,16 +28,16 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.16.2"
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: "1.20.2"
           channel: "stable"
       - name: upgrade Flutter
         working-directory: scripts
-        run: install_dependencies.sh
-      - name: install Flutter dependencies
-        working-directory: app
-        run: flutter pub get
+        run: ./install_dependencies.sh
       - name: lint Dart code
         working-directory: app
         run: flutter analyze
