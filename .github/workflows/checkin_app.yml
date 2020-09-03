@@ -6,15 +6,6 @@ on:
   schedule:
     - cron: 0 2 * * *
   push:
-    branches:
-      - "master"
-      - "dev/*"
-      - "feature/*"
-      - "release/*"
-      - "fix/*"
-      - "refactor/*"
-      - "chore/*"
-      - "actions/checkin-app__*"
     paths:
       - "app/*"
       - ".github/workflows/checkin_app.yml"

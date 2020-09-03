@@ -6,15 +6,6 @@ on:
   schedule:
     - cron: 0 2 * * *
   push:
-    branches:
-      - "master"
-      - "dev/*"
-      - "feature/*"
-      - "release/*"
-      - "fix/*"
-      - "refactor/*"
-      - "chore/*"
-      - "actions/checkin-generic__*"
 jobs:
   test:
     name: run generic tests
