@@ -1,5 +1,5 @@
 # Get project root directory
-Set-Variable -Name PROJ_ROOT -Value (get-item $PSScriptRoot).parent.FullName
+Set-Variable -Name PROJ_ROOT -Value (get-item $PSScriptRoot).parent.parent.FullName
 Write-Output "Use $PROJ_ROOT as project root"
 
 flutter channel master
