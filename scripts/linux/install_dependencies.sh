@@ -17,6 +17,7 @@ flutter --version
 npm install -g yarn
 npm install -g prettier
 npm install -g protobufjs
+export PATH="$FLUTTER_HOME/.pub-cache/bin:$PATH"
 flutter pub global activate protoc_plugin
 
 cd $PROJ_ROOT/app
