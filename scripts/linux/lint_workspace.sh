@@ -10,7 +10,8 @@ then
 fi
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
+LINUX_SCRIPT_DIR="$(dirname "$SCRIPT_DIR")"
+PROJ_ROOT="$(dirname "$LINUX_SCRIPT_DIR")"
 
 GENERIC_CHECKER="prettier --write"
 if [[ $1 == "check" ]]
