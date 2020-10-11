@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 ThemeData whiteTheme = ThemeData(
   primaryColor: Colors.white,
-  textSelectionColor: Colors.green,
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: Colors.green,
+  ),
   cardTheme: CardTheme(
     color: Colors.white,
   ),
