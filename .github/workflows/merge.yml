@@ -154,7 +154,7 @@ jobs:
             xcrun instruments -s |
             awk \
               -F ' *[][]' \
-              -v 'device=iPad Pro (12.9-inch) (4th generation) (13.6)' \
+              -v 'device=iPad Pro (12.9-inch) (4th generation) (13.7)' \
               '$1 == device { print $2 }'
           )
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
@@ -195,7 +195,7 @@ jobs:
             xcrun instruments -s |
             awk \
               -F ' *[][]' \
-              -v 'device=iPhone 11 Pro Max (13.6)' \
+              -v 'device=iPhone 11 Pro Max (13.7)' \
               '$1 == device { print $2 }'
           )
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
@@ -242,7 +242,7 @@ jobs:
             xcrun instruments -s |
             awk \
               -F ' *[][]' \
-              -v 'device=iPhone 11 Pro Max (13.6)' \
+              -v 'device=iPhone 11 Pro Max (13.7)' \
               '$1 == device { print $2 }'
           )
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
