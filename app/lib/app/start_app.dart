@@ -25,9 +25,8 @@ void startApp({
 }) {
   WidgetsFlutterBinding.ensureInitialized();
   if (shouldReportDevCrashes) {
-    // TODO(tianhaoz95): migrate to up-to-date crash reporting API
-    Crashlytics.instance.enableInDevMode = true;
-    FlutterError.onError = Crashlytics.instance.recordFlutterError;
+    // TODO(tianhaoz95): migrate to up-to-date crash reporting
+    // API, maybe move to splash screen.
   }
   AppContext appContext =
       getAppContext(appContextType, allowDynamicLink: allowDynamicLink);
