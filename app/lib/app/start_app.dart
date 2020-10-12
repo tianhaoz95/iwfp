@@ -1,4 +1,3 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/app/app.dart';
 import 'package:iwfpapp/services/app_auth/auth_factory.dart';
@@ -25,9 +24,9 @@ void startApp({
 }) {
   WidgetsFlutterBinding.ensureInitialized();
   if (shouldReportDevCrashes) {
-    Crashlytics.instance.enableInDevMode = true;
+    // TODO(tianhaoz95): migrate to up-to-date crash reporting
+    // API, maybe move to splash screen.
   }
-  FlutterError.onError = Crashlytics.instance.recordFlutterError;
   AppContext appContext =
       getAppContext(appContextType, allowDynamicLink: allowDynamicLink);
   AppAuth appAuth = getAppAuth(appAuthType);

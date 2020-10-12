@@ -9,7 +9,7 @@ class EmulatorDataBackend extends InAppDataBackend {
     if (defaultTargetPlatform == TargetPlatform.android) {
       cloudFunc.useFunctionsEmulator(origin: 'http://10.0.2.2:5001');
     } else {
-      cloudFunc.useFunctionsEmulator(origin: 'http://localhost:5001');
+      cloudFunc.useFunctionsEmulator(origin: 'http://0.0.0.0:5001');
     }
   }
 }

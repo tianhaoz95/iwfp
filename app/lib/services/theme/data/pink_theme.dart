@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 ThemeData pinkTheme = ThemeData(
   primaryColor: Colors.pink,
-  textSelectionColor: Colors.white,
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: Colors.white,
+  ),
   cardTheme: CardTheme(
     color: Colors.white,
   ),

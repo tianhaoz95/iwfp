@@ -17,7 +17,7 @@ class HomeBottomNavigator extends StatelessWidget {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       backgroundColor: Theme.of(context).primaryColor,
-      selectedItemColor: Theme.of(context).textSelectionColor,
+      selectedItemColor: Theme.of(context).textSelectionTheme.selectionColor,
       unselectedItemColor: Theme.of(context).unselectedWidgetColor,
       currentIndex: homeTabId2Index(currentTabId),
       items: <BottomNavigationBarItem>[
