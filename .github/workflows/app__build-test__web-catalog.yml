@@ -1,0 +1,41 @@
+name: App Build Test (Web Catalog)
+on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "app/pubspec.yaml"
+      - ".github/workflows/app__build-test__web-catalog.yml"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  app__build-test__web-catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: switch to master channel
+        run: flutter channel master
+      - name: enable flutter web
+        run: flutter config --enable-web
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: flutter upgrade
+      - name: check Flutter version
+        run: flutter --version
+      - name: install dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: build web app catalog
+        working-directory: ./app
+        run: flutter build web --target lib/entrypoint/ui.dart

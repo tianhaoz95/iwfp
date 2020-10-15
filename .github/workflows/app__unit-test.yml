@@ -1,42 +1,31 @@
-name: checkin app
+name: App Unit Test
 on:
   pull_request:
     branches:
       - "master"
+    paths:
+      - "app/**"
+      - ".github/workflows/app__unit-test.yml"
   schedule:
     - cron: 0 2 * * *
-  push:
-    branches:
-      - "master"
-      - "dev/*"
-      - "feature/*"
-      - "release/*"
-      - "fix/*"
-      - "refactor/*"
-      - "chore/*"
-      - "actions/checkin-app__*"
-    paths:
-      - "app/*"
-      - ".github/workflows/checkin_app.yml"
 jobs:
-  test:
-    name: run app unit tests on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-      fail-fast: false
+  app__unit-test:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: upgrade Flutter
+        working-directory: ./app
         run: |
           flutter channel master
           flutter upgrade
-          flutter --version
       - name: install Flutter dependencies
         working-directory: ./app
         run: flutter pub get
