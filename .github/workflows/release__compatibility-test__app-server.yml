@@ -10,7 +10,6 @@ on:
     - cron: 0 2 * * *
 jobs:
   release__compatibility-test__app-server:
-    name: app test with emulated server
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2

@@ -10,7 +10,6 @@ on:
     - cron: 0 2 * * *
 jobs:
   app__integration-test__iphone:
-    name: run integration test on iPhone
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2

@@ -1,17 +1,14 @@
-name: release Android app
+name: Release Android App
 on:
   push:
     branches:
       - "master"
-      - "actions/release-android-app__*"
-      - "refactor/android-infra__*"
     paths:
       - "app/pubspec.yaml"
       - "app/android/fastlane/Fastfile"
-      - ".github/workflows/release_android_app.yml"
+      - ".github/workflows/release__android-app.yml"
 jobs:
-  release-android-app:
-    name: release Android app
+  release__android-app:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

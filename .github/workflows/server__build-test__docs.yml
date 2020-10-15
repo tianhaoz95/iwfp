@@ -11,7 +11,6 @@ on:
 jobs:
   server__build-test__docs:
     # TODO(tianhaoz95): consolidate all working directory to task default.
-    name: build server docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

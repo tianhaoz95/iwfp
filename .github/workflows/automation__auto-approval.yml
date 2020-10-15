@@ -1,7 +1,7 @@
 name: Auto Approval
 on: pull_request
 jobs:
-  auto-approve:
+  automation__auto-approve:
     runs-on: ubuntu-latest
     steps:
       - name: Approve Dependabot updates

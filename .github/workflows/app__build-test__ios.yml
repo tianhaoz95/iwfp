@@ -10,7 +10,6 @@ on:
     - cron: 0 2 * * *
 jobs:
   app__build-test__ios:
-    name: build iOS app
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2

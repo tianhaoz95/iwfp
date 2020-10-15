@@ -10,7 +10,6 @@ on:
     - cron: 0 2 * * *
 jobs:
   app__unit-test:
-    name: app unit test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

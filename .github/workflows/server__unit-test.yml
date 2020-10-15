@@ -13,9 +13,8 @@ on:
   schedule:
     - cron: 0 2 * * *
 jobs:
-  server-unit-test:
+  server__unit-test:
     # TODO(tianhaoz95): consolidate all working directory to task default.
-    name: server unit test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
