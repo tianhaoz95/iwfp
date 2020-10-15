@@ -4,7 +4,8 @@ on:
     branches:
       - "master"
     paths:
-      - "app/pubspec.yaml"
+      - "app/**"
+      - "functions/**"
       - ".github/workflows/release__compatibility-test__app-server.yml"
   schedule:
     - cron: 0 2 * * *
