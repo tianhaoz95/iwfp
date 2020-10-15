@@ -1,0 +1,53 @@
+name: App Integration Test (iPhone)
+on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "app/pubspec.yaml"
+      - ".github/workflows/app__integration-test__iphone.yml"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  app__integration-test__iphone:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: use master channel
+        run: flutter channel master
+      - name: upgrade Flutter
+        run: flutter upgrade
+      - name: list all simulators
+        run: xcrun instruments -s
+      - name: start simulator
+        run: |
+          UDID=$(
+            xcrun instruments -s |
+            awk \
+              -F ' *[][]' \
+              -v 'device=iPhone 11 Pro Max (13.7)' \
+              '$1 == device { print $2 }'
+          )
+          xcrun simctl boot "${UDID:?No Simulator with this name found}"
+      - name: install server dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: run offline device end to end test
+        working-directory: ./app
+        run: flutter drive --target=test_driver/app.dart
+      - name: upload online screenshot
+        uses: actions/upload-artifact@master
+        with:
+          name: online_screenshot_iphone
+          path: /tmp/screenshots

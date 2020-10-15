@@ -1,18 +1,15 @@
-name: release firebase
+name: Release Firebase Related
 on:
   push:
     branches:
       - "master"
-      - "actions/release-firebase__*"
-      - "actions/server-refactor__*"
     paths:
-      - "site/*"
-      - "functions/*"
-      - "app/*"
-      - ".github/workflows/release_firebase.yml"
+      - "site/**"
+      - "functions/**"
+      - "app/**"
+      - ".github/workflows/release__firebase-related.yml"
 jobs:
-  release-firebase:
-    name: release Firebase
+  release__firebase-related:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

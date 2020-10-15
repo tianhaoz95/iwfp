@@ -1,40 +1,34 @@
-name: release Android app
+name: App Build Test (Android)
 on:
-  push:
+  pull_request:
     branches:
       - "master"
-      - "actions/release-android-app__*"
-      - "refactor/android-infra__*"
     paths:
       - "app/pubspec.yaml"
-      - "app/android/fastlane/Fastfile"
-      - ".github/workflows/release_android_app.yml"
+      - ".github/workflows/app__build-test__android.yml"
+  schedule:
+    - cron: 0 2 * * *
 jobs:
-  release-android-app:
-    name: release Android app
+  app__build-test__android:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: "2.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: upgrade Flutter
         working-directory: ./app
         run: |
           flutter channel master
           flutter upgrade
-      - name: install bundler
-        run: gem install bundler:1.17.3
-      - name: install ruby packages
-        working-directory: ./app/android
-        run: bundle install
       - name: prepare credentials
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
@@ -44,12 +38,9 @@ jobs:
       - name: install dependencies
         working-directory: ./app
         run: flutter pub get
-      - name: build apk
-        working-directory: ./app
-        run: flutter build apk --split-per-abi
       - name: build app bundle
         working-directory: ./app
         run: flutter build appbundle
-      - name: publish to internal track
-        working-directory: ./app/android
-        run: bundle exec fastlane internal
+      - name: build apk package
+        working-directory: ./app
+        run: flutter build apk --split-per-abi
