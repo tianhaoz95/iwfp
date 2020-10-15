@@ -1,0 +1,37 @@
+name: App Build Test (Docs)
+on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "app/**"
+      - ".github/workflows/app__build-test__docs.yml"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  app__build-test__docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: install dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: build docs
+        working-directory: ./app
+        run: FLUTTER_ROOT=$FLUTTER_HOME $FLUTTER_HOME/bin/cache/dart-sdk/bin/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
