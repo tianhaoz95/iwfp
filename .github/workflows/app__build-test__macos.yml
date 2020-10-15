@@ -1,38 +1,42 @@
-name: App Unit Test
+name: App Build Test (MacOS)
 on:
   pull_request:
     branches:
       - "master"
     paths:
-      - "app/**"
-      - ".github/workflows/app__unit-test.yml"
+      - "app/pubspec.yaml"
+      - ".github/workflows/app__build-test__macos.yml"
   schedule:
     - cron: 0 2 * * *
 jobs:
-  app__unit-test:
-    name: app unit test
-    runs-on: ubuntu-latest
+  app__build-test__macos:
+    name: build macOS app
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - uses: Monorepo-Actions/config-for-actions@main
         id: get_action_configs
         with:
           config_files: ./configs/actions.json
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: switch to master channel
+        run: flutter channel master
+      - name: enable desktop support
+        run: flutter config --enable-macos-desktop
       - name: upgrade Flutter
         working-directory: ./app
-        run: |
-          flutter channel master
-          flutter upgrade
-      - name: install Flutter dependencies
+        run: flutter upgrade
+      - name: check Flutter version
+        run: flutter --version
+      - name: install dependencies
         working-directory: ./app
         run: flutter pub get
-      - name: lint Dart code
+      - name: build macOS package
         working-directory: ./app
-        run: flutter analyze
-      - name: run unit tests
-        working-directory: ./app
-        run: flutter test
+        run: flutter build macos

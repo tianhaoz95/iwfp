@@ -1,0 +1,49 @@
+name: App Integration Test (Android)
+on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "app/pubspec.yaml"
+      - ".github/workflows/app__integration-test__android.yml"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  app__integration-test__android:
+    name: run integration test on Android
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "8.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: upgrade flutter to dev latest
+        run: |
+          flutter channel master
+          flutter upgrade
+          flutter --version
+      - name: run tests
+        timeout-minutes: 30
+        uses: reactivecircus/android-emulator-runner@v2.6.0
+        env:
+          ANDROID_DEBUG: "true"
+          ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
+          SECRET_REPO: ${{ secrets.SECRET_REPO }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        with:
+          api-level: 28
+          profile: "pixel_xl"
+          script: |
+            /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
+            sleep 20
+            flutter doctor -v
+            cd ./app && flutter pub get
+            cd ./app && flutter drive --target=test_driver/app.dart

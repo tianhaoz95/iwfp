@@ -1,0 +1,19 @@
+subprojects:
+  - id: "client application"
+    paths:
+      - "app/**"
+    checks:
+      - "app-docs-build-test"
+      - "app-unit-test"
+  - id: "server"
+    paths:
+      - "functions/**"
+    checks:
+      - "server-docs-build-test"
+      - "server-unit-test"
+  - id: "app release"
+    paths:
+      - "app/pubspec.yaml"
+    checks:
+      - "app-ipad-integration-test"
+      - "app-iphone-integration-test"

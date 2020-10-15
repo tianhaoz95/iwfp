@@ -1,16 +1,16 @@
-name: App Unit Test
+name: App Build Test (Android)
 on:
   pull_request:
     branches:
       - "master"
     paths:
-      - "app/**"
-      - ".github/workflows/app__unit-test.yml"
+      - "app/pubspec.yaml"
+      - ".github/workflows/app__build-test__android.yml"
   schedule:
     - cron: 0 2 * * *
 jobs:
-  app__unit-test:
-    name: app unit test
+  app__build-test__android:
+    name: build Android app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,6 +18,9 @@ jobs:
         id: get_action_configs
         with:
           config_files: ./configs/actions.json
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
@@ -27,12 +30,18 @@ jobs:
         run: |
           flutter channel master
           flutter upgrade
-      - name: install Flutter dependencies
+      - name: prepare credentials
+        env:
+          ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
+          SECRET_REPO: ${{ secrets.SECRET_REPO }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: ./scripts/setenv.sh
+      - name: install dependencies
         working-directory: ./app
         run: flutter pub get
-      - name: lint Dart code
+      - name: build app bundle
         working-directory: ./app
-        run: flutter analyze
-      - name: run unit tests
+        run: flutter build appbundle
+      - name: build apk package
         working-directory: ./app
-        run: flutter test
+        run: flutter build apk --split-per-abi

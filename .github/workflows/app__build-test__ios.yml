@@ -1,21 +1,17 @@
-name: App Docs Build Test
+name: App Build Tes (iOS)
 on:
-  push:
-    paths:
-      - "app/**"
-      - ".github/workflows/app__build-docs.yml"
   pull_request:
     branches:
       - "master"
     paths:
-      - "app/**"
-      - ".github/workflows/app__build-docs.yml"
+      - "app/pubspec.yaml"
+      - ".github/workflows/app__build-test__ios.yml"
   schedule:
     - cron: 0 2 * * *
 jobs:
-  build-app-docs:
-    name: build app docs
-    runs-on: ubuntu-latest
+  app__build-test__ios:
+    name: build iOS app
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - uses: Monorepo-Actions/config-for-actions@main
@@ -37,6 +33,6 @@ jobs:
       - name: install dependencies
         working-directory: ./app
         run: flutter pub get
-      - name: build docs
+      - name: build ios
         working-directory: ./app
-        run: FLUTTER_ROOT=$FLUTTER_HOME $FLUTTER_HOME/bin/cache/dart-sdk/bin/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
+        run: flutter build ios --release --no-codesign

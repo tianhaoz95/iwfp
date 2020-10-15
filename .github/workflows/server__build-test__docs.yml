@@ -1,19 +1,15 @@
-name: Server Build Tests
+name: Server Docs Build Tests
 on:
-  push:
-    paths:
-      - "functions/**"
-      - ".github/workflows/server__build-docs.yml"
   pull_request:
     branches:
       - "master"
     paths:
       - "functions/**"
-      - ".github/workflows/server__build-docs.yml"
+      - ".github/workflows/server__build-test__docs.yml"
   schedule:
     - cron: 0 2 * * *
 jobs:
-  build-server-docs:
+  server__build-test__docs:
     # TODO(tianhaoz95): consolidate all working directory to task default.
     name: build server docs
     runs-on: ubuntu-latest
