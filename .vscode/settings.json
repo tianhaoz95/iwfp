@@ -1,5 +1,11 @@
 {
   "dart.analysisExcludedFolders": [
     "./iwfpapp/lib/generated_plugin_registrant.dart"
+  ],
+  "cSpell.words": [
+    "ipad",
+    "macos",
+    "reactivecircus",
+    "subosito"
   ]
 }

@@ -53,13 +53,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: upgrade Flutter
         working-directory: ./app
         run: |
@@ -76,10 +80,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: upgrade Flutter
         working-directory: ./app
         run: |
@@ -99,13 +107,17 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "8.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: upgrade flutter to dev latest
         run: |
           flutter channel master
@@ -135,13 +147,17 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: use master channel
         run: flutter channel master
       - name: upgrade Flutter
@@ -176,13 +192,17 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: use master channel
         run: flutter channel master
       - name: upgrade Flutter
@@ -218,6 +238,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-node@v1
         with:
           node-version: "12.16.2"
@@ -226,8 +250,8 @@ jobs:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: use master channel
         run: flutter channel master
       - name: upgrade Flutter
@@ -267,13 +291,17 @@ jobs:
       - app-unit-test
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: switch to master channel
         run: flutter channel master
       - name: enable flutter web
@@ -296,13 +324,17 @@ jobs:
       - app-unit-test
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: switch to master channel
         run: flutter channel master
       - name: enable flutter web
@@ -325,13 +357,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: upgrade Flutter
         working-directory: ./app
         run: |
@@ -359,13 +395,17 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: upgrade Flutter
         working-directory: ./app
         run: |
@@ -384,13 +424,17 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: switch to master channel
         run: flutter channel master
       - name: enable desktop support
