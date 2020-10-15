@@ -1,0 +1,25 @@
+name: Server Docs Build Tests
+on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "functions/**"
+      - ".github/workflows/server__build-test__docs.yml"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  server__build-test__docs:
+    # TODO(tianhaoz95): consolidate all working directory to task default.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.16.2"
+      - name: install dependencies
+        working-directory: ./functions
+        run: npm install
+      - name: build docs
+        working-directory: ./functions
+        run: npm run docs

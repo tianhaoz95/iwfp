@@ -1,0 +1,37 @@
+name: App Build Tes (iOS)
+on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "app/pubspec.yaml"
+      - ".github/workflows/app__build-test__ios.yml"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  app__build-test__ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: install dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: build ios
+        working-directory: ./app
+        run: flutter build ios --release --no-codesign
