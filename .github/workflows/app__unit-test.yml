@@ -1,0 +1,42 @@
+name: App Unit Test
+on:
+  push:
+    paths:
+      - "app/**"
+      - ".github/workflows/app__unit-test.yml"
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "app/**"
+      - ".github/workflows/app__unit-test.yml"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  app-unit-test:
+    name: app unit test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: upgrade Flutter
+        working-directory: ./app
+        run: |
+          flutter channel master
+          flutter upgrade
+      - name: install Flutter dependencies
+        working-directory: ./app
+        run: flutter pub get
+      - name: lint Dart code
+        working-directory: ./app
+        run: flutter analyze
+      - name: run unit tests
+        working-directory: ./app
+        run: flutter test
