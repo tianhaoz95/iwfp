@@ -33,7 +33,7 @@ jobs:
           USERNAME: ${{ github.repository_owner }}
         run: |
           source query_image_tag.sh
-          echo "::set-output name=image_tag::ghcr.io/$USERNAME/approveman-server:$USE_TAG_NAME"
+          echo "::set-output name=image_tag::ghcr.io/$USERNAME/iwfp-server:$USE_TAG_NAME"
       - uses: docker/build-push-action@v2
         if: ${{ github.event_name == 'push' }}
         with:
