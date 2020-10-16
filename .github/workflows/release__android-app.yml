@@ -6,7 +6,9 @@ on:
     paths:
       - "app/pubspec.yaml"
       - "app/android/fastlane/Fastfile"
-      - ".github/workflows/release__android-app.yml"
+      - ".github/workflows/release__*"
+      - ".github/workflows/app__*"
+      - ".github/workflows/server__*"
 jobs:
   release__android-app:
     runs-on: ubuntu-latest

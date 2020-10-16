@@ -5,7 +5,8 @@ on:
       - "master"
     paths:
       - "app/pubspec.yaml"
-      - ".github/workflows/app__integration-test__android.yml"
+      - ".github/workflows/app__*"
+      - "scripts/configure_flutter.sh"
   schedule:
     - cron: 0 2 * * *
 jobs:
