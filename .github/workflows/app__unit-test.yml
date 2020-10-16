@@ -5,6 +5,7 @@ on:
       - "master"
     paths:
       - "app/**"
+      - "scripts/configure_flutter.sh"
       - ".github/workflows/app__unit-test.yml"
   schedule:
     - cron: 0 2 * * *
@@ -21,14 +22,8 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: |
-          flutter channel master
-          flutter upgrade
-      - name: install Flutter dependencies
-        working-directory: ./app
-        run: flutter pub get
+      - name: configure Flutter
+        run: ./scripts/configure_flutter.sh
       - name: lint Dart code
         working-directory: ./app
         run: flutter analyze
