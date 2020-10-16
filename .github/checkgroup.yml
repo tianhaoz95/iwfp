@@ -12,6 +12,7 @@ subprojects:
       - "server__unit-test"
       - "server__build-test__docs"
       - "release__compatibility-test__app-server"
+      - "release__server-emulator-image"
   - id: "app infra"
     paths:
       - ".github/app__*"
@@ -51,3 +52,4 @@ subprojects:
       - "server__unit-test"
       - "server__build-test__docs"
       - "release__compatibility-test__app-server"
+      - "release__server-emulator-image"

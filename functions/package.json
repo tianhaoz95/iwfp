@@ -14,6 +14,7 @@
     "e2e": "npm run build && firebase emulators:exec --only functions,firestore \"jest --detectOpenHandles ./test/end2end.test.ts\"",
     "device": "npm run build && firebase emulators:exec --only functions,firestore \"cd ../app && flutter drive --target=test_driver/emulator.dart\"",
     "emulator": "npm run build && firebase emulators:start --only firestore,functions",
+    "emulator:container": "npm run build && firebase emulators:start --token ${FIREBASE_TOKEN} --only firestore,functions",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
