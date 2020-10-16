@@ -1,10 +1,21 @@
 subprojects:
-  - id: "infra"
+  - id: "repository infra"
     paths:
-      - ".github/app__*"
+      - ".github/code-health__*"
+    checks:
+      - "code-health__generic"
+  - id: "server infra"
+    paths:
       - ".github/server__*"
       - ".github/release__*"
-      - ".github/code-health__*"
+    checks:
+      - "server__unit-test"
+      - "server__build-test__docs"
+      - "release__compatibility-test__app-server"
+  - id: "app infra"
+    paths:
+      - ".github/app__*"
+      - ".github/release__*"
       - "scripts/configure_flutter.sh"
     checks:
       - "app__build-test__web-catalog"
@@ -17,8 +28,6 @@ subprojects:
       - "app__integration-test__ipad"
       - "app__integration-test__iphone"
       - "app__integration-test__android"
-      - "server__unit-test"
-      - "server__build-test__docs"
       - "release__compatibility-test__app-server"
   - id: "client application"
     paths:
