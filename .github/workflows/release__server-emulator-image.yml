@@ -6,7 +6,7 @@ on:
     paths:
       - "functions/**"
       - "Dockerfile"
-      - ".github/workflows/server__*"
+      - ".github/workflows/release__*"
   push:
     branches:
       - master
