@@ -5,13 +5,11 @@ on:
       - master
     paths:
       - "functions/**"
-      - ".github/workflows/server__*"
+      - "Dockerfile"
+      - ".github/workflows/release__*"
   push:
     branches:
       - master
-    paths:
-      - "functions/**"
-      - ".github/workflows/server__*"
 jobs:
   release__server-emulator-image:
     runs-on: ubuntu-latest
@@ -27,7 +25,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.USE_GITHUB_TOKEN }}
+          password: ${{ secrets.MY_GITHUB_TOKEN }}
       - name: get_tag
         id: get_tag
         working-directory: scripts
@@ -35,7 +33,7 @@ jobs:
           USERNAME: ${{ github.repository_owner }}
         run: |
           source query_image_tag.sh
-          echo "::set-output name=image_tag::ghcr.io/$USERNAME/approveman-server:$USE_TAG_NAME"
+          echo "::set-output name=image_tag::ghcr.io/$USERNAME/iwfp-server:$USE_TAG_NAME"
       - uses: docker/build-push-action@v2
         if: ${{ github.event_name == 'push' }}
         with:
