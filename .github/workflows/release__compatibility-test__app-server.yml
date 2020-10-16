@@ -6,7 +6,9 @@ on:
     paths:
       - "app/**"
       - "functions/**"
-      - ".github/workflows/release__compatibility-test__app-server.yml"
+      - ".github/workflows/release__*"
+      - ".github/workflows/app__*"
+      - ".github/workflows/server__*"
   schedule:
     - cron: 0 2 * * *
 jobs:

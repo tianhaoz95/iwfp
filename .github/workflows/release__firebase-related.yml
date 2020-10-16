@@ -7,7 +7,9 @@ on:
       - "site/**"
       - "functions/**"
       - "app/**"
-      - ".github/workflows/release__firebase-related.yml"
+      - ".github/workflows/release__*"
+      - ".github/workflows/app__*"
+      - ".github/workflows/server__*"
 jobs:
   release__firebase-related:
     runs-on: ubuntu-latest

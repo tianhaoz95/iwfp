@@ -6,7 +6,7 @@ on:
     paths:
       - "app/**"
       - "scripts/configure_flutter.sh"
-      - ".github/workflows/app__unit-test.yml"
+      - ".github/workflows/app__*"
   schedule:
     - cron: 0 2 * * *
 jobs:

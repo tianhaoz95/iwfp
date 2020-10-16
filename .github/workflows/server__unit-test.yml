@@ -1,15 +1,11 @@
 name: Server Unit Tests
 on:
-  push:
-    paths:
-      - "functions/**"
-      - ".github/workflows/server__unit-test.yml"
   pull_request:
     branches:
       - "master"
     paths:
       - "functions/**"
-      - ".github/workflows/server__unit-test.yml"
+      - ".github/workflows/server__*"
   schedule:
     - cron: 0 2 * * *
 jobs:
