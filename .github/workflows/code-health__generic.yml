@@ -10,14 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-node@v1
         with:
           node-version: "12.16.2"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: initialize environment
+        run: source ./scripts/bash/initialize_environment.sh
       - name: install dependencies
-        run: ./scripts/install_dependencies.sh
+        run: ./scripts/bash/install_dependencies.sh
       - name: generic check
-        run: ./scripts/lint_workspace.sh check
+        run: ./scripts/bash/lint_workspace.sh check
