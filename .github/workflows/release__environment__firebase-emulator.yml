@@ -6,7 +6,7 @@ on:
     paths:
       - "functions/**"
       - "Dockerfile"
-      - ".github/workflows/release__*"
+      - ".github/workflows/release__environment__firebase-emulator.yml"
       - ".github/checkgroup.yml"
   push:
     branches:

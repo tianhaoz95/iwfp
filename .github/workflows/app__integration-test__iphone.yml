@@ -5,9 +5,9 @@ on:
       - "master"
     paths:
       - "app/pubspec.yaml"
-      - ".github/workflows/app__*"
       - "scripts/configure_flutter.sh"
       - ".github/checkgroup.yml"
+      - ".github/workflows/app__integration-test__iphone.yml"
   schedule:
     - cron: 0 2 * * *
 jobs:

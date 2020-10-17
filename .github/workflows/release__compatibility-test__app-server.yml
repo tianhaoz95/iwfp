@@ -5,10 +5,8 @@ on:
       - "master"
     paths:
       - "app/**"
-      - "functions/**"
-      - ".github/workflows/release__*"
-      - ".github/workflows/app__*"
-      - ".github/workflows/server__*"
+      - "vendors/firebase/functions/**"
+      - ".github/workflows/release__compatibility-test__app-server.yml"
       - ".github/checkgroup.yml"
   schedule:
     - cron: 0 2 * * *
