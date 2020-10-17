@@ -1,4 +1,4 @@
-name: Release Server Emulator Image
+name: Release Environment (Firebase Emulator)
 on:
   pull_request:
     branches:

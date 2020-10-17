@@ -1,4 +1,4 @@
-name: Release Server Emulator Image
+name: Release Environment (Chrome Driver)
 on:
   pull_request:
     branches:
