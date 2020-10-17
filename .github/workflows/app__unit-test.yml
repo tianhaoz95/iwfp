@@ -8,6 +8,7 @@ on:
       - "scripts/configure_flutter.sh"
       - ".github/workflows/app__*"
       - ".github/checkgroup.yml"
+      - "scripts/bash/initialize_environment.sh"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -23,6 +24,8 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: initialize environment
+        run: source ./scripts/bash/initialize_environment.sh
       - name: configure Flutter
         run: ./scripts/configure_flutter.sh
       - name: lint Dart code
