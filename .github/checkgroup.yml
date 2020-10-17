@@ -1,4 +1,9 @@
 subprojects:
+  - id: "dependabot"
+    paths:
+      - ".github/dependabot.yml"
+    checks:
+      - ".github/dependabot.yml"
   - id: "repository infra"
     paths:
       - ".github/code-health__*"
