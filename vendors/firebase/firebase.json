@@ -15,7 +15,7 @@
   "hosting": [
     {
       "site": "iwfpapp",
-      "public": "app/build/web",
+      "public": "build/web_app",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
@@ -26,23 +26,23 @@
     },
     {
       "site": "iwfp-app-docs",
-      "public": "app/doc/api"
+      "public": "build/app_docs"
     },
     {
       "site": "iwfp-app-catalog",
-      "public": "app/build/catalog"
+      "public": "build/catalog"
     },
     {
       "site": "iwfp-app-cov",
-      "public": "app/coverage"
+      "public": "build/app_coverage"
     },
     {
       "site": "iwfp-server-docs",
-      "public": "functions/docs"
+      "public": "build/server_docs"
     },
     {
       "site": "iwfp-project",
-      "public": "site/docs/.vuepress/dist",
+      "public": "build/project_site",
       "rewrites": [
         {
           "source": "**",

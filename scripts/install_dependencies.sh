@@ -4,6 +4,7 @@ set -o pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
+SERVER_ROOT="$PROJ_ROOT/vendors/firebase/functions"
 
 flutter channel master
 flutter config --enable-web
@@ -19,10 +20,10 @@ cd $PROJ_ROOT/app
 flutter pub get
 cd $PROJ_ROOT
 
-cd $PROJ_ROOT/functions
+cd $SERVER_ROOT
 npm install
 cd $PROJ_ROOT
 
-cd $PROJ_ROOT/app
+cd $PROJ_ROOT/site
 yarn install
 cd $PROJ_ROOT

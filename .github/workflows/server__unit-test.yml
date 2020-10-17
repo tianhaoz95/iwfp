@@ -4,8 +4,9 @@ on:
     branches:
       - "master"
     paths:
-      - "functions/**"
+      - "vendors/firebase/functions/**"
       - ".github/workflows/server__*"
+      - ".github/checkgroup.yml"
   schedule:
     - cron: 0 2 * * *
 jobs:

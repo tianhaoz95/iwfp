@@ -11,6 +11,8 @@ fi
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
+FIREBASE_ROOT="$PROJ_ROOT/vendors/firebase"
+SERVER_ROOT="$FIREBASE_ROOT/functions"
 
 GENERIC_CHECKER="prettier --write"
 if [[ $1 == "check" ]]
@@ -30,12 +32,12 @@ $GENERIC_CHECKER \
 
 # Check server code
 $GENERIC_CHECKER \
-  $PROJ_ROOT/functions/package.json \
-  $PROJ_ROOT/functions/README.md \
-  $PROJ_ROOT/functions/tslint.json \
-  $PROJ_ROOT/functions/tsconfig.json \
-  $PROJ_ROOT/functions/jest.config.js
-cd $PROJ_ROOT/functions
+  $SERVER_ROOT/package.json \
+  $SERVER_ROOT/README.md \
+  $SERVER_ROOT/tslint.json \
+  $SERVER_ROOT/tsconfig.json \
+  $SERVER_ROOT/jest.config.js
+cd $SERVER_ROOT
 if [[ $1 == "check" ]]
 then
   npm run lint
@@ -80,7 +82,7 @@ fi
 cd $PROJ_ROOT
 
 # Check Firebase config
-$GENERIC_CHECKER $PROJ_ROOT/firebase.json $PROJ_ROOT/database.rules.json $PROJ_ROOT/firestore.indexes.json
+$GENERIC_CHECKER $FIREBASE_ROOT/firebase.json $FIREBASE_ROOT/database.rules.json $FIREBASE_ROOT/firestore.indexes.json
 
 # Check gitpod config
 $GENERIC_CHECKER $PROJ_ROOT/.gitpod.yml

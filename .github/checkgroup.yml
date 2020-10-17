@@ -47,7 +47,7 @@ subprojects:
       - "release__compatibility-test__app-server"
   - id: "server"
     paths:
-      - "functions/**"
+      - "vendors/firebase/functions/**"
     checks:
       - "server__unit-test"
       - "server__build-test__docs"

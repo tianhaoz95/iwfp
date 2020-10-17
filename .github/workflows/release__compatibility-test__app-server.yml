@@ -9,6 +9,7 @@ on:
       - ".github/workflows/release__*"
       - ".github/workflows/app__*"
       - ".github/workflows/server__*"
+      - ".github/checkgroup.yml"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -49,13 +50,13 @@ jobs:
           )
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
       - name: install server dependencies
-        working-directory: ./functions
+        working-directory: ./vendors/firebase/functions
         run: npm install
       - name: install server dependencies
         working-directory: ./app
         run: flutter pub get
       - name: run offline device end to end test
-        working-directory: ./functions
+        working-directory: ./vendors/firebase/functions
         run: npm run device
       - name: upload online screenshot
         uses: actions/upload-artifact@master

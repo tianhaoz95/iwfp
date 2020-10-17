@@ -1,15 +1,24 @@
 name: Release Firebase Related
 on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "vendors/firebase/**"
+      - "scripts/build_firebase_related.sh"
+      - "app/**"
+      - "site/**"
   push:
     branches:
       - "master"
     paths:
       - "site/**"
-      - "functions/**"
+      - "vendors/firebase/**"
       - "app/**"
       - ".github/workflows/release__*"
       - ".github/workflows/app__*"
       - ".github/workflows/server__*"
+      - ".github/checkgroup.yml"
 jobs:
   release__firebase-related:
     runs-on: ubuntu-latest
@@ -25,55 +34,10 @@ jobs:
         with:
           flutter-version: "1.20.2"
           channel: "stable"
-      - name: install firebase cli
-        run: npm install -g firebase-tools
-      - name: install yarn
-        run: npm install -g yarn
-      - name: install coverage visualization tools
-        run: sudo apt install -y lcov
-      - name: switch to master channel
-        run: flutter channel master
-      - name: enable Flutter web
-        run: flutter config --enable-web
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: flutter upgrade
-      - name: verify Flutter version
-        run: flutter --version
-      - name: install app dependencies
-        working-directory: ./app
-        run: flutter pub get
-      - name: install server dependencies
-        working-directory: ./functions
-        run: npm install
-      - name: install site dependencies
-        working-directory: ./site
-        run: yarn install
-      - name: test app with coverage
-        working-directory: ./app
-        run: flutter test --coverage
-      - name: generate app coverage report
-        working-directory: ./app
-        run: genhtml coverage/lcov.info -o coverage
-      - name: build app catalog
-        working-directory: ./app
-        run: flutter build web --target lib/entrypoint/ui.dart
-      - name: move app catalog
-        working-directory: ./app
-        run: mv build/web build/catalog
-      - name: build web app
-        working-directory: ./app
-        run: flutter build web
-      - name: build app docs
-        working-directory: ./app
-        run: FLUTTER_ROOT=$FLUTTER_HOME $FLUTTER_HOME/bin/cache/dart-sdk/bin/dartdoc --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:io,dart:isolate,dart:math,dart:typed_data,dart:ui,dart:ffi,dart:html,dart:js,dart:js_util'
-      - name: build server docs
-        working-directory: ./functions
-        run: npm run docs
-      - name: build project site
-        working-directory: ./site
-        run: yarn docs:build
+      - name: build
+        run: ./scripts/build_firebase_related.sh
       - name: deploy to Firebase
+        working-directory: ./vendors/firebase
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
         run: firebase deploy --token $FIREBASE_TOKEN
