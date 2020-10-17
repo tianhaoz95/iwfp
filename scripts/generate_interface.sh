@@ -13,7 +13,7 @@ SRC_DIR=$PROJ_ROOT/interfaces
 DART_DST_DIR=$PROJ_ROOT/app/lib/services/interfaces
 
 # TypeScript code locations
-TS_DST_DIR=$PROJ_ROOT/functions/src/interfaces
+TS_DST_DIR=$PROJ_ROOT/vendors/firebase/functions/src/interfaces
 
 # Compile Dart interfaces
 # rm -rf $DART_DST_DIR/*.dart

@@ -6,6 +6,7 @@ on:
     paths:
       - "environments/chromedriver/**"
       - ".github/workflows/release__environment__chrome-driver.yml"
+      - ".github/checkgroup.yml"
   push:
     branches:
       - master

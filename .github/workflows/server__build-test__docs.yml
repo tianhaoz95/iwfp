@@ -4,8 +4,9 @@ on:
     branches:
       - "master"
     paths:
-      - "functions/**"
+      - "vendors/firebase/functions/**"
       - ".github/workflows/server__*"
+      - ".github/checkgroup.yml"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -18,8 +19,8 @@ jobs:
         with:
           node-version: "12.16.2"
       - name: install dependencies
-        working-directory: ./functions
+        working-directory: ./vendors/firebase/functions
         run: npm install
       - name: build docs
-        working-directory: ./functions
+        working-directory: ./vendors/firebase/functions
         run: npm run docs
