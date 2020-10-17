@@ -5,7 +5,7 @@ on:
       - "master"
     paths:
       - "app/**"
-      - "scripts/configure_flutter.sh"
+      - "scripts/bash/configure_flutter.sh"
       - ".github/workflows/app__*"
       - ".github/checkgroup.yml"
       - "scripts/bash/initialize_environment.sh"
@@ -27,7 +27,7 @@ jobs:
       - name: initialize environment
         run: source ./scripts/bash/initialize_environment.sh
       - name: configure Flutter
-        run: ./scripts/configure_flutter.sh
+        run: ./scripts/bash/configure_flutter.sh
       - name: lint Dart code
         working-directory: ./app
         run: flutter analyze
