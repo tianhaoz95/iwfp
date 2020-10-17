@@ -24,6 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
@@ -32,10 +36,12 @@ jobs:
           node-version: "12.16.2"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: build
-        run: ./scripts/build_firebase_related.sh
+        run: |
+          source ./scripts/bash/initialize_environment.sh
+          bash ./scripts/bash/build_firebase_related.sh
       - name: deploy to Firebase
         if: ${{ github.event_name != 'pull_request' }}
         working-directory: ./vendors/firebase

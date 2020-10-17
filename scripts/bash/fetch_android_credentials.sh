@@ -1,13 +1,5 @@
 #!/bin/bash
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
-echo "Script absolute path is $SCRIPT_DIR"
-
-PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
-
-echo "Project root path is $PROJ_ROOT"
-
 if [ -z "${ANDROID_SIGN_PWD}" ]
 then
   echo "ANDROID_SIGN_PWD not found, abort"

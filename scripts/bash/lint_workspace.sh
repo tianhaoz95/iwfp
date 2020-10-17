@@ -9,11 +9,6 @@ then
   exit 1
 fi
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
-FIREBASE_ROOT="$PROJ_ROOT/vendors/firebase"
-SERVER_ROOT="$FIREBASE_ROOT/functions"
-
 GENERIC_CHECKER="prettier --write"
 if [[ $1 == "check" ]]
 then
@@ -97,4 +92,4 @@ $GENERIC_CHECKER $PROJ_ROOT/.vscode/settings.json
 $GENERIC_CHECKER $PROJ_ROOT/.github/ISSUE_TEMPLATE/*.md $PROJ_ROOT/.github/pull_request_template.md
 
 # Check dependabot config
-$GENERIC_CHECKER $PROJ_ROOT/.dependabot/config.yml
+$GENERIC_CHECKER $PROJ_ROOT/.github/dependabot.yml

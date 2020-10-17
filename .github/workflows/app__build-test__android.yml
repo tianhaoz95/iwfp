@@ -36,7 +36,9 @@ jobs:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-        run: ./scripts/setenv.sh
+        run: |
+          source scripts/bash/initialize_environment.sh
+          ./scripts/bash/fetch_android_credentials.sh
       - name: install dependencies
         working-directory: ./app
         run: flutter pub get

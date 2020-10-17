@@ -2,24 +2,6 @@
 
 set -o pipefail
 
-# TODO(tianhaoz95): consolidate the environment variables into a single script.
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
-FIREBASE_ROOT="$PROJ_ROOT/vendors/firebase"
-SERVER_ROOT="$FIREBASE_ROOT/functions"
-APP_ROOT="$PROJ_ROOT/app"
-SITE_ROOT="$PROJ_ROOT/site"
-
-BUILD_DIR="$FIREBASE_ROOT/build"
-
-rm -rf "$BUILD_DIR"
-mkdir -p "$BUILD_DIR"
-
-FLUTTER_PATH="$(which flutter)"
-FLUTTER_BIN="$(dirname "$FLUTTER_PATH")"
-export FLUTTER_ROOT="$(dirname "$FLUTTER_BIN")"
-DART_BIN="$FLUTTER_BIN/cache/dart-sdk/bin/"
-
 if [ "$CI" == "true" ]; then
     echo "Install global dependencies."
     sudo apt install -y lcov

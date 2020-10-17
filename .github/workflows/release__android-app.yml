@@ -1,5 +1,12 @@
 name: Release Android App
 on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - ".github/workflows/release__android-app.yml"
+      - "scripts/bash/initialize_environment.sh"
+      - "scripts/bash/fetch_android_credentials.sh"
   push:
     branches:
       - "master"
@@ -40,7 +47,9 @@ jobs:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-        run: ./scripts/setenv.sh
+        run: |
+          source ./scripts/bash/initialize_environment.sh
+          ./scripts/bash/fetch_android_credentials.sh
       - name: install dependencies
         working-directory: ./app
         run: flutter pub get
@@ -51,5 +60,6 @@ jobs:
         working-directory: ./app
         run: flutter build appbundle
       - name: publish to internal track
+        if: ${{ github.event_name != 'pull_request' }}
         working-directory: ./app/android
         run: bundle exec fastlane internal
