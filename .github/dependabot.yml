@@ -1,0 +1,35 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/site"
+    schedule:
+      interval: daily
+      time: "01:00"
+      timezone: America/Los_Angeles
+    open-pull-requests-limit: 10
+    reviewers:
+      - tianhaoz95
+    labels:
+      - docs dependency update
+  - package-ecosystem: npm
+    directory: "/vendors/firebase/functions"
+    schedule:
+      interval: daily
+      time: "01:00"
+      timezone: America/Los_Angeles
+    open-pull-requests-limit: 10
+    reviewers:
+      - tianhaoz95
+    labels:
+      - api dependency update
+  - package-ecosystem: bundler
+    directory: "/app/android"
+    schedule:
+      interval: daily
+      time: "01:00"
+      timezone: America/Los_Angeles
+    open-pull-requests-limit: 10
+    reviewers:
+      - tianhaoz95
+    labels:
+      - gem dependency update
