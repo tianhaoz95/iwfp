@@ -21,17 +21,17 @@ jobs:
       - name: install Firebase CLI
         run: npm install -g firebase-tools
       - name: install dependencies
-        working-directory: ./functions
+        working-directory: ./vendors/firebase/functions
         run: npm install
       - name: lint test
-        working-directory: ./functions
+        working-directory: ./vendors/firebase/functions
         run: npm run lint
       - name: build test
-        working-directory: ./functions
+        working-directory: ./vendors/firebase/functions
         run: npm run build
       - name: run unit test
-        working-directory: ./functions
+        working-directory: ./vendors/firebase/functions
         run: npm test
       - name: run end to end test
-        working-directory: ./functions
+        working-directory: ./vendors/firebase/functions
         run: npm run e2e

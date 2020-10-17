@@ -37,6 +37,7 @@ jobs:
       - name: build
         run: ./scripts/build_firebase_related.sh
       - name: deploy to Firebase
+        if: ${{ github.event_name != 'pull_request' }}
         working-directory: ./vendors/firebase
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
