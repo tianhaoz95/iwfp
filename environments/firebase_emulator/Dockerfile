@@ -1,6 +1,6 @@
 FROM node:10
 
-WORKDIR /functions
+WORKDIR /vendors/firebase/functions
 
 RUN \
   apt-get update && \
