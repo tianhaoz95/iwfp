@@ -1,4 +1,4 @@
-name: Release Server Emulator Image
+name: Release Environment (Firebase Emulator)
 on:
   pull_request:
     branches:
@@ -11,7 +11,7 @@ on:
     branches:
       - master
 jobs:
-  release__server-emulator-image:
+  release__environment__firebase-emulator:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -36,5 +36,7 @@ jobs:
           echo "::set-output name=image_tag::ghcr.io/$USERNAME/iwfp-server:$USE_TAG_NAME"
       - uses: docker/build-push-action@v2
         with:
+          context: .
+          file: ./environments/firebase_emulator/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.get_tag.outputs.image_tag }}
