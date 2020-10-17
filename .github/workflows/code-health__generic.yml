@@ -21,9 +21,8 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: initialize environment
-        run: source ./scripts/bash/initialize_environment.sh
-      - name: install dependencies
-        run: ./scripts/bash/install_dependencies.sh
-      - name: generic check
-        run: ./scripts/bash/lint_workspace.sh check
+      - name: run checks
+        run: |
+          source ./scripts/bash/initialize_environment.sh
+          ./scripts/bash/install_dependencies.sh
+          ./scripts/bash/lint_workspace.sh check
