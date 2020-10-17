@@ -97,4 +97,4 @@ $GENERIC_CHECKER $PROJ_ROOT/.vscode/settings.json
 $GENERIC_CHECKER $PROJ_ROOT/.github/ISSUE_TEMPLATE/*.md $PROJ_ROOT/.github/pull_request_template.md
 
 # Check dependabot config
-$GENERIC_CHECKER $PROJ_ROOT/.dependabot/config.yml
+$GENERIC_CHECKER $PROJ_ROOT/.github/dependabot.yml
