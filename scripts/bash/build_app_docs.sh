@@ -2,6 +2,9 @@
 
 set -o pipefail
 
+CURRENT_DIR=$(pwd)
+
+cd "$APP_ROOT"
 $DART_BIN/dartdoc \
     --exclude \
     'dart:async,\
@@ -18,3 +21,4 @@ $DART_BIN/dartdoc \
         dart:html,\
         dart:js,\
         dart:js_util'
+cd "$CURRENT_DIR"
