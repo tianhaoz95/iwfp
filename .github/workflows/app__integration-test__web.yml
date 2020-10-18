@@ -36,6 +36,6 @@ jobs:
           flutter channel master
           flutter upgrade
           flutter --version
-      - name: run test
+      - name: run integration test
         working-directory: ./app
         run: flutter drive --target=test_driver/app.dart --browser-name=chrome --release
