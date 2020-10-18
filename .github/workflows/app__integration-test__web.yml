@@ -34,7 +34,7 @@ jobs:
         run: chromedriver --port=${{ steps.get_action_configs.outputs.chrome_driver_port }} &
       - name: configure Flutter
         working-directory: ./scripts/bash
-        run: source initialize_environment.sh && configure_flutter.sh
+        run: source ./initialize_environment.sh && ./configure_flutter.sh
       - name: run integration test
         working-directory: ./app
         run: flutter drive --target=test_driver/app.dart --browser-name=chrome --release

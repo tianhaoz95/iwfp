@@ -29,7 +29,7 @@ jobs:
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: configure Flutter
         working-directory: ./scripts/bash
-        run: source initialize_environment.sh && configure_flutter.sh
+        run: source ./initialize_environment.sh && ./configure_flutter.sh
       - name: lint and test
         working-directory: ./app
         run: flutter analyze && flutter test
