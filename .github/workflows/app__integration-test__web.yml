@@ -34,6 +34,7 @@ jobs:
       - name: upgrade flutter to dev latest
         run: |
           flutter channel master
+          flutter config --enable-web
           flutter upgrade
           flutter --version
       - name: run integration test
