@@ -17,7 +17,7 @@ jobs:
       chrome-driver:
         image: "ghcr.io/tianhaoz95/iwfp-chrome-driver:latest"
         ports:
-          - 4444:4444
+          - 127.0.0.1:4444:4444
     steps:
       - uses: actions/checkout@v2
       - uses: Monorepo-Actions/config-for-actions@main
