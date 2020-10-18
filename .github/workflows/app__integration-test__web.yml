@@ -1,13 +1,17 @@
 name: App Integration Test (Web)
 on:
+  push:
+    branches:
+      - "actions/app__integration-test__web__*"
   pull_request:
     branches:
       - "master"
     paths:
-      - "app/pubspec.yaml"
-      - ".github/workflows/app__integration-test__web.yml"
+      - "configs/actions.json"
       - "scripts/configure_flutter.sh"
       - ".github/checkgroup.yml"
+      - ".github/workflows/app__integration-test__web.yml"
+      - "app/**"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -19,24 +23,18 @@ jobs:
         id: get_action_configs
         with:
           config_files: ./configs/actions.json
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "8.x"
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - uses: nanasess/setup-chromedriver@master
         with:
-          chromedriver-version: "86.0.4240.22"
+          chromedriver-version: ${{ steps.get_action_configs.outputs.chrome_driver_version }}
       - name: start chrome driver
-        run: chromedriver --port=4444 &
-      - name: upgrade flutter to dev latest
-        run: |
-          flutter channel master
-          flutter config --enable-web
-          flutter upgrade
-          flutter --version
+        run: chromedriver --port=${{ steps.get_action_configs.outputs.chrome_driver_port }} &
+      - name: configure Flutter
+        working-directory: ./scripts/bash
+        run: source initialize_environment.sh && configure_flutter.sh
       - name: run integration test
         working-directory: ./app
         run: flutter drive --target=test_driver/app.dart --browser-name=chrome --release

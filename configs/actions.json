@@ -1,4 +1,9 @@
 {
   "flutter_version": "1.22.1",
-  "flutter_channel": "stable"
+  "flutter_channel": "stable",
+  "chrome_driver_version": "86.0.4240.22",
+  "chrome_driver_port": "4444",
+  "flutter_java_version": "8.x",
+  "iphone_device_id": "iPhone 11 Pro Max (13.7)",
+  "ipad_device_id": "iPad Pro (12.9-inch) (4th generation) (13.7)"
 }

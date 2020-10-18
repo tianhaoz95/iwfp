@@ -1,14 +1,17 @@
 name: App Unit Test
 on:
+  push:
+    branches:
+      - "actions/app__unit-test__*"
   pull_request:
     branches:
       - "master"
     paths:
-      - "app/**"
+      - "configs/actions.json"
       - "scripts/bash/configure_flutter.sh"
-      - ".github/workflows/app__*"
+      - ".github/workflows/app__unit-test.yml"
       - ".github/checkgroup.yml"
-      - "scripts/bash/initialize_environment.sh"
+      - "app/**"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -24,13 +27,9 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: initialize environment
-        run: source ./scripts/bash/initialize_environment.sh
       - name: configure Flutter
-        run: ./scripts/bash/configure_flutter.sh
-      - name: lint Dart code
+        working-directory: ./scripts/bash
+        run: source initialize_environment.sh && configure_flutter.sh
+      - name: lint and test
         working-directory: ./app
-        run: flutter analyze
-      - name: run unit tests
-        working-directory: ./app
-        run: flutter test
+        run: flutter analyze && flutter test
