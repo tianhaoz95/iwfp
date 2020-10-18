@@ -38,4 +38,4 @@ jobs:
           flutter --version
       - name: run test
         working-directory: ./app
-        run: flutter drive --target=test_driver/app.dart --browser-name=chrome --release --device-id=chrome
+        run: flutter drive --target=test_driver/app.dart --browser-name=chrome --release
