@@ -5,7 +5,7 @@ on:
       - "master"
     paths:
       - "app/**"
-      - ".github/workflows/app__*"
+      - ".github/workflows/app__build-test__docs.yml"
       - "scripts/configure_flutter.sh"
       - ".github/checkgroup.yml"
   schedule:
