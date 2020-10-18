@@ -124,6 +124,7 @@ class _HomeScreen extends State<HomeScreen> {
                   currentTabId: this.currentTabId,
                   onTabTappedHandler: this.onTabTapped,
                   mode: mode),
+              key: Key('home_screen_drawer'),
             )
           : null,
       body: HomeScreenContentAdapter(

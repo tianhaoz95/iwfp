@@ -16,6 +16,9 @@ abstract class AppContext extends ChangeNotifier {
   }
 
   bool getAllowDynamicLink() {
+    if (kIsWeb) {
+      return false;
+    }
     return allowDynamicLink;
   }
 

@@ -36,6 +36,7 @@ class HomeScreenContentAdapter extends StatelessWidget {
                   mode: this.mode,
                   onTabTappedHandler: this.onTabTappedHandler,
                   tabs: this.tabs,
+                  key: Key('home_screen_vertical_menu'),
                 ),
               ),
               VerticalDivider(

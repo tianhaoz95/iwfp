@@ -1,0 +1,41 @@
+name: App Integration Test (Android)
+on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "app/pubspec.yaml"
+      - ".github/workflows/app__integration-test__web.yml"
+      - "scripts/configure_flutter.sh"
+      - ".github/checkgroup.yml"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  app__integration-test__web:
+    runs-on: macos-latest
+    services:
+      chrome-driver:
+        image: "ghcr.io/tianhaoz95/iwfp-chrome-driver:latest"
+        ports:
+          - 4444:4444
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "8.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: upgrade flutter to dev latest
+        run: |
+          flutter channel master
+          flutter upgrade
+          flutter --version
+      - name: run test
+        working-directory: ./app
+        run: flutter drive --target=test_driver/app.dart --browser-name=chrome --release --device-id=chrome

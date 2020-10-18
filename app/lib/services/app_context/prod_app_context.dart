@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/app_context/base_app_context.dart';
 
 class ProdAppContext extends AppContext {
@@ -6,6 +7,9 @@ class ProdAppContext extends AppContext {
 
   @override
   bool needRemoteConfig() {
+    if (kIsWeb) {
+      return false;
+    }
     return true;
   }
 
