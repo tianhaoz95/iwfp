@@ -1,13 +1,17 @@
 name: App Build Test (Web Catalog)
 on:
+  push:
+    branches:
+      - "actions/app__build-test__web-catalog__*"
   pull_request:
     branches:
       - "master"
     paths:
-      - "app/pubspec.yaml"
       - ".github/workflows/app__build-test__web-catalog.yml"
-      - "scripts/configure_flutter.sh"
       - ".github/checkgroup.yml"
+      - "scripts/configure_flutter.sh"
+      - "scripts/bash/initialize_environment.sh"
+      - "app/**"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -19,25 +23,13 @@ jobs:
         id: get_action_configs
         with:
           config_files: ./configs/actions.json
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: switch to master channel
-        run: flutter channel master
-      - name: enable flutter web
-        run: flutter config --enable-web
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: flutter upgrade
-      - name: check Flutter version
-        run: flutter --version
-      - name: install dependencies
-        working-directory: ./app
-        run: flutter pub get
+      - name: configure Flutter
+        working-directory: ./scripts/bash
+        run: source ./initialize_environment.sh && ./configure_flutter.sh
       - name: build web app catalog
         working-directory: ./app
         run: flutter build web --target lib/entrypoint/ui.dart
