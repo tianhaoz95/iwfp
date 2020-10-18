@@ -28,7 +28,7 @@ jobs:
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - uses: nanasess/setup-chromedriver@master
         with:
-          chromedriver-version: '86.0.4240.22'
+          chromedriver-version: "86.0.4240.22"
       - name: start chrome driver
         run: chromedriver --port=4444 &
       - name: upgrade flutter to dev latest
