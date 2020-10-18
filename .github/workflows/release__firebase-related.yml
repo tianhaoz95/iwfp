@@ -6,6 +6,7 @@ on:
     paths:
       - "vendors/firebase/**"
       - "scripts/build_firebase_related.sh"
+      - ".github/workflows/release__firebase-related.yml"
       - "app/**"
       - "site/**"
   push:
@@ -15,9 +16,7 @@ on:
       - "site/**"
       - "vendors/firebase/**"
       - "app/**"
-      - ".github/workflows/release__*"
-      - ".github/workflows/app__*"
-      - ".github/workflows/server__*"
+      - ".github/workflows/release__firebase-related.yml"
       - ".github/checkgroup.yml"
 jobs:
   release__firebase-related:
