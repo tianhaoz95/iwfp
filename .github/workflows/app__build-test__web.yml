@@ -7,10 +7,12 @@ on:
     branches:
       - "master"
     paths:
-      - "app/pubspec.yaml"
       - ".github/workflows/app__build-test__web.yml"
       - ".github/checkgroup.yml"
+      - "configs/actions.json"
       - "scripts/configure_flutter.sh"
+      - "scripts/bash/initialize_environment.sh"
+      - "app/**"
   schedule:
     - cron: 0 2 * * *
 jobs:
