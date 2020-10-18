@@ -37,22 +37,7 @@ flutter build web --target lib/entrypoint/ui.dart
 mv "$APP_ROOT/build/web" "$BUILD_DIR/catalog"
 flutter build web
 mv "$APP_ROOT/build/web" "$BUILD_DIR/web_app"
-$DART_BIN/dartdoc \
-    --exclude \
-    'dart:async,\
-        dart:collection,\
-        dart:convert,\
-        dart:core,\
-        dart:developer,\
-        dart:io,\
-        dart:isolate,\
-        dart:math,\
-        dart:typed_data,\
-        dart:ui,\
-        dart:ffi,\
-        dart:html,\
-        dart:js,\
-        dart:js_util'
+. "$BASH_SCRIPT_DIR/build_app_docs.sh"
 mv "$APP_ROOT/doc/api" "$BUILD_DIR/app_docs"
 cd "$PROJ_ROOT"
 echo "App related done."
