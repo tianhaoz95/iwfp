@@ -1,13 +1,8 @@
 name: App Build Test (Android)
 on:
-  pull_request:
+  push:
     branches:
-      - "master"
-    paths:
-      - "app/pubspec.yaml"
-      - ".github/workflows/app__build-test__android.yml"
-      - "scripts/configure_flutter.sh"
-      - ".github/checkgroup.yml"
+      - "actions/app__build-test__android__*"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -19,32 +14,20 @@ jobs:
         id: get_action_configs
         with:
           config_files: ./configs/actions.json
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: |
-          flutter channel master
-          flutter upgrade
+      - name: configure Flutter
+        working-directory: ./scripts/bash
+        run: source ./initialize_environment.sh && ./configure_flutter.sh
       - name: prepare credentials
+        working-directory: ./scripts/bash
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-        run: |
-          source scripts/bash/initialize_environment.sh
-          ./scripts/bash/fetch_android_credentials.sh
-      - name: install dependencies
+        run: source ./initialize_environment.sh && ./fetch_android_credentials.sh
+      - name: build app
         working-directory: ./app
-        run: flutter pub get
-      - name: build app bundle
-        working-directory: ./app
-        run: flutter build appbundle
-      - name: build apk package
-        working-directory: ./app
-        run: flutter build apk --split-per-abi
+        run: flutter build appbundle && flutter build apk --split-per-abi
