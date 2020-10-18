@@ -1,4 +1,4 @@
-name: App Integration Test (Android)
+name: App Integration Test (Web)
 on:
   pull_request:
     branches:
