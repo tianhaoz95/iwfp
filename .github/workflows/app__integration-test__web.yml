@@ -13,11 +13,6 @@ on:
 jobs:
   app__integration-test__web:
     runs-on: ubuntu-latest
-    services:
-      chrome-driver:
-        image: "ghcr.io/tianhaoz95/iwfp-chrome-driver:latest"
-        ports:
-          - 127.0.0.1:4444:4444
     steps:
       - uses: actions/checkout@v2
       - uses: Monorepo-Actions/config-for-actions@main
@@ -31,6 +26,11 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - uses: nanasess/setup-chromedriver@master
+        with:
+          chromedriver-version: '86.0.4240.22'
+      - name: start chrome driver
+        run: chromedriver --port=4444
       - name: upgrade flutter to dev latest
         run: |
           flutter channel master
