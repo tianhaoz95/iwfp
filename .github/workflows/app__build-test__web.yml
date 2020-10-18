@@ -1,5 +1,8 @@
 name: App Build Test (Web)
 on:
+  push:
+    branches:
+      - "actions/app__build-test__web__*"
   pull_request:
     branches:
       - "master"
