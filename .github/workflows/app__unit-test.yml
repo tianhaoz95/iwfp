@@ -7,10 +7,11 @@ on:
     branches:
       - "master"
     paths:
-      - "configs/actions.json"
-      - "scripts/bash/configure_flutter.sh"
       - ".github/workflows/app__unit-test.yml"
       - ".github/checkgroup.yml"
+      - "configs/actions.json"
+      - "scripts/bash/configure_flutter.sh"
+      - "scripts/bash/initialize_environment.sh"
       - "app/**"
   schedule:
     - cron: 0 2 * * *

@@ -2,7 +2,7 @@ name: App Build Test (MacOS)
 on:
   push:
     branches:
-        - "actions/app__build-test__macos__*"
+      - "actions/app__build-test__macos__*"
   schedule:
     - cron: 0 2 * * *
 jobs:
