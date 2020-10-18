@@ -2,7 +2,7 @@ name: App Integration Test (Android)
 on:
   push:
     branches:
-      - ".github/workflows/app__integration-test__android.yml"
+      - "actions/app__integration-test__android__*"
   schedule:
     - cron: 0 2 * * *
 jobs:
