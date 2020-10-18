@@ -12,7 +12,7 @@ on:
     - cron: 0 2 * * *
 jobs:
   app__integration-test__web:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     services:
       chrome-driver:
         image: "ghcr.io/tianhaoz95/iwfp-chrome-driver:latest"
