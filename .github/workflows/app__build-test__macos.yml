@@ -1,13 +1,8 @@
 name: App Build Test (MacOS)
 on:
-  pull_request:
+  push:
     branches:
-      - "master"
-    paths:
-      - "app/pubspec.yaml"
-      - ".github/workflows/app__build-test__macos.yml"
-      - "scripts/configure_flutter.sh"
-      - ".github/checkgroup.yml"
+        - "actions/app__build-test__macos__*"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -19,25 +14,15 @@ jobs:
         id: get_action_configs
         with:
           config_files: ./configs/actions.json
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: switch to master channel
-        run: flutter channel master
+      - name: configure Flutter
+        working-directory: ./scripts/bash
+        run: source ./initialize_environment.sh && ./configure_flutter.sh
       - name: enable desktop support
         run: flutter config --enable-macos-desktop
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: flutter upgrade
-      - name: check Flutter version
-        run: flutter --version
-      - name: install dependencies
-        working-directory: ./app
-        run: flutter pub get
       - name: build macOS package
         working-directory: ./app
         run: flutter build macos
