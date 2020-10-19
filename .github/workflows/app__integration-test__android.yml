@@ -1,13 +1,8 @@
 name: App Integration Test (Android)
 on:
-  pull_request:
+  push:
     branches:
-      - "master"
-    paths:
-      - "app/pubspec.yaml"
-      - ".github/workflows/app__integration-test__android.yml"
-      - "scripts/configure_flutter.sh"
-      - ".github/checkgroup.yml"
+      - "actions/app__integration-test__android__*"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -19,18 +14,13 @@ jobs:
         id: get_action_configs
         with:
           config_files: ./configs/actions.json
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "8.x"
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: upgrade flutter to dev latest
-        run: |
-          flutter channel master
-          flutter upgrade
-          flutter --version
+      - name: configure Flutter
+        working-directory: ./scripts/bash
+        run: source ./initialize_environment.sh && ./configure_flutter.sh
       - name: run tests
         timeout-minutes: 30
         uses: reactivecircus/android-emulator-runner@v2.11.1
@@ -46,5 +36,4 @@ jobs:
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
             sleep 20
             flutter doctor -v
-            cd ./app && flutter pub get
-            cd ./app && flutter drive --target=test_driver/app.dart
+            cd ./app && flutter pub get && flutter drive --target=test_driver/app.dart
