@@ -5,7 +5,7 @@ set -o pipefail
 if [ "$CI" == "true" ]; then
     echo "Install global dependencies."
     sudo apt install -y lcov
-    npm install -g firebase-tools yarn
+    npm install -g yarn
 fi
 
 # TODO(tianhaoz95): use the configure FLutter script to do this.
@@ -51,8 +51,8 @@ cd "$PROJ_ROOT"
 echo "Site related done."
 
 echo "Build server related."
+. "$BASH_SCRIPT_DIR/install_firebase_functions_dependencies.sh"
 cd "$SERVER_ROOT"
-npm install
 npm run docs
 mv "$SERVER_ROOT/docs" "$BUILD_DIR/server_docs"
 cd "$PROJ_ROOT"
