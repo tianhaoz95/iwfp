@@ -1,5 +1,12 @@
 name: Server Unit Tests
 on:
+  # This is used for testing changes in this CI script.
+  # For changes that goes into this script and its
+  # related dependencies, open a branch that starts with
+  # actions/server__unit-test__. For example, for cleaning
+  # up unused scripts, use actions/server__unit-test__clean-up
+  # as the branch name and the CI task will run for all pushes
+  # that goes into the branch.
   push:
     branches:
       - "actions/server__unit-test__*"
