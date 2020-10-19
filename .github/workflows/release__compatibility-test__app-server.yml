@@ -32,7 +32,7 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter
+      - name: configure Flutter and Firebase
         working-directory: ./scripts/bash
         run: source ./initialize_environment.sh && ./configure_flutter.sh && ./install_firebase_functions_dependencies.sh
       - name: start simulator
