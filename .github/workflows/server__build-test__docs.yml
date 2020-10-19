@@ -1,26 +1,29 @@
 name: Server Docs Build Tests
 on:
+  push:
+    branches:
+      - "actions/server__build-test__docs__*"
   pull_request:
     branches:
       - "master"
     paths:
-      - "vendors/firebase/functions/**"
       - ".github/workflows/server__build-test__docs.yml"
-      - ".github/checkgroup.yml"
+      - "vendors/firebase/functions/**"
+      - "configs/actions.json"
   schedule:
     - cron: 0 2 * * *
 jobs:
   server__build-test__docs:
-    # TODO(tianhaoz95): consolidate all working directory to task default.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-node@v1
         with:
-          node-version: "12.16.2"
-      - name: install dependencies
+          node-version: ${{ steps.get_action_configs.outputs.node_version }}
+      - name: install dependencies and build docs
         working-directory: ./vendors/firebase/functions
-        run: npm install
-      - name: build docs
-        working-directory: ./vendors/firebase/functions
-        run: npm run docs
+        run: npm install && npm run docs
