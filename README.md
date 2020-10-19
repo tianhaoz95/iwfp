@@ -1,4 +1,4 @@
-![logo](https://raw.githubusercontent.com/tianhaoz95/iwfp/master/assets/medium_banner.png)
+![logo](https://raw.githubusercontent.com/tianhaoz95/iwfp/master/docs/assets/medium_banner.png)
 
 [![release firebase](https://github.com/tianhaoz95/iwfp/workflows/release%20firebase/badge.svg)](https://github.com/tianhaoz95/iwfp/actions?query=workflow%3A%22release+firebase%22)
 [![release Android app](https://github.com/tianhaoz95/iwfp/workflows/release%20Android%20app/badge.svg)](https://github.com/tianhaoz95/iwfp/actions?query=workflow%3A%22release+Android+app%22)
