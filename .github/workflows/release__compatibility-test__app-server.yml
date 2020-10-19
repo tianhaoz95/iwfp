@@ -1,13 +1,19 @@
 name: Release Server App Compatibility Tests
 on:
+  push:
+    branches:
+      - "actions/release__compatibility-test__app-server__*"
   pull_request:
     branches:
       - "master"
     paths:
-      - "app/**"
-      - "vendors/firebase/functions/**"
       - ".github/workflows/release__compatibility-test__app-server.yml"
       - ".github/checkgroup.yml"
+      - "configs/actions.json"
+      - "scripts/bash/configure_flutter.sh"
+      - "scripts/bash/initialize_environment.sh"
+      - "app/**"
+      - "vendors/firebase/functions/**"
   schedule:
     - cron: 0 2 * * *
 jobs:
@@ -22,37 +28,18 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.16.2"
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: use master channel
-        run: flutter channel master
-      - name: upgrade Flutter
-        run: flutter upgrade
-      - name: install firebase CLI
-        run: npm install -g firebase-tools
-      - name: list all simulators
-        run: xcrun instruments -s
+      - name: configure Flutter and Firebase
+        working-directory: ./scripts/bash
+        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./install_firebase_functions_dependencies.sh
       - name: start simulator
-        run: |
-          UDID=$(
-            xcrun instruments -s |
-            awk \
-              -F ' *[][]' \
-              -v 'device=iPhone 11 Pro Max (13.7)' \
-              '$1 == device { print $2 }'
-          )
-          xcrun simctl boot "${UDID:?No Simulator with this name found}"
-      - name: install server dependencies
-        working-directory: ./vendors/firebase/functions
-        run: npm install
-      - name: install server dependencies
-        working-directory: ./app
-        run: flutter pub get
+        working-directory: ./scripts/macos
+        env:
+          DEVICE_ID: ${{ steps.get_action_configs.outputs.iphone_device_id }}
+        run: ./start_emulator.sh
       - name: run offline device end to end test
         working-directory: ./vendors/firebase/functions
         run: npm run device
