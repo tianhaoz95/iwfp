@@ -1,5 +1,5 @@
 image:
-  file: .gitpod.dockerfile
+  file: environments/gitpod/Dockerfile
 github:
   prebuilds:
     master: true
