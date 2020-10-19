@@ -1,4 +1,4 @@
-name: App Build Tes (iOS)
+name: App Build Test (iOS)
 on:
   pull_request:
     branches:
