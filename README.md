@@ -8,10 +8,6 @@
 
 5% App is a utility that helps credit card users maximize cash back rewards across multiple credit cards.
 
-**A quick look** (where you select a shopping category and it tells you which card is the best):
-
-![App Screenshots](./assets/app_screenshots.png)
-
 ## Availability
 
 | Platform | Build Status | Usability Status | Open Issues | Download | Roadmap |
