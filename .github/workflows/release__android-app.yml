@@ -5,61 +5,45 @@ on:
       - "master"
     paths:
       - ".github/workflows/release__android-app.yml"
+      - "scripts/bash/configure_flutter.sh"
+      - "scripts/bash/configure_ruby.sh"
       - "scripts/bash/initialize_environment.sh"
-      - "scripts/bash/fetch_android_credentials.sh"
   push:
     branches:
       - "master"
     paths:
       - "app/pubspec.yaml"
       - "app/android/fastlane/Fastfile"
-      - ".github/workflows/release__*"
-      - ".github/workflows/app__*"
-      - ".github/workflows/server__*"
-      - ".github/checkgroup.yml"
 jobs:
   release__android-app:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
         with:
-          java-version: "12.x"
+          config_files: ./configs/actions.json
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: "2.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
-          channel: "stable"
-      - name: upgrade Flutter
-        working-directory: ./app
-        run: |
-          flutter channel master
-          flutter upgrade
-      - name: install bundler
-        run: gem install bundler:1.17.3
-      - name: install ruby packages
-        working-directory: ./app/android
-        run: bundle install
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - name: configure Flutter and Ruby
+        working-directory: ./scripts/bash
+        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./configure_ruby.sh
       - name: prepare credentials
+        working-directory: ./scripts/bash
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-        run: |
-          source ./scripts/bash/initialize_environment.sh
-          ./scripts/bash/fetch_android_credentials.sh
-      - name: install dependencies
+        run: source ./initialize_environment.sh && ./fetch_android_credentials.sh
+      - name: build app
         working-directory: ./app
-        run: flutter pub get
-      - name: build apk
-        working-directory: ./app
-        run: flutter build apk --split-per-abi
-      - name: build app bundle
-        working-directory: ./app
-        run: flutter build appbundle
+        run: flutter build appbundle && flutter build apk --split-per-abi
       - name: publish to internal track
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name == 'push' }}
         working-directory: ./app/android
         run: bundle exec fastlane internal
