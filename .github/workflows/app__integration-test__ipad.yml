@@ -18,14 +18,14 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter
-        working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh
       - name: start simulator
         working-directory: ./scripts/macos
         env:
           DEVICE_ID: ${{ steps.get_action_configs.outputs.ipad_device_id }}
         run: ./start_emulator.sh
+      - name: configure Flutter
+        working-directory: ./scripts/bash
+        run: source ./initialize_environment.sh && ./configure_flutter.sh
       - name: run offline device end to end test
         working-directory: ./app
         run: flutter drive --target=test_driver/app.dart
