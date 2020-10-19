@@ -12,6 +12,7 @@ on:
       - "configs/actions.json"
       - "scripts/bash/configure_flutter.sh"
       - "scripts/bash/initialize_environment.sh"
+      - "scripts/bash/install_firebase_functions_dependencies.sh"
       - "app/**"
       - "vendors/firebase/functions/**"
   schedule:
