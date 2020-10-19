@@ -1,4 +1,4 @@
-name: Server Docs Build Tests
+name: Server Build Tests (Docs)
 on:
   push:
     branches:
