@@ -18,11 +18,6 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter
+      - name: configure Flutter and build for macOS
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh
-      - name: enable desktop support
-        run: flutter config --enable-macos-desktop
-      - name: build macOS package
-        working-directory: ./app
-        run: flutter build macos
+        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./build_app_macos.sh
