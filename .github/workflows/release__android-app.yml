@@ -41,9 +41,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: source ./initialize_environment.sh && ./fetch_android_credentials.sh
       - name: build app
-        working-directory: ./app
+        working-directory: ${{ steps.get_action_configs.outputs.app_root }}
         run: flutter build appbundle && flutter build apk --split-per-abi
       - name: publish to internal track
         if: ${{ github.event_name == 'push' }}
-        working-directory: ./app/android
+        working-directory: ${{ steps.get_action_configs.outputs.app_root }}/android
         run: bundle exec fastlane internal
