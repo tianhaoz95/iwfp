@@ -12,6 +12,7 @@ on:
       - "configs/actions.json"
       - "scripts/configure_flutter.sh"
       - "scripts/bash/initialize_environment.sh"
+      - "scripts/bash/build_app_web.sh"
       - "app/**"
   schedule:
     - cron: 0 2 * * *
