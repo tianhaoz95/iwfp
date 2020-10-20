@@ -1,5 +1,8 @@
 name: Generic Code Health Check
 on:
+  push:
+    branches:
+      - "actions/code-health__generic__*"
   pull_request:
     branches:
       - "master"
@@ -22,7 +25,5 @@ jobs:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: run checks
-        run: |
-          source ./scripts/bash/initialize_environment.sh
-          ./scripts/bash/install_dependencies.sh
-          ./scripts/bash/lint_workspace.sh check
+        working-directory: ./scripts/bash
+        run: source ./initialize_environment.sh && ./install_dependencies.sh && ./lint_workspace.sh check
