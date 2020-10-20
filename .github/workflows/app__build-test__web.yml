@@ -12,6 +12,7 @@ on:
       - "configs/actions.json"
       - "scripts/configure_flutter.sh"
       - "scripts/bash/initialize_environment.sh"
+      - "scripts/bash/build_app_web.sh"
       - "app/**"
   schedule:
     - cron: 0 2 * * *
@@ -30,7 +31,4 @@ jobs:
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
       - name: configure Flutter
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh
-      - name: build web
-        working-directory: ./app
-        run: flutter build web
+        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./build_app_web.sh
