@@ -7,10 +7,11 @@ on:
     branches:
       - "master"
     paths:
-      - "configs/actions.json"
-      - "scripts/configure_flutter.sh"
       - ".github/checkgroup.yml"
       - ".github/workflows/app__integration-test__web.yml"
+      - "configs/actions.json"
+      - "scripts/configure_flutter.sh"
+      - "scripts/bash/run_app_integration_test_web.sh"
       - "app/**"
   schedule:
     - cron: 0 2 * * *
@@ -32,9 +33,6 @@ jobs:
           chromedriver-version: ${{ steps.get_action_configs.outputs.chrome_driver_version }}
       - name: start chrome driver
         run: chromedriver --port=${{ steps.get_action_configs.outputs.chrome_driver_port }} &
-      - name: configure Flutter
+      - name: configure Flutter and run test
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh
-      - name: run integration test
-        working-directory: ./app
-        run: flutter drive --target=test_driver/app.dart --browser-name=chrome --release
+        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./run_app_integration_test_web.sh
