@@ -32,4 +32,4 @@ jobs:
         with:
           api-level: 28
           profile: "pixel_xl"
-          script: cd ./scripts/bash && ./initialize_environment.sh && run_android_integration_test.sh
+          script: cd ./scripts/bash && ./initialize_environment.sh && ./run_android_integration_test.sh
