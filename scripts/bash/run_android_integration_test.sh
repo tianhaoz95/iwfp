@@ -9,6 +9,6 @@ cd "$APP_ROOT"
 /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
 sleep 20
 flutter doctor -v
-cd ./app && flutter pub get && flutter drive --target=test_driver/app.dart
+flutter pub get && flutter drive --target=test_driver/app.dart
 
 cd "$CURRENT_DIR"
