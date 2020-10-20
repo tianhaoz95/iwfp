@@ -25,10 +25,7 @@ jobs:
         run: ./start_emulator.sh
       - name: configure Flutter
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh
-      - name: run offline device end to end test
-        working-directory: ./app
-        run: flutter drive --target=test_driver/app.dart
+        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./run_app_integration_test.sh
       - name: upload online screenshot
         uses: actions/upload-artifact@master
         with:
