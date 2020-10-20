@@ -35,4 +35,4 @@ jobs:
         run: chromedriver --port=${{ steps.get_action_configs.outputs.chrome_driver_port }} &
       - name: configure Flutter and run test
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./run_app_integration_test_web
+        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./run_app_integration_test_web.sh
