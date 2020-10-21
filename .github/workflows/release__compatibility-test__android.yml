@@ -2,12 +2,12 @@ name: Release Server App Compatibility Tests
 on:
   push:
     branches:
-      - "actions/release__compatibility-test__app-server__*"
+      - "actions/release__compatibility-test__android__*"
   pull_request:
     branches:
       - "master"
     paths:
-      - ".github/workflows/release__compatibility-test__app-server.yml"
+      - ".github/workflows/release__compatibility-test__android.yml"
       - ".github/checkgroup.yml"
       - "configs/actions.json"
       - "scripts/bash/configure_flutter.sh"
@@ -18,7 +18,7 @@ on:
   schedule:
     - cron: 0 2 * * *
 jobs:
-  release__compatibility-test__app-server:
+  release__compatibility-test__android:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
