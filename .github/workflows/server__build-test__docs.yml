@@ -8,6 +8,8 @@ on:
       - "master"
     paths:
       - ".github/workflows/server__build-test__docs.yml"
+      - "scripts/bash/build_server_docs.sh"
+      - "scripts/bash/initialize_environment.sh"
       - "vendors/firebase/functions/**"
       - "configs/actions.json"
   schedule:
@@ -24,6 +26,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ steps.get_action_configs.outputs.node_version }}
-      - name: install dependencies and build docs
-        working-directory: ./vendors/firebase/functions
-        run: npm install && npm run docs
+      - name: configure Firebase and build docs
+        working-directory: ./scripts/bash
+        run: source ./initialize_environment.sh && ./build_server_docs.sh
