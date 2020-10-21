@@ -1,0 +1,55 @@
+name: Release Server App Compatibility Tests
+on:
+  push:
+    branches:
+      - "actions/release__compatibility-test__web__*"
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - ".github/workflows/release__compatibility-test__web.yml"
+      - ".github/checkgroup.yml"
+      - "configs/actions.json"
+      - "scripts/bash/configure_flutter.sh"
+      - "scripts/bash/initialize_environment.sh"
+      - "scripts/bash/install_firebase_functions_dependencies.sh"
+      - "app/**"
+      - "vendors/firebase/functions/**"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  release__compatibility-test__web:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.get_action_configs.outputs.node_version }}
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
+          channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
+      - uses: nanasess/setup-chromedriver@master
+        with:
+          chromedriver-version: ${{ steps.get_action_configs.outputs.chrome_driver_version }}
+      - name: start chrome driver
+        run: chromedriver --port=${{ steps.get_action_configs.outputs.chrome_driver_port }} &
+      - name: configure Flutter and Firebase
+        working-directory: ./scripts/bash
+        run: |
+          source ./initialize_environment.sh
+          ./configure_flutter.sh
+          ./install_firebase_functions_dependencies.sh
+          cd $SERVER_ROOT
+          npm run emulator &
+          cd $APP_ROOT
+          ./run_app_emulator_test_web.sh
+      - name: upload online screenshot
+        uses: actions/upload-artifact@master
+        with:
+          name: offline_screenshot_iphone
+          path: /tmp/screenshots
