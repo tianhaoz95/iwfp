@@ -12,7 +12,7 @@
     "wintest": "set FIREBASE_CONFIG=dummy && set GCLOUD_PROJECT=dummy && jest -c unit_test_jest.config.js",
     "test": "FIREBASE_CONFIG=dummy GCLOUD_PROJECT=dummy jest -c unit_test_jest.config.js",
     "e2e": "npm run build && firebase emulators:exec --only functions,firestore \"jest --detectOpenHandles ./test/end2end.test.ts\"",
-    "device": "npm run build && firebase emulators:exec --only functions,firestore \"cd ../../../app && flutter drive --target=test_driver/emulator.dart\"",
+    "device": "npm run build && firebase emulators:exec --only functions,firestore \"cd ${APP_ROOT} && flutter drive --target=test_driver/emulator.dart\"",
     "emulator": "npm run build && firebase emulators:start --only firestore,functions",
     "emulator:container": "npm run build && firebase emulators:start --token ${FIREBASE_TOKEN} --only firestore,functions",
     "deploy": "firebase deploy --only functions",

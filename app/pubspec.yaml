@@ -20,12 +20,12 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  # basic utilites
+  # Utilities
   http: ^0.12.0+4
   url_launcher: ^5.4.10
-  # third party utilities
   edit_distance: ^0.4.1
-  # firebase packages
+
+  # Firebase Packages
   firebase_core: ^0.5.0
   firebase_analytics: ^6.0.2
   firebase_auth: ^0.18.1
@@ -34,8 +34,11 @@ dependencies:
   cloud_functions: ^0.6.0
   firebase_dynamic_links: ^0.6.0
   google_sign_in: ^4.5.1
-  firebase_remote_config: ^0.4.0
-  # protobuf support
+  # Firebase Remote Config is disabled for now since we do not
+  # yet need it and it causes bug.
+  # firebase_remote_config: ^0.4.0
+
+  # Protobuf support for Dart.
   protobuf: ^1.0.1
   # provider package for dependency injection
   provider: ^4.3.2

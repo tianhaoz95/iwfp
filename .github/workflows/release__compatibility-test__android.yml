@@ -2,12 +2,12 @@ name: Release Server App Compatibility Tests
 on:
   push:
     branches:
-      - "actions/release__compatibility-test__app-server__*"
+      - "actions/release__compatibility-test__android__*"
   pull_request:
     branches:
       - "master"
     paths:
-      - ".github/workflows/release__compatibility-test__app-server.yml"
+      - ".github/workflows/release__compatibility-test__android.yml"
       - ".github/checkgroup.yml"
       - "configs/actions.json"
       - "scripts/bash/configure_flutter.sh"
@@ -18,7 +18,7 @@ on:
   schedule:
     - cron: 0 2 * * *
 jobs:
-  release__compatibility-test__app-server:
+  release__compatibility-test__android:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,22 +28,23 @@ jobs:
           config_files: ./configs/actions.json
       - uses: actions/setup-node@v1
         with:
-          node-version: "12.16.2"
+          node-version: ${{ steps.get_action_configs.outputs.node_version }}
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter and Firebase
-        working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./install_firebase_functions_dependencies.sh
       - name: start simulator
         working-directory: ./scripts/macos
         env:
           DEVICE_ID: ${{ steps.get_action_configs.outputs.iphone_device_id }}
         run: ./start_emulator.sh
-      - name: run offline device end to end test
-        working-directory: ./vendors/firebase/functions
-        run: npm run device
+      - name: configure Flutter and Firebase
+        working-directory: ./scripts/bash
+        run: |
+          source ./initialize_environment.sh
+          ./configure_flutter.sh
+          ./install_firebase_functions_dependencies.sh
+          cd $SERVER_ROOT && npm run device
       - name: upload online screenshot
         uses: actions/upload-artifact@master
         with:
