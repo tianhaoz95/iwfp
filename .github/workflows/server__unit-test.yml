@@ -15,8 +15,9 @@ on:
       - "master"
     paths:
       - ".github/workflows/server__unit-test.yml"
-      - "scripts/bash/install_firebase_functions_dependencies.sh"
       - "scripts/bash/initialize_environment.sh"
+      - "scripts/bash/install_firebase_functions_dependencies.sh"
+      - "scripts/bash/run_server_firebase_unit_test.sh"
       - "vendors/firebase/functions/**"
   schedule:
     - cron: 0 2 * * *
@@ -35,12 +36,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ steps.get_action_configs.outputs.node_version }}
-      - name: configure Firebase
+      - name: configure Firebase and run tests
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./install_firebase_functions_dependencies.sh
-      - name: lint and build
-        run: npm run lint && npm run build
-      - name: run unit tests
-        run: npm test
-      - name: run integration tests
-        run: npm run e2e
+        run: |
+          source ./initialize_environment.sh
+          ./install_firebase_functions_dependencies.sh
+          ./run_server_firebase_unit_test.sh
