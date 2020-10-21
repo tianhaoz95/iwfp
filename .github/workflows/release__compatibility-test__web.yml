@@ -13,6 +13,7 @@ on:
       - "scripts/bash/configure_flutter.sh"
       - "scripts/bash/initialize_environment.sh"
       - "scripts/bash/install_firebase_functions_dependencies.sh"
+      - "scripts/bash/run_app_emulator_test_web.sh"
       - "app/**"
       - "vendors/firebase/functions/**"
   schedule:
@@ -38,7 +39,7 @@ jobs:
           chromedriver-version: ${{ steps.get_action_configs.outputs.chrome_driver_version }}
       - name: start chrome driver
         run: chromedriver --port=${{ steps.get_action_configs.outputs.chrome_driver_port }} &
-      - name: configure Flutter and Firebase
+      - name: configure Flutter Firebase and run test
         working-directory: ./scripts/bash
         run: |
           source ./initialize_environment.sh
