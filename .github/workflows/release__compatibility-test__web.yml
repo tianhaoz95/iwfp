@@ -45,9 +45,6 @@ jobs:
           source ./initialize_environment.sh
           ./configure_flutter.sh
           ./install_firebase_functions_dependencies.sh
-          cd $SERVER_ROOT
-          npm run emulator &
-          cd $APP_ROOT
           ./run_app_emulator_test_web.sh
       - name: upload online screenshot
         uses: actions/upload-artifact@master
