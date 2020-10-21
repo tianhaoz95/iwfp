@@ -6,7 +6,8 @@ CURRENT_DIR=$(pwd)
 
 cd $SERVER_ROOT
 
-npm run emulator &
+npm run build
+firebase emulators:start --only firestore,functions &
 
 cd "$APP_ROOT"
 
