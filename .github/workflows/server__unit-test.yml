@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ steps.get_action_configs.outputs.node_version }}
-      - name: configure Firebase
+      - name: configure Firebase and run tests
         working-directory: ./scripts/bash
         run: |
           source ./initialize_environment.sh
