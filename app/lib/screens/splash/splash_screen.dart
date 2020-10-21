@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
+// import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/app_context/base_app_context.dart';
@@ -29,10 +29,12 @@ class _SplashScreen extends State<SplashScreen> {
       await Hive.initFlutter();
     }
     if (Provider.of<AppContext>(context, listen: false).needRemoteConfig()) {
-      print('set up remote config');
-      RemoteConfig remoteConfig = await RemoteConfig.instance;
-      await remoteConfig.fetch(expiration: const Duration(hours: 6));
-      await remoteConfig.activateFetched();
+      // TODO(tianhaoz95): re-enable this when remote config is officially
+      // introduced and used.
+      // RemoteConfig remoteConfig = await RemoteConfig.instance;
+      // await remoteConfig.fetch(expiration: const Duration(hours: 6));
+      // await remoteConfig.activateFetched();
+      print('Remote config is not yet enabled.');
     }
     await Provider.of<AppTheme>(context, listen: false).initialize();
     await maybeNavigateToSignIn();
