@@ -8,6 +8,6 @@ flutter upgrade
 flutter --version
 flutter doctor -v
 
-cd $PROJ_ROOT/app
+cd $APP_ROOT
 flutter pub get
 cd $PROJ_ROOT
