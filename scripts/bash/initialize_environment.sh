@@ -8,7 +8,7 @@ export PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
 export VENDOR_ROOT="$PROJ_ROOT/vendors"
 export FIREBASE_ROOT="$VENDOR_ROOT/firebase"
 export SERVER_ROOT="$FIREBASE_ROOT/functions"
-export APP_ROOT="$PROJ_ROOT/app"
+export APP_ROOT="$PROJ_ROOT/projects/app"
 export ANDROID_APP_ROOT="$APP_ROOT/android"
 export SITE_ROOT="$PROJ_ROOT/site"
 
