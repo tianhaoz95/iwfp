@@ -24,14 +24,15 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: start simulator
-        working-directory: ./scripts/macos
+      - name: "Configure Flutter, start iOS emulator and run integration tests (mock)"
+        working-directory: ./scripts/bash
         env:
           DEVICE_ID: ${{ steps.get_action_configs.outputs.ipad_device_id }}
-        run: ./start_emulator.sh
-      - name: configure Flutter
-        working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./run_app_integration_test.sh
+        run: |
+          source ./initialize_environment.sh
+          ./configure_flutter.sh
+          ./start_emulator.sh
+          ./run_app_integration_test.sh
       - name: upload online screenshot
         uses: actions/upload-artifact@master
         with:

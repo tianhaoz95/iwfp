@@ -24,6 +24,9 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: run checks
+      - name: "Install dependencies and run code health check"
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./install_dependencies.sh && ./lint_workspace.sh check
+        run: |
+          source ./initialize_environment.sh
+          ./install_dependencies.sh
+          ./lint_workspace.sh check

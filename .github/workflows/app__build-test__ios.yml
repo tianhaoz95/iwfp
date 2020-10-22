@@ -24,6 +24,9 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter
+      - name: "Configure Flutter and build iOS package"
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./build_app_ios_package.sh
+        run: |
+          source ./initialize_environment.sh
+          ./configure_flutter.sh
+          ./build_app_ios_package.sh

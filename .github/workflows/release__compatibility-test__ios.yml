@@ -1,24 +1,22 @@
-name: Release Server App Compatibility Tests
+name: Release Compatibility Tests (iOS)
 on:
   push:
     branches:
-      - "actions/release__compatibility-test__android__*"
+      - "actions/release__compatibility-test__ios__*"
   pull_request:
     branches:
       - "master"
     paths:
-      - ".github/workflows/release__compatibility-test__android.yml"
+      - ".github/workflows/release__compatibility-test__ios.yml"
       - ".github/checkgroup.yml"
       - "configs/actions.json"
       - "scripts/bash/configure_flutter.sh"
       - "scripts/bash/initialize_environment.sh"
       - "scripts/bash/install_firebase_functions_dependencies.sh"
-      - "app/**"
-      - "vendors/firebase/functions/**"
   schedule:
     - cron: 0 2 * * *
 jobs:
-  release__compatibility-test__android:
+  release__compatibility-test__ios:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -38,13 +36,13 @@ jobs:
         env:
           DEVICE_ID: ${{ steps.get_action_configs.outputs.iphone_device_id }}
         run: ./start_emulator.sh
-      - name: configure Flutter and Firebase
+      - name: "Configure Flutter, Firebase emulator and run compatibility tests"
         working-directory: ./scripts/bash
         run: |
           source ./initialize_environment.sh
           ./configure_flutter.sh
           ./install_firebase_functions_dependencies.sh
-          cd $SERVER_ROOT && npm run device
+          ./app/test/compatibility/ios.sh
       - name: upload online screenshot
         uses: actions/upload-artifact@master
         with:

@@ -18,6 +18,9 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter and build for macOS
+      - name: "Configure Flutter and build for macOS package"
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./build_app_macos.sh
+        run: |
+          source ./initialize_environment.sh
+          ./configure_flutter.sh
+          ./build_app_macos.sh

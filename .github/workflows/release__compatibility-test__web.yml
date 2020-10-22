@@ -20,7 +20,7 @@ on:
     - cron: 0 2 * * *
 jobs:
   release__compatibility-test__web:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: Monorepo-Actions/config-for-actions@main

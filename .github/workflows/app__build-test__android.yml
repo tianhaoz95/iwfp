@@ -18,16 +18,14 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter
-        working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh
-      - name: prepare credentials
+      - name: "Configure Flutter, Android credentials and build Android package"
         working-directory: ./scripts/bash
         env:
           ANDROID_SIGN_PWD: ${{ secrets.ANDROID_SIGN_PWD }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-        run: source ./initialize_environment.sh && ./fetch_android_credentials.sh
-      - name: build Android package
-        working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./build_android_package.sh
+        run: |
+          source ./initialize_environment.sh
+          ./configure_flutter.sh
+          ./fetch_android_credentials.sh
+          ./build_android_package.sh

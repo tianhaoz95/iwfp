@@ -28,6 +28,9 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter and
+      - name: "Configure Flutter and run unit tests"
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./run_app_unit_tests.sh
+        run: |
+          source ./initialize_environment.sh
+          ./configure_flutter.sh
+          ./run_app_unit_tests.sh

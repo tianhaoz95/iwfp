@@ -38,13 +38,16 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: build
+      - name: "Build Firebase related projects"
+        working-directory: ./scripts/bash
         run: |
-          source ./scripts/bash/initialize_environment.sh
-          bash ./scripts/bash/build_firebase_related.sh
-      - name: deploy to Firebase
+          source ./initialize_environment.sh
+          ./build_firebase_related.sh
+      - name: "Upload to Firebase"
         if: ${{ github.event_name != 'pull_request' }}
-        working-directory: ./vendors/firebase
+        working-directory: ./scripts/bash
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
-        run: firebase deploy --token $FIREBASE_TOKEN
+        run: |
+          source ./initialize_environment.sh
+          ./vendors/firebase/release.sh

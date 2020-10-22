@@ -27,7 +27,7 @@ jobs:
       - name: configure Flutter
         working-directory: ./scripts/bash
         run: source ./initialize_environment.sh && ./configure_flutter.sh
-      - name: run tests
+      - name: "Run Android integration test (mock)"
         timeout-minutes: 30
         uses: reactivecircus/android-emulator-runner@v2.11.1
         env:
@@ -38,4 +38,4 @@ jobs:
         with:
           api-level: 28
           profile: "pixel_xl"
-          script: cd ./scripts/bash && ./initialize_environment.sh && ./run_android_integration_test.sh
+          script: cd ./scripts/bash && source ./initialize_environment.sh && ./run_android_integration_test.sh
