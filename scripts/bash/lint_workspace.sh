@@ -64,8 +64,8 @@ cd $PROJ_ROOT
 $GENERIC_CHECKER $PROJ_ROOT/.github/workflows/*.yml
 
 # Check project site
-$GENERIC_CHECKER $PROJ_ROOT/site/package.json
-cd $PROJ_ROOT/site
+$GENERIC_CHECKER $SITE_ROOT/package.json
+cd $SITE_ROOT
 if [[ $1 == "check" ]]
 then
   yarn docs:lint
