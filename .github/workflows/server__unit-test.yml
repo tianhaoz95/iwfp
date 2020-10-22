@@ -15,6 +15,7 @@ on:
       - "master"
     paths:
       - ".github/workflows/server__unit-test.yml"
+      - ".github/checkgroup.yml"
       - "scripts/bash/initialize_environment.sh"
       - "scripts/bash/install_firebase_functions_dependencies.sh"
       - "scripts/bash/run_server_firebase_unit_test.sh"

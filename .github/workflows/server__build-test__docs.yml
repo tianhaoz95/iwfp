@@ -7,11 +7,12 @@ on:
     branches:
       - "master"
     paths:
-      - ".github/workflows/server__build-test__docs.yml"
-      - "scripts/bash/build_server_docs.sh"
-      - "scripts/bash/initialize_environment.sh"
-      - "vendors/firebase/functions/**"
       - "configs/actions.json"
+      - ".github/checkgroup.yml"
+      - ".github/workflows/server__build-test__docs.yml"
+      - "scripts/bash/initialize_environment.sh"
+      - "scripts/bash/build_server_docs.sh"
+      - "vendors/firebase/functions/**"
   schedule:
     - cron: 0 2 * * *
 jobs:

@@ -4,20 +4,24 @@ on:
     branches:
       - "master"
     paths:
-      - "vendors/firebase/**"
-      - "scripts/build_firebase_related.sh"
       - ".github/workflows/release__firebase-related.yml"
-      - "app/**"
-      - "site/**"
+      - ".github/checkgroup.yml"
+      - "scripts/bash/initialize_environment.sh"
+      - "scripts/bash/build_firebase_related.sh"
+      - "vendors/firebase/**"
+      - "projects/proejct-website/**"
+      - "projects/app/**"
   push:
     branches:
       - "master"
     paths:
-      - "site/**"
-      - "vendors/firebase/**"
-      - "app/**"
       - ".github/workflows/release__firebase-related.yml"
       - ".github/checkgroup.yml"
+      - "scripts/bash/initialize_environment.sh"
+      - "scripts/bash/build_firebase_related.sh"
+      - "vendors/firebase/**"
+      - "projects/proejct-website/**"
+      - "projects/app/**"
 jobs:
   release__firebase-related:
     runs-on: ubuntu-latest
@@ -27,12 +31,9 @@ jobs:
         id: get_action_configs
         with:
           config_files: ./configs/actions.json
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
       - uses: actions/setup-node@v1
         with:
-          node-version: "12.16.2"
+          node-version: ${{ steps.get_action_configs.outputs.node_version }}
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
