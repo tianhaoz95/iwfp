@@ -7,5 +7,5 @@
   "iphone_device_id": "iPhone 11 Pro Max (13.7)",
   "ipad_device_id": "iPad Pro (12.9-inch) (4th generation) (13.7)",
   "node_version": "12.16.2",
-  "app_root": "./app"
+  "app_root": "./projects/app"
 }
