@@ -29,6 +29,9 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter
+      - name: "Configure Flutter and build web app"
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh && ./build_app_web.sh
+        run: |
+          source ./initialize_environment.sh
+          ./configure_flutter.sh
+          ./build_app_web.sh

@@ -24,17 +24,15 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: configure Flutter
+      - name: "Configure Flutter, start iOS emulator and run integration tests (mock)"
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./configure_flutter.sh
-      - name: start simulator
-        working-directory: ./scripts/macos
         env:
           DEVICE_ID: ${{ steps.get_action_configs.outputs.iphone_device_id }}
-        run: ./start_emulator.sh
-      - name: run offline device end to end test
-        working-directory: ./app
-        run: flutter drive --target=test_driver/app.dart
+        run: |
+          source ./initialize_environment.sh
+          ./configure_flutter.sh
+          ./app/test/emulator/ios.sh
+          ./run_app_integration_test.sh
       - name: upload online screenshot
         uses: actions/upload-artifact@master
         with:

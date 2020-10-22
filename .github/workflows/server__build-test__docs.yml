@@ -27,6 +27,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ steps.get_action_configs.outputs.node_version }}
-      - name: configure Firebase and build docs
+      - name: "Configure Firebase and build docs"
         working-directory: ./scripts/bash
-        run: source ./initialize_environment.sh && ./build_server_docs.sh
+        run: |
+          source ./initialize_environment.sh
+          ./build_server_docs.sh
