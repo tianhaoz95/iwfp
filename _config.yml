@@ -1,7 +1,0 @@
-theme: jekyll-theme-primer
-title: Welcome to I Want 5% Project Page
-description: Let's make credit card cashback reward simple again.
-markdown: GFM
-include:
-  - "CONTRIBUTING.md"
-  - "CODE_OF_CONDUCT.md"
