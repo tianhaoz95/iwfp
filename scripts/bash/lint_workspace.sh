@@ -82,9 +82,6 @@ $GENERIC_CHECKER $FIREBASE_ROOT/firebase.json $FIREBASE_ROOT/database.rules.json
 # Check gitpod config
 $GENERIC_CHECKER $PROJ_ROOT/.gitpod.yml
 
-# Check GitHub pages config
-$GENERIC_CHECKER $PROJ_ROOT/_config.yml
-
 # Check vscode config
 $GENERIC_CHECKER $PROJ_ROOT/.vscode/settings.json
 
