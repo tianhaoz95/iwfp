@@ -1,5 +1,11 @@
 name: App Integration Test (Android)
 on:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - ".github/checkgroup.yml"
+      - ".github/workflows/app__integration-test__android.yml"
   push:
     branches:
       - "actions/app__integration-test__android__*"

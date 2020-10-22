@@ -4,6 +4,7 @@ on:
     branches:
       - "master"
     paths:
+      - ".github/checkgroup.yml"
       - ".github/workflows/release__android-app.yml"
       - "scripts/bash/configure_flutter.sh"
       - "scripts/bash/configure_ruby.sh"

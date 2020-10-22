@@ -19,7 +19,7 @@ jobs:
           config_files: ./configs/actions.json
       - uses: actions/setup-node@v1
         with:
-          node-version: "12.16.2"
+          node-version: ${{ steps.get_action_configs.outputs.node_version }}
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}

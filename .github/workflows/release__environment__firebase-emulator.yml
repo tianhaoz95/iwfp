@@ -4,10 +4,11 @@ on:
     branches:
       - master
     paths:
-      - "functions/**"
-      - "Dockerfile"
       - ".github/workflows/release__environment__firebase-emulator.yml"
       - ".github/checkgroup.yml"
+      - "vendors/firebase/functions/**"
+      - "scripts/bash/query_image_tag.sh"
+      - "environments/firebase_emulator/Dockerfile"
   push:
     branches:
       - master
@@ -16,9 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/config-for-actions@main
+        id: get_action_configs
+        with:
+          config_files: ./configs/actions.json
       - uses: actions/setup-node@v1
         with:
-          node-version: "12.16.2"
+          node-version: ${{ steps.get_action_configs.outputs.node_version }}
       - run: npm install
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1

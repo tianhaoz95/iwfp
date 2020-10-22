@@ -1,40 +1,53 @@
 subprojects:
-  - id: "dependabot"
+  - id: "Dependabot"
     paths:
       - ".github/dependabot.yml"
     checks:
       - ".github/dependabot.yml"
-  - id: "repository infra"
+  - id: "Universal configuration"
     paths:
-      - ".github/code-health__*"
+      - "configs/actions.json"
+      - ".github/checkgroup.yml"
+      - "scripts/bash/initialize_environment.sh"
+    checks:
+      - "release__firebase-related"
+      - "server__unit-test"
+      - "release__environment__firebase-emulator"
+      - "release__environment__chrome-driver"
+      - "app__integration-test__ipad"
+      - "app__integration-test__android"
+      - "app__integration-test__iphone"
+  - id: "Firebase releasing pipeline"
+    paths:
+      - ".github/workflows/release__firebase-related.yml"
+      - "scripts/bash/build_firebase_related.sh"
+    checks:
+      - "release__firebase-related"
+  - id: "Global code health checking pipeline"
+    paths:
+      - ".github/workflows/code-health__generic.yml"
+      - "scripts/bash/lint_workspace.sh"
     checks:
       - "code-health__generic"
-  - id: "server infra"
+  - id: "Release environment (Firebase emulator) pipeline"
     paths:
-      - ".github/server__*"
-      - ".github/release__*"
+      - ".github/workflows/release__environment__firebase-emulator.yml"
+      - "scripts/bash/query_image_tag.sh"
     checks:
-      - "server__unit-test"
-      - "server__build-test__docs"
-      - "release__compatibility-test__app-server"
       - "release__environment__firebase-emulator"
-  - id: "app infra"
+  - id: "Release environment (chrome driver)"
     paths:
-      - ".github/app__*"
-      - ".github/release__*"
-      - "scripts/configure_flutter.sh"
+      - ".github/workflows/release__environment__chrome-driver.yml"
+      - "environments/chromedriver/Dockerfile"
+      - "environments/chromedriver/entrypoint.sh"
     checks:
-      - "app__build-test__web-catalog"
-      - "app__build-test__web"
-      - "app__build-test__docs"
-      - "app__build-test__android"
-      - "app__build-test__ios"
-      - "app__build-test__macos"
-      - "app__unit-test"
-      - "app__integration-test__ipad"
-      - "app__integration-test__iphone"
-      - "app__integration-test__android"
-      - "release__compatibility-test__app-server"
+      - "release__environment__chrome-driver"
+  - id: "Server build test (Docs) pipeline"
+    paths:
+      - ".github/workflows/server__build-test__docs.yml"
+      - "scripts/bash/build_server_docs.sh"
+    checks:
+      - "server__build-test__docs"
   - id: "client application"
     paths:
       - "app/**"
@@ -49,12 +62,12 @@ subprojects:
       - "app__integration-test__ipad"
       - "app__integration-test__iphone"
       - "app__integration-test__android"
-      - "release__compatibility-test__app-server"
+      - "release__compatibility-test__web"
   - id: "server"
     paths:
       - "vendors/firebase/functions/**"
     checks:
       - "server__unit-test"
       - "server__build-test__docs"
-      - "release__compatibility-test__app-server"
       - "release__environment__firebase-emulator"
+      - "release__compatibility-test__web"
