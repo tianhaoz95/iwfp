@@ -45,11 +45,11 @@ cd $PROJ_ROOT
 
 # Check app code
 $GENERIC_CHECKER \
-  $PROJ_ROOT/app/pubspec.yaml \
-  $PROJ_ROOT/app/analysis_options.yaml \
-  $PROJ_ROOT/app/dartdoc_options.yaml \
-  $PROJ_ROOT/app/README.md
-cd $PROJ_ROOT/app
+  $APP_ROOT/pubspec.yaml \
+  $APP_ROOT/analysis_options.yaml \
+  $APP_ROOT/dartdoc_options.yaml \
+  $APP_ROOT/README.md
+cd $APP_ROOT
 if [[ $1 == "check" ]]
 then
   flutter analyze
