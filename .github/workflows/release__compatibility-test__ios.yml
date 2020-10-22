@@ -31,16 +31,14 @@ jobs:
         with:
           flutter-version: ${{ steps.get_action_configs.outputs.flutter_version }}
           channel: ${{ steps.get_action_configs.outputs.flutter_channel }}
-      - name: start simulator
-        working-directory: ./scripts/macos
-        env:
-          DEVICE_ID: ${{ steps.get_action_configs.outputs.iphone_device_id }}
-        run: ./start_emulator.sh
       - name: "Configure Flutter, Firebase emulator and run compatibility tests"
         working-directory: ./scripts/bash
+        env:
+          DEVICE_ID: ${{ steps.get_action_configs.outputs.iphone_device_id }}
         run: |
           source ./initialize_environment.sh
           ./configure_flutter.sh
+          ./app/test/emulator/ios.sh
           ./install_firebase_functions_dependencies.sh
           ./app/test/compatibility/ios.sh
       - name: upload online screenshot
