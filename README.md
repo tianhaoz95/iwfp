@@ -1,11 +1,5 @@
 ![logo](https://raw.githubusercontent.com/tianhaoz95/iwfp/master/docs/assets/medium_banner.png)
 
-[![release firebase](https://github.com/tianhaoz95/iwfp/workflows/release%20firebase/badge.svg)](https://github.com/tianhaoz95/iwfp/actions?query=workflow%3A%22release+firebase%22)
-[![release Android app](https://github.com/tianhaoz95/iwfp/workflows/release%20Android%20app/badge.svg)](https://github.com/tianhaoz95/iwfp/actions?query=workflow%3A%22release+Android+app%22)
-[![checkin app](https://github.com/tianhaoz95/iwfp/workflows/checkin%20app/badge.svg)](https://github.com/tianhaoz95/iwfp/actions?query=workflow%3A%22checkin+app%22)
-[![checkin server](https://github.com/tianhaoz95/iwfp/workflows/checkin%20server/badge.svg)](https://github.com/tianhaoz95/iwfp/actions?query=workflow%3A%22checkin+server%22)
-[![guardians of the pull requests](https://github.com/tianhaoz95/iwfp/workflows/guardians%20of%20the%20pull%20requests/badge.svg)](https://github.com/tianhaoz95/iwfp/actions?query=workflow%3A%22guardians+of+the+pull+requests%22)
-
 5% App is a utility that helps credit card users maximize cash back rewards across multiple credit cards.
 
 ## Availability
