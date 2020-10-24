@@ -1,0 +1,18 @@
+name: Duplicate Docs
+on:
+  push:
+    branches:
+      - "master"
+jobs:
+  automation__dup-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Monorepo-Actions/file-dup-action@main
+        with:
+          username: "tianhaoz95"
+          email: "tianhaoz@umich.edu"
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
+          config_files: "configs/file-dup-action.json"
+          method: "pull_request"
+          branch: "chore/dup-docs"
