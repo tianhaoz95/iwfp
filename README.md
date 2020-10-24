@@ -15,15 +15,15 @@
 
 For the latest updates, please subscribe to [newsletter](https://jacksonz.substack.com).
 
-## Helpful Resource
+## Useful Links
 
-- [Project Site](https://iwfp-project.web.app/)
-- [Blog](https://medium.com/i-want-5)
-- Apps
-  - [Coverage Report](https://iwfp-app-cov.web.app/)
-  - [Docs](https://iwfp-app-docs.web.app/)
-- Server
-  - [Docs](https://iwfp-server-docs.web.app/)
+|           Name           |                           Description                            |                URL                 |
+| :----------------------: | :--------------------------------------------------------------: | :--------------------------------: |
+|       Project site       |        The website for user-facing project introduction.         |   <https://iwfp-project.web.app>   |
+|           Blog           |           The Medium publication for project updates.            |   <https://medium.com/i-want-5>    |
+|   App coverage report    | The website showing the code coverage status on the main branch. |   <https://iwfp-app-cov.web.app>   |
+|  App API documentation   |        The auto-generated API documentation for the app.         |  <https://iwfp-app-docs.web.app>   |
+| Server API documentation |       The auto-generated API documentation for the server.       | <https://iwfp-server-docs.web.app> |
 
 ## Contribute
 
