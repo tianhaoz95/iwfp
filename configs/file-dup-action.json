@@ -1,5 +1,17 @@
 {
     "README.md": [
         "docs/README.md"
+    ],
+    "CONTRIBUTING.md": [
+        "docs/CONTRIBUTING.md"
+    ],
+    "CODE_OF_CONDUCT.md": [
+        "docs/CODE_OF_CONDUCT.md"
+    ],
+    "SECURITY.md": [
+        "docs/SECURITY.md"
+    ],
+    "LICENSE": [
+        "docs/LICENSE.md"
     ]
 }
