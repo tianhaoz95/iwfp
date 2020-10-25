@@ -3,10 +3,10 @@ Set-Variable -Name PROJ_ROOT -Value (get-item $PSScriptRoot).parent.parent.FullN
 Write-Output $PROJ_ROOT
 
 # Protobuf location
-Set-Variable -Name SRC_DIR -Value $PROJ_ROOT/interfaces
+Set-Variable -Name SRC_DIR -Value $PROJ_ROOT/projects/interfaces
 
 # Dart code locations
-Set-Variable -Name DART_DST_DIR -Value $PROJ_ROOT/app/lib/services/interfaces
+Set-Variable -Name DART_DST_DIR -Value $PROJ_ROOT/projects/app/lib/services/interfaces
 
 # TypeScript code locations
 Set-Variable -Name  TS_DST_DIR -Value $PROJ_ROOT/vendors/firebase/functions/src/interfaces
