@@ -19,3 +19,4 @@ jobs:
           config_files: "configs/file-dup-action.json"
           method: "pull_request"
           base: "master"
+          head: "chore/duplicate-documentation"
