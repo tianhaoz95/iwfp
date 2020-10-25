@@ -1,4 +1,12 @@
 pull_request_rules:
+  - name: auto merge auto dup docs
+    conditions:
+      - author=tianhaoz95
+      - base=master
+      - label=auto-docs-dup
+    actions:
+      merge:
+        method: squash
   - name: auto merge for dependabot
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
