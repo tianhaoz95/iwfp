@@ -18,4 +18,4 @@ jobs:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
           config_files: "configs/file-dup-action.json"
           method: "pull_request"
-          branch: "chore/dup-docs"
+          base: "master"
