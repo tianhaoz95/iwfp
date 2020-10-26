@@ -4,6 +4,7 @@ import 'package:iwfpapp/screens/auth/not_signed_in/github_sign_in.dart';
 import 'package:iwfpapp/screens/auth/not_signed_in/google_sign_in.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/config/typedefs/nav_config.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:iwfpapp/widgets/layouts/listview_item.dart';
 import 'package:provider/provider.dart';
 
@@ -64,6 +65,20 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                       hintText: 'password',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0))))),
+          ListViewItem(
+            child: SignInButton(
+              Buttons.Email,
+              text: 'Sign in with Email',
+              onPressed: () {},
+            ),
+          ),
+          ListViewItem(
+            child: SignInButton(
+              Buttons.GitHub,
+              text: 'Sign in with GitHub',
+              onPressed: () {},
+            ),
+          ),
           ListViewItem(
               child: Material(
             child: RaisedButton(

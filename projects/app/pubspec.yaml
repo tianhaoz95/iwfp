@@ -38,6 +38,9 @@ dependencies:
   # yet need it and it causes bug.
   # firebase_remote_config: ^0.4.0
 
+  # Icons
+  flutter_signin_button: ^1.1.0
+
   # Protobuf support for Dart.
   protobuf: ^1.0.1
   # provider package for dependency injection
