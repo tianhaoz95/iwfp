@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
-    "@types/node": "^14.14.2",
+    "@types/node": "^14.14.3",
     "axios": "^0.20.0",
     "firebase": "^7.24.0",
     "firebase-functions-test": "^0.2.2",
