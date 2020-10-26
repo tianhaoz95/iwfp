@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 // import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:iwfpapp/screens/error/error_screen_with_recover_route.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 import 'package:iwfpapp/services/app_context/base_app_context.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
@@ -18,6 +19,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreen extends State<SplashScreen> {
+  Future<void> maybeInitAppData() async {
+    try {
+      await initAppData();
+    } catch (err) {
+      Navigator.of(context).pushReplacementNamed(
+          '/error_screen_with_recover_route',
+          arguments:
+              ErrorScreenArgs('Init app data error', err.toString(), '/'));
+    }
+  }
+
   Future<void> initAppData() async {
     if (Provider.of<AppContext>(context, listen: false).needFirebase()) {
       /// Only initialize Firebase core if the app is in production mode.
@@ -80,7 +92,7 @@ class _SplashScreen extends State<SplashScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    initAppData();
+    maybeInitAppData();
   }
 
   @override
