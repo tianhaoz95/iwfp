@@ -336,7 +336,7 @@ packages:
       name: firebase_performance
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0"
+    version: "0.4.0+2"
   fixnum:
     dependency: transitive
     description:
@@ -371,6 +371,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_webview_plugin:
+    dependency: transitive
+    description:
+      name: flutter_webview_plugin
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.11"
   font_awesome_flutter:
     dependency: transitive
     description:
@@ -383,6 +390,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  github_sign_in:
+    dependency: "direct main"
+    description:
+      name: github_sign_in
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   glob:
     dependency: transitive
     description:
@@ -921,5 +935,5 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.10.0-110 <=2.11.0-256.0.dev"
+  dart: ">=2.10.0-110 <=2.11.0-242.0.dev"
   flutter: ">=1.16.0 <2.0.0"

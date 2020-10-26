@@ -76,7 +76,10 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
             child: SignInButton(
               Buttons.GitHub,
               text: 'Sign in with GitHub',
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<AppAuth>(context, listen: false)
+                    .signInWithGitHub(context: context);
+              },
             ),
           ),
           ListViewItem(

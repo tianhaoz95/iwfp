@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:iwfpapp/services/config/typedefs/auth_states.dart';
 import 'package:iwfpapp/services/config/typedefs/reset_email_states.dart';
@@ -47,11 +48,11 @@ abstract class AppAuth extends ChangeNotifier {
     }
   }
 
-  Future<void> signInWithGitHub() async {
+  Future<void> signInWithGitHub({BuildContext context}) async {
     try {
       authState = AuthState.LOADING;
       notifyListeners();
-      await signInWithGitHubHandler();
+      await signInWithGitHubHandler(context: context);
       authState = AuthState.SIGNED_IN;
       notifyListeners();
     } catch (err) {
@@ -146,7 +147,7 @@ abstract class AppAuth extends ChangeNotifier {
 
   Future<void> signInWithGoogleHandler();
 
-  Future<void> signInWithGitHubHandler();
+  Future<void> signInWithGitHubHandler({BuildContext context});
 
   Future<void> signUpWithEmailHandler(String email, String pwd);
 

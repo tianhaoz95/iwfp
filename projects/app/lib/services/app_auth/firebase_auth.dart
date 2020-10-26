@@ -1,4 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:github_sign_in/github_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 
@@ -38,9 +41,29 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
   }
 
   @override
-  Future<void> signInWithGitHubHandler() async {
-    AuthCredential cred = GithubAuthProvider.credential('cf66baec2260c0d635dd');
-    authResult = await _auth.signInWithCredential(cred);
+  Future<void> signInWithGitHubHandler({BuildContext context}) async {
+    if (kIsWeb) {
+      GithubAuthProvider githubProvider = GithubAuthProvider();
+      await FirebaseAuth.instance.signInWithPopup(githubProvider);
+    } else {
+      final String clientId = String.fromEnvironment('GITHUB_AUTH_CLIENT_ID');
+      final String clientSecret =
+          String.fromEnvironment('GITHUB_AUTH_CLIENT_SECRET');
+      final GitHubSignIn gitHubSignIn = GitHubSignIn(
+          clientId: clientId,
+          clientSecret: clientSecret,
+          redirectUrl: 'https://iwfpapp.firebaseapp.com/__/auth/handler');
+      if (context != null) {
+        final result = await gitHubSignIn.signIn(context);
+        final AuthCredential githubAuthCredential =
+            GithubAuthProvider.credential(result.token);
+        final UserCredential cred = await FirebaseAuth.instance
+            .signInWithCredential(githubAuthCredential);
+        print(cred.user.displayName);
+      } else {
+        print('Context not found (required for mobile).');
+      }
+    }
   }
 
   @override

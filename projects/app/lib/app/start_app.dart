@@ -23,10 +23,6 @@ void startApp({
   bool allowDynamicLink = true,
 }) {
   WidgetsFlutterBinding.ensureInitialized();
-  if (shouldReportDevCrashes) {
-    // TODO(tianhaoz95): migrate to up-to-date crash reporting
-    // API, maybe move to splash screen.
-  }
   AppContext appContext =
       getAppContext(appContextType, allowDynamicLink: allowDynamicLink);
   AppAuth appAuth = getAppAuth(appAuthType);

@@ -30,10 +30,11 @@ dependencies:
   firebase_analytics: ^6.0.2
   firebase_auth: ^0.18.1
   firebase_crashlytics: ^0.2.1+1
-  firebase_performance: ^0.4.0
+  firebase_performance: ^0.4.0+2
   cloud_functions: ^0.6.0
   firebase_dynamic_links: ^0.6.0
   google_sign_in: ^4.5.1
+  github_sign_in: ^0.0.1
   # Firebase Remote Config is disabled for now since we do not
   # yet need it and it causes bug.
   # firebase_remote_config: ^0.4.0

@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 
 class DumbAuth extends AppAuth {
@@ -29,7 +30,7 @@ class DumbAuth extends AppAuth {
   }
 
   @override
-  Future<void> signInWithGitHubHandler() async {
+  Future<void> signInWithGitHubHandler({BuildContext context}) async {
     await Future.delayed(Duration(milliseconds: 200));
   }
 
