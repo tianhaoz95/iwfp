@@ -1,4 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:github_sign_in/github_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 
@@ -38,9 +41,40 @@ class AppAuthUsingFirebaseAuth extends AppAuth {
   }
 
   @override
-  Future<void> signInWithGitHubHandler() async {
-    AuthCredential cred = GithubAuthProvider.credential('cf66baec2260c0d635dd');
-    authResult = await _auth.signInWithCredential(cred);
+  Future<void> signInWithGitHubHandler({BuildContext context}) async {
+    if (kIsWeb) {
+      GithubAuthProvider githubProvider = GithubAuthProvider();
+      githubProvider.addScope('repo');
+      githubProvider.setCustomParameters({
+        'allow_signup': 'true',
+      });
+      await FirebaseAuth.instance.signInWithPopup(githubProvider);
+    } else {
+      const String clientId = String.fromEnvironment('GITHUB_AUTH_CLIENT_ID');
+      const String clientSecret =
+          String.fromEnvironment('GITHUB_AUTH_CLIENT_SECRET');
+      if (clientId.isEmpty || clientSecret.isEmpty) {
+        print('GitHub Oauth client ID or secret is empty.');
+        throw ('GitHub Oauth credential not found.');
+      }
+      print('Use ID ${clientId} and secret ${clientSecret}');
+      final GitHubSignIn gitHubSignIn = GitHubSignIn(
+          clientId: clientId,
+          clientSecret: clientSecret,
+          scope: 'repo,user,gist,user:email',
+          allowSignUp: true,
+          redirectUrl: 'https://iwfpapp.firebaseapp.com/__/auth/handler');
+      if (context != null) {
+        final result = await gitHubSignIn.signIn(context);
+        final AuthCredential githubAuthCredential =
+            GithubAuthProvider.credential(result.token);
+        final UserCredential cred = await FirebaseAuth.instance
+            .signInWithCredential(githubAuthCredential);
+        print('Signed in user with id ${cred.user.displayName} using GitHub');
+      } else {
+        print('Context not found (required for mobile).');
+      }
+    }
   }
 
   @override

@@ -43,7 +43,7 @@ jobs:
           source ./initialize_environment.sh
           ./configure_flutter.sh
           ./configure_ruby.sh
-          ./fetch_android_credentials.sh
+          ./app/cred/fetch.sh
           ./app/build/android.sh
       - name: publish to internal track
         if: ${{ github.event_name == 'push' }}

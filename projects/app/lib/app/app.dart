@@ -6,6 +6,7 @@ import 'package:iwfpapp/screens/add_card_from_template/add_card_from_template_sc
 import 'package:iwfpapp/screens/add_promo/add_promo_screen.dart';
 import 'package:iwfpapp/screens/delete_account/delete_account_screen.dart';
 import 'package:iwfpapp/screens/edit_card/edit_card_screen.dart';
+import 'package:iwfpapp/screens/error/error_screen_with_recover_route.dart';
 import 'package:iwfpapp/screens/forgot_password/forgot_password_screen.dart';
 import 'package:iwfpapp/screens/home/home_screen.dart';
 import 'package:iwfpapp/screens/placeholder/main.dart';
@@ -53,6 +54,8 @@ class IwfpApp extends StatelessWidget {
                 '/remove_promo': (context) => RemovePromoScreen(),
                 '/delete_account': (context) => DeleteAccountScreen(),
                 '/forgot_password': (context) => ForgotPasswordScreen(),
+                '/error_screen_with_recover_route': (context) =>
+                    ErrorScreenWithRecoverRoute(),
               },
             ));
       },

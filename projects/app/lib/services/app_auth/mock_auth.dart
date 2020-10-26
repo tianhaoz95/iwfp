@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:iwfpapp/services/app_auth/base_auth.dart';
 
 class MockAuth extends AppAuth {
@@ -47,7 +48,7 @@ class MockAuth extends AppAuth {
   }
 
   @override
-  Future<void> signInWithGitHubHandler() async {
+  Future<void> signInWithGitHubHandler({BuildContext context}) async {
     await Future.delayed(Duration(milliseconds: 200));
     signedIn = true;
     userEmail = 'example@googleauth.com';
