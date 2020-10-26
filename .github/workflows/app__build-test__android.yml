@@ -27,5 +27,5 @@ jobs:
         run: |
           source ./initialize_environment.sh
           ./configure_flutter.sh
-          ./fetch_android_credentials.sh
+          ./app/cred/fetch_android.sh
           ./build_android_package.sh

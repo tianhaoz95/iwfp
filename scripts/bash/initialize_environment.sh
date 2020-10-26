@@ -12,6 +12,8 @@ export PROJECTS_ROOT="$PROJ_ROOT/projects"
 export APP_ROOT="$PROJECTS_ROOT/app"
 export ANDROID_APP_ROOT="$APP_ROOT/android"
 export SITE_ROOT="$PROJECTS_ROOT/project-website"
+export CREDENTIAL_REPOSITORY="iwfp-credentials"
+export TEMP_DIR="/tmp"
 
 echo "Initialize build area for Firebase release."
 export BUILD_DIR="$FIREBASE_ROOT/build"

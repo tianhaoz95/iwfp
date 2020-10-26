@@ -67,13 +67,6 @@ class _AuthNotSignedInContent extends State<AuthNotSignedInContent> {
                           borderRadius: BorderRadius.circular(5.0))))),
           ListViewItem(
             child: SignInButton(
-              Buttons.Email,
-              text: 'Sign in with Email',
-              onPressed: () {},
-            ),
-          ),
-          ListViewItem(
-            child: SignInButton(
               Buttons.GitHub,
               text: 'Sign in with GitHub',
               onPressed: () {

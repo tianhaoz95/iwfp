@@ -9,7 +9,7 @@ void main() {
     appAuthType: AppAuthType.FIREBASE_AUTH,
     backendType: BackendType.MOCK,
     appThemeType: AppThemeType.MOCK,
-    appContextType: AppContextType.MOCK,
+    appContextType: AppContextType.PROD,
     allowDynamicLink: false,
     shouldReportDevCrashes: false,
   );
