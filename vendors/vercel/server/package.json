@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "tsc && next build",
+    "build:server-core": "cd ../../../projects/server-core && npm run build",
+    "build:ts": "tsc",
+    "build": "npm run build:server-core && npm install && npm run build:ts && next build",
     "start": "next start",
     "format": "prettier --write pages/api/proto.ts"
   },
