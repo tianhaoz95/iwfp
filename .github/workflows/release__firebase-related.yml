@@ -19,6 +19,7 @@ on:
       - ".github/checkgroup.yml"
       - "scripts/bash/initialize_environment.sh"
       - "scripts/bash/build_firebase_related.sh"
+      - "scripts/bash/vendors/firebase/release.sh"
       - "vendors/firebase/**"
       - "projects/proejct-website/**"
       - "projects/app/**"
