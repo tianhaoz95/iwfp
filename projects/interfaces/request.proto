@@ -34,3 +34,16 @@ message PromotionUpdateRequest {
   string target_card_id = 1;
   Promotion updated_promotion_data = 2;
 }
+
+message HttpBasedRequest {
+  bool require_auth = 1;
+  string token = 2;
+  oneof request {
+    CreditCardCreationRequest credit_card_creation_request = 3;
+    CreditCardUpdateRequest credit_card_update_request = 4;
+    CreditCardRemovalRequest credit_card_removal_request = 5;
+    PromotionAdditionRequest promotion_addition_request = 6;
+    PromotionRemovalRequest promotion_removal_request = 7;
+    PromotionUpdateRequest promotion_update_request = 8;
+  }
+}

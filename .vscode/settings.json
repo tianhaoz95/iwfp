@@ -2,5 +2,8 @@
   "dart.analysisExcludedFolders": [
     "./iwfpapp/lib/generated_plugin_registrant.dart"
   ],
+  "protoc": {
+    "options": ["--proto_path=${workspaceDir}/projects/interfaces"]
+  },
   "cSpell.words": ["ipad", "macos", "reactivecircus", "subosito"]
 }

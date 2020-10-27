@@ -1,0 +1,26 @@
+{
+  "name": "nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "tsc && next build",
+    "start": "next start",
+    "format": "prettier --write pages/api/proto.ts"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.8",
+    "@vercel/node": "^1.8.4",
+    "cors": "^2.8.5",
+    "iwfp-server-core": "file:../../../projects/server-core",
+    "next": "9.5.4",
+    "protobufjs": "^6.10.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.53",
+    "prettier": "^2.1.2",
+    "typescript": "^4.0.5"
+  }
+}
