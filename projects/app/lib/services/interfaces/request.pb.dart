@@ -383,3 +383,178 @@ class PromotionUpdateRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $1.Promotion ensureUpdatedPromotionData() => $_ensure(1);
 }
+
+enum HttpBasedRequest_Request {
+  creditCardCreationRequest,
+  creditCardUpdateRequest,
+  creditCardRemovalRequest,
+  promotionAdditionRequest,
+  promotionRemovalRequest,
+  promotionUpdateRequest,
+  notSet
+}
+
+class HttpBasedRequest extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, HttpBasedRequest_Request>
+      _HttpBasedRequest_RequestByTag = {
+    3: HttpBasedRequest_Request.creditCardCreationRequest,
+    4: HttpBasedRequest_Request.creditCardUpdateRequest,
+    5: HttpBasedRequest_Request.creditCardRemovalRequest,
+    6: HttpBasedRequest_Request.promotionAdditionRequest,
+    7: HttpBasedRequest_Request.promotionRemovalRequest,
+    8: HttpBasedRequest_Request.promotionUpdateRequest,
+    0: HttpBasedRequest_Request.notSet
+  };
+  static final $pb.BuilderInfo _i =
+      $pb.BuilderInfo('HttpBasedRequest', createEmptyInstance: create)
+        ..oo(0, [3, 4, 5, 6, 7, 8])
+        ..aOB(1, 'requireAuth')
+        ..aOS(2, 'token')
+        ..aOM<CreditCardCreationRequest>(3, 'creditCardCreationRequest',
+            subBuilder: CreditCardCreationRequest.create)
+        ..aOM<CreditCardUpdateRequest>(4, 'creditCardUpdateRequest',
+            subBuilder: CreditCardUpdateRequest.create)
+        ..aOM<CreditCardRemovalRequest>(5, 'creditCardRemovalRequest',
+            subBuilder: CreditCardRemovalRequest.create)
+        ..aOM<PromotionAdditionRequest>(6, 'promotionAdditionRequest',
+            subBuilder: PromotionAdditionRequest.create)
+        ..aOM<PromotionRemovalRequest>(7, 'promotionRemovalRequest',
+            subBuilder: PromotionRemovalRequest.create)
+        ..aOM<PromotionUpdateRequest>(8, 'promotionUpdateRequest',
+            subBuilder: PromotionUpdateRequest.create)
+        ..hasRequiredFields = false;
+
+  HttpBasedRequest._() : super();
+  factory HttpBasedRequest() => create();
+  factory HttpBasedRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory HttpBasedRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  HttpBasedRequest clone() => HttpBasedRequest()..mergeFromMessage(this);
+  HttpBasedRequest copyWith(void Function(HttpBasedRequest) updates) =>
+      super.copyWith((message) => updates(message as HttpBasedRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static HttpBasedRequest create() => HttpBasedRequest._();
+  HttpBasedRequest createEmptyInstance() => create();
+  static $pb.PbList<HttpBasedRequest> createRepeated() =>
+      $pb.PbList<HttpBasedRequest>();
+  @$core.pragma('dart2js:noInline')
+  static HttpBasedRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<HttpBasedRequest>(create);
+  static HttpBasedRequest _defaultInstance;
+
+  HttpBasedRequest_Request whichRequest() =>
+      _HttpBasedRequest_RequestByTag[$_whichOneof(0)];
+  void clearRequest() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  $core.bool get requireAuth => $_getBF(0);
+  @$pb.TagNumber(1)
+  set requireAuth($core.bool v) {
+    $_setBool(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasRequireAuth() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRequireAuth() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get token => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set token($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearToken() => clearField(2);
+
+  @$pb.TagNumber(3)
+  CreditCardCreationRequest get creditCardCreationRequest => $_getN(2);
+  @$pb.TagNumber(3)
+  set creditCardCreationRequest(CreditCardCreationRequest v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasCreditCardCreationRequest() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCreditCardCreationRequest() => clearField(3);
+  @$pb.TagNumber(3)
+  CreditCardCreationRequest ensureCreditCardCreationRequest() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  CreditCardUpdateRequest get creditCardUpdateRequest => $_getN(3);
+  @$pb.TagNumber(4)
+  set creditCardUpdateRequest(CreditCardUpdateRequest v) {
+    setField(4, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasCreditCardUpdateRequest() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCreditCardUpdateRequest() => clearField(4);
+  @$pb.TagNumber(4)
+  CreditCardUpdateRequest ensureCreditCardUpdateRequest() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  CreditCardRemovalRequest get creditCardRemovalRequest => $_getN(4);
+  @$pb.TagNumber(5)
+  set creditCardRemovalRequest(CreditCardRemovalRequest v) {
+    setField(5, v);
+  }
+
+  @$pb.TagNumber(5)
+  $core.bool hasCreditCardRemovalRequest() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCreditCardRemovalRequest() => clearField(5);
+  @$pb.TagNumber(5)
+  CreditCardRemovalRequest ensureCreditCardRemovalRequest() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  PromotionAdditionRequest get promotionAdditionRequest => $_getN(5);
+  @$pb.TagNumber(6)
+  set promotionAdditionRequest(PromotionAdditionRequest v) {
+    setField(6, v);
+  }
+
+  @$pb.TagNumber(6)
+  $core.bool hasPromotionAdditionRequest() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPromotionAdditionRequest() => clearField(6);
+  @$pb.TagNumber(6)
+  PromotionAdditionRequest ensurePromotionAdditionRequest() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  PromotionRemovalRequest get promotionRemovalRequest => $_getN(6);
+  @$pb.TagNumber(7)
+  set promotionRemovalRequest(PromotionRemovalRequest v) {
+    setField(7, v);
+  }
+
+  @$pb.TagNumber(7)
+  $core.bool hasPromotionRemovalRequest() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearPromotionRemovalRequest() => clearField(7);
+  @$pb.TagNumber(7)
+  PromotionRemovalRequest ensurePromotionRemovalRequest() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  PromotionUpdateRequest get promotionUpdateRequest => $_getN(7);
+  @$pb.TagNumber(8)
+  set promotionUpdateRequest(PromotionUpdateRequest v) {
+    setField(8, v);
+  }
+
+  @$pb.TagNumber(8)
+  $core.bool hasPromotionUpdateRequest() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearPromotionUpdateRequest() => clearField(8);
+  @$pb.TagNumber(8)
+  PromotionUpdateRequest ensurePromotionUpdateRequest() => $_ensure(7);
+}

@@ -5,3 +5,26 @@ import "credit_card.proto";
 message GetCreditCardResponse {
   repeated CreditCard cards = 1;
 }
+
+message GenericResponse {
+  string msg = 1;
+}
+
+message HttpBasedResponse {
+  enum Status {
+    SUCCESS = 0;
+    ERROR = 1;
+    UNKNOWN = 2;
+  }
+  message Error {
+    string title = 1;
+    string detail = 2;
+  }
+  Status status = 1;
+  int32 status_code = 2;
+  Error error = 3;
+  oneof response {
+    GenericResponse generic_response = 4;
+    GetCreditCardResponse get_credit_card_response = 5;
+  }
+}

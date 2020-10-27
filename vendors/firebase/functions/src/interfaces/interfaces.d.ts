@@ -1055,6 +1055,159 @@ export class PromotionUpdateRequest implements IPromotionUpdateRequest {
   public toJSON(): { [k: string]: any };
 }
 
+/** Properties of a HttpBasedRequest. */
+export interface IHttpBasedRequest {
+  /** HttpBasedRequest requireAuth */
+  requireAuth?: boolean | null;
+
+  /** HttpBasedRequest token */
+  token?: string | null;
+
+  /** HttpBasedRequest creditCardCreationRequest */
+  creditCardCreationRequest?: ICreditCardCreationRequest | null;
+
+  /** HttpBasedRequest creditCardUpdateRequest */
+  creditCardUpdateRequest?: ICreditCardUpdateRequest | null;
+
+  /** HttpBasedRequest creditCardRemovalRequest */
+  creditCardRemovalRequest?: ICreditCardRemovalRequest | null;
+
+  /** HttpBasedRequest promotionAdditionRequest */
+  promotionAdditionRequest?: IPromotionAdditionRequest | null;
+
+  /** HttpBasedRequest promotionRemovalRequest */
+  promotionRemovalRequest?: IPromotionRemovalRequest | null;
+
+  /** HttpBasedRequest promotionUpdateRequest */
+  promotionUpdateRequest?: IPromotionUpdateRequest | null;
+}
+
+/** Represents a HttpBasedRequest. */
+export class HttpBasedRequest implements IHttpBasedRequest {
+  /**
+   * Constructs a new HttpBasedRequest.
+   * @param [properties] Properties to set
+   */
+  constructor(properties?: IHttpBasedRequest);
+
+  /** HttpBasedRequest requireAuth. */
+  public requireAuth: boolean;
+
+  /** HttpBasedRequest token. */
+  public token: string;
+
+  /** HttpBasedRequest creditCardCreationRequest. */
+  public creditCardCreationRequest?: ICreditCardCreationRequest | null;
+
+  /** HttpBasedRequest creditCardUpdateRequest. */
+  public creditCardUpdateRequest?: ICreditCardUpdateRequest | null;
+
+  /** HttpBasedRequest creditCardRemovalRequest. */
+  public creditCardRemovalRequest?: ICreditCardRemovalRequest | null;
+
+  /** HttpBasedRequest promotionAdditionRequest. */
+  public promotionAdditionRequest?: IPromotionAdditionRequest | null;
+
+  /** HttpBasedRequest promotionRemovalRequest. */
+  public promotionRemovalRequest?: IPromotionRemovalRequest | null;
+
+  /** HttpBasedRequest promotionUpdateRequest. */
+  public promotionUpdateRequest?: IPromotionUpdateRequest | null;
+
+  /** HttpBasedRequest request. */
+  public request?:
+    | "creditCardCreationRequest"
+    | "creditCardUpdateRequest"
+    | "creditCardRemovalRequest"
+    | "promotionAdditionRequest"
+    | "promotionRemovalRequest"
+    | "promotionUpdateRequest";
+
+  /**
+   * Creates a new HttpBasedRequest instance using the specified properties.
+   * @param [properties] Properties to set
+   * @returns HttpBasedRequest instance
+   */
+  public static create(properties?: IHttpBasedRequest): HttpBasedRequest;
+
+  /**
+   * Encodes the specified HttpBasedRequest message. Does not implicitly {@link HttpBasedRequest.verify|verify} messages.
+   * @param message HttpBasedRequest message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encode(
+    message: IHttpBasedRequest,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Encodes the specified HttpBasedRequest message, length delimited. Does not implicitly {@link HttpBasedRequest.verify|verify} messages.
+   * @param message HttpBasedRequest message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encodeDelimited(
+    message: IHttpBasedRequest,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Decodes a HttpBasedRequest message from the specified reader or buffer.
+   * @param reader Reader or buffer to decode from
+   * @param [length] Message length if known beforehand
+   * @returns HttpBasedRequest
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decode(
+    reader: $protobuf.Reader | Uint8Array,
+    length?: number
+  ): HttpBasedRequest;
+
+  /**
+   * Decodes a HttpBasedRequest message from the specified reader or buffer, length delimited.
+   * @param reader Reader or buffer to decode from
+   * @returns HttpBasedRequest
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decodeDelimited(
+    reader: $protobuf.Reader | Uint8Array
+  ): HttpBasedRequest;
+
+  /**
+   * Verifies a HttpBasedRequest message.
+   * @param message Plain object to verify
+   * @returns `null` if valid, otherwise the reason why it is not
+   */
+  public static verify(message: { [k: string]: any }): string | null;
+
+  /**
+   * Creates a HttpBasedRequest message from a plain object. Also converts values to their respective internal types.
+   * @param object Plain object
+   * @returns HttpBasedRequest
+   */
+  public static fromObject(object: { [k: string]: any }): HttpBasedRequest;
+
+  /**
+   * Creates a plain object from a HttpBasedRequest message. Also converts values to other types if specified.
+   * @param message HttpBasedRequest
+   * @param [options] Conversion options
+   * @returns Plain object
+   */
+  public static toObject(
+    message: HttpBasedRequest,
+    options?: $protobuf.IConversionOptions
+  ): { [k: string]: any };
+
+  /**
+   * Converts this HttpBasedRequest to JSON.
+   * @returns JSON object
+   */
+  public toJSON(): { [k: string]: any };
+}
+
 /** Properties of a GetCreditCardResponse. */
 export interface IGetCreditCardResponse {
   /** GetCreditCardResponse cards */
@@ -1157,4 +1310,356 @@ export class GetCreditCardResponse implements IGetCreditCardResponse {
    * @returns JSON object
    */
   public toJSON(): { [k: string]: any };
+}
+
+/** Properties of a GenericResponse. */
+export interface IGenericResponse {
+  /** GenericResponse msg */
+  msg?: string | null;
+}
+
+/** Represents a GenericResponse. */
+export class GenericResponse implements IGenericResponse {
+  /**
+   * Constructs a new GenericResponse.
+   * @param [properties] Properties to set
+   */
+  constructor(properties?: IGenericResponse);
+
+  /** GenericResponse msg. */
+  public msg: string;
+
+  /**
+   * Creates a new GenericResponse instance using the specified properties.
+   * @param [properties] Properties to set
+   * @returns GenericResponse instance
+   */
+  public static create(properties?: IGenericResponse): GenericResponse;
+
+  /**
+   * Encodes the specified GenericResponse message. Does not implicitly {@link GenericResponse.verify|verify} messages.
+   * @param message GenericResponse message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encode(
+    message: IGenericResponse,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Encodes the specified GenericResponse message, length delimited. Does not implicitly {@link GenericResponse.verify|verify} messages.
+   * @param message GenericResponse message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encodeDelimited(
+    message: IGenericResponse,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Decodes a GenericResponse message from the specified reader or buffer.
+   * @param reader Reader or buffer to decode from
+   * @param [length] Message length if known beforehand
+   * @returns GenericResponse
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decode(
+    reader: $protobuf.Reader | Uint8Array,
+    length?: number
+  ): GenericResponse;
+
+  /**
+   * Decodes a GenericResponse message from the specified reader or buffer, length delimited.
+   * @param reader Reader or buffer to decode from
+   * @returns GenericResponse
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decodeDelimited(
+    reader: $protobuf.Reader | Uint8Array
+  ): GenericResponse;
+
+  /**
+   * Verifies a GenericResponse message.
+   * @param message Plain object to verify
+   * @returns `null` if valid, otherwise the reason why it is not
+   */
+  public static verify(message: { [k: string]: any }): string | null;
+
+  /**
+   * Creates a GenericResponse message from a plain object. Also converts values to their respective internal types.
+   * @param object Plain object
+   * @returns GenericResponse
+   */
+  public static fromObject(object: { [k: string]: any }): GenericResponse;
+
+  /**
+   * Creates a plain object from a GenericResponse message. Also converts values to other types if specified.
+   * @param message GenericResponse
+   * @param [options] Conversion options
+   * @returns Plain object
+   */
+  public static toObject(
+    message: GenericResponse,
+    options?: $protobuf.IConversionOptions
+  ): { [k: string]: any };
+
+  /**
+   * Converts this GenericResponse to JSON.
+   * @returns JSON object
+   */
+  public toJSON(): { [k: string]: any };
+}
+
+/** Properties of a HttpBasedResponse. */
+export interface IHttpBasedResponse {
+  /** HttpBasedResponse status */
+  status?: HttpBasedResponse.Status | null;
+
+  /** HttpBasedResponse statusCode */
+  statusCode?: number | null;
+
+  /** HttpBasedResponse error */
+  error?: HttpBasedResponse.IError | null;
+
+  /** HttpBasedResponse genericResponse */
+  genericResponse?: IGenericResponse | null;
+
+  /** HttpBasedResponse getCreditCardResponse */
+  getCreditCardResponse?: IGetCreditCardResponse | null;
+}
+
+/** Represents a HttpBasedResponse. */
+export class HttpBasedResponse implements IHttpBasedResponse {
+  /**
+   * Constructs a new HttpBasedResponse.
+   * @param [properties] Properties to set
+   */
+  constructor(properties?: IHttpBasedResponse);
+
+  /** HttpBasedResponse status. */
+  public status: HttpBasedResponse.Status;
+
+  /** HttpBasedResponse statusCode. */
+  public statusCode: number;
+
+  /** HttpBasedResponse error. */
+  public error?: HttpBasedResponse.IError | null;
+
+  /** HttpBasedResponse genericResponse. */
+  public genericResponse?: IGenericResponse | null;
+
+  /** HttpBasedResponse getCreditCardResponse. */
+  public getCreditCardResponse?: IGetCreditCardResponse | null;
+
+  /** HttpBasedResponse response. */
+  public response?: "genericResponse" | "getCreditCardResponse";
+
+  /**
+   * Creates a new HttpBasedResponse instance using the specified properties.
+   * @param [properties] Properties to set
+   * @returns HttpBasedResponse instance
+   */
+  public static create(properties?: IHttpBasedResponse): HttpBasedResponse;
+
+  /**
+   * Encodes the specified HttpBasedResponse message. Does not implicitly {@link HttpBasedResponse.verify|verify} messages.
+   * @param message HttpBasedResponse message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encode(
+    message: IHttpBasedResponse,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Encodes the specified HttpBasedResponse message, length delimited. Does not implicitly {@link HttpBasedResponse.verify|verify} messages.
+   * @param message HttpBasedResponse message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encodeDelimited(
+    message: IHttpBasedResponse,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Decodes a HttpBasedResponse message from the specified reader or buffer.
+   * @param reader Reader or buffer to decode from
+   * @param [length] Message length if known beforehand
+   * @returns HttpBasedResponse
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decode(
+    reader: $protobuf.Reader | Uint8Array,
+    length?: number
+  ): HttpBasedResponse;
+
+  /**
+   * Decodes a HttpBasedResponse message from the specified reader or buffer, length delimited.
+   * @param reader Reader or buffer to decode from
+   * @returns HttpBasedResponse
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decodeDelimited(
+    reader: $protobuf.Reader | Uint8Array
+  ): HttpBasedResponse;
+
+  /**
+   * Verifies a HttpBasedResponse message.
+   * @param message Plain object to verify
+   * @returns `null` if valid, otherwise the reason why it is not
+   */
+  public static verify(message: { [k: string]: any }): string | null;
+
+  /**
+   * Creates a HttpBasedResponse message from a plain object. Also converts values to their respective internal types.
+   * @param object Plain object
+   * @returns HttpBasedResponse
+   */
+  public static fromObject(object: { [k: string]: any }): HttpBasedResponse;
+
+  /**
+   * Creates a plain object from a HttpBasedResponse message. Also converts values to other types if specified.
+   * @param message HttpBasedResponse
+   * @param [options] Conversion options
+   * @returns Plain object
+   */
+  public static toObject(
+    message: HttpBasedResponse,
+    options?: $protobuf.IConversionOptions
+  ): { [k: string]: any };
+
+  /**
+   * Converts this HttpBasedResponse to JSON.
+   * @returns JSON object
+   */
+  public toJSON(): { [k: string]: any };
+}
+
+export namespace HttpBasedResponse {
+  /** Status enum. */
+  enum Status {
+    SUCCESS = 0,
+    ERROR = 1,
+    UNKNOWN = 2,
+  }
+
+  /** Properties of an Error. */
+  interface IError {
+    /** Error title */
+    title?: string | null;
+
+    /** Error detail */
+    detail?: string | null;
+  }
+
+  /** Represents an Error. */
+  class Error implements IError {
+    /**
+     * Constructs a new Error.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: HttpBasedResponse.IError);
+
+    /** Error title. */
+    public title: string;
+
+    /** Error detail. */
+    public detail: string;
+
+    /**
+     * Creates a new Error instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns Error instance
+     */
+    public static create(
+      properties?: HttpBasedResponse.IError
+    ): HttpBasedResponse.Error;
+
+    /**
+     * Encodes the specified Error message. Does not implicitly {@link HttpBasedResponse.Error.verify|verify} messages.
+     * @param message Error message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(
+      message: HttpBasedResponse.IError,
+      writer?: $protobuf.Writer
+    ): $protobuf.Writer;
+
+    /**
+     * Encodes the specified Error message, length delimited. Does not implicitly {@link HttpBasedResponse.Error.verify|verify} messages.
+     * @param message Error message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(
+      message: HttpBasedResponse.IError,
+      writer?: $protobuf.Writer
+    ): $protobuf.Writer;
+
+    /**
+     * Decodes an Error message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns Error
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(
+      reader: $protobuf.Reader | Uint8Array,
+      length?: number
+    ): HttpBasedResponse.Error;
+
+    /**
+     * Decodes an Error message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns Error
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(
+      reader: $protobuf.Reader | Uint8Array
+    ): HttpBasedResponse.Error;
+
+    /**
+     * Verifies an Error message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): string | null;
+
+    /**
+     * Creates an Error message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns Error
+     */
+    public static fromObject(object: {
+      [k: string]: any;
+    }): HttpBasedResponse.Error;
+
+    /**
+     * Creates a plain object from an Error message. Also converts values to other types if specified.
+     * @param message Error
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(
+      message: HttpBasedResponse.Error,
+      options?: $protobuf.IConversionOptions
+    ): { [k: string]: any };
+
+    /**
+     * Converts this Error to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+  }
 }

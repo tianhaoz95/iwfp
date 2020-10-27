@@ -1,4 +1,6 @@
 # This is due to a bug in flutter at https://github.com/flutter/flutter/issues/45711
 # TODO(tianhaoz95): retire this once the flutter bug is addressed
 analyzer:
-  exclude: [lib/generated_plugin_registrant.dart]
+  exclude:
+    - lib/generated_plugin_registrant.dart
+    - lib/services/interfaces/*.dart
