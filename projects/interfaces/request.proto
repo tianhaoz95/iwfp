@@ -18,6 +18,10 @@ message CreditCardRemovalRequest {
   string card_id = 2;
 }
 
+message CreditCardFetchRequest {
+  string card_id = 1;
+}
+
 message PromotionAdditionRequest {
   bool valid = 1;
   string target_card_id = 2;
@@ -33,6 +37,10 @@ message PromotionRemovalRequest {
 message PromotionUpdateRequest {
   string target_card_id = 1;
   Promotion updated_promotion_data = 2;
+}
+
+message UserRemovalRequest {
+  string username = 1;
 }
 
 message HttpBasedRequest {

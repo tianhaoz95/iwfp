@@ -2,6 +2,8 @@
 
 set -o pipefail
 
+flutter pub global activate protoc_plugin
+
 # Protobuf location
 SRC_DIR=$PROJECTS_ROOT/interfaces
 

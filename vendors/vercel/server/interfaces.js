@@ -1482,6 +1482,193 @@ $root.CreditCardRemovalRequest = (function() {
     return CreditCardRemovalRequest;
 })();
 
+$root.CreditCardFetchRequest = (function() {
+
+    /**
+     * Properties of a CreditCardFetchRequest.
+     * @exports ICreditCardFetchRequest
+     * @interface ICreditCardFetchRequest
+     * @property {string|null} [cardId] CreditCardFetchRequest cardId
+     */
+
+    /**
+     * Constructs a new CreditCardFetchRequest.
+     * @exports CreditCardFetchRequest
+     * @classdesc Represents a CreditCardFetchRequest.
+     * @implements ICreditCardFetchRequest
+     * @constructor
+     * @param {ICreditCardFetchRequest=} [properties] Properties to set
+     */
+    function CreditCardFetchRequest(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * CreditCardFetchRequest cardId.
+     * @member {string} cardId
+     * @memberof CreditCardFetchRequest
+     * @instance
+     */
+    CreditCardFetchRequest.prototype.cardId = "";
+
+    /**
+     * Creates a new CreditCardFetchRequest instance using the specified properties.
+     * @function create
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {ICreditCardFetchRequest=} [properties] Properties to set
+     * @returns {CreditCardFetchRequest} CreditCardFetchRequest instance
+     */
+    CreditCardFetchRequest.create = function create(properties) {
+        return new CreditCardFetchRequest(properties);
+    };
+
+    /**
+     * Encodes the specified CreditCardFetchRequest message. Does not implicitly {@link CreditCardFetchRequest.verify|verify} messages.
+     * @function encode
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {ICreditCardFetchRequest} message CreditCardFetchRequest message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    CreditCardFetchRequest.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.cardId != null && Object.hasOwnProperty.call(message, "cardId"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.cardId);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified CreditCardFetchRequest message, length delimited. Does not implicitly {@link CreditCardFetchRequest.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {ICreditCardFetchRequest} message CreditCardFetchRequest message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    CreditCardFetchRequest.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a CreditCardFetchRequest message from the specified reader or buffer.
+     * @function decode
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {CreditCardFetchRequest} CreditCardFetchRequest
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    CreditCardFetchRequest.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CreditCardFetchRequest();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.cardId = reader.string();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a CreditCardFetchRequest message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {CreditCardFetchRequest} CreditCardFetchRequest
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    CreditCardFetchRequest.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a CreditCardFetchRequest message.
+     * @function verify
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    CreditCardFetchRequest.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.cardId != null && message.hasOwnProperty("cardId"))
+            if (!$util.isString(message.cardId))
+                return "cardId: string expected";
+        return null;
+    };
+
+    /**
+     * Creates a CreditCardFetchRequest message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {CreditCardFetchRequest} CreditCardFetchRequest
+     */
+    CreditCardFetchRequest.fromObject = function fromObject(object) {
+        if (object instanceof $root.CreditCardFetchRequest)
+            return object;
+        var message = new $root.CreditCardFetchRequest();
+        if (object.cardId != null)
+            message.cardId = String(object.cardId);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a CreditCardFetchRequest message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {CreditCardFetchRequest} message CreditCardFetchRequest
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    CreditCardFetchRequest.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.cardId = "";
+        if (message.cardId != null && message.hasOwnProperty("cardId"))
+            object.cardId = message.cardId;
+        return object;
+    };
+
+    /**
+     * Converts this CreditCardFetchRequest to JSON.
+     * @function toJSON
+     * @memberof CreditCardFetchRequest
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    CreditCardFetchRequest.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return CreditCardFetchRequest;
+})();
+
 $root.PromotionAdditionRequest = (function() {
 
     /**
@@ -2164,6 +2351,193 @@ $root.PromotionUpdateRequest = (function() {
     };
 
     return PromotionUpdateRequest;
+})();
+
+$root.UserRemovalRequest = (function() {
+
+    /**
+     * Properties of a UserRemovalRequest.
+     * @exports IUserRemovalRequest
+     * @interface IUserRemovalRequest
+     * @property {string|null} [username] UserRemovalRequest username
+     */
+
+    /**
+     * Constructs a new UserRemovalRequest.
+     * @exports UserRemovalRequest
+     * @classdesc Represents a UserRemovalRequest.
+     * @implements IUserRemovalRequest
+     * @constructor
+     * @param {IUserRemovalRequest=} [properties] Properties to set
+     */
+    function UserRemovalRequest(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * UserRemovalRequest username.
+     * @member {string} username
+     * @memberof UserRemovalRequest
+     * @instance
+     */
+    UserRemovalRequest.prototype.username = "";
+
+    /**
+     * Creates a new UserRemovalRequest instance using the specified properties.
+     * @function create
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {IUserRemovalRequest=} [properties] Properties to set
+     * @returns {UserRemovalRequest} UserRemovalRequest instance
+     */
+    UserRemovalRequest.create = function create(properties) {
+        return new UserRemovalRequest(properties);
+    };
+
+    /**
+     * Encodes the specified UserRemovalRequest message. Does not implicitly {@link UserRemovalRequest.verify|verify} messages.
+     * @function encode
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {IUserRemovalRequest} message UserRemovalRequest message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    UserRemovalRequest.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified UserRemovalRequest message, length delimited. Does not implicitly {@link UserRemovalRequest.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {IUserRemovalRequest} message UserRemovalRequest message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    UserRemovalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a UserRemovalRequest message from the specified reader or buffer.
+     * @function decode
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {UserRemovalRequest} UserRemovalRequest
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    UserRemovalRequest.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.UserRemovalRequest();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.username = reader.string();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a UserRemovalRequest message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {UserRemovalRequest} UserRemovalRequest
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    UserRemovalRequest.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a UserRemovalRequest message.
+     * @function verify
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    UserRemovalRequest.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.username != null && message.hasOwnProperty("username"))
+            if (!$util.isString(message.username))
+                return "username: string expected";
+        return null;
+    };
+
+    /**
+     * Creates a UserRemovalRequest message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {UserRemovalRequest} UserRemovalRequest
+     */
+    UserRemovalRequest.fromObject = function fromObject(object) {
+        if (object instanceof $root.UserRemovalRequest)
+            return object;
+        var message = new $root.UserRemovalRequest();
+        if (object.username != null)
+            message.username = String(object.username);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a UserRemovalRequest message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {UserRemovalRequest} message UserRemovalRequest
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    UserRemovalRequest.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.username = "";
+        if (message.username != null && message.hasOwnProperty("username"))
+            object.username = message.username;
+        return object;
+    };
+
+    /**
+     * Converts this UserRemovalRequest to JSON.
+     * @function toJSON
+     * @memberof UserRemovalRequest
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    UserRemovalRequest.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return UserRemovalRequest;
 })();
 
 $root.HttpBasedRequest = (function() {

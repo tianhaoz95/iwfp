@@ -3,7 +3,7 @@
 //  source: promotion.proto
 //
 // @dart = 2.3
-// ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
 
@@ -12,18 +12,54 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'shopping_category.pb.dart' as $0;
 
 class Promotion extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('Promotion', createEmptyInstance: create)
-        ..aOS(1, 'id')
-        ..aOS(2, 'displayName')
-        ..aOS(3, 'startDate')
-        ..aOS(4, 'endDate')
-        ..aOS(5, 'type')
-        ..aOS(6, 'repeatPattern')
-        ..a<$core.double>(7, 'rate', $pb.PbFieldType.OF)
-        ..aOM<$0.ShoppingCategory>(8, 'category',
-            subBuilder: $0.ShoppingCategory.create)
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'Promotion',
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'id')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'displayName')
+    ..aOS(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'startDate')
+    ..aOS(
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'endDate')
+    ..aOS(
+        5,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'type')
+    ..aOS(
+        6,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'repeatPattern')
+    ..a<$core.double>(
+        7,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'rate',
+        $pb.PbFieldType.OF)
+    ..aOM<$0.ShoppingCategory>(
+        8,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'category',
+        subBuilder: $0.ShoppingCategory.create)
+    ..hasRequiredFields = false;
 
   Promotion._() : super();
   factory Promotion() => create();
@@ -33,9 +69,16 @@ class Promotion extends $pb.GeneratedMessage {
   factory Promotion.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   Promotion clone() => Promotion()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   Promotion copyWith(void Function(Promotion) updates) =>
-      super.copyWith((message) => updates(message as Promotion));
+      super.copyWith((message) =>
+          updates(message as Promotion)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Promotion create() => Promotion._();

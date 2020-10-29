@@ -707,6 +707,112 @@ export class CreditCardRemovalRequest implements ICreditCardRemovalRequest {
   public toJSON(): { [k: string]: any };
 }
 
+/** Properties of a CreditCardFetchRequest. */
+export interface ICreditCardFetchRequest {
+  /** CreditCardFetchRequest cardId */
+  cardId?: string | null;
+}
+
+/** Represents a CreditCardFetchRequest. */
+export class CreditCardFetchRequest implements ICreditCardFetchRequest {
+  /**
+   * Constructs a new CreditCardFetchRequest.
+   * @param [properties] Properties to set
+   */
+  constructor(properties?: ICreditCardFetchRequest);
+
+  /** CreditCardFetchRequest cardId. */
+  public cardId: string;
+
+  /**
+   * Creates a new CreditCardFetchRequest instance using the specified properties.
+   * @param [properties] Properties to set
+   * @returns CreditCardFetchRequest instance
+   */
+  public static create(
+    properties?: ICreditCardFetchRequest
+  ): CreditCardFetchRequest;
+
+  /**
+   * Encodes the specified CreditCardFetchRequest message. Does not implicitly {@link CreditCardFetchRequest.verify|verify} messages.
+   * @param message CreditCardFetchRequest message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encode(
+    message: ICreditCardFetchRequest,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Encodes the specified CreditCardFetchRequest message, length delimited. Does not implicitly {@link CreditCardFetchRequest.verify|verify} messages.
+   * @param message CreditCardFetchRequest message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encodeDelimited(
+    message: ICreditCardFetchRequest,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Decodes a CreditCardFetchRequest message from the specified reader or buffer.
+   * @param reader Reader or buffer to decode from
+   * @param [length] Message length if known beforehand
+   * @returns CreditCardFetchRequest
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decode(
+    reader: $protobuf.Reader | Uint8Array,
+    length?: number
+  ): CreditCardFetchRequest;
+
+  /**
+   * Decodes a CreditCardFetchRequest message from the specified reader or buffer, length delimited.
+   * @param reader Reader or buffer to decode from
+   * @returns CreditCardFetchRequest
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decodeDelimited(
+    reader: $protobuf.Reader | Uint8Array
+  ): CreditCardFetchRequest;
+
+  /**
+   * Verifies a CreditCardFetchRequest message.
+   * @param message Plain object to verify
+   * @returns `null` if valid, otherwise the reason why it is not
+   */
+  public static verify(message: { [k: string]: any }): string | null;
+
+  /**
+   * Creates a CreditCardFetchRequest message from a plain object. Also converts values to their respective internal types.
+   * @param object Plain object
+   * @returns CreditCardFetchRequest
+   */
+  public static fromObject(object: {
+    [k: string]: any;
+  }): CreditCardFetchRequest;
+
+  /**
+   * Creates a plain object from a CreditCardFetchRequest message. Also converts values to other types if specified.
+   * @param message CreditCardFetchRequest
+   * @param [options] Conversion options
+   * @returns Plain object
+   */
+  public static toObject(
+    message: CreditCardFetchRequest,
+    options?: $protobuf.IConversionOptions
+  ): { [k: string]: any };
+
+  /**
+   * Converts this CreditCardFetchRequest to JSON.
+   * @returns JSON object
+   */
+  public toJSON(): { [k: string]: any };
+}
+
 /** Properties of a PromotionAdditionRequest. */
 export interface IPromotionAdditionRequest {
   /** PromotionAdditionRequest valid */
@@ -1050,6 +1156,108 @@ export class PromotionUpdateRequest implements IPromotionUpdateRequest {
 
   /**
    * Converts this PromotionUpdateRequest to JSON.
+   * @returns JSON object
+   */
+  public toJSON(): { [k: string]: any };
+}
+
+/** Properties of a UserRemovalRequest. */
+export interface IUserRemovalRequest {
+  /** UserRemovalRequest username */
+  username?: string | null;
+}
+
+/** Represents a UserRemovalRequest. */
+export class UserRemovalRequest implements IUserRemovalRequest {
+  /**
+   * Constructs a new UserRemovalRequest.
+   * @param [properties] Properties to set
+   */
+  constructor(properties?: IUserRemovalRequest);
+
+  /** UserRemovalRequest username. */
+  public username: string;
+
+  /**
+   * Creates a new UserRemovalRequest instance using the specified properties.
+   * @param [properties] Properties to set
+   * @returns UserRemovalRequest instance
+   */
+  public static create(properties?: IUserRemovalRequest): UserRemovalRequest;
+
+  /**
+   * Encodes the specified UserRemovalRequest message. Does not implicitly {@link UserRemovalRequest.verify|verify} messages.
+   * @param message UserRemovalRequest message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encode(
+    message: IUserRemovalRequest,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Encodes the specified UserRemovalRequest message, length delimited. Does not implicitly {@link UserRemovalRequest.verify|verify} messages.
+   * @param message UserRemovalRequest message or plain object to encode
+   * @param [writer] Writer to encode to
+   * @returns Writer
+   */
+  public static encodeDelimited(
+    message: IUserRemovalRequest,
+    writer?: $protobuf.Writer
+  ): $protobuf.Writer;
+
+  /**
+   * Decodes a UserRemovalRequest message from the specified reader or buffer.
+   * @param reader Reader or buffer to decode from
+   * @param [length] Message length if known beforehand
+   * @returns UserRemovalRequest
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decode(
+    reader: $protobuf.Reader | Uint8Array,
+    length?: number
+  ): UserRemovalRequest;
+
+  /**
+   * Decodes a UserRemovalRequest message from the specified reader or buffer, length delimited.
+   * @param reader Reader or buffer to decode from
+   * @returns UserRemovalRequest
+   * @throws {Error} If the payload is not a reader or valid buffer
+   * @throws {$protobuf.util.ProtocolError} If required fields are missing
+   */
+  public static decodeDelimited(
+    reader: $protobuf.Reader | Uint8Array
+  ): UserRemovalRequest;
+
+  /**
+   * Verifies a UserRemovalRequest message.
+   * @param message Plain object to verify
+   * @returns `null` if valid, otherwise the reason why it is not
+   */
+  public static verify(message: { [k: string]: any }): string | null;
+
+  /**
+   * Creates a UserRemovalRequest message from a plain object. Also converts values to their respective internal types.
+   * @param object Plain object
+   * @returns UserRemovalRequest
+   */
+  public static fromObject(object: { [k: string]: any }): UserRemovalRequest;
+
+  /**
+   * Creates a plain object from a UserRemovalRequest message. Also converts values to other types if specified.
+   * @param message UserRemovalRequest
+   * @param [options] Conversion options
+   * @returns Plain object
+   */
+  public static toObject(
+    message: UserRemovalRequest,
+    options?: $protobuf.IConversionOptions
+  ): { [k: string]: any };
+
+  /**
+   * Converts this UserRemovalRequest to JSON.
    * @returns JSON object
    */
   public toJSON(): { [k: string]: any };

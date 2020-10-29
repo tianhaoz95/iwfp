@@ -3,6 +3,8 @@
 set -o pipefail
 
 export BASH_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+export CRED_SCRIPT_DIR="$BASH_SCRIPT_DIR/credential"
+export SERVER_SCRIPT_DIR="$BASH_SCRIPT_DIR/server"
 export SCRIPT_DIR="$(dirname "$BASH_SCRIPT_DIR")"
 export PROJ_ROOT="$(dirname "$SCRIPT_DIR")"
 export VENDOR_ROOT="$PROJ_ROOT/vendors"

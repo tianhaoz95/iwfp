@@ -3,7 +3,7 @@
 //  source: request.proto
 //
 // @dart = 2.3
-// ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
 
@@ -13,11 +13,23 @@ import 'credit_card.pb.dart' as $2;
 import 'promotion.pb.dart' as $1;
 
 class CreditCardCreationRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('CreditCardCreationRequest', createEmptyInstance: create)
-        ..aOB(1, 'valid')
-        ..aOM<$2.CreditCard>(2, 'cardData', subBuilder: $2.CreditCard.create)
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CreditCardCreationRequest',
+      createEmptyInstance: create)
+    ..aOB(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'valid')
+    ..aOM<$2.CreditCard>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'cardData',
+        subBuilder: $2.CreditCard.create)
+    ..hasRequiredFields = false;
 
   CreditCardCreationRequest._() : super();
   factory CreditCardCreationRequest() => create();
@@ -27,12 +39,18 @@ class CreditCardCreationRequest extends $pb.GeneratedMessage {
   factory CreditCardCreationRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   CreditCardCreationRequest clone() =>
       CreditCardCreationRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   CreditCardCreationRequest copyWith(
           void Function(CreditCardCreationRequest) updates) =>
-      super
-          .copyWith((message) => updates(message as CreditCardCreationRequest));
+      super.copyWith((message) => updates(message
+          as CreditCardCreationRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static CreditCardCreationRequest create() => CreditCardCreationRequest._();
@@ -72,10 +90,22 @@ class CreditCardCreationRequest extends $pb.GeneratedMessage {
 }
 
 class CreditCardUpdateRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreditCardUpdateRequest',
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CreditCardUpdateRequest',
       createEmptyInstance: create)
-    ..aOB(1, 'valid')
-    ..aOM<$2.CreditCard>(2, 'updatedCardData', subBuilder: $2.CreditCard.create)
+    ..aOB(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'valid')
+    ..aOM<$2.CreditCard>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updatedCardData',
+        subBuilder: $2.CreditCard.create)
     ..hasRequiredFields = false;
 
   CreditCardUpdateRequest._() : super();
@@ -86,11 +116,18 @@ class CreditCardUpdateRequest extends $pb.GeneratedMessage {
   factory CreditCardUpdateRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   CreditCardUpdateRequest clone() =>
       CreditCardUpdateRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   CreditCardUpdateRequest copyWith(
           void Function(CreditCardUpdateRequest) updates) =>
-      super.copyWith((message) => updates(message as CreditCardUpdateRequest));
+      super.copyWith((message) => updates(
+          message as CreditCardUpdateRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static CreditCardUpdateRequest create() => CreditCardUpdateRequest._();
@@ -130,11 +167,22 @@ class CreditCardUpdateRequest extends $pb.GeneratedMessage {
 }
 
 class CreditCardRemovalRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('CreditCardRemovalRequest', createEmptyInstance: create)
-        ..aOB(1, 'valid')
-        ..aOS(2, 'cardId')
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CreditCardRemovalRequest',
+      createEmptyInstance: create)
+    ..aOB(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'valid')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'cardId')
+    ..hasRequiredFields = false;
 
   CreditCardRemovalRequest._() : super();
   factory CreditCardRemovalRequest() => create();
@@ -144,11 +192,18 @@ class CreditCardRemovalRequest extends $pb.GeneratedMessage {
   factory CreditCardRemovalRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   CreditCardRemovalRequest clone() =>
       CreditCardRemovalRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   CreditCardRemovalRequest copyWith(
           void Function(CreditCardRemovalRequest) updates) =>
-      super.copyWith((message) => updates(message as CreditCardRemovalRequest));
+      super.copyWith((message) => updates(message
+          as CreditCardRemovalRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static CreditCardRemovalRequest create() => CreditCardRemovalRequest._();
@@ -185,13 +240,86 @@ class CreditCardRemovalRequest extends $pb.GeneratedMessage {
   void clearCardId() => clearField(2);
 }
 
+class CreditCardFetchRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CreditCardFetchRequest',
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'cardId')
+    ..hasRequiredFields = false;
+
+  CreditCardFetchRequest._() : super();
+  factory CreditCardFetchRequest() => create();
+  factory CreditCardFetchRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CreditCardFetchRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CreditCardFetchRequest clone() =>
+      CreditCardFetchRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CreditCardFetchRequest copyWith(
+          void Function(CreditCardFetchRequest) updates) =>
+      super.copyWith((message) => updates(
+          message as CreditCardFetchRequest)); // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreditCardFetchRequest create() => CreditCardFetchRequest._();
+  CreditCardFetchRequest createEmptyInstance() => create();
+  static $pb.PbList<CreditCardFetchRequest> createRepeated() =>
+      $pb.PbList<CreditCardFetchRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreditCardFetchRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreditCardFetchRequest>(create);
+  static CreditCardFetchRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get cardId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set cardId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasCardId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCardId() => clearField(1);
+}
+
 class PromotionAdditionRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('PromotionAdditionRequest', createEmptyInstance: create)
-        ..aOB(1, 'valid')
-        ..aOS(2, 'targetCardId')
-        ..aOM<$1.Promotion>(3, 'promotionData', subBuilder: $1.Promotion.create)
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'PromotionAdditionRequest',
+      createEmptyInstance: create)
+    ..aOB(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'valid')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'targetCardId')
+    ..aOM<$1.Promotion>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'promotionData',
+        subBuilder: $1.Promotion.create)
+    ..hasRequiredFields = false;
 
   PromotionAdditionRequest._() : super();
   factory PromotionAdditionRequest() => create();
@@ -201,11 +329,18 @@ class PromotionAdditionRequest extends $pb.GeneratedMessage {
   factory PromotionAdditionRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   PromotionAdditionRequest clone() =>
       PromotionAdditionRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   PromotionAdditionRequest copyWith(
           void Function(PromotionAdditionRequest) updates) =>
-      super.copyWith((message) => updates(message as PromotionAdditionRequest));
+      super.copyWith((message) => updates(message
+          as PromotionAdditionRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static PromotionAdditionRequest create() => PromotionAdditionRequest._();
@@ -257,12 +392,27 @@ class PromotionAdditionRequest extends $pb.GeneratedMessage {
 }
 
 class PromotionRemovalRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('PromotionRemovalRequest', createEmptyInstance: create)
-        ..aOB(1, 'valid')
-        ..aOS(2, 'targetCardId')
-        ..aOS(3, 'targetPromotionId')
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'PromotionRemovalRequest',
+      createEmptyInstance: create)
+    ..aOB(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'valid')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'targetCardId')
+    ..aOS(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'targetPromotionId')
+    ..hasRequiredFields = false;
 
   PromotionRemovalRequest._() : super();
   factory PromotionRemovalRequest() => create();
@@ -272,11 +422,18 @@ class PromotionRemovalRequest extends $pb.GeneratedMessage {
   factory PromotionRemovalRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   PromotionRemovalRequest clone() =>
       PromotionRemovalRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   PromotionRemovalRequest copyWith(
           void Function(PromotionRemovalRequest) updates) =>
-      super.copyWith((message) => updates(message as PromotionRemovalRequest));
+      super.copyWith((message) => updates(
+          message as PromotionRemovalRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static PromotionRemovalRequest create() => PromotionRemovalRequest._();
@@ -326,12 +483,23 @@ class PromotionRemovalRequest extends $pb.GeneratedMessage {
 }
 
 class PromotionUpdateRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('PromotionUpdateRequest', createEmptyInstance: create)
-        ..aOS(1, 'targetCardId')
-        ..aOM<$1.Promotion>(2, 'updatedPromotionData',
-            subBuilder: $1.Promotion.create)
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'PromotionUpdateRequest',
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'targetCardId')
+    ..aOM<$1.Promotion>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updatedPromotionData',
+        subBuilder: $1.Promotion.create)
+    ..hasRequiredFields = false;
 
   PromotionUpdateRequest._() : super();
   factory PromotionUpdateRequest() => create();
@@ -341,11 +509,18 @@ class PromotionUpdateRequest extends $pb.GeneratedMessage {
   factory PromotionUpdateRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   PromotionUpdateRequest clone() =>
       PromotionUpdateRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   PromotionUpdateRequest copyWith(
           void Function(PromotionUpdateRequest) updates) =>
-      super.copyWith((message) => updates(message as PromotionUpdateRequest));
+      super.copyWith((message) => updates(
+          message as PromotionUpdateRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static PromotionUpdateRequest create() => PromotionUpdateRequest._();
@@ -384,6 +559,61 @@ class PromotionUpdateRequest extends $pb.GeneratedMessage {
   $1.Promotion ensureUpdatedPromotionData() => $_ensure(1);
 }
 
+class UserRemovalRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'UserRemovalRequest',
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'username')
+    ..hasRequiredFields = false;
+
+  UserRemovalRequest._() : super();
+  factory UserRemovalRequest() => create();
+  factory UserRemovalRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory UserRemovalRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  UserRemovalRequest clone() => UserRemovalRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  UserRemovalRequest copyWith(void Function(UserRemovalRequest) updates) =>
+      super.copyWith((message) => updates(
+          message as UserRemovalRequest)); // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UserRemovalRequest create() => UserRemovalRequest._();
+  UserRemovalRequest createEmptyInstance() => create();
+  static $pb.PbList<UserRemovalRequest> createRepeated() =>
+      $pb.PbList<UserRemovalRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UserRemovalRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UserRemovalRequest>(create);
+  static UserRemovalRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get username => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set username($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasUsername() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsername() => clearField(1);
+}
+
 enum HttpBasedRequest_Request {
   creditCardCreationRequest,
   creditCardUpdateRequest,
@@ -405,24 +635,36 @@ class HttpBasedRequest extends $pb.GeneratedMessage {
     8: HttpBasedRequest_Request.promotionUpdateRequest,
     0: HttpBasedRequest_Request.notSet
   };
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('HttpBasedRequest', createEmptyInstance: create)
-        ..oo(0, [3, 4, 5, 6, 7, 8])
-        ..aOB(1, 'requireAuth')
-        ..aOS(2, 'token')
-        ..aOM<CreditCardCreationRequest>(3, 'creditCardCreationRequest',
-            subBuilder: CreditCardCreationRequest.create)
-        ..aOM<CreditCardUpdateRequest>(4, 'creditCardUpdateRequest',
-            subBuilder: CreditCardUpdateRequest.create)
-        ..aOM<CreditCardRemovalRequest>(5, 'creditCardRemovalRequest',
-            subBuilder: CreditCardRemovalRequest.create)
-        ..aOM<PromotionAdditionRequest>(6, 'promotionAdditionRequest',
-            subBuilder: PromotionAdditionRequest.create)
-        ..aOM<PromotionRemovalRequest>(7, 'promotionRemovalRequest',
-            subBuilder: PromotionRemovalRequest.create)
-        ..aOM<PromotionUpdateRequest>(8, 'promotionUpdateRequest',
-            subBuilder: PromotionUpdateRequest.create)
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'HttpBasedRequest',
+      createEmptyInstance: create)
+    ..oo(0, [3, 4, 5, 6, 7, 8])
+    ..aOB(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'requireAuth')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'token')
+    ..aOM<CreditCardCreationRequest>(
+        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'creditCardCreationRequest',
+        subBuilder: CreditCardCreationRequest.create)
+    ..aOM<CreditCardUpdateRequest>(
+        4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'creditCardUpdateRequest',
+        subBuilder: CreditCardUpdateRequest.create)
+    ..aOM<CreditCardRemovalRequest>(
+        5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'creditCardRemovalRequest',
+        subBuilder: CreditCardRemovalRequest.create)
+    ..aOM<PromotionAdditionRequest>(
+        6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionAdditionRequest',
+        subBuilder: PromotionAdditionRequest.create)
+    ..aOM<PromotionRemovalRequest>(
+        7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionRemovalRequest',
+        subBuilder: PromotionRemovalRequest.create)
+    ..aOM<PromotionUpdateRequest>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionUpdateRequest', subBuilder: PromotionUpdateRequest.create)
+    ..hasRequiredFields = false;
 
   HttpBasedRequest._() : super();
   factory HttpBasedRequest() => create();
@@ -432,9 +674,16 @@ class HttpBasedRequest extends $pb.GeneratedMessage {
   factory HttpBasedRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   HttpBasedRequest clone() => HttpBasedRequest()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   HttpBasedRequest copyWith(void Function(HttpBasedRequest) updates) =>
-      super.copyWith((message) => updates(message as HttpBasedRequest));
+      super.copyWith((message) => updates(
+          message as HttpBasedRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static HttpBasedRequest create() => HttpBasedRequest._();
