@@ -1,4 +1,4 @@
-import { fetchFirebaseAdminCredentials } from "./fetch_credentials";
+import { fetchCredentialRepository } from "./fetch_credentials";
 import { initializeRuntime } from "./initialize_runtime";
 
-export { fetchFirebaseAdminCredentials, initializeRuntime };
+export { fetchCredentialRepository, initializeRuntime };

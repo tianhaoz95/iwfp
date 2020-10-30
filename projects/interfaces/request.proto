@@ -43,9 +43,21 @@ message UserRemovalRequest {
   string username = 1;
 }
 
+message HttpBasedCredential {
+  string token = 1;
+}
+
+message HttpBasedVersionInfo {
+  enum ServiceType {
+    FIREBASE = 0;
+    MOCK = 1;
+  }
+  ServiceType service_type = 1;
+}
+
 message HttpBasedRequest {
-  bool require_auth = 1;
-  string token = 2;
+  HttpBasedCredential credential = 1;
+  HttpBasedVersionInfo version_info = 2;
   oneof request {
     CreditCardCreationRequest credit_card_creation_request = 3;
     CreditCardUpdateRequest credit_card_update_request = 4;

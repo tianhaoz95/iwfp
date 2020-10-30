@@ -22,7 +22,7 @@ export const handler = async (
     response: NowResponse
 ): Promise<void> => {
     const req: HttpBasedRequest = HttpBasedRequest.create({});
-    const res: HttpBasedResponse = processRequest(req);
+    const res: HttpBasedResponse = await processRequest(req);
     response.statusCode = 200;
     response.json(res.toJSON());
 };

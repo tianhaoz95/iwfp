@@ -103,11 +103,55 @@ const UserRemovalRequest$json = const {
   ],
 };
 
+const HttpBasedCredential$json = const {
+  '1': 'HttpBasedCredential',
+  '2': const [
+    const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
+  ],
+};
+
+const HttpBasedVersionInfo$json = const {
+  '1': 'HttpBasedVersionInfo',
+  '2': const [
+    const {
+      '1': 'service_type',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.HttpBasedVersionInfo.ServiceType',
+      '10': 'serviceType'
+    },
+  ],
+  '4': const [HttpBasedVersionInfo_ServiceType$json],
+};
+
+const HttpBasedVersionInfo_ServiceType$json = const {
+  '1': 'ServiceType',
+  '2': const [
+    const {'1': 'FIREBASE', '2': 0},
+    const {'1': 'MOCK', '2': 1},
+  ],
+};
+
 const HttpBasedRequest$json = const {
   '1': 'HttpBasedRequest',
   '2': const [
-    const {'1': 'require_auth', '3': 1, '4': 1, '5': 8, '10': 'requireAuth'},
-    const {'1': 'token', '3': 2, '4': 1, '5': 9, '10': 'token'},
+    const {
+      '1': 'credential',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.HttpBasedCredential',
+      '10': 'credential'
+    },
+    const {
+      '1': 'version_info',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.HttpBasedVersionInfo',
+      '10': 'versionInfo'
+    },
     const {
       '1': 'credit_card_creation_request',
       '3': 3,

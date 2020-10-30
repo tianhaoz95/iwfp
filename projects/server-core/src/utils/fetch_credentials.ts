@@ -1,9 +1,9 @@
 import Git from "nodegit";
 import { Logger } from "tslog";
-import path from "path";
 import fs from "fs";
+import { targetCredDir } from "./config";
 
-export const fetchFirebaseAdminCredentials = async (
+export const fetchCredentialRepository = async (
   logger: Logger
 ): Promise<void> => {
   logger.info("Clone repository.");
@@ -19,24 +19,23 @@ export const fetchFirebaseAdminCredentials = async (
       credentials: function () {
         return Git.Cred.userpassPlaintextNew(token, "x-oauth-basic");
       },
-    }
-  }
+    },
+  };
   const cloneOptions: Git.CloneOptions = {
-    fetchOpts: fetchOptions
+    fetchOpts: fetchOptions,
   };
   const repoUrl = "https://github.com/tianhaoz95/iwfp-credentials";
-  const targetDir = path.join("/tmp", "iwfp", "creds");
   let repo: Git.Repository;
-  if (fs.existsSync(targetDir)) {
-    logger.info(`Target repository ${targetDir} exist.`);
-    repo = await Git.Repository.open(targetDir);
+  if (fs.existsSync(targetCredDir)) {
+    logger.info(`Target repository ${targetCredDir} exist.`);
+    repo = await Git.Repository.open(targetCredDir);
   } else {
-    logger.info(`Target repository ${targetDir} not exist. Clone.`);
-    repo = await Git.Clone.clone(repoUrl, targetDir, cloneOptions);
+    logger.info(`Target repository ${targetCredDir} not exist. Clone.`);
+    repo = await Git.Clone.clone(repoUrl, targetCredDir, cloneOptions);
   }
-  logger.info('Check out to master branch.');
-  await repo.checkoutBranch('master');
-  logger.info('Fetch all branches.');
+  logger.info("Check out to master branch.");
+  await repo.checkoutBranch("master");
+  logger.info("Fetch all branches.");
   await repo.fetchAll(fetchOptions);
-  logger.info('Done');
+  logger.info("Done");
 };

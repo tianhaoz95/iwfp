@@ -3,6 +3,7 @@ import {
   CreditCardFetchRequest,
   CreditCardRemovalRequest,
   CreditCardUpdateRequest,
+  HttpBasedCredential,
   HttpBasedResponse,
   PromotionAdditionRequest,
   PromotionRemovalRequest,
@@ -16,8 +17,10 @@ import {
  * The interface for the service supplied to the
  * server core to fulfill the APIs.
  */
-export abstract class ServerCore {
-  abstract async initialize(): Promise<void>;
+export abstract class ServiceProvider {
+  abstract requiresAsyncInitialization(): boolean;
+
+  abstract async initialize(credential: HttpBasedCredential): Promise<void>;
 
   abstract async addCreditCard(
     req: CreditCardCreationRequest

@@ -12,6 +12,10 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'credit_card.pb.dart' as $2;
 import 'promotion.pb.dart' as $1;
 
+import 'request.pbenum.dart';
+
+export 'request.pbenum.dart';
+
 class CreditCardCreationRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
@@ -614,6 +618,121 @@ class UserRemovalRequest extends $pb.GeneratedMessage {
   void clearUsername() => clearField(1);
 }
 
+class HttpBasedCredential extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'HttpBasedCredential',
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'token')
+    ..hasRequiredFields = false;
+
+  HttpBasedCredential._() : super();
+  factory HttpBasedCredential() => create();
+  factory HttpBasedCredential.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory HttpBasedCredential.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  HttpBasedCredential clone() => HttpBasedCredential()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  HttpBasedCredential copyWith(void Function(HttpBasedCredential) updates) =>
+      super.copyWith((message) => updates(
+          message as HttpBasedCredential)); // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static HttpBasedCredential create() => HttpBasedCredential._();
+  HttpBasedCredential createEmptyInstance() => create();
+  static $pb.PbList<HttpBasedCredential> createRepeated() =>
+      $pb.PbList<HttpBasedCredential>();
+  @$core.pragma('dart2js:noInline')
+  static HttpBasedCredential getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<HttpBasedCredential>(create);
+  static HttpBasedCredential _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get token => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set token($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasToken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearToken() => clearField(1);
+}
+
+class HttpBasedVersionInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'HttpBasedVersionInfo',
+      createEmptyInstance: create)
+    ..e<HttpBasedVersionInfo_ServiceType>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'serviceType',
+        $pb.PbFieldType.OE,
+        defaultOrMaker: HttpBasedVersionInfo_ServiceType.FIREBASE,
+        valueOf: HttpBasedVersionInfo_ServiceType.valueOf,
+        enumValues: HttpBasedVersionInfo_ServiceType.values)
+    ..hasRequiredFields = false;
+
+  HttpBasedVersionInfo._() : super();
+  factory HttpBasedVersionInfo() => create();
+  factory HttpBasedVersionInfo.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory HttpBasedVersionInfo.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  HttpBasedVersionInfo clone() =>
+      HttpBasedVersionInfo()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  HttpBasedVersionInfo copyWith(void Function(HttpBasedVersionInfo) updates) =>
+      super.copyWith((message) => updates(
+          message as HttpBasedVersionInfo)); // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static HttpBasedVersionInfo create() => HttpBasedVersionInfo._();
+  HttpBasedVersionInfo createEmptyInstance() => create();
+  static $pb.PbList<HttpBasedVersionInfo> createRepeated() =>
+      $pb.PbList<HttpBasedVersionInfo>();
+  @$core.pragma('dart2js:noInline')
+  static HttpBasedVersionInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<HttpBasedVersionInfo>(create);
+  static HttpBasedVersionInfo _defaultInstance;
+
+  @$pb.TagNumber(1)
+  HttpBasedVersionInfo_ServiceType get serviceType => $_getN(0);
+  @$pb.TagNumber(1)
+  set serviceType(HttpBasedVersionInfo_ServiceType v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasServiceType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearServiceType() => clearField(1);
+}
+
 enum HttpBasedRequest_Request {
   creditCardCreationRequest,
   creditCardUpdateRequest,
@@ -638,16 +757,12 @@ class HttpBasedRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'HttpBasedRequest',
       createEmptyInstance: create)
     ..oo(0, [3, 4, 5, 6, 7, 8])
-    ..aOB(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'requireAuth')
-    ..aOS(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'token')
+    ..aOM<HttpBasedCredential>(
+        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'credential',
+        subBuilder: HttpBasedCredential.create)
+    ..aOM<HttpBasedVersionInfo>(
+        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'versionInfo',
+        subBuilder: HttpBasedVersionInfo.create)
     ..aOM<CreditCardCreationRequest>(
         3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'creditCardCreationRequest',
         subBuilder: CreditCardCreationRequest.create)
@@ -657,12 +772,8 @@ class HttpBasedRequest extends $pb.GeneratedMessage {
     ..aOM<CreditCardRemovalRequest>(
         5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'creditCardRemovalRequest',
         subBuilder: CreditCardRemovalRequest.create)
-    ..aOM<PromotionAdditionRequest>(
-        6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionAdditionRequest',
-        subBuilder: PromotionAdditionRequest.create)
-    ..aOM<PromotionRemovalRequest>(
-        7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionRemovalRequest',
-        subBuilder: PromotionRemovalRequest.create)
+    ..aOM<PromotionAdditionRequest>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionAdditionRequest', subBuilder: PromotionAdditionRequest.create)
+    ..aOM<PromotionRemovalRequest>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionRemovalRequest', subBuilder: PromotionRemovalRequest.create)
     ..aOM<PromotionUpdateRequest>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionUpdateRequest', subBuilder: PromotionUpdateRequest.create)
     ..hasRequiredFields = false;
 
@@ -700,28 +811,32 @@ class HttpBasedRequest extends $pb.GeneratedMessage {
   void clearRequest() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $core.bool get requireAuth => $_getBF(0);
+  HttpBasedCredential get credential => $_getN(0);
   @$pb.TagNumber(1)
-  set requireAuth($core.bool v) {
-    $_setBool(0, v);
+  set credential(HttpBasedCredential v) {
+    setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasRequireAuth() => $_has(0);
+  $core.bool hasCredential() => $_has(0);
   @$pb.TagNumber(1)
-  void clearRequireAuth() => clearField(1);
+  void clearCredential() => clearField(1);
+  @$pb.TagNumber(1)
+  HttpBasedCredential ensureCredential() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.String get token => $_getSZ(1);
+  HttpBasedVersionInfo get versionInfo => $_getN(1);
   @$pb.TagNumber(2)
-  set token($core.String v) {
-    $_setString(1, v);
+  set versionInfo(HttpBasedVersionInfo v) {
+    setField(2, v);
   }
 
   @$pb.TagNumber(2)
-  $core.bool hasToken() => $_has(1);
+  $core.bool hasVersionInfo() => $_has(1);
   @$pb.TagNumber(2)
-  void clearToken() => clearField(2);
+  void clearVersionInfo() => clearField(2);
+  @$pb.TagNumber(2)
+  HttpBasedVersionInfo ensureVersionInfo() => $_ensure(1);
 
   @$pb.TagNumber(3)
   CreditCardCreationRequest get creditCardCreationRequest => $_getN(2);
