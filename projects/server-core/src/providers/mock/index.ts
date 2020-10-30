@@ -19,6 +19,9 @@ export class MockServiceProvider extends ServiceProvider {
   initialize(credential: HttpBasedCredential): Promise<void> {
     throw new Error("Method not implemented.");
   }
+  sanityCheck(): Promise<HttpBasedResponse> {
+    throw new Error("Method not implemented.");
+  }
   addCreditCard(req: CreditCardCreationRequest): Promise<HttpBasedResponse> {
     throw new Error("Method not implemented.");
   }

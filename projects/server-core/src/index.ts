@@ -6,12 +6,16 @@ import {
 } from "./interfaces";
 import { getServiceProvider } from "./providers";
 
-export const processRequest = async (req: HttpBasedRequest): Promise<HttpBasedResponse> => {
+export const processRequest = async (
+  req: HttpBasedRequest
+): Promise<HttpBasedResponse> => {
   if (req.versionInfo) {
     const versionInfo = HttpBasedVersionInfo.fromObject(req.versionInfo);
     const serviceProvider = getServiceProvider(versionInfo);
     if (req.credential) {
-      const cred: HttpBasedCredential = HttpBasedCredential.fromObject(req.credential);
+      const cred: HttpBasedCredential = HttpBasedCredential.fromObject(
+        req.credential
+      );
       await serviceProvider.initialize(cred);
       const response: HttpBasedResponse = HttpBasedResponse.create({});
       return response;

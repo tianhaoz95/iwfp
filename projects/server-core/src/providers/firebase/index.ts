@@ -11,6 +11,8 @@ import {
   PromotionUpdateRequest,
   UserRemovalRequest,
   HttpBasedCredential,
+  CreditCard,
+  GetCreditCardResponse,
 } from "../../interfaces";
 import fs from "fs";
 
@@ -65,6 +67,29 @@ export class FirebaseServiceProvider extends ServiceProvider {
       credential: cred,
       databaseURL: "https://iwfpapp.firebaseio.com",
     });
+    if (process.env["USE_FIREBASE_EMULATOR"] === "true") {
+      this.app.firestore().settings({
+        ssl: false,
+        host: "localhost:8080",
+        servicePath: undefined,
+      });
+      this.app.firestore().settings({
+        ssl: false,
+        host: "localhost:9099",
+        servicePath: undefined,
+      });
+    }
+  }
+
+  getUserRef(
+    userId: string
+  ): FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData> {
+    return this.app
+      .firestore()
+      .collection("channel")
+      .doc("production-v1")
+      .collection("users")
+      .doc(userId);
   }
 
   requiresAsyncInitialization(): boolean {
@@ -75,13 +100,44 @@ export class FirebaseServiceProvider extends ServiceProvider {
     await this.authenticate(credential);
   }
 
-  async authenticate(credential: HttpBasedCredential): Promise<void> {
-    const verifyResult = await this.app.auth().verifyIdToken(credential.token);
-    this.authUid = verifyResult.uid;
+  sanityCheck(): Promise<HttpBasedResponse> {
+    throw new Error("Method not implemented.");
   }
 
-  addCreditCard(req: CreditCardCreationRequest): Promise<HttpBasedResponse> {
-    throw new Error("Method not implemented.");
+  async authenticate(credential: HttpBasedCredential): Promise<void> {
+    if (process.env["FIREBASE_AUTH_UID_OVERRIDE"]) {
+      this.authUid = process.env["FIREBASE_AUTH_UID_OVERRIDE"];
+    } else {
+      const verifyResult = await this.app.auth().verifyIdToken(credential.token);
+      this.authUid = verifyResult.uid;
+    }
+  }
+
+  async addCreditCard(
+    req: CreditCardCreationRequest
+  ): Promise<HttpBasedResponse> {
+    if (req.cardData && req.cardData.id) {
+      const userId: string = this.authUid;
+      const userRef = this.getUserRef(userId);
+      const cardRef = userRef.collection("cards").doc(req.cardData.id);
+      const cardSnap = await cardRef.get();
+      if (cardSnap.exists) {
+        throw Error("Card already exist.");
+      } else {
+        const cardData: CreditCard = CreditCard.fromObject(req.cardData);
+        await cardRef.set(cardData.toJSON());
+        const response: HttpBasedResponse = HttpBasedResponse.create({
+          status: HttpBasedResponse.Status.SUCCESS,
+          statusCode: 200,
+          genericResponse: {
+            msg: "Add credit card success.",
+          },
+        });
+        return response;
+      }
+    } else {
+      throw Error("Card data missing or incomplete.");
+    }
   }
   removeCreditCard(req: CreditCardUpdateRequest): Promise<HttpBasedResponse> {
     throw new Error("Method not implemented.");
@@ -89,8 +145,21 @@ export class FirebaseServiceProvider extends ServiceProvider {
   updateCreditCard(req: CreditCardRemovalRequest): Promise<HttpBasedResponse> {
     throw new Error("Method not implemented.");
   }
-  fetchCreditCards(req: CreditCardFetchRequest): Promise<HttpBasedResponse> {
-    throw new Error("Method not implemented.");
+  async fetchCreditCards(req: CreditCardFetchRequest): Promise<HttpBasedResponse> {
+    const userRef = this.getUserRef(this.authUid);
+    const cardsRef = userRef.collection("cards");
+    const cardSnap: FirebaseFirestore.QuerySnapshot = await cardsRef.get();
+    const cardsResponse: GetCreditCardResponse = GetCreditCardResponse.create();
+    for (const cardDoc of cardSnap.docs) {
+      const card: CreditCard = CreditCard.fromObject(cardDoc.data());
+      cardsResponse.cards.push(card);
+    }
+    const response: HttpBasedResponse = HttpBasedResponse.create({
+      status: HttpBasedResponse.Status.SUCCESS,
+      statusCode: 200,
+      getCreditCardResponse: cardsResponse,
+    });
+    return response;
   }
   addPromotion(req: PromotionAdditionRequest): Promise<HttpBasedResponse> {
     throw new Error("Method not implemented.");

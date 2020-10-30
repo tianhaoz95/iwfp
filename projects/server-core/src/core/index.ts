@@ -22,6 +22,8 @@ export abstract class ServiceProvider {
 
   abstract async initialize(credential: HttpBasedCredential): Promise<void>;
 
+  abstract async sanityCheck(): Promise<HttpBasedResponse>;
+
   abstract async addCreditCard(
     req: CreditCardCreationRequest
   ): Promise<HttpBasedResponse>;
