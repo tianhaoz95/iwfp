@@ -21,8 +21,24 @@ export const handler = async (
     request: NowRequest,
     response: NowResponse
 ): Promise<void> => {
-    const req: HttpBasedRequest = HttpBasedRequest.create({});
-    const res: HttpBasedResponse = await processRequest(req);
-    response.statusCode = 200;
-    response.json(res.toJSON());
+    try {
+        const req: HttpBasedRequest = HttpBasedRequest.create({});
+        const res: HttpBasedResponse = await processRequest(req);
+        response.statusCode = 200;
+        response.json(res.toJSON());
+    } catch (err) {
+        response.statusCode = 500;
+        const res: HttpBasedResponse = HttpBasedResponse.create({
+            status: HttpBasedResponse.Status.UNKNOWN,
+            statusCode: 500,
+            error: {
+                title: "Unknown Error",
+                detail: JSON.stringify(err),
+            },
+            genericResponse: {
+                msg: "N/A",
+            }
+        });
+        response.json(res.toJSON());
+    }
 };
