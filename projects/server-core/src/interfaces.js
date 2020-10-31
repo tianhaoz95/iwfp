@@ -2952,6 +2952,7 @@ $root.HttpBasedRequest = (function() {
      * @property {ICreditCardCreationRequest|null} [creditCardCreationRequest] HttpBasedRequest creditCardCreationRequest
      * @property {ICreditCardUpdateRequest|null} [creditCardUpdateRequest] HttpBasedRequest creditCardUpdateRequest
      * @property {ICreditCardRemovalRequest|null} [creditCardRemovalRequest] HttpBasedRequest creditCardRemovalRequest
+     * @property {ICreditCardFetchRequest|null} [creditCardFetchRequest] HttpBasedRequest creditCardFetchRequest
      * @property {IPromotionAdditionRequest|null} [promotionAdditionRequest] HttpBasedRequest promotionAdditionRequest
      * @property {IPromotionRemovalRequest|null} [promotionRemovalRequest] HttpBasedRequest promotionRemovalRequest
      * @property {IPromotionUpdateRequest|null} [promotionUpdateRequest] HttpBasedRequest promotionUpdateRequest
@@ -3013,6 +3014,14 @@ $root.HttpBasedRequest = (function() {
     HttpBasedRequest.prototype.creditCardRemovalRequest = null;
 
     /**
+     * HttpBasedRequest creditCardFetchRequest.
+     * @member {ICreditCardFetchRequest|null|undefined} creditCardFetchRequest
+     * @memberof HttpBasedRequest
+     * @instance
+     */
+    HttpBasedRequest.prototype.creditCardFetchRequest = null;
+
+    /**
      * HttpBasedRequest promotionAdditionRequest.
      * @member {IPromotionAdditionRequest|null|undefined} promotionAdditionRequest
      * @memberof HttpBasedRequest
@@ -3041,12 +3050,12 @@ $root.HttpBasedRequest = (function() {
 
     /**
      * HttpBasedRequest request.
-     * @member {"creditCardCreationRequest"|"creditCardUpdateRequest"|"creditCardRemovalRequest"|"promotionAdditionRequest"|"promotionRemovalRequest"|"promotionUpdateRequest"|undefined} request
+     * @member {"creditCardCreationRequest"|"creditCardUpdateRequest"|"creditCardRemovalRequest"|"creditCardFetchRequest"|"promotionAdditionRequest"|"promotionRemovalRequest"|"promotionUpdateRequest"|undefined} request
      * @memberof HttpBasedRequest
      * @instance
      */
     Object.defineProperty(HttpBasedRequest.prototype, "request", {
-        get: $util.oneOfGetter($oneOfFields = ["creditCardCreationRequest", "creditCardUpdateRequest", "creditCardRemovalRequest", "promotionAdditionRequest", "promotionRemovalRequest", "promotionUpdateRequest"]),
+        get: $util.oneOfGetter($oneOfFields = ["creditCardCreationRequest", "creditCardUpdateRequest", "creditCardRemovalRequest", "creditCardFetchRequest", "promotionAdditionRequest", "promotionRemovalRequest", "promotionUpdateRequest"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -3084,12 +3093,14 @@ $root.HttpBasedRequest = (function() {
             $root.CreditCardUpdateRequest.encode(message.creditCardUpdateRequest, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
         if (message.creditCardRemovalRequest != null && Object.hasOwnProperty.call(message, "creditCardRemovalRequest"))
             $root.CreditCardRemovalRequest.encode(message.creditCardRemovalRequest, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+        if (message.creditCardFetchRequest != null && Object.hasOwnProperty.call(message, "creditCardFetchRequest"))
+            $root.CreditCardFetchRequest.encode(message.creditCardFetchRequest, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
         if (message.promotionAdditionRequest != null && Object.hasOwnProperty.call(message, "promotionAdditionRequest"))
-            $root.PromotionAdditionRequest.encode(message.promotionAdditionRequest, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            $root.PromotionAdditionRequest.encode(message.promotionAdditionRequest, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
         if (message.promotionRemovalRequest != null && Object.hasOwnProperty.call(message, "promotionRemovalRequest"))
-            $root.PromotionRemovalRequest.encode(message.promotionRemovalRequest, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            $root.PromotionRemovalRequest.encode(message.promotionRemovalRequest, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
         if (message.promotionUpdateRequest != null && Object.hasOwnProperty.call(message, "promotionUpdateRequest"))
-            $root.PromotionUpdateRequest.encode(message.promotionUpdateRequest, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            $root.PromotionUpdateRequest.encode(message.promotionUpdateRequest, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
         return writer;
     };
 
@@ -3140,12 +3151,15 @@ $root.HttpBasedRequest = (function() {
                 message.creditCardRemovalRequest = $root.CreditCardRemovalRequest.decode(reader, reader.uint32());
                 break;
             case 6:
-                message.promotionAdditionRequest = $root.PromotionAdditionRequest.decode(reader, reader.uint32());
+                message.creditCardFetchRequest = $root.CreditCardFetchRequest.decode(reader, reader.uint32());
                 break;
             case 7:
-                message.promotionRemovalRequest = $root.PromotionRemovalRequest.decode(reader, reader.uint32());
+                message.promotionAdditionRequest = $root.PromotionAdditionRequest.decode(reader, reader.uint32());
                 break;
             case 8:
+                message.promotionRemovalRequest = $root.PromotionRemovalRequest.decode(reader, reader.uint32());
+                break;
+            case 9:
                 message.promotionUpdateRequest = $root.PromotionUpdateRequest.decode(reader, reader.uint32());
                 break;
             default:
@@ -3222,6 +3236,16 @@ $root.HttpBasedRequest = (function() {
                     return "creditCardRemovalRequest." + error;
             }
         }
+        if (message.creditCardFetchRequest != null && message.hasOwnProperty("creditCardFetchRequest")) {
+            if (properties.request === 1)
+                return "request: multiple values";
+            properties.request = 1;
+            {
+                var error = $root.CreditCardFetchRequest.verify(message.creditCardFetchRequest);
+                if (error)
+                    return "creditCardFetchRequest." + error;
+            }
+        }
         if (message.promotionAdditionRequest != null && message.hasOwnProperty("promotionAdditionRequest")) {
             if (properties.request === 1)
                 return "request: multiple values";
@@ -3292,6 +3316,11 @@ $root.HttpBasedRequest = (function() {
                 throw TypeError(".HttpBasedRequest.creditCardRemovalRequest: object expected");
             message.creditCardRemovalRequest = $root.CreditCardRemovalRequest.fromObject(object.creditCardRemovalRequest);
         }
+        if (object.creditCardFetchRequest != null) {
+            if (typeof object.creditCardFetchRequest !== "object")
+                throw TypeError(".HttpBasedRequest.creditCardFetchRequest: object expected");
+            message.creditCardFetchRequest = $root.CreditCardFetchRequest.fromObject(object.creditCardFetchRequest);
+        }
         if (object.promotionAdditionRequest != null) {
             if (typeof object.promotionAdditionRequest !== "object")
                 throw TypeError(".HttpBasedRequest.promotionAdditionRequest: object expected");
@@ -3345,6 +3374,11 @@ $root.HttpBasedRequest = (function() {
             object.creditCardRemovalRequest = $root.CreditCardRemovalRequest.toObject(message.creditCardRemovalRequest, options);
             if (options.oneofs)
                 object.request = "creditCardRemovalRequest";
+        }
+        if (message.creditCardFetchRequest != null && message.hasOwnProperty("creditCardFetchRequest")) {
+            object.creditCardFetchRequest = $root.CreditCardFetchRequest.toObject(message.creditCardFetchRequest, options);
+            if (options.oneofs)
+                object.request = "creditCardFetchRequest";
         }
         if (message.promotionAdditionRequest != null && message.hasOwnProperty("promotionAdditionRequest")) {
             object.promotionAdditionRequest = $root.PromotionAdditionRequest.toObject(message.promotionAdditionRequest, options);

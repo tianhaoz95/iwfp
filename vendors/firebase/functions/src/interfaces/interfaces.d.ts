@@ -1494,6 +1494,9 @@ export interface IHttpBasedRequest {
   /** HttpBasedRequest creditCardRemovalRequest */
   creditCardRemovalRequest?: ICreditCardRemovalRequest | null;
 
+  /** HttpBasedRequest creditCardFetchRequest */
+  creditCardFetchRequest?: ICreditCardFetchRequest | null;
+
   /** HttpBasedRequest promotionAdditionRequest */
   promotionAdditionRequest?: IPromotionAdditionRequest | null;
 
@@ -1527,6 +1530,9 @@ export class HttpBasedRequest implements IHttpBasedRequest {
   /** HttpBasedRequest creditCardRemovalRequest. */
   public creditCardRemovalRequest?: ICreditCardRemovalRequest | null;
 
+  /** HttpBasedRequest creditCardFetchRequest. */
+  public creditCardFetchRequest?: ICreditCardFetchRequest | null;
+
   /** HttpBasedRequest promotionAdditionRequest. */
   public promotionAdditionRequest?: IPromotionAdditionRequest | null;
 
@@ -1541,6 +1547,7 @@ export class HttpBasedRequest implements IHttpBasedRequest {
     | "creditCardCreationRequest"
     | "creditCardUpdateRequest"
     | "creditCardRemovalRequest"
+    | "creditCardFetchRequest"
     | "promotionAdditionRequest"
     | "promotionRemovalRequest"
     | "promotionUpdateRequest";

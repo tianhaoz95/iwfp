@@ -18,7 +18,9 @@
     "next": "9.5.4",
     "protobufjs": "^6.10.1",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "tslog": "^2.10.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/react": "^16.9.53",

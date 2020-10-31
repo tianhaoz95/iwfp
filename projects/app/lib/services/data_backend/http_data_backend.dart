@@ -1,11 +1,44 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:iwfpapp/services/interfaces/response.pb.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
 import 'package:iwfpapp/services/interfaces/request.pb.dart';
 import 'package:iwfpapp/services/interfaces/credit_card.pb.dart';
+import 'package:http/http.dart' as http;
 
 class HttpDataBackend extends DataBackend {
+  String endpoint;
+
+  HttpDataBackend() {
+    endpoint = 'http://localhost:3000';
+  }
+
+  HttpBasedCredential buildCredential() {
+    HttpBasedCredential cred = HttpBasedCredential();
+    cred.token = 'test_token';
+    return cred;
+  }
+
+  HttpBasedVersionInfo buildVersionInfo() {
+    HttpBasedVersionInfo versionInfo = HttpBasedVersionInfo();
+    versionInfo.serviceType = HttpBasedVersionInfo_ServiceType.FIREBASE;
+    return versionInfo;
+  }
+
   @override
   Future<void> addCreditCardToDatabase(CreditCardCreationRequest req) async {
     await Future.delayed(Duration(milliseconds: 200));
+    HttpBasedRequest httpRequest = HttpBasedRequest();
+    httpRequest.credential = buildCredential();
+    httpRequest.versionInfo = buildVersionInfo();
+    httpRequest.creditCardCreationRequest = req;
+    http.Response res = await http.post(endpoint + '/api/card/add',
+        body: httpRequest.writeToJson());
+    HttpBasedResponse response = HttpBasedResponse.fromJson(res.body);
+    if (response.status != HttpBasedResponse_Status.SUCCESS) {
+      throw ('Add credit card failed.');
+    }
   }
 
   @override
@@ -20,8 +53,19 @@ class HttpDataBackend extends DataBackend {
 
   @override
   Future<List<CreditCard>> fetchCreditCardsFromDatabase() async {
-    await Future.delayed(Duration(milliseconds: 200));
-    return [];
+    HttpBasedRequest httpRequest = HttpBasedRequest();
+    httpRequest.credential = buildCredential();
+    httpRequest.versionInfo = buildVersionInfo();
+    httpRequest.creditCardFetchRequest = CreditCardFetchRequest();
+    List<int> buffer = httpRequest.writeToBuffer();
+    String strBuffer = utf8.decode(buffer);
+    http.Response res = await http
+        .post(endpoint + '/api/card/fetch', body: {'proto': strBuffer});
+    HttpBasedResponse response = HttpBasedResponse.fromJson(res.body);
+    if (response.status != HttpBasedResponse_Status.SUCCESS) {
+      throw ('Add credit card failed.');
+    }
+    return response.getCreditCardResponse.cards;
   }
 
   @override

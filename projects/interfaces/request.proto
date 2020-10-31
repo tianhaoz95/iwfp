@@ -62,8 +62,9 @@ message HttpBasedRequest {
     CreditCardCreationRequest credit_card_creation_request = 3;
     CreditCardUpdateRequest credit_card_update_request = 4;
     CreditCardRemovalRequest credit_card_removal_request = 5;
-    PromotionAdditionRequest promotion_addition_request = 6;
-    PromotionRemovalRequest promotion_removal_request = 7;
-    PromotionUpdateRequest promotion_update_request = 8;
+    CreditCardFetchRequest credit_card_fetch_request = 6;
+    PromotionAdditionRequest promotion_addition_request = 7;
+    PromotionRemovalRequest promotion_removal_request = 8;
+    PromotionUpdateRequest promotion_update_request = 9;
   }
 }

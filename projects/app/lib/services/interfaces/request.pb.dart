@@ -737,6 +737,7 @@ enum HttpBasedRequest_Request {
   creditCardCreationRequest,
   creditCardUpdateRequest,
   creditCardRemovalRequest,
+  creditCardFetchRequest,
   promotionAdditionRequest,
   promotionRemovalRequest,
   promotionUpdateRequest,
@@ -749,14 +750,15 @@ class HttpBasedRequest extends $pb.GeneratedMessage {
     3: HttpBasedRequest_Request.creditCardCreationRequest,
     4: HttpBasedRequest_Request.creditCardUpdateRequest,
     5: HttpBasedRequest_Request.creditCardRemovalRequest,
-    6: HttpBasedRequest_Request.promotionAdditionRequest,
-    7: HttpBasedRequest_Request.promotionRemovalRequest,
-    8: HttpBasedRequest_Request.promotionUpdateRequest,
+    6: HttpBasedRequest_Request.creditCardFetchRequest,
+    7: HttpBasedRequest_Request.promotionAdditionRequest,
+    8: HttpBasedRequest_Request.promotionRemovalRequest,
+    9: HttpBasedRequest_Request.promotionUpdateRequest,
     0: HttpBasedRequest_Request.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'HttpBasedRequest',
       createEmptyInstance: create)
-    ..oo(0, [3, 4, 5, 6, 7, 8])
+    ..oo(0, [3, 4, 5, 6, 7, 8, 9])
     ..aOM<HttpBasedCredential>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'credential',
         subBuilder: HttpBasedCredential.create)
@@ -772,9 +774,10 @@ class HttpBasedRequest extends $pb.GeneratedMessage {
     ..aOM<CreditCardRemovalRequest>(
         5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'creditCardRemovalRequest',
         subBuilder: CreditCardRemovalRequest.create)
-    ..aOM<PromotionAdditionRequest>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionAdditionRequest', subBuilder: PromotionAdditionRequest.create)
-    ..aOM<PromotionRemovalRequest>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionRemovalRequest', subBuilder: PromotionRemovalRequest.create)
-    ..aOM<PromotionUpdateRequest>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionUpdateRequest', subBuilder: PromotionUpdateRequest.create)
+    ..aOM<CreditCardFetchRequest>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'creditCardFetchRequest', subBuilder: CreditCardFetchRequest.create)
+    ..aOM<PromotionAdditionRequest>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionAdditionRequest', subBuilder: PromotionAdditionRequest.create)
+    ..aOM<PromotionRemovalRequest>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionRemovalRequest', subBuilder: PromotionRemovalRequest.create)
+    ..aOM<PromotionUpdateRequest>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'promotionUpdateRequest', subBuilder: PromotionUpdateRequest.create)
     ..hasRequiredFields = false;
 
   HttpBasedRequest._() : super();
@@ -881,44 +884,58 @@ class HttpBasedRequest extends $pb.GeneratedMessage {
   CreditCardRemovalRequest ensureCreditCardRemovalRequest() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  PromotionAdditionRequest get promotionAdditionRequest => $_getN(5);
+  CreditCardFetchRequest get creditCardFetchRequest => $_getN(5);
   @$pb.TagNumber(6)
-  set promotionAdditionRequest(PromotionAdditionRequest v) {
+  set creditCardFetchRequest(CreditCardFetchRequest v) {
     setField(6, v);
   }
 
   @$pb.TagNumber(6)
-  $core.bool hasPromotionAdditionRequest() => $_has(5);
+  $core.bool hasCreditCardFetchRequest() => $_has(5);
   @$pb.TagNumber(6)
-  void clearPromotionAdditionRequest() => clearField(6);
+  void clearCreditCardFetchRequest() => clearField(6);
   @$pb.TagNumber(6)
-  PromotionAdditionRequest ensurePromotionAdditionRequest() => $_ensure(5);
+  CreditCardFetchRequest ensureCreditCardFetchRequest() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  PromotionRemovalRequest get promotionRemovalRequest => $_getN(6);
+  PromotionAdditionRequest get promotionAdditionRequest => $_getN(6);
   @$pb.TagNumber(7)
-  set promotionRemovalRequest(PromotionRemovalRequest v) {
+  set promotionAdditionRequest(PromotionAdditionRequest v) {
     setField(7, v);
   }
 
   @$pb.TagNumber(7)
-  $core.bool hasPromotionRemovalRequest() => $_has(6);
+  $core.bool hasPromotionAdditionRequest() => $_has(6);
   @$pb.TagNumber(7)
-  void clearPromotionRemovalRequest() => clearField(7);
+  void clearPromotionAdditionRequest() => clearField(7);
   @$pb.TagNumber(7)
-  PromotionRemovalRequest ensurePromotionRemovalRequest() => $_ensure(6);
+  PromotionAdditionRequest ensurePromotionAdditionRequest() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  PromotionUpdateRequest get promotionUpdateRequest => $_getN(7);
+  PromotionRemovalRequest get promotionRemovalRequest => $_getN(7);
   @$pb.TagNumber(8)
-  set promotionUpdateRequest(PromotionUpdateRequest v) {
+  set promotionRemovalRequest(PromotionRemovalRequest v) {
     setField(8, v);
   }
 
   @$pb.TagNumber(8)
-  $core.bool hasPromotionUpdateRequest() => $_has(7);
+  $core.bool hasPromotionRemovalRequest() => $_has(7);
   @$pb.TagNumber(8)
-  void clearPromotionUpdateRequest() => clearField(8);
+  void clearPromotionRemovalRequest() => clearField(8);
   @$pb.TagNumber(8)
-  PromotionUpdateRequest ensurePromotionUpdateRequest() => $_ensure(7);
+  PromotionRemovalRequest ensurePromotionRemovalRequest() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  PromotionUpdateRequest get promotionUpdateRequest => $_getN(8);
+  @$pb.TagNumber(9)
+  set promotionUpdateRequest(PromotionUpdateRequest v) {
+    setField(9, v);
+  }
+
+  @$pb.TagNumber(9)
+  $core.bool hasPromotionUpdateRequest() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearPromotionUpdateRequest() => clearField(9);
+  @$pb.TagNumber(9)
+  PromotionUpdateRequest ensurePromotionUpdateRequest() => $_ensure(8);
 }

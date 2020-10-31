@@ -180,8 +180,17 @@ const HttpBasedRequest$json = const {
       '10': 'creditCardRemovalRequest'
     },
     const {
-      '1': 'promotion_addition_request',
+      '1': 'credit_card_fetch_request',
       '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.CreditCardFetchRequest',
+      '9': 0,
+      '10': 'creditCardFetchRequest'
+    },
+    const {
+      '1': 'promotion_addition_request',
+      '3': 7,
       '4': 1,
       '5': 11,
       '6': '.PromotionAdditionRequest',
@@ -190,7 +199,7 @@ const HttpBasedRequest$json = const {
     },
     const {
       '1': 'promotion_removal_request',
-      '3': 7,
+      '3': 8,
       '4': 1,
       '5': 11,
       '6': '.PromotionRemovalRequest',
@@ -199,7 +208,7 @@ const HttpBasedRequest$json = const {
     },
     const {
       '1': 'promotion_update_request',
-      '3': 8,
+      '3': 9,
       '4': 1,
       '5': 11,
       '6': '.PromotionUpdateRequest',
