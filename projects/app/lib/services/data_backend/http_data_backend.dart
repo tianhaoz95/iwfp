@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:typed_data';
+// import 'dart:typed_data';
 
 import 'package:iwfpapp/services/interfaces/response.pb.dart';
 import 'package:iwfpapp/services/data_backend/base_data_backend.dart';
@@ -26,15 +26,27 @@ class HttpDataBackend extends DataBackend {
     return versionInfo;
   }
 
+  void populateHttpBasedRequest(HttpBasedRequest req) {
+    req.credential = buildCredential();
+    req.versionInfo = buildVersionInfo();
+  }
+
+  HttpBasedRequest buildHttpBasedRequest() {
+    HttpBasedRequest req = HttpBasedRequest();
+    populateHttpBasedRequest(req);
+    return req;
+  }
+
   @override
   Future<void> addCreditCardToDatabase(CreditCardCreationRequest req) async {
-    await Future.delayed(Duration(milliseconds: 200));
     HttpBasedRequest httpRequest = HttpBasedRequest();
     httpRequest.credential = buildCredential();
     httpRequest.versionInfo = buildVersionInfo();
     httpRequest.creditCardCreationRequest = req;
-    http.Response res = await http.post(endpoint + '/api/card/add',
-        body: httpRequest.writeToJson());
+    List<int> buffer = httpRequest.writeToBuffer();
+    // String strBuffer = utf8.decode(buffer);
+    http.Response res = await http
+        .post(endpoint + '/api/card/add', body: {'proto': buffer.toString()});
     HttpBasedResponse response = HttpBasedResponse.fromJson(res.body);
     if (response.status != HttpBasedResponse_Status.SUCCESS) {
       throw ('Add credit card failed.');
@@ -58,9 +70,9 @@ class HttpDataBackend extends DataBackend {
     httpRequest.versionInfo = buildVersionInfo();
     httpRequest.creditCardFetchRequest = CreditCardFetchRequest();
     List<int> buffer = httpRequest.writeToBuffer();
-    String strBuffer = utf8.decode(buffer);
+    // String strBuffer = utf8.decode(buffer);
     http.Response res = await http
-        .post(endpoint + '/api/card/fetch', body: {'proto': strBuffer});
+        .post(endpoint + '/api/card/fetch', body: {'proto': buffer.toString()});
     HttpBasedResponse response = HttpBasedResponse.fromJson(res.body);
     if (response.status != HttpBasedResponse_Status.SUCCESS) {
       throw ('Add credit card failed.');
@@ -70,13 +82,36 @@ class HttpDataBackend extends DataBackend {
 
   @override
   Future<void> initCreditCardInDatabase(CreditCardCreationRequest req) async {
-    await Future.delayed(Duration(milliseconds: 200));
+    HttpBasedRequest httpRequest = HttpBasedRequest();
+    httpRequest.credential = buildCredential();
+    httpRequest.versionInfo = buildVersionInfo();
+    httpRequest.creditCardCreationRequest = req;
+    List<int> buffer = httpRequest.writeToBuffer();
+    http.Response res = await http
+        .post(endpoint + '/api/card/add', body: {'proto': buffer.toString()});
+    HttpBasedResponse response = HttpBasedResponse.fromJson(res.body);
+    if (response.status != HttpBasedResponse_Status.SUCCESS) {
+      throw ('Add credit card failed.');
+    }
   }
 
   @override
   Future<void> initCreditCardWithTemplateInDatabase(
       CreditCardCreationRequest req) async {
-    await Future.delayed(Duration(milliseconds: 200));
+    print('Run initCreditCardWithTemplateInDatabase');
+    HttpBasedRequest httpRequest = HttpBasedRequest();
+    httpRequest.credential = buildCredential();
+    httpRequest.versionInfo = buildVersionInfo();
+    httpRequest.creditCardCreationRequest = req;
+    print('req composed');
+    List<int> buffer = httpRequest.writeToBuffer();
+    print('req encoded');
+    http.Response res = await http
+        .post(endpoint + '/api/card/add', body: {'proto': buffer.toString()});
+    HttpBasedResponse response = HttpBasedResponse.fromJson(res.body);
+    if (response.status != HttpBasedResponse_Status.SUCCESS) {
+      throw ('Add credit card failed.');
+    }
   }
 
   @override

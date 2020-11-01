@@ -1,9 +1,29 @@
 // Next.js API route support:
 // https://nextjs.org/docs/api-routes/introduction
 import { NowRequest, NowResponse } from "@vercel/node";
-import { processRequest } from "iwfp-server-core";
-import { HttpBasedRequest, HttpBasedResponse } from "./interfaces";
+import { RequestProcessor } from "iwfp-server-core";
+import { HttpBasedRequest, HttpBasedResponse, HttpBasedVersionInfo } from "./interfaces";
 import winston from "winston";
+
+const logger = winston.createLogger({
+    transports: [
+        new winston.transports.Console(),
+    ]
+});
+
+const versionInfo: HttpBasedVersionInfo = HttpBasedVersionInfo.create({
+    serviceType: HttpBasedVersionInfo.ServiceType.FIREBASE
+});
+
+const requestProcessor: RequestProcessor = new RequestProcessor((msg: string, type: "info" | "error") => {
+    if (type === "info") {
+        logger.info(msg);
+    } else if (type === "error") {
+        logger.error(msg);
+    } else {
+        throw Error("Logging type unknown.")
+    }
+}, versionInfo);
 
 export const allowCors = (
     fn: (request: NowRequest, response: NowResponse) => Promise<void>
@@ -22,26 +42,13 @@ export const handler = async (
     request: NowRequest,
     response: NowResponse
 ): Promise<void> => {
-    const logger = winston.createLogger({
-        transports: [
-            new winston.transports.Console(),
-        ]
-    });
-    const buffer: Buffer = Buffer.from(request.body['proto']);
+    const buffer: Buffer = Buffer.from(JSON.parse(request.body['proto']) as number[]);
     logger.info(`Request received: ${buffer.toString('binary')}`);
     try {
         logger.info('Parse HttpBasedRequest from the buffer.');
         const req: HttpBasedRequest = HttpBasedRequest.decode(buffer);
         logger.info(`HttpBasedRequest created: ${JSON.stringify(req.toJSON())}`);
-        const res: HttpBasedResponse = await processRequest(req, (msg: string, type: "info" | "error") => {
-            if (type === "info") {
-                logger.info(msg);
-            } else if (type === "error") {
-                logger.error(msg);
-            } else {
-                throw Error("Logging type unknown.")
-            }
-        });
+        const res: HttpBasedResponse = await requestProcessor.process(req);
         logger.info(`HttpBasedRequest processed and returned HttpBasedResponse: ${JSON.stringify(res)}`);
         response.statusCode = 200;
         response.json(res.toJSON());
