@@ -29,10 +29,10 @@ export class MockServiceProvider extends ServiceProvider {
   addCreditCard(req: CreditCardCreationRequest): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  removeCreditCard(req: CreditCardUpdateRequest): Promise<void> {
+  removeCreditCard(req: CreditCardRemovalRequest): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  updateCreditCard(req: CreditCardRemovalRequest): Promise<void> {
+  updateCreditCard(req: CreditCardUpdateRequest): Promise<void> {
     throw new Error("Method not implemented.");
   }
   fetchCreditCards(req: CreditCardFetchRequest): Promise<CreditCard[]> {

@@ -26,9 +26,9 @@ export abstract class ServiceProvider {
 
   abstract async addCreditCard(req: CreditCardCreationRequest): Promise<void>;
 
-  abstract async removeCreditCard(req: CreditCardUpdateRequest): Promise<void>;
+  abstract async removeCreditCard(req: CreditCardRemovalRequest): Promise<void>;
 
-  abstract async updateCreditCard(req: CreditCardRemovalRequest): Promise<void>;
+  abstract async updateCreditCard(req: CreditCardUpdateRequest): Promise<void>;
 
   abstract async fetchCreditCards(
     req: CreditCardFetchRequest

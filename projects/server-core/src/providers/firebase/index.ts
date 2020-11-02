@@ -71,7 +71,6 @@ export class FirebaseServiceProvider extends ServiceProvider {
         {
           projectId: projectId,
           credential: cred,
-          // databaseURL: "https://iwfpapp.firebaseio.com",
         },
         "vercel-server"
       );
@@ -147,38 +146,51 @@ export class FirebaseServiceProvider extends ServiceProvider {
   async addCreditCard(req: CreditCardCreationRequest): Promise<void> {
     this.logger("Execute add credit card in Firebase.", "info");
     if (req.cardData && req.cardData.id) {
-      this.logger("Card data and id found.", "info");
       const userId: string = this.authUid;
-      this.logger("Got user ID.", "info");
       const userRef = await this.getUserRef(userId);
-      this.logger("Created user reference.", "info");
       const cardRef = userRef.collection("cards").doc(req.cardData.id);
-      this.logger("Created card reference.", "info");
       const cardSnap = await cardRef.get();
-      this.logger(
-        `Retrieved card snapshot => existence: ${
-          cardSnap.exists
-        }, data: ${JSON.stringify(cardSnap.data())}`,
-        "info"
-      );
-      if (cardSnap.data() === undefined) {
-        this.logger("Card not exist. Procceed.", "info");
+      if (!cardSnap.exists) {
         const cardData: CreditCard = CreditCard.fromObject(req.cardData);
         await cardRef.set(cardData.toJSON());
-        this.logger("Card data set. Done.", "info");
       } else {
-        this.logger("Card already exist", "error");
         throw Error("Card already exist.");
       }
     } else {
       throw Error("Card data missing or incomplete.");
     }
   }
-  removeCreditCard(req: CreditCardUpdateRequest): Promise<void> {
-    throw new Error("Method not implemented.");
+  async removeCreditCard(req: CreditCardRemovalRequest): Promise<void> {
+    if (req.cardId) {
+      const userId: string = this.authUid;
+      const userRef = await this.getUserRef(userId);
+      const cardRef = userRef.collection("cards").doc(req.cardId);
+      const cardSnap = await cardRef.get();
+      if (cardSnap.exists) {
+        await cardRef.delete();
+      } else {
+        throw Error("Card not exist.");
+      }
+    } else {
+      throw Error("Card data missing or incomplete.");
+    }
   }
-  updateCreditCard(req: CreditCardRemovalRequest): Promise<void> {
-    throw new Error("Method not implemented.");
+  async updateCreditCard(req: CreditCardUpdateRequest): Promise<void> {
+    this.logger("Execute update credit card in Firebase.", "info");
+    if (req.updatedCardData && req.updatedCardData.id) {
+      const userId: string = this.authUid;
+      const userRef = await this.getUserRef(userId);
+      const cardRef = userRef.collection("cards").doc(req.updatedCardData.id);
+      const cardSnap = await cardRef.get();
+      if (cardSnap.exists) {
+        const cardData: CreditCard = CreditCard.fromObject(req.updatedCardData);
+        await cardRef.set(cardData.toJSON());
+      } else {
+        throw Error("Card already exist.");
+      }
+    } else {
+      throw Error("Card data missing or incomplete.");
+    }
   }
   async fetchCreditCards(req: CreditCardFetchRequest): Promise<CreditCard[]> {
     const userRef = await this.getUserRef(this.authUid);
@@ -191,16 +203,61 @@ export class FirebaseServiceProvider extends ServiceProvider {
     }
     return cards;
   }
-  addPromotion(req: PromotionAdditionRequest): Promise<void> {
-    throw new Error("Method not implemented.");
+  async addPromotion(req: PromotionAdditionRequest): Promise<void> {
+    if (req.promotionData) {
+      const cardId = req.targetCardId;
+      const userRef = await this.getUserRef(this.authUid);
+      const cardRef = userRef.collection("cards").doc(cardId);
+      const cardData = await cardRef.get();
+      if (cardData.exists) {
+        const card = CreditCard.fromObject(cardData.data);
+        card.promotions.push(req.promotionData)
+        await cardRef.set(card.toJSON());
+      } else {
+        throw Error("Card not exist.");
+      }
+    } else {
+      throw Error("Promotion data not exist.");
+    }
   }
-  removePromition(req: PromotionRemovalRequest): Promise<void> {
-    throw new Error("Method not implemented.");
+  async removePromition(req: PromotionRemovalRequest): Promise<void> {
+    if (req.targetCardId && req.targetPromotionId) {
+      const cardId = req.targetCardId;
+      const userRef = await this.getUserRef(this.authUid);
+      const cardRef = userRef.collection("cards").doc(cardId);
+      const cardData = await cardRef.get();
+      if (cardData.exists) {
+        const card = CreditCard.fromObject(cardData.data);
+        card.promotions = card.promotions.filter((promo) => promo.id !== req.targetPromotionId);
+        await cardRef.set(card.toJSON());
+      } else {
+        throw Error("Card not exist.");
+      }
+    } else {
+      throw Error("Promotion data not exist.");
+    }
   }
-  updatePromotion(req: PromotionUpdateRequest): Promise<void> {
-    throw new Error("Method not implemented.");
+  async updatePromotion(req: PromotionUpdateRequest): Promise<void> {
+    if (req.targetCardId && req.updatedPromotionData) {
+      const cardId = req.targetCardId;
+      const userRef = await this.getUserRef(this.authUid);
+      const cardRef = userRef.collection("cards").doc(cardId);
+      const cardData = await cardRef.get();
+      if (cardData.exists) {
+        const card = CreditCard.fromObject(cardData.data);
+        card.promotions = card.promotions.filter((promo) => promo.id !== req.updatedPromotionData?.id);
+        card.promotions.push(req.updatedPromotionData);
+        await cardRef.set(card.toJSON());
+      } else {
+        throw Error("Card not exist.");
+      }
+    } else {
+      throw Error("Promotion data not exist.");
+    }
   }
-  removeUser(req: UserRemovalRequest): Promise<void> {
-    throw new Error("Method not implemented.");
+  async removeUser(req: UserRemovalRequest): Promise<void> {
+    const userRef = await this.getUserRef(req.username);
+    await userRef.delete();
+    await this.app?.auth().deleteUser(req.username);
   }
 }

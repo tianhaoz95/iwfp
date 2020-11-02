@@ -40,8 +40,7 @@ export class RequestProcessor {
         );
         this.logger("Credential info parsed from the request.", "info");
         await serviceProvider.initialize(cred);
-        await handlerRequest(req, this.serviceProvider, this.logger);
-        const response: HttpBasedResponse = HttpBasedResponse.create({});
+        const response = await handlerRequest(req, this.serviceProvider, this.logger);
         return response;
       } else {
         this.logger("Credential not found", "error");

@@ -51,7 +51,8 @@ export const handler = async (
         const res: HttpBasedResponse = await requestProcessor.process(req);
         logger.info(`HttpBasedRequest processed and returned HttpBasedResponse: ${JSON.stringify(res)}`);
         response.statusCode = 200;
-        response.json(res.toJSON());
+        const resBuffer = Array.from(HttpBasedResponse.encode(res).finish());
+        response.json({"proto": resBuffer});
     } catch (err) {
         response.statusCode = 500;
         logger.info(`Unknown error: ${JSON.stringify(err)}`);

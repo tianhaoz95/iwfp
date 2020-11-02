@@ -66,5 +66,6 @@ message HttpBasedRequest {
     PromotionAdditionRequest promotion_addition_request = 7;
     PromotionRemovalRequest promotion_removal_request = 8;
     PromotionUpdateRequest promotion_update_request = 9;
+    UserRemovalRequest user_removal_request = 10;
   }
 }
