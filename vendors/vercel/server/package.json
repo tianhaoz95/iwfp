@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 next dev",
+    "dev": "FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 FIREBASE_TEST_USERNAME=test_username next dev",
     "build:server-core": "cd ../../../projects/server-core && npm run build",
     "build:ts": "tsc",
     "build": "npm run build:server-core && npm install && npm run build:ts && next build",

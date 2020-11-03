@@ -32,14 +32,13 @@ export class RequestProcessor {
         `Parsed version info: ${JSON.stringify(versionInfo)}`,
         "info"
       );
-      const serviceProvider = getServiceProvider(versionInfo, this.logger);
       if (req.credential) {
         this.logger("Credential info found in the request.", "info");
         const cred: HttpBasedCredential = HttpBasedCredential.fromObject(
           req.credential
         );
         this.logger("Credential info parsed from the request.", "info");
-        await serviceProvider.initialize(cred);
+        await this.serviceProvider.initialize(cred);
         const response = await handlerRequest(req, this.serviceProvider, this.logger);
         return response;
       } else {

@@ -17,6 +17,15 @@ abstract class BaseHttpDataBackend extends DataBackend {
   @protected
   String getCreditCardFetchEndpoint();
 
+  @protected
+  String getCreditCardRemovalEndpoint();
+
+  @protected
+  String getPromotionAdditionEndpoint();
+
+  @protected
+  String getPromotionRemovalEndpoint();
+
   void logTrace(String info, {Object error, bool exception = false}) {
     developer.log(info, name: getLoggingNamespace(), error: error);
     if (exception) {
@@ -95,11 +104,17 @@ abstract class BaseHttpDataBackend extends DataBackend {
 
   @override
   Future<void> addPromitionToDatabase(PromotionAdditionRequest req) async {
-    await Future.delayed(Duration(milliseconds: 200));
+    HttpBasedRequest httpRequest = buildHttpBasedRequest();
+    httpRequest.promotionAdditionRequest = req;
+    HttpBasedResponse response =
+        await sendRequest(httpRequest, getPromotionAdditionEndpoint());
+    maybePostException(response);
   }
 
   @override
   Future<void> deleteAccountFromDatabase() async {
+    // TODO(tianhaoz95): there should be a way for data backend to access
+    // authentication information.
     await Future.delayed(Duration(milliseconds: 200));
   }
 
@@ -118,6 +133,8 @@ abstract class BaseHttpDataBackend extends DataBackend {
 
   @override
   Future<void> initCreditCardInDatabase(CreditCardCreationRequest req) async {
+    // TODO(tianhaoz95): this should be deprecated in favor of
+    // the addCreditCardToDatabase API.
     HttpBasedRequest httpRequest = buildHttpBasedRequest();
     httpRequest.creditCardCreationRequest = req;
     HttpBasedResponse response =
@@ -128,6 +145,8 @@ abstract class BaseHttpDataBackend extends DataBackend {
   @override
   Future<void> initCreditCardWithTemplateInDatabase(
       CreditCardCreationRequest req) async {
+    // TODO(tianhaoz95): this should be deprecated in favor of
+    // the addCreditCardToDatabase API.
     HttpBasedRequest httpRequest = buildHttpBasedRequest();
     httpRequest.creditCardCreationRequest = req;
     HttpBasedResponse response =
@@ -138,16 +157,26 @@ abstract class BaseHttpDataBackend extends DataBackend {
   @override
   Future<void> initialize() async {
     await Future.delayed(Duration(milliseconds: 200));
+    // TODO(tianhaoz95): this is probably a good place to check the
+    // version compatibility of app and server.
   }
 
   @override
   Future<void> removeCreditCardFromDatabase(
       CreditCardRemovalRequest req) async {
-    await Future.delayed(Duration(milliseconds: 200));
+    HttpBasedRequest httpRequest = buildHttpBasedRequest();
+    httpRequest.creditCardRemovalRequest = req;
+    HttpBasedResponse response =
+        await sendRequest(httpRequest, getCreditCardRemovalEndpoint());
+    maybePostException(response);
   }
 
   @override
   Future<void> removePromotionFromDatabase(PromotionRemovalRequest req) async {
-    await Future.delayed(Duration(milliseconds: 200));
+    HttpBasedRequest httpRequest = buildHttpBasedRequest();
+    httpRequest.promotionRemovalRequest = req;
+    HttpBasedResponse response =
+        await sendRequest(httpRequest, getPromotionRemovalEndpoint());
+    maybePostException(response);
   }
 }

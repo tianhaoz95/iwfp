@@ -5,12 +5,19 @@ class LocalDevelopmentHttpDataBackend extends BaseHttpDataBackend {
   String baseEndpoint;
   String creditCardCreationEndpoint;
   String creditCardFetchEndpoint;
+  String creditCardRemovalEndpoint;
+  String promotionAdditionEndpoint;
+  String promotionRemovalEndpoint;
 
   LocalDevelopmentHttpDataBackend() {
     baseEndpoint = 'http://localhost:3000/api';
     String creditCardScope = baseEndpoint + '/card';
     creditCardCreationEndpoint = creditCardScope + '/add';
     creditCardFetchEndpoint = creditCardScope + '/fetch';
+    creditCardRemovalEndpoint = creditCardScope + '/remove';
+    String promotionScope = baseEndpoint + '/promo';
+    promotionAdditionEndpoint = promotionScope + '/add';
+    promotionRemovalEndpoint = promotionScope + '/remove';
     loggingNamspace = 'service.data_backend.http.local_development';
   }
 
@@ -27,5 +34,20 @@ class LocalDevelopmentHttpDataBackend extends BaseHttpDataBackend {
   @override
   String getLoggingNamespace() {
     return loggingNamspace;
+  }
+
+  @override
+  String getCreditCardRemovalEndpoint() {
+    return creditCardRemovalEndpoint;
+  }
+
+  @override
+  String getPromotionAdditionEndpoint() {
+    return promotionAdditionEndpoint;
+  }
+
+  @override
+  String getPromotionRemovalEndpoint() {
+    return promotionRemovalEndpoint;
   }
 }
