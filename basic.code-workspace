@@ -1,0 +1,35 @@
+{
+	"folders": [
+		{
+			"name": "Overview",
+			"path": "."
+		},
+		{
+			"name": "Application",
+			"path": "./projects/app"
+		},
+		{
+			"name": "Server Core",
+			"path": "./projects/server-core"
+		},
+		{
+			"name": "Protobuf Interface",
+			"path": "./projects/interfaces"
+		},
+		{
+			"name": "Vendor: Firebase",
+			"path": "./vendors/firebase"
+		},
+		{
+			"name": "Vendor: Vercel",
+			"path": "./vendors/vercel"
+		}
+	],
+	"settings": {
+		"protoc": {
+			"options": [
+				"--proto_path=${workspaceDir}/projects/interfaces"
+			]
+		}
+	}
+}
