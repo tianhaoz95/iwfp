@@ -19,11 +19,7 @@ export ANDROID_APP_ROOT="$APP_ROOT/android"
 export SITE_ROOT="$PROJECTS_ROOT/project-website"
 export CREDENTIAL_REPOSITORY="iwfp-credentials"
 export TEMP_DIR="/tmp/iwfp"
-
-echo "Initialize build area for Firebase release."
-export BUILD_DIR="$FIREBASE_ROOT/build"
-rm -rf "$BUILD_DIR"
-mkdir -p "$BUILD_DIR"
+export FIREBASE_BUILD_DIR="$FIREBASE_ROOT/build"
 
 echo "Extract Dart path from Flutter location."
 export FLUTTER_PATH="$(which flutter)"
