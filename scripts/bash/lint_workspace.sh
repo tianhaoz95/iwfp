@@ -90,3 +90,17 @@ $GENERIC_CHECKER $PROJ_ROOT/.github/ISSUE_TEMPLATE/*.md $PROJ_ROOT/.github/pull_
 
 # Check dependabot config
 $GENERIC_CHECKER $PROJ_ROOT/.github/dependabot.yml
+
+# Chkec the Vercel server shell code
+cd $VERCEL_SERVER_ROOT
+npm run format
+if [[ $1 == "check" ]]
+then
+  # TODO(tianhaoz95): add a lint option for vercel linter script
+  npm run format
+fi
+if [[ $1 == "format" ]]
+then
+  npm run format
+fi
+cd $PROJ_ROOT

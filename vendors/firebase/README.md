@@ -10,3 +10,9 @@ The cloud functions has been taken out in favor of lower cost Vercel solution. T
     ]
 }
 ```
+
+To find out which zombie process is taking the port, use the following command and then kill the process:
+
+```bash
+netstat -ltnp | grep -w ':[port number]'
+```

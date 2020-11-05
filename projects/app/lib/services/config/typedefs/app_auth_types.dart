@@ -1,5 +1,6 @@
 enum AppAuthType {
   FIREBASE_AUTH,
+  FIREBASE_EMULATOR,
   MOCK_AUTH,
   DUMB_AUTH,
 }

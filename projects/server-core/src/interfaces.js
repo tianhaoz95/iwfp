@@ -1482,6 +1482,193 @@ $root.CreditCardRemovalRequest = (function() {
     return CreditCardRemovalRequest;
 })();
 
+$root.CreditCardFetchRequest = (function() {
+
+    /**
+     * Properties of a CreditCardFetchRequest.
+     * @exports ICreditCardFetchRequest
+     * @interface ICreditCardFetchRequest
+     * @property {string|null} [cardId] CreditCardFetchRequest cardId
+     */
+
+    /**
+     * Constructs a new CreditCardFetchRequest.
+     * @exports CreditCardFetchRequest
+     * @classdesc Represents a CreditCardFetchRequest.
+     * @implements ICreditCardFetchRequest
+     * @constructor
+     * @param {ICreditCardFetchRequest=} [properties] Properties to set
+     */
+    function CreditCardFetchRequest(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * CreditCardFetchRequest cardId.
+     * @member {string} cardId
+     * @memberof CreditCardFetchRequest
+     * @instance
+     */
+    CreditCardFetchRequest.prototype.cardId = "";
+
+    /**
+     * Creates a new CreditCardFetchRequest instance using the specified properties.
+     * @function create
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {ICreditCardFetchRequest=} [properties] Properties to set
+     * @returns {CreditCardFetchRequest} CreditCardFetchRequest instance
+     */
+    CreditCardFetchRequest.create = function create(properties) {
+        return new CreditCardFetchRequest(properties);
+    };
+
+    /**
+     * Encodes the specified CreditCardFetchRequest message. Does not implicitly {@link CreditCardFetchRequest.verify|verify} messages.
+     * @function encode
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {ICreditCardFetchRequest} message CreditCardFetchRequest message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    CreditCardFetchRequest.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.cardId != null && Object.hasOwnProperty.call(message, "cardId"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.cardId);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified CreditCardFetchRequest message, length delimited. Does not implicitly {@link CreditCardFetchRequest.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {ICreditCardFetchRequest} message CreditCardFetchRequest message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    CreditCardFetchRequest.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a CreditCardFetchRequest message from the specified reader or buffer.
+     * @function decode
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {CreditCardFetchRequest} CreditCardFetchRequest
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    CreditCardFetchRequest.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CreditCardFetchRequest();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.cardId = reader.string();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a CreditCardFetchRequest message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {CreditCardFetchRequest} CreditCardFetchRequest
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    CreditCardFetchRequest.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a CreditCardFetchRequest message.
+     * @function verify
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    CreditCardFetchRequest.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.cardId != null && message.hasOwnProperty("cardId"))
+            if (!$util.isString(message.cardId))
+                return "cardId: string expected";
+        return null;
+    };
+
+    /**
+     * Creates a CreditCardFetchRequest message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {CreditCardFetchRequest} CreditCardFetchRequest
+     */
+    CreditCardFetchRequest.fromObject = function fromObject(object) {
+        if (object instanceof $root.CreditCardFetchRequest)
+            return object;
+        var message = new $root.CreditCardFetchRequest();
+        if (object.cardId != null)
+            message.cardId = String(object.cardId);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a CreditCardFetchRequest message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof CreditCardFetchRequest
+     * @static
+     * @param {CreditCardFetchRequest} message CreditCardFetchRequest
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    CreditCardFetchRequest.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.cardId = "";
+        if (message.cardId != null && message.hasOwnProperty("cardId"))
+            object.cardId = message.cardId;
+        return object;
+    };
+
+    /**
+     * Converts this CreditCardFetchRequest to JSON.
+     * @function toJSON
+     * @memberof CreditCardFetchRequest
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    CreditCardFetchRequest.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return CreditCardFetchRequest;
+})();
+
 $root.PromotionAdditionRequest = (function() {
 
     /**
@@ -2166,17 +2353,606 @@ $root.PromotionUpdateRequest = (function() {
     return PromotionUpdateRequest;
 })();
 
+$root.UserRemovalRequest = (function() {
+
+    /**
+     * Properties of a UserRemovalRequest.
+     * @exports IUserRemovalRequest
+     * @interface IUserRemovalRequest
+     * @property {string|null} [username] UserRemovalRequest username
+     */
+
+    /**
+     * Constructs a new UserRemovalRequest.
+     * @exports UserRemovalRequest
+     * @classdesc Represents a UserRemovalRequest.
+     * @implements IUserRemovalRequest
+     * @constructor
+     * @param {IUserRemovalRequest=} [properties] Properties to set
+     */
+    function UserRemovalRequest(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * UserRemovalRequest username.
+     * @member {string} username
+     * @memberof UserRemovalRequest
+     * @instance
+     */
+    UserRemovalRequest.prototype.username = "";
+
+    /**
+     * Creates a new UserRemovalRequest instance using the specified properties.
+     * @function create
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {IUserRemovalRequest=} [properties] Properties to set
+     * @returns {UserRemovalRequest} UserRemovalRequest instance
+     */
+    UserRemovalRequest.create = function create(properties) {
+        return new UserRemovalRequest(properties);
+    };
+
+    /**
+     * Encodes the specified UserRemovalRequest message. Does not implicitly {@link UserRemovalRequest.verify|verify} messages.
+     * @function encode
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {IUserRemovalRequest} message UserRemovalRequest message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    UserRemovalRequest.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified UserRemovalRequest message, length delimited. Does not implicitly {@link UserRemovalRequest.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {IUserRemovalRequest} message UserRemovalRequest message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    UserRemovalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a UserRemovalRequest message from the specified reader or buffer.
+     * @function decode
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {UserRemovalRequest} UserRemovalRequest
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    UserRemovalRequest.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.UserRemovalRequest();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.username = reader.string();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a UserRemovalRequest message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {UserRemovalRequest} UserRemovalRequest
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    UserRemovalRequest.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a UserRemovalRequest message.
+     * @function verify
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    UserRemovalRequest.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.username != null && message.hasOwnProperty("username"))
+            if (!$util.isString(message.username))
+                return "username: string expected";
+        return null;
+    };
+
+    /**
+     * Creates a UserRemovalRequest message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {UserRemovalRequest} UserRemovalRequest
+     */
+    UserRemovalRequest.fromObject = function fromObject(object) {
+        if (object instanceof $root.UserRemovalRequest)
+            return object;
+        var message = new $root.UserRemovalRequest();
+        if (object.username != null)
+            message.username = String(object.username);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a UserRemovalRequest message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof UserRemovalRequest
+     * @static
+     * @param {UserRemovalRequest} message UserRemovalRequest
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    UserRemovalRequest.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.username = "";
+        if (message.username != null && message.hasOwnProperty("username"))
+            object.username = message.username;
+        return object;
+    };
+
+    /**
+     * Converts this UserRemovalRequest to JSON.
+     * @function toJSON
+     * @memberof UserRemovalRequest
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    UserRemovalRequest.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return UserRemovalRequest;
+})();
+
+$root.HttpBasedCredential = (function() {
+
+    /**
+     * Properties of a HttpBasedCredential.
+     * @exports IHttpBasedCredential
+     * @interface IHttpBasedCredential
+     * @property {string|null} [token] HttpBasedCredential token
+     */
+
+    /**
+     * Constructs a new HttpBasedCredential.
+     * @exports HttpBasedCredential
+     * @classdesc Represents a HttpBasedCredential.
+     * @implements IHttpBasedCredential
+     * @constructor
+     * @param {IHttpBasedCredential=} [properties] Properties to set
+     */
+    function HttpBasedCredential(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * HttpBasedCredential token.
+     * @member {string} token
+     * @memberof HttpBasedCredential
+     * @instance
+     */
+    HttpBasedCredential.prototype.token = "";
+
+    /**
+     * Creates a new HttpBasedCredential instance using the specified properties.
+     * @function create
+     * @memberof HttpBasedCredential
+     * @static
+     * @param {IHttpBasedCredential=} [properties] Properties to set
+     * @returns {HttpBasedCredential} HttpBasedCredential instance
+     */
+    HttpBasedCredential.create = function create(properties) {
+        return new HttpBasedCredential(properties);
+    };
+
+    /**
+     * Encodes the specified HttpBasedCredential message. Does not implicitly {@link HttpBasedCredential.verify|verify} messages.
+     * @function encode
+     * @memberof HttpBasedCredential
+     * @static
+     * @param {IHttpBasedCredential} message HttpBasedCredential message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    HttpBasedCredential.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.token != null && Object.hasOwnProperty.call(message, "token"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.token);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified HttpBasedCredential message, length delimited. Does not implicitly {@link HttpBasedCredential.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof HttpBasedCredential
+     * @static
+     * @param {IHttpBasedCredential} message HttpBasedCredential message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    HttpBasedCredential.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a HttpBasedCredential message from the specified reader or buffer.
+     * @function decode
+     * @memberof HttpBasedCredential
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {HttpBasedCredential} HttpBasedCredential
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    HttpBasedCredential.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HttpBasedCredential();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.token = reader.string();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a HttpBasedCredential message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof HttpBasedCredential
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {HttpBasedCredential} HttpBasedCredential
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    HttpBasedCredential.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a HttpBasedCredential message.
+     * @function verify
+     * @memberof HttpBasedCredential
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    HttpBasedCredential.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.token != null && message.hasOwnProperty("token"))
+            if (!$util.isString(message.token))
+                return "token: string expected";
+        return null;
+    };
+
+    /**
+     * Creates a HttpBasedCredential message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof HttpBasedCredential
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {HttpBasedCredential} HttpBasedCredential
+     */
+    HttpBasedCredential.fromObject = function fromObject(object) {
+        if (object instanceof $root.HttpBasedCredential)
+            return object;
+        var message = new $root.HttpBasedCredential();
+        if (object.token != null)
+            message.token = String(object.token);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a HttpBasedCredential message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof HttpBasedCredential
+     * @static
+     * @param {HttpBasedCredential} message HttpBasedCredential
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    HttpBasedCredential.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.token = "";
+        if (message.token != null && message.hasOwnProperty("token"))
+            object.token = message.token;
+        return object;
+    };
+
+    /**
+     * Converts this HttpBasedCredential to JSON.
+     * @function toJSON
+     * @memberof HttpBasedCredential
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    HttpBasedCredential.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return HttpBasedCredential;
+})();
+
+$root.HttpBasedVersionInfo = (function() {
+
+    /**
+     * Properties of a HttpBasedVersionInfo.
+     * @exports IHttpBasedVersionInfo
+     * @interface IHttpBasedVersionInfo
+     * @property {HttpBasedVersionInfo.ServiceType|null} [serviceType] HttpBasedVersionInfo serviceType
+     */
+
+    /**
+     * Constructs a new HttpBasedVersionInfo.
+     * @exports HttpBasedVersionInfo
+     * @classdesc Represents a HttpBasedVersionInfo.
+     * @implements IHttpBasedVersionInfo
+     * @constructor
+     * @param {IHttpBasedVersionInfo=} [properties] Properties to set
+     */
+    function HttpBasedVersionInfo(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * HttpBasedVersionInfo serviceType.
+     * @member {HttpBasedVersionInfo.ServiceType} serviceType
+     * @memberof HttpBasedVersionInfo
+     * @instance
+     */
+    HttpBasedVersionInfo.prototype.serviceType = 0;
+
+    /**
+     * Creates a new HttpBasedVersionInfo instance using the specified properties.
+     * @function create
+     * @memberof HttpBasedVersionInfo
+     * @static
+     * @param {IHttpBasedVersionInfo=} [properties] Properties to set
+     * @returns {HttpBasedVersionInfo} HttpBasedVersionInfo instance
+     */
+    HttpBasedVersionInfo.create = function create(properties) {
+        return new HttpBasedVersionInfo(properties);
+    };
+
+    /**
+     * Encodes the specified HttpBasedVersionInfo message. Does not implicitly {@link HttpBasedVersionInfo.verify|verify} messages.
+     * @function encode
+     * @memberof HttpBasedVersionInfo
+     * @static
+     * @param {IHttpBasedVersionInfo} message HttpBasedVersionInfo message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    HttpBasedVersionInfo.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.serviceType != null && Object.hasOwnProperty.call(message, "serviceType"))
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.serviceType);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified HttpBasedVersionInfo message, length delimited. Does not implicitly {@link HttpBasedVersionInfo.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof HttpBasedVersionInfo
+     * @static
+     * @param {IHttpBasedVersionInfo} message HttpBasedVersionInfo message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    HttpBasedVersionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a HttpBasedVersionInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof HttpBasedVersionInfo
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {HttpBasedVersionInfo} HttpBasedVersionInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    HttpBasedVersionInfo.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HttpBasedVersionInfo();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.serviceType = reader.int32();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a HttpBasedVersionInfo message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof HttpBasedVersionInfo
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {HttpBasedVersionInfo} HttpBasedVersionInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    HttpBasedVersionInfo.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a HttpBasedVersionInfo message.
+     * @function verify
+     * @memberof HttpBasedVersionInfo
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    HttpBasedVersionInfo.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.serviceType != null && message.hasOwnProperty("serviceType"))
+            switch (message.serviceType) {
+            default:
+                return "serviceType: enum value expected";
+            case 0:
+            case 1:
+                break;
+            }
+        return null;
+    };
+
+    /**
+     * Creates a HttpBasedVersionInfo message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof HttpBasedVersionInfo
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {HttpBasedVersionInfo} HttpBasedVersionInfo
+     */
+    HttpBasedVersionInfo.fromObject = function fromObject(object) {
+        if (object instanceof $root.HttpBasedVersionInfo)
+            return object;
+        var message = new $root.HttpBasedVersionInfo();
+        switch (object.serviceType) {
+        case "FIREBASE":
+        case 0:
+            message.serviceType = 0;
+            break;
+        case "MOCK":
+        case 1:
+            message.serviceType = 1;
+            break;
+        }
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a HttpBasedVersionInfo message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof HttpBasedVersionInfo
+     * @static
+     * @param {HttpBasedVersionInfo} message HttpBasedVersionInfo
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    HttpBasedVersionInfo.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.serviceType = options.enums === String ? "FIREBASE" : 0;
+        if (message.serviceType != null && message.hasOwnProperty("serviceType"))
+            object.serviceType = options.enums === String ? $root.HttpBasedVersionInfo.ServiceType[message.serviceType] : message.serviceType;
+        return object;
+    };
+
+    /**
+     * Converts this HttpBasedVersionInfo to JSON.
+     * @function toJSON
+     * @memberof HttpBasedVersionInfo
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    HttpBasedVersionInfo.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    /**
+     * ServiceType enum.
+     * @name HttpBasedVersionInfo.ServiceType
+     * @enum {number}
+     * @property {number} FIREBASE=0 FIREBASE value
+     * @property {number} MOCK=1 MOCK value
+     */
+    HttpBasedVersionInfo.ServiceType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "FIREBASE"] = 0;
+        values[valuesById[1] = "MOCK"] = 1;
+        return values;
+    })();
+
+    return HttpBasedVersionInfo;
+})();
+
 $root.HttpBasedRequest = (function() {
 
     /**
      * Properties of a HttpBasedRequest.
      * @exports IHttpBasedRequest
      * @interface IHttpBasedRequest
-     * @property {boolean|null} [requireAuth] HttpBasedRequest requireAuth
-     * @property {string|null} [token] HttpBasedRequest token
+     * @property {IHttpBasedCredential|null} [credential] HttpBasedRequest credential
+     * @property {IHttpBasedVersionInfo|null} [versionInfo] HttpBasedRequest versionInfo
      * @property {ICreditCardCreationRequest|null} [creditCardCreationRequest] HttpBasedRequest creditCardCreationRequest
      * @property {ICreditCardUpdateRequest|null} [creditCardUpdateRequest] HttpBasedRequest creditCardUpdateRequest
      * @property {ICreditCardRemovalRequest|null} [creditCardRemovalRequest] HttpBasedRequest creditCardRemovalRequest
+     * @property {ICreditCardFetchRequest|null} [creditCardFetchRequest] HttpBasedRequest creditCardFetchRequest
      * @property {IPromotionAdditionRequest|null} [promotionAdditionRequest] HttpBasedRequest promotionAdditionRequest
      * @property {IPromotionRemovalRequest|null} [promotionRemovalRequest] HttpBasedRequest promotionRemovalRequest
      * @property {IPromotionUpdateRequest|null} [promotionUpdateRequest] HttpBasedRequest promotionUpdateRequest
@@ -2198,20 +2974,20 @@ $root.HttpBasedRequest = (function() {
     }
 
     /**
-     * HttpBasedRequest requireAuth.
-     * @member {boolean} requireAuth
+     * HttpBasedRequest credential.
+     * @member {IHttpBasedCredential|null|undefined} credential
      * @memberof HttpBasedRequest
      * @instance
      */
-    HttpBasedRequest.prototype.requireAuth = false;
+    HttpBasedRequest.prototype.credential = null;
 
     /**
-     * HttpBasedRequest token.
-     * @member {string} token
+     * HttpBasedRequest versionInfo.
+     * @member {IHttpBasedVersionInfo|null|undefined} versionInfo
      * @memberof HttpBasedRequest
      * @instance
      */
-    HttpBasedRequest.prototype.token = "";
+    HttpBasedRequest.prototype.versionInfo = null;
 
     /**
      * HttpBasedRequest creditCardCreationRequest.
@@ -2236,6 +3012,14 @@ $root.HttpBasedRequest = (function() {
      * @instance
      */
     HttpBasedRequest.prototype.creditCardRemovalRequest = null;
+
+    /**
+     * HttpBasedRequest creditCardFetchRequest.
+     * @member {ICreditCardFetchRequest|null|undefined} creditCardFetchRequest
+     * @memberof HttpBasedRequest
+     * @instance
+     */
+    HttpBasedRequest.prototype.creditCardFetchRequest = null;
 
     /**
      * HttpBasedRequest promotionAdditionRequest.
@@ -2266,12 +3050,12 @@ $root.HttpBasedRequest = (function() {
 
     /**
      * HttpBasedRequest request.
-     * @member {"creditCardCreationRequest"|"creditCardUpdateRequest"|"creditCardRemovalRequest"|"promotionAdditionRequest"|"promotionRemovalRequest"|"promotionUpdateRequest"|undefined} request
+     * @member {"creditCardCreationRequest"|"creditCardUpdateRequest"|"creditCardRemovalRequest"|"creditCardFetchRequest"|"promotionAdditionRequest"|"promotionRemovalRequest"|"promotionUpdateRequest"|undefined} request
      * @memberof HttpBasedRequest
      * @instance
      */
     Object.defineProperty(HttpBasedRequest.prototype, "request", {
-        get: $util.oneOfGetter($oneOfFields = ["creditCardCreationRequest", "creditCardUpdateRequest", "creditCardRemovalRequest", "promotionAdditionRequest", "promotionRemovalRequest", "promotionUpdateRequest"]),
+        get: $util.oneOfGetter($oneOfFields = ["creditCardCreationRequest", "creditCardUpdateRequest", "creditCardRemovalRequest", "creditCardFetchRequest", "promotionAdditionRequest", "promotionRemovalRequest", "promotionUpdateRequest"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -2299,22 +3083,24 @@ $root.HttpBasedRequest = (function() {
     HttpBasedRequest.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.requireAuth != null && Object.hasOwnProperty.call(message, "requireAuth"))
-            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.requireAuth);
-        if (message.token != null && Object.hasOwnProperty.call(message, "token"))
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.token);
+        if (message.credential != null && Object.hasOwnProperty.call(message, "credential"))
+            $root.HttpBasedCredential.encode(message.credential, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+        if (message.versionInfo != null && Object.hasOwnProperty.call(message, "versionInfo"))
+            $root.HttpBasedVersionInfo.encode(message.versionInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         if (message.creditCardCreationRequest != null && Object.hasOwnProperty.call(message, "creditCardCreationRequest"))
             $root.CreditCardCreationRequest.encode(message.creditCardCreationRequest, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
         if (message.creditCardUpdateRequest != null && Object.hasOwnProperty.call(message, "creditCardUpdateRequest"))
             $root.CreditCardUpdateRequest.encode(message.creditCardUpdateRequest, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
         if (message.creditCardRemovalRequest != null && Object.hasOwnProperty.call(message, "creditCardRemovalRequest"))
             $root.CreditCardRemovalRequest.encode(message.creditCardRemovalRequest, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+        if (message.creditCardFetchRequest != null && Object.hasOwnProperty.call(message, "creditCardFetchRequest"))
+            $root.CreditCardFetchRequest.encode(message.creditCardFetchRequest, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
         if (message.promotionAdditionRequest != null && Object.hasOwnProperty.call(message, "promotionAdditionRequest"))
-            $root.PromotionAdditionRequest.encode(message.promotionAdditionRequest, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            $root.PromotionAdditionRequest.encode(message.promotionAdditionRequest, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
         if (message.promotionRemovalRequest != null && Object.hasOwnProperty.call(message, "promotionRemovalRequest"))
-            $root.PromotionRemovalRequest.encode(message.promotionRemovalRequest, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            $root.PromotionRemovalRequest.encode(message.promotionRemovalRequest, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
         if (message.promotionUpdateRequest != null && Object.hasOwnProperty.call(message, "promotionUpdateRequest"))
-            $root.PromotionUpdateRequest.encode(message.promotionUpdateRequest, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            $root.PromotionUpdateRequest.encode(message.promotionUpdateRequest, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
         return writer;
     };
 
@@ -2350,10 +3136,10 @@ $root.HttpBasedRequest = (function() {
             var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1:
-                message.requireAuth = reader.bool();
+                message.credential = $root.HttpBasedCredential.decode(reader, reader.uint32());
                 break;
             case 2:
-                message.token = reader.string();
+                message.versionInfo = $root.HttpBasedVersionInfo.decode(reader, reader.uint32());
                 break;
             case 3:
                 message.creditCardCreationRequest = $root.CreditCardCreationRequest.decode(reader, reader.uint32());
@@ -2365,12 +3151,15 @@ $root.HttpBasedRequest = (function() {
                 message.creditCardRemovalRequest = $root.CreditCardRemovalRequest.decode(reader, reader.uint32());
                 break;
             case 6:
-                message.promotionAdditionRequest = $root.PromotionAdditionRequest.decode(reader, reader.uint32());
+                message.creditCardFetchRequest = $root.CreditCardFetchRequest.decode(reader, reader.uint32());
                 break;
             case 7:
-                message.promotionRemovalRequest = $root.PromotionRemovalRequest.decode(reader, reader.uint32());
+                message.promotionAdditionRequest = $root.PromotionAdditionRequest.decode(reader, reader.uint32());
                 break;
             case 8:
+                message.promotionRemovalRequest = $root.PromotionRemovalRequest.decode(reader, reader.uint32());
+                break;
+            case 9:
                 message.promotionUpdateRequest = $root.PromotionUpdateRequest.decode(reader, reader.uint32());
                 break;
             default:
@@ -2409,12 +3198,16 @@ $root.HttpBasedRequest = (function() {
         if (typeof message !== "object" || message === null)
             return "object expected";
         var properties = {};
-        if (message.requireAuth != null && message.hasOwnProperty("requireAuth"))
-            if (typeof message.requireAuth !== "boolean")
-                return "requireAuth: boolean expected";
-        if (message.token != null && message.hasOwnProperty("token"))
-            if (!$util.isString(message.token))
-                return "token: string expected";
+        if (message.credential != null && message.hasOwnProperty("credential")) {
+            var error = $root.HttpBasedCredential.verify(message.credential);
+            if (error)
+                return "credential." + error;
+        }
+        if (message.versionInfo != null && message.hasOwnProperty("versionInfo")) {
+            var error = $root.HttpBasedVersionInfo.verify(message.versionInfo);
+            if (error)
+                return "versionInfo." + error;
+        }
         if (message.creditCardCreationRequest != null && message.hasOwnProperty("creditCardCreationRequest")) {
             properties.request = 1;
             {
@@ -2441,6 +3234,16 @@ $root.HttpBasedRequest = (function() {
                 var error = $root.CreditCardRemovalRequest.verify(message.creditCardRemovalRequest);
                 if (error)
                     return "creditCardRemovalRequest." + error;
+            }
+        }
+        if (message.creditCardFetchRequest != null && message.hasOwnProperty("creditCardFetchRequest")) {
+            if (properties.request === 1)
+                return "request: multiple values";
+            properties.request = 1;
+            {
+                var error = $root.CreditCardFetchRequest.verify(message.creditCardFetchRequest);
+                if (error)
+                    return "creditCardFetchRequest." + error;
             }
         }
         if (message.promotionAdditionRequest != null && message.hasOwnProperty("promotionAdditionRequest")) {
@@ -2488,10 +3291,16 @@ $root.HttpBasedRequest = (function() {
         if (object instanceof $root.HttpBasedRequest)
             return object;
         var message = new $root.HttpBasedRequest();
-        if (object.requireAuth != null)
-            message.requireAuth = Boolean(object.requireAuth);
-        if (object.token != null)
-            message.token = String(object.token);
+        if (object.credential != null) {
+            if (typeof object.credential !== "object")
+                throw TypeError(".HttpBasedRequest.credential: object expected");
+            message.credential = $root.HttpBasedCredential.fromObject(object.credential);
+        }
+        if (object.versionInfo != null) {
+            if (typeof object.versionInfo !== "object")
+                throw TypeError(".HttpBasedRequest.versionInfo: object expected");
+            message.versionInfo = $root.HttpBasedVersionInfo.fromObject(object.versionInfo);
+        }
         if (object.creditCardCreationRequest != null) {
             if (typeof object.creditCardCreationRequest !== "object")
                 throw TypeError(".HttpBasedRequest.creditCardCreationRequest: object expected");
@@ -2506,6 +3315,11 @@ $root.HttpBasedRequest = (function() {
             if (typeof object.creditCardRemovalRequest !== "object")
                 throw TypeError(".HttpBasedRequest.creditCardRemovalRequest: object expected");
             message.creditCardRemovalRequest = $root.CreditCardRemovalRequest.fromObject(object.creditCardRemovalRequest);
+        }
+        if (object.creditCardFetchRequest != null) {
+            if (typeof object.creditCardFetchRequest !== "object")
+                throw TypeError(".HttpBasedRequest.creditCardFetchRequest: object expected");
+            message.creditCardFetchRequest = $root.CreditCardFetchRequest.fromObject(object.creditCardFetchRequest);
         }
         if (object.promotionAdditionRequest != null) {
             if (typeof object.promotionAdditionRequest !== "object")
@@ -2539,13 +3353,13 @@ $root.HttpBasedRequest = (function() {
             options = {};
         var object = {};
         if (options.defaults) {
-            object.requireAuth = false;
-            object.token = "";
+            object.credential = null;
+            object.versionInfo = null;
         }
-        if (message.requireAuth != null && message.hasOwnProperty("requireAuth"))
-            object.requireAuth = message.requireAuth;
-        if (message.token != null && message.hasOwnProperty("token"))
-            object.token = message.token;
+        if (message.credential != null && message.hasOwnProperty("credential"))
+            object.credential = $root.HttpBasedCredential.toObject(message.credential, options);
+        if (message.versionInfo != null && message.hasOwnProperty("versionInfo"))
+            object.versionInfo = $root.HttpBasedVersionInfo.toObject(message.versionInfo, options);
         if (message.creditCardCreationRequest != null && message.hasOwnProperty("creditCardCreationRequest")) {
             object.creditCardCreationRequest = $root.CreditCardCreationRequest.toObject(message.creditCardCreationRequest, options);
             if (options.oneofs)
@@ -2560,6 +3374,11 @@ $root.HttpBasedRequest = (function() {
             object.creditCardRemovalRequest = $root.CreditCardRemovalRequest.toObject(message.creditCardRemovalRequest, options);
             if (options.oneofs)
                 object.request = "creditCardRemovalRequest";
+        }
+        if (message.creditCardFetchRequest != null && message.hasOwnProperty("creditCardFetchRequest")) {
+            object.creditCardFetchRequest = $root.CreditCardFetchRequest.toObject(message.creditCardFetchRequest, options);
+            if (options.oneofs)
+                object.request = "creditCardFetchRequest";
         }
         if (message.promotionAdditionRequest != null && message.hasOwnProperty("promotionAdditionRequest")) {
             object.promotionAdditionRequest = $root.PromotionAdditionRequest.toObject(message.promotionAdditionRequest, options);

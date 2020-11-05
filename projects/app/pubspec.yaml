@@ -21,14 +21,14 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^0.1.2
   # Utilities
-  http: ^0.12.0+4
+  http: ^0.12.2
   url_launcher: ^5.4.10
   edit_distance: ^0.4.1
 
   # Firebase Packages
   firebase_core: ^0.5.0
   firebase_analytics: ^6.0.2
-  firebase_auth: ^0.18.1
+  firebase_auth: ^0.18.2
   firebase_crashlytics: ^0.2.1+1
   firebase_performance: ^0.4.0+2
   cloud_functions: ^0.6.0

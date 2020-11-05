@@ -3,7 +3,7 @@
 //  source: response.proto
 //
 // @dart = 2.3
-// ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
 
@@ -16,11 +16,19 @@ import 'response.pbenum.dart';
 export 'response.pbenum.dart';
 
 class GetCreditCardResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('GetCreditCardResponse', createEmptyInstance: create)
-        ..pc<$2.CreditCard>(1, 'cards', $pb.PbFieldType.PM,
-            subBuilder: $2.CreditCard.create)
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetCreditCardResponse',
+      createEmptyInstance: create)
+    ..pc<$2.CreditCard>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'cards',
+        $pb.PbFieldType.PM,
+        subBuilder: $2.CreditCard.create)
+    ..hasRequiredFields = false;
 
   GetCreditCardResponse._() : super();
   factory GetCreditCardResponse() => create();
@@ -30,11 +38,18 @@ class GetCreditCardResponse extends $pb.GeneratedMessage {
   factory GetCreditCardResponse.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   GetCreditCardResponse clone() =>
       GetCreditCardResponse()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   GetCreditCardResponse copyWith(
           void Function(GetCreditCardResponse) updates) =>
-      super.copyWith((message) => updates(message as GetCreditCardResponse));
+      super.copyWith((message) => updates(
+          message as GetCreditCardResponse)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetCreditCardResponse create() => GetCreditCardResponse._();
@@ -51,10 +66,17 @@ class GetCreditCardResponse extends $pb.GeneratedMessage {
 }
 
 class GenericResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('GenericResponse', createEmptyInstance: create)
-        ..aOS(1, 'msg')
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GenericResponse',
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'msg')
+    ..hasRequiredFields = false;
 
   GenericResponse._() : super();
   factory GenericResponse() => create();
@@ -64,9 +86,16 @@ class GenericResponse extends $pb.GeneratedMessage {
   factory GenericResponse.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   GenericResponse clone() => GenericResponse()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   GenericResponse copyWith(void Function(GenericResponse) updates) =>
-      super.copyWith((message) => updates(message as GenericResponse));
+      super.copyWith((message) =>
+          updates(message as GenericResponse)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GenericResponse create() => GenericResponse._();
@@ -92,11 +121,22 @@ class GenericResponse extends $pb.GeneratedMessage {
 }
 
 class HttpBasedResponse_Error extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('HttpBasedResponse.Error', createEmptyInstance: create)
-        ..aOS(1, 'title')
-        ..aOS(2, 'detail')
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'HttpBasedResponse.Error',
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'title')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'detail')
+    ..hasRequiredFields = false;
 
   HttpBasedResponse_Error._() : super();
   factory HttpBasedResponse_Error() => create();
@@ -106,11 +146,18 @@ class HttpBasedResponse_Error extends $pb.GeneratedMessage {
   factory HttpBasedResponse_Error.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   HttpBasedResponse_Error clone() =>
       HttpBasedResponse_Error()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   HttpBasedResponse_Error copyWith(
           void Function(HttpBasedResponse_Error) updates) =>
-      super.copyWith((message) => updates(message as HttpBasedResponse_Error));
+      super.copyWith((message) => updates(
+          message as HttpBasedResponse_Error)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static HttpBasedResponse_Error create() => HttpBasedResponse_Error._();
@@ -160,19 +207,29 @@ class HttpBasedResponse extends $pb.GeneratedMessage {
     5: HttpBasedResponse_Response.getCreditCardResponse,
     0: HttpBasedResponse_Response.notSet
   };
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo('HttpBasedResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo
+      _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'HttpBasedResponse',
+          createEmptyInstance: create)
         ..oo(0, [4, 5])
-        ..e<HttpBasedResponse_Status>(1, 'status', $pb.PbFieldType.OE,
+        ..e<HttpBasedResponse_Status>(
+            1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE,
             defaultOrMaker: HttpBasedResponse_Status.SUCCESS,
             valueOf: HttpBasedResponse_Status.valueOf,
             enumValues: HttpBasedResponse_Status.values)
-        ..a<$core.int>(2, 'statusCode', $pb.PbFieldType.O3)
-        ..aOM<HttpBasedResponse_Error>(3, 'error',
+        ..a<$core.int>(
+            2,
+            const $core.bool.fromEnvironment('protobuf.omit_field_names')
+                ? ''
+                : 'statusCode',
+            $pb.PbFieldType.O3)
+        ..aOM<HttpBasedResponse_Error>(
+            3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error',
             subBuilder: HttpBasedResponse_Error.create)
-        ..aOM<GenericResponse>(4, 'genericResponse',
+        ..aOM<GenericResponse>(
+            4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'genericResponse',
             subBuilder: GenericResponse.create)
-        ..aOM<GetCreditCardResponse>(5, 'getCreditCardResponse',
+        ..aOM<GetCreditCardResponse>(
+            5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'getCreditCardResponse',
             subBuilder: GetCreditCardResponse.create)
         ..hasRequiredFields = false;
 
@@ -184,9 +241,16 @@ class HttpBasedResponse extends $pb.GeneratedMessage {
   factory HttpBasedResponse.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   HttpBasedResponse clone() => HttpBasedResponse()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
   HttpBasedResponse copyWith(void Function(HttpBasedResponse) updates) =>
-      super.copyWith((message) => updates(message as HttpBasedResponse));
+      super.copyWith((message) => updates(
+          message as HttpBasedResponse)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static HttpBasedResponse create() => HttpBasedResponse._();
