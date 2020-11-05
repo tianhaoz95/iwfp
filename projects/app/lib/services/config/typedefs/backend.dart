@@ -1,6 +1,7 @@
 enum BackendType {
   IN_APP,
-  HTTP,
+  HTTP_LOCAL_DEV,
+  HTTP_PROD,
   EMULATOR,
   MOCK,
   DUMB,

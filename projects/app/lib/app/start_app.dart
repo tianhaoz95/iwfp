@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 
 void startApp({
   AppAuthType appAuthType = AppAuthType.FIREBASE_AUTH,
-  BackendType backendType = BackendType.HTTP,
+  BackendType backendType = BackendType.MOCK,
   AppThemeType appThemeType = AppThemeType.OFFLINE,
   AppContextType appContextType = AppContextType.PROD,
   bool shouldReportDevCrashes = true,
