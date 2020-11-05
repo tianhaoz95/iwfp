@@ -7,7 +7,7 @@ import 'package:iwfpapp/services/config/typedefs/backend.dart';
 void main() {
   startApp(
     appAuthType: AppAuthType.MOCK_AUTH,
-    backendType: BackendType.HTTP,
+    backendType: BackendType.HTTP_LOCAL_DEV,
     appThemeType: AppThemeType.MOCK,
     appContextType: AppContextType.EMULATOR,
     shouldReportDevCrashes: false,

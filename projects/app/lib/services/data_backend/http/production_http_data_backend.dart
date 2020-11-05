@@ -1,9 +1,9 @@
 import 'package:iwfpapp/services/data_backend/http/vercel_http_data_backend.dart';
 
-class LocalDevelopmentHttpDataBackend extends VercelHttpDataBackend {
+class ProductionHttpDataBackend extends VercelHttpDataBackend {
   @override
   String getBaseEndpoint() {
-    return 'http://localhost:3000/api';
+    return 'https://cashback-optimizer-api.vercel.app/api';
   }
 
   @override
