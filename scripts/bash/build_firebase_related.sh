@@ -39,6 +39,8 @@ flutter build web
 mv "$APP_ROOT/build/web" "$BUILD_DIR/web_app"
 . "$BASH_SCRIPT_DIR/build_app_docs.sh"
 mv "$APP_ROOT/doc/api" "$BUILD_DIR/app_docs"
+echo "Check application artifect"
+ls "$BUILD_DIR"
 cd "$PROJ_ROOT"
 echo "App related done."
 
