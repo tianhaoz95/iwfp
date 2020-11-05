@@ -5,7 +5,7 @@ import 'package:iwfpapp/services/config/typedefs/backend.dart';
 void main() {
   startApp(
     appAuthType: AppAuthType.FIREBASE_AUTH,
-    backendType: BackendType.IN_APP,
+    backendType: BackendType.HTTP,
     shouldReportDevCrashes: false,
   );
 }
