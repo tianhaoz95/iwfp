@@ -5,6 +5,14 @@
 			"path": "."
 		},
 		{
+			"name": "Scripts",
+			"path": "./scripts"
+		},
+		{
+			"name": "GitHub Config",
+			"path": "./.github"
+		},
+		{
 			"name": "Application",
 			"path": "./projects/app"
 		},
