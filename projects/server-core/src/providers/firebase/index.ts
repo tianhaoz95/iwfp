@@ -58,7 +58,14 @@ export class FirebaseServiceProvider extends ServiceProvider {
         );
       }
     } else {
-      throw Error("Firebase credentials missing.");
+      throw Error(`
+        Error: Firebase credentials missing.
+
+        Did you forget to fetch Firebase credentials by the following commands?
+
+        source scripts/bash/initialize_environment.sh
+        source scripts/bash/server/fetch_credentials.sh
+      `);
     }
     if (admin.apps.length === 0) {
       const cred: admin.credential.Credential = admin.credential.cert({

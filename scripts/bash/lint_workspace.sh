@@ -33,6 +33,7 @@ $GENERIC_CHECKER \
   $SERVER_ROOT/tsconfig.json \
   $SERVER_ROOT/jest.config.js
 cd $SERVER_ROOT
+npm install
 if [[ $1 == "check" ]]
 then
   npm run lint
