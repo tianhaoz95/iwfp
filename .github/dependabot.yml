@@ -12,7 +12,7 @@ updates:
     labels:
       - docs dependency update
   - package-ecosystem: npm
-    directory: "/vendors/firebase/functions"
+    directory: "/vendors/firebase/functions_deprecated"
     schedule:
       interval: daily
       time: "01:00"
