@@ -11,7 +11,6 @@ import {
   UserRemovalRequest,
   HttpBasedCredential,
   CreditCard,
-  Promotion,
 } from "../../interfaces";
 import fs from "fs";
 import { LoggingCallback } from "../../types";
@@ -38,8 +37,8 @@ export class FirebaseServiceProvider extends ServiceProvider {
       projectId = process.env["FB_PROJECT_ID"];
       clientEmail = process.env["FB_CLIENT_EMAIL"];
       privateKey = process.env["FB_PRIVATE_KEY"];
-    } else if (process.env["FB_PROJECT_CRED_LOCATION"]) {
-      const projectCredLocation = process.env["FB_PROJECT_CRED_LOCATION"];
+    } else if (process.env["GOOGLE_APPLICATION_CREDENTIALS"]) {
+      const projectCredLocation = process.env["GOOGLE_APPLICATION_CREDENTIALS"];
       const credContent = fs.readFileSync(projectCredLocation, "utf-8");
       const parsedCred = JSON.parse(credContent);
       logger(`Parsed credentials success.`, "info");
@@ -54,12 +53,19 @@ export class FirebaseServiceProvider extends ServiceProvider {
       } else {
         throw Error(
           "Error: Credential missing from the credential file. " +
-            "Please set FB_PROJECT_CRED_LOCATION to the absolute " +
+            "Please set GOOGLE_APPLICATION_CREDENTIALS to the absolute " +
             "path to the service account credential JSON file."
         );
       }
     } else {
-      throw Error("Firebase credentials missing.");
+      throw Error(`
+        Error: Firebase credentials missing.
+
+        Did you forget to fetch Firebase credentials by the following commands?
+
+        source scripts/bash/initialize_environment.sh
+        source scripts/bash/server/fetch_credentials.sh
+      `);
     }
     if (admin.apps.length === 0) {
       const cred: admin.credential.Credential = admin.credential.cert({
@@ -274,6 +280,7 @@ export class FirebaseServiceProvider extends ServiceProvider {
   }
 
   async removeUser(req: UserRemovalRequest): Promise<void> {
+    this.logger(`Delete user ${req.username}`, "info");
     const userRef = await this.getUserRef(req.username);
     await userRef.delete();
     await this.app?.auth().deleteUser(req.username);

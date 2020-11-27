@@ -26,6 +26,9 @@ abstract class BaseHttpDataBackend extends DataBackend {
   @protected
   String getPromotionRemovalEndpoint();
 
+  @protected
+  String getDeleteAccountEndpoint();
+
   void logTrace(String info, {Object error, bool exception = false}) {
     developer.log(info, name: getLoggingNamespace(), error: error);
     if (exception) {
@@ -57,6 +60,7 @@ abstract class BaseHttpDataBackend extends DataBackend {
   }
 
   HttpBasedResponse parseHttpBasedResponse(String body) {
+    logTrace('Server responded with ${body}.');
     Map<String, dynamic> resContent = jsonDecode(body);
     logTrace('Server response decoded as JSON.');
     List<int> resBuffer =

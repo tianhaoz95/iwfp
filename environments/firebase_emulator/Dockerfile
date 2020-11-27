@@ -1,7 +1,5 @@
 FROM node:10
 
-WORKDIR /vendors/firebase/functions
-
 RUN \
   apt-get update && \
   apt-get -y upgrade && \
@@ -11,11 +9,8 @@ RUN \
 
 RUN apt -y install default-jre
 
-COPY . /
+COPY ./vendors/firebase /
 
-RUN \
-    npm install -g firebase-tools && \
-    npm install && \
-    npm run build
+RUN npm install -g firebase-tools
 
-ENTRYPOINT [ "npm", "run", "emulator:container" ]
+ENTRYPOINT [ "firebase", "emulators:start" ]
