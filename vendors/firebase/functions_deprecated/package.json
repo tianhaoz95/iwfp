@@ -30,7 +30,7 @@
     "firebase-functions": "^3.11.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.16",
+    "@types/jest": "^26.0.17",
     "@types/node": "^14.14.10",
     "axios": "^0.21.0",
     "firebase": "^8.1.2",
