@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@types/nodegit": "^0.26.12",
-    "firebase-admin": "^9.3.0",
+    "firebase-admin": "^11.4.1",
     "nodegit": "^0.27.0",
     "tslog": "^2.10.0"
   }
